@@ -1,0 +1,21 @@
+Id	Description	Qty	Unit	Designators
+1	Cable, 1 x 14 AWG	1.5	m	W_MAIN_IN, W_MAIN_OUT, W_RR_GND, W_RR_OUT
+2	Cable, 1 x 16 AWG	2.8	m	W_COIL_FEED, W_COIL_L, W_COIL_R, W_IGN_FEED, W_IGN_RET
+3	Cable, 1 x 18 AWG	3.3	m	W_PTS_L, W_PTS_R, W_RH_IN, W_RH_OUT, W_SOL_GND
+4	Cable, 1 x 6 AWG	1	m	W_BAT_GND, W_BAT_SOL, W_SOL_SM
+5	Cable, 2 x 14 AWG	0.5	m	W_ALT
+6	Connector, Alternator, single-phase, 2 bullet, 2 pins	1		ALT
+7	Connector, Battery, 12V 10Ah, 2 pins	1		BATT
+8	Connector, Contact breaker LEFT, 1 pins	1		PTS_L
+9	Connector, Contact breaker RIGHT, 1 pins	1		PTS_R
+10	Connector, Ignition coil LEFT, 2 pins	1		COIL_L
+11	Connector, Ignition coil RIGHT, 2 pins	1		COIL_R
+12	Connector, Ignition switch, 4-pin, 4 pins	1		IGN
+13	Connector, Main fuse, 20A inline, sealed holder, 2 pins	1		MF
+14	Connector, Power distribution module, TBD - RTMR vs MTA not yet selected, 6 pins	1		PDM
+15	Connector, Regulator / rectifier, combined, shunt type, 4 pins	1		RR
+16	Connector, Right bar cluster, stop switch + starter button, 3 pins	1		RH
+17	Connector, Splice, sealed butt splice	1		
+18	Connector, Star ground bus, to bare chassis stud, 5 pins	1		GND
+19	Connector, Starter motor, 1 pins	1		SM
+20	Connector, Starter relay, 4 pins	1		SOL
