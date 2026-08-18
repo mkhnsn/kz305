@@ -114,20 +114,38 @@ contact. **If that lands, it overrides the measure-first plan below** — a
 genuine SH775 at discount beats a $75 shunt outright, and the series design
 cures the heat problem rather than mitigating it.
 
-**Ask for both of these, not just the regulator:**
-
-| What | Part | Why |
-|---|---|---|
-| The regulator | **4012941** — "REGULATOR, 3PH, 35A, SERIES, 105C" | The SH775. Ask whether it has superseded; **710001103** appears as an alternate OEM number. |
-| **The mating connector** | Not publicly catalogued — look it up against the models that use 4012941 (2011–2020 Ranger / RZR 570, 800, 1000) | Housing, terminals and seals. **This is the part to grab while there is access.** |
-
-🛑 **Do not skip the connector.** It is the piece that makes the serviceable-R/R
-plan work, its part number is not published anywhere public, and a dealer parts
-system is the one place it can be looked up. Sourcing it afterwards means
-identifying it from a photograph.
+**Ask for: 4012941** — "REGULATOR, 3PH, 35A, SERIES, 105C". Check whether it
+has superseded; **710001103** appears as an alternate OEM number.
 
 If the discount is deep, a second regulator is cheap insurance on a part that
 is otherwise $179–285 and increasingly counterfeited.
+
+#### Connectors — correction, they are not scarce
+
+An earlier version of this file said the mating connector was unobtainable
+outside a dealer parts system. **That was wrong**, and the reasoning behind it
+was wrong too.
+
+The connector is not Polaris's choice. It comes on the regulator, so it is
+**Shindengen's** spec — which is why reasoning from how Polaris builds harnesses
+points at the wrong vendor, however sound that reasoning is about Polaris.
+
+The SH775 uses **two** connectors:
+
+| Side | Pins | Carries |
+|---|---|---|
+| AC | 3 | the three stator phases — **this bike uses any two** |
+| DC | 2 | battery positive (fused) and ground |
+
+Mating pigtails are sold openly as "3-way connector for Shindengen MOSFET type
+SH775" and fit the whole FH009/FH010/FH011/FH012/FH020 family as well —
+**$16–22** on Amazon, eBay and Walmart. Eastern Beaver also supplies Shindengen
+R/R connectors and is the better source if correct terminal crimps and wire
+gauge matter, which on the DC side they do.
+
+So the connector is a $20 catalogue item, not a scarcity problem. Getting an OEM
+sealed pigtail through the discount is still nice — correct seals and gauge for
+little money — but it is convenience, not necessity.
 
 **If it lands, what changes:**
 
