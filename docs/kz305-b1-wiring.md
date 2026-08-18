@@ -579,9 +579,10 @@ cavity map, the last of the four original TBDs.
 - ~~Starter relay coil ground~~ — **RESOLVED, see above.**
 - **Dimmer switch common** — unchanged from 13 Aug, still needs a meter.
 - **Right cluster contact cleaning** — must happen before harness build; re-measure after.
-- 🛑 **Coil feed routing — DECISION NEEDED before any harness is cut.** See
-  above. The loom must be re-sourced from the kill switch output or the engine
-  stop switch does not stop the engine.
+- ~~Coil feed routing~~ — **RESOLVED in the rebuild model.** PDM F2 now feeds
+  the kill switch, whose output drives the `K_COIL` relay; the relay passes coil
+  power to `SP_YR` and on to both coils. Cutting the kill switch therefore drops
+  the coils, which the parallel arrangement did not do.
 - **Unidentified Br/W and Bl/W at the right cluster.** Neither is in the diagram
   transcription, the color-code table, or the loom. Leading candidate for both:
   the front brake light switch, which the diagram lists as its own component and
