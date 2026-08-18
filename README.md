@@ -37,14 +37,15 @@ WireViz is pinned to the [unstable-studios fork](https://github.com/unstable-stu
 at an exact commit rather than a branch. The fork adds `--strict`, which
 `build.py` depends on — see below.
 
-## Why `build.py` instead of plain `wireviz`
+## Why the fork, and why `build.py`
 
-WireViz's `--prepend` concatenates files as raw text, and YAML resolves
+Stock WireViz's `--prepend` concatenates files as raw text, and YAML resolves
 duplicate top-level keys last-wins. Two files that each define `connections:`
 therefore render only the second one's — silently, exit 0, with a warning. A
 harness built from that BOM would be missing real wires.
 
-`build.py` merges at the data level and makes four things hard errors:
+The fork's `--merge` combines sources at the **data level** instead, and its
+`--strict` refuses to drop input silently. Between them they raise:
 
 | Guard | Raised by |
 |---|---|
@@ -54,10 +55,10 @@ harness built from that BOM would be missing real wires.
 | A setting given different values in two files | `ConflictingValueError` |
 | An unknown output format code | `build.py` |
 
-All but the last are raised by the pinned fork's `--merge` / `--strict`, which is
-where the merging now lives. `build.py` is only the project layer on top: it
-reads `harness.yml` so no flags have to be remembered, and resolves each model's
-source globs.
+`build.py` adds only the last row. It is the project layer on top of the fork:
+it reads `harness.yml` so no flags have to be remembered, resolves each model's
+source globs, and reports line numbers against the file being edited rather than
+against the merged text. The merging and every other guard live in WireViz.
 
 Add `--dump FILE` to see the merged YAML that WireViz actually received.
 

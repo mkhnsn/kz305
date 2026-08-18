@@ -98,7 +98,7 @@ def build(name, sources, common_path, output_name, output_dir, formats, dump=Non
             f"error: {', '.join(e.components)} {'appears' if one else 'appear'} in "
             f"no connection set, so {'it is' if one else 'they are'} absent from "
             f"the drawing AND the BOM and would never get built.\n"
-            f"Connect {'it' if one else 'them'}, or move to the documented gap list."
+            f"Connect {'it' if one else 'them'}, or move "f"{'it' if one else 'them'} to the documented gap list."
         )
 
     print(f"{label}wrote {output_dir / output_name}.[{'|'.join(formats)}]")
