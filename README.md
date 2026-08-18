@@ -85,6 +85,8 @@ harness.yml     which files make up which model, and the render defaults
 render          entry point; build.py does the merging
 models/         harness models + shared part library  <- source of truth
 docs/           bench findings, transcriptions, procedures
+measurements/   raw bench data: lengths, trunk map, generated cable index
+tools/          small generators (cable index)
 parts/          order guides and shopping lists
 out/            rendered drawings and BOMs (generated, gitignored)
 archive/        superseded work, kept for provenance

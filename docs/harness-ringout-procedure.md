@@ -39,6 +39,11 @@ which ends are *worth* probing, never to decide what connects to what.
 Number every connector and every free end with tape and marker before touching
 anything else. Tag **both halves** of each connector separately.
 
+Use **`B01`, `B02`, …** for branches, in the order you tag them. The string on
+the tape and the `branch_id` in `measurements/harness-lengths.csv` are the same
+string — that is what makes a measurement traceable to a physical thing. Do not
+renumber later; a gap costs nothing, a renumber invalidates every photograph.
+
 Then photograph: the whole harness laid out with tags visible, and each
 connector face-on with the pins showing. (The reference doc has been asking for
 face-on connector shots since 13 Aug — this is that.)
@@ -65,12 +70,18 @@ Everything after this step can destroy lengths permanently.
    That is what actually determines the shape of the new harness — branch
    lengths alone will not reproduce it.
 
-| Branch | Breaks out at (mm from datum) | Runs to | Length (mm) |
-|---|---|---|---|
-| | | | |
+Record into **`measurements/harness-lengths.csv`**, one row per branch, and the
+datum plus breakout order into **`measurements/trunk-map.md`**. The scheme,
+including how to redo a measurement without destroying the first one, is in
+`measurements/README.md`.
 
 Record raw measurements. Add service loop at build time, not here — bake slack
 into the record and you will never know what the real number was.
+
+⚠️ **Measure branches that are not modelled yet too.** Lighting, horn and
+instruments are still untranscribed (#9), but the loom gets cut up long before
+that is finished. A branch with no `W_*` designator still gets a `B##` tag and a
+row; the designator can be filled in later, the length cannot.
 
 ---
 
