@@ -1,0 +1,377 @@
+# =====================================================================
+# KZ305-B1 — REPLACEMENT HARNESS  (DRAFT - NOT BUILDABLE YET)
+#
+#   wireviz -f hps -p kz305-common.yml kz305-rebuild.yml
+#
+# This is the harness being built to replace the factory one. It must
+# reproduce EVERY circuit in kz305-factory.yml - any circuit missing
+# from the factory transcription is a circuit that will not exist on
+# the bike.
+#
+# ---------------------------------------------------------------------
+# BLOCKED - do not cut wire against this file yet
+#
+#   1. Factory transcription incomplete. Lighting, signals, horn,
+#      instruments, brake switches, 6P junctions and the two 10A fuse
+#      assignments are not yet read off the diagram.
+#   2. No lengths. The old harness is the ONLY length reference - the
+#      bike is in pieces and the engine is out, so runs cannot be
+#      measured off the chassis. Measure every branch off the old
+#      harness while it is still laid out flat, BEFORE it is cut up or
+#      binned. Until then the BOM is meaningless; render with -f hps.
+#   3. Fuse block part not selected - depends on final circuit count.
+# ---------------------------------------------------------------------
+#
+# DESIGN DECISIONS  (16 Aug 2026)
+#
+#   Connectors: HYBRID. Sealed where exposed or run-critical - charging,
+#     ignition, grounds, main power, starter, anything under the tank or
+#     at the headstock. Stock-style bullets where the run is sheltered
+#     and serviceable - inside the headlight shell, instrument lamps,
+#     inside signal housings. Water in the sleeve killed the original,
+#     so sealing follows exposure, not circuit importance.
+#
+#   Lighting: FULL LED.
+#   Ignition: POINTS NOW, EI-READY. Stock circuit unchanged; the Y/R
+#     node stays an accessible, documented tap so EI is a plug-in later.
+#   Regulator: MODERN SOLID-STATE, single-phase. See RR notes - the
+#     popular series-type upgrade does NOT apply to this bike.
+#   High-current switch paths: RELAYED. See K_COIL.
+#
+# ---------------------------------------------------------------------
+# FULL LED - three harness consequences, not just a warning
+#
+#   a. FLASHER. Wanted: LOAD-INDEPENDENT solid-state, so it flashes at a
+#      constant rate regardless of what is hanging off it. Look for a
+#      wide current range (roughly 0.05-10A) so it drives LEDs now and
+#      would still drive incandescent if you ever revert.
+#
+#      2-pin (B+/load) is the common form and drops straight into the
+#      stock 2-pin socket. 3-pin adds a dedicated ground and is the more
+#      consistent design. RUN THE GROUND WIRE ANYWAY - it costs one wire
+#      in a harness being built from scratch, and it keeps 3-pin parts
+#      on the table forever instead of locking the bike to 2-pin.
+#
+#      Buy one with reverse-polarity protection: electronic flashers are
+#      polarity-sensitive where the stock thermal unit was not, and the
+#      cheap ones often omit the protection.
+#
+#      Good news for this bike: it has SEPARATE left and right indicator
+#      lamps (12V 3.4W each, printed 255). Bikes with one shared
+#      indicator bridge the two circuits and backfeed with LEDs. That
+#      failure mode does not apply here.
+#
+#   b. REGULATOR HEAT - PARTLY, NOT FULLY, SOLVED. A shunt regulator
+#      burns off surplus as heat, so cutting load makes it work harder.
+#      The genuine fix is a SERIES regulator, which open-circuits the
+#      stator instead of shorting it. BUT the well-known series units
+#      (SH775 and friends) are THREE-PHASE and this alternator is
+#      confirmed single-phase, so they do not fit no matter how often
+#      they are recommended as "the" upgrade.
+#
+#      Single-phase options found are modern solid-state SHUNT units.
+#      They run cooler than the stock SCR unit through lower forward
+#      drop, but they still dissipate the surplus. Going full LED with
+#      one is an improvement, NOT a cure. Measure regulator body
+#      temperature on the first run, not just voltage - the 87V does
+#      type-K thermocouple, so the instrument is already in hand.
+#
+#   c. POLARITY NOW MATTERS. Incandescent lamps do not care; LEDs do.
+#      Every lamp branch must be drawn with feed and ground identified,
+#      and the tail/brake dual-intensity function verified.
+#
+#   Bonus: the 3.6 ohm neutral switch ground path stops mattering. At
+#   0.28A an incandescent indicator lost ~1.1V across it; an LED drawing
+#   ~20mA loses ~0.07V. Still worth cleaning, no longer worth chasing.
+#
+# ---------------------------------------------------------------------
+# DECIDED - HIGH-CURRENT PATHS GET RELAYS
+#
+#   Stock ran the full coil current through the kill switch. Yours
+#   measured 3 ohm (kill) and 5 ohm (button), 8 ohm in series. K_COIL
+#   now passes coil power; the kill switch only drives the relay coil,
+#   so those contacts carry roughly 0.3A instead of ~6A and their
+#   condition stops being load-bearing.
+#
+#   HONEST TRADE: this adds a part that did not exist. If K_COIL fails,
+#   there is no spark. It fails SAFE (open = engine stops, which is what
+#   a kill circuit should do) but it is a new single point of failure.
+#   Use a quality relay, socket it, keep it accessible, carry a spare.
+#
+#   K_MAIN - DECIDED, drawn below. The ignition switch now drives a
+#     relay coil instead of passing the bike's entire switched load.
+#     Its contact measured a healthy 0.1 ohm, so this is preventive.
+#     Fails safe (open = bike dead, key does nothing).
+#
+#   K_HORN - DECIDED, NOT YET DRAWN. Blocked on transcription: the horn
+#     and the left cluster are not modelled yet. Design is settled -
+#     the horn button switches the GROUND side, so the relay coil takes
+#     switched power on 86 and the button pulls 85 to ground; contacts
+#     then pass horn current. Behaviour is unchanged, the button just
+#     stops carrying the load. Justification is measured, not assumed:
+#     the horn is only ~2A, but the RIGHT cluster contacts came back at
+#     3-5 ohm, and 3 ohm at 2A is a 6V drop - a horn that barely sounds.
+#     The left cluster is the same age and construction.
+#
+#   HEADLIGHT - DEFERRED, and blocked on a measurement you already have
+#     on the sheet. The dimmer COMMON is still unresolved (open since
+#     13 Aug, Check 4), and you cannot wire a beam relay without knowing
+#     which pin is the feed. It also needs TWO relays or a changeover,
+#     since the dimmer selects between beams. Meter the dimmer, pick the
+#     LED headlight, measure its actual draw on the 87V 10A range, then
+#     decide. Stock was 4.2A; an LED unit under ~2A through a cleaned
+#     switch does not need a relay.
+#
+#   Do not relay everything. Each relay is a socket, a ground and a
+#   failure point. Relay where the switch is old AND the current is high.
+# =====================================================================
+
+connectors:
+
+  BATT:
+    <<: *battery
+
+  GND:
+    type: Star ground bus
+    subtype: to bare chassis stud
+    pinlabels: [BATT, RR, SOL, RELAY 1, RELAY 2, ENG, LAMPS, SPARE]
+    notes: UPGRADE - replaces the single stock Y/BK ring terminal, which was the harness's one common-mode failure point. Frame is powder coated; mask or scrape the stud back to bare metal. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor - treat it as pass/fail, not a measurement.
+
+  MF:
+    <<: *main_fuse
+    subtype: 20A inline, sealed holder
+
+  PDM:
+    type: Power distribution module
+    subtype: TBD - part not selected
+    pinlabels: [MAIN STUD, F1 IGN SW FEED, F2 KILL FEED, F3 COIL PWR, F4 SPARE, SW IN (Br), SW OUT (Br)]
+    notes: UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL and circuit count is not final until the factory transcription is complete. F2 feeds the KILL SWITCH, not the coils directly - see SP_YR. PART CHOICE - the relay decisions now settle this - the design needs roughly 6-8 fused circuits AND 3-5 relay positions, which points at a sealed RTMR-style relay/fuse module rather than a plain blade fuse block. F1 may also downsize once the tail circuit is transcribed, since it now feeds only relay coils plus the park-fed tail.
+
+  IGN:
+    <<: *ign_switch
+
+  RH:
+    <<: *rh_cluster
+    pinlabels: [STOP IN (Br), LINK (Y/R), START OUT (BK)]
+
+  SOL:
+    <<: *starter_relay
+  SM:
+    <<: *starter_motor
+  ALT:
+    <<: *alternator
+  RR:
+    type: Regulator / rectifier
+    subtype: modern solid-state, single-phase - part TBD
+    pinlabels: [AC1, AC2, DC OUT, GND]
+    notes: UPGRADE - replaces the stock SCR shunt unit. MUST be single-phase. The alternator is confirmed single-phase (two yellow leads, 0.4 ohm), so three-phase units do NOT fit however often they are recommended. The series-type advantage is three-phase only; single-phase options are still shunt, so this runs cooler than stock but does NOT cure the LED heat problem. Universal single-phase units are commonly rated about 180W, comfortably above this bike's load. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
+
+  K_MAIN:
+    type: Relay
+    subtype: ISO mini, socketed
+    pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
+    notes: UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy 0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
+
+  K_COIL:
+    type: Relay
+    subtype: ISO mini, socketed
+    pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
+    notes: UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A) instead of passing ~6A through 44-year-old contacts. Socket it and keep it accessible - if it fails there is no spark. Fails safe (open = engine stops).
+
+
+  COIL_L:
+    <<: *coil
+    subtype: LEFT
+  COIL_R:
+    <<: *coil
+    subtype: RIGHT
+  PTS_L:
+    <<: *points
+    subtype: LEFT
+  PTS_R:
+    <<: *points
+    subtype: RIGHT
+
+  SP_YR:
+    style: simple
+    type: Splice
+    subtype: Y/R coil feed - EI TAP POINT
+    notes: Factory topology preserved - the kill switch output feeds both coils here, which is what makes the engine stop switch actually stop the engine. Keep this splice ACCESSIBLE and documented; it is the plug-in point for an EI module later.
+
+# ---------------------------------------------------------------------
+# CARRY-OVER FROM THE FACTORY BRANCH MAP (17 Aug 2026)
+#
+#   The right bar is a DISTRIBUTION POINT in the stock harness, not just
+#   a switch location - the switched brown splits three ways there and
+#   feeds two taps (Br/W to the 4P, Bl/W to a bullet) whose destinations
+#   are not yet traced. Whatever those feed still needs feeding in the
+#   new harness. Do not finalise the right-bar branch until both are
+#   chased down, or two circuits will simply be missing.
+# ---------------------------------------------------------------------
+
+cables:
+
+  W_BAT_SOL:  {<<: *w6,  colors: [RD]}
+  W_SOL_SM:   {<<: *w6,  colors: [BK]}
+  W_BAT_GND:  {<<: *w6,  colors: [BK]}
+  W_MAIN_IN:  {<<: *w14, colors: [WH]}
+  W_MAIN_OUT: {<<: *w14, colors: [WH]}
+  W_IGN_FEED: {<<: *w16, colors: [WH]}
+  W_IGN_RET:
+    <<: *w18
+    colors: [BN]
+    notes: Ignition switch output - now drives the K_MAIN coil only (~0.15A), so this dropped from 16 to 18 AWG. The switch no longer carries the bike's load.
+
+  W_RH_IN:
+    <<: *w16
+    colors: [BN]
+    notes: Fed from PDM F2. Low current now - this only has to run the kill switch and, through it, two relay coils.
+  W_YR_TRIG:
+    <<: *w18
+    colors: [YERD]
+    notes: Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about 0.3A instead of the stock ~6A. Still the node that makes the kill switch stop the engine - cutting it drops the coils.
+  W_MAIN_SW_FEED:
+    <<: *w14
+    colors: [WH]
+    notes: Main stud to the relay common. Short run inside the PDM; protected by the 20A main. Individual circuits are fused downstream of the relay.
+  W_SW_BUS:
+    <<: *w14
+    colors: [BN]
+    notes: Relay output - this is now the switched brown bus that feeds everything. Sized for total switched load, NOT for what the ignition switch used to pass.
+  W_KMAIN_GND:
+    <<: *w18
+    colors: [BK]
+    notes: K_MAIN coil ground to the star bus.
+  W_COIL_PWR:
+    <<: *w16
+    colors: [BN]
+    notes: Fused coil power into the relay. Switched, NOT always-hot - coils must die with the key.
+  W_K_GND:
+    <<: *w18
+    colors: [BK]
+    notes: K_COIL coil ground to the star bus.
+  W_YR_OUT:
+    <<: *w16
+    colors: [YERD]
+    notes: Relay output to the coil splice. Kept Y/R to match the stock coil-feed colour so the circuit still reads as factory.
+  W_COIL_L: {<<: *w16, colors: [YERD]}
+  W_COIL_R: {<<: *w16, colors: [YERD]}
+  W_PTS_L:
+    <<: *w18
+    colors: [YE]
+    notes: Yellow serves LEFT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
+  W_PTS_R:
+    <<: *w18
+    colors: [BK]
+    notes: Black serves RIGHT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
+  W_RH_OUT:
+    <<: *w18
+    colors: [BK]
+    notes: Starter trigger. BK but NOT a ground - do not land it on the star bus.
+  W_SOL_GND:
+    <<: *w18
+    colors: [BK]
+    notes: Direct to the star bus. CONFIRMED 15 Aug 2026 - no neutral-switch interlock in this circuit.
+  W_ALT:     {<<: *w14, colors: [YE, YE]}
+  W_RR_OUT:  {<<: *w14, colors: [WH]}
+  W_RR_GND:  {<<: *w14, colors: [BK]}
+
+connections:
+
+  # --- heavy starter path -------------------------------------------
+  - - BATT: [1]
+    - W_BAT_SOL: [1]
+    - SOL: [1]
+  - - SOL: [2]
+    - W_SOL_SM: [1]
+    - SM: [1]
+  - - BATT: [2]
+    - W_BAT_GND: [1]
+    - GND: [1]
+
+  # --- main feed through the 20A fuse --------------------------------
+  - - SOL: [1]
+    - W_MAIN_IN: [1]
+    - MF: [1]
+  - - MF: [2]
+    - W_MAIN_OUT: [1]
+    - PDM: [1]
+
+  # --- ignition switch loop -----------------------------------------
+  - - PDM: [2]
+    - W_IGN_FEED: [1]
+    - IGN: [1]
+  # --- ignition switch drives the main relay coil only --------------
+  - - IGN: [2]
+    - W_IGN_RET: [1]
+    - K_MAIN: [3]
+  - - K_MAIN: [4]
+    - W_KMAIN_GND: [1]
+    - GND: [5]
+
+  # --- main relay passes the whole switched bus ---------------------
+  - - PDM: [1]
+    - W_MAIN_SW_FEED: [1]
+    - K_MAIN: [1]
+  - - K_MAIN: [2]
+    - W_SW_BUS: [1]
+    - PDM: [6]
+
+  # --- FIXED: fused feed to the KILL SWITCH, not to the coils --------
+  - - PDM: [3]
+    - W_RH_IN: [1]
+    - RH: [1]
+
+  # --- kill switch drives the relay coil only (~0.15A) ---------------
+  - - RH: [2]
+    - W_YR_TRIG: [1]
+    - K_COIL: [3]
+  - - K_COIL: [4]
+    - W_K_GND: [1]
+    - GND: [4]
+
+  # --- relay passes the coil power ----------------------------------
+  - - PDM: [4]
+    - W_COIL_PWR: [1]
+    - K_COIL: [1]
+  - - K_COIL: [2]
+    - W_YR_OUT: [1]
+    - SP_YR: [1]
+  - - SP_YR: [1]
+    - W_COIL_L: [1]
+    - COIL_L: [1]
+  - - SP_YR: [1]
+    - W_COIL_R: [1]
+    - COIL_R: [1]
+  - - COIL_L: [2]
+    - W_PTS_L: [1]
+    - PTS_L: [1]
+  - - COIL_R: [2]
+    - W_PTS_R: [1]
+    - PTS_R: [1]
+
+  # --- starter trigger ----------------------------------------------
+  - - RH: [3]
+    - W_RH_OUT: [1]
+    - SOL: [3]
+  - - SOL: [4]
+    - W_SOL_GND: [1]
+    - GND: [3]
+
+  # --- charging ------------------------------------------------------
+  - - ALT: [1,2]
+    - W_ALT: [1,2]
+    - RR: [1,2]
+  - - RR: [3]
+    - W_RR_OUT: [1]
+    - PDM: [1]
+  - - RR: [4]
+    - W_RR_GND: [1]
+    - GND: [2]
+
+# =====================================================================
+# NOT YET DRAWN - blocked on factory transcription
+#   headlight + dimmer, 4x turn signals + flasher, horn, tail/brake,
+#   license lamp, front/rear brake switches, instrument + indicator
+#   lamps, neutral indicator, 6P junctions, accessory leads
+# =====================================================================
