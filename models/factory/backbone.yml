@@ -1,0 +1,71 @@
+# BACKBONE — Power distribution and grounds. Included by every sheet.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  BATT:
+    <<: *battery
+  GND_CHASSIS:
+    type: Chassis ground
+    subtype: single BK/Y ring terminal
+    pinlabels: [RING]
+    notes: Stock returns the ENTIRE harness through one ring terminal - the single point of failure the rebuild replaces with a star bus. COLOUR DISPUTED - recorded BK/Y (black, yellow stripe) 17 Aug 2026 from the physical harness. The 13 Aug bench note said Y/BK and the 600 dpi diagram reads yellow-primary. Newest hands-on observation wins for now but it was hedged. Settle it by cutting a fresh end and identifying the BASE colour.
+  GND_ENG:
+    type: Engine case ground
+    subtype: internal, no harness wire
+    pinlabels: [CASE]
+    notes: Components that ground through their own mounting rather than a harness lead - starter motor, points, capacitors, neutral switch.
+  MF:
+    <<: *main_fuse
+  FUSE_A:
+    <<: *fuse10
+    subtype: 10A glass - WHICH holder is TBD
+    notes: Feeds the right-bar branch on Bl/W, per bench trace 17 Aug 2026. WHICH of the two 10A holders this is has NOT been established, and it matters - this one fuse protects the kill switch, both ignition coils, the starter trigger and whatever Br and Br/W feed onward. That is the whole run-critical half of the bike on one fuse.
+  IGN:
+    <<: *ign_switch
+  SOL:
+    <<: *starter_relay
+  SP_BR:
+    style: simple
+    type: Splice
+    subtype: brown switched bus
+    notes: TBD - stock junction point for the switched brown feed not positively located on the scan. Modeled as a splice because the feed demonstrably serves more than one branch.
+
+cables:
+  # --- battery main and chassis ground ---------------------------
+  W_BAT_SOL:  {<<: *w6, colors: [RD]}
+  W_BAT_GND:  {<<: *w6, colors: [BKYE]}
+  # --- main feed ----------------------------------------------------
+  W_MAIN:     {<<: *w14, colors: [WH]}
+  W_IGN_FEED: {<<: *w14, colors: [WH]}
+
+  # --- switched brown bus -------------------------------------------
+  W_BR_MAIN:  {<<: *w16, colors: [BN]}
+  W_FUSE_A_IN: {<<: *w18, colors: [BN]}
+
+connections:
+  # --- main feed to the ignition switch ------------------------------
+  - - SOL: [1]
+    - W_MAIN: [1]
+    - MF: [1]
+  - - MF: [2]
+    - W_IGN_FEED: [1]
+    - IGN: [1]
+
+  # --- ignition switch ON: W to Br ----------------------------------
+  - - IGN: [2]
+    - W_BR_MAIN: [1]
+    - SP_BR: [1]
+  - - SP_BR: [1]
+    - W_FUSE_A_IN: [1]
+    - FUSE_A: [1]
+
+  # --- battery main and chassis ground ----------------------------
+  - - BATT: [1]
+    - W_BAT_SOL: [1]
+    - SOL: [1]
+  - - BATT: [2]
+    - W_BAT_GND: [1]
+    - GND_CHASSIS: [1]

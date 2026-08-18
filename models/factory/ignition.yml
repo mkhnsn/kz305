@@ -1,0 +1,71 @@
+# IGNITION — Coils, contact breakers and capacitors.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  COIL_L:
+    <<: *coil
+    subtype: LEFT
+  COIL_R:
+    <<: *coil
+    subtype: RIGHT
+  PTS_L:
+    <<: *points
+    subtype: LEFT
+  PTS_R:
+    <<: *points
+    subtype: RIGHT
+  CAP_L:
+    <<: *capacitor
+    subtype: LEFT
+  CAP_R:
+    <<: *capacitor
+    subtype: RIGHT
+
+cables:
+  # --- coil feeds ------------------------------------------------
+  W_COIL_L_FEED: {<<: *w16, colors: [YERD]}
+  W_COIL_R_FEED: {<<: *w16, colors: [YERD]}
+  # --- points -------------------------------------------------------
+  W_PTS_L:
+    <<: *w18
+    colors: [YE]
+    notes: Yellow serves LEFT - confirmed from the stamped plate 15 Aug 2026 and corroborated by the diagram at the coil block. YE also carries the alternator phases.
+  W_PTS_R:
+    <<: *w18
+    colors: [BK]
+    notes: Black serves RIGHT - confirmed from the stamped plate 15 Aug 2026 and corroborated by the diagram at the coil block. BK also serves the starter trigger and the grounds.
+  W_CAP_L: {<<: *w18, colors: [YE]}
+  W_CAP_R: {<<: *w18, colors: [BK]}
+
+connections:
+  # --- coil primaries to the points ---------------------------------
+  - - COIL_L: [2]
+    - W_PTS_L: [1]
+    - PTS_L: [1]
+  - - COIL_R: [2]
+    - W_PTS_R: [1]
+    - PTS_R: [1]
+  - - PTS_L: [1]
+    - W_CAP_L: [1]
+    - CAP_L: [1]
+  - - PTS_R: [1]
+    - W_CAP_R: [1]
+    - CAP_R: [1]
+  # case grounds - no harness wire, drawn as arrows
+  - - CAP_L: [2]
+    - '-->'
+    - GND_ENG: [1]
+  - - CAP_R: [2]
+    - '-->'
+    - GND_ENG: [1]
+
+  # --- kill switch output feeding both coils -------------------------
+  - - SP_YR: [1]
+    - W_COIL_L_FEED: [1]
+    - COIL_L: [1]
+  - - SP_YR: [1]
+    - W_COIL_R_FEED: [1]
+    - COIL_R: [1]

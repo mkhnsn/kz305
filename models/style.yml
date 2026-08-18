@@ -1,0 +1,23 @@
+# Shared drawing style, merged into every model.
+#
+# rankdir stays LR. The fork supports options.rankdir: TB, and it correctly
+# flips the port compass points so wires stop rendering as lens shapes -- but
+# TB is still NOT usable here, and the reason is structural rather than a
+# setting.
+#
+# WireViz names connector ports p{n}l and p{n}r: every pin sits on the LEFT or
+# RIGHT edge of the node's HTML table, because those tables are built for
+# left-to-right flow. Under TB an edge attaches to the south face of a
+# right-edge cell and then has to travel down across whatever node is below it,
+# so wires are drawn straight through other boxes and over their labels.
+#
+# Making TB work means transposing every connector and cable table so pins sit
+# on the top and bottom edges. That is a rework of the label builder, not a
+# flag, and it would diverge the fork sharply from upstream.
+#
+# Consequence: drawings are wide and short. Per-subsystem sheets are what makes
+# them manageable -- see the sheet-* models in harness.yml.
+
+tweak:
+  append:
+    - 'graph [ranksep="1.2", nodesep="0.4"]'

@@ -6,7 +6,7 @@ stock is a visible diff rather than an accident:
 
 | Model | What it is |
 |---|---|
-| `models/kz305-factory.yml` | The **as-built** factory harness. Reference only — nothing gets built from it. Carries no wire lengths by design, so it renders without a BOM. |
+| `models/factory/*.yml` | The **as-built** factory harness, split by subsystem. Reference only — nothing gets built from it. Carries no wire lengths by design, so it renders without a BOM. |
 | `models/kz305-rebuild.yml` | The **replacement** harness actually being built. DRAFT — see its header for open blockers. |
 
 `models/kz305-common.yml` holds the shared part library (connector and cable
@@ -75,8 +75,23 @@ enforced by the pinned fork, so a repin that lost `--strict` or `--merge` would
 quietly stop protecting the BOM, and a guard that no longer fails the build is
 indistinguishable from a clean run. CI runs these on every push.
 
-Subsystem files can be split into `models/factory/` and `models/rebuild/`; the
-manifest globs already point there, and `./render` proves nothing was dropped.
+## Sheets
+
+`harness.yml` defines a `sheet-*` model per subsystem, so each system gets its
+own drawing the way a factory manual splits them — that is what makes a wiring
+diagram readable, far more than any layout setting.
+
+Sheets set `strict: false`. The unreferenced-component guard exists because such
+a component vanishes from the BOM and never gets built; sheets render no BOM,
+and a view of one system is *supposed* to leave other systems' parts
+unconnected. The `factory` model still enforces it over the same files.
+
+## Layout
+
+`models/style.yml` sets `rankdir=TB` and `splines=ortho` for every model.
+GraphViz places nodes by graph topology, not by position on the bike, so it
+cannot reproduce a factory plate — but `rankdir=TB` alone takes the factory
+model from roughly 15:1 (an unprintable ribbon) to 1.9:1.
 
 ## Layout
 
@@ -84,7 +99,11 @@ manifest globs already point there, and `./render` proves nothing was dropped.
 harness.yml     which files make up which model, and the render defaults
 render          entry point; build.py does the merging
 models/         harness models + shared part library  <- source of truth
+  factory/      the factory harness, one file per subsystem
+  style.yml     shared drawing style, merged into every model
 docs/           bench findings, transcriptions, procedures
+measurements/   raw bench data: lengths, trunk map, generated cable index
+tools/          small generators (cable index)
 parts/          order guides and shopping lists
 out/            rendered drawings and BOMs (generated, gitignored)
 archive/        superseded work, kept for provenance

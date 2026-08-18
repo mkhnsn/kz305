@@ -1,0 +1,100 @@
+# CONTROLS — Handlebar switchgear, including the mapped right-bar branch.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  RH:
+    <<: *rh_cluster
+    pinlabels: [Br STOP IN, Y/R STOP OUT, Y/R BTN IN, BK BTN OUT]
+    notes: Four leads leave the switch housing directly - no connector at the switch. MAPPED by unsleeving 17 Aug 2026. Contacts degraded - button 5 ohm, kill 3 ohm; clean before reuse.
+  SP_RH_YR:
+    style: simple
+    type: Splice
+    subtype: 2 to 1, Y/R
+    notes: MAPPED 17 Aug 2026. The two Y/R leads from the switch housing join here and continue as a single Y/R to the 4P. This is the shared node - kill switch output and starter button input are the same net - and it is what carries the coil feed out of the branch. Confirms the topology the models already assumed.
+  SP_RH_BR:
+    style: simple
+    type: Splice
+    subtype: 1 to 3, Br
+    notes: MAPPED 17 Aug 2026. Four legs - Bl/W IN from a fuse, then out to the kill switch (Br), and onward into the harness as Br and Br/W via the 4P. So the right bar is a DISTRIBUTION POINT fed from a fuse, not a set of taps hanging off a bus. Br/W's onward destination is still UNTRACED - it is a live fused circuit feeding something nobody has identified.
+  RH_4P:
+    type: Junction
+    subtype: 4-pin connector, right bar
+    pinlabels: [Br, Br/W, Y/R, BK]
+    notes: Wire count now reconciles - 4 leads at the switch become 4 pins here plus one bullet. The two Y/R merge 2-to-1; the single Br expands to Br plus Br/W, with Bl/W leaving separately.
+  RH_BLW:
+    type: Bullet connector
+    subtype: Bl/W, right bar
+    pinlabels: [Bl/W]
+    notes: THE FEED INTO THIS BRANCH, not a tap out - traced to a fuse 17 Aug 2026. Mates Bl/W to Bl/W across the bullet. Supersedes the accessory-lead guess, which was wrong about direction. Fused switched power arrives here, and the branch splice distributes it to the kill switch and out again as Br and Br/W.
+  SP_YR:
+    style: simple
+    type: Splice
+    subtype: Y/R coil feed
+    notes: The kill switch output feeds BOTH ignition coils and the starter button from this node. Killing the engine works by cutting coil power here.
+
+cables:
+  W_RH_IN:
+    <<: *w18
+    colors: [BUWH]
+    notes: Fuse output to the right-bar branch. This is the FEED, traced 17 Aug 2026 - it is not a tap.
+  # --- kill switch output: coils AND starter button -----------------
+  W_YR_OUT:
+    <<: *w16
+    colors: [YERD]
+    notes: THE critical stock detail. Kill switch output. Feeds the coil splice and, internally to the cluster, the starter button. Cutting this is how the engine stop switch stops the engine.
+
+  # --- right-bar branch internals, mapped by unsleeving 17 Aug -------
+  W_RH_BR_SW:  {<<: *w18, colors: [BN]}
+  W_RH_BR:     {<<: *w18, colors: [BN]}
+  W_RH_BRW:
+    <<: *w18
+    colors: [BNWH]
+    notes: Same net as the kill switch feed. Destination beyond the 4P not yet traced.
+  W_RH_BLW:
+    <<: *w18
+    colors: [BUWH]
+    notes: Same net as the kill switch feed, leaving on a bullet rather than the 4P. Destination not traced.
+  W_RH_YR1:    {<<: *w18, colors: [YERD]}
+  W_RH_YR2:    {<<: *w18, colors: [YERD]}
+  W_RH_YR_OUT: {<<: *w18, colors: [YERD]}
+  W_RH_BK:     {<<: *w18, colors: [BK]}
+
+connections:
+  # --- right-bar branch internals -----------------------------------
+  - - RH_4P: [1]
+    - W_RH_BR_SW: [1]
+    - SP_RH_BR: [1]
+  - - SP_RH_BR: [1]
+    - W_RH_BR: [1]
+    - RH: [1]
+  - - SP_RH_BR: [1]
+    - W_RH_BRW: [1]
+    - RH_4P: [2]
+  - - SP_RH_BR: [1]
+    - W_RH_BLW: [1]
+    - RH_BLW: [1]
+  - - RH: [2]
+    - W_RH_YR1: [1]
+    - SP_RH_YR: [1]
+  - - RH: [3]
+    - W_RH_YR2: [1]
+    - SP_RH_YR: [1]
+  - - SP_RH_YR: [1]
+    - W_RH_YR_OUT: [1]
+    - RH_4P: [3]
+  - - RH: [4]
+    - W_RH_BK: [1]
+    - RH_4P: [4]
+
+  # --- kill switch out: coils and starter button --------------------
+  - - RH_4P: [3]
+    - W_YR_OUT: [1]
+    - SP_YR: [1]
+
+  # --- fused feed arriving at the right bar - Bl/W, traced 17 Aug ----
+  - - FUSE_A: [2]
+    - W_RH_IN: [1]
+    - RH_BLW: [1]

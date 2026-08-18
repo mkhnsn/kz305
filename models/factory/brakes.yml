@@ -1,0 +1,63 @@
+# BRAKES — Tail lamp and brake switches.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  TAIL:
+    <<: *taillight
+    notes: CONFIRMED off the diagram 17 Aug 2026 - RED feeds the tail filament, BLUE the brake filament, BK/Y grounds. Blue brake circuit ties to the Bl/W found loose at the right cluster and the light blue lead on the front brake switch.
+  FBRK:
+    <<: *brake_switch
+    subtype: front, at the lever perch
+    pinlabels: [Br IN, Bl OUT]
+    notes: CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch. It has its own pair of bullet connectors, BLUE and BROWN. Consistent across three reads - the diagram shows a brownish and a light blue lead here, and blue feeds the brake filament at the tail lamp.
+  RBRK:
+    <<: *brake_switch
+    subtype: rear, frame mounted
+    pinlabels: [Br IN, Bl OUT]
+    notes: TBD - not transcribed. Modeled in parallel with the front switch, and assumed Br in / Bl out to match it, because that is the only arrangement that lights the brake lamp from either control. Verify.
+  SP_BRAKE:
+    style: simple
+    type: Splice
+    subtype: brake lamp feed
+
+cables:
+  W_GND_TAIL:   {<<: *w18, colors: [BKYE]}
+  # --- tail / brake --------------------------------------------------
+  W_TAIL:
+    <<: *w18
+    colors: [RD]
+    notes: Tail filament feed off the ignition switch R pin. In ON it is fed through R/BK; in PARK straight off W. Preserve that.
+  W_BRAKE:     {<<: *w18, colors: [BU]}
+  W_BRK_FEED_F: {<<: *w18, colors: [BN]}
+  W_BRK_FEED_R: {<<: *w18, colors: [BN]}
+  W_BRK_OUT_F:  {<<: *w18, colors: [BU]}
+  W_BRK_OUT_R:  {<<: *w18, colors: [BU]}
+
+connections:
+  # --- tail and brake -----------------------------------------------
+  - - IGN: [4]
+    - W_TAIL: [1]
+    - TAIL: [1]
+  - - SP_BR: [1]
+    - W_BRK_FEED_F: [1]
+    - FBRK: [1]
+  - - SP_BR: [1]
+    - W_BRK_FEED_R: [1]
+    - RBRK: [1]
+  - - FBRK: [2]
+    - W_BRK_OUT_F: [1]
+    - SP_BRAKE: [1]
+  - - RBRK: [2]
+    - W_BRK_OUT_R: [1]
+    - SP_BRAKE: [1]
+  - - SP_BRAKE: [1]
+    - W_BRAKE: [1]
+    - TAIL: [2]
+
+  # --- tail lamp ground ----------------------------------------------
+  - - TAIL: [3]
+    - W_GND_TAIL: [1]
+    - GND_CHASSIS: [1]
