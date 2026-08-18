@@ -35,7 +35,7 @@
 #   Ignition: POINTS NOW, EI-READY. Stock circuit unchanged; the Y/R
 #     node stays an accessible, documented tap so EI is a plug-in later.
 #   Regulator: MODERN SOLID-STATE, single-phase. See RR notes - the
-#     popular series-type upgrade does NOT apply to this bike.
+#     series-type upgrade DOES apply - see the correction below.
 #   High-current switch paths: RELAYED. See K_COIL.
 #
 # ---------------------------------------------------------------------
@@ -61,18 +61,25 @@
 #      indicator bridge the two circuits and backfeed with LEDs. That
 #      failure mode does not apply here.
 #
-#   b. REGULATOR HEAT - PARTLY, NOT FULLY, SOLVED. A shunt regulator
-#      burns off surplus as heat, so cutting load makes it work harder.
-#      The genuine fix is a SERIES regulator, which open-circuits the
-#      stator instead of shorting it. BUT the well-known series units
-#      (SH775 and friends) are THREE-PHASE and this alternator is
-#      confirmed single-phase, so they do not fit no matter how often
-#      they are recommended as "the" upgrade.
+#   b. REGULATOR HEAT - SOLVABLE AFTER ALL. A shunt regulator burns off
+#      surplus as heat, so cutting load makes it work harder. The
+#      genuine fix is a SERIES regulator, which open-circuits the stator
+#      instead of shorting it, so the stator runs cooler too.
 #
-#      Single-phase options found are modern solid-state SHUNT units.
-#      They run cooler than the stock SCR unit through lower forward
-#      drop, but they still dissipate the surplus. Going full LED with
-#      one is an improvement, NOT a cure. Measure regulator body
+#      CORRECTED 18 Aug 2026. This file previously said the series units
+#      (SH775 and friends) are three-phase and therefore do not fit.
+#      That was wrong. They ARE three-phase parts, but a single-phase
+#      stator connects to ANY TWO of the three AC inputs, which is
+#      standard practice on single-phase classics - Nortons in
+#      particular - and manufacturers reportedly accept it. So the
+#      series option is open to this bike and is now the top pick.
+#      See docs/part-selection.md.
+#
+#      The single-phase-specific parts (Podtronics, Boyer, Tympanium)
+#      are all still SHUNT units. They run cooler than the stock SCR
+#      through lower forward drop, but they still dissipate the surplus,
+#      so with one of those full LED is an improvement, NOT a cure.
+#      Measure regulator body
 #      temperature on the first run, not just voltage - the 87V does
 #      type-K thermocouple, so the instrument is already in hand.
 #
@@ -164,7 +171,7 @@ connectors:
     type: Regulator / rectifier
     subtype: modern solid-state, single-phase - part TBD, see docs/part-selection.md
     pinlabels: [AC1, AC2, DC OUT, GND]
-    notes: UPGRADE - replaces the stock SCR shunt unit. MUST be single-phase. The alternator is confirmed single-phase (two yellow leads, 0.4 ohm), so three-phase units do NOT fit however often they are recommended. The series-type advantage is three-phase only; single-phase options are still shunt, so this runs cooler than stock but does NOT cure the LED heat problem. Universal single-phase units are commonly rated about 180W, assumed comfortably above this bike's load - but the stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Research 18 Aug 2026 widened the warning - it is not only the series units that are three-phase, essentially the whole modern MOSFET catalogue is (Shindengen FH020AA, FH027EA, FH014AA, FH027BA, SH847). Shortlist is Podtronics single-phase, Boyer Power Box, or a Rick's Hot Shot IF one exists for this bike - unconfirmed, call them. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
+    notes: UPGRADE - replaces the stock SCR shunt unit. The alternator is confirmed single-phase, two yellow leads, 0.4 ohm, permanent-magnet rotor confirmed on the bench 18 Aug 2026. CORRECTED 18 Aug 2026 - this note previously said three-phase units do not fit. Wrong. A single-phase stator connects to ANY TWO of a three-phase regulator's three AC inputs. That is standard practice on single-phase classics, Nortons especially, with long-term field reports, and manufacturers reportedly accept it. Leading candidate is now the Shindengen SH775, a SERIES type that open-circuits the stator rather than shorting it, so both regulator and stator run cooler and the LED heat problem is cured at source rather than mitigated. Rated about 30A, far above this bike. Caveats - counterfeits are widespread so buy from a known source such as Roadstercycle, only two of three rectifier legs are used so capacity is below the rating which does not matter here, and one forum report raises unconfirmed doubt about phase-differential monitoring. Fallback if avoiding off-label use is a single-phase SHUNT unit - Podtronics or Boyer - which is an improvement but not a cure. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
 
   K_MAIN:
     type: Relay

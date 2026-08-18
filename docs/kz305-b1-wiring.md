@@ -182,7 +182,7 @@ photos confirm, and what they don't.
 |---|---|
 | **Harness P/N `26001-12348`** | Woven cloth tag, "MADE IN JAPAN". A second tag appears on another branch. Read both under good light and log them — this identifies the harness variant independent of the diagram's A1/A2/B1/C1/D1 grouping. |
 | **Fuse block matches the diagram** | Three glass fuses in the original black box, feeds in white, blue, and red. Consistent with the 20 A main plus 10 A × 2 on printed 255. Use as the baseline when laying out the 6-circuit blade block. |
-| **Alternator is single-phase** | Short taped stub terminating in two yellow bullets — the stator pair, physically confirmed. Three-phase R/R units (SH775 etc.) stay off the table. |
+| **Alternator is single-phase** | Short taped stub terminating in two yellow bullets — the stator pair, physically confirmed. Rotor confirmed permanent-magnet, hands-on 18 Aug 2026. ~~Three-phase R/R units (SH775 etc.) stay off the table.~~ **Corrected 18 Aug 2026** — a single-phase stator connects to any two of a three-phase regulator's three AC inputs, so the SH775 is back on the table and is now the leading candidate. See `docs/part-selection.md`. |
 | **Single chassis ground** | Exactly one ring terminal on the entire harness — recorded here 13 Aug as *yellow/black*, but see the colour dispute in Bench findings, 17 Aug. Everything returns through that one point. This is the single failure point the star ground bus is meant to replace on a powder-coated frame. |
 
 ### Condition

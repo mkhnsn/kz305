@@ -68,56 +68,94 @@ recommended options need it.
 
 ## Regulator / rectifier (#12)
 
-### The market reality, and it is worse than the SH775 warning suggests
+### CORRECTION, 18 Aug 2026 — the series option was never actually closed
 
-The models already flag that the popular SH775-class **series** upgrade is
-three-phase only. Research widens that considerably: **essentially the entire
-modern MOSFET regulator market is three-phase.** Eastern Beaver's Shindengen
-lineup — FH020AA, FH027EA, FH014AA, FH027BA and the SH847 — is three-phase
-throughout. None of it fits this bike, however often "just fit a MOSFET R/R" is
-offered as universal advice.
+Everything in this project up to now has said that series regulators are
+three-phase only and therefore do not fit this bike. **That was wrong**, and it
+was wrong in the direction that cost the most: it ruled out the one part that
+solves the LED heat problem properly.
 
-🛑 **Every option that does fit is still a SHUNT regulator.** None of them cure
-the problem that cutting load with LEDs makes a shunt unit dump *more* surplus
-as heat. A modern unit runs cooler than the 44-year-old original, but the
-LED heat trade is unchanged. Mount it in airflow and check body temperature on
-the bench run, not just voltage.
+**A single-phase stator connects to ANY TWO of a three-phase regulator's three
+AC inputs.** This is standard practice on single-phase classics — Nortons in
+particular, where it is the routine SH775 fitment — with long-term field
+reports, and manufacturers reportedly accept the configuration. One rider
+reports fifteen years on it, noting the spare input leg is effectively a
+built-in redundancy.
 
-### Candidates that actually fit single-phase
+The three-phase parts are still three-phase parts. What was wrong was the
+inference that a single-phase stator cannot drive one.
+
+### Recommended: Shindengen SH775
+
+A **series (open) type**. When the battery is charged it *disconnects* the
+stator rather than shorting it, so the stator stops producing current it does
+not need.
+
+That is the difference that matters here. A shunt regulator makes the stator
+windings themselves the load, so cutting electrical load with LEDs pushes more
+surplus into heat. A series regulator removes the load entirely — **both the
+regulator and the stator run cooler, and the LED heat problem is cured at
+source rather than mitigated.**
+
+Rated about 30 A, far above anything this bike will ask for.
+
+**Caveats, honestly:**
+
+- Only two of three rectifier legs are used, so real capacity is below the
+  rating. Irrelevant at this bike's load, but true.
+- **Counterfeits are widespread.** Buy from a known source — Roadstercycle is
+  the name that recurs. Suspiciously cheap "OEM" listings are fakes.
+- One forum participant raised unconfirmed doubt about whether the series
+  control circuitry monitors voltage differential across the AC phases. Field
+  reports say it works; nobody has shown a datasheet either way.
+- Physically larger than a Podtronics.
+- Lithium-friendly, which the shunt units are not — worth noting if a lithium
+  battery is ever on the cards.
+
+### Fallback: single-phase shunt units
+
+If off-label use is unappealing, the purpose-built single-phase parts are all
+**shunt** type and none of them cure the heat trade:
 
 | Option | ~Price | Notes |
 |---|---|---|
-| **Podtronics single-phase 12 V** | $75 | The classic-bike standard — British twins are single-phase, so this is a purpose-built part rather than an adaptation. High-output version suits 180 W stators. Needs cooling fins and airflow. |
-| **Boyer Bransden Power Box** | $170 | Single-phase, 180 W. Older units lacked reverse-polarity protection; resolved on current production, so confirm which you are buying. |
-| **Tympanium** | — | Smaller, no cooling fins, mounts under the battery carrier. Availability is poor and it is little seen now. |
-| **Rick's 10-317** | $109 | Direct-fit OEM-style replacement listed for the KZ305. New, plug-and-play, but still an SCR shunt — a fresh stock part, not an upgrade. |
-| **Rick's Hot Shot** | — | MOSFET, runs cooler, direct-fit versions come with factory plugs. **Fitment for the KZ305 is NOT confirmed** — their site has no single-phase or KZ305 listing for the Hot Shot line. |
+| **Podtronics single-phase 12 V** | $75 | Classic-bike standard, purpose-built for single-phase. Needs fins and airflow. |
+| **Boyer Power Box** | $170 | 180 W. Confirm current production for reverse-polarity protection. |
+| **Tympanium** | — | Compact, no fins. Poor availability. |
+| **Rick's 10-317** | $109 | Direct-fit KZ305, but a fresh *stock* SCR shunt. |
+| **Rick's Hot Shot** | — | MOSFET **shunt** — cooler regulator, but it does nothing for the stator. KZ305 fitment unconfirmed. |
 
-### Recommendation
+⚠️ **A MOSFET shunt is not a substitute for a series unit.** It improves the
+regulator's own survival through lower forward drop, but it shorts the stator
+exactly as an SCR does, so the stator sees the same treatment.
 
-**Call Rick's first: 603-329-9901.** If a Hot Shot exists for the KZ305 it is
-the best answer — MOSFET, direct fit, factory connectors — and heat is the
-thing this bike is least able to afford. If not, **Podtronics single-phase**:
-cheapest of the credible options, purpose-built for single-phase, and long
-proven on bikes with the same charging architecture.
+### Why single-phase options are so thin
 
-Rick's 10-317 is the right choice only if the goal is a working stock bike
-rather than an improved one.
+The market answer is unsatisfying but real: single-phase means old and small.
+Modern bikes need 350–600 W and are three-phase throughout, so that is where
+the development money goes. Even the largest single-phase market — Harley —
+is served by three-phase *conversion* kits; Compu-Fire's own 55402 series
+regulator is a 40 A three-phase unit for their three-phase upgrade, not a
+single-phase part.
+
+Which is precisely why the two-of-three-inputs trick matters: it is how a
+single-phase bike reaches the modern parts bin without changing anything
+mechanical.
 
 ### Converting to three-phase — considered and NOT recommended
 
 Three-phase is what the modern R/R market serves, so the question is fair:
 what would it take to join it?
 
+**Decided: NOT doing this, 18 Aug 2026.** The correction above removes the only
+genuine argument for it — a series regulator no longer requires converting.
+
 **It takes a new stator and a new rotor.** A three-phase R/R needs a
 three-phase stator, and the rotor's magnet arrangement has to suit the winding.
 This is not a wiring change — it is engine work.
 
-⚠️ **One thing to confirm while the engine is apart:** that the rotor is a
-permanent magnet type with no field coil or brushes. Two ungrounded yellow
-leads and no field wire in the harness make this near-certain, but it is
-inferred, not confirmed, and it is visible on the bench right now. An excited
-field rotor would make conversion a substantially bigger job.
+✅ **Rotor confirmed permanent-magnet**, hands-on 18 Aug 2026. No field coil,
+no brushes.
 
 #### Path 1 — donor from the same engine family (the only realistic bolt-in)
 
@@ -152,18 +190,14 @@ bike does not have.
 | Stator + rotor | already fitted | $300-500, fitment unproven |
 | Risk | none, proven parts | you are the test case, on the charging system |
 
-**The one genuine engineering argument for it** is heat. A series-type
-regulator such as the SH775 is three-phase only, and it *would* cure the
-problem that LED load reduction makes a shunt regulator dump more surplus. That
-is a real gain, not a marketing one. But it is several hundred dollars and an
-unproven fitment to solve a heat problem that also yields to mounting a $75
-shunt unit in decent airflow.
+**The argument that used to carry it has evaporated.** The case for converting
+was that a series regulator cures the LED heat problem and series units are
+three-phase. The first half is still true; the second half was the error
+corrected above. An SH775 on two of three inputs delivers the series benefit
+for about $165 and no engine work at all.
 
-**However — the engine is apart right now, which is the only moment the labour
-for this is free.** So the decision belongs here rather than later. If it is
-worth doing at all, the next step is cheap and commits to nothing: pull the
-EX305 stator, rotor and cover part numbers and compare them against the KZ305.
-That is a catalogue lookup, not a purchase.
+Nothing else about conversion pays: more output this bike will never use, at
+several hundred dollars and an unproven fitment.
 
 ### Before ordering
 
@@ -186,6 +220,8 @@ That is a catalogue lookup, not a purchase.
 
 - [Eastern Beaver — motorcycle rectifiers](https://www.easternbeaver.com/motorcycle-rectifiers/)
 - [Shindengen — regulators/rectifiers](https://www.shindengen.com/products/electro/motorcycle/reg/)
+- [Norton Owners Club — Shindengen SH775 regulators](https://www.nortonownersclub.org/forum/shindengen-sh775-regulators)
+- [Access Norton — single-phase open regulator rectifier](https://www.accessnorton.com/NortonCommando/single-phase-open-regulator-rectifier.26142/)
 - [motogadget mo.flash](https://www.motogadget.com/en-us/products/mo-flash) (discontinued)
 - [Highsider SHIN YO 3-pin flasher relay](https://www.jpcycles.com/product/highsider-shin-yo-3-pin-universal-flasher-relay)
 - [SHIN YO 3-pin, EU stock](https://cafe4racer.eu/en/flasher-relays-for-motorcycle-motorbikes/1010-shin-yo-3-pin-universal-flasher-relay-12v-4054783211647.html)
