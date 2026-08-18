@@ -1,0 +1,25 @@
+# Project manifest. `./render` reads this and builds every model listed.
+# Nothing here is WireViz syntax -- it is just which files make up which model.
+
+common: models/kz305-common.yml     # shared part library, prepended to every source file
+
+output_dir: out
+
+models:
+  factory:
+    # The as-built reference. Rendered WITHOUT a BOM (no `t`): it carries no
+    # lengths by design, and WireViz has no "length unknown" state, so a BOM
+    # would print 0 m and read as measured.
+    output: kz305-factory
+    formats: hps
+    sources:
+      - models/factory/*.yml
+      - models/kz305-factory.yml
+
+  rebuild:
+    # The harness actually being built, so the BOM matters -- `t` included.
+    output: kz305-rebuild
+    formats: hpst
+    sources:
+      - models/rebuild/*.yml
+      - models/kz305-rebuild.yml
