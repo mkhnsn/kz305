@@ -85,15 +85,37 @@ built-in redundancy.
 The three-phase parts are still three-phase parts. What was wrong was the
 inference that a single-phase stator cannot drive one.
 
-### The SH775 is the right part, but the price has moved
+### DECISION — fit a shunt unit now, measure, upgrade only if the number says so
+
+**Fit a Podtronics single-phase ($75), mount it in real airflow, and measure the
+body temperature.** Buy the SH775 only if the measurement says to.
+
+The reasoning is that the heat problem, while real, has **never been quantified
+on this bike**. What is known: a shunt regulator makes the stator the load, and
+cutting draw with LEDs increases the surplus it must burn. What is not known:
+by how much, on a stator whose rated output has never been read off anything.
+Spending $180–285 to pre-empt an unmeasured problem is the wrong order of
+operations when the instrument to measure it is already on the bench.
+
+**The instrument exists.** The Fluke 87V does type-K thermocouple temperature;
+it needs an 80BK-A probe (already on the shopping list under the dynamic tests).
+So this is a measurement, not a guess.
+
+**Decision rule:** record the regulator body temperature at 3,000–5,000 rpm in
+still air. Compare it against that unit's own rating rather than an absolute
+number. Sustained operation near the rating is the trigger to upgrade; a
+comfortable margin means the $75 part was the right answer and $200 was saved.
+
+### Upgrade path — Shindengen SH775
 
 Polaris part **4012941**, catalogued by Polaris itself as *"REGULATOR 3PH 35A
 **SERIES** 105C"* — which confirms the series type and the 105 degC rating from
 the manufacturer rather than a forum.
 
-**It is no longer $165.** Current OEM pricing runs **$179 to $285**. The
-$95 Roadstercycle deal that recurs in forum posts is historical; they no longer
-list it.
+**Priced out of the initial build at $179–285.** The $95 Roadstercycle deal
+that recurs in forum posts is historical; they no longer list it. This is the
+part to move to if the temperature measurement calls for it, or if the discount
+route below comes through.
 
 | Source | Price | |
 |---|---|---|
@@ -107,12 +129,13 @@ aftermarket is not pretending to be anything. That does not make it good; it
 means the fraud risk and the quality risk are separate questions, and only the
 second one applies. Nobody has published a teardown either way.
 
-### PENDING — OEM discount route being checked, 18 Aug 2026
+### Open — OEM discount route, asked 18 Aug 2026
 
-Dealer/employee pricing on the genuine part is being chased through a Polaris
-contact. **If that lands, it overrides the measure-first plan below** — a
-genuine SH775 at discount beats a $75 shunt outright, and the series design
-cures the heat problem rather than mitigating it.
+Dealer pricing on the genuine part has been asked after through a Polaris
+contact. **Assume it is not available and build to the decision above**; if it
+does come through, it overrides that decision outright — a genuine SH775 at
+discount beats a $75 shunt, and the series design cures the heat problem rather
+than mitigating it. Update this file if it lands.
 
 **Ask for: 4012941** — "REGULATOR, 3PH, 35A, SERIES, 105C". Check whether it
 has superseded; **710001103** appears as an alternate OEM number.
@@ -154,27 +177,6 @@ little money — but it is convenience, not necessity.
 - Temperature measurement becomes validation rather than a decision gate
 - Run the DC pair **heavy gauge and direct to the battery, fused at the
   battery end**; series regulators are sensitive to resistance in that path
-
-### Recommendation if the discount route does not land: measure before spending
-
-**Fit a Podtronics single-phase ($75), mount it in real airflow, and measure the
-body temperature.** Buy the SH775 only if the measurement says to.
-
-The reasoning is that the heat problem, while real, has **never been quantified
-on this bike**. What is known: a shunt regulator makes the stator the load, and
-cutting draw with LEDs increases the surplus it must burn. What is not known:
-by how much, on a stator whose rated output has never been read off anything.
-Spending $180–285 to pre-empt an unmeasured problem is the wrong order of
-operations when the instrument to measure it is already on the bench.
-
-**The instrument exists.** The Fluke 87V does type-K thermocouple temperature;
-it needs an 80BK-A probe (already on the shopping list under the dynamic tests).
-So this is a measurement, not a guess.
-
-**Decision rule:** record the regulator body temperature at 3,000–5,000 rpm in
-still air. Compare it against that unit's own rating rather than an absolute
-number. Sustained operation near the rating is the trigger to upgrade; a
-comfortable margin means the $75 part was the right answer and $200 was saved.
 
 ### Design the harness so the upgrade stays cheap
 
