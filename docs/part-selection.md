@@ -85,49 +85,70 @@ built-in redundancy.
 The three-phase parts are still three-phase parts. What was wrong was the
 inference that a single-phase stator cannot drive one.
 
-### Recommended: Shindengen SH775
+### The SH775 is the right part, but the price has moved
 
-A **series (open) type**. When the battery is charged it *disconnects* the
-stator rather than shorting it, so the stator stops producing current it does
-not need.
+Polaris part **4012941**, catalogued by Polaris itself as *"REGULATOR 3PH 35A
+**SERIES** 105C"* — which confirms the series type and the 105 degC rating from
+the manufacturer rather than a forum.
 
-That is the difference that matters here. A shunt regulator makes the stator
-windings themselves the load, so cutting electrical load with LEDs pushes more
-surplus into heat. A series regulator removes the load entirely — **both the
-regulator and the stator run cooler, and the LED heat problem is cured at
-source rather than mitigated.**
+**It is no longer $165.** Current OEM pricing runs **$179 to $285**. The
+$95 Roadstercycle deal that recurs in forum posts is historical; they no longer
+list it.
 
-Rated about 30 A, far above anything this bike will ask for.
-
-**Caveats, honestly:**
-
-- Only two of three rectifier legs are used, so real capacity is below the
-  rating. Irrelevant at this bike's load, but true.
-- **Counterfeits are widespread.** Buy from a known source — Roadstercycle is
-  the name that recurs. Suspiciously cheap "OEM" listings are fakes.
-- One forum participant raised unconfirmed doubt about whether the series
-  control circuitry monitors voltage differential across the AC phases. Field
-  reports say it works; nobody has shown a datasheet either way.
-- Physically larger than a Podtronics.
-- Lithium-friendly, which the shunt units are not — worth noting if a lithium
-  battery is ever on the cards.
-
-### Fallback: single-phase shunt units
-
-If off-label use is unappealing, the purpose-built single-phase parts are all
-**shunt** type and none of them cure the heat trade:
-
-| Option | ~Price | Notes |
+| Source | Price | |
 |---|---|---|
-| **Podtronics single-phase 12 V** | $75 | Classic-bike standard, purpose-built for single-phase. Needs fins and airflow. |
-| **Boyer Power Box** | $170 | 180 W. Confirm current production for reverse-polarity protection. |
-| **Tympanium** | — | Compact, no fins. Poor availability. |
-| **Rick's 10-317** | $109 | Direct-fit KZ305, but a fresh *stock* SCR shunt. |
-| **Rick's Hot Shot** | — | MOSFET **shunt** — cooler regulator, but it does nothing for the stator. KZ305 fitment unconfirmed. |
+| OEM dealer (Partzilla etc.) | $179–285 | Genuine, warranted |
+| Used / salvage from a wrecked Polaris | $40–80 | Genuine part, unknown history — but a regulator either works or does not, and it is testable |
+| Aftermarket "SH775" clones | $26–65 | Unverifiable |
 
-⚠️ **A MOSFET shunt is not a substitute for a series unit.** It improves the
-regulator's own survival through lower forward drop, but it shorts the stator
-exactly as an SCR does, so the stator sees the same treatment.
+⚠️ On the clones — the counterfeit warning in the Norton forums is specifically
+about fakes sold **as genuine at genuine prices**. A $30 unit openly listed as
+aftermarket is not pretending to be anything. That does not make it good; it
+means the fraud risk and the quality risk are separate questions, and only the
+second one applies. Nobody has published a teardown either way.
+
+### Recommendation: measure before spending
+
+**Fit a Podtronics single-phase ($75), mount it in real airflow, and measure the
+body temperature.** Buy the SH775 only if the measurement says to.
+
+The reasoning is that the heat problem, while real, has **never been quantified
+on this bike**. What is known: a shunt regulator makes the stator the load, and
+cutting draw with LEDs increases the surplus it must burn. What is not known:
+by how much, on a stator whose rated output has never been read off anything.
+Spending $180–285 to pre-empt an unmeasured problem is the wrong order of
+operations when the instrument to measure it is already on the bench.
+
+**The instrument exists.** The Fluke 87V does type-K thermocouple temperature;
+it needs an 80BK-A probe (already on the shopping list under the dynamic tests).
+So this is a measurement, not a guess.
+
+**Decision rule:** record the regulator body temperature at 3,000–5,000 rpm in
+still air. Compare it against that unit's own rating rather than an absolute
+number. Sustained operation near the rating is the trigger to upgrade; a
+comfortable margin means the $75 part was the right answer and $200 was saved.
+
+### Design the harness so the upgrade stays cheap
+
+This is the part that matters at build time, and it costs nothing:
+
+- Give the R/R its **own serviceable connector**, sized for the higher current,
+  rather than splicing it into the loom.
+- Bring **both stator leads and the DC pair to that connector** so swapping to a
+  three-AC-input unit means a new pigtail, not opening the harness.
+- Leave physical room and a mounting point for a unit the size of an SH775,
+  which is larger than a Podtronics.
+- Mount wherever the airflow actually is — that decision is worth more than the
+  choice between the two parts.
+
+Done that way, the upgrade later is a twenty-minute job, and the measurement
+decides it rather than a forum consensus.
+
+⚠️ **The one option that costs nothing at all** is worth naming even though it
+is already decided against: a halogen headlight restores the load the regulator
+wants to see and makes the whole problem disappear. FULL LED is a deliberate
+choice, and this is its actual price. Noting it for completeness, not to
+reopen it.
 
 ### Why single-phase options are so thin
 
