@@ -162,7 +162,7 @@ connectors:
     type: Turn signal relay
     subtype: 2-pin, thermal
     pinlabels: [Br IN, O OUT]
-    notes: CONFIRMED 2-PIN off the diagram, 17 Aug 2026 - brown in, orange out, NO ground terminal. This is why an electronic 3-pin flasher needs a wire the stock harness does not have.
+    notes: CONFIRMED 2-PIN off the diagram, 17 Aug 2026 - brown in, orange out, NO ground terminal. This is why an electronic 3-pin flasher needs a wire the stock harness does not have. The rebuild runs a ground wire here regardless, so a 3-pin electronic unit is fine - see docs/part-selection.md.
 
   LH:
     <<: *lh_cluster
