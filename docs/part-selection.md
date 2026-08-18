@@ -104,6 +104,67 @@ proven on bikes with the same charging architecture.
 Rick's 10-317 is the right choice only if the goal is a working stock bike
 rather than an improved one.
 
+### Converting to three-phase — considered and NOT recommended
+
+Three-phase is what the modern R/R market serves, so the question is fair:
+what would it take to join it?
+
+**It takes a new stator and a new rotor.** A three-phase R/R needs a
+three-phase stator, and the rotor's magnet arrangement has to suit the winding.
+This is not a wiring change — it is engine work.
+
+⚠️ **One thing to confirm while the engine is apart:** that the rotor is a
+permanent magnet type with no field coil or brushes. Two ungrounded yellow
+leads and no field wire in the harness make this near-certain, but it is
+inferred, not confirmed, and it is visible on the bench right now. An excited
+field rotor would make conversion a substantially bigger job.
+
+#### Path 1 — donor from the same engine family (the only realistic bolt-in)
+
+The later **EX305 / GPZ305 (1983-88) is three-phase.** Its regulator carries
+three yellow leads (Electrex RR20), and its stator is Kawasaki 21003-1073. Same
+305 twin family, one generation later.
+
+🛑 **Whether that stator and rotor physically fit the KZ305-B1 cases and crank
+is UNVERIFIED, and it is the entire question.** Settle it with a parts-catalogue
+cross-reference of stator, rotor and cover part numbers before spending
+anything. Note also that Electrex flags the Z305 LTD as possibly needing a
+*different* regulator (RR26) — so this family spans both architectures, which
+is exactly why part numbers must be checked rather than assumed.
+
+#### Path 2 — custom rewind
+
+Possible only if the stator's slot count divides evenly by three with groups
+120 degrees apart. Frequently it does not, and the answer from rewinders in
+that case is a flat "can't be done with that stator". Requires counting the
+actual slots and poles on this stator, and the rotor still has to suit.
+$200-400 before the regulator.
+
+#### Why not to do it
+
+**Three-phase is common because modern bikes need 350-600 W.** This one, after
+the LED conversion, needs perhaps 60-100 W. Three-phase solves a problem this
+bike does not have.
+
+| | Single-phase | Three-phase conversion |
+|---|---|---|
+| Regulator | $75 Podtronics | $165 MOSFET / SH775-class |
+| Stator + rotor | already fitted | $300-500, fitment unproven |
+| Risk | none, proven parts | you are the test case, on the charging system |
+
+**The one genuine engineering argument for it** is heat. A series-type
+regulator such as the SH775 is three-phase only, and it *would* cure the
+problem that LED load reduction makes a shunt regulator dump more surplus. That
+is a real gain, not a marketing one. But it is several hundred dollars and an
+unproven fitment to solve a heat problem that also yields to mounting a $75
+shunt unit in decent airflow.
+
+**However — the engine is apart right now, which is the only moment the labour
+for this is free.** So the decision belongs here rather than later. If it is
+worth doing at all, the next step is cheap and commits to nothing: pull the
+EX305 stator, rotor and cover part numbers and compare them against the KZ305.
+That is a catalogue lookup, not a purchase.
+
 ### Before ordering
 
 - **Confirm the stator's rated output in watts.** The 180 W universal units are
@@ -134,3 +195,6 @@ rather than an improved one.
 - [Rick's 10-317 for KZ305](https://www.svspowersports.com/products/ricks-replacement-regulator-rectifier-10-317)
 - [Podtronics single-phase 12 V](https://www.britishbikebits.com/podtronics-solid-state-rectifier-regulater-bsa-triumph-single-phase-12v)
 - [Regulator/rectifier guide — types, brands, faults](https://granttiller.com/regulator-rectifiers-alternators)
+- [Electrex RR20 — GPZ305 / Z305LTD, three yellow leads](https://www.electrexworld.co.uk/acatalog/RR20_-_Regulator_Rectifier_GPZ305_GPZ400_GPZ600R.html)
+- [EX305 / GPZ305 stator 21003-1073](https://www.theolouwesmotors.com/product/21003-1073-stator-generator-kaw-gpz305-ex305-b1/)
+- [Rewinding single-phase to three-phase — feasibility](https://www.eng-tips.com/threads/how-to-rewind-a-stator-from-one-phase-to-three-phase.346823/)
