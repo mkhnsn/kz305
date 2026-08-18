@@ -1,0 +1,159 @@
+# =====================================================================
+# KZ305-B1 — shared definitions
+#
+# Prepended to BOTH models. Nothing here describes topology; this file
+# holds only things true of the parts themselves, plus bench-confirmed
+# measurements that must never drift between the two drawings.
+#
+#   wireviz -p kz305-common.yml kz305-factory.yml   # as-built reference
+#   wireviz -p kz305-common.yml kz305-rebuild.yml   # the rebuild
+#
+# The "templates" key is ignored by WireViz; it exists to anchor values.
+#
+# Kawasaki -> WireViz color codes:
+#   W=WH  Br=BN  R=RD  BK=BK  Y=YE  Bl=BU  Gy=GY  O=OG  G=GN
+#   Y/R=YERD  Y/BK=YEBK  R/BK=RDBK  R/Y=RDYE  Br/W=BNWH  Bl/W=BUWH
+#   BK/Y=BKYE  <- the common ground net. NOT Y/BK. See kz305-b1-wiring.md,
+#              the two are different wires and this one is disputed.
+#
+# !! WireViz has no light-green code, so Kawasaki LG and G BOTH render as
+#    GN. Any LG lead is tagged in its notes. Do not read green off the
+#    drawing and assume it is G.
+#
+# Two-color leads are primary-then-secondary. Y/R and R/Y are DIFFERENT
+# wires; so are Br/W and W/Br. Base manual, printed 33, item 18.
+#
+# !! COLOR COLLISION - never identify a lead by color alone:
+#      BK = right points lead, starter trigger, chassis grounds
+#      YE = left points lead, alternator phases
+#      Y/R = kill switch output, coil feed, AND starter button input
+#    Ring out to the endpoint before terminating.
+# =====================================================================
+
+templates:
+
+  # ---- wire gauges -------------------------------------------------
+  # Gauge only. length_unit lives in the rebuild file, which is the one
+  # that gets cut; the factory model carries no lengths at all so the
+  # BOM cannot report a fabricated zero.
+  w6:  &w6  {gauge: 6 AWG}
+  w14: &w14 {gauge: 14 AWG}
+  w16: &w16 {gauge: 16 AWG}
+  w18: &w18 {gauge: 18 AWG}
+
+  # ---- ignition ----------------------------------------------------
+  coil: &coil
+    type: Ignition coil
+    pinlabels: [PRI+, PRI-]
+    notes: Primary 3.6-5.4 ohm, secondary 11-17 kohm. Printed 161.
+
+  points: &points
+    type: Contact breaker
+    pinlabels: [SIGNAL]
+    notes: Leads carry a factory braided jacket - do NOT strip it. Colors confirmed 15 Aug 2026 from the stamped plate.
+
+  capacitor: &capacitor
+    type: Capacitor
+    subtype: 0.24 +/- 0.02 uF, 1000 W VDC
+    pinlabels: [SIGNAL, GND]
+    notes: Parallel across the points.
+
+  plug: &plug
+    type: Spark plug
+    pinlabels: [HT]
+
+  # ---- charging / starting -----------------------------------------
+  alternator: &alternator
+    type: Alternator
+    subtype: single-phase, 2 bullet
+    pinlabels: [PHASE A, PHASE B]
+    notes: Single-phase CONFIRMED on the bench. 0.4 ohm across the pair (spec 0.36-0.54, printed 159). Each lead must read infinity to ground. About 75V AC at 4000 rpm.
+
+  regrec: &regrec
+    type: Regulator / rectifier
+    subtype: combined, shunt type
+    notes: Shunt type - it dumps surplus as heat, so LED load reduction makes it run HOTTER. Check 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on.
+
+  battery: &battery
+    type: Battery
+    subtype: 12V 10Ah
+    pinlabels: [POS, NEG]
+
+  starter_relay: &starter_relay
+    type: Starter relay
+    pinlabels: [BAT STUD, MOTOR STUD, COIL+, COIL-]
+    notes: Green corrosion on both studs on the original - replace. COIL+ is fed BK from the starter button. COIL- grounds directly, CONFIRMED 15 Aug 2026.
+
+  starter_motor: &starter_motor
+    type: Starter motor
+    pinlabels: [POS]
+    notes: Grounds through the case.
+
+  # ---- switches ----------------------------------------------------
+  ign_switch: &ign_switch
+    type: Ignition switch
+    subtype: 4-pin
+    pinlabels: [BATT (W), IGN (Br), TAIL1 (R/BK), TAIL2 (R)]
+    notes: METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_BK-R. PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function.
+
+  rh_cluster: &rh_cluster
+    type: Right bar cluster
+    subtype: stop switch + starter button
+    notes: METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts degraded - button 5 ohm, kill 3 ohm, 8 ohm series. The relay will NOT pull in through 8 ohm. Clean before building.
+
+  lh_cluster: &lh_cluster
+    type: Left bar cluster
+    subtype: dimmer + turn signal + horn
+    notes: TBD - dimmer common (Bl vs R_BK / R_Y) NOT resolved. Scan is marginal here and getting the common wrong lights both filaments at once. Meter the switch itself.
+
+  neutral_switch: &neutral_switch
+    type: Neutral switch
+    subtype: single conductor, case-grounding
+    pinlabels: [SIGNAL]
+    notes: CONFIRMED 15 Aug 2026 - one wire, grounds through the engine case. 4 ohm in neutral (3.6 lead-corrected), open in gear. Indicator only, NOT a crank interlock. The 4 ohm is contamination, not spec - was 40 ohm before cleaning.
+
+  brake_switch: &brake_switch
+    type: Brake light switch
+    pinlabels: [IN, OUT]
+
+  # ---- lamps -------------------------------------------------------
+  headlight: &headlight
+    type: Headlight
+    subtype: 12V 50/35W sealed beam
+    pinlabels: [HI, LO, GND]
+
+  taillight: &taillight
+    type: Tail / brake light
+    subtype: 12V 8/27W
+    pinlabels: [TAIL, BRAKE, GND]
+
+  signal_lamp: &signal_lamp
+    type: Turn signal
+    subtype: 12V 23W
+    pinlabels: [FEED, GND]
+
+  license_lamp: &license_lamp
+    type: License plate light
+    subtype: 12V 8W
+    pinlabels: [FEED, GND]
+
+  indicator: &indicator
+    type: Indicator lamp
+    subtype: 12V 3.4W
+    pinlabels: [FEED, GND]
+    notes: Six 3.4W lamps total about 20W. Removing them shifts that load onto the shunt regulator.
+
+  # ---- distribution ------------------------------------------------
+  main_fuse: &main_fuse
+    type: Main fuse
+    subtype: 20A
+    pinlabels: [IN, OUT]
+
+  fuse10: &fuse10
+    type: Fuse
+    subtype: 10A glass
+    pinlabels: [IN, OUT]
+
+  junction6p: &junction6p
+    type: Junction
+    subtype: 6P connector

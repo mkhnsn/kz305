@@ -1,0 +1,21 @@
+#!/bin/sh
+# One-liner entry point: `./render` builds every model in harness.yml.
+# Finds the project's own venv so no activation step is needed.
+set -e
+here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
+if [ -x "$here/bin/python3" ]; then
+    py="$here/bin/python3"
+elif [ -x "$here/.venv/bin/python3" ]; then
+    py="$here/.venv/bin/python3"
+else
+    py=python3
+fi
+
+if ! "$py" -c 'import wireviz' 2>/dev/null; then
+    echo "error: wireviz is not importable by $py" >&2
+    echo "       install it with: $py -m pip install wireviz" >&2
+    exit 1
+fi
+
+exec "$py" "$here/build.py" "$@"

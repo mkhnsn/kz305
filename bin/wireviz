@@ -1,6 +1,0 @@
-#!/Users/mkhnsn/kz305/bin/python3
-import sys
-from wireviz.wv_cli import wireviz
-if __name__ == '__main__':
-    sys.argv[0] = sys.argv[0].removesuffix('.exe')
-    sys.exit(wireviz())
