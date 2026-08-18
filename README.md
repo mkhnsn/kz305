@@ -25,13 +25,17 @@ make                  # same as ./render
 Outputs land in `out/` and are gitignored — `models/` is the source of truth,
 and anything in `out/` is one command away from being regenerated.
 
-Needs a Python venv with WireViz 0.4.1:
+Needs a Python venv:
 
 ```sh
-python3 -m venv .venv && .venv/bin/pip install wireviz
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 `render` finds `.venv` on its own; there is no activation step.
+
+WireViz is pinned to the [unstable-studios fork](https://github.com/unstable-studios/WireViz),
+at an exact commit rather than a branch. The fork adds `--strict`, which
+`build.py` depends on — see below.
 
 ## Why `build.py` instead of plain `wireviz`
 
@@ -42,11 +46,17 @@ harness built from that BOM would be missing real wires.
 
 `build.py` merges at the data level and makes four things hard errors:
 
-- a connector or cable name defined in two files
-- a duplicate key inside one file
-- a component left out of every connection set (WireViz only warns, then drops
-  it from both the drawing *and* the BOM)
-- an unknown output format code
+| Guard | Enforced by |
+|---|---|
+| A connector or cable name defined in two files | `build.py` |
+| A duplicate key inside one file | fork, `DuplicateKeyError` |
+| A component left out of every connection set | fork, `UnreferencedComponentsError` |
+| An unknown output format code | `build.py` |
+
+The last two are raised by the pinned WireViz fork through a real API. They were
+originally detected by string-matching WireViz's stdout, which would have failed
+*silently* if upstream ever reworded the warning — restoring exactly the class of
+bug this tool exists to prevent.
 
 Add `--dump FILE` to see the merged YAML that WireViz actually received.
 
