@@ -62,6 +62,19 @@ against the merged text. The merging and every other guard live in WireViz.
 
 Add `--dump FILE` to see the merged YAML that WireViz actually received.
 
+## Tests
+
+```sh
+pytest tests/
+```
+
+End-to-end checks on `./render`: that every model in the manifest renders, that
+the factory model produces no BOM and the rebuild model does, and that each
+guard actually **exits nonzero**. That last part is the point — every guard is
+enforced by the pinned fork, so a repin that lost `--strict` or `--merge` would
+quietly stop protecting the BOM, and a guard that no longer fails the build is
+indistinguishable from a clean run. CI runs these on every push.
+
 Subsystem files can be split into `models/factory/` and `models/rebuild/`; the
 manifest globs already point there, and `./render` proves nothing was dropped.
 

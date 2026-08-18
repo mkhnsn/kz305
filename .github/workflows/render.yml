@@ -1,0 +1,38 @@
+name: Render
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # WireViz shells out to GraphViz; without it every render fails.
+      - uses: ts-graphviz/setup-graphviz@v2
+
+      # requirements.txt pins WireViz to an exact commit of the
+      # unstable-studios fork, which supplies --merge and --strict.
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Every guard below lives in the pinned fork, so this is what catches a
+      # repin that changed or lost them: a guard that stops failing the build
+      # looks exactly like a clean run.
+      - name: Guards and render
+        run: pytest tests/ -v
+
+      # The drawings are gitignored, so publish them per-commit. Reviewing a
+      # harness change means looking at the harness, not at YAML diffs.
+      - name: Upload drawings
+        uses: actions/upload-artifact@v4
+        with:
+          name: harness-drawings
+          path: out/
+          if-no-files-found: error
