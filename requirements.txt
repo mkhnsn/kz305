@@ -1,0 +1,11 @@
+# WireViz, pinned to the unstable-studios fork.
+#
+# The fork adds --strict, which turns two silent-data-loss behaviours into
+# errors: a component that no connection set references (dropped from the
+# drawing AND the BOM), and duplicate YAML keys (last-wins, no diagnostic).
+# build.py depends on that API, so this is pinned to an exact commit rather
+# than a branch -- a moving ref could change the guarantees underneath us.
+wireviz @ git+https://github.com/unstable-studios/WireViz@5400a2704863248185af989aed8871115be26b62
+
+# Test runner for the guard tests.
+pytest>=8

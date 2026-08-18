@@ -28,15 +28,15 @@ Flags still override the manifest for one-off renders:
 """
 
 import argparse
-import io
 import sys
 from collections import OrderedDict
-from contextlib import redirect_stdout
 from pathlib import Path
 
 import yaml
 
 import wireviz.wireviz as wv
+from wireviz import wv_yaml
+from wireviz.wv_errors import DuplicateKeyError, UnreferencedComponentsError
 
 # Keys merged by union; every other top-level key must be defined by exactly one file.
 MERGE_DICT = ("connectors", "cables")
@@ -48,48 +48,18 @@ MANIFEST = "harness.yml"
 FORMAT_CODES = {"g": "gv", "h": "html", "p": "png", "s": "svg", "t": "tsv"}
 
 
-# Lines of shared template text prepended to the file currently being loaded,
-# so reported line numbers point into the subsystem file the author is editing.
-_PREPENDED_LINES = 0
-
-
-class StrictLoader(yaml.SafeLoader):
-    """SafeLoader that refuses duplicate mapping keys instead of silently
-    keeping the last one."""
-
-
-def _no_duplicates(loader, node, deep=False):
-    # Check the keys written literally in this mapping, BEFORE flatten_mapping
-    # merges the anchor in. A subsystem overriding an anchor field (`<<: *coil`
-    # then `subtype: ...`) is legitimate; the same key typed twice is not.
-    seen = set()
-    for key_node, _ in node.value:
-        if key_node.tag == "tag:yaml.org,2002:merge":
-            continue
-        key = key_node.value
-        if key in seen:
-            raise yaml.YAMLError(
-                f"duplicate key {key!r} at line "
-                f"{key_node.start_mark.line + 1 - _PREPENDED_LINES} "
-                f"(YAML would silently keep only the last one)"
-            )
-        seen.add(key)
-    # Hand off to SafeConstructor, which resolves `<<` merge keys.
-    return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
-
-
-StrictLoader.add_constructor(
-    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, _no_duplicates
-)
-
-
 def load(path: Path, common: str) -> dict:
     """Load one subsystem file with the shared templates prepended."""
-    global _PREPENDED_LINES
-    _PREPENDED_LINES = common.count("\n") + 1
+    prepended_lines = common.count("\n") + 1
     text = common + "\n" + path.read_text(encoding="utf-8")
     try:
-        data = yaml.load(text, Loader=StrictLoader) or {}
+        data = wv_yaml.safe_load(text, strict=True) or {}
+    except DuplicateKeyError as e:
+        # Report the line in the file being edited, not in the merged text.
+        sys.exit(
+            f"error: {path}: duplicate key {e.key!r} at line "
+            f"{e.line - prepended_lines}"
+        )
     except yaml.YAMLError as e:
         sys.exit(f"error: {path}: {e}")
     data.pop(TEMPLATE_KEY, None)
@@ -162,28 +132,23 @@ def build(name, sources, common_path, output_name, output_dir, formats, dump=Non
     if dump:
         dump.write_text(yaml.safe_dump(merged, sort_keys=False), encoding="utf-8")
 
-    # WireViz reports unreferenced components on stdout as a warning. Capture it
-    # and promote it to a build failure: a component in no connection set is
-    # dropped from both the drawing and the BOM, so it would never get built.
-    buf = io.StringIO()
-    with redirect_stdout(buf):
+    # strict=True makes WireViz raise on a component that no connection set
+    # references. Such a component is dropped from both the drawing and the
+    # BOM, so it would never get built.
+    try:
         wv.parse(
             merged,
             output_formats=formats,
             output_dir=output_dir,
             output_name=output_name,
+            strict=True,
         )
-    out = buf.getvalue()
-    sys.stdout.write("".join(
-        line + "\n" for line in out.splitlines()
-        if line.strip() and not line.startswith("Warning: Unknown")
-    ))
-
-    if "not referenced in any connection set" in out:
+    except UnreferencedComponentsError as e:
+        verb = "appears" if len(e.components) == 1 else "appear"
         sys.exit(
-            f"error: the components above are in no connection set. WireViz drops "
-            f"them from the drawing AND the BOM, so they would never get built.\n"
-            f"Connect them, or move them to the documented gap list."
+            f"error: {', '.join(e.components)} {verb} in no connection set, so "
+            f"they are absent from the drawing AND the BOM and would never get "
+            f"built.\nConnect them, or move them to the documented gap list."
         )
 
     print(f"{label}wrote {output_dir / output_name}.[{'|'.join(formats)}]")
