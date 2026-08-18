@@ -25,8 +25,14 @@ jobs:
       # Every guard below lives in the pinned fork, so this is what catches a
       # repin that changed or lost them: a guard that stops failing the build
       # looks exactly like a clean run.
-      - name: Guards and render
+      - name: Guards and models
         run: pytest tests/ -v
+
+      # The tests render into temp dirs, so this is also the only step that
+      # exercises ./render itself -- the manifest defaults, the output_dir, and
+      # the wrapper's fallback to a system python when there is no .venv.
+      - name: Render into out/
+        run: ./render
 
       # The drawings are gitignored, so publish them per-commit. Reviewing a
       # harness change means looking at the harness, not at YAML diffs.
