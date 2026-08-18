@@ -1,0 +1,42 @@
+# STARTING — Starter motor and trigger circuit.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  SM:
+    <<: *starter_motor
+
+cables:
+  # --- heavy starter path -------------------------------------------
+  W_SOL_SM:   {<<: *w6, colors: [BK]}
+
+  # --- starter trigger ----------------------------------------------
+  W_START:
+    <<: *w18
+    colors: [BK]
+    notes: Starter button output to relay COIL+. BK but NOT a ground.
+  W_SOL_GND:
+    <<: *w18
+    colors: [BK]
+    notes: CONFIRMED direct to ground 15 Aug 2026. No neutral-switch interlock in this circuit.
+
+connections:
+  # --- heavy starter path -------------------------------------------
+  - - SOL: [2]
+    - W_SOL_SM: [1]
+    - SM: [1]
+
+  # --- starter trigger ----------------------------------------------
+  - - RH_4P: [4]
+    - W_START: [1]
+    - SOL: [3]
+  - - SOL: [4]
+    - W_SOL_GND: [1]
+    - GND_CHASSIS: [1]
+
+  # --- starter motor case ground -------------------------------------
+  - - SM: [1]
+    - '-->'
+    - GND_ENG: [1]

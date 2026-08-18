@@ -1,0 +1,35 @@
+# INSTRUMENTS — Neutral switch and its indicator.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  NSW:
+    <<: *neutral_switch
+  IND_N:
+    <<: *indicator
+    subtype: neutral indicator, 12V 3.4W
+
+cables:
+  # --- neutral indicator --------------------------------------------
+  W_IND_N_FEED:
+    <<: *w18
+    colors: [BN]
+    notes: TBD - lamp feed assumed off the switched brown bus. Not confirmed.
+  W_NSW:
+    <<: *w18
+    colors: [GN]
+    notes: TBD colour. Stock is light green (LG), which WireViz cannot render distinctly from G. Do not read this as plain green.
+
+connections:
+  # --- neutral indicator --------------------------------------------
+  - - SP_BR: [1]
+    - W_IND_N_FEED: [1]
+    - IND_N: [1]
+  - - IND_N: [2]
+    - W_NSW: [1]
+    - NSW: [1]
+  - - NSW: [1]
+    - '-->'
+    - GND_ENG: [1]

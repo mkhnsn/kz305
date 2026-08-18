@@ -1,0 +1,33 @@
+# CHARGING — Alternator and regulator/rectifier.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  ALT:
+    <<: *alternator
+  RR:
+    <<: *regrec
+    pinlabels: [AC1, AC2, DC OUT, GND]
+
+cables:
+  # --- charging -----------------------------------------------------
+  W_ALT:    {<<: *w14, colors: [YE, YE]}
+  W_RR_OUT:
+    <<: *w14
+    colors: [WH]
+    notes: TBD - the DC output is modeled as returning to the battery stud. Where it physically lands in the stock harness is NOT confirmed off the scan.
+  W_RR_GND: {<<: *w14, colors: [BK]}
+
+connections:
+  # --- charging ------------------------------------------------------
+  - - ALT: [1,2]
+    - W_ALT: [1,2]
+    - RR: [1,2]
+  - - RR: [3]
+    - W_RR_OUT: [1]
+    - SOL: [1]
+  - - RR: [4]
+    - W_RR_GND: [1]
+    - GND_CHASSIS: [1]

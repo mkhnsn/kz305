@@ -15,8 +15,9 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
-FACTORY = ROOT / "models" / "kz305-factory.yml"
 COMMON = ROOT / "models" / "kz305-common.yml"
+FACTORY_DIR = ROOT / "models" / "factory"
+FACTORY = sorted(FACTORY_DIR.glob("*.yml"))
 
 ORPHAN = """
 connectors:
@@ -78,14 +79,14 @@ def test_rebuild_produces_a_bom(tmp_path):
 
 def test_component_in_no_connection_set_fails_the_build(tmp_path):
     orphan = write(tmp_path, "orphan.yml", ORPHAN)
-    result = render_files(tmp_path, FACTORY, orphan)
+    result = render_files(tmp_path, *FACTORY, orphan)
     assert result.returncode != 0
     assert "ORPHAN_FOR_TEST" in result.stdout + result.stderr
 
 
 def test_name_defined_in_two_files_fails_the_build(tmp_path):
     clash = write(tmp_path, "clash.yml", CLASH)
-    result = render_files(tmp_path, FACTORY, clash)
+    result = render_files(tmp_path, *FACTORY, clash)
     assert result.returncode != 0
     assert "SP_BR" in result.stdout + result.stderr
 
@@ -105,19 +106,32 @@ def test_unknown_format_code_fails_the_build(tmp_path):
 
 
 def test_split_across_files_matches_a_single_file(tmp_path):
-    """Splitting a model by subsystem must not change what gets built."""
-    text = FACTORY.read_text().splitlines(keepends=True)
-    boundary = next(i for i, line in enumerate(text) if line.startswith("cables:"))
-    part_a = write(tmp_path, "part_a.yml", "".join(text[:boundary]))
-    part_b = write(tmp_path, "part_b.yml", "".join(text[boundary:]))
+    """Splitting a model across files must not change what gets built."""
+    # Concatenating the subsystem files by hand is only valid because none of
+    # them repeat a top-level key -- which is exactly what --merge exists to
+    # stop mattering. Both routes must reach the same drawing.
+    parts = [write(tmp_path, f"part_{i}.yml", p.read_text())
+             for i, p in enumerate(FACTORY)]
 
     split_dir, whole_dir = tmp_path / "split", tmp_path / "whole"
     split_dir.mkdir()
     whole_dir.mkdir()
 
     assert render("--common", COMMON, "-O", "h", "-o", split_dir, "-f", "s",
-                  part_a, part_b).returncode == 0
+                  *parts).returncode == 0
     assert render("--common", COMMON, "-O", "h", "-o", whole_dir, "-f", "s",
-                  FACTORY).returncode == 0
+                  *FACTORY).returncode == 0
 
     assert (split_dir / "h.svg").read_bytes() == (whole_dir / "h.svg").read_bytes()
+
+
+def test_every_sheet_renders(tmp_path):
+    """Each per-subsystem sheet must render on its own."""
+    import yaml
+    manifest = yaml.safe_load((ROOT / "harness.yml").read_text())
+    sheets = [n for n in manifest["models"] if n.startswith("sheet-")]
+    assert sheets, "no sheets defined in the manifest"
+    result = render(*sheets, "-o", tmp_path)
+    assert result.returncode == 0, result.stdout + result.stderr
+    for name in sheets:
+        assert (tmp_path / f"{name}.svg").exists(), f"{name} produced no drawing"

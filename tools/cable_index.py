@@ -18,7 +18,7 @@ from wireviz import wv_merge  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 COMMON = ROOT / "models" / "kz305-common.yml"
-FACTORY = ROOT / "models" / "kz305-factory.yml"
+FACTORY = sorted((ROOT / "models" / "factory").glob("*.yml"))
 
 
 def endpoints(connections):
@@ -39,7 +39,7 @@ def endpoints(connections):
 
 def main():
     common = COMMON.read_text(encoding="utf-8")
-    model = wv_merge.merge([(str(FACTORY), load(FACTORY, common))])
+    model = wv_merge.merge([(str(p), load(p, common)) for p in FACTORY])
     ends = endpoints(model.get("connections", []))
 
     print("# Cable index — factory model\n")

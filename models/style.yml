@@ -1,0 +1,16 @@
+# Shared drawing style, merged into every model.
+#
+# WireViz lays out with GraphViz `dot`, which places nodes by graph topology,
+# not by position on the bike. It cannot reproduce a factory plate. What it can
+# do is stop producing a ribbon.
+#
+# rankdir=TB is the single biggest improvement: on the factory model it turns
+# roughly 24000 x 1650 (15:1, unprintable) into roughly 12000 x 5800 (2:1,
+# page-shaped). splines=ortho gives the right-angle wire runs that read as a
+# wiring diagram rather than a graph.
+#
+# Per-sheet legibility comes from the subsystem split, not from these settings.
+
+tweak:
+  append:
+    - 'graph [rankdir=TB, ranksep="1.6", nodesep="0.5", splines=ortho]'

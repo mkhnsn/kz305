@@ -58,7 +58,8 @@ def resolve_formats(codes: str) -> tuple:
     return tuple(OrderedDict.fromkeys(FORMAT_CODES[c] for c in codes))
 
 
-def build(name, sources, common_path, output_name, output_dir, formats, dump=None):
+def build(name, sources, common_path, output_name, output_dir, formats,
+          dump=None, strict=True):
     """Merge `sources` into one harness and render it. Exits nonzero on any
     condition that would otherwise produce a quietly incomplete BOM."""
     if not sources:
@@ -81,16 +82,18 @@ def build(name, sources, common_path, output_name, output_dir, formats, dump=Non
     if dump:
         dump.write_text(yaml.safe_dump(merged, sort_keys=False), encoding="utf-8")
 
-    # strict=True makes WireViz raise on a component that no connection set
-    # references. Such a component is dropped from both the drawing and the
-    # BOM, so it would never get built.
+    # strict makes WireViz raise on a component that no connection set
+    # references, because such a component is dropped from both the drawing and
+    # the BOM and would never get built. Per-subsystem sheets set it false in
+    # the manifest: a sheet is a view that deliberately shows one system, it
+    # renders no BOM, and so there is nothing there for the guard to protect.
     try:
         wv.parse(
             merged,
             output_formats=formats,
             output_dir=output_dir,
             output_name=output_name,
-            strict=True,
+            strict=strict,
         )
     except UnreferencedComponentsError as e:
         one = len(e.components) == 1
@@ -193,6 +196,7 @@ def main() -> None:
             output_name=spec["output"],
             output_dir=out_dir,
             formats=resolve_formats(args.format or spec.get("formats", "hps")),
+            strict=spec.get("strict", True),
         )
 
 
