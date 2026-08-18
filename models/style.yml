@@ -1,16 +1,23 @@
 # Shared drawing style, merged into every model.
 #
-# WireViz lays out with GraphViz `dot`, which places nodes by graph topology,
-# not by position on the bike. It cannot reproduce a factory plate. What it can
-# do is stop producing a ribbon.
+# rankdir stays LR. The fork supports options.rankdir: TB, and it correctly
+# flips the port compass points so wires stop rendering as lens shapes -- but
+# TB is still NOT usable here, and the reason is structural rather than a
+# setting.
 #
-# rankdir=TB is the single biggest improvement: on the factory model it turns
-# roughly 24000 x 1650 (15:1, unprintable) into roughly 12000 x 5800 (2:1,
-# page-shaped). splines=ortho gives the right-angle wire runs that read as a
-# wiring diagram rather than a graph.
+# WireViz names connector ports p{n}l and p{n}r: every pin sits on the LEFT or
+# RIGHT edge of the node's HTML table, because those tables are built for
+# left-to-right flow. Under TB an edge attaches to the south face of a
+# right-edge cell and then has to travel down across whatever node is below it,
+# so wires are drawn straight through other boxes and over their labels.
 #
-# Per-sheet legibility comes from the subsystem split, not from these settings.
+# Making TB work means transposing every connector and cable table so pins sit
+# on the top and bottom edges. That is a rework of the label builder, not a
+# flag, and it would diverge the fork sharply from upstream.
+#
+# Consequence: drawings are wide and short. Per-subsystem sheets are what makes
+# them manageable -- see the sheet-* models in harness.yml.
 
 tweak:
   append:
-    - 'graph [rankdir=TB, ranksep="1.6", nodesep="0.5", splines=ortho]'
+    - 'graph [ranksep="1.2", nodesep="0.4"]'
