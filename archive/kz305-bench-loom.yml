@@ -13,10 +13,16 @@
 # Kawasaki -> WireViz color codes:
 #   W=WH  Br=BN  R=RD  BK=BK  Y=YE  Bl=BU  Gy=GY  O=OG  G=GN
 #   Y/R=YERD   R/BK=RDBK   Y/BK=YEBK
+#
+# !! COLOR COLLISION - do not identify these leads by color alone:
+#      BK = right points lead (W_PTS_R), starter trigger (W_RH_OUT),
+#           chassis ground (W_BAT_GND, W_SOL_GND, W_RR_GND)
+#      YE = left points lead (W_PTS_L), alternator phases (W_ALT)
+#    Ring out to the endpoint before terminating. Per-cable notes repeat
+#    this because comments do not render into the diagram.
 # =====================================================================
 
 connectors:
-
   BATT:
     type: Battery
     subtype: 12V 10Ah
@@ -43,13 +49,13 @@ connectors:
     type: Ignition switch
     subtype: 4-pin
     pinlabels: [BATT (W), IGN (Br), TAIL1 (R/BK), TAIL2 (R)]
-    notes: ON = W-Br and R_BK-R. PARK = W-R. Preserve park function.
+    notes: METER-CONFIRMED 15 Aug 2026 - all six pin pairs tested in all four positions, switch unplugged. ON = W-Br and R_BK-R. PARK = W-R only. OFF and LOCK fully open. Preserve park function.
 
   RH:
     type: Right bar cluster
     subtype: stop switch + starter button
     pinlabels: [STOP IN (Br), LINK (Y/R), START OUT (BK)]
-    notes: RUN = Br-Y_R. Push = Y_R-BK. Interlock - no crank with kill off.
+    notes: METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, and the interlock holds (no Br-BK path with kill OFF). WARNING contacts are degraded - button 5 ohm, kill switch 3 ohm, 8 ohm in series. The relay will NOT pull in through 8 ohm. Clean both switches before this goes in the harness.
 
   SOL:
     type: Starter relay
@@ -64,13 +70,13 @@ connectors:
     type: Alternator
     subtype: single-phase, 2 bullet
     pinlabels: [PHASE A, PHASE B]
-    notes: Confirmed single-phase on the bench. 0.36-0.54 ohm across the pair.
+    notes: Confirmed single-phase on the bench. 0.4 ohm across the pair.
 
   RR:
     type: Regulator / rectifier
     subtype: combined, shunt type
     pinlabels: [AC1, AC2, DC OUT, GND]
-    notes: Shunt. LED load reduction makes it run HOTTER. Check 14.0-14.5V at 3-5k.
+    notes: Shunt. LED load reduction makes it run HOTTER. Check 14.0-14.5V at 3-5k. White/red is separate lead.
 
   COIL_L:
     type: Ignition coil LEFT
@@ -103,182 +109,187 @@ connectors:
     notes: Non-negotiable. Frame is powder coated - mask or scrape the stud.
 
 cables:
-
   W_BAT_SOL:
     gauge: 6 AWG
-    length: 0.4
+    length: 400
+    length_unit: mm
     colors: [RD]
 
   W_SOL_SM:
     gauge: 6 AWG
-    length: 0.3
+    length: 300
+    length_unit: mm
     colors: [RD]
 
   W_BAT_GND:
     gauge: 6 AWG
-    length: 0.3
+    length: 300
+    length_unit: mm
     colors: [BK]
 
   W_MAIN_IN:
     gauge: 14 AWG
-    length: 0.3
+    length: 300
+    length_unit: mm
     colors: [WH]
 
   W_MAIN_OUT:
     gauge: 14 AWG
-    length: 0.3
+    length: 300
+    length_unit: mm
     colors: [WH]
 
   W_IGN_FEED:
     gauge: 16 AWG
-    length: 0.9
+    length: 900
+    length_unit: mm
     colors: [WH]
 
   W_IGN_RET:
     gauge: 16 AWG
-    length: 0.9
+    length: 900
+    length_unit: mm
     colors: [BN]
 
   W_COIL_FEED:
     gauge: 16 AWG
-    length: 0.5
+    length: 500
+    length_unit: mm
     colors: [BN]
+    notes:
+      STOP - DO NOT BUILD AS DRAWN. Factory diagram (printed 255, 600 dpi) shows both coils fed by Y_R
+      DOWNSTREAM of the kill switch. This feed comes off PDM F2 in parallel with the kill switch, so the engine
+      stop switch would gate the starter only and NOT stop a running engine. Pending decision - re-source from
+      RH LINK (Y_R), which is currently an unconnected pin.
 
   W_COIL_L:
     gauge: 16 AWG
-    length: 0.25
+    length: 250
+    length_unit: mm
     colors: [BN]
 
   W_COIL_R:
     gauge: 16 AWG
-    length: 0.25
+    length: 250
+    length_unit: mm
     colors: [BN]
 
   W_PTS_L:
     gauge: 18 AWG
-    length: 0.4
-    colors: [BK]
-    notes: TBD - points lead color not read off the scan. Verify.
+    length: 400
+    length_unit: mm
+    colors: [YE]
+    notes: Color confirmed 15 Aug 2026 from the factory-stamped plate on the points module - yellow serves LEFT. Factory braided jacket - do NOT strip it. YE also carries the alternator phases (W_ALT) - identify by endpoint, not color.
 
   W_PTS_R:
     gauge: 18 AWG
-    length: 0.4
+    length: 400
+    length_unit: mm
     colors: [BK]
-    notes: TBD - points lead color not read off the scan. Verify.
+    notes: Color confirmed 15 Aug 2026 from the factory-stamped plate on the points module - black serves RIGHT. Factory braided jacket - do NOT strip it. BK also serves the starter trigger and all three ground runs - identify by endpoint, not color.
 
   W_RH_IN:
     gauge: 18 AWG
-    length: 1.1
+    length: 1100
+    length_unit: mm
     colors: [BN]
 
   W_RH_OUT:
     gauge: 18 AWG
-    length: 1.1
+    length: 1100
+    length_unit: mm
     colors: [BK]
+    notes: Starter trigger (RH START OUT to SOL COIL+). BK but NOT a ground - do not land it on the star bus.
 
   W_SOL_GND:
     gauge: 18 AWG
-    length: 0.3
+    length: 300
+    length_unit: mm
     colors: [BK]
-    notes: TBD - stock may ground the coil via the neutral switch. Check before committing.
+    notes: Direct ground CONFIRMED 15 Aug 2026 - factory diagram (printed 255, 600 dpi) read at the relay, plus bench observation. The neutral switch is an isolated single-wire branch that grounds through its own case symbol and feeds the indicator only. No crank interlock in this circuit.
 
   W_ALT:
     gauge: 14 AWG
-    length: 0.5
+    length: 500
+    length_unit: mm
     colors: [YE, YE]
+    notes: Both phases YE, same color as the LEFT points lead (W_PTS_L). Identify by endpoint.
 
   W_RR_OUT:
     gauge: 14 AWG
-    length: 0.5
+    length: 500
+    length_unit: mm
     colors: [WH]
 
   W_RR_GND:
     gauge: 14 AWG
-    length: 0.4
+    length: 400
+    length_unit: mm
     colors: [BK]
 
 connections:
-
   # --- heavy starter path -------------------------------------------
-  -
-    - BATT: [1]
+  - - BATT: [1]
     - W_BAT_SOL: [1]
     - SOL: [1]
-  -
-    - SOL: [2]
+  - - SOL: [2]
     - W_SOL_SM: [1]
     - SM: [1]
-  -
-    - BATT: [2]
+  - - BATT: [2]
     - W_BAT_GND: [1]
     - GND: [1]
 
   # --- main feed through the 20A fuse into the PDM lug ---------------
-  -
-    - SOL: [1]
+  - - SOL: [1]
     - W_MAIN_IN: [1]
     - MF: [1]
-  -
-    - MF: [2]
+  - - MF: [2]
     - W_MAIN_OUT: [1]
     - PDM: [1]
 
   # --- ignition switch loop -----------------------------------------
-  -
-    - PDM: [2]
+  - - PDM: [2]
     - W_IGN_FEED: [1]
     - IGN: [1]
-  -
-    - IGN: [2]
+  - - IGN: [2]
     - W_IGN_RET: [1]
     - PDM: [5]
 
   # --- coils on their own fused feed, dedicated connector -----------
-  -
-    - PDM: [3]
+  - - PDM: [3]
     - W_COIL_FEED: [1]
     - SP_COIL: [1]
-  -
-    - SP_COIL: [1]
+  - - SP_COIL: [1]
     - W_COIL_L: [1]
     - COIL_L: [1]
-  -
-    - SP_COIL: [1]
+  - - SP_COIL: [1]
     - W_COIL_R: [1]
     - COIL_R: [1]
-  -
-    - COIL_L: [2]
+  - - COIL_L: [2]
     - W_PTS_L: [1]
     - PTS_L: [1]
-  -
-    - COIL_R: [2]
+  - - COIL_R: [2]
     - W_PTS_R: [1]
     - PTS_R: [1]
 
   # --- kill / start interlock ---------------------------------------
-  -
-    - PDM: [6]
+  - - PDM: [6]
     - W_RH_IN: [1]
     - RH: [1]
-  -
-    - RH: [3]
+  - - RH: [3]
     - W_RH_OUT: [1]
     - SOL: [3]
-  -
-    - SOL: [4]
+  - - SOL: [4]
     - W_SOL_GND: [1]
     - GND: [3]
 
   # --- charging ------------------------------------------------------
-  -
-    - ALT: [1,2]
-    - W_ALT: [1,2]
-    - RR: [1,2]
-  -
-    - RR: [3]
+  - - ALT: [1, 2]
+    - W_ALT: [1, 2]
+    - RR: [1, 2]
+  - - RR: [3]
     - W_RR_OUT: [1]
     - PDM: [1]
-  -
-    - RR: [4]
+  - - RR: [4]
     - W_RR_GND: [1]
     - GND: [2]

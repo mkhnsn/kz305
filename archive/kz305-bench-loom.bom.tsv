@@ -1,9 +1,9 @@
 Id	Description	Qty	Unit	Designators
-1	Cable, 1 x 14 AWG	1.5	m	W_MAIN_IN, W_MAIN_OUT, W_RR_GND, W_RR_OUT
-2	Cable, 1 x 16 AWG	2.8	m	W_COIL_FEED, W_COIL_L, W_COIL_R, W_IGN_FEED, W_IGN_RET
-3	Cable, 1 x 18 AWG	3.3	m	W_PTS_L, W_PTS_R, W_RH_IN, W_RH_OUT, W_SOL_GND
-4	Cable, 1 x 6 AWG	1	m	W_BAT_GND, W_BAT_SOL, W_SOL_SM
-5	Cable, 2 x 14 AWG	0.5	m	W_ALT
+1	Cable, 1 x 14 AWG	1500	mm	W_MAIN_IN, W_MAIN_OUT, W_RR_GND, W_RR_OUT
+2	Cable, 1 x 16 AWG	2800	mm	W_COIL_FEED, W_COIL_L, W_COIL_R, W_IGN_FEED, W_IGN_RET
+3	Cable, 1 x 18 AWG	3300	mm	W_PTS_L, W_PTS_R, W_RH_IN, W_RH_OUT, W_SOL_GND
+4	Cable, 1 x 6 AWG	1000	mm	W_BAT_GND, W_BAT_SOL, W_SOL_SM
+5	Cable, 2 x 14 AWG	500	mm	W_ALT
 6	Connector, Alternator, single-phase, 2 bullet, 2 pins	1		ALT
 7	Connector, Battery, 12V 10Ah, 2 pins	1		BATT
 8	Connector, Contact breaker LEFT, 1 pins	1		PTS_L
