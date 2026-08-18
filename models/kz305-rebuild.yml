@@ -162,9 +162,9 @@ connectors:
     <<: *alternator
   RR:
     type: Regulator / rectifier
-    subtype: modern solid-state, single-phase - part TBD
+    subtype: modern solid-state, single-phase - part TBD, see docs/part-selection.md
     pinlabels: [AC1, AC2, DC OUT, GND]
-    notes: UPGRADE - replaces the stock SCR shunt unit. MUST be single-phase. The alternator is confirmed single-phase (two yellow leads, 0.4 ohm), so three-phase units do NOT fit however often they are recommended. The series-type advantage is three-phase only; single-phase options are still shunt, so this runs cooler than stock but does NOT cure the LED heat problem. Universal single-phase units are commonly rated about 180W, comfortably above this bike's load. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
+    notes: UPGRADE - replaces the stock SCR shunt unit. MUST be single-phase. The alternator is confirmed single-phase (two yellow leads, 0.4 ohm), so three-phase units do NOT fit however often they are recommended. The series-type advantage is three-phase only; single-phase options are still shunt, so this runs cooler than stock but does NOT cure the LED heat problem. Universal single-phase units are commonly rated about 180W, assumed comfortably above this bike's load - but the stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Research 18 Aug 2026 widened the warning - it is not only the series units that are three-phase, essentially the whole modern MOSFET catalogue is (Shindengen FH020AA, FH027EA, FH014AA, FH027BA, SH847). Shortlist is Podtronics single-phase, Boyer Power Box, or a Rick's Hot Shot IF one exists for this bike - unconfirmed, call them. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
 
   K_MAIN:
     type: Relay
