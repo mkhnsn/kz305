@@ -107,7 +107,37 @@ aftermarket is not pretending to be anything. That does not make it good; it
 means the fraud risk and the quality risk are separate questions, and only the
 second one applies. Nobody has published a teardown either way.
 
-### Recommendation: measure before spending
+### PENDING — OEM discount route being checked, 18 Aug 2026
+
+Dealer/employee pricing on the genuine part is being chased through a Polaris
+contact. **If that lands, it overrides the measure-first plan below** — a
+genuine SH775 at discount beats a $75 shunt outright, and the series design
+cures the heat problem rather than mitigating it.
+
+**Ask for both of these, not just the regulator:**
+
+| What | Part | Why |
+|---|---|---|
+| The regulator | **4012941** — "REGULATOR, 3PH, 35A, SERIES, 105C" | The SH775. Ask whether it has superseded; **710001103** appears as an alternate OEM number. |
+| **The mating connector** | Not publicly catalogued — look it up against the models that use 4012941 (2011–2020 Ranger / RZR 570, 800, 1000) | Housing, terminals and seals. **This is the part to grab while there is access.** |
+
+🛑 **Do not skip the connector.** It is the piece that makes the serviceable-R/R
+plan work, its part number is not published anywhere public, and a dealer parts
+system is the one place it can be looked up. Sourcing it afterwards means
+identifying it from a photograph.
+
+If the discount is deep, a second regulator is cheap insurance on a part that
+is otherwise $179–285 and increasingly counterfeited.
+
+**If it lands, what changes:**
+
+- Fit the SH775 from the start; the Podtronics is not bought at all
+- Two of the three AC inputs take the stator pair — already the plan
+- Temperature measurement becomes validation rather than a decision gate
+- Run the DC pair **heavy gauge and direct to the battery, fused at the
+  battery end**; series regulators are sensitive to resistance in that path
+
+### Recommendation if the discount route does not land: measure before spending
 
 **Fit a Podtronics single-phase ($75), mount it in real airflow, and measure the
 body temperature.** Buy the SH775 only if the measurement says to.
