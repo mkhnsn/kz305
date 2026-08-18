@@ -1,22 +1,10 @@
 #!/usr/bin/env python3
-"""Merge subsystem WireViz files into one harness and render it.
+"""Render the harness models listed in harness.yml.
 
-Why this exists: WireViz's --prepend concatenates raw text, and YAML resolves
-duplicate top-level keys last-wins. Two files that each define `connections:`
-therefore produce a drawing containing only the second one's -- silently, with
-exit 0 and a warning. A harness built from that BOM is missing real wires.
-
-This tool merges at the data level instead:
-  * duplicate connector/cable NAMES across files are an error, never last-wins
-  * duplicate keys WITHIN a file are an error (PyYAML also silently drops those)
-  * a component left out of every connection set is an error, not a warning
-
-Each subsystem file is loaded with the shared template file textually prepended,
-so YAML anchors resolve per-file and every subsystem stays independently
-renderable on its own.
-
-Normally driven by ./render, which reads harness.yml and builds every model
-listed there, so no flags need remembering:
+All of the merging and validation lives in WireViz itself now -- see FORK.md in
+the pinned fork for --merge and --strict. What remains here is the project
+layer: reading the manifest so that no flags have to be remembered, and
+resolving each model's source globs.
 
     ./render               # build everything
     ./render factory       # build one model
@@ -24,7 +12,7 @@ listed there, so no flags need remembering:
 
 Flags still override the manifest for one-off renders:
 
-    ./render --common kz305-common.yml -O scratch -f s some/*.yml
+    ./render --common models/kz305-common.yml -O scratch -f s some/*.yml
 """
 
 import argparse
@@ -35,25 +23,20 @@ from pathlib import Path
 import yaml
 
 import wireviz.wireviz as wv
-from wireviz import wv_yaml
-from wireviz.wv_errors import DuplicateKeyError, UnreferencedComponentsError
-
-# Keys merged by union; every other top-level key must be defined by exactly one file.
-MERGE_DICT = ("connectors", "cables")
-MERGE_LIST = ("connections", "additional_bom_items")
-# Anchor definitions live here; WireViz ignores it, and so do we.
-TEMPLATE_KEY = "templates"
+from wireviz import wv_merge, wv_yaml
+from wireviz.wv_errors import DuplicateKeyError, UnreferencedComponentsError, WireVizError
 
 MANIFEST = "harness.yml"
 FORMAT_CODES = {"g": "gv", "h": "html", "p": "png", "s": "svg", "t": "tsv"}
 
 
 def load(path: Path, common: str) -> dict:
-    """Load one subsystem file with the shared templates prepended."""
+    """Load one source file with the shared templates prepended, so that YAML
+    anchors defined there resolve inside it."""
     prepended_lines = common.count("\n") + 1
     text = common + "\n" + path.read_text(encoding="utf-8")
     try:
-        data = wv_yaml.safe_load(text, strict=True) or {}
+        return wv_yaml.safe_load(text, strict=True) or {}
     except DuplicateKeyError as e:
         # Report the line in the file being edited, not in the merged text.
         sys.exit(
@@ -62,43 +45,6 @@ def load(path: Path, common: str) -> dict:
         )
     except yaml.YAMLError as e:
         sys.exit(f"error: {path}: {e}")
-    data.pop(TEMPLATE_KEY, None)
-    return data
-
-
-def merge(sources: dict[Path, dict]) -> dict:
-    merged: dict = {}
-    owner: dict[tuple[str, str], Path] = {}  # (section, name) -> file that defined it
-    errors: list[str] = []
-
-    for path, data in sources.items():
-        for key, value in data.items():
-            if key in MERGE_DICT:
-                section = merged.setdefault(key, {})
-                for name, body in value.items():
-                    if name in section:
-                        errors.append(
-                            f"{key[:-1]} {name!r} defined in both "
-                            f"{owner[(key, name)]} and {path}"
-                        )
-                        continue
-                    section[name] = body
-                    owner[(key, name)] = path
-            elif key in MERGE_LIST:
-                merged.setdefault(key, []).extend(value)
-            else:
-                if key in owner:
-                    errors.append(
-                        f"top-level {key!r} defined in both {owner[key]} and {path}; "
-                        f"it must appear in exactly one file"
-                    )
-                    continue
-                merged[key] = value
-                owner[key] = path
-
-    if errors:
-        sys.exit("error: name collisions across subsystem files:\n  - " + "\n  - ".join(errors))
-    return merged
 
 
 def resolve_formats(codes: str) -> tuple:
@@ -113,13 +59,16 @@ def resolve_formats(codes: str) -> tuple:
 
 
 def build(name, sources, common_path, output_name, output_dir, formats, dump=None):
-    """Merge `sources` into one harness and render it. Returns nothing; exits
-    nonzero on any condition that would silently produce an incomplete BOM."""
+    """Merge `sources` into one harness and render it. Exits nonzero on any
+    condition that would otherwise produce a quietly incomplete BOM."""
     if not sources:
         sys.exit(f"error: model {name!r} matched no source files")
 
     common = common_path.read_text(encoding="utf-8") if common_path else ""
-    merged = merge({p: load(p, common) for p in sources})
+    try:
+        merged = wv_merge.merge([(str(p), load(p, common)) for p in sources])
+    except WireVizError as e:
+        sys.exit(f"error: {e}")
 
     label = f"[{name}] " if name else ""
     print(
@@ -144,11 +93,12 @@ def build(name, sources, common_path, output_name, output_dir, formats, dump=Non
             strict=True,
         )
     except UnreferencedComponentsError as e:
-        verb = "appears" if len(e.components) == 1 else "appear"
+        one = len(e.components) == 1
         sys.exit(
-            f"error: {', '.join(e.components)} {verb} in no connection set, so "
-            f"they are absent from the drawing AND the BOM and would never get "
-            f"built.\nConnect them, or move them to the documented gap list."
+            f"error: {', '.join(e.components)} {'appears' if one else 'appear'} in "
+            f"no connection set, so {'it is' if one else 'they are'} absent from "
+            f"the drawing AND the BOM and would never get built.\n"
+            f"Connect {'it' if one else 'them'}, or move to the documented gap list."
         )
 
     print(f"{label}wrote {output_dir / output_name}.[{'|'.join(formats)}]")
