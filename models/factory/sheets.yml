@@ -1,0 +1,114 @@
+# Sheet assignments for the factory model -- WireViz fork `sheets:` feature.
+#
+# One sheet per subsystem, mirroring the models/factory/*.yml file split.
+# Every connector and cable is assigned explicitly to the sheet of the file
+# that defines it, so nothing depends on the inference rules; the renderer
+# errors on any designator that goes missing or unassigned, which makes this
+# list self-checking against the model files.
+#
+# A connection crossing sheets is drawn on the cable's sheet ending in a stub
+# (a reduced far-connector copy typed "=> <sheet>"), so the backbone's feeds
+# and grounds appear on every sheet that uses them without duplicating the
+# component itself.
+
+sheets:
+  backbone:
+    - BATT
+    - GND_CHASSIS
+    - GND_ENG
+    - MF
+    - FUSE_A
+    - IGN
+    - SOL
+    - SP_BR
+    - W_BAT_SOL
+    - W_BAT_GND
+    - W_MAIN
+    - W_IGN_FEED
+    - W_BR_MAIN
+    - W_FUSE_A_IN
+  controls:
+    - RH
+    - SP_RH_YR
+    - SP_RH_BR
+    - RH_4P
+    - RH_BLW
+    - SP_YR
+    - W_RH_IN
+    - W_YR_OUT
+    - W_RH_BR_SW
+    - W_RH_BR
+    - W_RH_BRW
+    - W_RH_BLW
+    - W_RH_YR1
+    - W_RH_YR2
+    - W_RH_YR_OUT
+    - W_RH_BK
+  starting:
+    - SM
+    - W_SOL_SM
+    - W_START
+    - W_SOL_GND
+  charging:
+    - ALT
+    - RR
+    - W_ALT
+    - W_RR_OUT
+    - W_RR_GND
+  ignition:
+    - COIL_L
+    - COIL_R
+    - PTS_L
+    - PTS_R
+    - CAP_L
+    - CAP_R
+    - W_COIL_L_FEED
+    - W_COIL_R_FEED
+    - W_PTS_L
+    - W_PTS_R
+    - W_CAP_L
+    - W_CAP_R
+  signals:
+    - LH
+    - FLASHER
+    - SIG_FL
+    - SIG_FR
+    - SIG_RL
+    - SIG_RR
+    - IND_L
+    - IND_R
+    - SP_SIG_L
+    - SP_SIG_R
+    - W_FLASH_IN
+    - W_FLASH_OUT
+    - W_SIG_L
+    - W_SIG_R
+    - W_SIG_FL
+    - W_SIG_RL
+    - W_SIG_FR
+    - W_SIG_RR
+    - W_IND_L
+    - W_IND_R
+    - W_GND_SIG_FL
+    - W_GND_SIG_FR
+    - W_GND_SIG_RL
+    - W_GND_SIG_RR
+    - W_GND_IND_L
+    - W_GND_IND_R
+  brakes:
+    - TAIL
+    - FBRK
+    - RBRK
+    - SP_BRAKE
+    - W_GND_TAIL
+    - W_TAIL
+    - W_BRAKE
+    - W_BRK_FEED_F
+    - W_BRK_FEED_R
+    - W_BRK_OUT_F
+    - W_BRK_OUT_R
+  instruments:
+    - NSW
+    - IND_N
+    - W_IND_N_FEED
+    - W_NSW

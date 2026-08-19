@@ -60,8 +60,11 @@ def write(tmp_path, name, text):
 def test_every_model_in_the_manifest_renders(tmp_path):
     result = render("-o", tmp_path)
     assert result.returncode == 0, result.stdout + result.stderr
-    # A model that rendered nothing would still exit 0 without this.
-    assert (tmp_path / "kz305-factory.svg").exists()
+    # A model that rendered nothing would still exit 0 without this. The
+    # factory model defines `sheets:`, so its graphical outputs are per-sheet
+    # files; the whole-harness HTML page carries every sheet.
+    assert (tmp_path / "kz305-factory.backbone.svg").exists()
+    assert (tmp_path / "kz305-factory.html").exists()
     assert (tmp_path / "kz305-rebuild.svg").exists()
 
 
@@ -122,16 +125,40 @@ def test_split_across_files_matches_a_single_file(tmp_path):
     assert render("--common", COMMON, "-O", "h", "-o", whole_dir, "-f", "s",
                   *FACTORY).returncode == 0
 
-    assert (split_dir / "h.svg").read_bytes() == (whole_dir / "h.svg").read_bytes()
+    # The factory sources define `sheets:`, so the drawing is per-sheet files.
+    split_svgs = sorted(p.name for p in split_dir.glob("h.*.svg"))
+    whole_svgs = sorted(p.name for p in whole_dir.glob("h.*.svg"))
+    assert split_svgs and split_svgs == whole_svgs
+    for name in split_svgs:
+        assert (split_dir / name).read_bytes() == (whole_dir / name).read_bytes()
 
 
 def test_every_sheet_renders(tmp_path):
-    """Each per-subsystem sheet must render on its own."""
+    """Every sheet named in the sheet mapping must come out as a drawing."""
     import yaml
-    manifest = yaml.safe_load((ROOT / "harness.yml").read_text())
-    sheets = [n for n in manifest["models"] if n.startswith("sheet-")]
-    assert sheets, "no sheets defined in the manifest"
-    result = render(*sheets, "-o", tmp_path)
+    sheets = yaml.safe_load(
+        (FACTORY_DIR / "sheets.yml").read_text())["sheets"]
+    assert sheets, "no sheets defined in models/factory/sheets.yml"
+    result = render("factory", "-o", tmp_path, "-f", "s")
     assert result.returncode == 0, result.stdout + result.stderr
     for name in sheets:
-        assert (tmp_path / f"{name}.svg").exists(), f"{name} produced no drawing"
+        svg = tmp_path / f"kz305-factory.{name}.svg"
+        assert svg.exists(), f"sheet {name} produced no drawing"
+
+
+def test_component_missing_from_the_sheet_mapping_fails_the_build(tmp_path):
+    """The sheet mapping is exhaustive: a new component that nobody assigned
+    (or chained to an assigned one) must fail, not silently land somewhere."""
+    stray = write(tmp_path, "stray.yml", """
+connectors:
+  STRAY_FOR_TEST: {type: Nowhere, pinlabels: [a, b]}
+cables:
+  W_STRAY_FOR_TEST: {wirecount: 1, gauge: 18 AWG}
+connections:
+  - - STRAY_FOR_TEST: [1]
+    - W_STRAY_FOR_TEST: [1]
+    - STRAY_FOR_TEST: [2]
+""")
+    result = render_files(tmp_path, *FACTORY, stray)
+    assert result.returncode != 0
+    assert "STRAY_FOR_TEST" in result.stdout + result.stderr

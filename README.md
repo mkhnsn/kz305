@@ -34,8 +34,11 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 `render` finds `.venv` on its own; there is no activation step.
 
 WireViz is pinned to the [unstable-studios fork](https://github.com/unstable-studios/WireViz),
-at an exact commit rather than a branch. The fork adds `--strict`, which
-`build.py` depends on — see below.
+at an exact commit rather than a branch. The fork adds `--strict` and
+`--merge`, which `build.py` depends on (see below), plus the layout and output
+features the models use: `rankdir: TB` with transposed node tables, native
+`sheets:` splitting, and interactive HTML output (pan/zoom, net tracing across
+sheets, BOM rows that highlight their component in the drawing).
 
 ## Why the fork, and why `build.py`
 
@@ -77,21 +80,33 @@ indistinguishable from a clean run. CI runs these on every push.
 
 ## Sheets
 
-`harness.yml` defines a `sheet-*` model per subsystem, so each system gets its
-own drawing the way a factory manual splits them — that is what makes a wiring
-diagram readable, far more than any layout setting.
+`models/factory/sheets.yml` assigns every component of the factory model to a
+subsystem sheet, using the fork's native `sheets:` feature. Each system gets
+its own drawing the way a factory manual splits them — that is what makes a
+wiring diagram readable, far more than any layout setting.
 
-Sheets set `strict: false`. The unreferenced-component guard exists because such
-a component vanishes from the BOM and never gets built; sheets render no BOM,
-and a view of one system is *supposed* to leave other systems' parts
-unconnected. The `factory` model still enforces it over the same files.
+A connection crossing sheets is drawn on the cable's sheet and ends in a stub —
+a reduced copy of the far connector typed `⇒ <sheet>` — so each sheet reads on
+its own: the starting sheet shows the start button as a stub of the controls
+sheet, the way a factory manual cross-references. png/svg come out as
+`kz305-factory.<sheet>.<ext>`; the HTML is a single interactive page carrying
+every sheet, and hovering a wire traces its net across sheet boundaries.
+
+Unlike the old `sheet-*` models (which re-rendered overlapping file subsets
+with `strict: false`), the sheets are views of the one validated harness:
+strict stays on, and a component missing from the sheet mapping — or from
+every connection set — fails the build rather than silently vanishing.
 
 ## Layout
 
-`models/style.yml` sets `rankdir=TB` and `splines=ortho` for every model.
-GraphViz places nodes by graph topology, not by position on the bike, so it
-cannot reproduce a factory plate — but `rankdir=TB` alone takes the factory
-model from roughly 15:1 (an unprintable ribbon) to 1.9:1.
+`models/style.yml` sets `rankdir: TB` for every model. GraphViz places nodes by
+graph topology, not by position on the bike, so it cannot reproduce a factory
+plate — but TB takes the drawings from unprintable ribbons to something like
+2:1 or 3:1. The fork transposes connector and cable tables under TB (pins on
+the top/bottom edges), so wires attach on the faces the graph flows through
+instead of routing through node bodies — the problem that forced an earlier
+revert to LR. style.yml also sets `sort_wires`, `wirelabel_detail`, and
+`mate_labels`; see the comments there.
 
 ## Layout
 

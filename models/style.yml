@@ -1,23 +1,23 @@
 # Shared drawing style, merged into every model.
 #
-# rankdir stays LR. The fork supports options.rankdir: TB, and it correctly
-# flips the port compass points so wires stop rendering as lens shapes -- but
-# TB is still NOT usable here, and the reason is structural rather than a
-# setting.
+# The fork has since transposed the connector/cable tables under
+# options.rankdir: TB (pins on top/bottom edges, ports on the faces the graph
+# flows through), which fixes the wires-through-nodes problem that forced the
+# earlier revert to LR. TB turns the ~15:1 LR ribbon into roughly 2:1, which
+# actually prints.
 #
-# WireViz names connector ports p{n}l and p{n}r: every pin sits on the LEFT or
-# RIGHT edge of the node's HTML table, because those tables are built for
-# left-to-right flow. Under TB an edge attaches to the south face of a
-# right-edge cell and then has to travel down across whatever node is below it,
-# so wires are drawn straight through other boxes and over their labels.
-#
-# Making TB work means transposing every connector and cable table so pins sit
-# on the top and bottom edges. That is a rework of the label builder, not a
-# flag, and it would diverge the fork sharply from upstream.
-#
-# Consequence: drawings are wide and short. Per-subsystem sheets are what makes
-# them manageable -- see the sheet-* models in harness.yml.
+# ranksep/nodesep are now first-class options in the fork, replacing the raw
+# GraphViz tweak that used to live here.
 
-tweak:
-  append:
-    - 'graph [ranksep="1.2", nodesep="0.4"]'
+options:
+  rankdir: TB
+  ranksep: 1.2
+  nodesep: 0.4
+  # Straighten wire rows whose connection sets are written against pin order;
+  # display order only, wire numbers/colors/BOM untouched.
+  sort_wires: by_pin
+  # Drop the redundant pinlabel from in-cable endpoint labels; the connector's
+  # own pinlabel cell still shows it. Keeps dense cable nodes narrow.
+  wirelabel_detail: pin
+  # Label the dashed mate arrows (mate/into) so they read without a legend.
+  mate_labels: true
