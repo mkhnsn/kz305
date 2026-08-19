@@ -142,7 +142,11 @@ connectors:
     type: Star ground bus
     subtype: to bare chassis stud
     pinlabels: [BATT, RR, SOL, RELAY 1, RELAY 2, ENG, LAMPS, SPARE]
-    notes: UPGRADE - replaces the single stock Y/BK ring terminal, which was the harness's one common-mode failure point. Frame is powder coated; mask or scrape the stud back to bare metal. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor - treat it as pass/fail, not a measurement.
+    notes: |-
+      UPGRADE - replaces the single stock Y/BK ring terminal, which was the harness's one common-mode
+      failure point. Frame is powder coated; mask or scrape the stud back to bare metal. Acceptance is
+      0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor - treat it as pass/fail, not a
+      measurement.
 
   MF:
     <<: *main_fuse
@@ -152,7 +156,13 @@ connectors:
     type: Power distribution module
     subtype: TBD - part not selected
     pinlabels: [MAIN STUD, F1 IGN SW FEED, F2 KILL FEED, F3 COIL PWR, F4 SPARE, SW IN (Br), SW OUT (Br)]
-    notes: UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL and circuit count is not final until the factory transcription is complete. F2 feeds the KILL SWITCH, not the coils directly - see SP_YR. PART CHOICE - the relay decisions now settle this - the design needs roughly 6-8 fused circuits AND 3-5 relay positions, which points at a sealed RTMR-style relay/fuse module rather than a plain blade fuse block. F1 may also downsize once the tail circuit is transcribed, since it now feeds only relay coils plus the park-fed tail.
+    notes: |-
+      UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL and circuit
+      count is not final until the factory transcription is complete. F2 feeds the KILL SWITCH, not the
+      coils directly - see SP_YR. PART CHOICE - the relay decisions now settle this - the design needs
+      roughly 6-8 fused circuits AND 3-5 relay positions, which points at a sealed RTMR-style relay/fuse
+      module rather than a plain blade fuse block. F1 may also downsize once the tail circuit is
+      transcribed, since it now feeds only relay coils plus the park-fed tail.
 
   IGN:
     <<: *ign_switch
@@ -171,19 +181,48 @@ connectors:
     type: Regulator / rectifier
     subtype: single-phase shunt (Podtronics class) - upgrade path is the SH775, see docs/part-selection.md
     pinlabels: [AC1, AC2, DC OUT, GND]
-    notes: UPGRADE - replaces the stock SCR shunt unit. The alternator is confirmed single-phase, two yellow leads, 0.4 ohm, permanent-magnet rotor confirmed on the bench 18 Aug 2026. CORRECTED 18 Aug 2026 - this note previously said three-phase units do not fit. Wrong. A single-phase stator connects to ANY TWO of a three-phase regulator's three AC inputs. That is standard practice on single-phase classics, Nortons especially, with long-term field reports, and manufacturers reportedly accept it. DECIDED 18 Aug 2026 - fit a single-phase SHUNT unit (Podtronics, about $75) and MEASURE regulator body temperature at 3-5k with a type-K probe, then upgrade only if the number says to. An OEM discount route for the SH775 has been asked after but is NOT assumed; build to this decision and revisit only if it lands. The heat problem is real but has never been quantified on this bike, and genuine SH775 pricing has moved to $179-285, so pre-empting an unmeasured problem is the wrong order. Upgrade path is the Shindengen SH775, Polaris 4012941, catalogued by Polaris as 3PH 35A SERIES 105C - a SERIES type that open-circuits the stator rather than shorting it, so both regulator and stator run cooler and the LED heat problem is cured at source rather than mitigated. Rated about 30A, far above this bike. Caveats - counterfeits are widespread so buy from a known source such as Roadstercycle, only two of three rectifier legs are used so capacity is below the rating which does not matter here, and one forum report raises unconfirmed doubt about phase-differential monitoring. HARNESS REQUIREMENT so the upgrade stays cheap - give this unit its own serviceable connector rather than splicing into the loom, bring both stator leads and the DC pair to it so a three-AC-input unit needs only a new pigtail, and leave room and a mount for a body larger than a Podtronics. Mount where the airflow actually is; that matters more than which of the two parts is fitted. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never disconnect the battery while running.
+    notes: |-
+      UPGRADE - replaces the stock SCR shunt unit. The alternator is confirmed single-phase, two yellow
+      leads, 0.4 ohm, permanent-magnet rotor confirmed on the bench 18 Aug 2026. CORRECTED 18 Aug 2026 -
+      this note previously said three-phase units do not fit. Wrong. A single-phase stator connects to ANY
+      TWO of a three-phase regulator's three AC inputs. That is standard practice on single-phase
+      classics, Nortons especially, with long-term field reports, and manufacturers reportedly accept it.
+      DECIDED 18 Aug 2026 - fit a single-phase SHUNT unit (Podtronics, about $75) and MEASURE regulator
+      body temperature at 3-5k with a type-K probe, then upgrade only if the number says to. An OEM
+      discount route for the SH775 has been asked after but is NOT assumed; build to this decision and
+      revisit only if it lands. The heat problem is real but has never been quantified on this bike, and
+      genuine SH775 pricing has moved to $179-285, so pre-empting an unmeasured problem is the wrong
+      order. Upgrade path is the Shindengen SH775, Polaris 4012941, catalogued by Polaris as 3PH 35A
+      SERIES 105C - a SERIES type that open-circuits the stator rather than shorting it, so both regulator
+      and stator run cooler and the LED heat problem is cured at source rather than mitigated. Rated about
+      30A, far above this bike. Caveats - counterfeits are widespread so buy from a known source such as
+      Roadstercycle, only two of three rectifier legs are used so capacity is below the rating which does
+      not matter here, and one forum report raises unconfirmed doubt about phase-differential monitoring.
+      HARNESS REQUIREMENT so the upgrade stays cheap - give this unit its own serviceable connector rather
+      than splicing into the loom, bring both stator leads and the DC pair to it so a three-AC-input unit
+      needs only a new pigtail, and leave room and a mount for a body larger than a Podtronics. Mount
+      where the airflow actually is; that matters more than which of the two parts is fitted. The stator's
+      rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Target
+      14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never
+      disconnect the battery while running.
 
   K_MAIN:
     type: Relay
     subtype: ISO mini, socketed
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
-    notes: UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy 0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
+    notes: |-
+      UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy
+      0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from
+      passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
 
   K_COIL:
     type: Relay
     subtype: ISO mini, socketed
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
-    notes: UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A) instead of passing ~6A through 44-year-old contacts. Socket it and keep it accessible - if it fails there is no spark. Fails safe (open = engine stops).
+    notes: |-
+      UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A)
+      instead of passing ~6A through 44-year-old contacts. Socket it and keep it accessible - if it fails
+      there is no spark. Fails safe (open = engine stops).
 
 
   COIL_L:
@@ -203,7 +242,10 @@ connectors:
     style: simple
     type: Splice
     subtype: Y/R coil feed - EI TAP POINT
-    notes: Factory topology preserved - the kill switch output feeds both coils here, which is what makes the engine stop switch actually stop the engine. Keep this splice ACCESSIBLE and documented; it is the plug-in point for an EI module later.
+    notes: |-
+      Factory topology preserved - the kill switch output feeds both coils here, which is what makes the
+      engine stop switch actually stop the engine. Keep this splice ACCESSIBLE and documented; it is the
+      plug-in point for an EI module later.
 
 # ---------------------------------------------------------------------
 # CARRY-OVER FROM THE FACTORY BRANCH MAP (17 Aug 2026)
@@ -236,7 +278,10 @@ cables:
   W_YR_TRIG:
     <<: *w18
     colors: [YERD]
-    notes: Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about 0.3A instead of the stock ~6A. Still the node that makes the kill switch stop the engine - cutting it drops the coils.
+    notes: |-
+      Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about
+      0.3A instead of the stock ~6A. Still the node that makes the kill switch stop the engine - cutting
+      it drops the coils.
   W_MAIN_SW_FEED:
     <<: *w14
     colors: [WH]

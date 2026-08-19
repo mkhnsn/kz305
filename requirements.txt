@@ -1,11 +1,12 @@
 # WireViz, pinned to the unstable-studios fork.
 #
-# The fork adds --strict, which turns two silent-data-loss behaviours into
-# errors: a component that no connection set references (dropped from the
-# drawing AND the BOM), and duplicate YAML keys (last-wins, no diagnostic).
-# build.py depends on that API, so this is pinned to an exact commit rather
-# than a branch -- a moving ref could change the guarantees underneath us.
-wireviz @ git+https://github.com/unstable-studios/WireViz@4ad5fa62c5b29e686b226ca06f99f488b30fcbd1
+# The fork adds --strict and --merge, which build.py depends on, plus the
+# layout/output features the models use: options.rankdir TB with transposed
+# node tables, ranksep/nodesep/sort_wires/wirelabel_detail/mate_labels, native
+# `sheets:` splitting with cross-sheet stubs, and interactive HTML (pan/zoom,
+# net tracing, BOM linkage). Pinned to an exact commit rather than a branch --
+# a moving ref could change the guarantees underneath us.
+wireviz @ git+https://github.com/unstable-studios/WireViz@1f4dd3e33c61d98e3d1833ece48ff65c2d9b709c
 
 # Test runner for the guard tests.
 pytest>=8

@@ -6,11 +6,24 @@ common: models/kz305-common.yml     # shared part library, prepended to every so
 output_dir: out
 
 models:
-  # ---- the two whole-harness models --------------------------------------
   factory:
     # The as-built reference. Rendered WITHOUT a BOM (no `t`): it carries no
     # lengths by design, and WireViz has no "length unknown" state, so a BOM
     # would print 0 m and read as measured.
+    #
+    # models/factory/sheets.yml splits the drawing into one sheet per
+    # subsystem (the fork's native `sheets:` feature). png/svg come out as
+    # kz305-factory.<sheet>.<ext>; html is a single interactive page carrying
+    # every sheet, with net tracing that follows a wire across sheet
+    # boundaries. Connections that cross sheets end in a stub naming the
+    # sheet they continue on, so each sheet still reads on its own -- the
+    # start button appears on the starting sheet as a stub of the controls
+    # sheet, the way a factory manual cross-references.
+    #
+    # This replaced the old sheet-* models, which re-rendered overlapping
+    # file subsets with strict off. Native sheets keep strict on: the split
+    # is a view of the one validated harness, so a component missing from
+    # every connection set still fails the build.
     output: kz305-factory
     formats: hps
     sources:
@@ -24,58 +37,3 @@ models:
     sources:
       - models/style.yml
       - models/kz305-rebuild.yml
-
-  # ---- per-subsystem sheets ----------------------------------------------
-  # One system per sheet, the way a factory manual splits them. This is what
-  # makes a diagram readable; the layout engine settings only stop it being a
-  # ribbon. Every sheet includes backbone.yml, which carries the power
-  # distribution and grounds each system hangs off.
-  # controls appears on several sheets because the switchgear operates those
-  # systems -- a starting sheet without the start button is not a diagram of
-  # anything. A factory manual shows the switch on the sheet too.
-  # Sheets set strict: false. The unreferenced-component guard exists because
-  # such a component vanishes from the BOM and never gets built -- but sheets
-  # render no BOM (no `t`), and a view of one system is *supposed* to leave the
-  # other systems' parts unconnected. The `factory` model above still enforces
-  # it over the same files.
-  sheet-starting:
-    strict: false
-    output: sheet-starting
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/controls.yml, models/factory/starting.yml]
-
-  sheet-charging:
-    strict: false
-    output: sheet-charging
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/charging.yml]
-
-  sheet-ignition:
-    strict: false
-    output: sheet-ignition
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/controls.yml, models/factory/ignition.yml]
-
-  sheet-controls:
-    strict: false
-    output: sheet-controls
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/controls.yml]
-
-  sheet-signals:
-    strict: false
-    output: sheet-signals
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/controls.yml, models/factory/signals.yml]
-
-  sheet-brakes:
-    strict: false
-    output: sheet-brakes
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/brakes.yml]
-
-  sheet-instruments:
-    strict: false
-    output: sheet-instruments
-    formats: hs
-    sources: [models/style.yml, models/factory/backbone.yml, models/factory/instruments.yml]
