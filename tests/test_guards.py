@@ -162,3 +162,24 @@ connections:
     result = render_files(tmp_path, *FACTORY, stray)
     assert result.returncode != 0
     assert "STRAY_FOR_TEST" in result.stdout + result.stderr
+
+
+def test_index_links_every_rendered_drawing(tmp_path):
+    """The published index is generated, so nothing fails loudly when it goes
+    wrong -- a renamed output just drops off the page and the site quietly
+    stops linking a drawing that rendered fine."""
+    assert render("-o", tmp_path).returncode == 0
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "make_index.py"), "-o", str(tmp_path)],
+        capture_output=True, text=True, cwd=ROOT,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+    index = (tmp_path / "index.html").read_text(encoding="utf-8")
+    rendered = [
+        p.name for p in tmp_path.iterdir()
+        if p.name != "index.html" and p.suffix in {".html", ".svg", ".png", ".tsv"}
+    ]
+    assert rendered, "nothing rendered to index"
+    missing = [n for n in rendered if n not in index]
+    assert not missing, f"rendered but not linked from index.html: {missing}"
