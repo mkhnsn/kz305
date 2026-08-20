@@ -11,9 +11,19 @@
 # ---------------------------------------------------------------------
 # BLOCKED - do not cut wire against this file yet
 #
-#   1. Factory transcription incomplete. Lighting, signals, horn,
-#      instruments, brake switches, 6P junctions and the two 10A fuse
-#      assignments are not yet read off the diagram.
+#   1. Factory transcription COMPLETE as of 19 Aug 2026 - lighting,
+#      signals, horn, instruments, brake switches, both 6P junctions
+#      and the fuse topology are all read off the 600 dpi scan. The
+#      remaining unknowns (horn-button ground colour, ignition R/BK
+#      source, two instrument-6P ways, accessory leads) are bench
+#      items listed at the foot of models/factory/signals.yml. None
+#      of them block drawing; two of them block CUTTING.
+#
+#      KEY FINDING for this rebuild: stock is a FUSE CASCADE. One 10A
+#      carries ignition, starter trigger, horn, signals, brakes AND
+#      (through the second 10A) the headlight. Only tail/park escapes.
+#      The per-circuit cavity map (#10) is not gold-plating; it fixes
+#      a real single point of failure.
 #   2. No lengths. The old harness is the ONLY length reference - the
 #      bike is in pieces and the engine is out, so runs cannot be
 #      measured off the chassis. Measure every branch off the old

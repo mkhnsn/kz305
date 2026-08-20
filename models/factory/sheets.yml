@@ -18,15 +18,22 @@ sheets:
     - GND_ENG
     - MF
     - FUSE_A
+    - FUSE_HEAD
+    - FUSE_4P
     - IGN
     - SOL
     - SP_BR
+    - SP_BLW
     - W_BAT_SOL
     - W_BAT_GND
     - W_MAIN
     - W_IGN_FEED
-    - W_BR_MAIN
     - W_FUSE_A_IN
+    - W_FUSE_A_LINK
+    - W_BLW_OUT
+    - W_BLW_UP
+    - W_FUSE_HEAD_IN
+    - W_BL_UP
   controls:
     - RH
     - SP_RH_YR
@@ -44,6 +51,7 @@ sheets:
     - W_RH_YR2
     - W_RH_YR_OUT
     - W_RH_BK
+    - W_BR_BUS
   starting:
     - SM
     - W_SOL_SM
@@ -68,8 +76,20 @@ sheets:
     - W_PTS_R
     - W_CAP_L
     - W_CAP_R
-  signals:
+  lighting:
     - LH
+    - HEAD
+    - HORN
+    - SP_HI
+    - W_DIM_FEED
+    - W_HI
+    - W_HI_HEAD
+    - W_LO
+    - W_GND_HEAD
+    - W_HORN_FEED
+    - W_HORN_SW
+    - W_HORN_GND
+  signals:
     - FLASHER
     - SIG_FL
     - SIG_FR
@@ -88,7 +108,9 @@ sheets:
     - W_SIG_FR
     - W_SIG_RR
     - W_IND_L
+    - W_IND_L2
     - W_IND_R
+    - W_IND_R2
     - W_GND_SIG_FL
     - W_GND_SIG_FR
     - W_GND_SIG_RL
@@ -100,8 +122,10 @@ sheets:
     - FBRK
     - RBRK
     - SP_BRAKE
+    - SP_R
     - W_GND_TAIL
     - W_TAIL
+    - W_TAIL_RUN
     - W_BRAKE
     - W_BRK_FEED_F
     - W_BRK_FEED_R
@@ -110,5 +134,17 @@ sheets:
   instruments:
     - NSW
     - IND_N
+    - IND_HB
+    - LAMP_SPD
+    - LAMP_TAC
+    - INSTR_6P
+    - W_MTR_SPD
+    - W_MTR_TAC
+    - W_IND_HB
+    - W_IND_HB2
     - W_IND_N_FEED
+    - W_IND_N_FEED2
     - W_NSW
+    - W_GND_SPD
+    - W_GND_TAC
+    - W_GND_HB

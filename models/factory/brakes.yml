@@ -7,21 +7,26 @@
 connectors:
   TAIL:
     <<: *taillight
-    notes: CONFIRMED off the diagram 17 Aug 2026 - RED feeds the tail filament, BLUE the brake filament, BK/Y grounds. Blue brake circuit ties to the Bl/W found loose at the right cluster and the light blue lead on the front brake switch.
+    notes: CONFIRMED off the diagram 17 Aug 2026 - RED feeds the tail filament, BLUE the brake filament, BK/Y grounds. Blue brake circuit ties to the Bl/W found loose at the right cluster and the light blue lead on the front brake switch. No license lamp exists on the US/Canada diagram - the tail lamp lights the plate.
   FBRK:
     <<: *brake_switch
     subtype: front, at the lever perch
-    pinlabels: [Br IN, Bl OUT]
-    notes: CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch. It has its own pair of bullet connectors, BLUE and BROWN. Consistent across three reads - the diagram shows a brownish and a light blue lead here, and blue feeds the brake filament at the tail lamp.
+    pinlabels: [Br/W IN, Bl OUT]
+    notes: CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of bullet connectors. FEED CORRECTED 19 Aug 2026 off the 600 dpi scan - the feed lead reads Br/W (pale, broken stroke), not plain Br, and it comes from the right-bar 4P's Br/W leg. This matches the 15 Aug inventory that found Br/W in the right-bar 4P with a loose Bl/W alongside. Output reads solid Bl to the brake filament net.
   RBRK:
     <<: *brake_switch
     subtype: rear, frame mounted
-    pinlabels: [Br IN, Bl OUT]
-    notes: TBD - not transcribed. Modeled in parallel with the front switch, and assumed Br in / Bl out to match it, because that is the only arrangement that lights the brake lamp from either control. Verify.
+    pinlabels: [Br/W IN, Bl OUT]
+    notes: READ OFF THE SCAN 19 Aug 2026 - drawn beside the regulator/rectifier, feed reads Br/W (same broken stroke as the front switch), output Bl. In parallel with the front switch as assumed. Bench-verify at the ring-out; this is a scan read, not a meter fact.
   SP_BRAKE:
     style: simple
     type: Splice
     subtype: brake lamp feed
+  SP_R:
+    style: simple
+    type: Splice
+    subtype: tail/city R net
+    notes: The R output of the ignition switch feeds the tail filament AND the meter illumination lamps. Live in ON and PARK.
 
 cables:
   W_GND_TAIL:   {<<: *w18, colors: [BKYE]}
@@ -29,10 +34,11 @@ cables:
   W_TAIL:
     <<: *w18
     colors: [RD]
-    notes: Tail filament feed off the ignition switch R pin. In ON it is fed through R/BK; in PARK straight off W. Preserve that.
+    notes: Tail filament feed off the ignition switch R pin. In ON it is fed through R/BK; in PARK straight off W. Preserve that. WHERE the ignition R/BK pin picks up ITS power is still unresolved - the fourth conductor at the fuse-panel 4P reads R or R/BK and is the standing candidate. Ring out under #3.
+  W_TAIL_RUN:  {<<: *w18, colors: [RD]}
   W_BRAKE:     {<<: *w18, colors: [BU]}
-  W_BRK_FEED_F: {<<: *w18, colors: [BN]}
-  W_BRK_FEED_R: {<<: *w18, colors: [BN]}
+  W_BRK_FEED_F: {<<: *w18, colors: [BNWH]}
+  W_BRK_FEED_R: {<<: *w18, colors: [BNWH]}
   W_BRK_OUT_F:  {<<: *w18, colors: [BU]}
   W_BRK_OUT_R:  {<<: *w18, colors: [BU]}
 
@@ -40,11 +46,14 @@ connections:
   # --- tail and brake -----------------------------------------------
   - - IGN: [4]
     - W_TAIL: [1]
+    - SP_R: [1]
+  - - SP_R: [1]
+    - W_TAIL_RUN: [1]
     - TAIL: [1]
-  - - SP_BR: [1]
+  - - RH_4P: [2]
     - W_BRK_FEED_F: [1]
     - FBRK: [1]
-  - - SP_BR: [1]
+  - - RH_4P: [2]
     - W_BRK_FEED_R: [1]
     - RBRK: [1]
   - - FBRK: [2]

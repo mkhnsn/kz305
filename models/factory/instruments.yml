@@ -1,8 +1,14 @@
-# INSTRUMENTS — Neutral switch and its indicator.
+# INSTRUMENTS — Meter lamps, indicator pod, neutral switch, 6P junction.
 #
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
 # See models/kz305-factory.yml for the model-wide notes.
+#
+# Pod transcribed 19 Aug 2026 off the 600 dpi scan. The four pod lamps
+# (right turn, high beam, neutral, left turn) share a common ground bus
+# out of the pod; their feeds cross the instrument 6P connector.
+# The meter illumination lamps (speedo, tacho) sit outside the 6P span
+# and route on their own bullets.
 
 connectors:
   NSW:
@@ -10,22 +16,79 @@ connectors:
   IND_N:
     <<: *indicator
     subtype: neutral indicator, 12V 3.4W
+  IND_HB:
+    <<: *indicator
+    subtype: high-beam indicator, 12V 3.4W
+  LAMP_SPD:
+    <<: *indicator
+    subtype: speedometer light, 12V 3.4W
+  LAMP_TAC:
+    <<: *indicator
+    subtype: tachometer light, 12V 3.4W
+  INSTR_6P:
+    <<: *junction6p
+    subtype: 6P connector, instrument pod
+    pinlabels: [Gy, R/BK, Br, G, TBD, TBD]
+    notes: The SECOND 6P on the bike - instrument pod side, distinct from the left-cluster 6P at the headstock. Four ways read off the scan 19 Aug 2026 - Gy (right turn ind), R/BK (high-beam ind), Br (neutral ind feed), G (left turn ind). The remaining two ways are NOT readable; candidates are the meter lamp R and the pod ground. Ring out under #8.
 
 cables:
-  # --- neutral indicator --------------------------------------------
+  # --- meter illumination - tail/city net ----------------------------
+  W_MTR_SPD:
+    <<: *w18
+    colors: [RD]
+    notes: Reads R (solid) off the scan - meter lamps live with the tail, so they light in PARK too. The tach read is clean; the speedo read is partly obscured by a connector symbol. R vs Br is scan-marginal - confirm at the ring-out.
+  W_MTR_TAC: {<<: *w18, colors: [RD]}
+
+  # --- pod indicator feeds crossing the 6P ---------------------------
+  W_IND_HB:  {<<: *w18, colors: [RDBK]}
+  W_IND_HB2: {<<: *w18, colors: [RDBK]}
   W_IND_N_FEED:
     <<: *w18
     colors: [BN]
-    notes: TBD - lamp feed assumed off the switched brown bus. Not confirmed.
+    notes: CONFIRMED 19 Aug 2026 off the 600 dpi scan - the neutral indicator feed is Br off the accessory bus, crossing the instrument 6P. Was previously an assumption.
+  W_IND_N_FEED2: {<<: *w18, colors: [BN]}
   W_NSW:
     <<: *w18
     colors: [GN]
     notes: TBD colour. Stock is light green (LG), which WireViz cannot render distinctly from G. Do not read this as plain green.
 
+  # --- lamp grounds ---------------------------------------------------
+  W_GND_SPD: {<<: *w18, colors: [BKYE]}
+  W_GND_TAC: {<<: *w18, colors: [BKYE]}
+  W_GND_HB:  {<<: *w18, colors: [BKYE]}
+
 connections:
-  # --- neutral indicator --------------------------------------------
+  # --- meter illumination off the tail R net -------------------------
+  - - SP_R: [1]
+    - W_MTR_SPD: [1]
+    - LAMP_SPD: [1]
+  - - SP_R: [1]
+    - W_MTR_TAC: [1]
+    - LAMP_TAC: [1]
+  - - LAMP_SPD: [2]
+    - W_GND_SPD: [1]
+    - GND_CHASSIS: [1]
+  - - LAMP_TAC: [2]
+    - W_GND_TAC: [1]
+    - GND_CHASSIS: [1]
+
+  # --- high-beam indicator off the HI net -----------------------------
+  - - SP_HI: [1]
+    - W_IND_HB: [1]
+    - INSTR_6P: [2]
+  - - INSTR_6P: [2]
+    - W_IND_HB2: [1]
+    - IND_HB: [1]
+  - - IND_HB: [2]
+    - W_GND_HB: [1]
+    - GND_CHASSIS: [1]
+
+  # --- neutral indicator ----------------------------------------------
   - - SP_BR: [1]
     - W_IND_N_FEED: [1]
+    - INSTR_6P: [3]
+  - - INSTR_6P: [3]
+    - W_IND_N_FEED2: [1]
     - IND_N: [1]
   - - IND_N: [2]
     - W_NSW: [1]

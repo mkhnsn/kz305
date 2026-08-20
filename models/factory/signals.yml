@@ -3,18 +3,17 @@
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
 # See models/kz305-factory.yml for the model-wide notes.
+#
+# The left cluster (LH) is defined on the lighting sheet now that the
+# dimmer and horn are transcribed; the turn-switch circuits below reach
+# it cross-sheet.
 
 connectors:
-  # --- left cluster - moves to its own file once dimmer and horn are transcribed 
-  LH:
-    <<: *lh_cluster
-    pinlabels: [R/BK, Bl, R/Y, G, O, Gy, BK HORN]
-    notes: See RH for the right-bar colour-change finding. Pins named by COLOUR, not function, because the dimmer common is still unresolved by meter. Do not infer that Bl is the feed from this drawing. Turn switch is known - R = O to Gy, L = G to O. The 6P carries G, O, Gy, Bl and two reds; the horn BK is separate.
   FLASHER:
     type: Turn signal relay
     subtype: 2-pin, thermal
     pinlabels: [Br IN, O OUT]
-    notes: CONFIRMED 2-PIN off the diagram, 17 Aug 2026 - brown in, orange out, NO ground terminal. This is why an electronic 3-pin flasher needs a wire the stock harness does not have. The rebuild runs a ground wire here regardless, so a 3-pin electronic unit is fine - see docs/part-selection.md.
+    notes: CONFIRMED 2-PIN off the diagram, 17 Aug 2026 - brown in, orange out, NO ground terminal. This is why an electronic 3-pin flasher needs a wire the stock harness does not have. The rebuild runs a ground wire here regardless, so a 3-pin electronic unit is fine - see docs/part-selection.md. Labelled "Turn Signal Light Relay" on the factory diagram and drawn REAR, beside the rear brake switch - the stock unit lives under the seat area, not at the headstock.
   SIG_FL: {<<: *signal_lamp, subtype: "front left, 12V 23W"}
   SIG_FR: {<<: *signal_lamp, subtype: "front right, 12V 23W"}
   SIG_RL: {<<: *signal_lamp, subtype: "rear left, 12V 23W"}
@@ -44,9 +43,14 @@ cables:
   W_SIG_FR: {<<: *w18, colors: [GY]}
   W_SIG_RR: {<<: *w18, colors: [GY]}
   W_IND_L:  {<<: *w18, colors: [GN]}
+  W_IND_L2: {<<: *w18, colors: [GN]}
   W_IND_R:  {<<: *w18, colors: [GY]}
+  W_IND_R2: {<<: *w18, colors: [GY]}
 
-  # --- rear lamp grounds - all to the single BK/Y bus ----------------
+  # --- lamp grounds - all to the single BK/Y bus ----------------------
+  # The scan draws local ground symbols at the front lamps and the
+  # headstock; on the bench everything homes to the ONE ring terminal.
+  # The rebuild should not copy the diagram's optimism about grounds.
   W_GND_SIG_FL: {<<: *w18, colors: [BKYE]}
   W_GND_SIG_FR: {<<: *w18, colors: [BKYE]}
   W_GND_SIG_RL: {<<: *w18, colors: [BKYE]}
@@ -74,17 +78,25 @@ connections:
   - - SP_SIG_L: [1]
     - W_SIG_RL: [1]
     - SIG_RL: [1]
-  - - SP_SIG_L: [1]
-    - W_IND_L: [1]
-    - IND_L: [1]
   - - SP_SIG_R: [1]
     - W_SIG_FR: [1]
     - SIG_FR: [1]
   - - SP_SIG_R: [1]
     - W_SIG_RR: [1]
     - SIG_RR: [1]
+
+  # --- pod indicators, through the instrument 6P ---------------------
+  - - SP_SIG_L: [1]
+    - W_IND_L: [1]
+    - INSTR_6P: [4]
+  - - INSTR_6P: [4]
+    - W_IND_L2: [1]
+    - IND_L: [1]
   - - SP_SIG_R: [1]
     - W_IND_R: [1]
+    - INSTR_6P: [1]
+  - - INSTR_6P: [1]
+    - W_IND_R2: [1]
     - IND_R: [1]
 
   # --- lamp grounds, all to the single BK/Y bus ---------------------
@@ -108,22 +120,22 @@ connections:
     - GND_CHASSIS: [1]
 
 # =====================================================================
-# STILL TO TRANSCRIBE - full-vehicle coverage is not complete
+# STILL TO TRANSCRIBE / RESOLVE - the short list, 19 Aug 2026
 #
-#   front brake light switch - leads believed Br/W + Bl/W. Diagram shows
-#     two leads, one brownish and one light blue; the 15 Aug inventory
-#     found Br/W in the right-bar 4P and a loose Bl/W alongside, which
-#     fits. Which is feed and which is output is UNVERIFIED. Deliberately
-#     NOT modeled: an unreferenced connector is dropped from the drawing
-#     entirely, so declaring it would imply coverage that does not exist.
-#   headlight + dimmer (LH cluster common still unresolved by meter)
-#   turn signals x4 + flasher + LH turn switch + 2 indicators
-#   horn + horn button
-#   tail / brake light, license lamp, front + rear brake switches
-#   speedo + tacho lamps, high-beam indicator
-#   the two 10A fuses and what each actually feeds
-#   6P junction connectors and the meter accessory leads
+# The 600 dpi scan pass closed the big gaps: headlight + dimmer, horn,
+# turn signals, indicators, meter lamps, brake switches, both 6P
+# junctions and the fuse topology are all modelled. What remains:
 #
-# The 10A fuse assignments matter most - they determine which circuits
-# survive a fault, and the rebuild's cavity map depends on them.
+#   - horn button ground-side colour: prints as a hatched swatch in the
+#     switch table, unreadable. Drawn BK/W as a guess. (bench, #8)
+#   - ignition R/BK pin's upstream source: fourth conductor at the
+#     fuse-panel 4P reads R or R/BK; unconfirmed. (bench, #3)
+#   - instrument 6P: two of six ways unread. (bench, #8)
+#   - electric accessory leads: TWO pairs drawn (one at the meters, one
+#     at the tail), colours too marginal to model - they read white-ish
+#     with one possibly Bl at the front. Deliberately NOT modelled; an
+#     unreferenced connector is dropped from the drawing, so declaring
+#     them would imply coverage that does not exist. (bench, #8)
+#   - meter lamp feed: reads R; R vs Br marginal at the speedo. (#8)
+#   - WHICH physical 10A holder is FUSE_A vs FUSE_HEAD. (bench, #3)
 # =====================================================================

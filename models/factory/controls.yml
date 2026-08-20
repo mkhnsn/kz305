@@ -18,7 +18,7 @@ connectors:
     style: simple
     type: Splice
     subtype: 1 to 3, Br
-    notes: MAPPED 17 Aug 2026. Four legs - Bl/W IN from a fuse, then out to the kill switch (Br), and onward into the harness as Br and Br/W via the 4P. So the right bar is a DISTRIBUTION POINT fed from a fuse, not a set of taps hanging off a bus. Br/W's onward destination is still UNTRACED - it is a live fused circuit feeding something nobody has identified.
+    notes: MAPPED 17 Aug 2026. Four legs - Bl/W IN from a fuse, then out to the kill switch (Br), and onward into the harness as Br and Br/W via the 4P. So the right bar is a DISTRIBUTION POINT fed from a fuse, not a set of taps hanging off a bus. RESOLVED 19 Aug 2026 off the 600 dpi scan - the Br return leg energises the accessory bus (SP_BR) and the Br/W leg feeds BOTH brake switches. Bench-verify with the ring-out.
   RH_4P:
     type: Junction
     subtype: 4-pin connector, right bar
@@ -52,7 +52,11 @@ cables:
   W_RH_BRW:
     <<: *w18
     colors: [BNWH]
-    notes: Same net as the kill switch feed. Destination beyond the 4P not yet traced.
+    notes: Same net as the kill switch feed. RESOLVED 19 Aug 2026 - beyond the 4P this leg feeds the front AND rear brake light switches (see brakes sheet). The scan corroborates the 15 Aug inventory that found Br/W in the right-bar 4P.
+  W_BR_BUS:
+    <<: *w16
+    colors: [BN]
+    notes: The right-bar Br return leg. Read off the 600 dpi scan 19 Aug 2026 - it joins the Br trunk just aft of the bar drop and is what ENERGISES the accessory bus. Horn, flasher and neutral indicator are live only because this leg is.
   W_RH_BLW:
     <<: *w18
     colors: [BUWH]
@@ -95,6 +99,11 @@ connections:
     - SP_YR: [1]
 
   # --- fused feed arriving at the right bar - Bl/W, traced 17 Aug ----
-  - - FUSE_A: [2]
+  - - FUSE_4P: [2]
     - W_RH_IN: [1]
     - RH_BLW: [1]
+
+  # --- Br return leg energising the accessory bus --------------------
+  - - RH_4P: [1]
+    - W_BR_BUS: [1]
+    - SP_BR: [1]

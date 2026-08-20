@@ -1,0 +1,81 @@
+# LIGHTING — Headlight, dimmer, left cluster and horn.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+#
+# TRANSCRIBED 19 Aug 2026 off the 600 dpi scan. The left-handlebar
+# switch-connection table finally resolves the dimmer: BLUE IS THE
+# COMMON. HI closes Bl to R/BK, LO closes Bl to R/Y. The 13 Aug meter
+# question (#4) stands as the confirming check, but the scan is no
+# longer marginal on this - the printed table is explicit.
+#
+# The Bl common is FED FROM FUSE_HEAD, which itself cascades off
+# FUSE_A's Bl/W - see the backbone sheet.
+
+connectors:
+  LH:
+    <<: *lh_cluster
+    pinlabels: [R/BK HI, Bl COMMON, R/Y LO, G, O, Gy, BK HORN, HORN GND]
+    notes: Dimmer resolved off the printed switch table 19 Aug 2026 - Bl common, R/BK HI, R/Y LO. Meter it anyway before cutting (#4) since getting the common wrong lights both filaments. Turn switch - R = O to Gy, L = G to O. The cluster 6P at the headstock carries G, O, Gy, Bl, R/BK, R/Y; the horn BK and the button's ground-side lead run separately. Pin 8 is the horn button's ground side - its colour prints as a hatched two-colour swatch in the table and is NOT readable; best guess BK/W. Identify on the bench.
+  HEAD:
+    <<: *headlight
+    notes: Feeds read off the scan 19 Aug 2026 - R/BK to HI, R/Y to LO, BK/Y ground. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.
+  HORN:
+    type: Horn
+    subtype: 12V 2A
+    pinlabels: [FEED, SW]
+    notes: Br feed off the accessory bus; the button switches the GROUND side, exactly the topology K_HORN in the rebuild assumes. 2A nominal - the relay case rests on the measured 3-5 ohm cluster contacts, not the load.
+  SP_HI:
+    style: simple
+    type: Splice
+    subtype: high-beam net
+    notes: R/BK from the dimmer feeds the HI filament and the high-beam indicator from this net.
+
+cables:
+  # --- dimmer feed and beams -----------------------------------------
+  W_DIM_FEED:
+    <<: *w16
+    colors: [BU]
+    notes: FUSE_HEAD output up to the left bar. Bl, the dimmer common.
+  W_HI:      {<<: *w18, colors: [RDBK]}
+  W_HI_HEAD: {<<: *w18, colors: [RDBK]}
+  W_LO:      {<<: *w18, colors: [RDYE]}
+  W_GND_HEAD: {<<: *w18, colors: [BKYE]}
+
+  # --- horn -----------------------------------------------------------
+  W_HORN_FEED: {<<: *w18, colors: [BN]}
+  W_HORN_SW:   {<<: *w18, colors: [BK]}
+  W_HORN_GND:
+    <<: *w18
+    colors: [BKWH]
+    notes: TBD COLOUR. The horn button's ground-side lead - the printed table shows a hatched swatch where the colour code should be, unreadable at 600 dpi. Drawn BK/W as the best guess. Identify on the bench before ordering wire.
+
+connections:
+  # --- headlight through the dimmer -----------------------------------
+  - - FUSE_4P: [3]
+    - W_DIM_FEED: [1]
+    - LH: [2]
+  - - LH: [1]
+    - W_HI: [1]
+    - SP_HI: [1]
+  - - SP_HI: [1]
+    - W_HI_HEAD: [1]
+    - HEAD: [1]
+  - - LH: [3]
+    - W_LO: [1]
+    - HEAD: [2]
+  - - HEAD: [3]
+    - W_GND_HEAD: [1]
+    - GND_CHASSIS: [1]
+
+  # --- horn, ground-side switched --------------------------------------
+  - - SP_BR: [1]
+    - W_HORN_FEED: [1]
+    - HORN: [1]
+  - - HORN: [2]
+    - W_HORN_SW: [1]
+    - LH: [7]
+  - - LH: [8]
+    - W_HORN_GND: [1]
+    - GND_CHASSIS: [1]

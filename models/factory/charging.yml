@@ -16,8 +16,8 @@ cables:
   W_ALT:    {<<: *w14, colors: [YE, YE]}
   W_RR_OUT:
     <<: *w14
-    colors: [WH]
-    notes: TBD - the DC output is modeled as returning to the battery stud. Where it physically lands in the stock harness is NOT confirmed off the scan.
+    colors: [RDWH]
+    notes: UPDATED 19 Aug 2026 - the 600 dpi scan draws the DC output leaving the R/R on a pink/striped lead (reads R/W) that runs forward and lands at the battery-positive / starter-relay junction, which is what the model already assumed topologically. Colour and the physical lug are still bench items - the read is clear on route, marginal on stripe.
   W_RR_GND: {<<: *w14, colors: [BK]}
 
 connections:
