@@ -1,6 +1,14 @@
 name: Render
 
-on: [push, pull_request, workflow_dispatch]
+# pull_request covers every PR branch (and tests the merge result, which is
+# what review cares about); push is limited to main so merges and direct
+# pushes still render. Without the limit, every push to an open PR ran the
+# workflow twice.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   render:
