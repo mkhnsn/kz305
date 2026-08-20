@@ -21,3 +21,14 @@ options:
   wirelabel_detail: pin
   # Label the dashed mate arrows (mate/into) so they read without a legend.
   mate_labels: true
+  # Safety net for long notes: wrap at render time so a new single-line note
+  # can never stretch its node full-width again. Existing literal-block notes
+  # keep their author-typed breaks (treated as paragraph breaks); those stay
+  # hand-wrapped because sub-100-column YAML is also nicer to edit.
+  note_wrap: 100
+  # routing: orthogonal is NOT enabled. The Manhattan look is right for a
+  # schematic, but the router does one turn per wire and does not avoid node
+  # boxes, so on the dense controls sheet the long vertical runs cut straight
+  # through intermediate nodes and their note text -- the exact artifact that
+  # forced the original revert to LR. Revisit when the fork's router learns
+  # node avoidance (unstable-studios/WireViz issue pending).
