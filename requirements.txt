@@ -2,11 +2,11 @@
 #
 # The fork adds --strict and --merge, which build.py depends on, plus the
 # layout/output features the models use: options.rankdir TB with transposed
-# node tables, ranksep/nodesep/sort_wires/wirelabel_detail/mate_labels, native
+# node tables, ranksep/nodesep/sort_wires/wirelabel_detail/mate_labels/note_wrap, native
 # `sheets:` splitting with cross-sheet stubs, and interactive HTML (pan/zoom,
 # net tracing, BOM linkage). Pinned to an exact commit rather than a branch --
 # a moving ref could change the guarantees underneath us.
-wireviz @ git+https://github.com/unstable-studios/WireViz@1f4dd3e33c61d98e3d1833ece48ff65c2d9b709c
+wireviz @ git+https://github.com/unstable-studios/WireViz@e26479e2c74f42a6037fd25a2a47fb65351e2c15
 
 # Test runner for the guard tests.
 pytest>=8
