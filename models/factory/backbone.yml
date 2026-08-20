@@ -3,6 +3,21 @@
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
 # See models/kz305-factory.yml for the model-wide notes.
+#
+# FUSE TOPOLOGY — read off the 600 dpi scan 19 Aug 2026, and it is a
+# CASCADE, not a fan-out:
+#
+#   IGN (Br) -> FUSE_A (10A) -> Bl/W -> right-bar branch
+#                                    -> FUSE_HEAD (10A) -> Bl -> dimmer
+#
+#   The right-bar branch then RETURNS two live legs into the harness:
+#   Br energises the accessory bus (SP_BR: horn, flasher, neutral
+#   indicator) and Br/W feeds both brake switches. Consequence: every
+#   switched circuit on the bike except tail/park (R, straight off the
+#   ignition switch) is downstream of FUSE_A. One 10A fuse carries the
+#   ignition, starter trigger, headlight, horn, signals and brake lamp.
+#   This is the single strongest argument for the rebuild's per-circuit
+#   cavity map.
 
 connectors:
   BATT:
@@ -11,7 +26,7 @@ connectors:
     type: Chassis ground
     subtype: single BK/Y ring terminal
     pinlabels: [RING]
-    notes: Stock returns the ENTIRE harness through one ring terminal - the single point of failure the rebuild replaces with a star bus. COLOUR DISPUTED - recorded BK/Y (black, yellow stripe) 17 Aug 2026 from the physical harness. The 13 Aug bench note said Y/BK and the 600 dpi diagram reads yellow-primary. Newest hands-on observation wins for now but it was hedged. Settle it by cutting a fresh end and identifying the BASE colour.
+    notes: Stock returns the ENTIRE harness through one ring terminal - the single point of failure the rebuild replaces with a star bus. COLOUR DISPUTED - recorded BK/Y (black, yellow stripe) 17 Aug 2026 from the physical harness. The 13 Aug bench note said Y/BK and the 600 dpi diagram reads yellow-primary. Newest hands-on observation wins for now but it was hedged. Settle it by cutting a fresh end and identifying the BASE colour. The scan draws the harness ring landing beside the battery negative ring on the same mount.
   GND_ENG:
     type: Engine case ground
     subtype: internal, no harness wire
@@ -19,10 +34,20 @@ connectors:
     notes: Components that ground through their own mounting rather than a harness lead - starter motor, points, capacitors, neutral switch.
   MF:
     <<: *main_fuse
+    notes: W on the switch side, meter-confirmed. The scan draws the battery side of the holder in R between the fuse and the battery/solenoid junction - a possible in-harness colour change to ring out before cutting (procedure item 0b).
   FUSE_A:
     <<: *fuse10
     subtype: 10A glass - WHICH holder is TBD
-    notes: Feeds the right-bar branch on Bl/W, per bench trace 17 Aug 2026. WHICH of the two 10A holders this is has NOT been established, and it matters - this one fuse protects the kill switch, both ignition coils, the starter trigger and whatever Br and Br/W feed onward. That is the whole run-critical half of the bike on one fuse.
+    notes: ASSIGNMENT CONFIRMED off the 600 dpi scan 19 Aug 2026 - fed Br straight off the ignition switch, output Bl/W to the right-bar branch, corroborating the 17 Aug bench trace. WHICH of the two physical holders this is has still NOT been established on the bench (#3). Everything except tail/park is downstream of this one fuse, including FUSE_HEAD and the headlight.
+  FUSE_HEAD:
+    <<: *fuse10
+    subtype: 10A glass - headlight, WHICH holder is TBD
+    notes: READ OFF THE SCAN 19 Aug 2026. The second 10A is the HEADLIGHT fuse, and it cascades - its feed taps the Bl/W net on FUSE_A's LOAD side, its output is the Bl dimmer common at the left bar. Blow FUSE_A and the headlight dies too. Physical holder identity pending the same #3 ring-out as FUSE_A.
+  FUSE_4P:
+    type: Junction
+    subtype: 4-pin connector, fuse panel
+    pinlabels: [Br IN, Bl/W, Bl, "TBD (R or R/BK)"]
+    notes: The fuse panel joins the harness through a drawn 4P connector (the main-fuse W bypasses it on a bullet). Three ways are read - Br feed in, Bl/W out, Bl out. The FOURTH conductor reads R or R/BK on the scan and is unresolved - it is the best candidate for the tail-circuit R/BK's source. Ring out under #3.
   IGN:
     <<: *ign_switch
   SOL:
@@ -30,8 +55,13 @@ connectors:
   SP_BR:
     style: simple
     type: Splice
-    subtype: brown switched bus
-    notes: TBD - stock junction point for the switched brown feed not positively located on the scan. Modeled as a splice because the feed demonstrably serves more than one branch.
+    subtype: brown accessory bus
+    notes: RESOLVED 19 Aug 2026 off the 600 dpi scan - the switched brown feed is the long Br trunk wire spanning the bike, energised by the RIGHT-BAR branch's Br return leg (drawn joining the trunk just aft of the bar drop). It is a trunk with taps, not a discrete stock splice; modelled as one node. Horn, flasher and neutral-indicator feeds hang off it. It is NOT fed directly by the ignition switch - the ignition Br goes to FUSE_A.
+  SP_BLW:
+    style: simple
+    type: Splice
+    subtype: Bl/W fused feed
+    notes: FUSE_A's load side splits here - up to the right-bar bullet, and into FUSE_HEAD for the headlight. Read off the scan 19 Aug 2026; the drawn split sits at the fuse panel.
 
 cables:
   # --- battery main and chassis ground ---------------------------
@@ -41,9 +71,16 @@ cables:
   W_MAIN:     {<<: *w14, colors: [WH]}
   W_IGN_FEED: {<<: *w14, colors: [WH]}
 
-  # --- switched brown bus -------------------------------------------
-  W_BR_MAIN:  {<<: *w16, colors: [BN]}
-  W_FUSE_A_IN: {<<: *w18, colors: [BN]}
+  # --- ignition Br to FUSE_A, and the fused Bl/W distribution --------
+  W_FUSE_A_IN:
+    <<: *w16
+    colors: [BN]
+    notes: Ignition switch Br OUTPUT straight to the fuse panel. This is a short link, not the accessory bus - the bus is energised through the right-bar branch.
+  W_FUSE_A_LINK: {<<: *w16, colors: [BN]}
+  W_BLW_OUT:   {<<: *w16, colors: [BUWH]}
+  W_BLW_UP:    {<<: *w16, colors: [BUWH]}
+  W_FUSE_HEAD_IN: {<<: *w18, colors: [BUWH]}
+  W_BL_UP:     {<<: *w18, colors: [BU]}
 
 connections:
   # --- main feed to the ignition switch ------------------------------
@@ -54,13 +91,25 @@ connections:
     - W_IGN_FEED: [1]
     - IGN: [1]
 
-  # --- ignition switch ON: W to Br ----------------------------------
+  # --- ignition switch ON: W to Br, Br into FUSE_A via the panel 4P --
   - - IGN: [2]
-    - W_BR_MAIN: [1]
-    - SP_BR: [1]
-  - - SP_BR: [1]
     - W_FUSE_A_IN: [1]
+    - FUSE_4P: [1]
+  - - FUSE_4P: [1]
+    - W_FUSE_A_LINK: [1]
     - FUSE_A: [1]
+  - - FUSE_A: [2]
+    - W_BLW_OUT: [1]
+    - SP_BLW: [1]
+  - - SP_BLW: [1]
+    - W_BLW_UP: [1]
+    - FUSE_4P: [2]
+  - - SP_BLW: [1]
+    - W_FUSE_HEAD_IN: [1]
+    - FUSE_HEAD: [1]
+  - - FUSE_HEAD: [2]
+    - W_BL_UP: [1]
+    - FUSE_4P: [3]
 
   # --- battery main and chassis ground ----------------------------
   - - BATT: [1]

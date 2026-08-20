@@ -45,12 +45,70 @@ KZRider for this family of bikes.
 ⚠️ **US stock is thin** — out of stock at both RevZilla and J&P Cycles as of
 18 Aug 2026. Available from EU sellers (cafe4racer, Tonnycat).
 
+### US-orderable alternative, researched 19 Aug 2026: Custom LED ELFR-1
+
+**$22.49**, in stock, engineered and assembled in New Jersey, 1-year warranty
+and an explicit money-back guarantee to run any 2-wire application at DOT
+rate. Load **0.05–10 A (0.6–120 W)** — the only candidate whose published spec
+matches the issue #11 requirement verbatim. Silent solid-state, near-zero
+turn-on delay, holds a constant rate on LED now and incandescent on revert.
+
+It is a **2-wire relay** (red = +12 V switched, black = load, explicitly
+polarized) that plugs into 2- or 3-wire OEM connectors — a 3rd ground pin is
+simply left unused, because **the relay needs no ground**. The flasher ground
+wire still goes in the rebuild loom (it costs one wire and keeps 3-pin parts
+on the table forever), but this pick does not depend on it. The ELFR-1-QD
+variant ($24.99) has 1/4" quick-disconnect spades, better suited to a
+hand-built harness than the OEM-connector version.
+
+If the Shin Yo cannot be had from a US seller when ordering time comes, this
+is the pick: comparable spec, better availability, actual warranty and a
+company that answers email. Order whichever of the two is in stock.
+
+### Backup: Novita EP35 — the walk-in option
+
+~**$12–18** at AutoZone / Advance Auto, same-day anywhere in the US. 3-terminal
+ISO (31 = ground, 49 = B+, 49a = load), 1/4" spades, rated 1–4 lamps up to
+162 W / 13.5 A, and Novita's own sheet says **LED, incandescent, or mixed**.
+It is also the unit the KZ community has actually bench-tested on this bike
+family (KZRider) and found sensitive to very light loads. Costs: it needs the
+dedicated ground (which the rebuild runs anyway), and it clicks — relay-style
+output. Near-zero-risk fallback if the ELFR-1 disappoints. An earlier draft of
+this section dismissed the EP34/35 off Tridon's Australian catalogue sheet;
+Novita's US sheet and the KZRider testing supersede that read.
+
+Also surveyed and passed over:
+
+- **SuperBrightLEDs LF1-S-FLAT** — $9.99, 0.05–10 A, 12 V. Right spec on
+  paper, but the listed lifespan is **400 working hours**, which is a
+  consumable, not a component.
+- **Kellermann R2** — the premium answer (~$35–50, 0.5–85 W, load-independent,
+  replaces 2- and 3-pole relays, tiny). Beautiful part; EU-distributed with
+  thin US stock, and nothing on this bike justifies doubling the spend over
+  the ELFR-1.
+- **TST Industries Gen 2** — 2-pin, adjustable rate, $21.99, well-regarded
+  sportbike vendor. Current range and minimum load unpublished, no polarity
+  documentation, modern-bike fitment chart. Weaker paper than the ELFR-1 at
+  the same price.
+- **Kuryakyn 2994** — 2-pin spades, solid-state, max 200 W claimed. Good
+  cruiser-community track record, weakest documentation of the name brands.
+- **CF18** — 8-pin automotive (Toyota/Lexus) form factor. Wrong socket.
+
+⚠️ **Reverse-polarity protection is published by NONE of these vendors** —
+including the recommended ones. Treat every candidate as unprotected: add an
+install-time step to verify B+/load orientation with a meter before first
+power-up. The KZ 2-pin socket makes swapped insertion physically possible on
+spade-style units. Custom LED is the vendor most likely to answer the
+protection question by phone or email before purchase.
+
 ### Fallback: generic 3-pin electronic flasher (CF14 / JL-02 style)
 
-$5–10 and always available. Electrically fine for this bike given the load
-numbers above. What is given up is sealing, a known brand, and any spec sheet
-worth trusting — on a part that costs $15 less than the Shin YO and is a
-five-minute swap if it fails. A defensible choice, not a false economy.
+$5–10 and always available. Electrically workable for this bike given the
+load numbers above, but demoted below the EP35 for a documented failure mode:
+**CF13 and CF14 have mirrored B/E pinouts and look identical**, and reversed
+B/E kills the unit — the exact opposite of polarity protection. Budget units
+also derate sharply after ~10 s and run a fixed 88 cpm, on the fast side. At
+$15 for the EP35 there is no reason to be here.
 
 ### Not recommended: motogadget mo.flash
 
@@ -324,6 +382,17 @@ several hundred dollars and an unproven fitment.
 - [Highsider SHIN YO 3-pin flasher relay](https://www.jpcycles.com/product/highsider-shin-yo-3-pin-universal-flasher-relay)
 - [SHIN YO 3-pin, EU stock](https://cafe4racer.eu/en/flasher-relays-for-motorcycle-motorbikes/1010-shin-yo-3-pin-universal-flasher-relay-12v-4054783211647.html)
 - [Kellermann flasher relay R1](https://www.kellermann-online.com/en/flasher-relay-r1/123.965)
+- [Kellermann flasher relay R2](https://www.kellermann-online.com/en/flasher-relay-r2/123.970)
+- [Custom LED ELFR-1](https://www.customled.com/products/elfr-1-electronic-led-flasher-relay)
+- [Custom LED ELFR-1-QD](https://www.customled.com/products/elfr-1-qd-electronic-led-flasher-relay)
+- [Custom LED flasher relay family](https://www.customled.com/collections/electronic-led-flasher-relays)
+- [Novita EP35 vendor sheet](https://www.novitatech.com/?q=aftermarket%2Fproducts%2Felectronic-flashers%2Fep35)
+- [KZRider — turn signals, EP35 testing](https://kzrider.com/forum/4-electrical/610321-turn-signals-for-dummies?start=12)
+- [TST Industries LED flasher relay Gen 2](https://tstindustries.com/products/tst-led-flasher-relay-gen2)
+- [Kuryakyn 2994](https://www.revzilla.com/motorcycle/kuryakyn-universal-10-amp-led-flasher-relay)
+- [CF14 pinout-mirroring failure mode](https://electronics.alibaba.com/buyingguides/cf14-flasher-relay-guide-choose-right-for-led-turn-signals)
+- [SuperBrightLEDs LF1-S-FLAT](https://www.superbrightleds.com/electronic-led-flasher-relays-for-motorcycle-universal-flat-motorcycle-flasher)
+- [Tridon EP34 vendor sheet](https://www.tridon.com.au/products/Tridon/35/478/flashers-and-relays/2000/flasher-relays-electronic/1756/EP34)
 - [KZRider — LED flasher relays frying](https://www.kzrider.com/forum/4-electrical/612048-led-flasher-relays-frying)
 - [Rick's Motorsport Electrics — Hot Shot series](https://ricksmotorsportelectrics.com/l/hot-shot-series)
 - [Rick's 10-317 for KZ305](https://www.svspowersports.com/products/ricks-replacement-regulator-rectifier-10-317)

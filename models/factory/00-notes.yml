@@ -20,9 +20,12 @@
 # placeholder lengths for a harness we are not building would put fake
 # numbers in the BOM.
 #
-# COVERAGE: run-critical core is transcribed and largely confirmed.
-# Lighting, turn signals, horn and instruments are NOT yet transcribed
-# - see "still to transcribe" at the foot of this file.
+# COVERAGE: full-vehicle as of 19 Aug 2026. The 600 dpi scan pass added
+# lighting, horn, instruments, brake switches, both 6P junctions and
+# the complete fuse topology (a cascade - see the backbone sheet).
+# Remaining unknowns are listed at the foot of signals.yml; all are
+# bench items, none block the drawing. Source scans now live in the
+# repo: KZ305-B1-wiring-diagram-600dpi.png.
 #
 # Anything marked TBD is unverified. The harness is on the bench; ring
 # it out rather than trusting this drawing.
