@@ -45,6 +45,39 @@ KZRider for this family of bikes.
 ⚠️ **US stock is thin** — out of stock at both RevZilla and J&P Cycles as of
 18 Aug 2026. Available from EU sellers (cafe4racer, Tonnycat).
 
+### US-orderable alternative, researched 19 Aug 2026: Custom LED ELFR-1
+
+**$22.49**, in stock, engineered and assembled in New Jersey, 1-year warranty.
+Load 0.05–10 A (0.6–120 W), holds the OEM flash rate regardless of load, and —
+useful for this harness — its connector scheme covers **both 2-wire and
+3-wire** flasher sockets, so it fits the stock 2-pin arrangement today and the
+grounded 3-pin arrangement the rebuild runs regardless. Same electronics in a
+quick-disconnect variant (ELFR-1-QD, $24.99) if the OEM-connector version
+doesn't suit hand-built wiring.
+
+If the Shin Yo cannot be had from a US seller when ordering time comes, this
+is the pick: comparable spec, better availability, actual warranty and a
+company that answers email. Order whichever of the two is in stock.
+
+Also surveyed and passed over:
+
+- **SuperBrightLEDs LF1-S-FLAT** — $9.99, 0.05–10 A, 12 V. Right spec on
+  paper, but the listed lifespan is **400 working hours**, which is a
+  consumable, not a component.
+- **Kellermann R2** — the premium answer (~$40–50, 0.5–85 W, load-independent,
+  replaces 2- and 3-pole relays, tiny). Beautiful part; nothing on this bike
+  justifies doubling the spend over the ELFR-1.
+- **Tridon/Novita EP34/EP35** — the classic parts-store 3-pin electronics.
+  Tridon's own catalogue lists them with load-sensitive outage indication and
+  the EP35 is superseded (FET13); third-party listings claim 0.02–20 A but the
+  vendor sheet does not. Too murky to order blind when the ELFR-1 publishes
+  the number needed.
+
+⚠️ **Reverse-polarity protection is published by NONE of these vendors** —
+including the recommended ones. Treat it as unprotected: the flasher goes in
+only after the harness polarity is verified end-to-end, which the build
+procedure requires anyway. The warranty on the ELFR-1 is the practical backstop.
+
 ### Fallback: generic 3-pin electronic flasher (CF14 / JL-02 style)
 
 $5–10 and always available. Electrically fine for this bike given the load
@@ -324,6 +357,11 @@ several hundred dollars and an unproven fitment.
 - [Highsider SHIN YO 3-pin flasher relay](https://www.jpcycles.com/product/highsider-shin-yo-3-pin-universal-flasher-relay)
 - [SHIN YO 3-pin, EU stock](https://cafe4racer.eu/en/flasher-relays-for-motorcycle-motorbikes/1010-shin-yo-3-pin-universal-flasher-relay-12v-4054783211647.html)
 - [Kellermann flasher relay R1](https://www.kellermann-online.com/en/flasher-relay-r1/123.965)
+- [Kellermann flasher relay R2](https://www.kellermann-online.com/en/flasher-relay-r2/123.970)
+- [Custom LED ELFR-1](https://www.customled.com/products/elfr-1-electronic-led-flasher-relay)
+- [Custom LED flasher relay family](https://www.customled.com/collections/electronic-led-flasher-relays)
+- [SuperBrightLEDs LF1-S-FLAT](https://www.superbrightleds.com/electronic-led-flasher-relays-for-motorcycle-universal-flat-motorcycle-flasher)
+- [Tridon EP34 vendor sheet](https://www.tridon.com.au/products/Tridon/35/478/flashers-and-relays/2000/flasher-relays-electronic/1756/EP34)
 - [KZRider — LED flasher relays frying](https://www.kzrider.com/forum/4-electrical/612048-led-flasher-relays-frying)
 - [Rick's Motorsport Electrics — Hot Shot series](https://ricksmotorsportelectrics.com/l/hot-shot-series)
 - [Rick's 10-317 for KZ305](https://www.svspowersports.com/products/ricks-replacement-regulator-rectifier-10-317)
