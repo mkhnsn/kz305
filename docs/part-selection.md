@@ -85,7 +85,29 @@ built-in redundancy.
 The three-phase parts are still three-phase parts. What was wrong was the
 inference that a single-phase stator cannot drive one.
 
-### DECISION — fit a shunt unit now, measure, upgrade only if the number says so
+### SUPERSEDED, 19 Aug 2026 — SH775 ordered
+
+**A used takeoff SH775 was found on eBay for $45 and ordered.** That is the
+"used / salvage from a wrecked Polaris" row in the source table below, at the
+bottom of its range — below the Podtronics price. The decision block that
+follows is kept for the reasoning, but its premise (SH775 costs $179–285) no
+longer holds, and the same override written for the OEM discount route applies:
+
+- Fit the SH775 from the start; the Podtronics is not bought at all
+- Two of the three AC inputs take the stator pair; the third stays unterminated
+- Temperature measurement becomes validation rather than a decision gate
+- Run the DC pair heavy gauge and direct to the battery, fused at the battery
+  end — **open check**: the rebuild model currently routes DC+ to the PDM main
+  stud; reconcile before cutting wire
+- **Bench-test the used unit before build** — unknown history, but a regulator
+  either works or does not, and it is testable (each AC leg to ground reads
+  infinity; verify 14.0–14.5 V behavior on the bike)
+
+**Still to order: the two mating pigtails** — 3-pin AC + 2-pin DC, Shindengen
+spec, covered under "Connectors" below. Eastern Beaver preferred for correct
+terminal crimps and DC-side wire gauge.
+
+### DECISION (superseded 19 Aug 2026, see above) — fit a shunt unit now, measure, upgrade only if the number says so
 
 **Fit a Podtronics single-phase ($75), mount it in real airflow, and measure the
 body temperature.** Buy the SH775 only if the measurement says to.
@@ -112,10 +134,11 @@ Polaris part **4012941**, catalogued by Polaris itself as *"REGULATOR 3PH 35A
 **SERIES** 105C"* — which confirms the series type and the 105 degC rating from
 the manufacturer rather than a forum.
 
-**Priced out of the initial build at $179–285.** The $95 Roadstercycle deal
-that recurs in forum posts is historical; they no longer list it. This is the
-part to move to if the temperature measurement calls for it, or if the discount
-route below comes through.
+**ORDERED 19 Aug 2026 — used takeoff, eBay, $45** (the used/salvage row below).
+The "priced out at $179–285" framing that follows is retained for the record:
+the $95 Roadstercycle deal that recurs in forum posts is historical; they no
+longer list it. At new-part prices this was the part to move to only if the
+temperature measurement called for it; at $45 it goes in from the start.
 
 | Source | Price | |
 |---|---|---|
@@ -129,7 +152,11 @@ aftermarket is not pretending to be anything. That does not make it good; it
 means the fraud risk and the quality risk are separate questions, and only the
 second one applies. Nobody has published a teardown either way.
 
-### Open — OEM discount route, asked 18 Aug 2026
+### Open — OEM discount route, asked 18 Aug 2026 (now moot for the first unit)
+
+**Update 19 Aug 2026:** the used $45 unit is ordered, so this route no longer
+gates anything. If it lands anyway, it becomes the cheap way to a **spare** —
+worth having on a part this counterfeited (see below on a second regulator).
 
 Dealer pricing on the genuine part has been asked after through a Polaris
 contact. **Assume it is not available and build to the decision above**; if it

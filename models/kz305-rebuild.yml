@@ -179,32 +179,26 @@ connectors:
     <<: *alternator
   RR:
     type: Regulator / rectifier
-    subtype: single-phase shunt (Podtronics class) - upgrade path is the SH775, see docs/part-selection.md
-    pinlabels: [AC1, AC2, DC OUT, GND]
+    subtype: Shindengen SH775 (Polaris 4012941), 3-phase 35A SERIES type - see docs/part-selection.md
+    pinlabels: [AC1, AC2, AC3, DC+, GND]
     notes: |-
-      UPGRADE - replaces the stock SCR shunt unit. The alternator is confirmed single-phase, two yellow
-      leads, 0.4 ohm, permanent-magnet rotor confirmed on the bench 18 Aug 2026. CORRECTED 18 Aug 2026 -
-      this note previously said three-phase units do not fit. Wrong. A single-phase stator connects to ANY
-      TWO of a three-phase regulator's three AC inputs. That is standard practice on single-phase
-      classics, Nortons especially, with long-term field reports, and manufacturers reportedly accept it.
-      DECIDED 18 Aug 2026 - fit a single-phase SHUNT unit (Podtronics, about $75) and MEASURE regulator
-      body temperature at 3-5k with a type-K probe, then upgrade only if the number says to. An OEM
-      discount route for the SH775 has been asked after but is NOT assumed; build to this decision and
-      revisit only if it lands. The heat problem is real but has never been quantified on this bike, and
-      genuine SH775 pricing has moved to $179-285, so pre-empting an unmeasured problem is the wrong
-      order. Upgrade path is the Shindengen SH775, Polaris 4012941, catalogued by Polaris as 3PH 35A
-      SERIES 105C - a SERIES type that open-circuits the stator rather than shorting it, so both regulator
-      and stator run cooler and the LED heat problem is cured at source rather than mitigated. Rated about
-      30A, far above this bike. Caveats - counterfeits are widespread so buy from a known source such as
-      Roadstercycle, only two of three rectifier legs are used so capacity is below the rating which does
-      not matter here, and one forum report raises unconfirmed doubt about phase-differential monitoring.
-      HARNESS REQUIREMENT so the upgrade stays cheap - give this unit its own serviceable connector rather
-      than splicing into the loom, bring both stator leads and the DC pair to it so a three-AC-input unit
-      needs only a new pigtail, and leave room and a mount for a body larger than a Podtronics. Mount
-      where the airflow actually is; that matters more than which of the two parts is fitted. The stator's
-      rated wattage has NOT been read off anything, only the 0.4 ohm and 75V AC test values. Target
-      14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and never
-      disconnect the battery while running.
+      ORDERED 19 Aug 2026 - used takeoff SH775, eBay, $45. This supersedes the 18 Aug decision to fit a
+      Podtronics shunt first and measure: the used-unit price hit the point where the SH775 wins outright
+      (a SERIES type open-circuits the stator rather than shorting it, so regulator and stator run cooler
+      and the LED heat problem is cured at source). Temperature measurement is now validation, not a
+      decision gate. BENCH-TEST the used unit before build - a regulator either works or does not, and it
+      is testable. The alternator is confirmed single-phase, two yellow leads, 0.4 ohm, permanent-magnet
+      rotor, bench 18 Aug 2026; it connects to ANY TWO of the three AC inputs - standard practice on
+      single-phase classics, manufacturers reportedly accept it. AC3 is deliberately unterminated. Only
+      two of three rectifier legs are used, so capacity is below the 35A rating - does not matter here.
+      CONNECTORS NOT YET ORDERED - two mating pigtails, 3-pin AC + 2-pin DC, Shindengen spec (fits the
+      FH009-FH020 family), $16-22 openly sold; Eastern Beaver preferred for correct crimps and DC gauge.
+      OPEN CHECK - part-selection.md wants the DC pair heavy gauge and direct to the battery, fused at
+      the battery end; the model currently routes DC+ to the PDM main stud. Reconcile before cutting
+      wire. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
+      actually is. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V
+      AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the
+      ignition on, and never disconnect the battery while running.
 
   K_MAIN:
     type: Relay
@@ -414,10 +408,10 @@ connections:
   - - ALT: [1,2]
     - W_ALT: [1,2]
     - RR: [1,2]
-  - - RR: [3]
+  - - RR: [4]
     - W_RR_OUT: [1]
     - PDM: [1]
-  - - RR: [4]
+  - - RR: [5]
     - W_RR_GND: [1]
     - GND: [2]
 
