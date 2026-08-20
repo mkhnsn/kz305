@@ -25,6 +25,17 @@ make                  # same as ./render
 Outputs land in `out/` and are gitignored — `models/` is the source of truth,
 and anything in `out/` is one command away from being regenerated.
 
+## Published drawings
+
+**<https://mkhnsn.github.io/kz305/>** — every drawing, re-rendered and
+republished on each push to `main`. The interactive pages are the ones worth
+opening at the bench: pan, zoom, click a wire to trace its net across sheets.
+
+Published straight from CI rather than committed, so the site cannot show a
+drawing that no longer matches the models. `tools/make_index.py` builds the
+landing page from `harness.yml` and from whatever actually landed in `out/`,
+which is why a new sheet appears there without anyone editing a list.
+
 Needs a Python venv:
 
 ```sh
@@ -34,7 +45,7 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 `render` finds `.venv` on its own; there is no activation step.
 
 WireViz is pinned to the [unstable-studios fork](https://github.com/unstable-studios/WireViz),
-at an exact commit rather than a branch. The fork adds `--strict` and
+at a release tag rather than a branch. The fork adds `--strict` and
 `--merge`, which `build.py` depends on (see below), plus the layout and output
 features the models use: `rankdir: TB` with transposed node tables, native
 `sheets:` splitting, and interactive HTML output (pan/zoom, net tracing across

@@ -10,6 +10,12 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Pages deployment needs these; the render job itself only reads the checkout.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -42,11 +48,43 @@ jobs:
       - name: Render into out/
         run: ./render
 
+      # ./render writes no index, so the site root would 404. Generated from
+      # the manifest and from what actually landed in out/, so a new sheet
+      # appears on the page without this workflow knowing sheets exist.
+      - name: Build index page
+        run: python tools/make_index.py
+
       # The drawings are gitignored, so publish them per-commit. Reviewing a
-      # harness change means looking at the harness, not at YAML diffs.
+      # harness change means looking at the harness, not at YAML diffs. Kept
+      # alongside Pages because it covers PR branches, which never deploy.
       - name: Upload drawings
         uses: actions/upload-artifact@v4
         with:
           name: harness-drawings
           path: out/
           if-no-files-found: error
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: out/
+
+  # Split out because deploy-pages needs its own environment, and because a
+  # failed publish should read as a publish failure rather than a render one.
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: render
+    runs-on: ubuntu-latest
+    # One deployment at a time, and never cancel one in flight -- a
+    # half-published site is worse than a stale one. Scoped to this job so it
+    # does not serialise PR renders, which never deploy.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
