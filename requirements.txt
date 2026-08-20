@@ -5,9 +5,15 @@
 # node tables, ranksep/nodesep/sort_wires/wirelabel_detail/mate_labels/note_wrap, native
 # `sheets:` splitting with cross-sheet stubs, and interactive HTML (pan/zoom,
 # net tracing, BOM linkage), and node-avoiding orthogonal wire routing.
-# Pinned to an exact commit rather than a branch --
-# a moving ref could change the guarantees underneath us.
-wireviz @ git+https://github.com/unstable-studios/WireViz@6b584a170088df685d1193d19c80deffb7389f1b
+# Pinned to a release tag rather than a branch -- a moving ref could change
+# the guarantees above underneath us between two runs of ./render, and this
+# repo's drawings are a measurement record that has to re-render the same way.
+#
+# The tag goes through the git URL on purpose. A bare `wireviz==0.5.0` would
+# resolve against PyPI, where `wireviz` is UPSTREAM wireviz/WireViz -- a
+# different project that stops at 0.4.1 and has none of the above. The fork
+# ships its wheels as GitHub release assets, not to an index.
+wireviz @ git+https://github.com/unstable-studios/WireViz@v0.5.0
 
 # Test runner for the guard tests.
 pytest>=8

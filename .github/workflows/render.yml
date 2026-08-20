@@ -23,7 +23,7 @@ jobs:
       # WireViz shells out to GraphViz; without it every render fails.
       - uses: ts-graphviz/setup-graphviz@v2
 
-      # requirements.txt pins WireViz to an exact commit of the
+      # requirements.txt pins WireViz to a release tag of the
       # unstable-studios fork, which supplies --merge and --strict.
       - name: Install
         run: |
