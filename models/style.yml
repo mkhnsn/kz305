@@ -26,9 +26,11 @@ options:
   # keep their author-typed breaks (treated as paragraph breaks); those stay
   # hand-wrapped because sub-100-column YAML is also nicer to edit.
   note_wrap: 100
-  # routing: orthogonal is NOT enabled. The Manhattan look is right for a
-  # schematic, but the router does one turn per wire and does not avoid node
-  # boxes, so on the dense controls sheet the long vertical runs cut straight
-  # through intermediate nodes and their note text -- the exact artifact that
-  # forced the original revert to LR. Revisit when the fork's router learns
-  # node avoidance (unstable-studios/WireViz issue pending).
+  # Manhattan wire routing in svg/html: straight runs and right-angle turns,
+  # so multi-colour stripes stay evenly spaced through corners instead of
+  # splaying like a brush stroke. The router treats node boxes as obstacles
+  # (unstable-studios/WireViz#38) and falls back to the GraphViz spline for
+  # any wire it cannot place cleanly, so a congested sheet degrades to a
+  # mixed drawing rather than drawing wires over note text. png keeps splines
+  # (it is an SVG post-pass).
+  routing: orthogonal

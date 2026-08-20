@@ -4,9 +4,10 @@
 # layout/output features the models use: options.rankdir TB with transposed
 # node tables, ranksep/nodesep/sort_wires/wirelabel_detail/mate_labels/note_wrap, native
 # `sheets:` splitting with cross-sheet stubs, and interactive HTML (pan/zoom,
-# net tracing, BOM linkage). Pinned to an exact commit rather than a branch --
+# net tracing, BOM linkage), and node-avoiding orthogonal wire routing.
+# Pinned to an exact commit rather than a branch --
 # a moving ref could change the guarantees underneath us.
-wireviz @ git+https://github.com/unstable-studios/WireViz@e26479e2c74f42a6037fd25a2a47fb65351e2c15
+wireviz @ git+https://github.com/unstable-studios/WireViz@1f183863014262ca9b58d2112c6a671ddbe9b3d4
 
 # Test runner for the guard tests.
 pytest>=8
