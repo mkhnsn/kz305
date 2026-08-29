@@ -258,6 +258,53 @@ connectors:
       The two-point W/R net recorded on 28 Aug (B04.6 to B06.4, 0.1 ohm) is unchanged as a
       measurement; what changed is that one of those points is now identified as the charging output
       rather than an unexplained white-base wire absent from the cable index.
+  SP_NETA:
+    style: simple
+    type: Splice
+    subtype: Y/BK - ground Net A, location unknown
+    notes: |-
+      INFERRED 29 Aug 2026, not seen - the same argument that located SP_BRW. Net A has THREE
+      endpoints (the B04.1 chassis ring, B00.7 and B08) and each holds exactly ONE wire, so
+      something joins them under the tape. Drawn as a node because the three-way net is measured;
+      its POSITION is not, so do not read the placement here as a location. Step 3 should find it.
+  ACC_F:
+    type: Junction
+    subtype: double-female bullet, both slots empty - front accessory point
+    pinlabels: [Y/BK]
+    notes: |-
+      B00.7 at the headlight junction. One harness wire in the crimp, TWO receptacle slots, BOTH
+      EMPTY - and unlike the other double-females on this harness, NOTHING EVER PLUGGED IN. The
+      pre-teardown photographs show it unmated, and the oxidation inside the slots matches the
+      outside, which is independent of the photographs: a mated slot ages differently from an open
+      one.
+      INTERPRETATION, strong but not proven: this is the GROUND half of the front "Electric
+      Accessory Leads" pickup that the diagram carries - see ACC_F_PWR, which is the same length,
+      the same terminal type, and leaves at the same point.
+  ACC_F_PWR:
+    type: Junction
+    subtype: double-female bullet, both slots empty - front accessory feed
+    pinlabels: [W/Bl]
+    notes: |-
+      B00.8, alongside ACC_F and the same 240 mm from the datum. Both slots empty.
+      W/Bl is the "blue-family wire" of the diagram's accessory pair. THIS IDENTIFIES THE LAST NET
+      IN THE HARNESS THAT HAD NO COUNTERPART in these models or the cable index.
+      WHERE IT TAKES POWER FROM IS NOT ESTABLISHED. The net has only two measured points, this one
+      and ACC_R_PWR, so nothing on the bench feeds it. Either a male plugged into one of these slots
+      brought power in, or B09's mate did. B09's mate is unrecorded.
+  ACC_R:
+    type: Junction
+    subtype: double-female bullet, both slots empty - rear accessory point
+    pinlabels: [Y/BK]
+    notes: |-
+      B08, at 975 mm. Both slots empty, and never connected - same photographic and oxidation
+      evidence as ACC_F. The ground half of the rear accessory pair.
+  ACC_R_PWR:
+    type: Bullet connector
+    subtype: male - rear accessory feed
+    pinlabels: [W/Bl]
+    notes: |-
+      B09, at 1060 mm. A MALE bullet, unlike the three double-females of this group. Its mate is not
+      recorded. Same net as ACC_F_PWR - 0.3 ohm, 28 Aug 2026.
   SP_BR:
     style: simple
     type: Splice
@@ -280,6 +327,30 @@ connectors:
 cables:
   # --- battery main and chassis ground ---------------------------
   W_BAT_SOL:  {<<: *w6, colors: [RD]}
+  # Net A is YELLOW base - YEBK, not BKYE. These are the only ground cables in
+  # this model drawn that way, and they are the only ones measured to be on it.
+  W_ACC_GND_F: {<<: *w16, colors: [YEBK]}
+  W_ACC_GND_R: {<<: *w16, colors: [YEBK]}
+  W_ACC_RING:
+    <<: *w16
+    colors: [YEBK]
+    notes: |-
+      The chassis ring terminal's own lead, B04.1. YELLOW base with a black tracer.
+      Every other ground in this model is drawn BKYE, black base - which for Net B is now measured
+      and correct, but which was applied to this net by inheritance and is WRONG. Net A is yellow
+      base, confirmed with the wires in hand 28 Aug 2026. Drawn YEBK so the drawing shows the
+      difference the meter found.
+      Gauge reads heavier than the harness's common wire, 16-18 by eye and DEFINITIVELY not 6 AWG -
+      so this is not the battery earth strap. See W_BAT_GND.
+  W_ACC_PWR:
+    <<: *w18
+    colors: [WHBU]
+    notes: |-
+      The accessory feed, front pickup to rear pickup. MEASURED as one net 28 Aug 2026 (0.3 ohm) and
+      IDENTIFIED 29 Aug 2026: it is the "blue-family wire" of the diagram's Electric Accessory Leads,
+      the last net in this harness that had no counterpart here or in the cable index.
+      WHITE base with a BLUE tracer - NOT Bl/W, which is a different wire on this bike and is drawn
+      as W_FUSE_HEAD_IN. Base colour first.
   W_BAT_GND:
     <<: *w6
     colors: [BKYE]
@@ -403,6 +474,20 @@ connections:
   - - SP_BRW: [1]
     - W_BRW_HL: [1]
     - BRW_HL: [1]
+
+  # --- accessory pickups: provisioned, never used ---------------------
+  - - GND_CHASSIS: [1]
+    - W_ACC_RING: [1]
+    - SP_NETA: [1]
+  - - SP_NETA: [1]
+    - W_ACC_GND_F: [1]
+    - ACC_F: [1]
+  - - SP_NETA: [1]
+    - W_ACC_GND_R: [1]
+    - ACC_R: [1]
+  - - ACC_F_PWR: [1]
+    - W_ACC_PWR: [1]
+    - ACC_R_PWR: [1]
 
   # --- battery main and chassis ground ----------------------------
   - - BATT: [1]

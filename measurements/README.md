@@ -295,7 +295,60 @@ plugged into them left at teardown and is recorded nowhere. So there is
 currently **no known load on Net A**, and the claim that it is the engine/power
 earth rests on the ring terminal alone.
 
-### What would test it
+### RESOLVED 2026-08-29 — the hypothesis is dead, and Net A is explained
+
+`B00.7` and `B08` were **never connected to anything**. Two independent lines
+agree:
+
+- **The on-bike photographs**, which predate the teardown, show them unmated.
+- **The oxidation inside the female slots is identical to the outside.** A
+  mated slot ages differently from an exposed one; identical means it spent its
+  life open. That does not depend on the photographs at all.
+
+So Net A has **no load, and never had one**. The "engine/power earth" half of
+the hypothesis is not merely unsupported — there is nothing on that net to be
+powered. And `B04.3`, the R/R ground, remains squarely on the black-base net.
+**Record grounds by measured net, never by base colour.**
+
+### What Net A actually is: the unused accessory earth
+
+The geometry gives it away once the bullets are known to be unused:
+
+| Branch | Colour | Position | Terminal |
+|---|---|---|---|
+| `B00.7` | `Y/BK` (Net A) | datum, **240 mm** | double-female, both slots empty |
+| `B00.8` | `W/Bl` | datum, **240 mm** | double-female, both slots empty |
+| `B08` | `Y/BK` (Net A) | 975 mm | double-female, both slots empty |
+| `B09` | `W/Bl` | 1060 mm | male bullet |
+
+`docs/kz305-b1-wiring.md` transcribes the diagram's **"Electric Accessory
+Leads"** as *a blue-family wire plus a black — a switched power pickup and a
+ground*, present as **two pairs, one at the meters and one at the tail**.
+
+`B00.7` and `B00.8` are the same length, the same terminal type, and leave at
+the same point: a pair, at the front. `B08` and `B09` are the rear pair. `W/Bl`
+is the blue-family feed; Net A is the ground. The doc's "black" is precisely the
+`Y/BK`-versus-`BK/Y` ambiguity the 600 dpi scan cannot carry, and which cost
+this project a fortnight.
+
+**This identifies `W/Bl`**, which was the last net in the harness with no
+counterpart in the models or the cable index. It is the accessory feed.
+
+**Strong, not proven.** It rests on the geometry, the doc's description, and the
+bullets being unused. It would be confirmed by finding where `W/Bl` takes power
+from, and by `B09`'s mate — still unrecorded.
+
+### Consequence: Net A has a hidden splice
+
+Net A has three endpoints — the `B04.1` ring terminal, `B00.7` and `B08` — and
+**each holds exactly one wire**. One wire cannot reach three endpoints, so a
+splice or shared crimp joins them **under the tape**, location unknown.
+
+This is the same argument that located the `Br/W` junction, and it is the second
+hidden splice inferred rather than seen. Step 3 unwraps the loom and should find
+both.
+
+### What would have tested it, kept for the reasoning
 
 **Find out what `B00.7` and `B08` fed.** They are the only unidentified Net A
 points, and identifying either would confirm or kill the hypothesis in one step.
@@ -337,12 +390,21 @@ Six branches end in a double-female bullet terminal — `B03`, `B08`, `B00.5`,
 into the crimp, and the terminal presents two receptacle slots that are **both
 empty**.
 
-They are fan-out points where up to two external male bullets plugged in. Those
-males were unplugged at teardown, before this project's tagging existed, and
-what went into each slot **is not recorded anywhere**.
+They are fan-out points where up to two external male bullets could plug in.
 
-This is the one place a real gap exists in the map, and no bench work closes it:
-the information left with the teardown. Two partial routes back:
+**For two of them the answer is now known: nothing ever did.** `B00.7` and `B08`
+were never connected — the pre-teardown photographs show them unmated, and the
+oxidation inside their slots matches the outside, which is independent evidence
+that they aged open. They are the unused accessory earth; see the Net A section
+above. The remaining four (`B03`, `B00.5`, `B00.11`, `B00.12`'s neighbours) are
+still unaccounted for, and for those the males were unplugged at teardown,
+before this project's tagging existed, and what went into each slot **is not
+recorded anywhere**.
+
+This was recorded as the one place a real gap exists that no bench work closes.
+That is now **half wrong in a useful way**: for `B00.7` and `B08` the answer was
+not lost with the teardown, because there was never anything to lose. The
+oxidation argument is what closed it, and it cost nothing. Two partial routes back:
 
 - **The on-bike photographs**, which predate the teardown.
 - **The components and child harnesses themselves** — a male bullet of the right

@@ -250,6 +250,27 @@ connections:
 #     the blue this model put in the 6P is a separate flying lead
 #     (B02.2). See LH.
 #
+# CLOSED 29 Aug 2026, from the pre-teardown photographs and the wire:
+#   - B00.7 AND B08 WERE NEVER CONNECTED. The photographs show them
+#     unmated, and the oxidation inside their slots matches the outside
+#     - independent of the photographs, since a mated slot ages
+#     differently from an open one. Net A has no load and never had
+#     one: it is the PROVISIONED, UNUSED accessory earth.
+#     This kills the bench hypothesis that black-base is the signal
+#     earth and yellow-base the engine/power earth. Net A powers
+#     nothing, and B04.3 - the R/R ground - is black-base. Record
+#     grounds by measured net, never by base colour.
+#   - The "permanent gap" of the empty double-female slots is HALF
+#     closed. For these two the answer was not lost at teardown; there
+#     was never anything to lose. Four others remain unaccounted for.
+#
+#   NEW 29 Aug 2026:
+#   - NET A HAS A HIDDEN SPLICE. Three endpoints - the B04.1 ring,
+#     B00.7 and B08 - each holding exactly ONE wire, and one wire
+#     cannot reach three endpoints. Same argument that located SP_BRW,
+#     and the second splice inferred rather than seen. Drawn as SP_NETA
+#     with its position explicitly unknown. Step 3 should find both.
+#
 #   NEW, and it now has two instances rather than one:
 #   - LIVE HARNESS WIRES INTO UNPOPULATED CAVITIES. B04.3's brown at
 #     the R/R and B02.3's brown at the left cluster. Both are on the
@@ -277,15 +298,19 @@ connections:
 #     the bullet at one of them holds a single wire. Step 3.
 #
 #   NEW 29 Aug 2026:
-#   - W/Bl IS THE LAST WHOLLY UNMODELLED NET. White base, blue tracer,
-#     two measured points 0.3 ohm apart - B00.8 at the headlight
-#     junction and B09 at 1060 mm on the trunk. It appears NOWHERE in
-#     these models and nowhere in the cable index. With W/R now
-#     resolved as the charging output, this is the only net on the
-#     bench map with no drawn counterpart at all. Find both ends.
-#     Note it is NOT Bl/W - that is a different wire, already drawn as
-#     W_FUSE_HEAD_IN. Base colour first; the two have been confused
-#     before.
+#   - W/Bl IS THE LAST WHOLLY UNMODELLED NET.
+#     ** IDENTIFIED AND DRAWN 29 Aug 2026: it is the ELECTRIC ACCESSORY
+#     FEED. ** The diagram carries "Electric Accessory Leads" as a
+#     blue-family wire plus a ground, in two pairs - one at the meters,
+#     one at the tail. B00.8 (W/Bl) and B00.7 (Y/BK) are the front
+#     pair: same 240 mm length, same terminal type, same breakout. B09
+#     and B08 are the rear pair. So W/Bl is the feed and Net A is its
+#     earth, and neither was ever used.
+#     STILL OPEN: where it takes power from. The net has only its two
+#     measured points, so nothing on the bench feeds it, and B09's mate
+#     is unrecorded.
+#     Note it is NOT Bl/W - a different wire, drawn as W_FUSE_HEAD_IN.
+#     Base colour first; the two have been confused before.
 #   - THE BROWN WAY AT THE R/R CONNECTOR. The harness runs brown into
 #     a cavity the stock R/R never populates. Not a fault, and not a
 #     loose end in the harness - the brown is soundly on the switched

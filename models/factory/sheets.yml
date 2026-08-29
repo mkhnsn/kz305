@@ -23,12 +23,21 @@ sheets:
     - FUSE_4P
     - IGN
     - SOL
+    - SP_NETA
+    - ACC_F
+    - ACC_F_PWR
+    - ACC_R
+    - ACC_R_PWR
     - SP_BR
     - SP_BRW
     - SP_WR
     - BRW_HL
     - W_BAT_SOL
     - W_BAT_GND
+    - W_ACC_GND_F
+    - W_ACC_GND_R
+    - W_ACC_RING
+    - W_ACC_PWR
     - W_MAIN
     - W_MAIN_OUT
     - W_IGN_FEED
