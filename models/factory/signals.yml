@@ -117,12 +117,13 @@ connections:
   - - SIG_RR: [2]
     - W_GND_SIG_RR: [1]
     - GND_CHASSIS: [1]
+  # Both pod indicator grounds join the pod's own bus - see SP_POD_GND.
   - - IND_L: [2]
     - W_GND_IND_L: [1]
-    - GND_CHASSIS: [1]
+    - SP_POD_GND: [1]
   - - IND_R: [2]
     - W_GND_IND_R: [1]
-    - GND_CHASSIS: [1]
+    - SP_POD_GND: [1]
 
 # =====================================================================
 # STILL TO TRANSCRIBE / RESOLVE - the short list, revised 28 Aug 2026
@@ -196,12 +197,22 @@ connections:
 #     tracer is the difference between the high-beam feed and a meter
 #     feed. Third time base-colour-vs-tracer has bitten this project.
 #
+# ALSO CLOSED 29 Aug 2026, by looking inside the pod pigtail:
+#   - THE POD'S COMMON GROUND BUS IS A 1-TO-3 SPLICE, and it is in the
+#     PIGTAIL rather than the pod. The conductor count makes it exactly
+#     three: six ways cross the 6P, eight wires enter the pod, five ways
+#     are signal, so 5 + 3 = 8. It also says WHICH lamps - IND_L, IND_R
+#     and IND_HB ground locally; IND_N does not, because its return is
+#     the LG lead to the neutral switch. Drawn as SP_POD_GND, and the
+#     three individually drawn lamp grounds are now joined to it.
+#
 # STILL OPEN, added 29 Aug 2026:
-#   - THE POD GROUND'S DESTINATION. Cavity 6 is BK/Y, the pod's common
-#     ground bus. Black base makes Net B the candidate but that is a
-#     colour argument. Ring it against Net B; not drawn until then, so
-#     the pod lamps keep individually drawn grounds that this file's
-#     own header contradicts.
+#   - THE POD GROUND'S DESTINATION. Cavity 6's harness side is still
+#     unmeasured, so the pod ground is drawn ending at the connector.
+#     Black base makes Net B the candidate but that is a colour
+#     argument. Ring B00.1's BK/Y against Net B. If it is Net B, the pod
+#     earths outside the harness like the rest of that net and the star
+#     ground gains another wire to account for (blocker 5).
 #
 # CLOSED 29 Aug 2026 at the ignition switch connector:
 #   - TAIL1 IS R/Bl, NOT R/BK. Both halves of B00.3 read red base with a

@@ -25,6 +25,24 @@ connectors:
   LAMP_TAC:
     <<: *indicator
     subtype: tachometer light, 12V 3.4W
+  SP_POD_GND:
+    style: simple
+    type: Splice
+    subtype: 1 to 3, BK/Y - pod common ground bus
+    notes: |-
+      OBSERVED 29 Aug 2026, inside the pod pigtail's sleeve: the BK/Y from cavity 6 splits into
+      three BK/Y legs. This is the "common ground bus out of the pod" this file's header has claimed
+      since 19 Aug, now located - it is in the PIGTAIL, not in the pod.
+      ** THE COUNT CLOSES IT AT EXACTLY THREE. ** Six ways cross the 6P and EIGHT wires leave the
+      pigtail into the pod. Five of the six ways are signal (Gn, Gy, Br, LG, R/BK), so 5 + 3 = 8. A
+      four-way split would need nine wires and a two-way seven. The bench read "at least three"; the
+      arithmetic makes it three.
+      ** AND IT DETERMINES WHICH LAMPS. ** Three of the pod's four lamps ground locally - IND_L on
+      Gn, IND_R on Gy, IND_HB on R/BK. IND_N does NOT need one: its return is the LG lead on cavity 4
+      running to the neutral switch, which grounds through the engine case in neutral. Four lamps,
+      three grounds, and the arithmetic only works this way round.
+      Same shape of argument as the right-bar 4P, where a conductor count corroborated two splices
+      from outside the sleeve.
   INSTR_6P:
     <<: *junction6p
     subtype: 6P connector, instrument pod
@@ -50,13 +68,12 @@ connectors:
       "red" among these six. It is RED base with a BLACK tracer, re-read 29 Aug. That single letter
       is the difference between the high-beam indicator feed and a meter lamp feed, and it is exactly
       the base-colour hazard the project has now been bitten by three times.
-      ** CAVITY 6 IS NOT DRAWN, DELIBERATELY. ** BK/Y is the pod's common ground bus leaving the pod -
-      this file's header records that the four pod lamps share one. Its harness-side destination is
-      NOT measured. Black base makes it a strong Net B candidate, and GND_CHASSIS's own note says most
-      of its inherited leads probably belong to Net B, but that is a colour argument and this project
-      has been burned by those. Ring B00.1's BK/Y against Net B before drawing it. Until then the pod
-      lamps keep their individually drawn grounds, which are a simplification this file's header
-      already contradicts.
+      ** CAVITY 6 IS DRAWN ON THE POD SIDE ONLY. ** BK/Y is the pod's common ground bus; the splice
+      that forms it was seen in the pigtail on 29 Aug and is drawn as SP_POD_GND. Its HARNESS-SIDE
+      destination is still NOT measured, so nothing leaves this connector on cavity 6. Black base
+      makes Net B the strong candidate, and GND_CHASSIS's own note says most of its inherited leads
+      probably belong to Net B, but that is a colour argument and this project has been burned by
+      those. Ring B00.1's BK/Y against Net B before drawing the other half.
 
 cables:
   # --- meter illumination - tail/city net ----------------------------
@@ -95,6 +112,18 @@ cables:
   W_GND_SPD: {<<: *w18, colors: [BKYE]}
   W_GND_TAC: {<<: *w18, colors: [BKYE]}
   W_GND_HB:  {<<: *w18, colors: [BKYE]}
+  W_POD_GND:
+    <<: *w18
+    colors: [BKYE]
+    notes: |-
+      The pod's combined ground leaving on cavity 6 of the instrument 6P - three lamp grounds onto
+      one conductor at SP_POD_GND.
+      ** ITS HARNESS-SIDE DESTINATION IS STILL NOT MEASURED, so it is drawn ending at the connector
+      and no further. ** Black base makes Net B the strong candidate, and GND_CHASSIS's own note says
+      most of its inherited leads probably belong to Net B - but that is a colour argument and colour
+      has been wrong on this harness repeatedly. Ring B00.1's BK/Y against Net B (B00.2, B10.5,
+      B04.3, B04.5). If it is Net B, this pod earths outside the harness through component mounting
+      like the rest of that net, and the star ground gains another wire to account for.
 
 connections:
   # --- meter illumination off the tail R net -------------------------
@@ -120,7 +149,10 @@ connections:
     - IND_HB: [1]
   - - IND_HB: [2]
     - W_GND_HB: [1]
-    - GND_CHASSIS: [1]
+    - SP_POD_GND: [1]
+  - - SP_POD_GND: [1]
+    - W_POD_GND: [1]
+    - INSTR_6P: [6]
 
   # --- neutral indicator ----------------------------------------------
   - - SP_BR: [1]

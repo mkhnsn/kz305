@@ -143,6 +143,8 @@ sheets:
     - LAMP_SPD
     - LAMP_TAC
     - INSTR_6P
+    - SP_POD_GND
+    - W_POD_GND
     - W_NSW2
     - W_MTR_SPD
     - W_MTR_TAC
