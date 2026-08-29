@@ -628,6 +628,28 @@ datasheet needs to know which one they are looking at without guessing.
 orientation used in words on every row of that connector — an unkeyed housing
 has no intrinsic up, so the number means nothing without the description.
 
+### ⚠️ Never orient by the moulded marks
+
+**The keyway or latch is the only datum.** Moulded marks are cast wherever the
+tool put them and they are not consistent between connectors, so "labels the
+right way up" is not an orientation rule.
+
+Proven on this harness, 2026-08-29:
+
+| Connector | With the keyway UP, its marks read |
+|---|---|
+| `B04.3` R/R 4P | **upright** |
+| `B06.5` fuse-box 4P | **upside down** |
+
+Two connectors, same harness, same session, opposite answers. `B04.3`'s row was
+originally written as though keyway-up and labels-upright were two independent
+references agreeing; they agreed **by coincidence**. Had `B04.3` been the one
+with inverted marks and the marks been trusted, its cavity map would have come
+out rotated 180° — swapping the brown against the ground, and the two yellows
+against each other.
+
+Record the marks verbatim, as a part-identification lead. Never orient by them.
+
 ### Inventory columns
 
 | Column | |

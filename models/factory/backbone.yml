@@ -138,7 +138,7 @@ connectors:
   FUSE_4P:
     type: Junction
     subtype: 4-pin connector, fuse panel
-    pinlabels: [Bl/W, Bl, R/Bl, Br/W]
+    pinlabels: [Bl, Br/W, Bl/W, R/Bl]
     notes: |-
       WAYS IDENTIFIED 28 Aug 2026. The fuse box joins the harness on a fixed pigtail - the 20A main's
       two wires leave on bullets (B06.3, B06.4) and the four 10A conductors come through this connector.
@@ -147,6 +147,23 @@ connectors:
       box.
       The R/Bl way is drawn terminating at the fuse; its harness-side partner is the standing candidate
       B00.3 at the ignition switch, unrung, so it is deliberately left unconnected rather than assumed.
+      ** WAYS RENUMBERED TO PHYSICAL CAVITIES 29 Aug 2026. ** They were previously listed grouped by
+      holder - Bl/W and Bl, then R/Bl and Br/W - which was a logical convention, not a record of the
+      connector. The bench order is different, and the pin numbers here are now the HARNESS-SIDE
+      cavities, matching measurements/connector-inventory.csv so there is only one numbering in the
+      project:
+        1  Bl     fused headlight supply, holder 2 HEAD out
+        2  Br/W   holder 3 TAIL, and the leg of the Br/W net that reaches SP_BRW
+        3  Bl/W   holder 2 HEAD in
+        4  R/Bl   holder 3 TAIL
+      Cavity numbering is mating face, KEYWAY UP, left to right, top row first. The housing's moulded
+      marks - a '4' and a flower logo - read UPSIDE DOWN in that orientation and are mould marks, not
+      cavity numbers and not an orientation reference. See measurements/README.
+      ** BOTH HALVES READ AND THE MIRROR CHECKS OUT 4-of-4, 29 Aug 2026. ** All four cavities are
+      populated on each side and every mated pair matches on colour. Male spades on the fuse-box
+      pigtail, female terminals in the harness. Unlike the R/R connector there is no unpopulated way
+      here and nothing to overturn - the check was run because of what it found at B04.3, and it
+      passed.
       SCOPE: the rebuild replaces this box and its pigtail with a blade block, so these wires are the
       baseline for laying that block out, not a set to reproduce.
   IGN:
@@ -303,20 +320,20 @@ connections:
     - SP_BR: [1]
 
   # --- fuse box: holder 2 HEAD, holder 3 TAIL, no bus between them ---
-  - - FUSE_4P: [1]
+  - - FUSE_4P: [3]
     - W_FUSE_HEAD_IN: [1]
     - FUSE_HEAD: [1]
   - - FUSE_HEAD: [2]
     - W_BL_UP: [1]
-    - FUSE_4P: [2]
-  - - FUSE_4P: [3]
+    - FUSE_4P: [1]
+  - - FUSE_4P: [4]
     - W_FUSE_TAIL_IN: [1]
     - FUSE_TAIL: [1]
   - - FUSE_TAIL: [2]
     - W_BRW_OUT: [1]
-    - FUSE_4P: [4]
+    - FUSE_4P: [2]
   # --- Br/W: three measured endpoints, junction location unknown -----
-  - - FUSE_4P: [4]
+  - - FUSE_4P: [2]
     - W_BRW_HARNESS: [1]
     - SP_BRW: [1]
   - - SP_BRW: [1]
