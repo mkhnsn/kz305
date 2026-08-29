@@ -114,27 +114,40 @@ connectors:
       DESIGN CONSEQUENCE: headlight current is fused, then run up to the handlebar and switched there,
       so the full lamp load passes through the bar-switch contacts. That is the standard case for a
       headlight relay, and it now rests on the harness rather than on assumption.
-      OPEN: what feeds Bl/W. It runs between this box and the right-bar branch (B01.1 to B06.5) and has
-      never been rung. The 17 Aug trace called it the feed INTO the right-bar branch; this holder's
-      settled orientation makes it a feed OUT of that branch into this fuse. Both readings are in the
-      record and the wire is one ring-out away.
+      ** CLOSED 29 Aug 2026: WHAT FEEDS Bl/W IS THE SWITCHED BROWN BUS. ** The right-bar pigtail was
+      unsleeved a second time and Bl/W sits on SP_RH_BR together with the brown arriving from the bus.
+      So Bl/W carries bus power DOWN from the handlebar into this fuse - a feed OUT of the right-bar
+      branch, which is what this holder's settled orientation predicted and the opposite of the
+      17 Aug trace. Both readings stay in the record; the deciding evidence is the unsleeving.
+      DESIGN: this fuse's supply goes up to the handlebar and back before reaching it. So does the
+      TAIL fuse's. See SP_RH_BR.
   FUSE_TAIL:
     <<: *fuse10
     subtype: 10A glass — fuse box holder 3, printed TAIL
-    pinlabels: [R/Bl, Br/W]
+    pinlabels: [Br/W IN, R/Bl OUT]
     notes: |-
       NEW 28 Aug 2026 - holder 3, printed TAIL, R/Bl on one terminal and Br/W on the other. This closes
       the standing question of what the fourth conductor at the fuse-panel 4P is: it reads R/Bl, not
       "R or R/BK", and the same R/Bl appears at B00.3, the ignition switch 4P.
-      ORIENTATION NOT MEASURED, and the box cannot answer it - with no bus and no fuses in, nothing
-      inside distinguishes an input from an output. Two readings are live and they disagree:
-        (a) R/Bl in from the ignition switch, fused Br/W out. Fits R/Bl appearing at the switch.
-        (b) Br/W in, R/Bl out to the switch's TAIL1 pin. Fits the Br/W net reaching the right-bar 4P,
-            where the mapped bar splice ties Br/W to the switched brown - which would otherwise
-            back-feed this fuse from the brown bus.
-      Reading (b) would also answer where the ignition switch's TAIL1 pin picks up its power, open
-      since 19 Aug. Settle it by ringing B06.5's R/Bl to B00.3's, and both terminals against the
-      switched brown net. Not drawn either way.
+      ** ORIENTATION SETTLED 29 Aug 2026 - READING (b). Br/W IN, R/Bl OUT. ** Drawn that way now.
+      The box itself still cannot answer it - no bus, no fuses in, nothing inside distinguishing an
+      input from an output. It was settled from the two ends instead, and reading (a) is not merely
+      less likely but IMPOSSIBLE:
+        (a) R/Bl in from the ignition switch, fused Br/W out. ELIMINATED. The metered switch table
+            has ON connecting R/BK to R and NOTHING ELSE to either - the tail pair is a bridge
+            between TAIL1 and TAIL2 that touches neither battery nor ignition. Under (a) this fuse
+            would be fed from a pin with no source and the tail lamp could never light.
+        (b) Br/W in, R/Bl out to the switch's TAIL1 pin. STANDS, and every end now has a source.
+      What forced it: the right-bar splice was UNSLEEVED A SECOND TIME on 29 Aug and SP_RH_BR is
+      confirmed as mapped - Bl/W, Br and Br/W join and leave as a single brown. The splice is not
+      misread, so of the disjunction this model posed, the other horn holds.
+      THE CIRCUIT NOW CLOSES END TO END: ignition switch Br, switched brown bus, up to the right bar,
+      SP_RH_BR, back down as Br/W, THIS FUSE, R/Bl, switch TAIL1, bridged to R in ON, tail lamp.
+      PARK's W-to-R corroborates it independently: it feeds the R side directly, so R is the lamp end
+      and R/Bl is the feed end.
+      This also closes, from 19 Aug, WHERE THE IGNITION SWITCH'S TAIL1 PIN PICKS UP ITS POWER: from
+      this fuse's output.
+      CONFIRMING READING, not required but cheap: ring B06.5's R/Bl to B00.3's.
   FUSE_4P:
     type: Junction
     subtype: 4-pin connector, fuse panel
@@ -287,8 +300,25 @@ cables:
   # --- fuse box internals: three independent holders, no bus ---------
   W_FUSE_HEAD_IN: {<<: *w18, colors: [BUWH]}
   W_BL_UP:        {<<: *w18, colors: [BU]}
-  W_FUSE_TAIL_IN: {<<: *w18, colors: [RDBU]}
-  W_BRW_OUT:      {<<: *w18, colors: [BNWH]}
+  W_TAIL_RBL:
+    <<: *w18
+    colors: [RDBU]
+    notes: |-
+      The TAIL fuse's R/Bl leg. RENAMED 29 Aug 2026 from W_FUSE_TAIL_IN: the holder's orientation is
+      settled as Br/W in and R/Bl out, so this is the OUTPUT, and a name encoding the old direction
+      would have been actively misleading. Named by colour rather than by direction on purpose -
+      this one has already flipped once.
+      Runs to the ignition switch's TAIL1 pin, which is where that pin gets its power. Its
+      harness-side partner at B00.3 is unrung, so it is still drawn terminating here.
+  W_TAIL_BRW:
+    <<: *w18
+    colors: [BNWH]
+    notes: |-
+      The TAIL fuse's Br/W leg, and its INPUT. RENAMED 29 Aug 2026 from W_BRW_OUT for the same reason
+      as W_TAIL_RBL - it was named for a direction that turned out to be backwards.
+      Fed from the switched brown bus by way of SP_RH_BR, the splice inside the RIGHT-BAR switch
+      pigtail. That is the stock design and it is worth reading twice: the feed for this fuse goes
+      UP TO THE HANDLEBAR AND BACK DOWN.
   W_BRW_HARNESS:
     <<: *w18
     colors: [BNWH]
@@ -328,12 +358,12 @@ connections:
   - - FUSE_HEAD: [2]
     - W_BL_UP: [1]
     - FUSE_4P: [1]
-  - - FUSE_4P: [4]
-    - W_FUSE_TAIL_IN: [1]
+  - - FUSE_4P: [2]
+    - W_TAIL_BRW: [1]
     - FUSE_TAIL: [1]
   - - FUSE_TAIL: [2]
-    - W_BRW_OUT: [1]
-    - FUSE_4P: [2]
+    - W_TAIL_RBL: [1]
+    - FUSE_4P: [4]
   # --- Br/W: three measured endpoints, junction location unknown -----
   - - FUSE_4P: [2]
     - W_BRW_HARNESS: [1]

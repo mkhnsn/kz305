@@ -31,6 +31,24 @@ connectors:
       would join the switched bus to the TAIL fuse's output when the cluster is mated. Either this
       splice is misread or holder 3 is oriented the other way. Not redrawn on inference - unsleeve it
       again with the net map in hand.
+      ** DONE, 29 Aug 2026. THE SPLICE IS CONFIRMED AS MAPPED. ** The subharness was unsleeved a
+      second time with the net map in hand: Bl/W, Br and Br/W join and leave as a single brown to the
+      switch. Four legs, exactly as drawn. SP_RH_YR is confirmed at the same time (one Y/R splitting
+      into two at the switchgear) and BK is continuous from the 4P to the switches with no splice.
+      ** SO THE OTHER HORN OF THE DISJUNCTION HOLDS: holder 3 is oriented the other way. ** Reading
+      (b) - Br/W in, R/Bl out - and it is now drawn that way. Reading (a) is not merely less likely
+      but impossible: the metered switch table connects R/BK to R in ON and nothing else to either,
+      so under (a) the TAIL fuse would be fed from a pin with no source. See FUSE_TAIL.
+      ** WHAT THIS NODE ACTUALLY IS: the distribution point for switched-ignition power. ** Brown
+      arrives from the bus on way 1 of the 4P and leaves three ways - to the kill switch as Br, to
+      the TAIL fuse as Br/W, and to the HEAD fuse as Bl/W. That last leg also closes the standing
+      question of WHAT FEEDS Bl/W, and fixes its direction as a feed OUT of this branch into the
+      HEAD fuse, matching that fuse's settled orientation.
+      ** DESIGN FINDING, and it is a real one: BOTH 10A FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. **
+      The fuse box's two 10A circuits are not fed from the fuse box end at all. They are fed from a
+      splice inside the right-hand switch pigtail, which is itself fed from the brown bus. That is
+      why Br/W and Bl/W both run between the fuse box and the right-bar branch - a pairing this model
+      circled for weeks without an explanation. The rebuild has no reason to reproduce the detour.
   RH_4P:
     type: Junction
     subtype: 4-pin connector, right bar
@@ -59,7 +77,14 @@ connectors:
     type: Bullet connector
     subtype: Bl/W, right bar
     pinlabels: [Bl/W]
-    notes: Mates Bl/W to Bl/W across the bullet, and the conductor runs to the fuse box - the 17 Aug trace and the 28 Aug net map agree on that much. WHICH WAY POWER FLOWS IS OPEN. Traced 17 Aug as the FEED into this branch; the HEAD fuse's orientation, settled 28 Aug on the dimmer, makes it the branch's feed INTO that fuse instead. Ring it before building anything that assumes a direction.
+    notes: |-
+      Mates Bl/W to Bl/W across the bullet, and the conductor runs to the fuse box - the 17 Aug trace
+      and the 28 Aug net map agree on that much.
+      ** DIRECTION SETTLED 29 Aug 2026: this is a feed OUT of the branch, into the HEAD fuse. ** The
+      second unsleeving puts Bl/W on SP_RH_BR together with the switched brown, so it carries bus
+      power down to the fuse rather than bringing power up. That matches the HEAD fuse's own settled
+      orientation (Bl/W in, Bl out) and closes the 17 Aug reading, which had it the other way round.
+      The harness half is B01.1, a male bullet; the subharness carries the female flying lead.
   SP_YR:
     style: simple
     type: Splice
@@ -75,9 +100,10 @@ cables:
       the way the deleted FUSE_A used. The conductor is unchanged and the topology is unchanged: Bl/W
       between the fuse box and this bullet, which is exactly the harness pair the bench found and has
       not yet rung.
-      DIRECTION IS THE OPEN QUESTION. The 17 Aug trace called this the FEED into the branch. The HEAD
-      fuse's settled orientation (Bl/W in, Bl out) makes it a feed OUT of the branch into that fuse.
-      Both readings are in the record; ring B01.1 to B06.5, and both against the main W/R net.
+      ** DIRECTION SETTLED 29 Aug 2026: a feed OUT of the branch into the HEAD fuse. ** Bl/W sits on
+      SP_RH_BR with the switched brown, so this conductor carries bus power DOWN to the fuse box. The
+      17 Aug reading, which called it the feed into the branch, is closed against. Both readings stay
+      in the record; the deciding evidence is the second unsleeving, not a ring-out.
   # --- kill switch output: coils AND starter button -----------------
   W_YR_OUT:
     <<: *w16

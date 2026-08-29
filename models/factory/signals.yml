@@ -147,6 +147,23 @@ connections:
 #     charging output, undrawn. Now W_RR_OUT plus W_MAIN_OUT.
 #   - THE R/R PART. Shindengen SH221-12, stock. Its 4P cavity map is
 #     recorded in measurements/connector-inventory.csv.
+#
+# CLOSED 29 Aug 2026, by unsleeving the right-bar pigtail a second time:
+#   - SP_RH_BR IS AS MAPPED. Bl/W, Br and Br/W join and leave as one
+#     brown. Four legs, exactly as drawn. SP_RH_YR confirmed with it,
+#     and BK is continuous to the switches with no splice.
+#   - HOLDER 3's ORIENTATION. Reading (b): Br/W in, R/Bl out. Forced,
+#     not preferred - with the splice confirmed, reading (a) would feed
+#     the TAIL fuse from a switch pin that ON connects to nothing but
+#     its own pair, and the tail lamp could never light.
+#   - WHERE THE IGNITION SWITCH'S TAIL1 PIN GETS ITS POWER. From that
+#     fuse's output. Open since 19 Aug.
+#   - WHAT FEEDS Bl/W, and which way it runs. The switched brown bus,
+#     via SP_RH_BR, running DOWN from the handlebar into the HEAD fuse.
+#   - Both 10A fuse feeds therefore leave the bus, go UP TO THE
+#     HANDLEBAR, and come back down. That is the stock design and it is
+#     why Br/W and Bl/W both run between the fuse box and the right-bar
+#     branch - a pairing this model circled for weeks.
 #   - WHICH YELLOW IS WHICH. Cavity 3 is branch B05.1.1, cavity 4 is
 #     B05.1.2. The two AC legs are interchangeable into a single-phase
 #     bridge, so this is completeness, not correctness - but it is
@@ -173,11 +190,6 @@ connections:
 #     net never reaches the headlight junction, so the white drawn from
 #     MF to the ignition switch is either the wrong colour or the wrong
 #     route. See the MF notes.
-#   - HOLDER 3's ORIENTATION - which terminal is the input. Settles
-#     where the ignition switch's TAIL1 pin gets its power, and whether
-#     the right-bar splice back-feeds the TAIL fuse. See FUSE_TAIL.
-#   - WHAT FEEDS Bl/W, and which way it runs between the fuse box and
-#     the right-bar branch. See FUSE_HEAD and RH_BLW.
 #   - BROWN AT THE LEFT-BAR 6P. The switched bus reaches it; the
 #     modelled way list has no room for it. (see LH)
 #   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and

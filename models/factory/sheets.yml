@@ -35,8 +35,8 @@ sheets:
     - W_BR_MAIN
     - W_FUSE_HEAD_IN
     - W_BL_UP
-    - W_FUSE_TAIL_IN
-    - W_BRW_OUT
+    - W_TAIL_RBL
+    - W_TAIL_BRW
     - W_BRW_HARNESS
     - W_BRW_RH
     - W_BRW_HL

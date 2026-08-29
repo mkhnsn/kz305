@@ -19,7 +19,6 @@ why the measurement log keys on physical branch IDs instead.
 | `W_BRK_OUT_R` | RBRK | SP_BRAKE | BU | 18 AWG |
 | `W_BRW_HARNESS` | FUSE_4P | SP_BRW | BNWH | 18 AWG |
 | `W_BRW_HL` | SP_BRW | BRW_HL | BNWH | 18 AWG |
-| `W_BRW_OUT` | FUSE_TAIL | FUSE_4P | BNWH | 18 AWG |
 | `W_BRW_RH` | SP_BRW | RH_4P | BNWH | 18 AWG |
 | `W_BR_BUS` | RH_4P | SP_BR | BN | 16 AWG |
 | `W_BR_MAIN` | IGN | SP_BR | BN | 16 AWG |
@@ -31,7 +30,6 @@ why the measurement log keys on physical branch IDs instead.
 | `W_FLASH_IN` | SP_BR | FLASHER | BN | 18 AWG |
 | `W_FLASH_OUT` | FLASHER | LH | OG | 18 AWG |
 | `W_FUSE_HEAD_IN` | FUSE_4P | FUSE_HEAD | BUWH | 18 AWG |
-| `W_FUSE_TAIL_IN` | FUSE_4P | FUSE_TAIL | RDBU | 18 AWG |
 | `W_GND_HB` | IND_HB | GND_CHASSIS | BKYE | 18 AWG |
 | `W_GND_HEAD` | HEAD | GND_CHASSIS | BKYE | 18 AWG |
 | `W_GND_IND_L` | IND_L | GND_CHASSIS | BKYE | 18 AWG |
@@ -86,6 +84,8 @@ why the measurement log keys on physical branch IDs instead.
 | `W_SOL_SM` | SOL | SM | BK | 6 AWG |
 | `W_START` | RH_4P | SOL | BK | 18 AWG |
 | `W_TAIL` | IGN | SP_R | RD | 18 AWG |
+| `W_TAIL_BRW` | FUSE_4P | FUSE_TAIL | BNWH | 18 AWG |
+| `W_TAIL_RBL` | FUSE_TAIL | FUSE_4P | RDBU | 18 AWG |
 | `W_TAIL_RUN` | SP_R | TAIL | RD | 18 AWG |
 | `W_YR_OUT` | RH_4P | SP_YR | YERD | 16 AWG |
 

@@ -46,6 +46,19 @@
 #      before anything was cut. Lengths still are not in this file -
 #      transferring them is its own pass, and the BOM stays
 #      meaningless until it happens. Render with -f hps.
+#   3a. NOT A BLOCKER, A DESIGN INPUT, 29 Aug 2026 - THE STOCK 10A
+#      FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. Neither 10A circuit
+#      is fed at the fuse box. Both are fed from SP_RH_BR, a splice
+#      inside the RIGHT-HAND SWITCH PIGTAIL, which is itself fed from
+#      the switched brown bus: Br/W comes back down to the TAIL fuse,
+#      Bl/W to the HEAD fuse. That is why both wires run between the
+#      fuse box and the right-bar branch, which these models circled
+#      for weeks without an explanation.
+#      The rebuild has no reason to reproduce the detour - the PDM
+#      feeds its own fuses - but it DOES have to keep the right-bar
+#      connector's way count honest, because three of those ways only
+#      exist to serve the detour. Revisit the RH 4P way list when the
+#      PDM circuit list is final.
 #   3. Fuse block part not selected - depends on final circuit count,
 #      which now also depends on 5.
 #   4. GAUGE IS UNMEASURED, harness-wide. Not one wire has had its

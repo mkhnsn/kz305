@@ -183,3 +183,29 @@ def test_index_links_every_rendered_drawing(tmp_path):
     assert rendered, "nothing rendered to index"
     missing = [n for n in rendered if n not in index]
     assert not missing, f"rendered but not linked from index.html: {missing}"
+
+
+def test_no_angle_brackets_in_model_text(tmp_path):
+    """A '>' in a note silently breaks the graphviz HTML label.
+
+    WireViz renders notes into HTML-like labels, so a bare '>' - most easily
+    written as an arrow, 'A -> B' - is parsed as a tag delimiter. The label is
+    truncated mid-cell and graphviz fails with a syntax error pointing at
+    whatever word happens to sit near the break, which says nothing about the
+    real cause. This cost a debugging round on 29 Aug 2026.
+
+    The quoted '-->' used as a connection-set marker is legitimate and skipped.
+    """
+    offenders = []
+    for path in [COMMON, *FACTORY, ROOT / "models" / "kz305-rebuild.yml"]:
+        for lineno, line in enumerate(path.read_text().splitlines(), 1):
+            code = line.split("#", 1)[0]
+            if "'-->'" in code or '"-->"' in code:
+                continue
+            if ">" in code:
+                offenders.append(f"{path.relative_to(ROOT)}:{lineno}: {line.strip()}")
+    assert not offenders, (
+        "'>' in model text breaks the graphviz HTML label and fails the render "
+        "with a misleading syntax error. Write arrows as words, or use a comma:\n"
+        + "\n".join(offenders)
+    )
