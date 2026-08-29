@@ -42,11 +42,14 @@ number series** — they name different kinds of thing:
 - **`B01`, `B02`, …** on each **branch** — the run of wire itself, tagged near
   where it leaves the trunk. A branch is what has a length, so `B##` is what
   carries `breakout_mm` and `length_mm`.
-- **`C01`, `C02`, …** on each **connector half** and each free end. Tag both
-  halves of a mated connector separately — a mated pair is two tags. `C##` is
-  what the `from`/`to` columns name and what the connector inventory keys on.
+**Connectors need no tag of their own.** A connector is named by the branch it
+terminates — `B04.3` *is* the R/R connector — so the branch tags already
+identify every connector on the harness. Where one branch ends in more than one
+separable terminal, suffix with a letter (`B01.3a`, `B01.3b`); a multi-way
+housing is one connector however many wires it carries.
 
-A typical branch reads: `B07` runs from `C01` to `C14`.
+The far half of a mated pair needs no tag either: it belongs to a component or a
+child harness, not to this loom, and `mates_to` names it in words.
 
 The string on the tape and the ID in `measurements/` are the same string — that
 is what makes a measurement traceable to a physical thing. Number each series in
