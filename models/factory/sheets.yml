@@ -94,7 +94,6 @@ sheets:
     - W_GND_HEAD
     - W_HORN_FEED
     - W_HORN_SW
-    - W_HORN_GND
   signals:
     - FLASHER
     - SIG_FL

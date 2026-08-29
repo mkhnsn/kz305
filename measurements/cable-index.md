@@ -44,7 +44,6 @@ why the measurement log keys on physical branch IDs instead.
 | `W_HI` | LH | SP_HI | RDBK | 18 AWG |
 | `W_HI_HEAD` | SP_HI | HEAD | RDBK | 18 AWG |
 | `W_HORN_FEED` | SP_BR | HORN | BN | 18 AWG |
-| `W_HORN_GND` | LH | GND_CHASSIS | BKWH | 18 AWG |
 | `W_HORN_SW` | HORN | LH | BK | 18 AWG |
 | `W_IGN_FEED` | MF | IGN | WH | 14 AWG |
 | `W_IND_HB` | SP_HI | INSTR_6P | RDBK | 18 AWG |
@@ -89,4 +88,4 @@ why the measurement log keys on physical branch IDs instead.
 | `W_TAIL_RUN` | SP_R | TAIL | RD | 18 AWG |
 | `W_YR_OUT` | RH_4P | SP_YR | YERD | 16 AWG |
 
-80 cables.
+79 cables.

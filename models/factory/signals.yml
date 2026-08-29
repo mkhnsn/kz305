@@ -203,10 +203,18 @@ connections:
 #     serves A1/A2/B1/C1/D1 and these ways are live on other variants.
 #     Testable - it predicts more dead ways as the remaining connectors
 #     are read, and it is why BOTH HALVES of every connector get read.
-#   - THE LEFT CLUSTER HAS SEVEN LEADS, NOT EIGHT. Five through the 6P,
-#     the blue bullet, the black spade. LH's pin 8 horn ground does not
-#     exist as a wire; the button grounds through the cluster body.
-#     Still drawn - confirm at the cluster before removing it.
+#
+# CLOSED 29 Aug 2026 by unsleeving the left-bar pigtail:
+#   - THE HORN GROUND WIRE DOES NOT EXIST. The cluster has SEVEN leads,
+#     not eight, and W_HORN_GND has been deleted. The button grounds
+#     through the cluster body; LH pin 8 is now CASE GND drawn with the
+#     mounting-ground marker. The pigtail has NO SPLICES, so its
+#     conductor count IS the lead count and nothing can be hiding -
+#     which is what made this safe to redraw rather than merely likely.
+#   - The unreadable hatched swatch in the printed table is moot: there
+#     was no conductor for it to describe.
+#   - NEGATIVE RESULT, kept deliberately: no splices in the left-bar
+#     branch, against two in the right. The bars are not symmetric.
 #   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and
 #     one mid-harness, both on the switched bus.
 #   - WHICH GROUND NET each modelled ground lead belongs to. Only one

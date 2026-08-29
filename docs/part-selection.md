@@ -187,8 +187,20 @@ mate that pigtail.
   blade or 24.5 mm depth; they are a different part.
 - Housing marks: a `4` and a small flower logo. A part-identification lead only.
 
-The same question applies to the left-bar 6P (`B02.3`) and the instrument 6P
-(`B00.1`), which have not been examined as parts yet.
+**The left-bar 6P (`B02.3`) is the same series in a 6-way size**, confirmed
+29 Aug 2026, and it is reproduced too. So the rebuild needs, from one family:
+
+| | Way count | Harness-side terminals |
+|---|---|---|
+| `B01.2` right bar | 4 | male spades |
+| `B02.3` left bar | **5 of 6 used** — do not buy a 6-way for it | male spades |
+| `B06.5` fuse box | 4 | female — **not** reproduced, but it is the measurable sample |
+
+That is three members of one series across the harness, in both genders, which
+makes identifying it worth real effort rather than a nicety. **No dimension has
+been measured on any of them.**
+
+The instrument 6P (`B00.1`) has not been examined as a part yet.
 
 **Still to order: the two mating pigtails** — 3-pin AC + 2-pin DC, Shindengen
 spec, covered under "Connectors" below. Eastern Beaver preferred for correct
