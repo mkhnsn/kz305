@@ -145,6 +145,15 @@ inference that a single-phase stator cannot drive one.
 
 ### SUPERSEDED, 19 Aug 2026 — SH775 ordered
 
+**IN HAND, 29 Aug 2026 — the Polaris ORV takeoff SH775 has arrived and is
+ready to fit.** The regulator decision is closed; what remains is the bench test
+before build and the connector question immediately below.
+
+> **Open, and cheap to close:** does this takeoff include its mating pigtails?
+> Salvage units are often cut with a tail of harness still attached. If it does,
+> "still to order: the two mating pigtails" below is already satisfied and the
+> Eastern Beaver order shrinks to crimps and DC wire. Check before ordering.
+
 **A used takeoff SH775 was found on eBay for $45 and ordered.** That is the
 "used / salvage from a wrecked Polaris" row in the source table below, at the
 bottom of its range — below the Podtronics price. The decision block that

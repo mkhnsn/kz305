@@ -25,10 +25,12 @@ sheets:
     - SOL
     - SP_BR
     - SP_BRW
+    - SP_WR
     - BRW_HL
     - W_BAT_SOL
     - W_BAT_GND
     - W_MAIN
+    - W_MAIN_OUT
     - W_IGN_FEED
     - W_BR_MAIN
     - W_FUSE_HEAD_IN

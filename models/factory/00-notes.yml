@@ -37,8 +37,29 @@
 #   - THE R/R OUTPUT is brown and lands on the switched brown bus, not
 #     white to the solenoid - so charging current runs through the
 #     ignition switch.
+#     ** WITHDRAWN 29 Aug 2026. THIS WAS WRONG AND IS THE ONE ITEM ON
+#     THIS LIST THAT DID NOT SURVIVE. ** It rested on the R/R 4P having
+#     no spare pin. At the bench the R/R half of that connector is
+#     populated on THREE cavities only - the brown cavity is EMPTY -
+#     and the SH221-12's fourth lead leaves as a W/R male bullet to
+#     B04.6, the only female W/R terminal in the harness. The R/R
+#     output is W/R onto the main power net, which is what this
+#     drawing said BEFORE the 28 Aug revision. The original reading
+#     off the scan was right. Charging does NOT pass the ignition
+#     switch. See RR, W_RR_OUT and SP_WR.
+#     The brown at the R/R connector IS still on the switched bus -
+#     that meter reading stands. What fell was the inference that the
+#     R/R drives it.
 #   - THE BROWN BUS is fed by the ignition switch directly, not
 #     energised through the right-bar branch.
+#
+# METHOD NOTE, worth more than the correction itself: the 28 Aug error
+# was not a bad measurement. Every reading behind it was correct. It
+# was an argument from PIN COUNT - "four ways, four functions, no
+# spare" - which is a statement about a drawing, not an observation of
+# a harness. BOTH HALVES OF A CONNECTOR HAVE TO BE LOOKED AT. An
+# unpopulated cavity is invisible from the harness side and will
+# silently invert a conclusion.
 #
 # Where the bench contradicted the drawing without establishing what
 # replaces it, the drawing is LEFT AS IT WAS with the conflict written

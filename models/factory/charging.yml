@@ -19,7 +19,27 @@ connectors:
   RR:
     <<: *regrec
     pinlabels: [AC1, AC2, DC OUT, GND]
-    notes: Shunt type - it dumps surplus as heat, so LED load reduction makes it run HOTTER. Check 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on. CONNECTOR CONFIRMED 28 Aug 2026 by continuity from the alternator phase pair. The alternator is single phase, so the four ways are fully accounted for - two AC in, DC out, ground - and there is NO SPARE PIN. That is what forces the brown wire on this connector to be the DC output rather than a sense or field lead.
+    notes: |-
+      Shunt type - it dumps surplus as heat, so LED load reduction makes it run HOTTER. Check
+      14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on.
+      PART IDENTIFIED 29 Aug 2026: SHINDENGEN SH221-12, named off the unit itself, and stock.
+      CONNECTOR CONFIRMED 28 Aug 2026 by continuity from the alternator phase pair.
+      ** THE "NO SPARE PIN" ARGUMENT IS WITHDRAWN 29 Aug 2026. ** It ran: single phase, four ways,
+      therefore brown must be the DC output. The premise is false. The R/R half of the 4P is
+      populated on THREE cavities only and the brown cavity is EMPTY, so there IS a spare way.
+      The R/R carries FOUR leads - in physical order off the body, Y, BK, Y, W/R - and only three
+      enter the housing. THE DC OUTPUT LEAVES ON A SEPARATE MALE BULLET, outside this connector.
+      This connector's four ways, by harness cavity number (mating face, keyway up, left to right,
+      top row first - see measurements/README):
+        1  Br     harness wire present, R/R SIDE EMPTY. Dead at this connector.
+        2  BK/Y   ground, Net B.
+        3  Y      alternator phase, branch B05.1.1.
+        4  Y      alternator phase, branch B05.1.2.
+      Pin numbering below is by FUNCTION (component lead), not by cavity - DC OUT is lead 3 here and
+      is not in the housing at all. Cavity order is the table above.
+      OPEN, and not a fault: why a stock harness runs brown into a cavity the stock R/R never
+      populates. Likely a housing shared across model variants, or a sense lead unused on this unit.
+      SCOPE: not reused. An SH775 series regulator replaces it - see docs/part-selection.md.
 
 cables:
   # --- charging -----------------------------------------------------
@@ -29,19 +49,29 @@ cables:
     notes: GAUGE NOT ESTABLISHED. At the bench 28 Aug 2026 both yellows looked like the harness's common size rather than heavier, which would make them 18 AWG - but no wire in this harness has had its gauge measured with a tool, and "the common size" is itself an unverified label. An eyeball comparison against an unverified reference is not a bench finding, so the modelled 14 AWG stands. Recheck during the gauge pass; if the yellows are 18 AWG this is wrong and gets corrected then.
   W_RR_OUT:
     <<: *w14
-    colors: [BN]
+    colors: [WHRD]
     notes: |-
-      CORRECTED 28 Aug 2026 ON BOTH COUNTS - colour and destination. Was drawn R/W running to the
-      starter-relay junction, read off the 600 dpi scan. On the bench the R/R connector's brown wire
-      rings 0.0 ohm to the ignition switch's brown output, and the connector has no spare pin for
-      brown to be anything but the DC output.
-      Bench beats document, and unlike the gauge questions this rests on nothing unmeasured: a
-      continuity reading between two connectors whose identity is established.
-      DESIGN CONSEQUENCE, and it is the kind that only shows up by ringing the harness rather than
-      reading the drawing: charging current returns to the battery THROUGH THE IGNITION SWITCH
-      CONTACTS - R/R, brown bus, switch (ON closes W to Br), battery. Every amp the alternator makes
-      passes through a 44-year-old switch. Something for the rebuild to consider rather than reproduce
-      unexamined; the rebuild already routes DC+ separately.
+      RESTORED 29 Aug 2026 TO WHITE/RED AND THE MAIN POWER NET, which is what this model drew before
+      28 Aug. The 28 Aug "correction" to brown, running to the switched-ignition bus, is WITHDRAWN on
+      both counts. The original reading off the 600 dpi scan was right.
+      WHY IT WAS WRONG: it rested on the R/R 4P having no spare pin, so brown had to be the DC
+      output. At the bench 29 Aug the R/R half of that connector is populated on THREE cavities only
+      - the brown cavity is EMPTY - and the SH221-12's fourth lead leaves the body as a W/R MALE
+      BULLET, outside the housing.
+      WHERE IT LANDS, established by ELIMINATION rather than by continuity: the harness contains
+      exactly TWO W/R terminals, B04.6 (female) and B06.4 (male). A male bullet can only mate a
+      female, so B04.6 is the only candidate that exists. B04.6 and the R/R's own 4P branch B04.3
+      also break out at the same point (B04 + 200 mm), so the R/R's two connections leave the loom
+      together - which closes the loophole that the lead might reach a child harness instead.
+      Continuity could NOT have settled this: two unmated halves prove nothing and two mated halves
+      prove only that they are touching. It rests on the branch tagging being complete. IF AN
+      UNTAGGED W/R FEMALE BULLET IS EVER FOUND, THIS REOPENS.
+      WHAT SURVIVES FROM 28 Aug: the brown at the R/R connector really is continuous 0.0 ohm with the
+      switched-ignition net. That was a meter reading and it stands. What falls is the inference that
+      the R/R drives it.
+      DESIGN CONSEQUENCE WITHDRAWN: charging does NOT return through the ignition switch contacts.
+      That claim drove a rebuild blocker and has been removed there too.
+      GAUGE: 14 AWG is inherited, NOT measured - the harness-wide gauge caveat applies.
   W_RR_GND:
     <<: *w14
     colors: [BKYE]
@@ -54,7 +84,7 @@ connections:
     - RR: [1,2]
   - - RR: [3]
     - W_RR_OUT: [1]
-    - SP_BR: [1]
+    - SP_WR: [1]
   - - RR: [4]
     - W_RR_GND: [1]
     - GND_NETB: [1]

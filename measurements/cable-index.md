@@ -59,6 +59,7 @@ why the measurement log keys on physical branch IDs instead.
 | `W_IND_R2` | INSTR_6P | IND_R | GY | 18 AWG |
 | `W_LO` | LH | HEAD | RDYE | 18 AWG |
 | `W_MAIN` | SOL | MF | WH | 14 AWG |
+| `W_MAIN_OUT` | MF | SP_WR | WHRD | 14 AWG |
 | `W_MTR_SPD` | SP_R | LAMP_SPD | RD | 18 AWG |
 | `W_MTR_TAC` | SP_R | LAMP_TAC | RD | 18 AWG |
 | `W_NSW` | IND_N | NSW | GN | 18 AWG |
@@ -74,7 +75,7 @@ why the measurement log keys on physical branch IDs instead.
 | `W_RH_YR2` | RH | SP_RH_YR | YERD | 18 AWG |
 | `W_RH_YR_OUT` | SP_RH_YR | RH_4P | YERD | 18 AWG |
 | `W_RR_GND` | RR | GND_NETB | BKYE | 14 AWG |
-| `W_RR_OUT` | RR | SP_BR | BN | 14 AWG |
+| `W_RR_OUT` | RR | SP_WR | WHRD | 14 AWG |
 | `W_SIG_FL` | SP_SIG_L | SIG_FL | GN | 18 AWG |
 | `W_SIG_FR` | SP_SIG_R | SIG_FR | GY | 18 AWG |
 | `W_SIG_L` | LH | SP_SIG_L | GN | 18 AWG |
@@ -88,4 +89,4 @@ why the measurement log keys on physical branch IDs instead.
 | `W_TAIL_RUN` | SP_R | TAIL | RD | 18 AWG |
 | `W_YR_OUT` | RH_4P | SP_YR | YERD | 16 AWG |
 
-79 cables.
+80 cables.

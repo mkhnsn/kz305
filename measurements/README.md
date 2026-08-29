@@ -138,6 +138,11 @@ the model gives `W_RR_OUT` as **white**, and the confirmed R/R connector carries
 unmeasured quantity — it is a colour read off the wire in a connector whose
 identity is now established.
 
+**⚠️ Superseded 2026-08-29.** This conflict is not real. The R/R does not drive
+the brown wire — its cavity is unpopulated on the R/R half, and the DC output
+leaves on a `W/R` bullet outside the connector. See the overturned-conclusion
+note under *The charging output feeds the switched-ignition net*.
+
 ## Hypothesis: the ground net changes colour before the ring terminal
 
 The single chassis-ground ring terminal (`B04.1`) is **yellow base** (`Y/BK`),
@@ -359,7 +364,81 @@ the two bar-switch connectors and `B00.5`.
 and a condition matter rather than a design one, so not pursued — recorded only
 so the outlier is not mistaken for a transcription slip.
 
-#### The charging output feeds the switched-ignition net
+#### ~~The charging output feeds the switched-ignition net~~ — OVERTURNED 2026-08-29
+
+##### OVERTURNED 2026-08-29 — read the section below with this first
+
+The argument in this section is **wrong**, and it is worth understanding how,
+because the reasoning looked airtight.
+
+It ran: the alternator is single phase, so the R/R connector's four wires are
+two AC in, DC out and ground; there is **no spare pin**; therefore brown is the
+DC output. Every step follows — except the premise.
+
+At the bench 2026-08-29, with the mirror-image orientation explicitly accounted
+for, **the R/R half of the 4P has no wire in the brown cavity.** It is populated
+on three cavities only: `Y`, `BK`, `Y`. The harness's brown lands on an empty
+mate. There *is* a spare pin, so the argument never had a fourth wire to force
+brown into.
+
+The component is a **Shindengen SH221-12**, identified at the bench, and it is
+**stock**. It carries four leads — in physical order off the body, `Y` `BK` `Y`
+`W/R` — and only three of them enter the 4P. The `W/R` leaves to a **male
+bullet** outside the connector.
+
+The "no spare" argument does hold, but on **the component's leads**, not on the
+connector's cavities: two AC in, one ground, one lead remaining on a
+single-phase unit. **`W/R` is the DC output.**
+
+That lands it on the known **main power path** — `W/R` is `B04.6` ↔ `B06.4`,
+0.1 Ω, feeding the starter relay and the fuse box — which is an ordinary
+charging circuit and makes the models' `W_RR_OUT` (white, `RR`→`SOL`) broadly
+**correct**, not wrong on both counts as claimed below.
+
+**What survives unchanged:** the brown at `B04.3` really is continuous 0.0 Ω
+with the switched-ignition net. That was a meter reading and it stands. What
+falls is the inference that the R/R *drives* it.
+
+**What is still open:**
+
+- ~~**Ring the R/R's `W/R` bullet to `B04.6`/`B06.4`.**~~ **CLOSED 2026-08-29
+  by elimination, and continuity could never have closed it anyway** — two
+  unmated halves prove nothing, two mated halves prove only that they touch.
+
+  The harness holds **exactly two `W/R` terminals**: `B04.6` (female) and
+  `B06.4` (male). The R/R's DC lead is a **male** bullet, so it can mate only a
+  female, and `B04.6` is the only one in the harness. `B04.6` and `B04.3` also
+  share a breakout point (`B04` + 200 mm), so the R/R's two connections leave
+  the loom together — which closes the loophole that the lead might reach a
+  child harness instead.
+
+  So the circuit is: **R/R → `B04.6` → the `W/R` net → `B06.4`'s double-female
+  node → starter relay + fuse box.**
+
+  **This restores the models.** `W_RR_OUT` is drawn white, `RR`→`SOL`, and
+  `B06.4`'s node feeds the starter relay. The models were right; the 28 August
+  reading was inverted. The bench-vs-model conflict on `W_RR_OUT` is not a
+  conflict and should not be carried into the rebuild as one.
+
+  This rests on the candidate list being complete, which is a property of the
+  branch tagging. **If an untagged `W/R` female bullet ever turns up, this
+  reopens.**
+- **Pull the SH221-12 pinout** and confirm on paper that three pins are
+  populated and the fourth lead is DC out — closing it from the component side
+  too.
+- **Why does a stock harness run brown into a cavity the stock R/R never
+  populates?** Likely a housing shared across model variants, or a sense lead
+  unused here. Unresolved, and not a fault.
+
+**The lesson for the rest of this pass:** "the pin count accounts for every
+function" is an argument about a *drawing*, not an observation of a *harness*.
+Both halves of a connector have to be looked at. An unpopulated cavity is
+invisible from the harness side, and it will silently invert a conclusion.
+
+**Design consequence — withdrawn.** The claim below that every charging amp
+passes through the ignition switch contacts does not hold, and the rebuild
+should not be designed around it.
+
 
 `B04.3` is the confirmed R/R connector and its brown wire rings 0.0 Ω to the
 ignition switch's brown output.
@@ -499,7 +578,79 @@ component or a child harness, and `mates_to` names it in words ("fuse box
 pigtail", "headlight pigtail"). Tagging both halves would only matter if both
 halves were being rebuilt, and they are not.
 
-### `B00.x` — the headlight junction cluster### `B00.x` — the headlight junction cluster
+## Cavity numbering — stated 2026-08-29, before the first inventory row
+
+`connector-inventory.csv` carries one row per cavity, and a cavity number is
+worthless without a rule for which cavity is number 1. The rule, in order:
+
+1. **Use the housing's own molded numbers** wherever it has them. A part that
+   is later identified has to agree with its datasheet, and renumbering a
+   connector after the fact means re-reading every wire in it.
+2. **Where the housing carries no numbers**, view it from the **mating face**
+   — the end that plugs in, the same face `length_mm` is measured to — with the
+   **latch or keyway UP**, and number **left to right, top row first**.
+
+```
+Viewed from the mating face, latch up:
+
+  [1][2][3]
+  [4][5][6]
+     ^latch
+```
+
+### A moulded mark is not a moulded cavity number
+
+Rule 1 means **numbers that label the cavities** — one per cavity, reading in
+sequence, sitting next to the holes. Most housings also carry moulding marks
+that are nothing of the kind:
+
+| Mark | What it is |
+|---|---|
+| A lone digit | The **mould-tool cavity** — which cavity of the injection mould made this part. Nothing to do with the wire positions. |
+| A letter in a circle, or a logo | Maker's mark. |
+| A symbol in a diamond or triangle | Resin / material identification. |
+
+`B04.3` carries all three — a diamond-hashtag, a `5`, and a circled `T` — on a
+**four**-way housing. The `5` proves itself: a 4-cavity connector has no cavity
+5. It is a part-identification lead, not a position.
+
+The test: a real cavity numbering has **as many numbers as there are cavities**,
+and they sit **at** the cavities. One number floating on the face is a mould
+mark. When in doubt, treat it as a mould mark, use the latch-up rule, and record
+the marks verbatim in `notes` — they are the best lead on the part number, and
+they cost nothing to keep.
+
+Every row says which rule applied, in `notes`: `cavity rule: molded` or
+`cavity rule: latch-up`. The two can disagree, and a later reader holding the
+datasheet needs to know which one they are looking at without guessing.
+
+**Where the housing has no latch and no keyway**, say so and describe the
+orientation used in words on every row of that connector — an unkeyed housing
+has no intrinsic up, so the number means nothing without the description.
+
+### Inventory columns
+
+| Column | |
+|---|---|
+| `branch_id` | The branch this connector terminates — `B04.3`. The connector's identity; there is no separate connector tag. |
+| `terminal` | Letter suffix only where one branch ends in more than one separable terminal (`B01.3a`, `B01.3b`). Blank otherwise. |
+| `type` | What the connector physically is — `4P rect`, `male bullet`, `spade`, `ring`. |
+| `pin_count` | Cavities in the housing, **populated or not**. An empty cavity is a finding; see the double-female bullets. |
+| `cavity` | Position per the rule above. Blank on a single-terminal connector. |
+| `colour` | The wire in that cavity, **base colour first**. |
+| `gauge` | Visual estimate only — see the gauge warning above. Blank means the common size. |
+| `mates_to` | The far half, **in words**: `fuse box pigtail`, `headlight pigtail`. The far half carries no tag. |
+| `mate_class` | `component`, `subharness`, or `open` where nothing was found mated. |
+| `model_connector` | The models' connector name (`RR`, `RH_4P`), or blank if not modelled. |
+| `recorded_on` | ISO date. |
+| `status` | `provisional`, `confirmed`, `superseded`. Same append-never-overwrite rule as lengths. |
+| `notes` | The cavity rule used, plus anything that changes how the row reads. |
+
+**Depth belongs here, once per connector type** — mating face to the back of the
+body, the constant that turns a `length_mm` into a cut length. Record it in
+`notes` on the first row of each type rather than in every lengths row.
+
+### `B00.x` — the headlight junction cluster
 
 Everything that fans out **forward** of the datum into the headlight junction.
 Around a dozen connectors, all leaving at the datum itself:
@@ -691,6 +842,28 @@ recorded in that step's own table.
 
 Number each series in the order you tag them. Do not renumber later; a gap in
 the sequence costs nothing and a renumber invalidates every photograph.
+
+### The tape tag is the identity — correct the log, not the harness
+
+Where the log and the tape disagree about a branch's ID, **the tape is right by
+definition**. `branch_id` is defined as the tag on the run; a log ID with no
+sticker behind it refers to nothing, and re-labelling the harness to match a
+spreadsheet invalidates every photograph taken so far.
+
+This happened on 2026-08-29. The two alternator yellows were logged as
+`B05.1`/`B05.2` by flattening the bench tagging — a flattening that was recorded
+at the time as deliberate, with an explicit *"confirm against the tape tags"*.
+The tape reads **`B05.1.1`/`B05.1.2`**, and no `B05.2` sticker exists anywhere on
+the harness. The log moved.
+
+**An implied parent needs no tag.** `B05.1.1`/`B05.1.2` imply a `B05.1` that is
+not on the harness and never will be: the two yellows separate at the fork where
+`B05`'s tape ends, so the intermediate level has zero length and nothing to
+measure. Record it as `breakout_ref` and say in `notes` that no such tag exists,
+so a later reader does not go hunting for one.
+
+Deeper-than-necessary tags are worth **nothing to fix and something to change**.
+Leave them.
 
 ## Re-measuring: append, never overwrite
 

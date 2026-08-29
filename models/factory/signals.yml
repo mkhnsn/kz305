@@ -136,6 +136,22 @@ connections:
 #     R/Bl appears at the ignition switch 4P.
 #   - Y/BK versus BK/Y. Both wires exist; they are different nets.
 #
+# CLOSED 29 Aug 2026, by reading the R/R half of its connector:
+#   - THE R/R OUTPUT, colour and route. It is W/R onto the main power
+#     net, NOT brown onto the switched bus. The 28 Aug reading was
+#     inverted by an argument from pin count; the R/R half of the 4P is
+#     populated on three cavities only. This model is back to what it
+#     drew before 28 Aug. See RR, W_RR_OUT, SP_WR.
+#   - THE IGNITION-SWITCH CHARGING PATH. Withdrawn - it never existed.
+#   - WHAT W/R IS. It was absent from the cable index because it was the
+#     charging output, undrawn. Now W_RR_OUT plus W_MAIN_OUT.
+#   - THE R/R PART. Shindengen SH221-12, stock. Its 4P cavity map is
+#     recorded in measurements/connector-inventory.csv.
+#   - WHICH YELLOW IS WHICH. Cavity 3 is branch B05.1.1, cavity 4 is
+#     B05.1.2. The two AC legs are interchangeable into a single-phase
+#     bridge, so this is completeness, not correctness - but it is
+#     unrecoverable once the loom is cut.
+#
 # STILL OPEN, and the ring-out added to the list as well as subtracting:
 #
 #   - horn button ground-side colour: prints as a hatched swatch in the
@@ -170,4 +186,26 @@ connections:
 #     (the R/R ground) is measured. See GND_CHASSIS and GND_NETB.
 #   - A SPLICE UNDER THE TAPE on the Br/W net - three endpoints, and
 #     the bullet at one of them holds a single wire. Step 3.
+#
+#   NEW 29 Aug 2026:
+#   - W/Bl IS THE LAST WHOLLY UNMODELLED NET. White base, blue tracer,
+#     two measured points 0.3 ohm apart - B00.8 at the headlight
+#     junction and B09 at 1060 mm on the trunk. It appears NOWHERE in
+#     these models and nowhere in the cable index. With W/R now
+#     resolved as the charging output, this is the only net on the
+#     bench map with no drawn counterpart at all. Find both ends.
+#     Note it is NOT Bl/W - that is a different wire, already drawn as
+#     W_FUSE_HEAD_IN. Base colour first; the two have been confused
+#     before.
+#   - THE BROWN WAY AT THE R/R CONNECTOR. The harness runs brown into
+#     a cavity the stock R/R never populates. Not a fault, and not a
+#     loose end in the harness - the brown is soundly on the switched
+#     bus at 0.0 ohm. But the R/R end goes nowhere, so either the
+#     housing is shared across model variants or the pin served a
+#     function this unit does not use. Worth knowing before the
+#     rebuild decides whether to carry the way forward at all.
+#   - THE STARTER-RELAY LEG OF THE W/R NET. Seen mated at the bench on
+#     28 Aug, running off the double-female bullet node, but WHICH
+#     RELAY TERMINAL was not identified, so SP_WR draws two legs and
+#     not three. One look at the relay closes it.
 # =====================================================================

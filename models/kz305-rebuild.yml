@@ -30,8 +30,17 @@
 #        - A GAUGE STEP AT A BULLET ON THE 20A MAIN. That is where
 #          the old harness melted, and the mechanism is topology, not
 #          age - see W_MAIN_OUT.
-#        - CHARGING RUNS THROUGH THE IGNITION SWITCH. Every alternator
-#          amp passes the switch contacts in stock form. See RR.
+#        - CHARGING RUNS THROUGH THE IGNITION SWITCH.
+#          ** WITHDRAWN 29 Aug 2026. THIS IS NOT TRUE. ** It rested
+#          on the R/R 4P having no spare pin, forcing brown to be the
+#          DC output. At the bench the R/R half is populated on only
+#          THREE cavities - the brown cavity is EMPTY - and the
+#          SH221-12's fourth lead leaves as a W/R male bullet to
+#          B04.6, joining the main power path to the starter relay
+#          and fuse box. So stock charging does NOT pass the ignition
+#          switch, and the factory model was right before it was
+#          "corrected". Do not carry this into the rebuild as a
+#          design driver. See W_RR_OUT and measurements/README.
 #   2. No lengths YET, but the reference now exists: Step 1 measured
 #      46 branches off the old harness, datum and trunk map recorded,
 #      before anything was cut. Lengths still are not in this file -
@@ -244,7 +253,7 @@ connectors:
     subtype: Shindengen SH775 (Polaris 4012941), 3-phase 35A SERIES type - see docs/part-selection.md
     pinlabels: [AC1, AC2, AC3, DC+, GND]
     notes: |-
-      ORDERED 19 Aug 2026 - used takeoff SH775, eBay, $45. This supersedes the 18 Aug decision to fit a
+      IN HAND 29 Aug 2026 - the Polaris ORV takeoff has arrived. ORDERED 19 Aug 2026, eBay, $45. This supersedes the 18 Aug decision to fit a
       Podtronics shunt first and measure: the used-unit price hit the point where the SH775 wins outright
       (a SERIES type open-circuits the stator rather than shorting it, so regulator and stator run cooler
       and the LED heat problem is cured at source). Temperature measurement is now validation, not a
@@ -257,8 +266,9 @@ connectors:
       FH009-FH020 family), $16-22 openly sold; Eastern Beaver preferred for correct crimps and DC gauge.
       OPEN CHECK - part-selection.md wants the DC pair heavy gauge and direct to the battery, fused at
       the battery end; the model currently routes DC+ to the PDM main stud. Reconcile before cutting
-      wire - and note that the stock harness took the opposite approach and ran the whole charging
-      current through the ignition switch, confirmed by continuity 28 Aug 2026. See W_RR_OUT. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
+      wire. The claim previously here - that the stock harness ran the whole charging current through
+      the ignition switch - is WITHDRAWN 29 Aug 2026; stock routes R/R DC out on W/R to B04.6 and the
+      starter-relay/fuse-box node, not through the switch. See W_RR_OUT. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
       actually is. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V
       AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the
       ignition on, and never disconnect the battery while running.
