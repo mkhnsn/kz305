@@ -33,12 +33,21 @@ connectors:
       lead, B02.2, a female bullet alongside the connector. There was never a seventh conductor; Bl
       was assigned to the wrong one.
       Layout is 3 rows of 2. Ways, top row first, are R/BK and Br, then Gy and R/Y, then Or and Gn.
-      ** WHAT THE BROWN FEEDS IS STILL OPEN. ** It occupies the position this note guessed was the
-      horn button's ground side. That would mean there is no horn-ground wire and the button grounds
-      through the cluster body - but it is inference from a way count, and an argument from way count
-      is exactly what inverted the R/R conclusion on 28 Aug. Ring it out before drawing it.
-      Pin 8's colour was guessed BK/W off a hatched swatch in the printed table. B02.1 is a plain BK
-      spade ringing 0.1 ohm to the horn, so that guess looks wrong as well.
+      ** WHAT THE BROWN FEEDS - ANSWERED 29 Aug 2026. NOTHING. ** Both halves were read and the
+      mirror is 5 of 6: the cluster half of the brown's cavity is EMPTY. Every other pair matches on
+      colour. The harness carries a live switched-ignition wire to a way the left cluster does not
+      populate, and the question was never what it feeds.
+      This is the SECOND such way on this harness - B04.3's brown at the R/R is the other. Two in
+      four multi-way connectors checked. HYPOTHESIS: this loom serves KZ305-A1/A2/B1/C1/D1 and ways
+      dead on a B1 are live on another variant; a left-cluster brown would suit a headlight on/off
+      switch that some markets had and this bike does not. Not established, but it explains both
+      observations and predicts more dead ways as the remaining connectors are read.
+      ** PIN 8 DOES NOT EXIST. ** Its colour was guessed BK/W off a hatched swatch in the printed
+      table. B02.1 is a PLAIN BK spade - read off the wire, the only source there is - and the
+      cluster's lead count is five through the 6P plus the blue bullet plus that spade, which is
+      SEVEN, not eight. So the horn button grounds through the cluster body and W_HORN_GND is not a
+      wire. Left drawn pending one confirming look at the cluster itself; the way count says it, and
+      an argument from way count is what inverted the R/R conclusion once already.
   HEAD:
     <<: *headlight
     notes: Feeds read off the scan 19 Aug 2026 - R/BK to HI, R/Y to LO, BK/Y ground. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.

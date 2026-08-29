@@ -61,6 +61,20 @@
 # unpopulated cavity is invisible from the harness side and will
 # silently invert a conclusion.
 #
+# THAT RULE HAS NOW PAID TWICE. Reading both halves of every multi-way
+# connector found a second dead way on 29 Aug - the switched brown at
+# the LEFT-BAR 6P also lands on a cavity its cluster does not populate.
+# Two dead ways in the four multi-way connectors checked so far.
+#
+# HYPOTHESIS worth carrying into the remaining connectors: this loom is
+# catalogued for A1/A2/B1/C1/D1, so a way that is dead on a B1 may be
+# live on another variant. It explains both instances, and it predicts
+# more - which is what makes it testable rather than decorative.
+#
+# For the rebuild the consequence is concrete: a stock way count is NOT
+# a circuit count. Ways that serve nothing on this bike should not be
+# reproduced, and they are only visible by reading the far half.
+#
 # Where the bench contradicted the drawing without establishing what
 # replaces it, the drawing is LEFT AS IT WAS with the conflict written
 # into the notes - see MF/W_IGN_FEED and SP_RH_BR. A reference drawing

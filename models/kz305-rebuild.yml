@@ -46,6 +46,16 @@
 #      before anything was cut. Lengths still are not in this file -
 #      transferring them is its own pass, and the BOM stays
 #      meaningless until it happens. Render with -f hps.
+#   3b. NOT A BLOCKER, A DESIGN INPUT, 29 Aug 2026 - TWO STOCK WAYS
+#      SERVE NOTHING. The switched brown runs to a cavity the R/R does
+#      not populate (B04.3) and to a cavity the LEFT CLUSTER does not
+#      populate (B02.3). Both are live wires into empty mates, found by
+#      reading the far half of each connector.
+#      Do not reproduce either. The rebuild's left-bar connector needs
+#      FIVE ways, not six. A STOCK WAY COUNT IS NOT A CIRCUIT COUNT,
+#      and the difference is invisible from the harness side.
+#      Likely cause: the loom is catalogued for A1/A2/B1/C1/D1 and
+#      these ways are live on other variants.
 #   3a. NOT A BLOCKER, A DESIGN INPUT, 29 Aug 2026 - THE STOCK 10A
 #      FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. Neither 10A circuit
 #      is fed at the fuse box. Both are fed from SP_RH_BR, a splice

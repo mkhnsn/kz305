@@ -190,15 +190,23 @@ connections:
 #     net never reaches the headlight junction, so the white drawn from
 #     MF to the ignition switch is either the wrong colour or the wrong
 #     route. See the MF notes.
-#   - BROWN AT THE LEFT-BAR 6P - HALF CLOSED 29 Aug 2026. The way list
-#     DOES have room: the 6P reads R/BK, Br, Gy, R/Y, Or, Gn, and the
-#     blue this model put in it is actually a separate flying lead
-#     (B02.2). So the count closes and there is no seventh conductor.
-#     WHAT THE BROWN FEEDS IS STILL UNKNOWN. It sits where this model
-#     guessed a horn ground, which would mean the button grounds
-#     through the cluster body - but that is an argument from way
-#     count, and one of those already inverted the R/R conclusion
-#     once. Ring it out. (see LH)
+#   - BROWN AT THE LEFT-BAR 6P - CLOSED 29 Aug 2026. It feeds NOTHING.
+#     The cluster half of that cavity is EMPTY; the other five pairs
+#     match on colour. The way list was never over-subscribed either -
+#     the blue this model put in the 6P is a separate flying lead
+#     (B02.2). See LH.
+#
+#   NEW, and it now has two instances rather than one:
+#   - LIVE HARNESS WIRES INTO UNPOPULATED CAVITIES. B04.3's brown at
+#     the R/R and B02.3's brown at the left cluster. Both are on the
+#     switched bus, both dead at their connector. HYPOTHESIS: this loom
+#     serves A1/A2/B1/C1/D1 and these ways are live on other variants.
+#     Testable - it predicts more dead ways as the remaining connectors
+#     are read, and it is why BOTH HALVES of every connector get read.
+#   - THE LEFT CLUSTER HAS SEVEN LEADS, NOT EIGHT. Five through the 6P,
+#     the blue bullet, the black spade. LH's pin 8 horn ground does not
+#     exist as a wire; the button grounds through the cluster body.
+#     Still drawn - confirm at the cluster before removing it.
 #   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and
 #     one mid-harness, both on the switched bus.
 #   - WHICH GROUND NET each modelled ground lead belongs to. Only one
