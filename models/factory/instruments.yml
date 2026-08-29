@@ -28,8 +28,35 @@ connectors:
   INSTR_6P:
     <<: *junction6p
     subtype: 6P connector, instrument pod
-    pinlabels: [Gy, R/BK, Br, G, TBD, TBD]
-    notes: The SECOND 6P on the bike - instrument pod side, distinct from the left-cluster 6P at the headstock. Four ways read off the scan 19 Aug 2026 - Gy (right turn ind), R/BK (high-beam ind), Br (neutral ind feed), G (left turn ind). THREE OF THOSE FOUR CORROBORATED 28 Aug 2026 from the harness side - the cluster sits on the green, grey and switched-brown nets, exactly as drawn. The remaining two ways are still NOT readable; candidates are the meter lamp R and the pod ground. Ring out under #8.
+    pinlabels: [Gn, Gy, Br, LG, R/BK, BK/Y]
+    notes: |-
+      The SECOND 6P on the bike - instrument pod side, distinct from the left-cluster 6P at the
+      headstock. Four ways were read off the scan 19 Aug 2026 and three corroborated from the harness
+      side on 28 Aug - the cluster sits on the green, grey and switched-brown nets, exactly as drawn.
+      ** ALL SIX WAYS NOW READ, AND RENUMBERED TO PHYSICAL CAVITIES, 29 Aug 2026. ** Layout is 3 rows
+      of 2, mating face, keyway up, top row first. Harness side carries FEMALE terminals; the series
+      is the same as the left-bar 6P, which is male - both genders of this family are in the harness.
+        1 Gn    left-turn indicator
+        2 Gy    right-turn indicator
+        3 Br    neutral indicator feed, off the switched bus
+        4 LG    neutral SWITCH lead - see below
+        5 R/BK  high-beam indicator
+        6 BK/Y  pod ground - see below
+      The way list was previously ordered off the printed table, which is not the connector's order,
+      and its two TBD ways were guessed as "the meter lamp R and the pod ground". Half right: the pod
+      ground is there, but the other is LG, and the meter lamps are NOT in this connector at all -
+      they stay outside the 6P span on their own bullets, as this file's header says.
+      ** COLOUR CORRECTION: cavity 5 is R/BK, not R. ** The 28 Aug harness-side record listed a plain
+      "red" among these six. It is RED base with a BLACK tracer, re-read 29 Aug. That single letter
+      is the difference between the high-beam indicator feed and a meter lamp feed, and it is exactly
+      the base-colour hazard the project has now been bitten by three times.
+      ** CAVITY 6 IS NOT DRAWN, DELIBERATELY. ** BK/Y is the pod's common ground bus leaving the pod -
+      this file's header records that the four pod lamps share one. Its harness-side destination is
+      NOT measured. Black base makes it a strong Net B candidate, and GND_CHASSIS's own note says most
+      of its inherited leads probably belong to Net B, but that is a colour argument and this project
+      has been burned by those. Ring B00.1's BK/Y against Net B before drawing it. Until then the pod
+      lamps keep their individually drawn grounds, which are a simplification this file's header
+      already contradicts.
 
 cables:
   # --- meter illumination - tail/city net ----------------------------
@@ -50,7 +77,19 @@ cables:
   W_NSW:
     <<: *w18
     colors: [GN]
-    notes: TBD colour. Stock is light green (LG), which WireViz cannot render distinctly from G. Do not read this as plain green.
+    notes: |-
+      LIGHT GREEN. WireViz cannot render LG distinctly from G, so this is drawn GN - do NOT read it
+      as plain green. CONFIRMED at the bench 29 Aug 2026 rather than assumed: LG is cavity 4 of the
+      instrument 6P, and B01.4 is the LG branch running 900 mm to the neutral switch.
+      This is the HARNESS-SIDE leg, 6P to the switch. ROUTE CORRECTED 29 Aug 2026 - it was drawn
+      running from the pod straight to the switch without crossing the 6P, which the cavity map
+      disproves. The neutral circuit is now complete end to end: switched brown feeds the lamp on
+      cavity 3, and the lamp returns on cavity 4 to the switch, which grounds through the engine case
+      when in neutral.
+  W_NSW2:
+    <<: *w18
+    colors: [GN]
+    notes: The pod-side leg of the light-green neutral-switch lead, pod lamp to the 6P. Same LG-drawn-as-GN caveat as W_NSW.
 
   # --- lamp grounds ---------------------------------------------------
   W_GND_SPD: {<<: *w18, colors: [BKYE]}
@@ -75,8 +114,8 @@ connections:
   # --- high-beam indicator off the HI net -----------------------------
   - - SP_HI: [1]
     - W_IND_HB: [1]
-    - INSTR_6P: [2]
-  - - INSTR_6P: [2]
+    - INSTR_6P: [5]
+  - - INSTR_6P: [5]
     - W_IND_HB2: [1]
     - IND_HB: [1]
   - - IND_HB: [2]
@@ -91,6 +130,9 @@ connections:
     - W_IND_N_FEED2: [1]
     - IND_N: [1]
   - - IND_N: [2]
+    - W_NSW2: [1]
+    - INSTR_6P: [4]
+  - - INSTR_6P: [4]
     - W_NSW: [1]
     - NSW: [1]
   - - NSW: [1]

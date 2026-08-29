@@ -216,6 +216,10 @@ COLOUR_TOKENS = {
     "RD": "RD", "WH": "WH", "YE": "YE", "VT": "VT", "PK": "PK", "TQ": "TQ",
     "BL": "BU", "BR": "BN", "GR": "GY", "OR": "OG", "R": "RD", "W": "WH",
     "Y": "YE", "G": "GN", "O": "OG", "BLW": "BUWH",
+    # Light green is a DIFFERENT wire from green on this bike, but WireViz has
+    # no distinct code for it and renders both GN - so the guard cannot tell
+    # them apart either. Kept as a known limitation rather than a silent one.
+    "LG": "GN",
 }
 
 

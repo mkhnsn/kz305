@@ -93,14 +93,14 @@ connections:
   # --- pod indicators, through the instrument 6P ---------------------
   - - SP_SIG_L: [1]
     - W_IND_L: [1]
-    - INSTR_6P: [4]
-  - - INSTR_6P: [4]
+    - INSTR_6P: [1]
+  - - INSTR_6P: [1]
     - W_IND_L2: [1]
     - IND_L: [1]
   - - SP_SIG_R: [1]
     - W_IND_R: [1]
-    - INSTR_6P: [1]
-  - - INSTR_6P: [1]
+    - INSTR_6P: [2]
+  - - INSTR_6P: [2]
     - W_IND_R2: [1]
     - IND_R: [1]
 
@@ -173,13 +173,35 @@ connections:
 #
 #   - horn button ground-side colour: prints as a hatched swatch in the
 #     switch table, unreadable. Drawn BK/W as a guess. (bench, #8)
-#   - instrument 6P: two of six ways unread. (bench, #8)
 #   - electric accessory leads: TWO pairs drawn (one at the meters, one
 #     at the tail), colours too marginal to model - they read white-ish
 #     with one possibly Bl at the front. Deliberately NOT modelled; an
 #     unreferenced connector is dropped from the drawing, so declaring
 #     them would imply coverage that does not exist. (bench, #8)
 #   - meter lamp feed: reads R; R vs Br marginal at the speedo. (#8)
+#     Narrowed 29 Aug 2026 - it is NOT in the instrument 6P. Those six
+#     ways are all read and none is a meter feed, so the meter lamps
+#     really do sit outside the 6P span on their own bullets.
+#
+# CLOSED 29 Aug 2026 at the instrument 6P:
+#   - ALL SIX WAYS READ. Gn, Gy, Br, LG, R/BK, BK/Y. The "two unread
+#     ways" item is retired; the guesses for them were half right - the
+#     pod ground is one, but the other is LG, not a meter feed.
+#   - THE NEUTRAL CIRCUIT IS COMPLETE. LG is cavity 4 and is the same
+#     net as B01.4. Brown feeds the lamp on cavity 3, the lamp returns
+#     on cavity 4 to the switch, which grounds through the engine case.
+#     The models ran that return pod-to-switch without crossing the 6P;
+#     rerouted.
+#   - CAVITY 5 IS R/BK, NOT R. The 28 Aug record said plain "red". One
+#     tracer is the difference between the high-beam feed and a meter
+#     feed. Third time base-colour-vs-tracer has bitten this project.
+#
+# STILL OPEN, added 29 Aug 2026:
+#   - THE POD GROUND'S DESTINATION. Cavity 6 is BK/Y, the pod's common
+#     ground bus. Black base makes Net B the candidate but that is a
+#     colour argument. Ring it against Net B; not drawn until then, so
+#     the pod lamps keep individually drawn grounds that this file's
+#     own header contradicts.
 #
 # CLOSED 29 Aug 2026 at the ignition switch connector:
 #   - TAIL1 IS R/Bl, NOT R/BK. Both halves of B00.3 read red base with a
