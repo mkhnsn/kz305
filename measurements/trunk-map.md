@@ -74,18 +74,24 @@ Deliberately set aside, not forgotten. Clear before calling Step 1 done.
 | ~~Ground net: two tiers or two nets?~~ | **Closed 2026-08-28 by meter** — two separate nets. `Y/BK` (Net A) rings 0.2 Ω to the chassis ring; every `BK/Y` point (Net B) is open to it. |
 | **Net B earth points — count and locate** | Answered in kind 2026-08-28: Net B earths through the child harnesses, at component mounting points — some engine block, some frame. Not through the main harness. Each must be traced through its own child harness as that harness is worked. **The count of these is the count of new ground wires the star bus needs**, and it is not yet known. |
 | ~~Is Net B one net or several?~~ | **Closed 2026-08-28** — one net. All four black-base points mutually continuous (0.0–0.3 Ω from `B10.5`). |
-| **Still-mated connectors** | `B06.3`, `B06.4`, `B06.5` are still plugged into something. **Photograph and record the mate BEFORE separating** — that connectivity is free Step 4 data and is lost the moment they come apart. |
+| ~~Still-mated connectors~~ | **Closed 2026-08-28** — `B06.3/.4/.5` mates recorded before separating; all three land on the fuse box pigtail, with `B06.4`'s node also feeding the starter relay. |
 | `B06.4` melting — **design input** | Kept even though the harness is being replaced: the mechanism was a gauge step at a bullet on the main power path, so a new build reproduces the fault if it reproduces the topology. Not a condition question. |
 | ~~`B05` ↔ `B04.3` continuity~~ | **Closed 2026-08-28** — both yellows ring through to slots in the `B04.3` 4P and are not continuous with each other. `B05` is the alternator phase pair (`W_ALT`); `B04.3` is the regulator/rectifier connector. |
 | **Br/W resistance** | Item 0b closed on continuity but ohms were not recorded. Re-read `B01.2`↔`B06.5` for value — the procedure's >1 Ohm rule makes every ring-out a fault survey. |
 | **Hidden Br/W junction** | `B01.2`/`B00.11`/`B06.5` ring continuous but `B00.11` is one wire with both slots empty — so a splice joins them under the tape. Find it in Step 3. |
 | **Empty double-female slots** | Six nodes (`B03` `B08` `B00.5` `B00.7` `B00.8` `B00.11`) each present two empty receptacles. What plugged in was lost at teardown. Only the on-bike photos and the components themselves can narrow it. |
-| `B03` second cavity | Whether the second cavity of the double-female bullet is occupied, and by what. Step 2. |
+| ~~`B03` second cavity~~ | **Closed 2026-08-28** — both receptacle slots empty, like all six double-females. Folded into the empty-slots item above. |
 | ~~`B10.5.1` breakout~~ | **Closed 2026-08-28** — leaves the shared crimp at `B10.5`'s end; `breakout_mm` = 60. |
-| **Fuse box scope** | `B06.3/.4/.5` land on a fixed pigtail off the original glass-fuse box, but the plan is a 6-circuit blade block. Decide whether the rebuild terminates to the old pigtail or rebuilds those wires — it changes what needs measuring there. |
+| ~~Fuse box scope~~ | **Decided 2026-08-28** — the blade block replaces the box and its pigtail, so those wires are rebuilt rather than reused. The mapping in `fuse-box.md` is the baseline for laying the block out. |
 | **Gauge pass** | No wire gauge has been measured at all — every `gauge` value is a visual estimate. Needs a gauge tool or calipers on stripped conductor. Not urgent: gauge survives the loom coming apart. |
 | `B04.3` blade width | Caliper across a spade. Needed for part selection before the connector is bagged. |
-| `B04` wire count | Not visible under tape. Children sum to 10 — verify in Step 3. |
+| `B04` `B05` `B06` wire counts | Not visible under tape on any of the three. `B04`'s children sum to 10, `B05`'s to 2, `B06`'s to 9. Verify all three in Step 3; a mismatch is a splice. |
+| **`Bl/W` direction** | `B01.1` ↔ `B06.5` has never been rung. The 17 Aug trace calls it the feed INTO the right-bar branch; fuse holder 2's settled orientation makes it a feed OUT of that branch into the HEAD fuse. One reading settles it — it is the last live connection in the models resting on inference. |
+| **Fuse holder 3 orientation** | Which of `R/Bl` / `Br/W` is the input. The box cannot answer it — no bus, no fuses. Ring `B06.5`'s `R/Bl` to `B00.3`'s, and both terminals against the switched brown net. |
+| **`W_IGN_FEED` route** | The 20 A fuse's output leg is `W/R`, and the `W/R` net never reaches the headlight junction — so the white drawn `MF`→`IGN` is the wrong colour or the wrong route. Ring `B00.3`'s white against holder 1's white terminal. |
+| **Left-bar 6P brown** | The bench 6P carries brown; the modelled `LH` way list accounts for all six ways without it. Ring out what it feeds. |
+| **Unidentified nets** | `W/Bl` (`B00.8`+`B09`), `Y/R` Net 2 (`B06.1`), `R/Bl`'s harness side, `B00.5`, `B04.4`. Circuits with no name yet — each is a fuse assignment the rebuild cannot make. |
+| **Points and condenser leads** | The trunk's yellow pair turned out to be the alternator, so the left points and condenser leads are somewhere else and have not been found. |
 | On-bike photo folder | Record its path in the Photographs section below. |
 
 ## Trunk sketch
