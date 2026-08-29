@@ -145,6 +145,7 @@ sheets:
     - INSTR_6P
     - SP_POD_GND
     - W_POD_GND
+    - W_POD_GND2
     - W_NSW2
     - W_MTR_SPD
     - W_MTR_TAC

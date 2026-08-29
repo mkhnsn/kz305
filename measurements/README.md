@@ -183,8 +183,9 @@ Clean split along base colour, no ambiguity:
 
 - **Net A — `Y/BK`, yellow base.** `B04.1` (the chassis ring), `B00.7`, `B08`.
   Continuous, low resistance.
-- **Net B — `BK/Y`, black base.** `B00.2`, `B10.5`, `B04.3`, `B04.5`. **Open to
-  the chassis ring entirely.**
+- **Net B — `BK/Y`, black base.** `B00.2`, `B10.5`, `B04.3`, `B04.5`, and
+  `B00.1` added 2026-08-29 (the instrument pod's ground, 0.1 Ω to `B10.5`).
+  **Open to the chassis ring entirely.**
 
 This settles the question shelved earlier in favour of the **two-nets** reading.
 The competing "two tiers of one net" reading — branch grounds collected onto a
@@ -251,6 +252,64 @@ Net B earth points, which is not yet known.
   rather than wire. Re-read Net A now that the meter is zeroed; if it drops to
   0.0 Ω the net is clean, and if it holds at 0.2 Ω that is real resistance in a
   three-point net and worth explaining.
+
+## Hypothesis: `BK/Y` is signal/lighting earth, `Y/BK` is engine/power earth
+
+Proposed at the bench 2026-08-29, once the pod ground turned out to be Net B.
+The shape of it is appealing and **it is not established** — one point in the
+data contradicts it outright, and the half of it about power has no supporting
+evidence at all.
+
+**What supports it.** Every *identified* Net B point is a signal or lighting
+return:
+
+| Net B point | What it is |
+|---|---|
+| `B10.5` | tail section |
+| `B00.1` | instrument / indicator pod |
+| `B00.2` | headlight junction |
+| `B04.5` | unidentified |
+
+Gauge points the same way, for what little that is worth: Net A's wires all read
+heavier than the common size (`B04.1`, `B00.7`, `B08` are `>18`), Net B's read
+common. Heavier suits a power earth. **But no gauge on this harness has been
+measured with a tool**, so this is an eyeball comparison against an unverified
+baseline — see the gauge warning above.
+
+### The counterexample
+
+**`B04.3` is the regulator/rectifier's ground, and it is on Net B.** Charging is
+about as squarely "power" as anything on the bike, and its earth is black-base.
+That is a direct contradiction, not a borderline case.
+
+It might be rescuable — an R/R bolted to the frame has a case earth as well as
+its ground lead, so the black wire could be a reference rather than the main
+return path. **That is speculation and should not be written down as anything
+else.** Nobody has measured what current the black lead carries.
+
+### The other half has no evidence at all
+
+Net A has three points: the chassis ring terminal `B04.1`, and `B00.7` and
+`B08` — **both of which are double-female bullets with empty slots**. What
+plugged into them left at teardown and is recorded nowhere. So there is
+currently **no known load on Net A**, and the claim that it is the engine/power
+earth rests on the ring terminal alone.
+
+### What would test it
+
+**Find out what `B00.7` and `B08` fed.** They are the only unidentified Net A
+points, and identifying either would confirm or kill the hypothesis in one step.
+The information is not on the bench — it left with the teardown — but two routes
+back exist, and one is cheap:
+
+- **The on-bike photographs**, which predate the teardown.
+- The components and child harnesses themselves; a male bullet of the right
+  colour on a component narrows it, though it will not separate two same-colour
+  candidates.
+
+Until then, record grounds by **measured net**, never by base colour. Colour has
+been wrong on this harness three times, and the two nets were separated by a
+meter precisely because reading them was not enough.
 
 ## Condition findings are out of scope; design findings are not
 

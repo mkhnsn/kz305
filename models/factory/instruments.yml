@@ -68,12 +68,10 @@ connectors:
       "red" among these six. It is RED base with a BLACK tracer, re-read 29 Aug. That single letter
       is the difference between the high-beam indicator feed and a meter lamp feed, and it is exactly
       the base-colour hazard the project has now been bitten by three times.
-      ** CAVITY 6 IS DRAWN ON THE POD SIDE ONLY. ** BK/Y is the pod's common ground bus; the splice
-      that forms it was seen in the pigtail on 29 Aug and is drawn as SP_POD_GND. Its HARNESS-SIDE
-      destination is still NOT measured, so nothing leaves this connector on cavity 6. Black base
-      makes Net B the strong candidate, and GND_CHASSIS's own note says most of its inherited leads
-      probably belong to Net B, but that is a colour argument and this project has been burned by
-      those. Ring B00.1's BK/Y against Net B before drawing the other half.
+      ** CAVITY 6 IS COMPLETE. ** BK/Y is the pod's common ground bus, formed by the SP_POD_GND
+      splice inside the pigtail, and its harness side is NET B - measured 0.1 ohm to B10.5 on
+      29 Aug 2026, not inferred from black base. The pod's lamps therefore return on the net that
+      earths outside the harness entirely.
 
 cables:
   # --- meter illumination - tail/city net ----------------------------
@@ -112,18 +110,25 @@ cables:
   W_GND_SPD: {<<: *w18, colors: [BKYE]}
   W_GND_TAC: {<<: *w18, colors: [BKYE]}
   W_GND_HB:  {<<: *w18, colors: [BKYE]}
+  W_POD_GND2:
+    <<: *w18
+    colors: [BKYE]
+    notes: The pod-side leg - three lamp grounds onto one conductor at SP_POD_GND, out to cavity 6.
   W_POD_GND:
     <<: *w18
     colors: [BKYE]
     notes: |-
-      The pod's combined ground leaving on cavity 6 of the instrument 6P - three lamp grounds onto
-      one conductor at SP_POD_GND.
-      ** ITS HARNESS-SIDE DESTINATION IS STILL NOT MEASURED, so it is drawn ending at the connector
-      and no further. ** Black base makes Net B the strong candidate, and GND_CHASSIS's own note says
-      most of its inherited leads probably belong to Net B - but that is a colour argument and colour
-      has been wrong on this harness repeatedly. Ring B00.1's BK/Y against Net B (B00.2, B10.5,
-      B04.3, B04.5). If it is Net B, this pod earths outside the harness through component mounting
-      like the rest of that net, and the star ground gains another wire to account for.
+      The harness-side leg of the pod ground.
+      ** MEASURED 29 Aug 2026: 0.1 ohm from B00.1's BK/Y to B10.5. IT IS NET B. ** Settled by meter
+      rather than by colour, which matters - black base made Net B the obvious guess, and guesses off
+      colour have been wrong on this harness three times. Net B now has FIVE known harness points:
+      B00.2, B10.5, B04.3, B04.5 and B00.1.
+      So the pod's three indicator lamps return on the harness-wide black-base net, which reaches
+      earth OUTSIDE the harness through child-harness pigtails at component mounting points - not
+      through the chassis ring terminal, which it is open to.
+      NOTE FOR THE STAR GROUND: this is NOT one of blocker 5's cases. The pod already HAS a ground
+      wire in the harness; what blocker 5 counts is components with none, earthing through their own
+      mounting hardware. The pod's return simply needs re-terminating on the new bus.
 
 connections:
   # --- meter illumination off the tail R net -------------------------
@@ -151,8 +156,11 @@ connections:
     - W_GND_HB: [1]
     - SP_POD_GND: [1]
   - - SP_POD_GND: [1]
-    - W_POD_GND: [1]
+    - W_POD_GND2: [1]
     - INSTR_6P: [6]
+  - - INSTR_6P: [6]
+    - W_POD_GND: [1]
+    - GND_NETB: [1]
 
   # --- neutral indicator ----------------------------------------------
   - - SP_BR: [1]
