@@ -672,6 +672,18 @@ Record the marks verbatim, as a part-identification lead. Never orient by them.
 body, the constant that turns a `length_mm` into a cut length. Record it in
 `notes` on the first row of each type rather than in every lengths row.
 
+⚠️ **Which makes `type` load-bearing.** A depth recorded once per type is only
+safe if the type names *one part*. `4P rect` does not — this harness carries at
+least two unrelated four-way rectangular connectors: `B04.3` (R/R, larger,
+transparent white, marks: diamond + `5` + circled T) and `B06.5` (fuse box,
+**smaller**, marks: `4` + flower logo). Different series, probably different
+makers. They are typed **`4P rect (large)`** and **`4P rect (small)`** so that
+neither can inherit the other's depth or terminal width.
+
+Write the type specifically enough that a constant recorded against it is safe
+to reuse. If two connectors differ in any dimension that matters, they are
+different types even when the way-count matches.
+
 ### `B00.x` — the headlight junction cluster
 
 Everything that fans out **forward** of the datum into the headlight junction.

@@ -161,7 +161,9 @@ connectors:
       cavity numbers and not an orientation reference. See measurements/README.
       ** BOTH HALVES READ AND THE MIRROR CHECKS OUT 4-of-4, 29 Aug 2026. ** All four cavities are
       populated on each side and every mated pair matches on colour. Male spades on the fuse-box
-      pigtail, female terminals in the harness. Unlike the R/R connector there is no unpopulated way
+      pigtail, female terminals in the harness. NOTE THIS IS A DIFFERENT, SMALLER CONNECTOR THAN THE
+      R/R's 4P - same way count, unrelated part, different mould marks. Its depth and terminal width
+      are NOT measured, and the R/R connector's must not be borrowed for it. Unlike the R/R connector there is no unpopulated way
       here and nothing to overturn - the check was run because of what it found at B04.3, and it
       passed.
       SCOPE: the rebuild replaces this box and its pigtail with a blade block, so these wires are the
