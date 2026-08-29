@@ -42,6 +42,13 @@ connectors:
       mating face, keyway up, left to right, top row first - is Br, Br/W, Y/R, BK, exactly as drawn.
       No renumber needed, unlike FUSE_4P whose ways turned out to be grouped by holder rather than
       recorded. This connector's pin numbers were a record all along.
+      ** BOTH HALVES READ AND THE MIRROR CHECKS OUT 4-of-4. ** All four ways populated on each side,
+      every mated pair matching on colour. Terminals are male on the harness side, female on the
+      subharness side.
+      ** THE WIRE COUNT CLOSES ON THE CONNECTOR, NOT JUST ON PAPER. ** 4 ways here plus the Bl/W
+      flying bullet is 5 conductors leaving the switchgear, which is what this note's reconciliation
+      predicted from the switch's 4 leads through SP_RH_YR and SP_RH_BR. The splices' EXISTENCE is
+      therefore corroborated from outside the sleeve; what SP_RH_BR CONNECTS remains open.
       PHYSICAL: 4-way rectangular, the SMALLER of the two four-way series in this harness, with MALE
       spades on the harness side. B06.5 at the fuse box is the same series in the opposite gender.
       NOT the same part as the R/R's 4P - see measurements/README on why type is load-bearing.
