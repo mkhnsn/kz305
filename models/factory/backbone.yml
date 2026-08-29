@@ -148,15 +148,38 @@ connectors:
     <<: *ign_switch
   SOL:
     <<: *starter_relay
+  SP_BRW:
+    style: simple
+    type: Splice
+    subtype: Br/W junction - location unknown
+    notes: |-
+      INFERRED 28 Aug 2026, and it is a deduction rather than a sighting. Br/W rings continuous across
+      THREE endpoints - the fuse-box pigtail, the right-bar 4P and BRW_HL at the headlight junction -
+      with the right-bar 4P disconnected. BRW_HL holds ONE wire with both its receptacle slots empty,
+      so the junction is not there, and one wire cannot reach three endpoints. Something joins these
+      runs UNDER THE TAPE.
+      Drawn as a node because the three-way net is measured; its POSITION on the trunk is not, so do
+      not read the placement here as a location. Step 3 unwraps the loom and should find it - that is
+      the whole reason the procedure unwraps before ringing out rather than after.
+  BRW_HL:
+    type: Junction
+    subtype: double-female bullet, both slots empty
+    pinlabels: [Br/W]
+    notes: |-
+      The Br/W endpoint at the headlight junction (branch B00.11). One harness wire in the crimp and
+      TWO receptacle slots, BOTH EMPTY - whatever plugged in came off at teardown, before this
+      project's tagging existed, and is recorded nowhere. Modelled so the drawing carries the third
+      endpoint the meter found; what it fed is a permanent gap in the as-built record, recoverable
+      only from the on-bike photographs or from the components themselves.
   SP_BR:
     style: simple
     type: Splice
     subtype: brown switched-ignition bus
     notes: |-
       MEASURED 28 Aug 2026 and the direction is now the other way round. Reference on the instrument
-      cluster's brown, all pigtails off: ONE net, NINE harness points, 0.0-0.1 ohm throughout with no
-      splits - unlike Y/R, blue and black, which each turned out to be two nets. It is a trunk with
-      taps, modelled as one node.
+      cluster's brown, all pigtails off: ONE net, NINE harness points, 0.0-0.7 ohm with no splits -
+      unlike Y/R, blue and black, which each turned out to be two nets. It is a trunk with taps,
+      modelled as one node.
       This supersedes the 19 Aug scan reading that the bus is energised through the right-bar branch's
       Br return leg and is NOT fed directly by the ignition switch. The ignition switch's brown output
       is ON THIS NET at 0.0 ohm, so it is the source and the right-bar brown is a tap off it.
@@ -195,7 +218,15 @@ cables:
   W_BRW_HARNESS:
     <<: *w18
     colors: [BNWH]
-    notes: NEW 28 Aug 2026. Br/W is continuous from the fuse-box pigtail to the right-bar 4P (item 0b), which this model did not carry - it drew Br/W as generated at the right-bar splice. The net also reaches a third endpoint at the headlight junction, and that endpoint is one wire in a double-female bullet with both slots empty, so a splice or shared crimp joins these runs UNDER THE TAPE. One wire cannot reach three endpoints. Location unknown; Step 3 knows to look.
+    notes: NEW 28 Aug 2026. Br/W is continuous from the fuse-box pigtail to the right-bar 4P (item 0b), which this model did not carry - it drew Br/W as generated at the right-bar splice. This is the fuse-panel leg of the three-way net; see SP_BRW for why a node sits between the three endpoints.
+  W_BRW_RH:
+    <<: *w18
+    colors: [BNWH]
+    notes: The right-bar leg of the Br/W net. Rings 0.0 ohm to the fuse-panel and headlight-junction legs with the right-bar 4P DISCONNECTED, which is what makes the reading meaningful - probing the switch side would ring the whole branch through the confirmed 1-to-3 splice.
+  W_BRW_HL:
+    <<: *w18
+    colors: [BNWH]
+    notes: The headlight-junction leg of the Br/W net, ending at BRW_HL. Measured as part of the three-endpoint net; drawn so the sheet shows what the meter found rather than leaving the endpoint in prose only.
 
 connections:
   # --- main feed to the ignition switch ------------------------------
@@ -224,9 +255,16 @@ connections:
   - - FUSE_TAIL: [2]
     - W_BRW_OUT: [1]
     - FUSE_4P: [4]
+  # --- Br/W: three measured endpoints, junction location unknown -----
   - - FUSE_4P: [4]
     - W_BRW_HARNESS: [1]
+    - SP_BRW: [1]
+  - - SP_BRW: [1]
+    - W_BRW_RH: [1]
     - RH_4P: [2]
+  - - SP_BRW: [1]
+    - W_BRW_HL: [1]
+    - BRW_HL: [1]
 
   # --- battery main and chassis ground ----------------------------
   - - BATT: [1]

@@ -24,6 +24,8 @@ sheets:
     - IGN
     - SOL
     - SP_BR
+    - SP_BRW
+    - BRW_HL
     - W_BAT_SOL
     - W_BAT_GND
     - W_MAIN
@@ -34,6 +36,8 @@ sheets:
     - W_FUSE_TAIL_IN
     - W_BRW_OUT
     - W_BRW_HARNESS
+    - W_BRW_RH
+    - W_BRW_HL
   controls:
     - RH
     - SP_RH_YR
