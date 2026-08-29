@@ -477,29 +477,29 @@ The two logs split on exactly this line: `harness-lengths.csv` records
 **wires** — one row per cavity, per conductor. If you are recording something
 per-conductor it goes in the inventory, not the lengths log.
 
-## Two tag namespaces: `B##` branches, `C##` connectors
+## Connectors are named by their branch — there is no `C##` series
 
-These are different kinds of thing and they need different names.
+A connector is identified by **the branch it terminates**. `B04.3` is the
+regulator/rectifier connector; `B01.2` is the right-bar 4P. No second tag, and
+no second sticker on the harness.
 
-**`B##` is a branch** — the *run of wire itself*, from where it leaves the trunk
-to where it ends. Not the breakout point, not the connector. A branch is the
-thing that has a length, so a branch is what carries `breakout_mm` and
-`length_mm` in `harness-lengths.csv`.
+This works because the branch tree was mapped deep enough that almost every
+branch ends in exactly one connector. Where it does not, suffix with a letter:
 
-**`C##` is a connector half** — one physical endpoint. Step 0 says to tag both
-halves of every connector separately, so a mated pair is two tags, e.g. `C12`
-and `C13`. Connector halves are what the `from` and `to` columns name, and what
-`connector-inventory.csv` keys on as `conn_tag`.
+- **`B01.3a`, `B01.3b`** — the horn branch ends in two *individual* spade
+  terminals, which are two separable connectors, not one housing.
+- A multi-way housing is **one** connector however many wires it carries.
+  `B02.3` is a single 6P, not six of anything.
 
-So a typical row reads: branch `B07` runs from `C01` to `C14`. Three tags, three
-different physical things.
+Record the letter suffix only where a branch genuinely has more than one
+terminal. Most rows need no `terminal` value at all.
 
-Why not collapse them into one scheme: a branch does not always end in exactly
-one connector. `W_RH_BR` runs through a confirmed 1→3 splice, so one branch has
-several endpoints. And a connector half is a thing you inventory cavity by
-cavity, which a branch is not. One namespace cannot serve both.
+**The far half needs no tag either.** It is not part of this harness — it is a
+component or a child harness, and `mates_to` names it in words ("fuse box
+pigtail", "headlight pigtail"). Tagging both halves would only matter if both
+halves were being rebuilt, and they are not.
 
-### `B00.x` — the headlight junction cluster
+### `B00.x` — the headlight junction cluster### `B00.x` — the headlight junction cluster
 
 Everything that fans out **forward** of the datum into the headlight junction.
 Around a dozen connectors, all leaving at the datum itself:
@@ -681,8 +681,8 @@ to get it.
 
 Split into sub-branches when the children have **different lengths**. When a fan
 is equal-length, one row for the group is a complete record of the geometry —
-per-wire colour and gauge belong in `connector-inventory.csv` keyed by each
-end's `C##`. `B10` is that case.
+per-wire colour and gauge belong in `connector-inventory.csv`, keyed by the
+branch. `B10` is that case.
 
 **The breakout point itself gets no ID.** It is identified by the branch that
 leaves there plus its `breakout_mm`. Two branches leaving at the same point
