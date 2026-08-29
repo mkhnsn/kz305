@@ -4,20 +4,23 @@
 # and merged with the other subsystems for the combined drawing.
 # See models/kz305-factory.yml for the model-wide notes.
 #
-# TRANSCRIBED 19 Aug 2026 off the 600 dpi scan. The left-handlebar
-# switch-connection table finally resolves the dimmer: BLUE IS THE
-# COMMON. HI closes Bl to R/BK, LO closes Bl to R/Y. The 13 Aug meter
-# question (#4) stands as the confirming check, but the scan is no
-# longer marginal on this - the printed table is explicit.
+# TRANSCRIBED 19 Aug 2026 off the 600 dpi scan, and the dimmer is now
+# METER-CONFIRMED on the switch itself, 28 Aug 2026, cluster unplugged:
+# Bl is the common, R/BK is HI, R/Y is LO. Closes procedure item 5.6,
+# open since 13 Aug. The scan and the meter agree.
 #
-# The Bl common is FED FROM FUSE_HEAD, which itself cascades off
-# FUSE_A's Bl/W - see the backbone sheet.
+# The Bl common is fed from FUSE_HEAD - holder 2 of the fuse box,
+# printed HEAD - and that leg is measured end to end: fuse box to the
+# left-bar junction on the harness side, and Bl as the dimmer common on
+# the switch side, established independently the same day. The CASCADE
+# the earlier note described (FUSE_HEAD fed off FUSE_A's Bl/W) does not
+# exist - the box has no internal bus. See the backbone sheet.
 
 connectors:
   LH:
     <<: *lh_cluster
     pinlabels: [R/BK HI, Bl COMMON, R/Y LO, G, O, Gy, BK HORN, HORN GND]
-    notes: Dimmer resolved off the printed switch table 19 Aug 2026 - Bl common, R/BK HI, R/Y LO. Meter it anyway before cutting (#4) since getting the common wrong lights both filaments. Turn switch - R = O to Gy, L = G to O. The cluster 6P at the headstock carries G, O, Gy, Bl, R/BK, R/Y; the horn BK and the button's ground-side lead run separately. Pin 8 is the horn button's ground side - its colour prints as a hatched two-colour swatch in the table and is NOT readable; best guess BK/W. Identify on the bench.
+    notes: DIMMER CLOSED 28 Aug 2026 - metered on the unplugged cluster, Bl common (0.1 ohm to R/BK in HI, 0.1 ohm to R/Y in LO, R/BK to R/Y open in both), confirming the 19 Aug printed table. The wiper is MAKE-BEFORE-BREAK - both beam outputs blip together while the switch moves. Turn switch - R = O to Gy, L = G to O. The cluster 6P at the headstock carries G, O, Gy, Bl, R/BK, R/Y; the horn BK and the button's ground-side lead run separately. WAY LIST NOW OVER-SUBSCRIBED - the 28 Aug ring-out finds the switched BROWN net reaching this junction too, and those six ways are already spoken for. Ring out what the brown here feeds. Pin 8 is the horn button's ground side - its colour prints as a hatched two-colour swatch in the table and is NOT readable; best guess BK/W. Identify on the bench.
   HEAD:
     <<: *headlight
     notes: Feeds read off the scan 19 Aug 2026 - R/BK to HI, R/Y to LO, BK/Y ground. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.
@@ -37,7 +40,7 @@ cables:
   W_DIM_FEED:
     <<: *w16
     colors: [BU]
-    notes: FUSE_HEAD output up to the left bar. Bl, the dimmer common.
+    notes: CONFIRMED END TO END 28 Aug 2026. Blue is two nets in this harness - this one and the brake feed - and they are open to each other. This is the fused headlight supply, fuse box to the left-bar junction on the harness side, dimmer common on the switch side, each measured separately the same day. Repinned onto the fuse panel's identified Bl way.
   W_HI:      {<<: *w18, colors: [RDBK]}
   W_HI_HEAD: {<<: *w18, colors: [RDBK]}
   W_LO:      {<<: *w18, colors: [RDYE]}
@@ -45,7 +48,10 @@ cables:
 
   # --- horn -----------------------------------------------------------
   W_HORN_FEED: {<<: *w18, colors: [BN]}
-  W_HORN_SW:   {<<: *w18, colors: [BK]}
+  W_HORN_SW:
+    <<: *w18
+    colors: [BK]
+    notes: CONFIRMED 28 Aug 2026 by continuity - the horn button return is its own black net, left-bar junction to horn, open to the starter-trigger black. Corroborated from two independent directions that were not used to steer each other - this ring-out, and a switch table transcribed weeks earlier from an unrelated source giving the horn button as BK to ground. Two of the four black roles the models warn about are now separated by measurement.
   W_HORN_GND:
     <<: *w18
     colors: [BKWH]
@@ -53,7 +59,7 @@ cables:
 
 connections:
   # --- headlight through the dimmer -----------------------------------
-  - - FUSE_4P: [3]
+  - - FUSE_4P: [2]
     - W_DIM_FEED: [1]
     - LH: [2]
   - - LH: [1]

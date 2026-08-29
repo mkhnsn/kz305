@@ -148,6 +148,12 @@ These govern every edit to the models:
    resolved by guessing.
 4. **Validate every edit by rendering.** `./render` must exit 0.
 
-Watch for colour collisions the models flag: black serves three roles (right
-points lead, starter trigger, chassis ground), yellow serves two (left points
-lead, alternator phases), and Kawasaki's LG and G both render as `GN`.
+Watch for colour collisions the models flag. The 28 Aug ring-out turned that
+warning into a measurement: **three of the eight colours rung carry more than one
+circuit**. Black serves four roles (right points lead, starter trigger, chassis
+ground, horn button return — the starter trigger and the horn return are now
+separated from each other by continuity), yellow
+serves two (left points lead, alternator phases, separated by continuity, *not*
+by gauge), blue serves two (brake feed, fused headlight supply), and Y/R serves
+two — one of which appears in no model. Kawasaki's LG and G both render as `GN`.
+Identification by colour alone is unsafe here, including in the models.

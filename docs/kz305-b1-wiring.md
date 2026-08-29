@@ -183,7 +183,7 @@ photos confirm, and what they don't.
 | **Harness P/N `26001-12348`** | Woven cloth tag, "MADE IN JAPAN". A second tag appears on another branch. Read both under good light and log them — this identifies the harness variant independent of the diagram's A1/A2/B1/C1/D1 grouping. |
 | **Fuse block matches the diagram** | Three glass fuses in the original black box, feeds in white, blue, and red. Consistent with the 20 A main plus 10 A × 2 on printed 255. Use as the baseline when laying out the 6-circuit blade block. |
 | **Alternator is single-phase** | Short taped stub terminating in two yellow bullets — the stator pair, physically confirmed. Rotor confirmed permanent-magnet, hands-on 18 Aug 2026. ~~Three-phase R/R units (SH775 etc.) stay off the table.~~ **Corrected 18 Aug 2026** — a single-phase stator connects to any two of a three-phase regulator's three AC inputs, so the SH775 is back on the table and is now the leading candidate. See `docs/part-selection.md`. |
-| **Single chassis ground** | Exactly one ring terminal on the entire harness — recorded here 13 Aug as *yellow/black*, but see the colour dispute in Bench findings, 17 Aug. Everything returns through that one point. This is the single failure point the star ground bus is meant to replace on a powder-coated frame. |
+| **Single chassis ground** | ⚠️ **SUPERSEDED 28 Aug 2026 — see the ring-out correction below.** Recorded here 13 Aug as one ring terminal, *yellow/black*, with everything returning through it. The ring terminal and its colour are right; "everything returns through it" is wrong. |
 
 ### Condition
 
@@ -538,10 +538,31 @@ land on a **6P connector**.
 ⚠️ **Ground symbols on this diagram are schematic, not physical.** The drawing
 shows chassis-ground symbols at the front of the bike, which would suggest local
 ground points. The 13 Aug physical inspection found **exactly one ring terminal
-on the whole harness**. Both are true: the symbol means "returns to chassis", and
-physically every one of those returns runs back to that single ring. Worth being
-explicit about, because it changes the star-ground design — the front lighting
-grounds are long returns, not local bonds, and the star bus has to serve them.
+on the whole harness**, and this section used to conclude that every one of those
+returns therefore runs back to that single ring.
+
+**CORRECTED 28 Aug 2026 by meter — that conclusion was wrong, and the diagram was
+closer to the truth than this document was.** Working rule 1 applies: the bench
+value stands and the document changes.
+
+There are **two ground nets**, and they are open to each other:
+
+- **Net A**, `Y/BK` (yellow base). Small. It reaches the ring terminal.
+- **Net B**, `BK/Y` (black base). A single harness-wide return net spanning the
+  tail to the headlight junction — and **open to the ring terminal entirely**.
+
+Net B does not return through the main harness at all. It reaches earth through
+the **child harnesses**, at whatever each component is bolted to. So the harness
+has **one ring terminal but many earth points**, distributed across component
+mounting hardware. That is much closer to the local ground symbols the diagram
+draws than to the single-point reading recorded here.
+
+It still changes the star-ground design, and by more than the old reading did:
+every component earthing through its own mounting needs a **new ground wire back
+to the bus** — wire that does not exist in this harness and appears in neither
+model. The count of them is the count of Net B's earth points, which is not yet
+known. See `measurements/README.md` and the `GND_NETB` notes on the backbone
+sheet.
 
 **No Br/W identified here.** Still unexplained.
 

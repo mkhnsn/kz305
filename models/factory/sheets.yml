@@ -15,25 +15,29 @@ sheets:
   backbone:
     - BATT
     - GND_CHASSIS
+    - GND_NETB
     - GND_ENG
     - MF
-    - FUSE_A
     - FUSE_HEAD
+    - FUSE_TAIL
     - FUSE_4P
     - IGN
     - SOL
     - SP_BR
-    - SP_BLW
+    - SP_BRW
+    - BRW_HL
     - W_BAT_SOL
     - W_BAT_GND
     - W_MAIN
     - W_IGN_FEED
-    - W_FUSE_A_IN
-    - W_FUSE_A_LINK
-    - W_BLW_OUT
-    - W_BLW_UP
+    - W_BR_MAIN
     - W_FUSE_HEAD_IN
     - W_BL_UP
+    - W_FUSE_TAIL_IN
+    - W_BRW_OUT
+    - W_BRW_HARNESS
+    - W_BRW_RH
+    - W_BRW_HL
   controls:
     - RH
     - SP_RH_YR

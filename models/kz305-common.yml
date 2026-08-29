@@ -13,8 +13,26 @@
 # Kawasaki -> WireViz color codes:
 #   W=WH  Br=BN  R=RD  BK=BK  Y=YE  Bl=BU  Gy=GY  O=OG  G=GN
 #   Y/R=YERD  Y/BK=YEBK  R/BK=RDBK  R/Y=RDYE  Br/W=BNWH  Bl/W=BUWH
-#   BK/Y=BKYE  <- the common ground net. NOT Y/BK. See kz305-b1-wiring.md,
-#              the two are different wires and this one is disputed.
+#   R/Bl=RDBU
+#
+# !! Y/BK AND BK/Y ARE BOTH IN THIS HARNESS - RESOLVED 28 Aug 2026
+#
+#    Settled at the bench with the wires in hand, and the fortnight-old
+#    "dispute" turned out to be a false premise: the 13 Aug note and the
+#    17 Aug read were looking at two different wires.
+#
+#      Y/BK = YEBK  yellow base, black tracer  -> ground Net A
+#      BK/Y = BKYE  black base, yellow tracer  -> ground Net B
+#
+#    They are DIFFERENT NETS, measured open to each other. Net A reaches
+#    the single chassis ring terminal; Net B does not reach it at all.
+#    See the GND_CHASSIS / GND_NETB notes on the backbone sheet, and
+#    measurements/README.md.
+#
+#    Base colour is written FIRST, always. Bench convention 28 Aug 2026.
+#    Br/W is not W/Br; Y/BK is not BK/Y. Records written before that date
+#    that do not state the base colour are ambiguous and cannot be
+#    repaired by inference - re-read the wire.
 #
 # !! WireViz has no light-green code, so Kawasaki LG and G BOTH render as
 #    GN. Any LG lead is tagged in its notes. Do not read green off the
@@ -23,11 +41,25 @@
 # Two-color leads are primary-then-secondary. Y/R and R/Y are DIFFERENT
 # wires; so are Br/W and W/Br. Base manual, printed 33, item 18.
 #
-# !! COLOR COLLISION - never identify a lead by color alone:
-#      BK = right points lead, starter trigger, chassis grounds
-#      YE = left points lead, alternator phases
-#      Y/R = kill switch output, coil feed, AND starter button input
-#    Ring out to the endpoint before terminating.
+# !! COLOR COLLISION - never identify a lead by color alone. The ring-out
+#    of 28 Aug 2026 turned this from a warning into a measurement: THREE of
+#    the eight colours rung carry more than one circuit.
+#
+#      BK  = right points lead, starter trigger, chassis grounds, horn
+#            button return. Two of those four are now CONFIRMED as separate
+#            nets by continuity - horn button return (left bar to horn) and
+#            starter trigger (right bar to relay), open to each other.
+#      YE  = left points lead, alternator phases. Separated by continuity
+#            28 Aug 2026, NOT by gauge - both look the same on the bench.
+#      Y/R = kill switch output / coil feed (modelled, SP_YR) AND a SECOND,
+#            independent Y/R net on the fuse-box and starter-relay branch
+#            that is open to it and is MISSING FROM THESE MODELS entirely.
+#      Bl  = brake lamp feed AND the fused headlight supply to the dimmer.
+#            Two nets, open to each other.
+#
+#    Ring out to the endpoint before terminating. Identification by colour
+#    alone is unsafe in this harness - including identifications made in
+#    these models from the scan.
 # =====================================================================
 
 templates:
@@ -104,7 +136,7 @@ templates:
   lh_cluster: &lh_cluster
     type: Left bar cluster
     subtype: dimmer + turn signal + horn
-    notes: TBD - dimmer common (Bl vs R_BK / R_Y) NOT resolved. Scan is marginal here and getting the common wrong lights both filaments at once. Meter the switch itself.
+    notes: DIMMER METER-CONFIRMED 28 Aug 2026, cluster unplugged - Bl is the common (the only pin present in both positions), R/BK is HI, R/Y is LO. Closes procedure item 5.6, open since 13 Aug. Corroborated independently the same day from the harness side - Blue Net 2 runs the fuse box's HEAD output to this cluster. WIPER IS MAKE-BEFORE-BREAK - R_BK to R_Y is open in both settled positions but blips closed while the switch moves, so both beam outputs are tied for the instant of the change. Harmless on filaments; a two-relay beam scheme must tolerate it rather than assume the outputs are exclusive.
 
   neutral_switch: &neutral_switch
     type: Neutral switch

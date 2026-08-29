@@ -29,7 +29,7 @@ connectors:
     <<: *junction6p
     subtype: 6P connector, instrument pod
     pinlabels: [Gy, R/BK, Br, G, TBD, TBD]
-    notes: The SECOND 6P on the bike - instrument pod side, distinct from the left-cluster 6P at the headstock. Four ways read off the scan 19 Aug 2026 - Gy (right turn ind), R/BK (high-beam ind), Br (neutral ind feed), G (left turn ind). The remaining two ways are NOT readable; candidates are the meter lamp R and the pod ground. Ring out under #8.
+    notes: The SECOND 6P on the bike - instrument pod side, distinct from the left-cluster 6P at the headstock. Four ways read off the scan 19 Aug 2026 - Gy (right turn ind), R/BK (high-beam ind), Br (neutral ind feed), G (left turn ind). THREE OF THOSE FOUR CORROBORATED 28 Aug 2026 from the harness side - the cluster sits on the green, grey and switched-brown nets, exactly as drawn. The remaining two ways are still NOT readable; candidates are the meter lamp R and the pod ground. Ring out under #8.
 
 cables:
   # --- meter illumination - tail/city net ----------------------------
