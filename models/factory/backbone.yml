@@ -190,6 +190,18 @@ connectors:
           deliberately not drawn. Ring it before treating the relay end as known.
       Physically this node is a DOUBLE-FEMALE BULLET on the fuse-box pigtail, so "splice" here is a
       separable junction, not a crimp under the tape - unlike SP_BRW, which is genuinely hidden.
+      ** THE NODE IS NOT IN THE HARNESS AT ALL. ** Confirmed 29 Aug 2026 with the starter and
+      fuse-block cables disconnected: the harness side of B06.4 is a PLAIN SINGLE MALE BULLET. The
+      loom contributes one wire; the junction itself belongs to the fuse-box pigtail, which the
+      rebuild replaces outright. So this node is inherited only if the rebuild chooses to build one.
+      The 28 Aug mate observation was taken while everything was still plugged together and CANNOT
+      BE REPEATED now. It is the one bullet node on this harness whose contents were captured before
+      teardown - the other six lost theirs, and that gap is permanent.
+      DESIGN: the melted, corroded joint is HERE, and the mechanism is now precisely located - the
+      gauge step sits at the pigtail's double-female, where the fuse's larger W/R meets the smaller
+      harness W/R, on the highest-current circuit on the bike. The joint disappears with the pigtail;
+      the TOPOLOGY is what must not be reproduced - charging output, main-fuse output and
+      starter-relay feed all meeting at one bullet junction with a conductor-size step in it.
       The two-point W/R net recorded on 28 Aug (B04.6 to B06.4, 0.1 ohm) is unchanged as a
       measurement; what changed is that one of those points is now identified as the charging output
       rather than an unexplained white-base wire absent from the cable index.
