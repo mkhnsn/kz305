@@ -280,13 +280,12 @@ def test_cable_colour_matches_the_pin_it_lands_on(tmp_path):
     # project leaves a contradiction drawn rather than guessing a fix, so the
     # guard has to allow those - but each is re-asserted below, so an entry
     # cannot outlive the conflict it describes.
-    acknowledged = {
-        ("factory", "W_IGN_FEED", "MF", 2):
-            "The 20A fuse's output terminal is W/R on the bench, but this model "
-            "still runs white from it to the ignition switch. Either the colour "
-            "or the route is wrong and one ring-out settles it; see the MF and "
-            "W_IGN_FEED notes. Not resolved by inference.",
-    }
+    # Empty is the goal state, and it has been reached once already: the
+    # W_IGN_FEED / MF conflict lived here until 29 Aug 2026, when a ring-out
+    # showed the fuse's two terminals were assigned backwards and the cable was
+    # right all along. Add an entry only for a discrepancy the model is
+    # DELIBERATELY leaving drawn, with the reason.
+    acknowledged = {}
 
     problems, seen = [], set()
     for model, doc in docs.items():

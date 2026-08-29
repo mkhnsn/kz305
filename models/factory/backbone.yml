@@ -101,14 +101,24 @@ connectors:
       so the main power net has an identified SOURCE as well as an identified fuse. This also
       explains why W/R never appeared in the cable index: it was the charging output all along,
       and between 28 and 29 Aug it was mis-drawn onto the brown bus.
-      CONFLICT WITH THE DRAWN ROUTE, NOT YET RESOLVED. This model runs the fuse OUTPUT on to the
-      ignition switch as white (W_IGN_FEED). The W/R net does not reach the headlight junction at all,
-      so whatever feeds the ignition switch's white BATT pin, it is not this fuse's W/R output leg.
-      Either the ignition feed is a tap on the WHITE side, ahead of the fuse, or the drawn route is
-      wrong. Ring B00.3's white against holder 1's white terminal before redrawing; the route is left as
-      drawn rather than guessed.
-      DESIGN FINDING: the melted, corroded bullet on the fuse-box pigtail is this holder's W/R output.
-      The highest-current circuit on the bike, failing at a joint where conductor size steps. A new
+      ** ORIENTATION WAS BACKWARDS - CORRECTED 29 Aug 2026, AND NEITHER LIVE READING WAS RIGHT. **
+      The conflict recorded here was "the ignition feed taps the white side ahead of the fuse, or the
+      drawn route is wrong". It was neither. W_IGN_FEED - white, this fuse to the ignition switch -
+      is CORRECT in colour and route. What was wrong is which terminal is which.
+      MEASURED 29 Aug 2026: B00.3's white rings 0.1 ohm to B06.3, and B06.3 mates the pigtail white
+      that lands on this holder's W terminal. So W is the LOAD side. B06.4's node carries W/R to the
+      STARTER RELAY and the heavier W/R into the pigtail, so W/R is the BATTERY side.
+      So it is W/R IN from the battery, WHITE OUT to the ignition switch - the exact reverse of what
+      this note said. Same failure as holder 3, and for the same reason: a box with no bus cannot
+      tell you its own orientation, so both were guessed and both guesses were backwards.
+      ** WHAT THE 20A MAIN ACTUALLY PROTECTS: ** the ignition switch and everything downstream of it
+      - the brown bus, both 10A fuses, and their loads. It does NOT protect the charging path or the
+      starter relay, which sit on the battery side with it. That is a design property to decide about
+      rather than reproduce unexamined.
+      DESIGN FINDING: the melted, corroded bullet on the fuse-box pigtail is on this holder's W/R leg -
+      its INPUT, now that the orientation is settled, which puts it on the battery side where the
+      charging current joins as well. The highest-current joint on the bike, failing where conductor
+      size steps. A new
       harness built to the same topology puts the same step on the same 20A circuit - see the rebuild.
   FUSE_HEAD:
     <<: *fuse10
@@ -227,9 +237,10 @@ connectors:
       rectifier's DC output. Three things sit on it -
         - MF holder 1's W/R output terminal (the 20A MAIN), via the fuse-box pigtail;
         - the R/R's DC output, arriving on a male bullet at B04.6 (see W_RR_OUT);
-        - a W/R leg running off to the STARTER RELAY, seen at the bench 28 Aug 2026 while the node
-          was still mated, but WHICH RELAY TERMINAL IT LANDS ON WAS NOT IDENTIFIED, so it is
-          deliberately not drawn. Ring it before treating the relay end as known.
+        - a W/R leg to the STARTER RELAY'S BATTERY STUD. Seen at the bench 28 Aug 2026 while the
+          node was still mated, with the relay terminal unidentified; IDENTIFIED 29 Aug 2026 as the
+          battery stud, once the 20A fuse's orientation showed W/R to be the battery side. Now drawn
+          as W_MAIN, so all three of this node's legs are on the drawing.
       Physically this node is a DOUBLE-FEMALE BULLET on the fuse-box pigtail, so "splice" here is a
       separable junction, not a crimp under the tape - unlike SP_BRW, which is genuinely hidden.
       ** THE NODE IS NOT IN THE HARNESS AT ALL. ** Confirmed 29 Aug 2026 with the starter and
@@ -274,7 +285,15 @@ cables:
     colors: [BKYE]
     notes: The battery earth strap, NOT a harness lead - established 28 Aug 2026 when the harness's own ring terminal turned out to be 16-18 AWG Y/BK. This strap is separate hardware that lands on the same mount. Drawn because it is a real path, not because the loom carries it.
   # --- main feed ----------------------------------------------------
-  W_MAIN:     {<<: *w14, colors: [WH]}
+  W_MAIN:
+    <<: *w14
+    colors: [WHRD]
+    notes: |-
+      REROUTED AND RECOLOURED 29 Aug 2026. Was drawn white from the starter relay's battery stud to
+      the 20A fuse's input. It is W/R, and it runs to the bullet node (SP_WR) rather than to the fuse
+      directly - that node is what B06.4 mates, and its third leg was recorded on 28 Aug as "a W/R to
+      the STARTER RELAY" but left undrawn because the relay terminal was unidentified. It is the
+      battery stud, so the node's three legs are now all drawn: battery stud, 20A fuse, R/R output.
   W_MAIN_OUT:
     <<: *w14
     colors: [WHRD]
@@ -351,8 +370,8 @@ connections:
   # --- main feed to the ignition switch ------------------------------
   - - SOL: [1]
     - W_MAIN: [1]
-    - MF: [1]
-  - - MF: [2]
+    - SP_WR: [1]
+  - - MF: [1]
     - W_IGN_FEED: [1]
     - IGN: [1]
 

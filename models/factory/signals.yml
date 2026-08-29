@@ -189,6 +189,18 @@ connections:
 #     output), which is why it was never an obvious slip. The printed
 #     table in docs/kz305-b1-wiring.md is annotated, not rewritten - it
 #     transcribes the diagram, and the diagram does say R/BK.
+#   - THE IGNITION FEED - and NEITHER live reading was right. B00.3's
+#     white rings 0.1 ohm to B06.3, which mates the pigtail white on the
+#     20A MAIN's W terminal. The white-from-the-fuse route was correct;
+#     what was wrong is that the fuse's TERMINALS were backwards. W/R is
+#     the battery side, W the load side. Same failure as holder 3 - a
+#     box with no bus cannot tell you its orientation, so both holders
+#     were guessed and both guesses were inverted.
+#     CONSEQUENCE: the 20A MAIN protects the ignition switch and all of
+#     its downstream - brown bus, both 10A fuses, their loads. It does
+#     NOT protect the charging path or the starter relay.
+#   - THE TAIL CHAIN, now measured rather than deduced: B00.3's R/Bl
+#     rings 0.2 ohm to B06.5 cavity 4, the TAIL fuse output.
 #   - B00.3 IS the ignition switch, by elimination: no other 4-way in
 #     the harness carries W + R + Br + R/Bl, and family, gender and way
 #     count agree. Mirror 4-of-4, no dead way - which the variant
@@ -199,10 +211,6 @@ connections:
 #     open to the modelled coil-feed Y/R. It is a circuit this model
 #     does not carry AT ALL. Not drawn, because nothing yet says what it
 #     is - find both its ends before inventing a cable for it.
-#   - THE IGNITION FEED. The 20A fuse's output leg is W/R and the W/R
-#     net never reaches the headlight junction, so the white drawn from
-#     MF to the ignition switch is either the wrong colour or the wrong
-#     route. See the MF notes.
 #   - BROWN AT THE LEFT-BAR 6P - CLOSED 29 Aug 2026. It feeds NOTHING.
 #     The cluster half of that cavity is EMPTY; the other five pairs
 #     match on colour. The way list was never over-subscribed either -

@@ -55,7 +55,7 @@ why the measurement log keys on physical branch IDs instead.
 | `W_IND_R` | SP_SIG_R | INSTR_6P | GY | 18 AWG |
 | `W_IND_R2` | INSTR_6P | IND_R | GY | 18 AWG |
 | `W_LO` | LH | HEAD | RDYE | 18 AWG |
-| `W_MAIN` | SOL | MF | WH | 14 AWG |
+| `W_MAIN` | SOL | SP_WR | WHRD | 14 AWG |
 | `W_MAIN_OUT` | MF | SP_WR | WHRD | 14 AWG |
 | `W_MTR_SPD` | SP_R | LAMP_SPD | RD | 18 AWG |
 | `W_MTR_TAC` | SP_R | LAMP_TAC | RD | 18 AWG |
