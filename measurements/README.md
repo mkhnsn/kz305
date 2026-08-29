@@ -125,7 +125,18 @@ model is wrong and should be corrected then.
 
 What is established either way: **gauge cannot separate the yellow pair.** Both
 yellow candidates — alternator phases and left points lead — look the same on
-the bench, so the collision has to be resolved by continuity.
+the bench, so the collision had to be resolved by continuity.
+
+**It was, on 2026-08-28.** `B05.1` and `B05.2` each ring through to a slot in the
+`B04.3` 4P, and are not continuous with each other. So `B05` is the alternator
+phase pair (`W_ALT`) and `B04.3` is the regulator/rectifier connector. The left
+points and condenser leads are elsewhere and remain unlocated.
+
+That also promotes a bench-vs-model conflict from "if this is RR" to a real one:
+the model gives `W_RR_OUT` as **white**, and the confirmed R/R connector carries
+**brown**. Unlike the gauge questions this one does not depend on any
+unmeasured quantity — it is a colour read off the wire in a connector whose
+identity is now established.
 
 ## Hypothesis: the ground net changes colour before the ring terminal
 
@@ -150,177 +161,307 @@ Two readings fit:
    ring-out procedure warns about: a net untraceable by colour because it does
    not keep one.
 
-### Resolved by the `B00` cluster: two ground colours, two roles
+### RESOLVED 2026-08-28 by meter: two separate ground nets
 
-The headlight junction shows both wire types doing visibly different jobs:
+Reference lead clipped to the `B04.1` chassis-ground ring terminal:
 
-| | Role |
+| Probe | Colour | Reading |
+|---|---|---|
+| `B00.7` | `Y/BK` yellow base | **0.2 Ω** |
+| `B08` | `Y/BK` yellow base | **0.2 Ω** |
+| `B00.2` | `BK/Y` black base | **open** |
+| `B10.5` | `BK/Y` black base | **open** |
+| `B04.3` (R/R ground) | `BK/Y` black base | **open** |
+| `B04.5` | `BK/Y` black base | **open** |
+
+Clean split along base colour, no ambiguity:
+
+- **Net A — `Y/BK`, yellow base.** `B04.1` (the chassis ring), `B00.7`, `B08`.
+  Continuous, low resistance.
+- **Net B — `BK/Y`, black base.** `B00.2`, `B10.5`, `B04.3`, `B04.5`. **Open to
+  the chassis ring entirely.**
+
+This settles the question shelved earlier in favour of the **two-nets** reading.
+The competing "two tiers of one net" reading — branch grounds collected onto a
+heavier common return — is **disproved**: a common return would have rung
+continuous, and every black-base point is open.
+
+### This contradicts the documents
+
+`docs/kz305-b1-wiring.md` (13 Aug) records *"exactly one ring terminal on the
+entire harness … everything returns through that one point."* The meter says
+otherwise: the black-base net does not return through `B04.1`. By working rule 1
+the bench value stands and the document needs correcting.
+
+It also means the models are wrong in a structural way, not merely a cosmetic
+one. They render every ground as `BKYE` returning to a single `GND_CHASSIS`.
+There are two nets, they are different colours, and only one of them reaches
+that ring.
+
+### What this means for the star ground
+
+The rebuild's headline change is a star-ground bus, and this defines what it
+replaces: not one marginal ring terminal but a **distributed earth** spread over
+component mounting points, on a frame that is being powder-coated.
+
+Every component currently earthing through its own mounting hardware needs a
+**new ground wire back to the bus** — wire that does not exist in the harness
+today and appears nowhere in the models, because the models draw all of it as
+`BKYE` returning to a single `GND_CHASSIS` that Net B never reaches.
+
+That is a scope addition, not a detail. The count of those wires is the count of
+Net B earth points, which is not yet known.
+
+### What is still unknown
+
+- **Is Net B one net or several — answered 2026-08-28.** One net. Reference on
+  `B10.5` with probes re-zeroed: `B04.3` **0.0 Ω**, `B00.2` **0.2 Ω**,
+  `B04.5` **0.3 Ω**. Every black-base point is continuous with every other,
+  spanning tail to `B04` to the headlight junction.
+
+  So Net B is a single harness-wide return net that leaves through the child
+  harnesses to earth at several component mounting points — parallel earth paths
+  onto one net, rather than several independent grounds.
+
+  **Good news for the star ground:** it is one net to re-terminate, not four.
+- **Where does Net B ground — answered 2026-08-28.** It does not return through
+  the main harness at all. Net B reaches earth through the **child harnesses**:
+  component pigtails that ground at whatever they are bolted to — some to the
+  engine block, some to the frame, others elsewhere. That is why every black-base
+  point reads open with the harness on the bench; its returns are all outside it.
+
+  So the harness has **one ring terminal but many earth points**, and the earth
+  points are distributed across component mounting hardware rather than
+  collected. Each has to be traced through its own child harness as those get
+  worked — the main harness cannot answer for any of them.
+- **`B04.5` reads high for its path length.** With probes re-zeroed on Net B,
+  `B04.3` reads 0.0 Ω from `B10.5` — most of the length of the harness — while
+  `B04.5` reads 0.3 Ω over a comparable path from the same reference. Both are
+  under the procedure's 1 Ω damage threshold so neither is condemned, but 0.3 Ω
+  against 0.0 Ω on similar runs points at a marginal crimp or bullet contact at
+  `B04.5`. Worth a re-read and a look at the terminal.
+
+- **Net A's 0.2 Ω readings predate the re-zero.** `B00.7` and `B08` were measured
+  before the probes were re-zeroed on Net B, so that 0.2 Ω may be lead offset
+  rather than wire. Re-read Net A now that the meter is zeroed; if it drops to
+  0.0 Ω the net is clean, and if it holds at 0.2 Ω that is real resistance in a
+  three-point net and worth explaining.
+
+## Condition findings are out of scope; design findings are not
+
+The harness is being replaced with a new build, so the **condition** of the old
+one does not matter: aged crimps, marginal contacts and per-joint resistance are
+all discarded with the wire. Fault-survey readings are not worth chasing for
+their own sake, and the procedure's >1 Ω rule is not a gate on anything here.
+
+What still matters is anything the old harness reveals about **design** — a
+fault the new build would inherit by copying the layout:
+
+- `B06.4`'s melting sat at a gauge step on a bullet junction carrying the main
+  power path. Reproduce that topology and it heats again, in new wire.
+- The distributed Net B earth is a design property, not wear, and is exactly
+  what the star ground replaces.
+
+The test for whether a fault finding is worth recording: **would building a
+brand-new harness to the same drawing reproduce it?** If yes it is a design
+input; if no it died with the old wire.
+
+## Double-female bullet terminals: one harness wire, two empty slots
+
+Six branches end in a double-female bullet terminal — `B03`, `B08`, `B00.5`,
+`B00.7`, `B00.8`, `B00.11`. In every case the **harness contributes one wire**
+into the crimp, and the terminal presents two receptacle slots that are **both
+empty**.
+
+They are fan-out points where up to two external male bullets plugged in. Those
+males were unplugged at teardown, before this project's tagging existed, and
+what went into each slot **is not recorded anywhere**.
+
+This is the one place a real gap exists in the map, and no bench work closes it:
+the information left with the teardown. Two partial routes back:
+
+- **The on-bike photographs**, which predate the teardown.
+- **The components and child harnesses themselves** — a male bullet of the right
+  colour on a component narrows it, though it will not disambiguate two
+  same-colour candidates.
+
+Recording the slots as empty is itself the finding. A later reader must not
+mistake an unpopulated node for a node with nothing to say.
+
+### Consequence: the Br/W net has a hidden internal junction
+
+`B01.2`, `B00.11` and `B06.5` all ring continuous on Br/W. `B00.11` holds one
+wire with both slots empty, and **one wire cannot reach three endpoints**.
+
+Therefore a splice or shared crimp joins those runs **inside the harness, under
+the tape**. Its location is unknown. Step 3 should find it, and now knows to
+look — which is exactly the kind of thing the procedure warns gets missed when
+the loom is unwrapped after the ring-out instead of before it.
+
+## Net consolidation, 2026-08-28
+
+Taken with **every pigtail disconnected**, so nothing rings through a component
+or the fuse box.
+
+| Colour | Result |
 |---|---|
-| **`BK/Y`** (black base) | **Branch grounds.** Individual circuit returns. `B00.2` is a shared-crimp collection point described at the bench as gathering several; the tail grounds (`B10.5`, `B10.5.1`) are the same colour. |
-| **`Y/BK`** (yellow base) | **The common return trunk.** Heavier than the branch wires, and found only at distribution nodes: `B00.7` (double-female, larger gauge), `B08` (double-female), `B04.1` (the single chassis ring terminal). |
+| **W/R** | `B04.6` ↔ `B06.4` **0.1 Ω — one net.** The main power path: `B06.4`'s node feeds the starter relay and the fuse box. |
+| **W/Bl** | `B00.8` ↔ `B09` **0.3 Ω — one net**, seen at the headlight junction and at 1060 mm on the trunk. |
+| **Y/R** | `B03` ↔ `B01.2` **0.2 Ω**; `B06.1` **open to both**. **Two independent Y/R nets.** |
 
-Three yellow-base wires now, every one of them heavier than common and every one
-at a node — and the black-base wires are everywhere the individual circuits are.
-That is not a colour change at one splice; it is a **deliberate two-tier ground
-architecture**: branch returns in black-base, collected, then carried to the
-single chassis ring on heavier yellow-base.
+### The net map as it stands
 
-It explains the 13 Aug / 17 Aug disagreement completely. Both readings were
-right about different wires, and the ring terminal is yellow-base because it is
-the trunk end of the net, not a branch.
+Ten nets across eight colours, all read with every pigtail disconnected:
 
-#### Competing reading: engine grounds vs lighting grounds
-
-Proposed at the bench 2026-08-28: `Y/BK` is the **engine** ground net and `BK/Y`
-is the **instrument and lighting** ground net — two separate systems rather than
-two tiers of one.
-
-Both readings agree that `BK/Y` is the small-circuit branch ground; no
-counterexample to that has been found. They differ only on `Y/BK`.
-
-Two observations the engine reading has to account for:
-
-- **`B00.7` is `Y/BK` and sits in the headlight cluster** — heavier gauge, on a
-  double-female node, at the front of the bike.
-- **`B04.3`'s ground is `BK/Y`, and that connector is the regulator/rectifier** —
-  neither instrument nor lighting.
-
-**The discriminating test is `B00.7`.** Its run is 240 mm where almost everything
-else in the cluster is 100 mm, so it reaches past the local connectors to
-somewhere. If it collects headlight-area grounds and heads rearward it is a
-return trunk; if it runs to something engine-side and merely passes through, the
-engine reading is right.
-
-The on-bike photographs can also settle it: **where the `B04.1` ring terminal
-bolts** — engine case or frame — separates the two directly, and it is one of
-the few questions the bench genuinely cannot answer.
-
-**Still to confirm by meter**, since this rests on colour and position: ring the
-`B04.1` terminal against a black-base branch ground and against `B00.7`. The
-models render every ground as `BKYE`, so if this holds, the models are wrong
-about the trunk portion specifically.
-
-### Earlier reasoning, superseded
-
-**As of the tail fan (`B10`), reading 2 is ahead.** `B10.5` and `B10.5.1` are
-both black-base `BK/Y`, matching the modelled tail grounds exactly, and
-`B10.5.1` is itself a double-female distribution node. So the periphery of the
-ground net is unambiguously black-base while the single ring terminal is
-yellow-base — which is what a colour change looks like, not what one consistent
-net looks like.
-
-That leaves the two yellow-base wires (`B04.1`, `B08`) needing an account. Either
-they are the far side of that change, or they are a different circuit
-altogether that happens to be yellow-base — `B04.1` being a ring terminal argues
-for ground, but a ring terminal is not proof of one.
-
-**Both untested.** Resolved by ringing the ring terminal against the black-base
-grounds, and by looking at what the `B08` bullet feeds. Do not let either
-steer the ring-out — they are written down so a finding confirms something
-rather than surprising someone.
-
-## What is actually being rebuilt
-
-Most connections in this harness are bullets and spades to things that are **not
-this harness**. Sorting them is what defines the BOM, so every mate gets one of
-three classes in `connector-inventory.csv` (`mate_class`):
-
-| `mate_class` | Means | In the rebuild? |
+| Net | Points | Circuit |
 |---|---|---|
-| `main` | The other side is the main harness — an internal junction. | Yes, both sides |
-| `subharness` | A separate loom that plugs in: bar-switch pigtails, tail section. | The connector only |
-| `component` | A fixed pigtail off a component: coil, flasher, horn, R/R, starter relay, fuse box. | The connector only |
+| **Br** | `B00.1` `B00.3` `B00.5` `B01.2` `B01.3` `B02.3` `B04.3` `B04.4` `B07.2` | switched-ignition bus (9 points) |
+| **W/R** | `B04.6` `B06.4` | main power path |
+| **W/Bl** | `B00.8` `B09` | unidentified |
+| **Y/R 1** | `B03` `B01.2` | kill-switch output to the coils (`SP_YR`) |
+| **Y/R 2** | `B06.1` | separate circuit, **missing from the models** |
+| **Bl 1** | `B00.6` `B04.2` `B10.4` | brake (`SP_BRAKE` confirmed) |
+| **Bl 2** | `B02.2` `B06.5` | fused headlight supply to the dimmer |
+| **BK 1** | `B02.1` `B01.3` | horn button return |
+| **BK 2** | `B06.2` `B01.2` | starter trigger |
+| **Gn** | `B00.1` `B00.10` `B02.3` `B10.3` | left turn |
+| **Gy** | `B00.1` `B00.4` `B02.3` `B10.1` | right turn |
 
-For `subharness` and `component` the rebuild buys and terminates the mating
-half; it does not build the wire on the far side. Everything found so far in
-those two classes — horn, flasher, coils, the bar pigtails, the battery earth
-cable — is wire the models carry but the build does not.
+Plus the two ground nets: **Net A** `Y/BK` (`B04.1` `B00.7` `B08`) and **Net B**
+`BK/Y` (`B00.2` `B10.5` `B04.3` `B04.5`), open to each other.
 
-Getting this wrong in either direction is expensive: build wire that already
-exists, or leave out wire nothing else provides. It is cheap to record now,
-while both halves are in hand, and impossible to reconstruct from a cut-up
-harness later.
+Green and grey are structurally identical, as a symmetric signal pair should be:
+left-bar switch → headlight-junction two-into-one crimp → instrument cluster →
+tail.
 
-## What is actually being rebuilt
+**Three of eight colours carry more than one circuit** — Y/R, blue and black.
+Colour is not identity in this harness, and that now rests on measurement rather
+than on the warning in the models.
 
-Most connections in this harness are bullets and spades to things that are **not
-this harness**. Sorting them is what defines the BOM, so every mate gets one of
-three classes in `connector-inventory.csv` (`mate_class`):
+### Brown is a single net with nine harness endpoints
 
-| `mate_class` | Means | In the rebuild? |
+Reference on `B00.1`'s brown, all pigtails disconnected:
+
+| Point | | Point | |
+|---|---|---|---|
+| `B00.3` ignition 4P | 0.0 Ω | `B02.3` left 6P | 0.0 Ω |
+| `B00.5` | 0.0 Ω | `B04.3` R/R 4P | 0.0 Ω |
+| `B01.2` RH_4P | 0.1 Ω | `B04.4` | 0.7 Ω |
+| `B01.3` horn | 0.1 Ω | `B07.2` flasher feed | 0.0 Ω |
+
+One net, no splits — unlike Y/R. This is the switched-ignition distribution bus,
+and it corresponds to the models' `SP_BR`, which feeds `FBRK`, `RBRK`,
+`FLASHER`, `FUSE_A` and `IND_N` from `IGN`. The bench net reaches **nine**
+harness points against the model's six branches, the extras being the horn feed,
+the two bar-switch connectors and `B00.5`.
+
+`B04.4` reads 0.7 Ω against 0.0–0.1 Ω everywhere else. Under the 1 Ω threshold
+and a condition matter rather than a design one, so not pursued — recorded only
+so the outlier is not mistaken for a transcription slip.
+
+#### The charging output feeds the switched-ignition net
+
+`B04.3` is the confirmed R/R connector and its brown wire rings 0.0 Ω to the
+ignition switch's brown output.
+
+The alternator is **single phase**, so the connector's four wires are fully
+accounted for: two AC leads in, DC out, ground. There is no spare pin, and
+therefore brown is the **DC output** — not a sense or field wire.
+
+So charging current returns to the battery *through the ignition switch*:
+
+```
+R/R  --brown-->  switched-ignition net  -->  ignition switch (ON: W <-> Br)  -->  battery
+```
+
+which the switch table in `docs/kz305-b1-wiring.md` supports directly: **ON**
+closes `W` ↔ `Br`, battery to ignition.
+
+**This makes `W_RR_OUT` wrong in the models on both counts.** It is drawn as
+white and running `RR`→`SOL`; on the bench it is brown and lands on the brown
+switched net. Bench beats document, and unlike the gauge questions this rests on
+nothing unmeasured — a continuity reading between two identified connectors.
+
+**Design consequence:** every amp the alternator produces passes through the
+ignition switch contacts. That is a real current path for the rebuild to
+consider rather than reproduce unexamined, and it is exactly the sort of thing
+that only shows up by ringing the harness rather than reading the drawing.
+
+### Blue is two nets
+
+| Net | Points | |
 |---|---|---|
-| `main` | The other side is the main harness — an internal junction. | Yes, both sides |
-| `subharness` | A separate loom that plugs in: bar-switch pigtails, tail section. | The connector only |
-| `component` | A fixed pigtail off a component: coil, flasher, horn, R/R, starter relay, fuse box. | The connector only |
+| **Blue 1 — brake** | `B00.6` · `B04.2` · `B10.4` | Front brake switch output at the headlight junction, into the `B04.2` two-into-one crimp (`SP_BRAKE` confirmed), on to the tail lamp. |
+| **Blue 2 — headlight supply** | `B02.2` · `B06.5` | A fused feed from the fuse box reaching the left-bar junction. |
 
-For `subharness` and `component` the rebuild buys and terminates the mating
-half; it does not build the wire on the far side. Everything found so far in
-those two classes — horn, flasher, coils, the bar pigtails, the battery earth
-cable — is wire the models carry but the build does not.
+Blue 2 settles what `B02.2` is: not a brake wire — it is open to that net — but a
+**fused supply arriving at the left switch**, where the dimmer sits
+(`R/BK` · `Bl` · `R/Y`). It is the headlight feed into the dimmer common.
 
-Getting this wrong in either direction is expensive: build wire that already
-exists, or leave out wire nothing else provides. It is cheap to record now,
-while both halves are in hand, and impossible to reconstruct from a cut-up
-harness later.
+**Design consequence — this bears on the headlight relay decision.** Headlight
+current is fed through a fuse to the handlebar switch and switched there, so the
+full lamp load passes through the bar switch contacts. That is the standard
+argument for adding a relay, and it is now established from the harness rather
+than assumed. It does not settle procedure item 5.6, which asks which *pin* is
+the dimmer common and is a switch-side test.
 
-## The melted joint at `B06.4` — a likely mechanism
+### Probe hygiene: scrape before you trust a high reading
 
-`B06.4` shows melting/corrosion. Recording its mate while still connected
-supplied a plausible cause, which a disconnected inspection would not have.
+Two readings this session came back high and wrong — `B03`↔`B01.2` drifted
+30→12 Ω and remeasured at 0.2 Ω; `B02.2`↔`B06.5` read 23 Ω and remeasured at
+0.1 Ω after the terminal face was scraped.
 
-The joint is a double-female bullet forming a 3-way node on the **main power
-path**: main harness in, starter relay out, fuse-box feed out — and the
-fuse-box-side wire is **visibly larger gauge than `B06.4` itself**.
+Corroded contact surfaces do not matter for a harness being replaced, but they
+**actively produce false readings**, and 10–100 Ω is the band the procedure
+reserves for a path through a filament. A dirty terminal can therefore imitate a
+load and turn one net into two in the record.
 
-A gauge step at a bullet terminal on a high-current path is a classic
-overheating site: the small conductor and the terminal interface carry current
-sized for the large one. That fits both the location and the damage.
+Clean the contact before probing, and treat any reading in the tens of ohms as
+suspect until re-read on fresh metal. This is a measurement-reliability rule,
+not a condition check.
 
-**Not established** — it is a mechanism consistent with the evidence, not a
-diagnosis. Confirm during the ring-out fault survey: the procedure's >1 Ω rule
-should show elevated resistance here if the joint is degraded. Worth settling,
-because a rebuild that reproduces the same step at the same joint reproduces the
-fault.
+### Black is two nets, and both identify
 
-## ⚠️ Component pigtails count as build wire when the component is replaced
+| Net | Points | Circuit |
+|---|---|---|
+| **Black 1** | `B02.1` (left-bar junction) · `B01.3` (horn) | **Horn button return.** The switch table gives the horn button as `BK` ↔ ground, and the button is on the left switch — so this is the horn's return leg up to it. |
+| **Black 2** | `B06.2` (starter relay branch) · `B01.2` (RH_4P) | **Starter trigger.** The right bar carries the start button; the switch table gives Push = `Y/R` ↔ `BK`, and the docs record COIL+ as the `BK` lead from the start button. Start button to relay coil. |
 
-The `mate_class` table says a `component` mate means the rebuild buys the
-connector, not the wire. **That inverts when the component itself is being
-replaced.**
+Open to each other, 0.1 Ω and 0.2 Ω internally.
 
-The fuse box is the live case. `B06.3`, `B06.4` and `B06.5` all land on a fixed
-pigtail off the original glass-fuse box — so by the ordinary rule, none of that
-wire is the rebuild's problem. But the plan is a **6-circuit blade block**
-(`docs/kz305-b1-wiring.md`, 13 Aug), which means the original pigtail does not
-survive and the rebuild has to build every one of those wires itself, to new
-lengths, on a new layout.
+Both identifications are **corroborated from two independent directions** — bench
+continuity, and switch tables transcribed weeks earlier from a different source.
+Neither was used to steer the other.
 
-So `mate_class` answers "is the far side someone else's wire", and the scope
-question is one step further: **is that someone else still going to exist?**
-Record the class from what is in front of you; decide the BOM against the
-rebuild plan.
+This also closes two of the four black roles the models warn about. The
+remaining two — right points lead and chassis ground — are not on these nets, so
+they live on child harnesses or on wires not yet reached.
 
-## Mate-side lengths are deferred, not skipped
+### Y/R is two nets, and the models have one
 
-Wires on the far side of a connector — sub-harnesses, component pigtails — are
-**not measured during Step 1**, and deferring them costs nothing.
+`Y/R` Net 1 — `B03` and `B01.2` (RH_4P) — is consistent with `SP_YR`: the
+kill-switch output reaching the coils via the right-bar 4P.
 
-They are separate physical objects. Unwrapping the trunk, ringing it out and
-cutting it up destroys none of them. Their geometry is not perishable the way
-the main harness's is, which is the entire reason Step 1 is urgent.
+`Y/R` Net 2 — `B06.1`, on the branch that serves the starter relay and fuse box
+— is open to both. It is a **separate circuit that happens to share the colour**.
 
-What makes "later" fail is not time but **loss of identity**:
+The cable index carries one `YERD` net only (`W_COIL_L_FEED`, `W_COIL_R_FEED`,
+`W_RH_YR1`, `W_RH_YR2`, `W_RH_YR_OUT`, all through `SP_YR`). A second Y/R
+circuit exists on the bench and is **missing from the models entirely**.
 
-- A pigtail scrapped or cut before anyone decided whether it was needed.
-- A pigtail separated from the component that identifies it, so that a bag of
-  four similar looms cannot be told apart.
-- A mate whose harness-side partner was never recorded — which is why the
-  still-mated pairs got documented before separating rather than after.
+This is the third distinct colour collision found, after black (four roles) and
+yellow (alternator vs points). The pattern is now unmistakable: **this harness
+reuses colours across unrelated circuits, and any identification resting on
+colour alone is unsafe** — including identifications in the models themselves.
 
-So the obligation during Step 1 is **preservation, not measurement**: keep each
-sub-assembly whole, keep it with its component, and tag it. Measure when the
-rebuild's layout is settled and it is clear which of them are even being
-reproduced.
+### A rejected reading, kept
+
+The first `B03` ↔ `B01.2` reading drifted from 30 Ω down through 12 Ω rather
+than settling. It was rejected at the bench as bad probe contact and the
+remeasure gave 0.2 Ω. **Both are recorded.** The rule against overwriting a
+measurement applies to continuity as much as to length — a drifting reading is
+evidence about the probe or the terminal, and deleting it leaves the next reader
+unable to tell a clean result from a tidied-up one.
 
 ## Words used precisely
 
@@ -590,4 +731,8 @@ length nobody can trust.
 - **Do not stretch the harness straight.** It was built with bends in it.
 - **Record raw.** Service loop is added at build time. Bake slack in here and
   the real number is lost.
-- **`confirmed` means measured twice**, by preference on different days.
+- **`confirmed` means measured twice**, by preference on different days. It is
+  about the *measurement*, not the identification. A branch whose circuit has
+  been proved by continuity is still `provisional` if its length was measured
+  once — record the identification in `model_cables` and `notes`, never by
+  promoting `status`.
