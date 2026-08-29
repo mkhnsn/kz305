@@ -163,7 +163,7 @@ connections:
     - SP_YR: [1]
 
   # --- Bl/W between the fuse panel and the right bar - direction open --
-  - - FUSE_4P: [1]
+  - - FUSE_4P: [3]
     - W_RH_IN: [1]
     - RH_BLW: [1]
 

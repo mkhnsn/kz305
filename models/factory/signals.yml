@@ -190,8 +190,15 @@ connections:
 #     net never reaches the headlight junction, so the white drawn from
 #     MF to the ignition switch is either the wrong colour or the wrong
 #     route. See the MF notes.
-#   - BROWN AT THE LEFT-BAR 6P. The switched bus reaches it; the
-#     modelled way list has no room for it. (see LH)
+#   - BROWN AT THE LEFT-BAR 6P - HALF CLOSED 29 Aug 2026. The way list
+#     DOES have room: the 6P reads R/BK, Br, Gy, R/Y, Or, Gn, and the
+#     blue this model put in it is actually a separate flying lead
+#     (B02.2). So the count closes and there is no seventh conductor.
+#     WHAT THE BROWN FEEDS IS STILL UNKNOWN. It sits where this model
+#     guessed a horn ground, which would mean the button grounds
+#     through the cluster body - but that is an argument from way
+#     count, and one of those already inverted the R/R conclusion
+#     once. Ring it out. (see LH)
 #   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and
 #     one mid-harness, both on the switched bus.
 #   - WHICH GROUND NET each modelled ground lead belongs to. Only one

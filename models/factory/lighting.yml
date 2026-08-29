@@ -20,7 +20,25 @@ connectors:
   LH:
     <<: *lh_cluster
     pinlabels: [R/BK HI, Bl COMMON, R/Y LO, G, O, Gy, BK HORN, HORN GND]
-    notes: DIMMER CLOSED 28 Aug 2026 - metered on the unplugged cluster, Bl common (0.1 ohm to R/BK in HI, 0.1 ohm to R/Y in LO, R/BK to R/Y open in both), confirming the 19 Aug printed table. The wiper is MAKE-BEFORE-BREAK - both beam outputs blip together while the switch moves. Turn switch - R = O to Gy, L = G to O. The cluster 6P at the headstock carries G, O, Gy, Bl, R/BK, R/Y; the horn BK and the button's ground-side lead run separately. WAY LIST NOW OVER-SUBSCRIBED - the 28 Aug ring-out finds the switched BROWN net reaching this junction too, and those six ways are already spoken for. Ring out what the brown here feeds. Pin 8 is the horn button's ground side - its colour prints as a hatched two-colour swatch in the table and is NOT readable; best guess BK/W. Identify on the bench.
+    notes: |-
+      DIMMER CLOSED 28 Aug 2026 - metered on the unplugged cluster, Bl common (0.1 ohm to R/BK in HI,
+      0.1 ohm to R/Y in LO, R/BK to R/Y open in both), confirming the 19 Aug printed table. The wiper
+      is MAKE-BEFORE-BREAK - both beam outputs blip together while the switch moves. Turn switch - R
+      is O to Gy, L is G to O. The horn BK and the button's ground-side lead run separately from the
+      cluster 6P at the headstock.
+      ** THE OVER-SUBSCRIBED WAY LIST IS RESOLVED, 29 Aug 2026, AND THIS NOTE HAD IT WRONG. ** It
+      said the 6P carries G, O, Gy, Bl, R/BK, R/Y, and then could not find a way for the switched
+      brown that the ring-out had reached this junction on. The 6P was read at the bench and carries
+      R/BK, Br, Gy, R/Y, Or, Gn - BROWN IS IN IT AND BLUE IS NOT. Blue arrives on its own flying
+      lead, B02.2, a female bullet alongside the connector. There was never a seventh conductor; Bl
+      was assigned to the wrong one.
+      Layout is 3 rows of 2. Ways, top row first, are R/BK and Br, then Gy and R/Y, then Or and Gn.
+      ** WHAT THE BROWN FEEDS IS STILL OPEN. ** It occupies the position this note guessed was the
+      horn button's ground side. That would mean there is no horn-ground wire and the button grounds
+      through the cluster body - but it is inference from a way count, and an argument from way count
+      is exactly what inverted the R/R conclusion on 28 Aug. Ring it out before drawing it.
+      Pin 8's colour was guessed BK/W off a hatched swatch in the printed table. B02.1 is a plain BK
+      spade ringing 0.1 ohm to the horn, so that guess looks wrong as well.
   HEAD:
     <<: *headlight
     notes: Feeds read off the scan 19 Aug 2026 - R/BK to HI, R/Y to LO, BK/Y ground. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.
@@ -59,7 +77,7 @@ cables:
 
 connections:
   # --- headlight through the dimmer -----------------------------------
-  - - FUSE_4P: [2]
+  - - FUSE_4P: [1]
     - W_DIM_FEED: [1]
     - LH: [2]
   - - LH: [1]
