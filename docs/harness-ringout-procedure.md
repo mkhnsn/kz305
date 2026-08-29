@@ -36,13 +36,25 @@ which ends are *worth* probing, never to decide what connects to what.
 
 ## Step 0 — Tag every end  ·  NON-DESTRUCTIVE
 
-Number every connector and every free end with tape and marker before touching
-anything else. Tag **both halves** of each connector separately.
+Tag with tape and marker before touching anything else, using **two separate
+number series** — they name different kinds of thing:
 
-Use **`B01`, `B02`, …** for branches, in the order you tag them. The string on
-the tape and the `branch_id` in `measurements/harness-lengths.csv` are the same
-string — that is what makes a measurement traceable to a physical thing. Do not
-renumber later; a gap costs nothing, a renumber invalidates every photograph.
+- **`B01`, `B02`, …** on each **branch** — the run of wire itself, tagged near
+  where it leaves the trunk. A branch is what has a length, so `B##` is what
+  carries `breakout_mm` and `length_mm`.
+- **`C01`, `C02`, …** on each **connector half** and each free end. Tag both
+  halves of a mated connector separately — a mated pair is two tags. `C##` is
+  what the `from`/`to` columns name and what the connector inventory keys on.
+
+A typical branch reads: `B07` runs from `C01` to `C14`.
+
+The string on the tape and the ID in `measurements/` are the same string — that
+is what makes a measurement traceable to a physical thing. Number each series in
+tagging order. Do not renumber later; a gap costs nothing, a renumber
+invalidates every photograph.
+
+The breakout point itself gets no tag: it is identified by the branch leaving
+there plus its distance from the datum.
 
 Then photograph: the whole harness laid out with tags visible, and each
 connector face-on with the pins showing. (The reference doc has been asking for
