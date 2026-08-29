@@ -71,10 +71,15 @@ Deliberately set aside, not forgotten. Clear before calling Step 1 done.
 | Item | What is needed |
 |---|---|
 | ~~`B00.x`~~ | **Done 2026-08-28** — 12 branches measured. |
-| **Ground net: two tiers or two nets?** | Shelved 2026-08-28 by decision — let it fall out of the ring-out rather than chasing it. `Y/BK` is either a heavy common return trunk or a separate engine-ground net; `BK/Y` is the branch ground either way. Discriminator: where `B00.7` runs, and where the `B04.1` ring bolts (on-bike photos). |
+| ~~Ground net: two tiers or two nets?~~ | **Closed 2026-08-28 by meter** — two separate nets. `Y/BK` (Net A) rings 0.2 Ω to the chassis ring; every `BK/Y` point (Net B) is open to it. |
+| **Net B earth points — count and locate** | Answered in kind 2026-08-28: Net B earths through the child harnesses, at component mounting points — some engine block, some frame. Not through the main harness. Each must be traced through its own child harness as that harness is worked. **The count of these is the count of new ground wires the star bus needs**, and it is not yet known. |
+| ~~Is Net B one net or several?~~ | **Closed 2026-08-28** — one net. All four black-base points mutually continuous (0.0–0.3 Ω from `B10.5`). |
 | **Still-mated connectors** | `B06.3`, `B06.4`, `B06.5` are still plugged into something. **Photograph and record the mate BEFORE separating** — that connectivity is free Step 4 data and is lost the moment they come apart. |
-| `B06.4` melting | Evidence of melting/corrosion. Fault-survey finding: establish what overheated and why before the rebuild repeats it. |
-| `B05` ↔ `B04.3` continuity | One meter reading between `B05.1` and each yellow pin of the `B04.3` 4P. Continuous ⇒ alternator phases; open ⇒ left points/condenser. Settles the yellow collision on both branches. |
+| `B06.4` melting — **design input** | Kept even though the harness is being replaced: the mechanism was a gauge step at a bullet on the main power path, so a new build reproduces the fault if it reproduces the topology. Not a condition question. |
+| ~~`B05` ↔ `B04.3` continuity~~ | **Closed 2026-08-28** — both yellows ring through to slots in the `B04.3` 4P and are not continuous with each other. `B05` is the alternator phase pair (`W_ALT`); `B04.3` is the regulator/rectifier connector. |
+| **Br/W resistance** | Item 0b closed on continuity but ohms were not recorded. Re-read `B01.2`↔`B06.5` for value — the procedure's >1 Ohm rule makes every ring-out a fault survey. |
+| **Hidden Br/W junction** | `B01.2`/`B00.11`/`B06.5` ring continuous but `B00.11` is one wire with both slots empty — so a splice joins them under the tape. Find it in Step 3. |
+| **Empty double-female slots** | Six nodes (`B03` `B08` `B00.5` `B00.7` `B00.8` `B00.11`) each present two empty receptacles. What plugged in was lost at teardown. Only the on-bike photos and the components themselves can narrow it. |
 | `B03` second cavity | Whether the second cavity of the double-female bullet is occupied, and by what. Step 2. |
 | ~~`B10.5.1` breakout~~ | **Closed 2026-08-28** — leaves the shared crimp at `B10.5`'s end; `breakout_mm` = 60. |
 | **Fuse box scope** | `B06.3/.4/.5` land on a fixed pigtail off the original glass-fuse box, but the plan is a 6-circuit blade block. Decide whether the rebuild terminates to the old pigtail or rebuilds those wires — it changes what needs measuring there. |
