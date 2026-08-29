@@ -24,10 +24,12 @@ connectors:
     style: simple
     type: Splice
     subtype: left turn feed
+    notes: CONFIRMED 28 Aug 2026 - a physical two-into-one crimp at the headlight junction, not a modelling convenience. The green net rings four points through it, and the grey net mirrors it exactly.
   SP_SIG_R:
     style: simple
     type: Splice
     subtype: right turn feed
+    notes: CONFIRMED 28 Aug 2026 - mirrors SP_SIG_L. Green and grey came back structurally identical on the meter.
 
 cables:
   # --- turn signals: O common from the flasher, G left / Gy right ----
@@ -36,7 +38,7 @@ cables:
   W_SIG_L:
     <<: *w18
     colors: [GN]
-    notes: G feeds BOTH left lamps and the left indicator. Forced by wire count, not assumed - the switch has only two signal outputs for four lamps.
+    notes: G feeds BOTH left lamps and the left indicator. Forced by wire count, not assumed - the switch has only two signal outputs for four lamps. CONFIRMED 28 Aug 2026 by ring-out, and so is its grey mirror - the green and grey nets are structurally identical, which is what a symmetric signal pair should be - left-bar switch, then a two-into-one crimp at the headlight junction, then the instrument cluster and the tail. Four points each, matching this model.
   W_SIG_R:  {<<: *w18, colors: [GY]}
   W_SIG_FL: {<<: *w18, colors: [GN]}
   W_SIG_RL: {<<: *w18, colors: [GN]}
@@ -47,10 +49,13 @@ cables:
   W_IND_R:  {<<: *w18, colors: [GY]}
   W_IND_R2: {<<: *w18, colors: [GY]}
 
-  # --- lamp grounds - all to the single BK/Y bus ----------------------
+  # --- lamp grounds - net NOT established -----------------------------
   # The scan draws local ground symbols at the front lamps and the
-  # headstock; on the bench everything homes to the ONE ring terminal.
-  # The rebuild should not copy the diagram's optimism about grounds.
+  # headstock. These are still drawn to GND_CHASSIS, but 28 Aug 2026
+  # found TWO ground nets and only the small one reaches that ring, so
+  # every lead below is on an unmeasured net - drawn by inheritance
+  # from the diagram, not by continuity. Ring each before terminating
+  # it on the rebuild's star bus; see GND_CHASSIS and GND_NETB.
   W_GND_SIG_FL: {<<: *w18, colors: [BKYE]}
   W_GND_SIG_FR: {<<: *w18, colors: [BKYE]}
   W_GND_SIG_RL: {<<: *w18, colors: [BKYE]}
@@ -99,7 +104,7 @@ connections:
     - W_IND_R2: [1]
     - IND_R: [1]
 
-  # --- lamp grounds, all to the single BK/Y bus ---------------------
+  # --- lamp grounds - see the note above on which net ----------------
   - - SIG_FL: [2]
     - W_GND_SIG_FL: [1]
     - GND_CHASSIS: [1]
@@ -120,16 +125,21 @@ connections:
     - GND_CHASSIS: [1]
 
 # =====================================================================
-# STILL TO TRANSCRIBE / RESOLVE - the short list, 19 Aug 2026
+# STILL TO TRANSCRIBE / RESOLVE - the short list, revised 28 Aug 2026
 #
-# The 600 dpi scan pass closed the big gaps: headlight + dimmer, horn,
-# turn signals, indicators, meter lamps, brake switches, both 6P
-# junctions and the fuse topology are all modelled. What remains:
+# CLOSED by the ring-out and the fuse-box session:
+#   - which physical holder is which. All three, off the box's own
+#     printed labels, cross-checked against the harness net map.
+#   - the dimmer common. Metered on the switch: Bl common, R/BK HI,
+#     R/Y LO. (procedure 5.6, open since 13 Aug)
+#   - the fourth fuse-panel conductor. It reads R/Bl, and the same
+#     R/Bl appears at the ignition switch 4P.
+#   - Y/BK versus BK/Y. Both wires exist; they are different nets.
+#
+# STILL OPEN, and the ring-out added to the list as well as subtracting:
 #
 #   - horn button ground-side colour: prints as a hatched swatch in the
 #     switch table, unreadable. Drawn BK/W as a guess. (bench, #8)
-#   - ignition R/BK pin's upstream source: fourth conductor at the
-#     fuse-panel 4P reads R or R/BK; unconfirmed. (bench, #3)
 #   - instrument 6P: two of six ways unread. (bench, #8)
 #   - electric accessory leads: TWO pairs drawn (one at the meters, one
 #     at the tail), colours too marginal to model - they read white-ish
@@ -137,5 +147,27 @@ connections:
 #     unreferenced connector is dropped from the drawing, so declaring
 #     them would imply coverage that does not exist. (bench, #8)
 #   - meter lamp feed: reads R; R vs Br marginal at the speedo. (#8)
-#   - WHICH physical 10A holder is FUSE_A vs FUSE_HEAD. (bench, #3)
+#
+#   NEW 28 Aug 2026, all from the meter:
+#   - A SECOND Y/R NET exists, on the fuse-box and starter-relay branch,
+#     open to the modelled coil-feed Y/R. It is a circuit this model
+#     does not carry AT ALL. Not drawn, because nothing yet says what it
+#     is - find both its ends before inventing a cable for it.
+#   - THE IGNITION FEED. The 20A fuse's output leg is W/R and the W/R
+#     net never reaches the headlight junction, so the white drawn from
+#     MF to the ignition switch is either the wrong colour or the wrong
+#     route. See the MF notes.
+#   - HOLDER 3's ORIENTATION - which terminal is the input. Settles
+#     where the ignition switch's TAIL1 pin gets its power, and whether
+#     the right-bar splice back-feeds the TAIL fuse. See FUSE_TAIL.
+#   - WHAT FEEDS Bl/W, and which way it runs between the fuse box and
+#     the right-bar branch. See FUSE_HEAD and RH_BLW.
+#   - BROWN AT THE LEFT-BAR 6P. The switched bus reaches it; the
+#     modelled way list has no room for it. (see LH)
+#   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and
+#     one mid-harness, both on the switched bus.
+#   - WHICH GROUND NET each modelled ground lead belongs to. Only one
+#     (the R/R ground) is measured. See GND_CHASSIS and GND_NETB.
+#   - A SPLICE UNDER THE TAPE on the Br/W net - three endpoints, and
+#     the bullet at one of them holds a single wire. Step 3.
 # =====================================================================

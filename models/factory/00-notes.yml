@@ -20,12 +20,33 @@
 # placeholder lengths for a harness we are not building would put fake
 # numbers in the BOM.
 #
-# COVERAGE: full-vehicle as of 19 Aug 2026. The 600 dpi scan pass added
+# COVERAGE: full-vehicle as of 19 Aug 2026, off the 600 dpi scan -
 # lighting, horn, instruments, brake switches, both 6P junctions and
-# the complete fuse topology (a cascade - see the backbone sheet).
+# the fuse topology. Source scans live in the repo:
+# KZ305-B1-wiring-diagram-600dpi.png.
+#
+# REVISED 28 Aug 2026 BY RING-OUT. The first pass with a meter across
+# the whole harness, every pigtail disconnected, changed four things
+# this drawing had asserted from the scan:
+#
+#   - THE FUSE CASCADE DOES NOT EXIST. The box has no internal bus and
+#     no brown reaches it. Three independent holders, printed MAIN,
+#     HEAD and TAIL. FUSE_A and SP_BLW are deleted.
+#   - THERE ARE TWO GROUND NETS, not one, and only one of them reaches
+#     the ring terminal. See GND_CHASSIS and GND_NETB.
+#   - THE R/R OUTPUT is brown and lands on the switched brown bus, not
+#     white to the solenoid - so charging current runs through the
+#     ignition switch.
+#   - THE BROWN BUS is fed by the ignition switch directly, not
+#     energised through the right-bar branch.
+#
+# Where the bench contradicted the drawing without establishing what
+# replaces it, the drawing is LEFT AS IT WAS with the conflict written
+# into the notes - see MF/W_IGN_FEED and SP_RH_BR. A reference drawing
+# that guesses is worse than one that says it does not know.
+#
 # Remaining unknowns are listed at the foot of signals.yml; all are
-# bench items, none block the drawing. Source scans now live in the
-# repo: KZ305-B1-wiring-diagram-600dpi.png.
+# bench items, none block the drawing.
 #
 # Anything marked TBD is unverified. The harness is on the bench; ring
 # it out rather than trusting this drawing.

@@ -11,25 +11,48 @@
 # ---------------------------------------------------------------------
 # BLOCKED - do not cut wire against this file yet
 #
-#   1. Factory transcription COMPLETE as of 19 Aug 2026 - lighting,
-#      signals, horn, instruments, brake switches, both 6P junctions
-#      and the fuse topology are all read off the 600 dpi scan. The
-#      remaining unknowns (horn-button ground colour, ignition R/BK
-#      source, two instrument-6P ways, accessory leads) are bench
-#      items listed at the foot of models/factory/signals.yml. None
-#      of them block drawing; two of them block CUTTING.
+#   1. Factory transcription complete as of 19 Aug 2026 and REVISED
+#      28 Aug 2026 by the first ring-out. Remaining unknowns are
+#      listed at the foot of models/factory/signals.yml.
 #
-#      KEY FINDING for this rebuild: stock is a FUSE CASCADE. One 10A
-#      carries ignition, starter trigger, horn, signals, brakes AND
-#      (through the second 10A) the headlight. Only tail/park escapes.
-#      The per-circuit cavity map (#10) is not gold-plating; it fixes
-#      a real single point of failure.
-#   2. No lengths. The old harness is the ONLY length reference - the
-#      bike is in pieces and the engine is out, so runs cannot be
-#      measured off the chassis. Measure every branch off the old
-#      harness while it is still laid out flat, BEFORE it is cut up or
-#      binned. Until then the BOM is meaningless; render with -f hps.
-#   3. Fuse block part not selected - depends on final circuit count.
+#      THE FUSE-CASCADE ARGUMENT IS WITHDRAWN. It was read off the
+#      scan; the box on the bench has no internal bus and no brown
+#      reaches it. Three independent circuits, printed on the box
+#      itself: 20A MAIN, 10A HEAD, 10A TAIL. One 10A does NOT carry
+#      the whole bike.
+#
+#      The per-circuit cavity map survives that, on better evidence:
+#
+#        - THE EARTH, NOT THE FUSING, WAS THE COMMON-MODE FAILURE.
+#          Two ground nets, and the big one never reaches the ring
+#          terminal at all - it earths through component mounting
+#          hardware, outside the harness. See 5 below.
+#        - A GAUGE STEP AT A BULLET ON THE 20A MAIN. That is where
+#          the old harness melted, and the mechanism is topology, not
+#          age - see W_MAIN_OUT.
+#        - CHARGING RUNS THROUGH THE IGNITION SWITCH. Every alternator
+#          amp passes the switch contacts in stock form. See RR.
+#   2. No lengths YET, but the reference now exists: Step 1 measured
+#      46 branches off the old harness, datum and trunk map recorded,
+#      before anything was cut. Lengths still are not in this file -
+#      transferring them is its own pass, and the BOM stays
+#      meaningless until it happens. Render with -f hps.
+#   3. Fuse block part not selected - depends on final circuit count,
+#      which now also depends on 5.
+#   4. GAUGE IS UNMEASURED, harness-wide. Not one wire has had its
+#      gauge taken with a tool; every bench value is an eyeball
+#      estimate against an unverified 18 AWG baseline. Do not size
+#      rebuild wire against the measurement log until the gauge pass
+#      is done.
+#   5. NEW BLOCKER, 28 Aug 2026 - THE STAR GROUND IS BIGGER THAN
+#      DRAWN. The stock harness earths most components through their
+#      own mounting hardware rather than through a ground wire, so
+#      every one of those needs a NEW wire back to the bus. Those
+#      wires do not exist in the old harness and appear nowhere in
+#      either model. The count is the count of ground Net B's earth
+#      points and it is NOT YET KNOWN - each has to be traced through
+#      its own child harness. Until it is, the bus way count below is
+#      a guess and the circuit count is not final.
 # ---------------------------------------------------------------------
 #
 # DESIGN DECISIONS  (16 Aug 2026)
@@ -120,24 +143,41 @@
 #     Its contact measured a healthy 0.1 ohm, so this is preventive.
 #     Fails safe (open = bike dead, key does nothing).
 #
-#   K_HORN - DECIDED, NOT YET DRAWN. Blocked on transcription: the horn
-#     and the left cluster are not modelled yet. Design is settled -
-#     the horn button switches the GROUND side, so the relay coil takes
-#     switched power on 86 and the button pulls 85 to ground; contacts
-#     then pass horn current. Behaviour is unchanged, the button just
-#     stops carrying the load. Justification is measured, not assumed:
-#     the horn is only ~2A, but the RIGHT cluster contacts came back at
-#     3-5 ohm, and 3 ohm at 2A is a 6V drop - a horn that barely sounds.
-#     The left cluster is the same age and construction.
+#   K_HORN - DECIDED, NOT YET DRAWN, AND NO LONGER BLOCKED. The horn and
+#     the left cluster were transcribed 19 Aug, and 28 Aug confirmed the
+#     topology by meter: the horn button return is its own black net,
+#     left bar to horn, open to the starter-trigger black. So the button
+#     does switch the GROUND side, as the design assumed - the relay
+#     coil takes switched power on 86 and the button pulls 85 to ground;
+#     contacts then pass horn current. Behaviour unchanged, the button
+#     just stops carrying the load. Justification is measured: the horn
+#     is only ~2A, but the RIGHT cluster contacts came back at 3-5 ohm,
+#     and 3 ohm at 2A is a 6V drop - a horn that barely sounds. The left
+#     cluster is the same age and construction. Draw it with the rest of
+#     the lighting branch.
 #
-#   HEADLIGHT - DEFERRED, and blocked on a measurement you already have
-#     on the sheet. The dimmer COMMON is still unresolved (open since
-#     13 Aug, Check 4), and you cannot wire a beam relay without knowing
-#     which pin is the feed. It also needs TWO relays or a changeover,
-#     since the dimmer selects between beams. Meter the dimmer, pick the
-#     LED headlight, measure its actual draw on the 87V 10A range, then
-#     decide. Stock was 4.2A; an LED unit under ~2A through a cleaned
-#     switch does not need a relay.
+#   HEADLIGHT - UNBLOCKED 28 Aug 2026, still deferred on one number.
+#     The dimmer is metered and the common is settled: Bl is the common
+#     and the supply, R/BK is HI, R/Y is LO. Open since 13 Aug, and it
+#     was the thing standing in the way of a beam relay. The harness
+#     side agrees independently - the HEAD fuse feeds Bl up to the bar -
+#     which also establishes the case for relaying rather than assuming
+#     it: the FULL LAMP LOAD passes through the bar-switch contacts,
+#     fused and then switched at the handlebar.
+#
+#     TWO CONSTRAINTS FOR THE DESIGN, both now measured:
+#       - It needs TWO relays or a changeover, since the dimmer selects
+#         between beams rather than switching one.
+#       - THE WIPER IS MAKE-BEFORE-BREAK. R/BK and R/Y blip closed
+#         while the switch moves, so both beam outputs are tied for the
+#         instant of the change. A two-relay scheme must TOLERATE both
+#         coils energised together rather than assume the outputs are
+#         mutually exclusive. Not a fault and normal for the type - but
+#         it is exactly the assumption a naive two-relay wiring makes.
+#
+#     What is left is the load: pick the LED headlight and measure its
+#     actual draw on the 87V 10A range. Stock was 4.2A; an LED unit
+#     under ~2A through a cleaned switch does not need a relay at all.
 #
 #   Do not relay everything. Each relay is a socket, a ground and a
 #   failure point. Relay where the switch is old AND the current is high.
@@ -153,10 +193,18 @@ connectors:
     subtype: to bare chassis stud
     pinlabels: [BATT, RR, SOL, RELAY 1, RELAY 2, ENG, LAMPS, SPARE]
     notes: |-
-      UPGRADE - replaces the single stock Y/BK ring terminal, which was the harness's one common-mode
-      failure point. Frame is powder coated; mask or scrape the stud back to bare metal. Acceptance is
-      0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor - treat it as pass/fail, not a
-      measurement.
+      UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces
+      is not what this note used to say. There is no single ring terminal carrying the harness. There
+      are TWO ground nets: a small Y/BK net that does reach the ring, and a harness-wide BK/Y net that
+      is OPEN to it and earths through the child harnesses at component mounting points - engine block,
+      frame, wherever each part is bolted. One ring terminal, many earth points.
+      GOOD NEWS: the big net is ONE net, not four, so it is one thing to re-terminate.
+      BAD NEWS, AND IT IS SCOPE: every component that earthed through its mounting now needs a wire
+      back to this bus that the old harness never had. The way list below is provisional until that
+      count is known, and the frame is being powder coated, which removes the earth path those
+      components were silently using.
+      Mask or scrape the stud back to bare metal. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V,
+      which is the meter's floor - treat it as pass/fail, not a measurement.
 
   MF:
     <<: *main_fuse
@@ -167,12 +215,16 @@ connectors:
     subtype: TBD - part not selected
     pinlabels: [MAIN STUD, F1 IGN SW FEED, F2 KILL FEED, F3 COIL PWR, F4 SPARE, SW IN (Br), SW OUT (Br)]
     notes: |-
-      UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL and circuit
-      count is not final until the factory transcription is complete. F2 feeds the KILL SWITCH, not the
-      coils directly - see SP_YR. PART CHOICE - the relay decisions now settle this - the design needs
-      roughly 6-8 fused circuits AND 3-5 relay positions, which points at a sealed RTMR-style relay/fuse
-      module rather than a plain blade fuse block. F1 may also downsize once the tail circuit is
-      transcribed, since it now feeds only relay coils plus the park-fed tail.
+      UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
+      count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
+      SWITCH, not the coils directly - see SP_YR. PART CHOICE - the relay decisions point at a sealed
+      RTMR-style relay/fuse module rather than a plain blade fuse block: roughly 6-8 fused circuits and
+      3-5 relay positions.
+      BASELINE FOR THE LAYOUT, mapped off the old box 28 Aug 2026 with every fuse pulled. Three
+      independent holders, no internal bus, each carrying its printed name: 20A MAIN (W in, W/R out),
+      10A HEAD (Bl/W in, Bl out to the dimmer), 10A TAIL (R/Bl and Br/W, orientation not yet measured).
+      That is what the block has to cover as a floor, not a set of wires to reproduce - the old box and
+      its fixed pigtail do not survive.
 
   IGN:
     <<: *ign_switch
@@ -205,7 +257,8 @@ connectors:
       FH009-FH020 family), $16-22 openly sold; Eastern Beaver preferred for correct crimps and DC gauge.
       OPEN CHECK - part-selection.md wants the DC pair heavy gauge and direct to the battery, fused at
       the battery end; the model currently routes DC+ to the PDM main stud. Reconcile before cutting
-      wire. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
+      wire - and note that the stock harness took the opposite approach and ran the whole charging
+      current through the ignition switch, confirmed by continuity 28 Aug 2026. See W_RR_OUT. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
       actually is. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V
       AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the
       ignition on, and never disconnect the battery while running.
@@ -252,23 +305,43 @@ connectors:
       plug-in point for an EI module later.
 
 # ---------------------------------------------------------------------
-# CARRY-OVER FROM THE FACTORY BRANCH MAP (17 Aug 2026)
+# CARRY-OVER FROM THE FACTORY BRANCH MAP (17 Aug 2026, revised 28 Aug)
 #
 #   The right bar is a DISTRIBUTION POINT in the stock harness, not just
-#   a switch location - the switched brown splits three ways there and
-#   feeds two taps (Br/W to the 4P, Bl/W to a bullet) whose destinations
-#   are not yet traced. Whatever those feed still needs feeding in the
-#   new harness. Do not finalise the right-bar branch until both are
-#   chased down, or two circuits will simply be missing.
+#   a switch location - the switched brown splits three ways there, with
+#   Br/W going to the 4P and Bl/W to a bullet. BOTH FAR ENDS ARE NOW
+#   FOUND, and both land on the fuse box: Br/W is continuous to the box
+#   and so is Bl/W. What is NOT settled is which way either one runs.
+#   Whatever they feed still needs feeding in the new harness, and a
+#   through-connection needs different wire from a tap. Do not finalise
+#   this branch until the ring-out gives both directions.
+#
+#   ALSO CARRY OVER, and it is a circuit rather than a direction: a
+#   SECOND Y/R NET exists on the old harness, on the fuse-box and
+#   starter-relay branch, open to the coil-feed Y/R. Neither model
+#   carries it. A circuit missing from the factory transcription is a
+#   circuit that will not exist on the bike - find both its ends.
 # ---------------------------------------------------------------------
 
 cables:
 
   W_BAT_SOL:  {<<: *w6,  colors: [RD]}
   W_SOL_SM:   {<<: *w6,  colors: [BK]}
-  W_BAT_GND:  {<<: *w6,  colors: [BK]}
+  W_BAT_GND:
+    <<: *w6
+    colors: [BK]
+    notes: Plain black, deliberately. The stock harness has BOTH Y/BK and BK/Y in it on two different ground nets, which cost this project a fortnight of dispute before the bench settled it - the new build does not inherit that ambiguity.
   W_MAIN_IN:  {<<: *w14, colors: [WH]}
-  W_MAIN_OUT: {<<: *w14, colors: [WH]}
+  W_MAIN_OUT:
+    <<: *w14
+    colors: [WH]
+    notes: |-
+      DESIGN INPUT FROM THE OLD HARNESS, 28 Aug 2026 - the one condition finding worth carrying into a
+      new build. The stock harness melted at a bullet on this circuit: the 20A MAIN output, the highest
+      current path on the bike, at a joint where the conductor size STEPS from one gauge to another.
+      That is topology, not age. Build the same step at the same place in new wire and it heats again.
+      So: no gauge change at a connector on the main power path, and no bullet carrying it. One gauge
+      from the fuse to the distribution stud, and a terminal rated for it.
   W_IGN_FEED: {<<: *w16, colors: [WH]}
   W_IGN_RET:
     <<: *w18
@@ -329,7 +402,16 @@ cables:
     colors: [BK]
     notes: Direct to the star bus. CONFIRMED 15 Aug 2026 - no neutral-switch interlock in this circuit.
   W_ALT:     {<<: *w14, colors: [YE, YE]}
-  W_RR_OUT:  {<<: *w14, colors: [WH]}
+  W_RR_OUT:
+    <<: *w14
+    colors: [WH]
+    notes: |-
+      THE OPEN CHECK ON THIS ROUTE NOW HAS EVIDENCE BEHIND IT. In stock form the R/R output is brown
+      and lands on the switched brown bus, so every charging amp returns to the battery THROUGH THE
+      IGNITION SWITCH CONTACTS - measured 28 Aug 2026, not read off the diagram. Whatever this rebuild
+      does, it must not reproduce that. part-selection.md wants the DC pair heavy and direct to the
+      battery, fused at the battery end; this file still routes DC+ to the PDM main stud. Reconcile
+      before cutting - the stock arrangement is now a documented reason to prefer the direct route.
   W_RR_GND:  {<<: *w14, colors: [BK]}
 
 connections:
@@ -426,8 +508,19 @@ connections:
     - GND: [2]
 
 # =====================================================================
-# NOT YET DRAWN - blocked on factory transcription
-#   headlight + dimmer, 4x turn signals + flasher, horn, tail/brake,
-#   license lamp, front/rear brake switches, instrument + indicator
-#   lamps, neutral indicator, 6P junctions, accessory leads
+# NOT YET DRAWN
+#
+#   From the factory transcription, which is now complete enough to
+#   draw them: headlight + dimmer (with K_HORN and the beam relays),
+#   4x turn signals + flasher, horn, tail/brake, front/rear brake
+#   switches, instrument + indicator lamps, neutral indicator, 6P
+#   junctions, accessory leads.
+#
+#   NOT FROM THE FACTORY MODEL AT ALL, added 28 Aug 2026: the ground
+#   wires for every component that earths through its own mounting
+#   hardware in stock form. They have no counterpart to copy - the old
+#   harness simply does not contain them - and the count is unknown
+#   until ground Net B's earth points are traced through their child
+#   harnesses. This is the largest single unknown in the rebuild's
+#   wire count. See blocker 5 and the GND notes.
 # =====================================================================

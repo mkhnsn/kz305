@@ -3,6 +3,15 @@
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
 # See models/kz305-factory.yml for the model-wide notes.
+#
+# CONNECTOR IDENTITY ESTABLISHED 28 Aug 2026. The yellow collision -
+# alternator phases versus the left points lead - could not be settled
+# by gauge, because both yellow candidates look like the rest of the
+# harness on the bench. Continuity settled it: both wires of the trunk's
+# yellow pair ring through to slots in one 4-pin connector and are not
+# continuous with each other. So that pair is W_ALT and that 4P is the
+# R/R connector. The left points and condenser leads are elsewhere and
+# remain unlocated.
 
 connectors:
   ALT:
@@ -10,15 +19,33 @@ connectors:
   RR:
     <<: *regrec
     pinlabels: [AC1, AC2, DC OUT, GND]
+    notes: Shunt type - it dumps surplus as heat, so LED load reduction makes it run HOTTER. Check 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on. CONNECTOR CONFIRMED 28 Aug 2026 by continuity from the alternator phase pair. The alternator is single phase, so the four ways are fully accounted for - two AC in, DC out, ground - and there is NO SPARE PIN. That is what forces the brown wire on this connector to be the DC output rather than a sense or field lead.
 
 cables:
   # --- charging -----------------------------------------------------
-  W_ALT:    {<<: *w14, colors: [YE, YE]}
+  W_ALT:
+    <<: *w14
+    colors: [YE, YE]
+    notes: GAUGE NOT ESTABLISHED. At the bench 28 Aug 2026 both yellows looked like the harness's common size rather than heavier, which would make them 18 AWG - but no wire in this harness has had its gauge measured with a tool, and "the common size" is itself an unverified label. An eyeball comparison against an unverified reference is not a bench finding, so the modelled 14 AWG stands. Recheck during the gauge pass; if the yellows are 18 AWG this is wrong and gets corrected then.
   W_RR_OUT:
     <<: *w14
-    colors: [RDWH]
-    notes: UPDATED 19 Aug 2026 - the 600 dpi scan draws the DC output leaving the R/R on a pink/striped lead (reads R/W) that runs forward and lands at the battery-positive / starter-relay junction, which is what the model already assumed topologically. Colour and the physical lug are still bench items - the read is clear on route, marginal on stripe.
-  W_RR_GND: {<<: *w14, colors: [BK]}
+    colors: [BN]
+    notes: |-
+      CORRECTED 28 Aug 2026 ON BOTH COUNTS - colour and destination. Was drawn R/W running to the
+      starter-relay junction, read off the 600 dpi scan. On the bench the R/R connector's brown wire
+      rings 0.0 ohm to the ignition switch's brown output, and the connector has no spare pin for
+      brown to be anything but the DC output.
+      Bench beats document, and unlike the gauge questions this rests on nothing unmeasured: a
+      continuity reading between two connectors whose identity is established.
+      DESIGN CONSEQUENCE, and it is the kind that only shows up by ringing the harness rather than
+      reading the drawing: charging current returns to the battery THROUGH THE IGNITION SWITCH
+      CONTACTS - R/R, brown bus, switch (ON closes W to Br), battery. Every amp the alternator makes
+      passes through a 44-year-old switch. Something for the rebuild to consider rather than reproduce
+      unexamined; the rebuild already routes DC+ separately.
+  W_RR_GND:
+    <<: *w14
+    colors: [BKYE]
+    notes: MOVED TO NET B 28 Aug 2026, and it is the only ground lead in this model whose net is actually measured. Black base, BK/Y - it rings continuous with every other black-base point in the harness and OPEN to the chassis ring terminal. Colour corrected from plain BK at the same time.
 
 connections:
   # --- charging ------------------------------------------------------
@@ -27,7 +54,7 @@ connections:
     - RR: [1,2]
   - - RR: [3]
     - W_RR_OUT: [1]
-    - SOL: [1]
+    - SP_BR: [1]
   - - RR: [4]
     - W_RR_GND: [1]
-    - GND_CHASSIS: [1]
+    - GND_NETB: [1]

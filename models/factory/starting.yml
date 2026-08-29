@@ -16,7 +16,7 @@ cables:
   W_START:
     <<: *w18
     colors: [BK]
-    notes: Starter button output to relay COIL+. BK but NOT a ground.
+    notes: Starter button output to relay COIL+. BK but NOT a ground. CONFIRMED 28 Aug 2026 by continuity - a black net of its own from the right-bar 4P to the starter-relay branch, open to the horn-button black. Corroborated by a switch table transcribed weeks earlier from an unrelated source (Push = Y/R to BK) and by the 15 Aug note recording COIL+ as the BK lead from the start button.
   W_SOL_GND:
     <<: *w18
     colors: [BK]

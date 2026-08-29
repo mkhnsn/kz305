@@ -18,7 +18,19 @@ connectors:
     style: simple
     type: Splice
     subtype: 1 to 3, Br
-    notes: MAPPED 17 Aug 2026. Four legs - Bl/W IN from a fuse, then out to the kill switch (Br), and onward into the harness as Br and Br/W via the 4P. So the right bar is a DISTRIBUTION POINT fed from a fuse, not a set of taps hanging off a bus. RESOLVED 19 Aug 2026 off the 600 dpi scan - the Br return leg energises the accessory bus (SP_BR) and the Br/W leg feeds BOTH brake switches. Bench-verify with the ring-out.
+    notes: |-
+      MAPPED 17 Aug 2026 by unsleeving - four legs, and the splice itself is a physical observation
+      that stands. What it does is now in question. The 19 Aug reading, that the Br leg ENERGISES the
+      switched bus and the Br/W leg ORIGINATES both brake-switch feeds, does not survive the 28 Aug
+      ring-out: the switched brown is one net fed directly by the ignition switch, and Br/W is
+      continuous from the FUSE BOX to this 4P. Both of those legs now look like arrivals rather than
+      departures.
+      That reverses the direction of this node - a distribution point fed on brown from the bus, with
+      Bl/W and Br/W as through-connections rather than outputs. It also raises a question the ring-out
+      cannot answer with the switchgear unplugged, which is how it was measured: tying Br to Br/W here
+      would join the switched bus to the TAIL fuse's output when the cluster is mated. Either this
+      splice is misread or holder 3 is oriented the other way. Not redrawn on inference - unsleeve it
+      again with the net map in hand.
   RH_4P:
     type: Junction
     subtype: 4-pin connector, right bar
@@ -28,7 +40,7 @@ connectors:
     type: Bullet connector
     subtype: Bl/W, right bar
     pinlabels: [Bl/W]
-    notes: THE FEED INTO THIS BRANCH, not a tap out - traced to a fuse 17 Aug 2026. Mates Bl/W to Bl/W across the bullet. Supersedes the accessory-lead guess, which was wrong about direction. Fused switched power arrives here, and the branch splice distributes it to the kill switch and out again as Br and Br/W.
+    notes: Mates Bl/W to Bl/W across the bullet, and the conductor runs to the fuse box - the 17 Aug trace and the 28 Aug net map agree on that much. WHICH WAY POWER FLOWS IS OPEN. Traced 17 Aug as the FEED into this branch; the HEAD fuse's orientation, settled 28 Aug on the dimmer, makes it the branch's feed INTO that fuse instead. Ring it before building anything that assumes a direction.
   SP_YR:
     style: simple
     type: Splice
@@ -39,7 +51,14 @@ cables:
   W_RH_IN:
     <<: *w18
     colors: [BUWH]
-    notes: Fuse output to the right-bar branch. This is the FEED, traced 17 Aug 2026 - it is not a tap.
+    notes: |-
+      REPINNED 28 Aug 2026 onto the fuse panel's Bl/W way, which is now identified - it was drawn on
+      the way the deleted FUSE_A used. The conductor is unchanged and the topology is unchanged: Bl/W
+      between the fuse box and this bullet, which is exactly the harness pair the bench found and has
+      not yet rung.
+      DIRECTION IS THE OPEN QUESTION. The 17 Aug trace called this the FEED into the branch. The HEAD
+      fuse's settled orientation (Bl/W in, Bl out) makes it a feed OUT of the branch into that fuse.
+      Both readings are in the record; ring B01.1 to B06.5, and both against the main W/R net.
   # --- kill switch output: coils AND starter button -----------------
   W_YR_OUT:
     <<: *w16
@@ -52,11 +71,11 @@ cables:
   W_RH_BRW:
     <<: *w18
     colors: [BNWH]
-    notes: Same net as the kill switch feed. RESOLVED 19 Aug 2026 - beyond the 4P this leg feeds the front AND rear brake light switches (see brakes sheet). The scan corroborates the 15 Aug inventory that found Br/W in the right-bar 4P.
+    notes: Same net as the kill switch feed on the switch side of the 4P. BEYOND THE 4P THE SOURCE HAS CHANGED - 28 Aug 2026 continuity makes Br/W at this connector continuous with the fuse box (see W_BRW_HARNESS on the backbone sheet), so the brake-switch feeds are fed from there rather than generated at this splice. Measured with the switchgear unplugged, so the two halves were separate nets during the reading.
   W_BR_BUS:
     <<: *w16
     colors: [BN]
-    notes: The right-bar Br return leg. Read off the 600 dpi scan 19 Aug 2026 - it joins the Br trunk just aft of the bar drop and is what ENERGISES the accessory bus. Horn, flasher and neutral indicator are live only because this leg is.
+    notes: The right-bar brown leg, joining the Br trunk just aft of the bar drop. STILL DRAWN, BUT NO LONGER THE SOURCE - 28 Aug 2026 continuity puts the ignition switch's brown output on this net at 0.0 ohm, so the bus is fed at the switch and this leg is a tap off it, not what energises it. The connection is the same wire either way; only the arrow of causation changed.
   W_RH_BLW:
     <<: *w18
     colors: [BUWH]
@@ -98,12 +117,12 @@ connections:
     - W_YR_OUT: [1]
     - SP_YR: [1]
 
-  # --- fused feed arriving at the right bar - Bl/W, traced 17 Aug ----
-  - - FUSE_4P: [2]
+  # --- Bl/W between the fuse panel and the right bar - direction open --
+  - - FUSE_4P: [1]
     - W_RH_IN: [1]
     - RH_BLW: [1]
 
-  # --- Br return leg energising the accessory bus --------------------
+  # --- right-bar brown: a tap on the bus, not its source --------------
   - - RH_4P: [1]
     - W_BR_BUS: [1]
     - SP_BR: [1]
