@@ -35,7 +35,19 @@ connectors:
     type: Junction
     subtype: 4-pin connector, right bar
     pinlabels: [Br, Br/W, Y/R, BK]
-    notes: Wire count now reconciles - 4 leads at the switch become 4 pins here plus one bullet. The two Y/R merge 2-to-1; the single Br expands to Br plus Br/W, with Bl/W leaving separately.
+    notes: |-
+      Wire count now reconciles - 4 leads at the switch become 4 pins here plus one bullet. The two Y/R
+      merge 2-to-1; the single Br expands to Br plus Br/W, with Bl/W leaving separately.
+      ** WAY-LIST CONFIRMED AGAINST THE CONNECTOR, 4-of-4, 29 Aug 2026. ** The bench cavity order -
+      mating face, keyway up, left to right, top row first - is Br, Br/W, Y/R, BK, exactly as drawn.
+      No renumber needed, unlike FUSE_4P whose ways turned out to be grouped by holder rather than
+      recorded. This connector's pin numbers were a record all along.
+      PHYSICAL: 4-way rectangular, the SMALLER of the two four-way series in this harness, with MALE
+      spades on the harness side. B06.5 at the fuse box is the same series in the opposite gender.
+      NOT the same part as the R/R's 4P - see measurements/README on why type is load-bearing.
+      PART SELECTION: this one IS reproduced. The rebuild retains the right-bar switchgear, so the new
+      harness has to mate its pigtail in the male half of this series. The series is not yet identified
+      and no dimension has been measured on it.
   RH_BLW:
     type: Bullet connector
     subtype: Bl/W, right bar

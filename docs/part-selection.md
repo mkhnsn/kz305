@@ -170,6 +170,26 @@ longer holds, and the same override written for the OEM discount route applies:
   either works or does not, and it is testable (each AC leg to ground reads
   infinity; verify 14.0–14.5 V behavior on the bike)
 
+### Right-bar 4P — a connector the rebuild must reproduce (29 Aug 2026)
+
+Most stock connectors are archival: the fuse box, the R/R and their housings are
+all replaced by new parts with their own terminations. **The right-bar 4P is
+not.** The rebuild retains the right-bar switchgear, so the new harness has to
+mate that pigtail.
+
+- It is the **smaller** of the two four-way rectangular series in this harness —
+  **not** the same part as the R/R's 4P (`B04.3`).
+- The harness half carries **male spades**; `B06.5` at the fuse box is the same
+  series in the opposite gender, and is the sample to measure without
+  disturbing the switchgear.
+- **Nothing has been measured on it** — no terminal width, no depth, no series
+  identification. Do that before ordering, and do not borrow `B04.3`'s 5.96 mm
+  blade or 24.5 mm depth; they are a different part.
+- Housing marks: a `4` and a small flower logo. A part-identification lead only.
+
+The same question applies to the left-bar 6P (`B02.3`) and the instrument 6P
+(`B00.1`), which have not been examined as parts yet.
+
 **Still to order: the two mating pigtails** — 3-pin AC + 2-pin DC, Shindengen
 spec, covered under "Connectors" below. Eastern Beaver preferred for correct
 terminal crimps and DC-side wire gauge.
