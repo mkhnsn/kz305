@@ -125,8 +125,22 @@ templates:
   ign_switch: &ign_switch
     type: Ignition switch
     subtype: 4-pin
-    pinlabels: [BATT (W), IGN (Br), TAIL1 (R/BK), TAIL2 (R)]
-    notes: METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_BK-R. PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function.
+    pinlabels: [BATT (W), TAIL2 (R), IGN (Br), TAIL1 (R/Bl)]
+    notes: |-
+      METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_Bl-R.
+      PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function.
+      ** WAYS RENUMBERED TO PHYSICAL CAVITIES 29 Aug 2026 ** - mating face, keyway up, left to right,
+      top row first: 1 W, 2 R, 3 Br, 4 R/Bl. They were previously listed in the printed table's
+      column order, which is not the connector's. Both models were swept for pin references.
+      ** TAIL1 IS R/Bl, NOT R/BK - CORRECTED 29 Aug 2026. ** The printed table gives R/BK and the
+      600 dpi scan cannot separate the two. BOTH HALVES of B00.3 were read at the bench and both are
+      RED base with a BLUE tracer - the switch's own pigtail independently of the harness wire. Two
+      physical reads against one scan. R/BK is a real colour on this bike (the dimmer beam outputs),
+      which is why this was never an obvious slip.
+      CONNECTOR CONFIRMED as this switch 29 Aug 2026: 4 ways, W R Br R/Bl, 4-of-4 on the mirror, and
+      no other 4-way in the harness carries that set. Identified by elimination, not resemblance.
+      The BATT white is visibly heavier than the harness's common wire - eyeball only, see the
+      gauge caveat.
 
   rh_cluster: &rh_cluster
     type: Right bar cluster

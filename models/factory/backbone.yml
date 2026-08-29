@@ -357,7 +357,7 @@ connections:
     - IGN: [1]
 
   # --- ignition switch ON: W to Br, Br onto the switched bus ---------
-  - - IGN: [2]
+  - - IGN: [3]
     - W_BR_MAIN: [1]
     - SP_BR: [1]
 

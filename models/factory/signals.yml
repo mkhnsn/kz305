@@ -181,6 +181,19 @@ connections:
 #     them would imply coverage that does not exist. (bench, #8)
 #   - meter lamp feed: reads R; R vs Br marginal at the speedo. (#8)
 #
+# CLOSED 29 Aug 2026 at the ignition switch connector:
+#   - TAIL1 IS R/Bl, NOT R/BK. Both halves of B00.3 read red base with a
+#     blue tracer - the switch's own pigtail independently of the
+#     harness wire. Two physical reads against one 600 dpi scan, which
+#     cannot separate them. R/BK is real on this bike (the dimmer HI
+#     output), which is why it was never an obvious slip. The printed
+#     table in docs/kz305-b1-wiring.md is annotated, not rewritten - it
+#     transcribes the diagram, and the diagram does say R/BK.
+#   - B00.3 IS the ignition switch, by elimination: no other 4-way in
+#     the harness carries W + R + Br + R/Bl, and family, gender and way
+#     count agree. Mirror 4-of-4, no dead way - which the variant
+#     hypothesis predicts, since a B1 has a lock switch.
+#
 #   NEW 28 Aug 2026, all from the meter:
 #   - A SECOND Y/R NET exists, on the fuse-box and starter-relay branch,
 #     open to the modelled coil-feed Y/R. It is a circuit this model

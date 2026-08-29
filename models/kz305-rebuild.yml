@@ -473,7 +473,7 @@ connections:
     - W_IGN_FEED: [1]
     - IGN: [1]
   # --- ignition switch drives the main relay coil only --------------
-  - - IGN: [2]
+  - - IGN: [3]
     - W_IGN_RET: [1]
     - K_MAIN: [3]
   - - K_MAIN: [4]

@@ -220,7 +220,18 @@ COLOUR_TOKENS = {
 
 
 def _canon(label):
-    """'Bl/W' -> 'BUWH', 'Br' -> 'BN'. None if the label is not a colour."""
+    """'Bl/W' -> 'BUWH', 'Br' -> 'BN'. None if the label is not a colour.
+
+    Accepts a bare colour ('Br/W'), a colour with a role after it
+    ('Br STOP IN'), or a role with the colour parenthesised ('BATT (W)').
+    The last form is why IGN is covered - without it a connector whose ways
+    are named by function would sit outside the guard entirely, which is
+    exactly where a renumber does its damage unseen.
+    """
+    if "(" in label and ")" in label:
+        label = label[label.index("(") + 1:label.index(")")]
+    else:
+        label = label.split()[0]
     parts = label.replace("-", "/").split("/")
     out = ""
     for part in parts:
@@ -236,13 +247,14 @@ def test_cable_colour_matches_the_pin_it_lands_on(tmp_path):
 
     WireViz cannot catch this: pin 2 exists whatever colour lands on it, so
     renumbering a connector's ways silently repoints every connection that
-    referenced it BY INDEX - including ones in other files. That happened on
+    referenced it BY INDEX - including ones in other files, and including the
+    other model when the connector comes from a shared anchor. That happened on
     29 Aug 2026 when FUSE_4P was renumbered to physical cavities and the
     references in lighting.yml and controls.yml were missed. The render was
     clean and every test passed; the drawing was simply wrong.
 
     Only connectors whose pinlabels are ALL colours are checked, which is the
-    junctions where a way list is a colour map.
+    junctions and switches where a way list is a colour map.
 
     Uses build.py's own merge rather than concatenating the sources: duplicate
     top-level keys resolve last-wins, which is precisely the bug build.py
@@ -253,62 +265,72 @@ def test_cable_colour_matches_the_pin_it_lands_on(tmp_path):
     from wireviz import wv_merge
 
     common = COMMON.read_text(encoding="utf-8")
-    doc = wv_merge.merge([(str(p), build.load(p, common)) for p in FACTORY])
 
-    colour_maps = {}
-    for name, spec in (doc.get("connectors") or {}).items():
-        labels = (spec or {}).get("pinlabels")
-        if not labels:
-            continue
-        canon = [_canon(str(l).split()[0]) for l in labels]
-        if all(canon):
-            colour_maps[name] = canon
-    assert colour_maps, "no colour-mapped connectors found - the guard would be a no-op"
+    def merged(sources):
+        return wv_merge.merge([(str(p), build.load(p, common)) for p in sources])
 
-    cables = {n: (c or {}).get("colors") for n, c in (doc.get("cables") or {}).items()}
+    # Two separate harnesses that reuse component names, so they are checked as
+    # two documents rather than merged into one.
+    docs = {
+        "factory": merged(FACTORY),
+        "rebuild": merged([ROOT / "models" / "kz305-rebuild.yml"]),
+    }
 
-    # Discrepancies that are DELIBERATE and documented in the model notes.
-    # This model leaves a contradiction drawn rather than guessing a fix, so
-    # the guard has to allow those - but each is re-asserted below, so an entry
+    # Discrepancies that are DELIBERATE and documented in the model notes. This
+    # project leaves a contradiction drawn rather than guessing a fix, so the
+    # guard has to allow those - but each is re-asserted below, so an entry
     # cannot outlive the conflict it describes.
     acknowledged = {
-        ("W_IGN_FEED", "MF", 2):
+        ("factory", "W_IGN_FEED", "MF", 2):
             "The 20A fuse's output terminal is W/R on the bench, but this model "
             "still runs white from it to the ignition switch. Either the colour "
             "or the route is wrong and one ring-out settles it; see the MF and "
             "W_IGN_FEED notes. Not resolved by inference.",
     }
 
-    problems = []
-    seen = set()
-    for conn_set in doc.get("connections") or []:
-        entries = [e for e in conn_set if isinstance(e, dict)]
-        cable = next((n for e in entries for n in e if n in cables), None)
-        if cable is None or not cables.get(cable):
-            continue
-        wire = "".join(cables[cable])
-        for entry in entries:
-            for name, pins in entry.items():
-                if name not in colour_maps:
-                    continue
-                for pin in pins:
-                    if not isinstance(pin, int):
+    problems, seen = [], set()
+    for model, doc in docs.items():
+        colour_maps = {}
+        for name, spec in (doc.get("connectors") or {}).items():
+            labels = (spec or {}).get("pinlabels")
+            if not labels:
+                continue
+            canon = [_canon(str(l)) for l in labels]
+            if all(canon):
+                colour_maps[name] = canon
+        assert colour_maps, f"{model}: no colour-mapped connectors - guard is a no-op"
+
+        cables = {n: (c or {}).get("colors") for n, c in (doc.get("cables") or {}).items()}
+
+        for conn_set in doc.get("connections") or []:
+            entries = [e for e in conn_set if isinstance(e, dict)]
+            cable = next((n for e in entries for n in e if n in cables), None)
+            if cable is None or not cables.get(cable):
+                continue
+            wire = "".join(cables[cable])
+            for entry in entries:
+                for name, pins in entry.items():
+                    if name not in colour_maps:
                         continue
-                    expected = colour_maps[name][pin - 1]
-                    if expected == wire:
-                        continue
-                    if (cable, name, pin) in acknowledged:
-                        seen.add((cable, name, pin))
-                        continue
-                    problems.append(
-                        f"{cable} ({wire}) lands on {name} pin {pin}, "
-                        f"which is labelled {expected}"
-                    )
+                    for pin in pins:
+                        if not isinstance(pin, int):
+                            continue
+                        expected = colour_maps[name][pin - 1]
+                        if expected == wire:
+                            continue
+                        if (model, cable, name, pin) in acknowledged:
+                            seen.add((model, cable, name, pin))
+                            continue
+                        problems.append(
+                            f"[{model}] {cable} ({wire}) lands on {name} pin {pin}, "
+                            f"which is labelled {expected}"
+                        )
+
     assert not problems, "cable colour disagrees with the pin's label:\n" + "\n".join(problems)
 
     stale = set(acknowledged) - seen
     assert not stale, (
         "these conflicts are listed as acknowledged but no longer occur - the "
         "model was fixed and the list was not:\n"
-        + "\n".join(f"  {c} on {n} pin {p}" for c, n, p in sorted(stale))
+        + "\n".join(f"  [{m}] {c} on {n} pin {p}" for m, c, n, p in sorted(stale))
     )
