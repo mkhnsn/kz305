@@ -8,6 +8,7 @@ why the measurement log keys on physical branch IDs instead.
 
 | Designator | From | To | Colours | Gauge |
 |---|---|---|---|---|
+| `W_ACC_FUSED` | FUSE_AUX | ACC_R_PWR | WHBU | 18 AWG |
 | `W_ACC_GND_F` | SP_NETA | ACC_F | YEBK | 16 AWG |
 | `W_ACC_GND_R` | SP_NETA | ACC_R | YEBK | 16 AWG |
 | `W_ACC_PWR` | ACC_F_PWR | ACC_R_PWR | WHBU | 18 AWG |
@@ -95,4 +96,4 @@ why the measurement log keys on physical branch IDs instead.
 | `W_TAIL_RUN` | SP_R | TAIL | RD | 18 AWG |
 | `W_YR_OUT` | RH_4P | SP_YR | YERD | 16 AWG |
 
-86 cables.
+87 cables.

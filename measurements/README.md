@@ -335,8 +335,54 @@ this project a fortnight.
 counterpart in the models or the cable index. It is the accessory feed.
 
 **Strong, not proven.** It rests on the geometry, the doc's description, and the
-bullets being unused. It would be confirmed by finding where `W/Bl` takes power
-from, and by `B09`'s mate — still unrecorded.
+bullets being unused.
+
+### `W/Bl`'s source found, 2026-08-29 — a second fuse box
+
+Both open ends of that identification are now closed, and they close together.
+There is a **second fuse box** on this bike, carrying **two fuses**. It is a
+**factory part**, mounted somewhere other than where the bike carries it now.
+
+| | |
+|---|---|
+| In | one large **`R/W`** on a male bullet, splitting to both fuses |
+| Out 1 | **`W/Bl`**, single female bullet, **shows evidence of having been mated** — to `B09` |
+| Out 2 | **`W/BK`**, double-female, oxidised and unused |
+
+So `B09`'s mate is that box's `W/Bl` output, and the accessory feed was **in
+service**. Its inbound `R/W` mates a short jumper off the **starter relay
+assembly**'s own `R/W` female bullet.
+
+**⚠️ `R/W` is red base, and it is not `W/R`.** The main power path — `B04.6` to
+`B06.4`, and the R/R's DC output — is `W/R`, white base. Both wires exist on
+this bike and they are different circuits. `W/BK` is a colour that appears
+nowhere else in this project's map.
+
+### The asymmetry that follows
+
+The accessory **feed** was connected; both accessory **earths** never were.
+`ACC_F` and `ACC_R` sat open their whole lives, on the oxidation evidence. So
+whatever was fed from `W/Bl` returned somewhere other than the harness's own
+accessory ground — most likely straight to the frame.
+
+### It may also explain an old reading rather than contradict it
+
+The pre-28-August model drew `W_RR_OUT` as *"`R/W` running to the starter-relay
+junction"*, read off the 600 dpi scan. **There is an `R/W` at the starter-relay
+junction** — this box's feed. The scan may have read a real wire correctly and
+the model assigned it to the wrong cable. `W_RR_OUT` itself is `W/R`, white
+base, confirmed with the R/R in hand.
+
+### What is still open
+
+- **Where the second box takes power, and whether it is switched.** Its `R/W`
+  goes to the starter relay assembly, which **is not yet mapped**. This matters
+  for the accessory identification: the diagram calls the accessory pickup a
+  *switched* feed, and a lead off the relay's battery side would be permanently
+  live.
+- **`W/BK`'s mate.** None recorded, and it looks like it never had one.
+
+
 
 ### Consequence: Net A has a hidden splice
 

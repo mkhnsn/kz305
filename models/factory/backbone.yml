@@ -258,6 +258,30 @@ connectors:
       The two-point W/R net recorded on 28 Aug (B04.6 to B06.4, 0.1 ohm) is unchanged as a
       measurement; what changed is that one of those points is now identified as the charging output
       rather than an unexplained white-base wire absent from the cable index.
+  FUSE_AUX:
+    type: Fuse box
+    subtype: SECOND box, 2 fuses - factory part, relocated
+    pinlabels: [R/W IN, W/Bl OUT, W/BK OUT]
+    notes: |-
+      FOUND 29 Aug 2026, and it is a FACTORY part - just not where the bike carries it now.
+      A single large R/W feeds in on a MALE bullet and splits to both fuses. One fuse comes out as
+      W/Bl on a single FEMALE bullet, showing evidence of having been mated - to B09, the rear
+      accessory feed. The other comes out as W/BK on a double-female bullet that is oxidised and
+      looks unused.
+      ** R/W IS RED BASE, AND IT IS NOT W/R. ** The main power path (B04.6 to B06.4, and the R/R's
+      DC output) is W/R, WHITE base. Both wires exist on this bike. See the reversed-pairs warning in
+      kz305-common.yml.
+      The R/W inbound bullet mates a short jumper off the STARTER RELAY ASSEMBLY's own R/W female
+      bullet. That assembly is not yet mapped, so where this box takes power - and whether it is
+      switched or permanently live - IS NOT ESTABLISHED.
+      ** THIS MAY EXPLAIN AN OLD READING RATHER THAN CONTRADICT IT. ** The pre-28-Aug model drew
+      W_RR_OUT as "R/W running to the starter-relay junction", off the 600 dpi scan. There IS an R/W
+      at the starter-relay junction - this box's feed. The scan may have read a real wire and the
+      model assigned it to the wrong cable. W_RR_OUT itself is W/R, white base, confirmed with the
+      R/R in hand.
+      NOT DRAWN INTO THE CIRCUIT YET: only the W/Bl output has a known destination. The R/W input
+      waits on the starter-relay assembly map, and W/BK has no recorded mate at all.
+      W/BK is a colour that appears NOWHERE else in this project's map.
   SP_NETA:
     style: simple
     type: Splice
@@ -288,9 +312,9 @@ connectors:
       B00.8, alongside ACC_F and the same 240 mm from the datum. Both slots empty.
       W/Bl is the "blue-family wire" of the diagram's accessory pair. THIS IDENTIFIES THE LAST NET
       IN THE HARNESS THAT HAD NO COUNTERPART in these models or the cable index.
-      WHERE IT TAKES POWER FROM IS NOT ESTABLISHED. The net has only two measured points, this one
-      and ACC_R_PWR, so nothing on the bench feeds it. Either a male plugged into one of these slots
-      brought power in, or B09's mate did. B09's mate is unrecorded.
+      ** ITS SOURCE IS FOUND, 29 Aug 2026: A SECOND FUSE BOX. ** See FUSE_AUX. B09's mate is that
+      box's W/Bl output bullet, which shows evidence of having been mated - so the accessory FEED was
+      in service even though the accessory EARTHS at ACC_F and ACC_R never were.
   ACC_R:
     type: Junction
     subtype: double-female bullet, both slots empty - rear accessory point
@@ -303,8 +327,10 @@ connectors:
     subtype: male - rear accessory feed
     pinlabels: [W/Bl]
     notes: |-
-      B09, at 1060 mm. A MALE bullet, unlike the three double-females of this group. Its mate is not
-      recorded. Same net as ACC_F_PWR - 0.3 ohm, 28 Aug 2026.
+      B09, at 1060 mm. A MALE bullet, unlike the three double-females of this group. Same net as
+      ACC_F_PWR - 0.3 ohm, 28 Aug 2026.
+      ** MATE IDENTIFIED 29 Aug 2026: the W/Bl output of FUSE_AUX, the second fuse box. ** Its female
+      bullet shows evidence of having been mated, unlike everything else in this accessory group.
   SP_BR:
     style: simple
     type: Splice
@@ -342,6 +368,14 @@ cables:
       difference the meter found.
       Gauge reads heavier than the harness's common wire, 16-18 by eye and DEFINITIVELY not 6 AWG -
       so this is not the battery earth strap. See W_BAT_GND.
+  W_ACC_FUSED:
+    <<: *w18
+    colors: [WHBU]
+    notes: |-
+      The second fuse box's W/Bl output, to B09. Its female bullet shows evidence of having been
+      mated - the only terminal in the accessory group that does. So the accessory FEED was in
+      service while both accessory EARTHS sat unused, which is a real asymmetry and not an
+      assumption: ACC_F and ACC_R were never connected at all.
   W_ACC_PWR:
     <<: *w18
     colors: [WHBU]
@@ -487,6 +521,9 @@ connections:
     - ACC_R: [1]
   - - ACC_F_PWR: [1]
     - W_ACC_PWR: [1]
+    - ACC_R_PWR: [1]
+  - - FUSE_AUX: [2]
+    - W_ACC_FUSED: [1]
     - ACC_R_PWR: [1]
 
   # --- battery main and chassis ground ----------------------------

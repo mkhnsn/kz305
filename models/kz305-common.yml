@@ -57,6 +57,21 @@
 #      Bl  = brake lamp feed AND the fused headlight supply to the dimmer.
 #            Two nets, open to each other.
 #
+#    AND THE REVERSED PAIRS. These are not collisions but they are worse,
+#    because they LOOK like the same wire written two ways. On this bike
+#    both members of each pair physically exist:
+#
+#      W/R vs R/W - W/R (white base) is the main power path, B04.6 to
+#            B06.4, and the R/R's DC output. R/W (RED base) is a
+#            different circuit entirely: it feeds a SECOND, two-fuse
+#            box off the starter-relay assembly. Confirmed at the bench
+#            29 Aug 2026, both in hand.
+#      Y/BK vs BK/Y - the two ground nets, open to each other.
+#      Br/W vs W/Br, W/Bl vs Bl/W - the pairs that have cost this
+#            project time twice each.
+#
+#    BASE COLOUR FIRST, ALWAYS, and say so.
+#
 #    Ring out to the endpoint before terminating. Identification by colour
 #    alone is unsafe in this harness - including identifications made in
 #    these models from the scan.

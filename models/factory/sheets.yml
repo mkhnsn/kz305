@@ -23,6 +23,7 @@ sheets:
     - FUSE_4P
     - IGN
     - SOL
+    - FUSE_AUX
     - SP_NETA
     - ACC_F
     - ACC_F_PWR
@@ -38,6 +39,7 @@ sheets:
     - W_ACC_GND_R
     - W_ACC_RING
     - W_ACC_PWR
+    - W_ACC_FUSED
     - W_MAIN
     - W_MAIN_OUT
     - W_IGN_FEED
