@@ -34,6 +34,12 @@
 #    that do not state the base colour are ambiguous and cannot be
 #    repaired by inference - re-read the wire.
 #
+# !! NEVER PUT A BARE > OR < IN A notes: BODY. WireViz renders notes into
+#    a graphviz HTML-like label, where those characters open and close
+#    tags, so "raised 14 -> 12 AWG" fails the build with an opaque
+#    "syntax error ... near 'AWG'" pointing at generated dot, not at the
+#    YAML. Write "from 14 to 12" instead. Cost an hour on 1 Sep 2026.
+#
 # !! WireViz has no light-green code, so Kawasaki LG and G BOTH render as
 #    GN. Any LG lead is tagged in its notes. Do not read green off the
 #    drawing and assume it is G.
@@ -84,6 +90,7 @@ templates:
   # that gets cut; the factory model carries no lengths at all so the
   # BOM cannot report a fabricated zero.
   w6:  &w6  {gauge: 6 AWG}
+  w12: &w12 {gauge: 12 AWG}
   w14: &w14 {gauge: 14 AWG}
   w16: &w16 {gauge: 16 AWG}
   w18: &w18 {gauge: 18 AWG}
