@@ -563,6 +563,63 @@ part.** The earlier warning was written against a DIY array where the feed
 genuinely does fan out per position; applied here it overstates the problem, and
 the two-bus arrangement the hybrid split already calls for absorbs it.
 
+### Are any MTA modules bussed? Read off the catalogue, 1 Sep 2026
+
+Catalogue filed at `parts/MTA_Power_modular_solutions_2019_v1.1.pdf`.
+
+**Yes — and the bussed module is the wrong one for this bike.** Three findings,
+and they compound.
+
+#### 1. `0301697` is genuinely bussed, and the schematic says exactly how
+
+One `+` input feeds a single common bus. Thirteen fuse positions hang off it —
+5 MaxiCompact above, 5 MiniVal below, 3 M8Compact to the right — each with its
+own output. That is a real single-input bussed fuse block, not a row of
+independent holders.
+
+#### 2. But it holds no relays, and it is not waterproof
+
+`0301697` is 5 MiniVal + 5 MaxiCompact + 3 M8Compact. **All fuses.** There is no
+relay position in it, so it cannot be the block — at best it could be a fuse
+section alongside one.
+
+And it sits on the catalogue's **MODULES** pages, not the **WATERPROOF MODULES**
+pages. The waterproof range is `0301370`, `0301491`, `0301568`, `0301569` — plus
+`0301373` and `0301374`, which the catalogue describes as *"same module with
+integrated mounting brackets"*, i.e. bracket variants of the two they follow,
+**not bussed versions**. None of the waterproof modules shows a bus.
+
+#### 3. ⚠️ And it is ONE bus, which this design cannot use
+
+The schematic shows a single `+` common to all thirteen positions. **The hybrid
+split needs two independent buses** — HOT for F1/F4/F5, SWITCHED for F2/F3 — and
+a single-bus module cannot provide them. Two modules would, at 13 positions each
+where this design needs 3 and 2.
+
+So bussing exists in the MTA range, but every place it appears it is attached to
+something this bike does not want: fuses without relays, no sealing, and one
+common feed where the architecture requires two.
+
+#### What that settles
+
+**`0301370` remains the pick**, and the two feed buses get made outside it. That
+is the conclusion the previous section already reached on the junction count —
+two four-way junctions, not one per fuse — and the catalogue does not offer a
+better answer.
+
+**Worth considering: the buses may already exist as parts this build needs.**
+The HOT junction is electrically the main fuse's output; the SWITCHED junction
+is `K_MAIN`'s pin 87. If `MF` is mounted in a holder with a stud output, that
+stud *is* the HOT bus, and a small stud block off `K_MAIN` 87 is the switched
+one. Neither is a new part so much as a terminal already in the circuit doing a
+second job — which keeps the joint count down, and joint count on the main power
+path is the whole `B06.4` lesson.
+
+Elsewhere in the catalogue, bussing appears on the **MidiVal / MegaVal** side —
+the clip-together multiple fuse block, and the configurable C-MEC/PDU units with
+*"bussed MidiVal and MegaVal fuses"*. Those are high-current parts, relevant to
+`MF` and `MF_RR` if a holder is wanted for them, not to the branch circuits.
+
 ### Open before committing
 
 - **Which MTA modules are bussed.** The single most load-bearing question, per
@@ -611,6 +668,6 @@ the two-bus arrangement the hybrid split already calls for absorbs it.
 - [Omron G8V micro 280 relay datasheet — terminal layout](https://www.mouser.com/datasheet/2/307/en-g8v-843959.pdf)
 - [Littelfuse ISO micro relay datasheet](https://www.littelfuse.com/assetdocs/iso-micro-relays-datasheet?assetguid=63d22cee-8589-4d39-894c-c99a4fd82919)
 - [MTA modular fuse & relay holding system](https://www.12voltplanet.co.uk/mta-modular-fuse-relay-holding-system.html)
-- [MTA power and modular solutions catalogue (PDF)](https://www.mta.it/flex/files/1/d/9/D.f3e6d7122b09b483f4c2/MTA_Power_modular_solutions_2019_v1.1.pdf)
+- MTA power and modular solutions catalogue — filed at `parts/MTA_Power_modular_solutions_2019_v1.1.pdf`
 - [MTA 0301370 — 60 sealed 2.8 mm cavities, 280 footprint](https://www.connectorid.com/products/mta-0301370-sealed-power-distribution-module-280-footprint)
 - [0301370 module, cover 0301371, secondary lock 0301372](https://katalog.miunske.com/en/product-catalogue/fuses/combinable-fuseholder/free-configuable-central-electric/id-0301370)
