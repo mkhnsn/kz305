@@ -380,6 +380,9 @@ base, confirmed with the R/R in hand.
   for the accessory identification: the diagram calls the accessory pickup a
   *switched* feed, and a lead off the relay's battery side would be permanently
   live.
+  **The capture sheet for that session is `starter-relay.md`**, and the reading
+  that settles it is one ring-out: the `R/W` jumper against each heavy stud,
+  relay de-energised.
 - **`W/BK`'s mate.** None recorded, and it looks like it never had one.
 
 
