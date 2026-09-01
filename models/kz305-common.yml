@@ -167,7 +167,16 @@ templates:
   rh_cluster: &rh_cluster
     type: Right bar cluster
     subtype: stop switch + starter button
-    notes: METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts degraded - button 5 ohm, kill 3 ohm, 8 ohm series. The relay will NOT pull in through 8 ohm. Clean before building.
+    notes: |-
+      METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts
+      degraded - button 5 ohm, kill 3 ohm, 8 ohm series. The relay will NOT pull in through 8 ohm.
+      ** CLEANING IS A PLANNED BUILD STEP, CONFIRMED 1 Sep 2026, AND THE RELAY SCHEME DEPENDS ON IT. **
+      All five rebuild relays are driven through these contacts, so cleaning is not an alternative to
+      relaying - it is what makes relaying work. ACCEPTANCE, REL-zeroed on the 87V: under 1 ohm per
+      contact, the procedure's damaged-conductor threshold. The benchmark for what good looks like is
+      in hand - the ignition switch measured 0.1 ohm and this project called it healthy. Re-measure
+      after cleaning and record the value; a contact that will not come under 1 ohm needs replacing,
+      not more cleaning.
 
   lh_cluster: &lh_cluster
     type: Left bar cluster
