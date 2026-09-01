@@ -331,7 +331,15 @@ connectors:
       the main power path - the B06.4 mechanism rebuilt on purpose. This is also the thing to check
       on MTA: most of its modules carry NO common power and wire each terminal separately, which is
       the busbar problem in a nicer package. Two bars suit the hot/switched split above.
-      Full comparison, including why MTA fits the way-count argument best, in docs/part-selection.md.
+      ** SETTLED 1 Sep 2026: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm
+      cavities, 30 MiniVal fuses or 10 micro relays or mixed, so one cavity type takes either. The
+      catalogue's only bussed module (0301697) is fuses-only, not waterproof, and carries a SINGLE
+      bus where this design needs two - so the two junctions get wired by hand instead.
+      ** ONE WIRE PER CAVITY - DO NOT DAISY-CHAIN. ** A sealed cavity takes one cable seal on one
+      wire, so the HOT and SWITCHED junctions are star points OUTSIDE the module. Keep HOT and
+      SWITCHED positions at opposite ends of the block: interleaved, a mis-landed feed wire puts F3
+      on permanent power, which is exactly the failure the split exists to prevent.
+      Full comparison and the assembly rules in docs/part-selection.md.
       ** WHICH FUSES SIT BEHIND K_MAIN - DECIDED 1 Sep 2026, HYBRID. ** This was UNDEFINED until now:
       the model drew every PDM pin from the outside and said nothing about the module's internal bus,
       so whether a given fuse was switched or always-hot was not stated anywhere.

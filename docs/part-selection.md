@@ -620,6 +620,53 @@ the clip-together multiple fuse block, and the configurable C-MEC/PDU units with
 *"bussed MidiVal and MegaVal fuses"*. Those are high-current parts, relevant to
 `MF` and `MF_RR` if a holder is wanted for them, not to the branch circuits.
 
+### DECIDED 1 Sep 2026 — point-to-point the buses at assembly
+
+Accepted: the two feed junctions get wired by hand rather than bought as a
+busbar. That closes the bussing question and **settles `0301370` as the module**,
+since bussing was the only argument standing against it.
+
+Three rules make it safe, and the first is not obvious.
+
+#### 1. Star it outside the module — do not daisy-chain the cavities
+
+The tempting shape is a jumper from one fuse's input cavity to the next. **It
+does not work in a sealed module.** A daisy chain needs two wires at the first
+cavity — the feed in and the jumper out — and a sealed MP280 cavity takes **one
+cable seal on one wire**. Double-crimping into it defeats the sealing that is the
+entire reason for choosing a waterproof module.
+
+So: **one wire per cavity, always**, and the junction happens outside the module
+at a single star point per bus. Feed wires run from that point into their
+cavities individually.
+
+Ampacity is not the constraint either way — MP280 is a 30 A terminal and the
+whole switched side is under 10 A — so this is about the seal, not the current.
+
+#### 2. Keep HOT and SWITCHED physically apart in the layout
+
+Put all HOT-fed positions at one end of the module and all SWITCHED-fed
+positions at the other. **Do not interleave them.**
+
+The reason is the `K_COIL` safety property. If a feed wire is ever landed in the
+wrong cavity, an interleaved layout makes that a plausible slip — and bridging
+SWITCHED to HOT puts F3 on permanent power, which is the exact failure the
+hybrid split exists to prevent: a welded `K_COIL` would then leave the engine
+running with the key out and the kill switch powerless. Physical separation
+makes the mistake hard to make and easy to see.
+
+#### 3. Record the cavity map before populating
+
+`0301370` has 60 cavities and no printed circuit names. Which cavity is which is
+knowledge that exists only in whoever wired it, and this project already has a
+file's worth of evidence about what that costs — the stock harness had to have
+its connectors renumbered to physical cavities twice after being read off a
+diagram.
+
+Write the map down as it is built, in the same form as
+`measurements/connector-inventory.csv`: cavity number, circuit, wire colour,
+gauge. State the numbering rule first, before the first terminal goes in.
+
 ### Open before committing
 
 - **Which MTA modules are bussed.** The single most load-bearing question, per
