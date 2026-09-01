@@ -499,6 +499,70 @@ unknown and still growing. A system explicitly designed so modules can be added
 or removed as a design changes answers that directly, without making the busbar,
 the enclosure and the retention into three separate problems to solve.
 
+### Candidate part: MTA 0301370 (looked at 1 Sep 2026)
+
+A sealed MTA module, **60 sealed 2.8 mm cavities on the 280 footprint**, which
+the maker states as *"30 MiniVal fuses or 10 Micro 280 relays or mixed relays
+and MiniVal fuses."*
+
+**This confirms the mix-and-match property from the manufacturer rather than by
+inference** — the same cavity takes a fuse or a relay, and the population is
+chosen at build time. It is the exact property this section was reaching for.
+
+#### It is three part numbers, not one
+
+| | |
+|---|---|
+| `0301370` | module / footprint |
+| `0301371` | cover |
+| `0301372` | secondary lock |
+
+#### Capacity against this design
+
+A relay occupies roughly three fuse positions (30 ÷ 10), so in cavities:
+
+| | Count | Cavities |
+|---|---|---|
+| Relays — `K_MAIN` `K_COIL` `K_HORN` `K_HI` `K_LO` | 5 | ~30 |
+| Fuses — F1–F6 | 6 | 12 |
+| **Used** | | **~42 of 60** |
+
+Roughly **30% spare**, which is the right shape for this project: the circuit
+count is still growing as the undrawn branches land, and that headroom is the
+whole reason for going modular rather than buying a fixed RTMR unit.
+
+#### ⚠️ Two things to confirm before ordering
+
+- **Cavity plugs for the ~18 unused ways.** A sealed connector is only sealed if
+  every cavity is filled. Unused ways need blanking plugs or the module's rating
+  is void — and on a bike that died of water in the sleeve, that is the failure
+  mode, not a technicality. Confirm the plug part number is available and order
+  them with the module.
+- **Seal-to-gauge range.** Sealed MP280 uses a cable seal sized to the wire.
+  Confirm the seals cover **16–18 AWG**, which is what these branches are, and
+  that the right seal is ordered per gauge rather than one size for everything.
+
+#### Revising the busbar concern — it is smaller than stated above
+
+60 individually sealed cavities means **no internal bus**: every terminal is its
+own crimped wire. That is what the general warning above is about, and it is
+true of this part.
+
+**But the count that matters is the number of junctions, not the number of
+crimps**, and for this design it is **two**:
+
+| Junction | Feeds |
+|---|---|
+| HOT | F1 in, F4 in, F5 in, `K_MAIN` 30 |
+| SWITCHED | F2 in, F3 in, `K_HORN` 86, dimmer common |
+
+Two four-way junctions, not one per fuse. That is a small, ordinary thing to
+solve — a pair of short busbars or stud blocks outside the module, or a bussed
+MTA power-input module alongside this one. **It does not argue against the
+part.** The earlier warning was written against a DIY array where the feed
+genuinely does fan out per position; applied here it overstates the problem, and
+the two-bus arrangement the hybrid split already calls for absorbs it.
+
 ### Open before committing
 
 - **Which MTA modules are bussed.** The single most load-bearing question, per
@@ -548,3 +612,5 @@ the enclosure and the retention into three separate problems to solve.
 - [Littelfuse ISO micro relay datasheet](https://www.littelfuse.com/assetdocs/iso-micro-relays-datasheet?assetguid=63d22cee-8589-4d39-894c-c99a4fd82919)
 - [MTA modular fuse & relay holding system](https://www.12voltplanet.co.uk/mta-modular-fuse-relay-holding-system.html)
 - [MTA power and modular solutions catalogue (PDF)](https://www.mta.it/flex/files/1/d/9/D.f3e6d7122b09b483f4c2/MTA_Power_modular_solutions_2019_v1.1.pdf)
+- [MTA 0301370 — 60 sealed 2.8 mm cavities, 280 footprint](https://www.connectorid.com/products/mta-0301370-sealed-power-distribution-module-280-footprint)
+- [0301370 module, cover 0301371, secondary lock 0301372](https://katalog.miunske.com/en/product-catalogue/fuses/combinable-fuseholder/free-configuable-central-electric/id-0301370)
