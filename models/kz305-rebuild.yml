@@ -322,13 +322,16 @@ connectors:
       that, a bought sealed module arrives weatherproofed and already rated. The requirements the
       pin list encodes are the same either way, which is why this decision does not block the rest
       of the model.
-      ** CANDIDATE ROUTE, 1 Sep 2026: AN ARRAY OF METRI-PACK 630 TERMINALS ** - the inline fuse
-      holder idea scaled up. It works because an ATO fuse blade (6.35mm), an ISO mini relay pin
-      (6.3 x 0.8mm) and a Metri-Pack 630 male are all the same quarter-inch blade, so ONE receptacle
-      type takes either a fuse or a relay. Two things to carry into it: SEALED 630 is a 12-10 AWG
-      terminal and this harness runs 16-18, so seal the ENCLOSURE and use unsealed 630 (22-10 AWG)
-      inside; and BUS THE FEED SIDE WITH SOLID BAR rather than a wire per fuse, because a crimp per
-      fuse input rebuilds the B06.4 mechanism on purpose. Full write-up in docs/part-selection.md.
+      ** CANDIDATE ROUTES, 1 Sep 2026: A METRI-PACK 280 ARRAY, OR THE MTA MODULAR FAMILY. ** MP280 is
+      a 2.8mm blade on 22-14 AWG - the range this harness actually uses - and it mates BOTH a MINI
+      (ATM) fuse and an ISO 280 micro relay, so one receptacle type still takes either and a
+      position's role is decided by what is pushed in. Micro 280 relays are 20A with 35A versions,
+      against a worst case of ~6.6A at K_MAIN, so every position sits well inside a 20A part.
+      ** BUS THE FEED SIDE WITH SOLID BAR, WHICHEVER ROUTE. ** A wire per fuse input is N crimps on
+      the main power path - the B06.4 mechanism rebuilt on purpose. This is also the thing to check
+      on MTA: most of its modules carry NO common power and wire each terminal separately, which is
+      the busbar problem in a nicer package. Two bars suit the hot/switched split above.
+      Full comparison, including why MTA fits the way-count argument best, in docs/part-selection.md.
       ** WHICH FUSES SIT BEHIND K_MAIN - DECIDED 1 Sep 2026, HYBRID. ** This was UNDEFINED until now:
       the model drew every PDM pin from the outside and said nothing about the module's internal bus,
       so whether a given fuse was switched or always-hot was not stated anywhere.

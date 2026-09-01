@@ -413,107 +413,102 @@ several hundred dollars and an unproven fitment.
 
 ---
 
-## PDM — building the block from Metri-Pack terminals (1 Sep 2026)
+## PDM — Metri-Pack 280 array, or MTA modular (1 Sep 2026)
 
 Direction under consideration: rather than buying a sealed RTMR-style module,
-build the fuse/relay block as **an array of Metri-Pack terminals**, scaling up
-what a Metri-Pack inline fuse holder already does for one fuse.
+build the fuse/relay block from **Metri-Pack 280** terminals — the MP280 inline
+fuse holder scaled up to an array — or assemble it from the **MTA modular**
+family. Both are live; they are compared at the foot of this section.
 
-**The dimensional coincidence is real, and it is what makes the idea work.**
-Three things that look unrelated are all the same blade:
+> **Correction, same day.** This section first evaluated **Metri-Pack 630** and
+> was wrong about the series. The reasoning it rested on — that an ATO fuse
+> blade, an ISO mini relay pin and a 630 male are all the same 6.3 mm blade — is
+> true, but 630 is a 12–10 AWG terminal and this harness runs its branches on
+> 16–18 AWG. **280 is the right family**, and the rest of this section is
+> rewritten to it. The 630 note is not worth preserving; what survives from it
+> is the busbar argument, which applies to any DIY array and is kept below.
 
-| | Blade |
+### What 280 actually mates
+
+| | |
 |---|---|
-| ATO/ATC blade fuse terminal | **6.35 mm** (0.25 in) wide, ~0.8 mm thick |
-| ISO mini relay terminal | **6.3 × 0.8 mm** |
-| Metri-Pack **630** male | **6.3 mm** |
+| Blade | **2.8 mm** |
+| Wire range | **22–14 AWG** — the range this harness uses |
+| Inline rating | up to **30 A**, intermittently 35 A |
+| Fuse it takes | **MINI / ATM / APM** — *not* the larger ATO |
+| Relay it takes | **ISO 280 "micro"** relays, also 2.8 mm |
 
-So a Metri-Pack 630 **female** — a receptacle built to take a 6.3 mm male — is
-built to take an ATO fuse blade and an ISO relay pin as well. One receptacle
-type populates every position, and a position can be a fuse or a relay
-depending on what is pushed into it. That is a genuinely good property and it
-is not a coincidence anyone arranged; it falls out of both standards landing on
-the quarter-inch blade.
+**The fuse-and-relay-on-one-terminal idea survives the correction**, just on
+different parts. Mini blade fuses and ISO 280 micro relays both present 2.8 mm
+blades, so a 280 receptacle takes either, and a position's role is still decided
+by what gets pushed into it. ISO 280 micro relays are commonly **20 A** with
+**35 A** versions available — against a worst case of ~6.6 A at `K_MAIN`, every
+position in this design is comfortably inside a 20 A part.
 
-### ⚠️ The trap: 630 is sized for wire this harness does not use
+**And the gauge problem disappears.** 22–14 AWG is exactly where this harness
+lives, so the terminals crimp properly onto real branch wire. That was the
+objection that killed 630, and it was the whole objection.
 
-Metri-Pack 630 is a **high-current** series — **46 A**, and the **sealed**
-version takes **12–10 AWG**. This harness runs its branch circuits on 16–18 AWG.
-An 18 AWG conductor in a 12–10 AWG barrel is not a crimp, it is a wire resting
-in a tube, and it fails exactly the way this project already has evidence for.
-
-The smaller series do not rescue it: Metri-Pack 280 handles 22–14 AWG, but its
-blade is 2.8 mm, so it will not mate a fuse or a relay at all. **The blade size
-that accepts fuses and relays is welded to a terminal series built for heavy
-wire.** That is the actual constraint, and it is not obvious from a catalogue.
-
-### The way out: seal the box, not the terminal
-
-**Unsealed** Metri-Pack 630 covers **22–10 AWG** — the whole range this harness
-needs. The reason to want sealed terminals was that water killed the original
-loom, but per-terminal sealing is not the only way to get there:
-
-- Put the sealing at the **enclosure** — a gasketed lid and sealed wire entry —
-  and use unsealed 630 terminals inside, correctly crimped for their gauge.
-- This is how production fuse boxes are actually built. The box is weatherproof;
-  the terminals inside it are not individually sealed.
-- It also keeps the fuses serviceable, which per-terminal sealing does not.
-
-### Bus the feed side — do not build it out of crimps
+### Still true: bus the feed side, don't build it from crimps
 
 The one thing a bought block gives you that an array of discrete terminals does
-not is **a stamped internal busbar**. Without it, every fuse input needs its own
-wire back to a common point, which turns the feed into N crimps and N joints on
-the main power path.
+not is **a stamped internal busbar**. Without it every fuse input needs its own
+wire back to a common point — N crimps and N joints on the main power path.
 
-**That is the B06.4 failure mechanism, rebuilt deliberately.** The old harness
-melted at a bullet where a gauge step met the 20 A MAIN circuit, and the whole
-reason it is recorded as a *design* finding is that a new build reproduces it if
-it reproduces the topology.
+**That is the `B06.4` failure mechanism rebuilt on purpose.** The old harness
+melted at a bullet where a gauge step met the 20 A MAIN circuit, and it is filed
+as a *design* finding precisely because a new build reproduces it if it
+reproduces the topology.
 
-So: **solid busbar on the input side, Metri-Pack on the output side.** Which
-lands well, because the hybrid split decided the same day needs **two** buses
-anyway:
+⚠️ **This applies to MTA too, and it is the thing to check on the datasheet.**
+MTA's own literature notes that most modules have **no common power — each
+terminal is wired separately for maximum flexibility.** That flexibility is
+exactly the busbar problem in a different package. Bussed modules do exist;
+choosing them is the difference between a distribution block and a tidy row of
+individual crimps.
+
+So whichever route: **solid bus on the input side.** Which suits the hybrid
+split decided the same day, because it needs **two** buses anyway:
 
 | Bus | Fed from | Serves |
 |---|---|---|
 | HOT | main stud | F1 ign sw feed, F4 horn pwr, F5 headlamp pwr |
-| SWITCHED | K_MAIN output | F2 kill feed, F3 coil pwr |
+| SWITCHED | `K_MAIN` output | F2 kill feed, F3 coil pwr |
 
-Two bars, cut from copper stock, is a straightforward thing to fabricate and
-makes the hot/switched architecture physical rather than notional.
+### Sealing
 
-### Lay it out from measured parts, not from datasheets
+Sealed MP280 terminals and housings are standard and Eastern Beaver sells
+weatherproof MP280 fuse holders off the shelf, so unlike 630 there is no
+tension here between sealing and gauge — sealed 280 already covers 22–14 AWG.
+Sealing at the **enclosure** (gasketed lid, sealed entry) is still worth
+preferring for a multi-position block: it is how production fuse boxes are
+built, and it keeps fuses serviceable.
 
-**ATO fuse blade spacing and the ISO mini relay pin pattern are different
-pitches**, so a uniform grid will not serve both — the array has to be laid out
-to two footprints at once. Neither number is worth taking from a spec sheet
-here: get a fuse and a relay in hand, measure both footprints with the calipers
-this project already needs for the gauge pass, and lay out from that. Same rule
-as everything else on this bike.
+### The three routes, honestly
 
-### Open questions before committing to this route
+| | What it is | Against it |
+|---|---|---|
+| **DIY MP280 array** | Terminals in a housing you lay out | You fabricate the bus, the retention and the enclosure. Most work, most control. |
+| **MTA modular** | Purpose-built modules that combine into one covered unit via frames and brackets — mini/maxi fuses, micro/mini/high-power relays, mixed in one module | Check bussing per module; most are individually wired. Way count set by which modules exist. |
+| **Ready-made sealed panel** | Sealed MINI/MICRO fuse & relay panels on MP280, already bussed, sold as one part | Least control over way count — the constraint that pushed this project toward custom in the first place. |
 
-- **Crimp tooling.** Metri-Pack 630 is an open-barrel F-crimp. Does the bench
-  have a die for it, and for the gauges in play?
-- **Terminal retention and vibration.** A relay is heavy for something held only
-  by its own terminal locks. What retains the relay bodies?
-- **Extraction.** 630 needs its own release tool; confirm one is available
-  before the array is populated.
-- **Enclosure.** Not chosen. It sets the array footprint, so it comes before
-  the layout rather than after.
-- **Fuse rating headroom.** 630's 46 A is comfortably above every circuit here,
-  so the terminal is not the limit anywhere in this design.
+**MTA is the strongest fit for the stated goal.** The reason to go custom here
+was never fabrication for its own sake — it was that five relay positions is the
+top of what RTMR-style units are scoped for, and the star-ground count is still
+unknown and still growing. A system explicitly designed so modules can be added
+or removed as a design changes answers that directly, without making the busbar,
+the enclosure and the retention into three separate problems to solve.
 
-### Honest comparison
+### Open before committing
 
-A bought sealed module arrives weatherproofed, rated, and with the busbar
-problem already solved, and on a bike that died of water in the sleeve that is
-worth real money. What building it buys is a **way count set by the circuit list
-rather than by a vendor's layout** — which matters here, because the relay
-policy took the count to five relay positions, the top of what the RTMR-style
-units were scoped for, and the star-ground count is still unknown and still
-growing.
+- **Which MTA modules are bussed.** The single most load-bearing question, per
+  the busbar argument above. Get it off the datasheet, not off a retailer page.
+- **Crimp tooling.** MP280 open-barrel dies, for the gauges in play.
+- **Fuse family follow-through.** Committing to 280 commits the bike to **MINI**
+  fuses throughout. Not a drawback, but it should be deliberate — it sets what
+  spares get carried.
+- **Enclosure and mounting.** Sets the footprint, so it comes before layout.
+- **Relay retention against vibration**, for whichever route.
 
 ## Sources
 
@@ -544,10 +539,12 @@ growing.
 - [Electrex RR20 — GPZ305 / Z305LTD, three yellow leads](https://www.electrexworld.co.uk/acatalog/RR20_-_Regulator_Rectifier_GPZ305_GPZ400_GPZ600R.html)
 - [EX305 / GPZ305 stator 21003-1073](https://www.theolouwesmotors.com/product/21003-1073-stator-generator-kaw-gpz305-ex305-b1/)
 - [Rewinding single-phase to three-phase — feasibility](https://www.eng-tips.com/threads/how-to-rewind-a-stator-from-one-phase-to-three-phase.346823/)
-- [Metri-Pack 630 series data — 6.3 mm blade, 46 A](https://www.mouser.com/catalog/specsheets/delphi_03142018_met630-pdf.pdf)
-- [Metri-Pack 630 sealed, 12-10 AWG](https://crimpsupply.com/packard-delphi/metri-pack/630-series-sealed)
-- [Metri-Pack 630 unsealed, 22-10 AWG](https://www.electerm.com/metripack630unsealed)
 - [Metri-Pack series overview and FAQs](https://www.whiteproducts.com/metripack-faqs.php)
-- [ISO mini relay guide and specifications](https://www.hy-relay.com/news/most-common-automotive-relay-iso-mini-relay-guide-specifications.html)
-- [Automotive fuse dimensions — ATO blade 6.35 mm](https://en.wikipedia.org/wiki/Fuse_(automotive))
-- [Littelfuse blade terminal fuse datasheet](https://www.farnell.com/datasheets/237771.pdf)
+- [MP280 sealed MINI fuse holder kit](https://ceautoelectricsupply.com/product/metri-pack-280-series-mini-fuse-holder-kit/)
+- [Weatherproof triple MP280 fuse holder — Eastern Beaver](https://www.easternbeaver.com/product/aptiv-triple-metri-280/)
+- [Sealed MINI/MICRO fuse & relay panel, ISO 280, bussed](https://www.delcity.net/store/fuses-fuse-accessories/panels-terminal-strip-connectors/sealed-mini/iso-280-relay-30-amp-bussed/)
+- [ISO 280 micro relay, 35 A](https://m.delcity.net/store/NO-ISO!280-Micro-Relay/p_932455.h_932457)
+- [Omron G8V micro 280 relay datasheet — terminal layout](https://www.mouser.com/datasheet/2/307/en-g8v-843959.pdf)
+- [Littelfuse ISO micro relay datasheet](https://www.littelfuse.com/assetdocs/iso-micro-relays-datasheet?assetguid=63d22cee-8589-4d39-894c-c99a4fd82919)
+- [MTA modular fuse & relay holding system](https://www.12voltplanet.co.uk/mta-modular-fuse-relay-holding-system.html)
+- [MTA power and modular solutions catalogue (PDF)](https://www.mta.it/flex/files/1/d/9/D.f3e6d7122b09b483f4c2/MTA_Power_modular_solutions_2019_v1.1.pdf)
