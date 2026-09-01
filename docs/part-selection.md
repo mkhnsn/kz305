@@ -413,6 +413,108 @@ several hundred dollars and an unproven fitment.
 
 ---
 
+## PDM — building the block from Metri-Pack terminals (1 Sep 2026)
+
+Direction under consideration: rather than buying a sealed RTMR-style module,
+build the fuse/relay block as **an array of Metri-Pack terminals**, scaling up
+what a Metri-Pack inline fuse holder already does for one fuse.
+
+**The dimensional coincidence is real, and it is what makes the idea work.**
+Three things that look unrelated are all the same blade:
+
+| | Blade |
+|---|---|
+| ATO/ATC blade fuse terminal | **6.35 mm** (0.25 in) wide, ~0.8 mm thick |
+| ISO mini relay terminal | **6.3 × 0.8 mm** |
+| Metri-Pack **630** male | **6.3 mm** |
+
+So a Metri-Pack 630 **female** — a receptacle built to take a 6.3 mm male — is
+built to take an ATO fuse blade and an ISO relay pin as well. One receptacle
+type populates every position, and a position can be a fuse or a relay
+depending on what is pushed into it. That is a genuinely good property and it
+is not a coincidence anyone arranged; it falls out of both standards landing on
+the quarter-inch blade.
+
+### ⚠️ The trap: 630 is sized for wire this harness does not use
+
+Metri-Pack 630 is a **high-current** series — **46 A**, and the **sealed**
+version takes **12–10 AWG**. This harness runs its branch circuits on 16–18 AWG.
+An 18 AWG conductor in a 12–10 AWG barrel is not a crimp, it is a wire resting
+in a tube, and it fails exactly the way this project already has evidence for.
+
+The smaller series do not rescue it: Metri-Pack 280 handles 22–14 AWG, but its
+blade is 2.8 mm, so it will not mate a fuse or a relay at all. **The blade size
+that accepts fuses and relays is welded to a terminal series built for heavy
+wire.** That is the actual constraint, and it is not obvious from a catalogue.
+
+### The way out: seal the box, not the terminal
+
+**Unsealed** Metri-Pack 630 covers **22–10 AWG** — the whole range this harness
+needs. The reason to want sealed terminals was that water killed the original
+loom, but per-terminal sealing is not the only way to get there:
+
+- Put the sealing at the **enclosure** — a gasketed lid and sealed wire entry —
+  and use unsealed 630 terminals inside, correctly crimped for their gauge.
+- This is how production fuse boxes are actually built. The box is weatherproof;
+  the terminals inside it are not individually sealed.
+- It also keeps the fuses serviceable, which per-terminal sealing does not.
+
+### Bus the feed side — do not build it out of crimps
+
+The one thing a bought block gives you that an array of discrete terminals does
+not is **a stamped internal busbar**. Without it, every fuse input needs its own
+wire back to a common point, which turns the feed into N crimps and N joints on
+the main power path.
+
+**That is the B06.4 failure mechanism, rebuilt deliberately.** The old harness
+melted at a bullet where a gauge step met the 20 A MAIN circuit, and the whole
+reason it is recorded as a *design* finding is that a new build reproduces it if
+it reproduces the topology.
+
+So: **solid busbar on the input side, Metri-Pack on the output side.** Which
+lands well, because the hybrid split decided the same day needs **two** buses
+anyway:
+
+| Bus | Fed from | Serves |
+|---|---|---|
+| HOT | main stud | F1 ign sw feed, F4 horn pwr, F5 headlamp pwr |
+| SWITCHED | K_MAIN output | F2 kill feed, F3 coil pwr |
+
+Two bars, cut from copper stock, is a straightforward thing to fabricate and
+makes the hot/switched architecture physical rather than notional.
+
+### Lay it out from measured parts, not from datasheets
+
+**ATO fuse blade spacing and the ISO mini relay pin pattern are different
+pitches**, so a uniform grid will not serve both — the array has to be laid out
+to two footprints at once. Neither number is worth taking from a spec sheet
+here: get a fuse and a relay in hand, measure both footprints with the calipers
+this project already needs for the gauge pass, and lay out from that. Same rule
+as everything else on this bike.
+
+### Open questions before committing to this route
+
+- **Crimp tooling.** Metri-Pack 630 is an open-barrel F-crimp. Does the bench
+  have a die for it, and for the gauges in play?
+- **Terminal retention and vibration.** A relay is heavy for something held only
+  by its own terminal locks. What retains the relay bodies?
+- **Extraction.** 630 needs its own release tool; confirm one is available
+  before the array is populated.
+- **Enclosure.** Not chosen. It sets the array footprint, so it comes before
+  the layout rather than after.
+- **Fuse rating headroom.** 630's 46 A is comfortably above every circuit here,
+  so the terminal is not the limit anywhere in this design.
+
+### Honest comparison
+
+A bought sealed module arrives weatherproofed, rated, and with the busbar
+problem already solved, and on a bike that died of water in the sleeve that is
+worth real money. What building it buys is a **way count set by the circuit list
+rather than by a vendor's layout** — which matters here, because the relay
+policy took the count to five relay positions, the top of what the RTMR-style
+units were scoped for, and the star-ground count is still unknown and still
+growing.
+
 ## Sources
 
 - [Eastern Beaver — motorcycle rectifiers](https://www.easternbeaver.com/motorcycle-rectifiers/)
@@ -442,3 +544,10 @@ several hundred dollars and an unproven fitment.
 - [Electrex RR20 — GPZ305 / Z305LTD, three yellow leads](https://www.electrexworld.co.uk/acatalog/RR20_-_Regulator_Rectifier_GPZ305_GPZ400_GPZ600R.html)
 - [EX305 / GPZ305 stator 21003-1073](https://www.theolouwesmotors.com/product/21003-1073-stator-generator-kaw-gpz305-ex305-b1/)
 - [Rewinding single-phase to three-phase — feasibility](https://www.eng-tips.com/threads/how-to-rewind-a-stator-from-one-phase-to-three-phase.346823/)
+- [Metri-Pack 630 series data — 6.3 mm blade, 46 A](https://www.mouser.com/catalog/specsheets/delphi_03142018_met630-pdf.pdf)
+- [Metri-Pack 630 sealed, 12-10 AWG](https://crimpsupply.com/packard-delphi/metri-pack/630-series-sealed)
+- [Metri-Pack 630 unsealed, 22-10 AWG](https://www.electerm.com/metripack630unsealed)
+- [Metri-Pack series overview and FAQs](https://www.whiteproducts.com/metripack-faqs.php)
+- [ISO mini relay guide and specifications](https://www.hy-relay.com/news/most-common-automotive-relay-iso-mini-relay-guide-specifications.html)
+- [Automotive fuse dimensions — ATO blade 6.35 mm](https://en.wikipedia.org/wiki/Fuse_(automotive))
+- [Littelfuse blade terminal fuse datasheet](https://www.farnell.com/datasheets/237771.pdf)
