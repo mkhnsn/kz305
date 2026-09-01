@@ -307,14 +307,49 @@ connectors:
 
   PDM:
     type: Power distribution module
-    subtype: TBD - part not selected
-    pinlabels: [MAIN STUD, F1 IGN SW FEED, F2 KILL FEED, F3 COIL PWR, F4 HORN PWR, F5 HEADLAMP PWR, F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
+    subtype: TBD - PART NOT SELECTED, custom / semi-custom under consideration
+    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
       count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
       SWITCH, not the coils directly - see SP_YR. PART CHOICE - the relay decisions point at a sealed
       RTMR-style relay/fuse module rather than a plain blade fuse block: roughly 6-8 fused circuits and
       3-5 relay positions.
+      ** STILL OPEN 1 Sep 2026, AND CUSTOM / SEMI-CUSTOM IS IN PLAY. ** Do not read the pin list as a
+      chosen part's pinout - it is the circuit list the module has to satisfy, in a stable order so
+      the connection sets can reference it. A custom build would make the two-busbar split below
+      straightforward and free the way count from whatever a vendor happened to lay out; against
+      that, a bought sealed module arrives weatherproofed and already rated. The requirements the
+      pin list encodes are the same either way, which is why this decision does not block the rest
+      of the model.
+      ** WHICH FUSES SIT BEHIND K_MAIN - DECIDED 1 Sep 2026, HYBRID. ** This was UNDEFINED until now:
+      the model drew every PDM pin from the outside and said nothing about the module's internal bus,
+      so whether a given fuse was switched or always-hot was not stated anywhere.
+      ** THIS IS ARCHITECTURE, NOT PART SELECTION, AND IT BINDS WHATEVER THE PDM TURNS OUT TO BE. **
+      THE PART IS NOT LOCKED - see the part note below. What the split means in practice:
+        - BOUGHT MODULE: a requirement it has to meet. Not every RTMR-style unit splits its fused
+          outputs across two sources, and one that cannot is disqualified by this, not adapted to.
+        - CUSTOM OR SEMI-CUSTOM: two separate busbars, hot and switched, and the fuse positions
+          land on one or the other. That is a build detail rather than a search filter, and it is
+          the arrangement this split describes most naturally.
+        HOT  - fed from MAIN STUD, live whenever the battery is:
+          F1 IGN SW FEED  - must be hot; it feeds the switch that drives K_MAIN.
+          F4 HORN PWR     - K_HORN's 30. Its coil is switched, so the horn is still dead with the key
+                            out; only the contact side is hot.
+          F5 HEADLAMP PWR - K_HI and K_LO commons, same arrangement.
+        SW   - fed from SW IN, downstream of K_MAIN, dead with the key out:
+          F2 KILL FEED    - the kill switch.
+          F3 COIL PWR     - K_COIL's 30. ** THIS ONE IS NOT NEGOTIABLE - see below. **
+      ** WHY K_COIL IS THE EXCEPTION. ** If F3 were hot and K_COIL's contact ever welded, the engine
+      would keep running with the key out AND THE KILL SWITCH WOULD HAVE NO EFFECT, because the kill
+      switch only drives that coil. Every other relay's welded-closed failure is a flat battery. That
+      one is a bike you cannot stop. The rule the rest of this file states - coils must die with the
+      key - is exactly this, and it survives a failed relay only if F3 is switched.
+      ** NO PARASITIC DRAW FROM THE HOT FUSES. ** An un-energised relay is an open contact, so F4 and
+      F5 sit at battery voltage against an open circuit and pass nothing. Hot here costs no drain.
+      WHAT THE HYBRID BUYS: K_MAIN carries about 6.6A - the coil circuit plus four relay coils - rather
+      than the roughly 9A of a full stack, and the headlamp and horn loads never cross its contacts at
+      all. It is the one relay whose failure kills the bike, so it is the one worth unloading.
       ** RELAY COUNT IS NOW FIVE, 1 Sep 2026 ** - K_MAIN, K_COIL, K_HORN, K_HI, K_LO - which is at the
       TOP of that range, not in the middle. Size the module for five positions plus a spare, or accept
       that two of them live in separate sockets outside it. F4/F5 are new with the horn and beam relays.
@@ -385,6 +420,9 @@ connectors:
       UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy
       0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from
       passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
+      CARRIES ABOUT 6.6A UNDER THE HYBRID SPLIT, not the roughly 9A a full stack would put through it -
+      the headlamp and horn loads are fed hot and bypass these contacts entirely. This is the one relay
+      whose failure kills the bike, which is what made it worth unloading. See the PDM notes.
 
   K_COIL:
     type: Relay
@@ -566,7 +604,11 @@ cables:
   W_SW_BUS:
     <<: *w14
     colors: [BN]
-    notes: Relay output - this is now the switched brown bus that feeds everything. Sized for total switched load, NOT for what the ignition switch used to pass.
+    notes: |-
+      Relay output - the switched brown bus. NO LONGER FEEDS EVERYTHING, 1 Sep 2026: under the hybrid
+      split it carries the coil circuit through F3 plus four relay coils, about 6.6A, while the horn and
+      headlamp loads are fed hot and never cross it. Kept at 14 AWG anyway - it is the main switched
+      path, the margin is cheap, and the load grows as the undrawn circuits land.
   W_KMAIN_GND:
     <<: *w18
     colors: [BK]
@@ -574,7 +616,12 @@ cables:
   W_COIL_PWR:
     <<: *w16
     colors: [BN]
-    notes: Fused coil power into the relay. Switched, NOT always-hot - coils must die with the key.
+    notes: |-
+      Fused coil power into the relay. ** SWITCHED, NOT ALWAYS-HOT, AND THIS IS THE ONE THAT CANNOT BE
+      TRADED. ** Coils must die with the key, and that has to hold even if K_COIL's contact welds - if
+      F3 were hot, a welded contact would leave the engine running with the key out and the kill switch
+      powerless, since the kill switch only drives this relay's coil. It is the sole exception to the
+      hybrid split for exactly that reason. See the PDM notes.
   W_K_GND:
     <<: *w18
     colors: [BK]
@@ -622,7 +669,9 @@ cables:
   W_HORN_PWR:
     <<: *w16
     colors: [BN]
-    notes: Fused horn power from PDM F4 into the relay common.
+    notes: |-
+      Fused horn power from PDM F4 into the relay common. ALWAYS-HOT per the hybrid split - the horn is
+      still dead with the key out because its COIL is switched, and an open relay contact draws nothing.
   W_HORN_FEED:
     <<: *w16
     colors: [BN]
@@ -639,9 +688,10 @@ cables:
     <<: *w16
     colors: [BU]
     notes: |-
-      Fused headlamp power from PDM F5 to the splice. Bl is the dimmer's common and supply in stock
-      form - colour kept so the circuit still reads as factory. Sized for BOTH beams at once, per the
-      make-before-break note on K_LO.
+      Fused headlamp power from PDM F5 to the splice. ALWAYS-HOT per the hybrid split; the beams are
+      dead with the key out because both relay coils are switched. Bl is the dimmer's common and supply
+      in stock form - colour kept so the circuit still reads as factory. Sized for BOTH beams at once,
+      per the make-before-break note on K_LO.
   W_HI_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_HI common.}
   W_LO_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_LO common.}
   W_DIM_COMMON:
