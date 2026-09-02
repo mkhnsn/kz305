@@ -76,6 +76,56 @@ against the merged text. The merging and every other guard live in WireViz.
 
 Add `--dump FILE` to see the merged YAML that WireViz actually received.
 
+## Part numbers and the BOM
+
+The rebuild model renders with `t`, so `out/kz305-rebuild.bom.tsv` is generated
+from the drawing rather than maintained by hand. Procurement detail lives on the
+components themselves.
+
+**Per-component fields** — `manufacturer`, `mpn`, `pn`, `supplier`, `spn`. Each
+appears as a BOM column only once something uses it, so unfilled fields cost
+nothing:
+
+```yaml
+RR:
+  manufacturer: Shindengen
+  mpn: SH775
+  pn: "4012941"
+```
+
+⚠️ Quote bare-numeric part numbers. `0301370` unquoted is parsed as an integer
+and the leading zero is lost.
+
+**`additional_components`** carries the things a component needs but that are not
+themselves connectors or wire — covers, secondary locks, terminals, seals,
+cavity plugs. They become their own BOM lines against the parent's designator.
+
+**Quantities can derive from the drawing** via `qty_multiplier`, which is what
+makes the BOM self-correcting rather than a second thing to keep in sync:
+
+| Multiplier | Gives |
+|---|---|
+| `populated` | pins actually connected |
+| `unpopulated` | `pincount` minus those |
+| `pincount` | every way, used or not |
+
+Cables also take `wirecount`, `terminations`, `length`, `total_length`.
+
+The worked example is `RR`. It is a 5-pin part with `AC3` deliberately
+unterminated, so `populated` yields **4 terminals** and `unpopulated` yields
+**1 cavity plug** — and if `AC3` is ever connected, both numbers move on their
+own.
+
+**Where this does not reach.** `PDM`'s terminal and plug counts are hand-entered
+(42 and 18), because the model gives it **10 logical ways** — one per circuit —
+while the physical MTA `0301370` has **60 cavities**. The multipliers work off
+`pincount`, so they would compute against the wrong number. Those two figures
+have to be reconciled against the cavity map when it is written; see
+`docs/part-selection.md`.
+
+Unknown part numbers are written into the `subtype` as `MPN TBD` rather than
+left blank, so the BOM doubles as the procurement gap list.
+
 ## Tests
 
 ```sh

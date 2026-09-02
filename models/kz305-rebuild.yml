@@ -307,7 +307,33 @@ connectors:
 
   PDM:
     type: Power distribution module
-    subtype: TBD - PART NOT SELECTED, custom / semi-custom under consideration
+    subtype: Sealed modular, 60 cavities on the 280 footprint
+    manufacturer: MTA
+    mpn: "0301370"
+    additional_components:
+      - type: Cover
+        subtype: for 0301370
+        manufacturer: MTA
+        mpn: "0301371"
+        qty: 1
+      - type: Secondary lock
+        subtype: for 0301370
+        manufacturer: MTA
+        mpn: "0301372"
+        qty: 1
+      # ⚠️ THESE TWO ARE HAND-ENTERED AND WILL DRIFT. Everywhere else the BOM
+      # derives terminal and plug counts with qty_multiplier, but that works
+      # off pincount - and this connector has TEN logical ways (one per
+      # circuit) against the real module's SIXTY cavities. The multipliers
+      # would compute against the wrong number, so the figures below are
+      # manual: ~5 relays at ~6 cavities plus 6 fuses at 2, and the balance
+      # of 60 as plugs. Reconcile against the cavity map when it is written.
+      - type: Terminal
+        subtype: Metri-Pack 280 sealed female, 16-18 AWG - MPN TBD, confirm seal size per gauge
+        qty: 42
+      - type: Cavity plug
+        subtype: sealed blank for unused ways - MPN TBD, REQUIRED or the module is not sealed
+        qty: 18
     pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
@@ -407,8 +433,21 @@ connectors:
     <<: *alternator
   RR:
     type: Regulator / rectifier
-    subtype: Shindengen SH775 (Polaris 4012941), 3-phase 35A SERIES type - see docs/part-selection.md
+    subtype: 3-phase 35A SERIES type - see docs/part-selection.md
+    manufacturer: Shindengen
+    mpn: SH775
+    pn: "4012941"
     pinlabels: [AC1, AC2, AC3, DC+, GND]
+    additional_components:
+      # qty derives from the drawing, so these self-correct if AC3 is ever used.
+      - type: Terminal
+        subtype: Shindengen mating pigtail, FH009-FH020 family - MPN TBD, Eastern Beaver preferred
+        qty_multiplier: populated
+        qty: 1
+      - type: Cavity plug
+        subtype: seals the deliberately unterminated AC3 - MPN TBD
+        qty_multiplier: unpopulated
+        qty: 1
     notes: |-
       IN HAND 29 Aug 2026 - the Polaris ORV takeoff has arrived. ORDERED 19 Aug 2026, eBay, $45. This supersedes the 18 Aug decision to fit a
       Podtronics shunt first and measure: the used-unit price hit the point where the SH775 wins outright
@@ -432,9 +471,15 @@ connectors:
 
   K_MAIN:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
+      ** ALL FIVE RELAYS ARE MICRO 280, NOT ISO MINI - CORRECTED 1 Sep 2026 ** when the PDM settled on
+      MTA 0301370. They were drawn as ISO mini while the block was undecided; the module's cavities are
+      the 2.8mm 280 footprint, so the relays that seat in it are ISO 280 micro. Nor are they separately
+      socketed - they plug into the module, which is what let the terminal count be taken from its
+      cavities rather than from five loose sockets. 20A parts, with 35A versions available; the heaviest
+      duty here is K_MAIN at about 6.6A, so every position sits well inside a 20A relay.
       UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy
       0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from
       passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
@@ -444,7 +489,7 @@ connectors:
 
   K_COIL:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A)
@@ -454,7 +499,7 @@ connectors:
 
   K_HORN:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026,
@@ -468,14 +513,14 @@ connectors:
 
   K_HI:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - high beam. See K_LO for the pair's design notes; they are one decision, not two.
 
   K_LO:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - low beam, and the second half of the beam pair. TWO RELAYS RATHER THAN A CHANGEOVER,
