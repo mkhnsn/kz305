@@ -23,18 +23,31 @@ sheets:
     - FUSE_4P
     - IGN
     - SOL
+    - FUSE_AUX
+    - SP_NETA
+    - ACC_F
+    - ACC_F_PWR
+    - ACC_R
+    - ACC_R_PWR
     - SP_BR
     - SP_BRW
+    - SP_WR
     - BRW_HL
     - W_BAT_SOL
     - W_BAT_GND
+    - W_ACC_GND_F
+    - W_ACC_GND_R
+    - W_ACC_RING
+    - W_ACC_PWR
+    - W_ACC_FUSED
     - W_MAIN
+    - W_MAIN_OUT
     - W_IGN_FEED
     - W_BR_MAIN
     - W_FUSE_HEAD_IN
     - W_BL_UP
-    - W_FUSE_TAIL_IN
-    - W_BRW_OUT
+    - W_TAIL_RBL
+    - W_TAIL_BRW
     - W_BRW_HARNESS
     - W_BRW_RH
     - W_BRW_HL
@@ -92,7 +105,6 @@ sheets:
     - W_GND_HEAD
     - W_HORN_FEED
     - W_HORN_SW
-    - W_HORN_GND
   signals:
     - FLASHER
     - SIG_FL
@@ -142,6 +154,10 @@ sheets:
     - LAMP_SPD
     - LAMP_TAC
     - INSTR_6P
+    - SP_POD_GND
+    - W_POD_GND
+    - W_POD_GND2
+    - W_NSW2
     - W_MTR_SPD
     - W_MTR_TAC
     - W_IND_HB

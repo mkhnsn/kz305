@@ -93,14 +93,14 @@ connections:
   # --- pod indicators, through the instrument 6P ---------------------
   - - SP_SIG_L: [1]
     - W_IND_L: [1]
-    - INSTR_6P: [4]
-  - - INSTR_6P: [4]
+    - INSTR_6P: [1]
+  - - INSTR_6P: [1]
     - W_IND_L2: [1]
     - IND_L: [1]
   - - SP_SIG_R: [1]
     - W_IND_R: [1]
-    - INSTR_6P: [1]
-  - - INSTR_6P: [1]
+    - INSTR_6P: [2]
+  - - INSTR_6P: [2]
     - W_IND_R2: [1]
     - IND_R: [1]
 
@@ -117,12 +117,13 @@ connections:
   - - SIG_RR: [2]
     - W_GND_SIG_RR: [1]
     - GND_CHASSIS: [1]
+  # Both pod indicator grounds join the pod's own bus - see SP_POD_GND.
   - - IND_L: [2]
     - W_GND_IND_L: [1]
-    - GND_CHASSIS: [1]
+    - SP_POD_GND: [1]
   - - IND_R: [2]
     - W_GND_IND_R: [1]
-    - GND_CHASSIS: [1]
+    - SP_POD_GND: [1]
 
 # =====================================================================
 # STILL TO TRANSCRIBE / RESOLVE - the short list, revised 28 Aug 2026
@@ -136,38 +137,189 @@ connections:
 #     R/Bl appears at the ignition switch 4P.
 #   - Y/BK versus BK/Y. Both wires exist; they are different nets.
 #
+# CLOSED 29 Aug 2026, by reading the R/R half of its connector:
+#   - THE R/R OUTPUT, colour and route. It is W/R onto the main power
+#     net, NOT brown onto the switched bus. The 28 Aug reading was
+#     inverted by an argument from pin count; the R/R half of the 4P is
+#     populated on three cavities only. This model is back to what it
+#     drew before 28 Aug. See RR, W_RR_OUT, SP_WR.
+#   - THE IGNITION-SWITCH CHARGING PATH. Withdrawn - it never existed.
+#   - WHAT W/R IS. It was absent from the cable index because it was the
+#     charging output, undrawn. Now W_RR_OUT plus W_MAIN_OUT.
+#   - THE R/R PART. Shindengen SH221-12, stock. Its 4P cavity map is
+#     recorded in measurements/connector-inventory.csv.
+#
+# CLOSED 29 Aug 2026, by unsleeving the right-bar pigtail a second time:
+#   - SP_RH_BR IS AS MAPPED. Bl/W, Br and Br/W join and leave as one
+#     brown. Four legs, exactly as drawn. SP_RH_YR confirmed with it,
+#     and BK is continuous to the switches with no splice.
+#   - HOLDER 3's ORIENTATION. Reading (b): Br/W in, R/Bl out. Forced,
+#     not preferred - with the splice confirmed, reading (a) would feed
+#     the TAIL fuse from a switch pin that ON connects to nothing but
+#     its own pair, and the tail lamp could never light.
+#   - WHERE THE IGNITION SWITCH'S TAIL1 PIN GETS ITS POWER. From that
+#     fuse's output. Open since 19 Aug.
+#   - WHAT FEEDS Bl/W, and which way it runs. The switched brown bus,
+#     via SP_RH_BR, running DOWN from the handlebar into the HEAD fuse.
+#   - Both 10A fuse feeds therefore leave the bus, go UP TO THE
+#     HANDLEBAR, and come back down. That is the stock design and it is
+#     why Br/W and Bl/W both run between the fuse box and the right-bar
+#     branch - a pairing this model circled for weeks.
+#   - WHICH YELLOW IS WHICH. Cavity 3 is branch B05.1.1, cavity 4 is
+#     B05.1.2. The two AC legs are interchangeable into a single-phase
+#     bridge, so this is completeness, not correctness - but it is
+#     unrecoverable once the loom is cut.
+#
 # STILL OPEN, and the ring-out added to the list as well as subtracting:
 #
 #   - horn button ground-side colour: prints as a hatched swatch in the
 #     switch table, unreadable. Drawn BK/W as a guess. (bench, #8)
-#   - instrument 6P: two of six ways unread. (bench, #8)
 #   - electric accessory leads: TWO pairs drawn (one at the meters, one
 #     at the tail), colours too marginal to model - they read white-ish
 #     with one possibly Bl at the front. Deliberately NOT modelled; an
 #     unreferenced connector is dropped from the drawing, so declaring
 #     them would imply coverage that does not exist. (bench, #8)
 #   - meter lamp feed: reads R; R vs Br marginal at the speedo. (#8)
+#     Narrowed 29 Aug 2026 - it is NOT in the instrument 6P. Those six
+#     ways are all read and none is a meter feed, so the meter lamps
+#     really do sit outside the 6P span on their own bullets.
+#
+# CLOSED 29 Aug 2026 at the instrument 6P:
+#   - ALL SIX WAYS READ. Gn, Gy, Br, LG, R/BK, BK/Y. The "two unread
+#     ways" item is retired; the guesses for them were half right - the
+#     pod ground is one, but the other is LG, not a meter feed.
+#   - THE NEUTRAL CIRCUIT IS COMPLETE. LG is cavity 4 and is the same
+#     net as B01.4. Brown feeds the lamp on cavity 3, the lamp returns
+#     on cavity 4 to the switch, which grounds through the engine case.
+#     The models ran that return pod-to-switch without crossing the 6P;
+#     rerouted.
+#   - CAVITY 5 IS R/BK, NOT R. The 28 Aug record said plain "red". One
+#     tracer is the difference between the high-beam feed and a meter
+#     feed. Third time base-colour-vs-tracer has bitten this project.
+#
+# ALSO CLOSED 29 Aug 2026, by looking inside the pod pigtail:
+#   - THE POD'S COMMON GROUND BUS IS A 1-TO-3 SPLICE, and it is in the
+#     PIGTAIL rather than the pod. The conductor count makes it exactly
+#     three: six ways cross the 6P, eight wires enter the pod, five ways
+#     are signal, so 5 + 3 = 8. It also says WHICH lamps - IND_L, IND_R
+#     and IND_HB ground locally; IND_N does not, because its return is
+#     the LG lead to the neutral switch. Drawn as SP_POD_GND, and the
+#     three individually drawn lamp grounds are now joined to it.
+#
+# STILL OPEN, added 29 Aug 2026:
+#   - THE POD GROUND'S DESTINATION. Cavity 6's harness side is still
+#     unmeasured, so the pod ground is drawn ending at the connector.
+#     Black base makes Net B the candidate but that is a colour
+#     argument. Ring B00.1's BK/Y against Net B. If it is Net B, the pod
+#     earths outside the harness like the rest of that net and the star
+#     ground gains another wire to account for (blocker 5).
+#
+# CLOSED 29 Aug 2026 at the ignition switch connector:
+#   - TAIL1 IS R/Bl, NOT R/BK. Both halves of B00.3 read red base with a
+#     blue tracer - the switch's own pigtail independently of the
+#     harness wire. Two physical reads against one 600 dpi scan, which
+#     cannot separate them. R/BK is real on this bike (the dimmer HI
+#     output), which is why it was never an obvious slip. The printed
+#     table in docs/kz305-b1-wiring.md is annotated, not rewritten - it
+#     transcribes the diagram, and the diagram does say R/BK.
+#   - THE IGNITION FEED - and NEITHER live reading was right. B00.3's
+#     white rings 0.1 ohm to B06.3, which mates the pigtail white on the
+#     20A MAIN's W terminal. The white-from-the-fuse route was correct;
+#     what was wrong is that the fuse's TERMINALS were backwards. W/R is
+#     the battery side, W the load side. Same failure as holder 3 - a
+#     box with no bus cannot tell you its orientation, so both holders
+#     were guessed and both guesses were inverted.
+#     CONSEQUENCE: the 20A MAIN protects the ignition switch and all of
+#     its downstream - brown bus, both 10A fuses, their loads. It does
+#     NOT protect the charging path or the starter relay.
+#   - THE TAIL CHAIN, now measured rather than deduced: B00.3's R/Bl
+#     rings 0.2 ohm to B06.5 cavity 4, the TAIL fuse output.
+#   - B00.3 IS the ignition switch, by elimination: no other 4-way in
+#     the harness carries W + R + Br + R/Bl, and family, gender and way
+#     count agree. Mirror 4-of-4, no dead way - which the variant
+#     hypothesis predicts, since a B1 has a lock switch.
 #
 #   NEW 28 Aug 2026, all from the meter:
 #   - A SECOND Y/R NET exists, on the fuse-box and starter-relay branch,
 #     open to the modelled coil-feed Y/R. It is a circuit this model
 #     does not carry AT ALL. Not drawn, because nothing yet says what it
 #     is - find both its ends before inventing a cable for it.
-#   - THE IGNITION FEED. The 20A fuse's output leg is W/R and the W/R
-#     net never reaches the headlight junction, so the white drawn from
-#     MF to the ignition switch is either the wrong colour or the wrong
-#     route. See the MF notes.
-#   - HOLDER 3's ORIENTATION - which terminal is the input. Settles
-#     where the ignition switch's TAIL1 pin gets its power, and whether
-#     the right-bar splice back-feeds the TAIL fuse. See FUSE_TAIL.
-#   - WHAT FEEDS Bl/W, and which way it runs between the fuse box and
-#     the right-bar branch. See FUSE_HEAD and RH_BLW.
-#   - BROWN AT THE LEFT-BAR 6P. The switched bus reaches it; the
-#     modelled way list has no room for it. (see LH)
+#   - BROWN AT THE LEFT-BAR 6P - CLOSED 29 Aug 2026. It feeds NOTHING.
+#     The cluster half of that cavity is EMPTY; the other five pairs
+#     match on colour. The way list was never over-subscribed either -
+#     the blue this model put in the 6P is a separate flying lead
+#     (B02.2). See LH.
+#
+# CLOSED 29 Aug 2026, from the pre-teardown photographs and the wire:
+#   - B00.7 AND B08 WERE NEVER CONNECTED. The photographs show them
+#     unmated, and the oxidation inside their slots matches the outside
+#     - independent of the photographs, since a mated slot ages
+#     differently from an open one. Net A has no load and never had
+#     one: it is the PROVISIONED, UNUSED accessory earth.
+#     This kills the bench hypothesis that black-base is the signal
+#     earth and yellow-base the engine/power earth. Net A powers
+#     nothing, and B04.3 - the R/R ground - is black-base. Record
+#     grounds by measured net, never by base colour.
+#   - The "permanent gap" of the empty double-female slots is HALF
+#     closed. For these two the answer was not lost at teardown; there
+#     was never anything to lose. Four others remain unaccounted for.
+#
+#   NEW 29 Aug 2026:
+#   - NET A HAS A HIDDEN SPLICE. Three endpoints - the B04.1 ring,
+#     B00.7 and B08 - each holding exactly ONE wire, and one wire
+#     cannot reach three endpoints. Same argument that located SP_BRW,
+#     and the second splice inferred rather than seen. Drawn as SP_NETA
+#     with its position explicitly unknown. Step 3 should find both.
+#
+#   NEW, and it now has two instances rather than one:
+#   - LIVE HARNESS WIRES INTO UNPOPULATED CAVITIES. B04.3's brown at
+#     the R/R and B02.3's brown at the left cluster. Both are on the
+#     switched bus, both dead at their connector. HYPOTHESIS: this loom
+#     serves A1/A2/B1/C1/D1 and these ways are live on other variants.
+#     Testable - it predicts more dead ways as the remaining connectors
+#     are read, and it is why BOTH HALVES of every connector get read.
+#
+# CLOSED 29 Aug 2026 by unsleeving the left-bar pigtail:
+#   - THE HORN GROUND WIRE DOES NOT EXIST. The cluster has SEVEN leads,
+#     not eight, and W_HORN_GND has been deleted. The button grounds
+#     through the cluster body; LH pin 8 is now CASE GND drawn with the
+#     mounting-ground marker. The pigtail has NO SPLICES, so its
+#     conductor count IS the lead count and nothing can be hiding -
+#     which is what made this safe to redraw rather than merely likely.
+#   - The unreadable hatched swatch in the printed table is moot: there
+#     was no conductor for it to describe.
+#   - NEGATIVE RESULT, kept deliberately: no splices in the left-bar
+#     branch, against two in the right. The bars are not symmetric.
 #   - TWO UNMODELLED BROWN ENDPOINTS, one at the headlight junction and
 #     one mid-harness, both on the switched bus.
 #   - WHICH GROUND NET each modelled ground lead belongs to. Only one
 #     (the R/R ground) is measured. See GND_CHASSIS and GND_NETB.
 #   - A SPLICE UNDER THE TAPE on the Br/W net - three endpoints, and
 #     the bullet at one of them holds a single wire. Step 3.
+#
+#   NEW 29 Aug 2026:
+#   - W/Bl IS THE LAST WHOLLY UNMODELLED NET.
+#     ** IDENTIFIED AND DRAWN 29 Aug 2026: it is the ELECTRIC ACCESSORY
+#     FEED. ** The diagram carries "Electric Accessory Leads" as a
+#     blue-family wire plus a ground, in two pairs - one at the meters,
+#     one at the tail. B00.8 (W/Bl) and B00.7 (Y/BK) are the front
+#     pair: same 240 mm length, same terminal type, same breakout. B09
+#     and B08 are the rear pair. So W/Bl is the feed and Net A is its
+#     earth, and neither was ever used.
+#     STILL OPEN: where it takes power from. The net has only its two
+#     measured points, so nothing on the bench feeds it, and B09's mate
+#     is unrecorded.
+#     Note it is NOT Bl/W - a different wire, drawn as W_FUSE_HEAD_IN.
+#     Base colour first; the two have been confused before.
+#   - THE BROWN WAY AT THE R/R CONNECTOR. The harness runs brown into
+#     a cavity the stock R/R never populates. Not a fault, and not a
+#     loose end in the harness - the brown is soundly on the switched
+#     bus at 0.0 ohm. But the R/R end goes nowhere, so either the
+#     housing is shared across model variants or the pin served a
+#     function this unit does not use. Worth knowing before the
+#     rebuild decides whether to carry the way forward at all.
+#   - THE STARTER-RELAY LEG OF THE W/R NET. Seen mated at the bench on
+#     28 Aug, running off the double-female bullet node, but WHICH
+#     RELAY TERMINAL was not identified, so SP_WR draws two legs and
+#     not three. One look at the relay closes it.
 # =====================================================================

@@ -56,6 +56,17 @@ each other.
 
 Columns as printed: Battery (W) · Ignition (Br) · Tail 1 (R/BK) · Tail 2 (R)
 
+> ⚠️ **Tail 1 is `R/Bl` on the bike, not `R/BK` — bench 29 Aug 2026.** The line
+> above is left as *printed*, because this section transcribes the diagram. But
+> both halves of the switch connector (`B00.3`) read **red base with a blue
+> tracer**, the switch's own pigtail independently of the harness wire. Two
+> physical reads against one 600 dpi scan, and the scan cannot separate `R/BK`
+> from `R/Bl`. `R/BK` is a real colour on this bike — it is the dimmer's HI
+> output — which is why this was never an obvious slip.
+>
+> Read `R/BK` as `R/Bl` **everywhere in this switch table**. The electrical
+> content is unaffected: the 15 Aug meter test was of pin pairs, not colours.
+
 | Position | Connected |
 |---|---|
 | **ON** | W ↔ Br, and R/BK ↔ R |

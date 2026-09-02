@@ -34,7 +34,18 @@ cables:
   W_TAIL:
     <<: *w18
     colors: [RD]
-    notes: Tail filament feed off the ignition switch R pin. In ON it is fed through R/BK; in PARK straight off W. Preserve that. WHERE the ignition R/BK pin picks up ITS power is still unresolved - the fourth conductor at the fuse-panel 4P reads R or R/BK and is the standing candidate. Ring out under #3.
+    notes: |-
+      Tail filament feed off the ignition switch R pin. In ON it is fed through R/Bl; in PARK straight
+      off W. Preserve that.
+      ** CLOSED 29 Aug 2026 - WHERE THE R/Bl PIN PICKS UP ITS POWER. ** From the TAIL fuse's output.
+      Holder 3 is settled as Br/W in, R/Bl out, and B00.3's fourth way is R/Bl on BOTH halves. The
+      chain is: switched brown bus, right-bar splice, Br/W, TAIL fuse, R/Bl, this switch pin, bridged
+      to R in ON, tail lamp.
+      COLOUR CORRECTED at the same time: the pin is R/Bl, not R/BK. The printed table gives R/BK and
+      the scan cannot separate them; both halves of the connector read red-base-blue-tracer. The
+      "reads R or R/BK" wording here was chasing a colour that is not on this circuit.
+      NOTE PARK BYPASSES THE TAIL FUSE - W straight to R. That is a design property, not wear, so it
+      is inherited by any rebuild that preserves park.
   W_TAIL_RUN:  {<<: *w18, colors: [RD]}
   W_BRAKE:     {<<: *w18, colors: [BU]}
   W_BRK_FEED_F: {<<: *w18, colors: [BNWH]}
@@ -44,7 +55,7 @@ cables:
 
 connections:
   # --- tail and brake -----------------------------------------------
-  - - IGN: [4]
+  - - IGN: [2]
     - W_TAIL: [1]
     - SP_R: [1]
   - - SP_R: [1]

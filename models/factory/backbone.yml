@@ -77,23 +77,48 @@ connectors:
     type: Engine case ground
     subtype: internal, no harness wire
     pinlabels: [CASE]
-    notes: Components that ground through their own mounting rather than a harness lead - starter motor, points, capacitors, neutral switch. Net B earths this way too, but through child-harness pigtails rather than at the component body - see GND_NETB.
+    notes: |-
+      Components that ground through their own mounting rather than a harness lead - starter motor,
+      points, capacitors, neutral switch. Net B earths this way too, but through child-harness
+      pigtails rather than at the component body - see GND_NETB.
+      BROADER THAN ITS NAME, 29 Aug 2026. The LEFT-BAR CLUSTER now earths here as well: its horn
+      button grounds through the cluster body, bar to frame, not through the engine and not through
+      a harness wire. The node means "grounds through its own mounting"; the name says engine case.
+      Rename it when something else forces a sweep of these files - not worth churning references
+      for on its own.
+      REBUILD: every one of these is a component that gets a NEW wire back to the star bus, and the
+      count of them is not yet known. See blocker 5.
   MF:
     <<: *main_fuse
     subtype: 20A glass — fuse box holder 1, printed MAIN
     pinlabels: [W, W/R]
     notes: |-
       IDENTIFIED 28 Aug 2026 - holder 1 of the original three-holder glass box, printed MAIN, W on one
-      terminal and W/R on the other. White mates B06.3; W/R is the main power net (two points, 0.1 ohm),
+      terminal and W/R on the other. White mates B06.3; W/R is the main power net,
       so the bench reading is white in from the solenoid and W/R out to the main bus.
-      CONFLICT WITH THE DRAWN ROUTE, NOT YET RESOLVED. This model runs the fuse OUTPUT on to the
-      ignition switch as white (W_IGN_FEED). The W/R net does not reach the headlight junction at all,
-      so whatever feeds the ignition switch's white BATT pin, it is not this fuse's W/R output leg.
-      Either the ignition feed is a tap on the WHITE side, ahead of the fuse, or the drawn route is
-      wrong. Ring B00.3's white against holder 1's white terminal before redrawing; the route is left as
-      drawn rather than guessed.
-      DESIGN FINDING: the melted, corroded bullet on the fuse-box pigtail is this holder's W/R output.
-      The highest-current circuit on the bike, failing at a joint where conductor size steps. A new
+      UPDATED 29 Aug 2026: that net is no longer two anonymous points. Its W/R output leg is now
+      drawn (W_MAIN_OUT) into SP_WR, and the REGULATOR/RECTIFIER'S DC OUTPUT lands on the same node,
+      so the main power net has an identified SOURCE as well as an identified fuse. This also
+      explains why W/R never appeared in the cable index: it was the charging output all along,
+      and between 28 and 29 Aug it was mis-drawn onto the brown bus.
+      ** ORIENTATION WAS BACKWARDS - CORRECTED 29 Aug 2026, AND NEITHER LIVE READING WAS RIGHT. **
+      The conflict recorded here was "the ignition feed taps the white side ahead of the fuse, or the
+      drawn route is wrong". It was neither. W_IGN_FEED - white, this fuse to the ignition switch -
+      is CORRECT in colour and route. What was wrong is which terminal is which.
+      MEASURED 29 Aug 2026: B00.3's white rings 0.1 ohm to B06.3, and B06.3 mates the pigtail white
+      that lands on this holder's W terminal. So W is the LOAD side. B06.4's node carries W/R to the
+      STARTER RELAY and the heavier W/R into the pigtail, so W/R is the BATTERY side.
+      So it is W/R IN from the battery, WHITE OUT to the ignition switch - the exact reverse of what
+      this note said. Same failure as holder 3, and for the same reason: a box with no bus cannot
+      tell you its own orientation, so both were guessed and both guesses were backwards.
+      ** WHAT THE 20A MAIN ACTUALLY PROTECTS: ** the ignition switch and everything downstream of it
+      - the brown bus, both 10A fuses, and their loads. It does NOT protect the charging path or the
+      starter relay, which sit on the battery side with it. That is a design property to decide about
+      rather than reproduce unexamined.
+      DESIGN FINDING: the melted, corroded bullet on the fuse-box pigtail is on this holder's W/R leg -
+      its INPUT, now that the orientation is settled, which puts it on the battery side where the
+      charging current joins as well. The highest-current joint on the bike, failing where conductor
+      size steps. A new
       harness built to the same topology puts the same step on the same 20A circuit - see the rebuild.
   FUSE_HEAD:
     <<: *fuse10
@@ -109,31 +134,44 @@ connectors:
       DESIGN CONSEQUENCE: headlight current is fused, then run up to the handlebar and switched there,
       so the full lamp load passes through the bar-switch contacts. That is the standard case for a
       headlight relay, and it now rests on the harness rather than on assumption.
-      OPEN: what feeds Bl/W. It runs between this box and the right-bar branch (B01.1 to B06.5) and has
-      never been rung. The 17 Aug trace called it the feed INTO the right-bar branch; this holder's
-      settled orientation makes it a feed OUT of that branch into this fuse. Both readings are in the
-      record and the wire is one ring-out away.
+      ** CLOSED 29 Aug 2026: WHAT FEEDS Bl/W IS THE SWITCHED BROWN BUS. ** The right-bar pigtail was
+      unsleeved a second time and Bl/W sits on SP_RH_BR together with the brown arriving from the bus.
+      So Bl/W carries bus power DOWN from the handlebar into this fuse - a feed OUT of the right-bar
+      branch, which is what this holder's settled orientation predicted and the opposite of the
+      17 Aug trace. Both readings stay in the record; the deciding evidence is the unsleeving.
+      DESIGN: this fuse's supply goes up to the handlebar and back before reaching it. So does the
+      TAIL fuse's. See SP_RH_BR.
   FUSE_TAIL:
     <<: *fuse10
     subtype: 10A glass — fuse box holder 3, printed TAIL
-    pinlabels: [R/Bl, Br/W]
+    pinlabels: [Br/W IN, R/Bl OUT]
     notes: |-
       NEW 28 Aug 2026 - holder 3, printed TAIL, R/Bl on one terminal and Br/W on the other. This closes
       the standing question of what the fourth conductor at the fuse-panel 4P is: it reads R/Bl, not
       "R or R/BK", and the same R/Bl appears at B00.3, the ignition switch 4P.
-      ORIENTATION NOT MEASURED, and the box cannot answer it - with no bus and no fuses in, nothing
-      inside distinguishes an input from an output. Two readings are live and they disagree:
-        (a) R/Bl in from the ignition switch, fused Br/W out. Fits R/Bl appearing at the switch.
-        (b) Br/W in, R/Bl out to the switch's TAIL1 pin. Fits the Br/W net reaching the right-bar 4P,
-            where the mapped bar splice ties Br/W to the switched brown - which would otherwise
-            back-feed this fuse from the brown bus.
-      Reading (b) would also answer where the ignition switch's TAIL1 pin picks up its power, open
-      since 19 Aug. Settle it by ringing B06.5's R/Bl to B00.3's, and both terminals against the
-      switched brown net. Not drawn either way.
+      ** ORIENTATION SETTLED 29 Aug 2026 - READING (b). Br/W IN, R/Bl OUT. ** Drawn that way now.
+      The box itself still cannot answer it - no bus, no fuses in, nothing inside distinguishing an
+      input from an output. It was settled from the two ends instead, and reading (a) is not merely
+      less likely but IMPOSSIBLE:
+        (a) R/Bl in from the ignition switch, fused Br/W out. ELIMINATED. The metered switch table
+            has ON connecting R/BK to R and NOTHING ELSE to either - the tail pair is a bridge
+            between TAIL1 and TAIL2 that touches neither battery nor ignition. Under (a) this fuse
+            would be fed from a pin with no source and the tail lamp could never light.
+        (b) Br/W in, R/Bl out to the switch's TAIL1 pin. STANDS, and every end now has a source.
+      What forced it: the right-bar splice was UNSLEEVED A SECOND TIME on 29 Aug and SP_RH_BR is
+      confirmed as mapped - Bl/W, Br and Br/W join and leave as a single brown. The splice is not
+      misread, so of the disjunction this model posed, the other horn holds.
+      THE CIRCUIT NOW CLOSES END TO END: ignition switch Br, switched brown bus, up to the right bar,
+      SP_RH_BR, back down as Br/W, THIS FUSE, R/Bl, switch TAIL1, bridged to R in ON, tail lamp.
+      PARK's W-to-R corroborates it independently: it feeds the R side directly, so R is the lamp end
+      and R/Bl is the feed end.
+      This also closes, from 19 Aug, WHERE THE IGNITION SWITCH'S TAIL1 PIN PICKS UP ITS POWER: from
+      this fuse's output.
+      CONFIRMING READING, not required but cheap: ring B06.5's R/Bl to B00.3's.
   FUSE_4P:
     type: Junction
     subtype: 4-pin connector, fuse panel
-    pinlabels: [Bl/W, Bl, R/Bl, Br/W]
+    pinlabels: [Bl, Br/W, Bl/W, R/Bl]
     notes: |-
       WAYS IDENTIFIED 28 Aug 2026. The fuse box joins the harness on a fixed pigtail - the 20A main's
       two wires leave on bullets (B06.3, B06.4) and the four 10A conductors come through this connector.
@@ -142,6 +180,25 @@ connectors:
       box.
       The R/Bl way is drawn terminating at the fuse; its harness-side partner is the standing candidate
       B00.3 at the ignition switch, unrung, so it is deliberately left unconnected rather than assumed.
+      ** WAYS RENUMBERED TO PHYSICAL CAVITIES 29 Aug 2026. ** They were previously listed grouped by
+      holder - Bl/W and Bl, then R/Bl and Br/W - which was a logical convention, not a record of the
+      connector. The bench order is different, and the pin numbers here are now the HARNESS-SIDE
+      cavities, matching measurements/connector-inventory.csv so there is only one numbering in the
+      project:
+        1  Bl     fused headlight supply, holder 2 HEAD out
+        2  Br/W   holder 3 TAIL, and the leg of the Br/W net that reaches SP_BRW
+        3  Bl/W   holder 2 HEAD in
+        4  R/Bl   holder 3 TAIL
+      Cavity numbering is mating face, KEYWAY UP, left to right, top row first. The housing's moulded
+      marks - a '4' and a flower logo - read UPSIDE DOWN in that orientation and are mould marks, not
+      cavity numbers and not an orientation reference. See measurements/README.
+      ** BOTH HALVES READ AND THE MIRROR CHECKS OUT 4-of-4, 29 Aug 2026. ** All four cavities are
+      populated on each side and every mated pair matches on colour. Male spades on the fuse-box
+      pigtail, female terminals in the harness. NOTE THIS IS A DIFFERENT, SMALLER CONNECTOR THAN THE
+      R/R's 4P - same way count, unrelated part, different mould marks. Its depth and terminal width
+      are NOT measured, and the R/R connector's must not be borrowed for it. Unlike the R/R connector there is no unpopulated way
+      here and nothing to overturn - the check was run because of what it found at B04.3, and it
+      passed.
       SCOPE: the rebuild replaces this box and its pigtail with a blade block, so these wires are the
       baseline for laying that block out, not a set to reproduce.
   IGN:
@@ -171,6 +228,109 @@ connectors:
       project's tagging existed, and is recorded nowhere. Modelled so the drawing carries the third
       endpoint the meter found; what it fed is a permanent gap in the as-built record, recoverable
       only from the on-bike photographs or from the components themselves.
+  SP_WR:
+    style: simple
+    type: Splice
+    subtype: W/R main power net - double-female bullet node at B06.4
+    notes: |-
+      NEW 29 Aug 2026. The W/R net is the main power path and it now has a SOURCE: the regulator/
+      rectifier's DC output. Three things sit on it -
+        - MF holder 1's W/R output terminal (the 20A MAIN), via the fuse-box pigtail;
+        - the R/R's DC output, arriving on a male bullet at B04.6 (see W_RR_OUT);
+        - a W/R leg to the STARTER RELAY'S BATTERY STUD. Seen at the bench 28 Aug 2026 while the
+          node was still mated, with the relay terminal unidentified; IDENTIFIED 29 Aug 2026 as the
+          battery stud, once the 20A fuse's orientation showed W/R to be the battery side. Now drawn
+          as W_MAIN, so all three of this node's legs are on the drawing.
+      Physically this node is a DOUBLE-FEMALE BULLET on the fuse-box pigtail, so "splice" here is a
+      separable junction, not a crimp under the tape - unlike SP_BRW, which is genuinely hidden.
+      ** THE NODE IS NOT IN THE HARNESS AT ALL. ** Confirmed 29 Aug 2026 with the starter and
+      fuse-block cables disconnected: the harness side of B06.4 is a PLAIN SINGLE MALE BULLET. The
+      loom contributes one wire; the junction itself belongs to the fuse-box pigtail, which the
+      rebuild replaces outright. So this node is inherited only if the rebuild chooses to build one.
+      The 28 Aug mate observation was taken while everything was still plugged together and CANNOT
+      BE REPEATED now. It is the one bullet node on this harness whose contents were captured before
+      teardown - the other six lost theirs, and that gap is permanent.
+      DESIGN: the melted, corroded joint is HERE, and the mechanism is now precisely located - the
+      gauge step sits at the pigtail's double-female, where the fuse's larger W/R meets the smaller
+      harness W/R, on the highest-current circuit on the bike. The joint disappears with the pigtail;
+      the TOPOLOGY is what must not be reproduced - charging output, main-fuse output and
+      starter-relay feed all meeting at one bullet junction with a conductor-size step in it.
+      The two-point W/R net recorded on 28 Aug (B04.6 to B06.4, 0.1 ohm) is unchanged as a
+      measurement; what changed is that one of those points is now identified as the charging output
+      rather than an unexplained white-base wire absent from the cable index.
+  FUSE_AUX:
+    type: Fuse box
+    subtype: SECOND box, 2 fuses - factory part, relocated
+    pinlabels: [R/W IN, W/Bl OUT, W/BK OUT]
+    notes: |-
+      FOUND 29 Aug 2026, and it is a FACTORY part - just not where the bike carries it now.
+      A single large R/W feeds in on a MALE bullet and splits to both fuses. One fuse comes out as
+      W/Bl on a single FEMALE bullet, showing evidence of having been mated - to B09, the rear
+      accessory feed. The other comes out as W/BK on a double-female bullet that is oxidised and
+      looks unused.
+      ** R/W IS RED BASE, AND IT IS NOT W/R. ** The main power path (B04.6 to B06.4, and the R/R's
+      DC output) is W/R, WHITE base. Both wires exist on this bike. See the reversed-pairs warning in
+      kz305-common.yml.
+      The R/W inbound bullet mates a short jumper off the STARTER RELAY ASSEMBLY's own R/W female
+      bullet. That assembly is not yet mapped, so where this box takes power - and whether it is
+      switched or permanently live - IS NOT ESTABLISHED.
+      ** THIS MAY EXPLAIN AN OLD READING RATHER THAN CONTRADICT IT. ** The pre-28-Aug model drew
+      W_RR_OUT as "R/W running to the starter-relay junction", off the 600 dpi scan. There IS an R/W
+      at the starter-relay junction - this box's feed. The scan may have read a real wire and the
+      model assigned it to the wrong cable. W_RR_OUT itself is W/R, white base, confirmed with the
+      R/R in hand.
+      NOT DRAWN INTO THE CIRCUIT YET: only the W/Bl output has a known destination. The R/W input
+      waits on the starter-relay assembly map, and W/BK has no recorded mate at all.
+      W/BK is a colour that appears NOWHERE else in this project's map.
+  SP_NETA:
+    style: simple
+    type: Splice
+    subtype: Y/BK - ground Net A, location unknown
+    notes: |-
+      INFERRED 29 Aug 2026, not seen - the same argument that located SP_BRW. Net A has THREE
+      endpoints (the B04.1 chassis ring, B00.7 and B08) and each holds exactly ONE wire, so
+      something joins them under the tape. Drawn as a node because the three-way net is measured;
+      its POSITION is not, so do not read the placement here as a location. Step 3 should find it.
+  ACC_F:
+    type: Junction
+    subtype: double-female bullet, both slots empty - front accessory point
+    pinlabels: [Y/BK]
+    notes: |-
+      B00.7 at the headlight junction. One harness wire in the crimp, TWO receptacle slots, BOTH
+      EMPTY - and unlike the other double-females on this harness, NOTHING EVER PLUGGED IN. The
+      pre-teardown photographs show it unmated, and the oxidation inside the slots matches the
+      outside, which is independent of the photographs: a mated slot ages differently from an open
+      one.
+      INTERPRETATION, strong but not proven: this is the GROUND half of the front "Electric
+      Accessory Leads" pickup that the diagram carries - see ACC_F_PWR, which is the same length,
+      the same terminal type, and leaves at the same point.
+  ACC_F_PWR:
+    type: Junction
+    subtype: double-female bullet, both slots empty - front accessory feed
+    pinlabels: [W/Bl]
+    notes: |-
+      B00.8, alongside ACC_F and the same 240 mm from the datum. Both slots empty.
+      W/Bl is the "blue-family wire" of the diagram's accessory pair. THIS IDENTIFIES THE LAST NET
+      IN THE HARNESS THAT HAD NO COUNTERPART in these models or the cable index.
+      ** ITS SOURCE IS FOUND, 29 Aug 2026: A SECOND FUSE BOX. ** See FUSE_AUX. B09's mate is that
+      box's W/Bl output bullet, which shows evidence of having been mated - so the accessory FEED was
+      in service even though the accessory EARTHS at ACC_F and ACC_R never were.
+  ACC_R:
+    type: Junction
+    subtype: double-female bullet, both slots empty - rear accessory point
+    pinlabels: [Y/BK]
+    notes: |-
+      B08, at 975 mm. Both slots empty, and never connected - same photographic and oxidation
+      evidence as ACC_F. The ground half of the rear accessory pair.
+  ACC_R_PWR:
+    type: Bullet connector
+    subtype: male - rear accessory feed
+    pinlabels: [W/Bl]
+    notes: |-
+      B09, at 1060 mm. A MALE bullet, unlike the three double-females of this group. Same net as
+      ACC_F_PWR - 0.3 ohm, 28 Aug 2026.
+      ** MATE IDENTIFIED 29 Aug 2026: the W/Bl output of FUSE_AUX, the second fuse box. ** Its female
+      bullet shows evidence of having been mated, unlike everything else in this accessory group.
   SP_BR:
     style: simple
     type: Splice
@@ -193,16 +353,77 @@ connectors:
 cables:
   # --- battery main and chassis ground ---------------------------
   W_BAT_SOL:  {<<: *w6, colors: [RD]}
+  # Net A is YELLOW base - YEBK, not BKYE. These are the only ground cables in
+  # this model drawn that way, and they are the only ones measured to be on it.
+  W_ACC_GND_F: {<<: *w16, colors: [YEBK]}
+  W_ACC_GND_R: {<<: *w16, colors: [YEBK]}
+  W_ACC_RING:
+    <<: *w16
+    colors: [YEBK]
+    notes: |-
+      The chassis ring terminal's own lead, B04.1. YELLOW base with a black tracer.
+      Every other ground in this model is drawn BKYE, black base - which for Net B is now measured
+      and correct, but which was applied to this net by inheritance and is WRONG. Net A is yellow
+      base, confirmed with the wires in hand 28 Aug 2026. Drawn YEBK so the drawing shows the
+      difference the meter found.
+      Gauge reads heavier than the harness's common wire, 16-18 by eye and DEFINITIVELY not 6 AWG -
+      so this is not the battery earth strap. See W_BAT_GND.
+  W_ACC_FUSED:
+    <<: *w18
+    colors: [WHBU]
+    notes: |-
+      The second fuse box's W/Bl output, to B09. Its female bullet shows evidence of having been
+      mated - the only terminal in the accessory group that does. So the accessory FEED was in
+      service while both accessory EARTHS sat unused, which is a real asymmetry and not an
+      assumption: ACC_F and ACC_R were never connected at all.
+  W_ACC_PWR:
+    <<: *w18
+    colors: [WHBU]
+    notes: |-
+      The accessory feed, front pickup to rear pickup. MEASURED as one net 28 Aug 2026 (0.3 ohm) and
+      IDENTIFIED 29 Aug 2026: it is the "blue-family wire" of the diagram's Electric Accessory Leads,
+      the last net in this harness that had no counterpart here or in the cable index.
+      WHITE base with a BLUE tracer - NOT Bl/W, which is a different wire on this bike and is drawn
+      as W_FUSE_HEAD_IN. Base colour first.
   W_BAT_GND:
     <<: *w6
     colors: [BKYE]
     notes: The battery earth strap, NOT a harness lead - established 28 Aug 2026 when the harness's own ring terminal turned out to be 16-18 AWG Y/BK. This strap is separate hardware that lands on the same mount. Drawn because it is a real path, not because the loom carries it.
   # --- main feed ----------------------------------------------------
-  W_MAIN:     {<<: *w14, colors: [WH]}
+  W_MAIN:
+    <<: *w14
+    colors: [WHRD]
+    notes: |-
+      REROUTED AND RECOLOURED 29 Aug 2026. Was drawn white from the starter relay's battery stud to
+      the 20A fuse's input. It is W/R, and it runs to the bullet node (SP_WR) rather than to the fuse
+      directly - that node is what B06.4 mates, and its third leg was recorded on 28 Aug as "a W/R to
+      the STARTER RELAY" but left undrawn because the relay terminal was unidentified. It is the
+      battery stud, so the node's three legs are now all drawn: battery stud, 20A fuse, R/R output.
+  W_MAIN_OUT:
+    <<: *w14
+    colors: [WHRD]
+    notes: |-
+      NEW 29 Aug 2026. The 20A MAIN fuse's OUTPUT leg - W/R off holder 1, into the double-female
+      bullet node on the fuse-box pigtail. Drawn now because the node has a second identified leg
+      (the R/R's DC output) and a net with two named ends is worth a wire rather than prose.
+      DESIGN FINDING, unchanged and still the most important thing on this sheet: THIS is the melted,
+      corroded bullet. The larger-gauge W/R from the fuse meets a smaller harness W/R at this joint,
+      on the highest-current circuit on the bike. A new harness built to the same topology puts the
+      same gauge step on the same 20A node. GAUGE IS EYEBALLED, not measured - "larger" is a bench
+      comparison, so size the rebuild from the load, not from this.
   W_IGN_FEED:
     <<: *w14
     colors: [WH]
-    notes: LEFT AS DRAWN, AND CONTRADICTED - see the MF notes. The 20A fuse's output terminal carries W/R on the bench, and the W/R net has only two points, neither of them at the headlight junction where the ignition switch is. So this cable is either the wrong colour or the wrong route. One ring-out settles it; guessing which would put a fabricated topology in a reference drawing.
+    notes: |-
+      LEFT AS DRAWN, AND CONTRADICTED - see the MF notes. The 20A fuse's output terminal carries W/R
+      on the bench, and no point on the W/R net is at the headlight junction where the ignition
+      switch is. So this cable is either the wrong colour or the wrong route. One ring-out settles
+      it; guessing which would put a fabricated topology in a reference drawing.
+      STILL CONTRADICTED, AND MORE SHARPLY, 29 Aug 2026. The W/R net's membership is now better
+      known rather than worse: MF's output terminal, the R/R's DC output at B04.6, and an
+      unidentified leg to the starter relay. None of them is the ignition switch. The open question
+      is unchanged - ring B00.3's white against holder 1's white terminal - but of the two live
+      readings, "the ignition feed taps the WHITE side, ahead of the fuse" is now the likelier.
 
   # --- ignition Br: the switched bus, fed straight off the switch ----
   W_BR_MAIN:
@@ -213,8 +434,25 @@ cables:
   # --- fuse box internals: three independent holders, no bus ---------
   W_FUSE_HEAD_IN: {<<: *w18, colors: [BUWH]}
   W_BL_UP:        {<<: *w18, colors: [BU]}
-  W_FUSE_TAIL_IN: {<<: *w18, colors: [RDBU]}
-  W_BRW_OUT:      {<<: *w18, colors: [BNWH]}
+  W_TAIL_RBL:
+    <<: *w18
+    colors: [RDBU]
+    notes: |-
+      The TAIL fuse's R/Bl leg. RENAMED 29 Aug 2026 from W_FUSE_TAIL_IN: the holder's orientation is
+      settled as Br/W in and R/Bl out, so this is the OUTPUT, and a name encoding the old direction
+      would have been actively misleading. Named by colour rather than by direction on purpose -
+      this one has already flipped once.
+      Runs to the ignition switch's TAIL1 pin, which is where that pin gets its power. Its
+      harness-side partner at B00.3 is unrung, so it is still drawn terminating here.
+  W_TAIL_BRW:
+    <<: *w18
+    colors: [BNWH]
+    notes: |-
+      The TAIL fuse's Br/W leg, and its INPUT. RENAMED 29 Aug 2026 from W_BRW_OUT for the same reason
+      as W_TAIL_RBL - it was named for a direction that turned out to be backwards.
+      Fed from the switched brown bus by way of SP_RH_BR, the splice inside the RIGHT-BAR switch
+      pigtail. That is the stock design and it is worth reading twice: the feed for this fuse goes
+      UP TO THE HANDLEBAR AND BACK DOWN.
   W_BRW_HARNESS:
     <<: *w18
     colors: [BNWH]
@@ -229,34 +467,39 @@ cables:
     notes: The headlight-junction leg of the Br/W net, ending at BRW_HL. Measured as part of the three-endpoint net; drawn so the sheet shows what the meter found rather than leaving the endpoint in prose only.
 
 connections:
+  # --- 20A MAIN output onto the W/R main power net --------------------
+  - - MF: [2]
+    - W_MAIN_OUT: [1]
+    - SP_WR: [1]
+
   # --- main feed to the ignition switch ------------------------------
   - - SOL: [1]
     - W_MAIN: [1]
-    - MF: [1]
-  - - MF: [2]
+    - SP_WR: [1]
+  - - MF: [1]
     - W_IGN_FEED: [1]
     - IGN: [1]
 
   # --- ignition switch ON: W to Br, Br onto the switched bus ---------
-  - - IGN: [2]
+  - - IGN: [3]
     - W_BR_MAIN: [1]
     - SP_BR: [1]
 
   # --- fuse box: holder 2 HEAD, holder 3 TAIL, no bus between them ---
-  - - FUSE_4P: [1]
+  - - FUSE_4P: [3]
     - W_FUSE_HEAD_IN: [1]
     - FUSE_HEAD: [1]
   - - FUSE_HEAD: [2]
     - W_BL_UP: [1]
-    - FUSE_4P: [2]
-  - - FUSE_4P: [3]
-    - W_FUSE_TAIL_IN: [1]
+    - FUSE_4P: [1]
+  - - FUSE_4P: [2]
+    - W_TAIL_BRW: [1]
     - FUSE_TAIL: [1]
   - - FUSE_TAIL: [2]
-    - W_BRW_OUT: [1]
+    - W_TAIL_RBL: [1]
     - FUSE_4P: [4]
   # --- Br/W: three measured endpoints, junction location unknown -----
-  - - FUSE_4P: [4]
+  - - FUSE_4P: [2]
     - W_BRW_HARNESS: [1]
     - SP_BRW: [1]
   - - SP_BRW: [1]
@@ -265,6 +508,23 @@ connections:
   - - SP_BRW: [1]
     - W_BRW_HL: [1]
     - BRW_HL: [1]
+
+  # --- accessory pickups: provisioned, never used ---------------------
+  - - GND_CHASSIS: [1]
+    - W_ACC_RING: [1]
+    - SP_NETA: [1]
+  - - SP_NETA: [1]
+    - W_ACC_GND_F: [1]
+    - ACC_F: [1]
+  - - SP_NETA: [1]
+    - W_ACC_GND_R: [1]
+    - ACC_R: [1]
+  - - ACC_F_PWR: [1]
+    - W_ACC_PWR: [1]
+    - ACC_R_PWR: [1]
+  - - FUSE_AUX: [2]
+    - W_ACC_FUSED: [1]
+    - ACC_R_PWR: [1]
 
   # --- battery main and chassis ground ----------------------------
   - - BATT: [1]

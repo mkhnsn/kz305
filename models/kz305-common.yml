@@ -34,12 +34,54 @@
 #    that do not state the base colour are ambiguous and cannot be
 #    repaired by inference - re-read the wire.
 #
+# !! NEVER PUT A BARE > OR < IN A notes: BODY. WireViz renders notes into
+#    a graphviz HTML-like label, where those characters open and close
+#    tags, so "raised 14 -> 12 AWG" fails the build with an opaque
+#    "syntax error ... near 'AWG'" pointing at generated dot, not at the
+#    YAML. Write "from 14 to 12" instead. Cost an hour on 1 Sep 2026.
+#
 # !! WireViz has no light-green code, so Kawasaki LG and G BOTH render as
 #    GN. Any LG lead is tagged in its notes. Do not read green off the
 #    drawing and assume it is G.
 #
 # Two-color leads are primary-then-secondary. Y/R and R/Y are DIFFERENT
 # wires; so are Br/W and W/Br. Base manual, printed 33, item 18.
+#
+# !! THE REBUILD USES SOLID COLOURS ONLY - DECIDED 1 Sep 2026
+#
+#    No tracer wire. Custom striped TXL carries minimum order quantities
+#    that make no sense for one bike, so identification moves to PRINTED
+#    HEAT-SHRINK LABELS plus docs/label-schedule.md.
+#
+#    ** THIS KILLS THE REVERSED-PAIR FAILURE MODE OUTRIGHT. ** Y/BK vs
+#    BK/Y cost this project a fortnight; Br/W vs W/Br bit it twice. With
+#    no tracers there are no pairs left to reverse. That is a real gain,
+#    not merely a cost of the decision.
+#
+#    THE PRICE is that colour alone now separates fewer circuits, so the
+#    scheme was chosen to guarantee that NO TWO WIRES ON ONE CONNECTOR
+#    SHARE A COLOUR unless they are the same net. Eleven solids:
+#
+#      BK  ground ONLY - never a signal, never a feed
+#      RD  always-hot / battery / unfused main
+#      WH  fused main power, pre-relay
+#      BN  switched bus
+#      YE  ignition feed          PK  coil feed, and LO beam trigger
+#      VT  starter trigger, coil power, horn return, LO beam
+#      GY  relay coil drives      OG  horn power, HI beam
+#      BU  headlamp supply        GN  dimmer common
+#
+#    ⚠️ TWO DOCUMENTED EXCEPTIONS, both forced by parts we do not make:
+#      - W_PTS_R is BLACK and is NOT a ground. It is a factory contact
+#        breaker lead in a braided jacket - do not strip it, and do not
+#        land it on the star bus.
+#      - The 6 AWG heavy path is red/black battery cable, so W_BAT_SOL
+#        and W_SOL_SM are both RD at SOL. They are lugs on separate
+#        studs and cannot physically be interchanged.
+#
+#    THE FACTORY MODEL IS UNAFFECTED. It records what the bike HAD, in
+#    the stock two-colour codes, and remains the cross-reference. Only
+#    the rebuild changes.
 #
 # !! COLOR COLLISION - never identify a lead by color alone. The ring-out
 #    of 28 Aug 2026 turned this from a warning into a measurement: THREE of
@@ -57,6 +99,21 @@
 #      Bl  = brake lamp feed AND the fused headlight supply to the dimmer.
 #            Two nets, open to each other.
 #
+#    AND THE REVERSED PAIRS. These are not collisions but they are worse,
+#    because they LOOK like the same wire written two ways. On this bike
+#    both members of each pair physically exist:
+#
+#      W/R vs R/W - W/R (white base) is the main power path, B04.6 to
+#            B06.4, and the R/R's DC output. R/W (RED base) is a
+#            different circuit entirely: it feeds a SECOND, two-fuse
+#            box off the starter-relay assembly. Confirmed at the bench
+#            29 Aug 2026, both in hand.
+#      Y/BK vs BK/Y - the two ground nets, open to each other.
+#      Br/W vs W/Br, W/Bl vs Bl/W - the pairs that have cost this
+#            project time twice each.
+#
+#    BASE COLOUR FIRST, ALWAYS, and say so.
+#
 #    Ring out to the endpoint before terminating. Identification by colour
 #    alone is unsafe in this harness - including identifications made in
 #    these models from the scan.
@@ -68,10 +125,32 @@ templates:
   # Gauge only. length_unit lives in the rebuild file, which is the one
   # that gets cut; the factory model carries no lengths at all so the
   # BOM cannot report a fabricated zero.
-  w6:  &w6  {gauge: 6 AWG}
-  w14: &w14 {gauge: 14 AWG}
-  w16: &w16 {gauge: 16 AWG}
-  w18: &w18 {gauge: 18 AWG}
+  # WIRE DECIDED 1 Sep 2026: TXL from Prowire. Thin-wall XLPE, 125 C, SAE
+  # J1128. The choice is not only thermal - TXL's thin wall sets the MTA
+  # cavity SEAL size, and GXL or SXL in the same gauge would need a
+  # different seal part number. See docs/part-selection.md.
+  #
+  #   AWG   nominal OD        MTA 2.8mm cavity seal
+  #   18    0.078in / 1.98mm  4550748 red   (range 1.2-2.1)
+  #   16    0.089in / 2.26mm  4550747 green (range 2.2-3.0)
+  #   14    0.102in / 2.59mm  4550747 green
+  #   12    0.127in / 3.23mm  4550749 grey  (range 3.1-3.7) - does not enter the PDM
+  #
+  # TXL covers 24 to 8 AWG, so every gauge above EXCEPT 6 is available in it.
+  #
+  # ⚠️ 16 AWG CLEARS THE GREEN SEAL'S LOWER BOUND BY 0.06mm. Verify with
+  # calipers on the delivered spool before ordering seals in quantity.
+  # ⚠️ 6 AWG IS NOT TXL AND CANNOT BE. TXL runs roughly 24 to 8 AWG; 6 is
+  # outside the range. The three heavy cables - W_BAT_SOL, W_SOL_SM and
+  # W_BAT_GND - are battery/starter cable, a different product with a
+  # different insulation and a much larger OD. NOT SPECIFIED YET, and it
+  # does not inherit the seal or terminal decisions above: none of it
+  # enters the PDM, and all three terminate in lugs rather than 280s.
+  w6:  &w6  {gauge: 6 AWG,  type: Battery cable - SPEC TBD}
+  w12: &w12 {gauge: 12 AWG, type: TXL, supplier: Prowire}
+  w14: &w14 {gauge: 14 AWG, type: TXL, supplier: Prowire}
+  w16: &w16 {gauge: 16 AWG, type: TXL, supplier: Prowire}
+  w18: &w18 {gauge: 18 AWG, type: TXL, supplier: Prowire}
 
   # ---- ignition ----------------------------------------------------
   coil: &coil
@@ -125,13 +204,36 @@ templates:
   ign_switch: &ign_switch
     type: Ignition switch
     subtype: 4-pin
-    pinlabels: [BATT (W), IGN (Br), TAIL1 (R/BK), TAIL2 (R)]
-    notes: METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_BK-R. PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function.
+    pinlabels: [BATT (W), TAIL2 (R), IGN (Br), TAIL1 (R/Bl)]
+    notes: |-
+      METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_Bl-R.
+      PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function.
+      ** WAYS RENUMBERED TO PHYSICAL CAVITIES 29 Aug 2026 ** - mating face, keyway up, left to right,
+      top row first: 1 W, 2 R, 3 Br, 4 R/Bl. They were previously listed in the printed table's
+      column order, which is not the connector's. Both models were swept for pin references.
+      ** TAIL1 IS R/Bl, NOT R/BK - CORRECTED 29 Aug 2026. ** The printed table gives R/BK and the
+      600 dpi scan cannot separate the two. BOTH HALVES of B00.3 were read at the bench and both are
+      RED base with a BLUE tracer - the switch's own pigtail independently of the harness wire. Two
+      physical reads against one scan. R/BK is a real colour on this bike (the dimmer beam outputs),
+      which is why this was never an obvious slip.
+      CONNECTOR CONFIRMED as this switch 29 Aug 2026: 4 ways, W R Br R/Bl, 4-of-4 on the mirror, and
+      no other 4-way in the harness carries that set. Identified by elimination, not resemblance.
+      The BATT white is visibly heavier than the harness's common wire - eyeball only, see the
+      gauge caveat.
 
   rh_cluster: &rh_cluster
     type: Right bar cluster
     subtype: stop switch + starter button
-    notes: METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts degraded - button 5 ohm, kill 3 ohm, 8 ohm series. The relay will NOT pull in through 8 ohm. Clean before building.
+    notes: |-
+      METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts
+      degraded - button 5 ohm, kill 3 ohm, 8 ohm series. The relay will NOT pull in through 8 ohm.
+      ** CLEANING IS A PLANNED BUILD STEP, CONFIRMED 1 Sep 2026, AND THE RELAY SCHEME DEPENDS ON IT. **
+      All five rebuild relays are driven through these contacts, so cleaning is not an alternative to
+      relaying - it is what makes relaying work. ACCEPTANCE, REL-zeroed on the 87V: under 1 ohm per
+      contact, the procedure's damaged-conductor threshold. The benchmark for what good looks like is
+      in hand - the ignition switch measured 0.1 ohm and this project called it healthy. Re-measure
+      after cleaning and record the value; a contact that will not come under 1 ohm needs replacing,
+      not more cleaning.
 
   lh_cluster: &lh_cluster
     type: Left bar cluster

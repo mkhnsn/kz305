@@ -30,15 +30,70 @@
 #        - A GAUGE STEP AT A BULLET ON THE 20A MAIN. That is where
 #          the old harness melted, and the mechanism is topology, not
 #          age - see W_MAIN_OUT.
-#        - CHARGING RUNS THROUGH THE IGNITION SWITCH. Every alternator
-#          amp passes the switch contacts in stock form. See RR.
+#        - CHARGING RUNS THROUGH THE IGNITION SWITCH.
+#          ** WITHDRAWN 29 Aug 2026. THIS IS NOT TRUE. ** It rested
+#          on the R/R 4P having no spare pin, forcing brown to be the
+#          DC output. At the bench the R/R half is populated on only
+#          THREE cavities - the brown cavity is EMPTY - and the
+#          SH221-12's fourth lead leaves as a W/R male bullet to
+#          B04.6, joining the main power path to the starter relay
+#          and fuse box. So stock charging does NOT pass the ignition
+#          switch, and the factory model was right before it was
+#          "corrected". Do not carry this into the rebuild as a
+#          design driver. See W_RR_OUT and measurements/README.
 #   2. No lengths YET, but the reference now exists: Step 1 measured
 #      46 branches off the old harness, datum and trunk map recorded,
 #      before anything was cut. Lengths still are not in this file -
 #      transferring them is its own pass, and the BOM stays
 #      meaningless until it happens. Render with -f hps.
+#   3b. NOT A BLOCKER, A DESIGN INPUT, 29 Aug 2026 - TWO STOCK WAYS
+#      SERVE NOTHING. The switched brown runs to a cavity the R/R does
+#      not populate (B04.3) and to a cavity the LEFT CLUSTER does not
+#      populate (B02.3). Both are live wires into empty mates, found by
+#      reading the far half of each connector.
+#      Do not reproduce either. The rebuild's left-bar connector needs
+#      FIVE ways, not six. A STOCK WAY COUNT IS NOT A CIRCUIT COUNT,
+#      and the difference is invisible from the harness side.
+#      Likely cause: the loom is catalogued for A1/A2/B1/C1/D1 and
+#      these ways are live on other variants.
+#   3a. NOT A BLOCKER, A DESIGN INPUT, 29 Aug 2026 - THE STOCK 10A
+#      FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. Neither 10A circuit
+#      is fed at the fuse box. Both are fed from SP_RH_BR, a splice
+#      inside the RIGHT-HAND SWITCH PIGTAIL, which is itself fed from
+#      the switched brown bus: Br/W comes back down to the TAIL fuse,
+#      Bl/W to the HEAD fuse. That is why both wires run between the
+#      fuse box and the right-bar branch, which these models circled
+#      for weeks without an explanation.
+#      The rebuild has no reason to reproduce the detour - the PDM
+#      feeds its own fuses - but it DOES have to keep the right-bar
+#      connector's way count honest, because three of those ways only
+#      exist to serve the detour. Revisit the RH 4P way list when the
+#      PDM circuit list is final.
 #   3. Fuse block part not selected - depends on final circuit count,
-#      which now also depends on 5.
+#      which now also depends on 5, and the count grew again on 1 Sep
+#      when the relay policy took it to five relay positions.
+#   6. NEW BLOCKER, 1 Sep 2026 - THE STARTER RELAY ASSEMBLY IS NOT
+#      MAPPED, AND TWO CIRCUITS DEPEND ON IT. Everything in the
+#      measurement log points AT the assembly and nothing IS it: no
+#      terminal map, no lead lengths, no measured gauge. What that
+#      blocks here:
+#        - THE ACCESSORY FEED. A SECOND, two-fuse box was found
+#          29 Aug; its W/Bl output fed B09 and WAS in service. It takes
+#          power on an R/W jumper off the relay assembly. Whether that
+#          jumper leaves the BATTERY stud or the switched side decides
+#          if the accessory circuit is permanently live, and that is a
+#          fuse assignment this rebuild cannot make blind.
+#        - THE SOL WAY NUMBERS BELOW ARE FROM THE DIAGRAM, NOT THE
+#          PART. They have never been checked against the housing. IGN
+#          and FUSE_4P both had to be renumbered to physical cavities
+#          once read; assume SOL will too.
+#      Capture sheet: measurements/starter-relay.md.
+#   7. ACCESSORY EARTHS WERE NEVER CONNECTED, 29 Aug 2026 - and that is
+#      a design input, not a fault to reproduce. The accessory FEED was
+#      in service but BOTH accessory grounds sat open their whole lives
+#      on the oxidation evidence, so whatever was fed returned to the
+#      frame some other way. The rebuild draws accessory circuits with
+#      a real ground or not at all. NOT YET DRAWN either way, pending 6.
 #   4. GAUGE IS UNMEASURED, harness-wide. Not one wire has had its
 #      gauge taken with a tool; every bench value is an eyeball
 #      estimate against an unverified 18 AWG baseline. Do not size
@@ -143,7 +198,24 @@
 #     Its contact measured a healthy 0.1 ohm, so this is preventive.
 #     Fails safe (open = bike dead, key does nothing).
 #
-#   K_HORN - DECIDED, NOT YET DRAWN, AND NO LONGER BLOCKED. The horn and
+#   ** POLICY SET 1 Sep 2026: RELAY ANYTHING THAT USED TO RUN THROUGH
+#   SWITCH CONTACTS DIRECTLY. ** This supersedes the case-by-case
+#   deferrals below, which are kept for their reasoning rather than
+#   their conclusions. Five relays: K_MAIN, K_COIL, K_HORN, K_HI, K_LO.
+#
+#   THE STARTER ALREADY COMPLIES - NO NEW RELAY, AND ADDING ONE WOULD
+#   NOT HELP. SOL *is* the starter relay; the button has only ever
+#   driven its coil, never the motor. Putting a K_START in front of it
+#   would drive the new coil through the SAME degraded contacts, and a
+#   relay coil (~0.15A) against a solenoid coil (~0.3A) is a 2x
+#   improvement where K_COIL buys 20x. The measured problem is the
+#   contacts themselves - button 5 ohm, kill 3 ohm, 8 ohm in series,
+#   and the note on rh_cluster is blunt that a relay will NOT pull in
+#   through 8 ohm. CLEAN THE CLUSTER. That is the fix, and no relay
+#   substitutes for it: every one of the five above is driven through
+#   those same contacts.
+#
+#   K_HORN - DECIDED AND NOW DRAWN, 1 Sep 2026. The horn and
 #     the left cluster were transcribed 19 Aug, and 28 Aug confirmed the
 #     topology by meter: the horn button return is its own black net,
 #     left bar to horn, open to the starter-trigger black. So the button
@@ -153,10 +225,14 @@
 #     just stops carrying the load. Justification is measured: the horn
 #     is only ~2A, but the RIGHT cluster contacts came back at 3-5 ohm,
 #     and 3 ohm at 2A is a 6V drop - a horn that barely sounds. The left
-#     cluster is the same age and construction. Draw it with the rest of
-#     the lighting branch.
+#     cluster is the same age and construction.
 #
-#   HEADLIGHT - UNBLOCKED 28 Aug 2026, still deferred on one number.
+#   HEADLIGHT - DECIDED AND NOW DRAWN as K_HI + K_LO, 1 Sep 2026. The
+#     deferral below wanted the LED's measured draw first, on the
+#     argument that a unit under ~2A through a cleaned switch needs no
+#     relay at all. The policy above overrules that. Still measure the
+#     draw - it sizes F5 and the beam gauge - but it is not a gate.
+#     Kept because the two constraints it establishes are still binding:
 #     The dimmer is metered and the common is settled: Bl is the common
 #     and the supply, R/BK is HI, R/Y is LO. Open since 13 Aug, and it
 #     was the thing standing in the way of a beam relay. The harness
@@ -179,8 +255,17 @@
 #     actual draw on the 87V 10A range. Stock was 4.2A; an LED unit
 #     under ~2A through a cleaned switch does not need a relay at all.
 #
-#   Do not relay everything. Each relay is a socket, a ground and a
-#   failure point. Relay where the switch is old AND the current is high.
+#   THE HONEST COST OF THE POLICY. Each relay is a socket, a ground and
+#   a failure point, and five of them is five new parts the bike never
+#   had. The counter-argument used to be "relay where the switch is old
+#   AND the current is high" - the horn at 2A and an LED headlight under
+#   2A both fail the current half of that test. What carries the
+#   decision instead is that EVERY cluster contact on this bike measured
+#   degraded (3-5 ohm right, left same age and construction), and a
+#   contact that drops 6V at 2A is not a switch, it is a resistor. The
+#   relays move the load off 44-year-old contacts and leave them
+#   carrying 0.15A, where their condition stops being load-bearing.
+#   Socket every one, keep them accessible, carry spares.
 # =====================================================================
 
 connectors:
@@ -191,7 +276,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, RELAY 1, RELAY 2, ENG, LAMPS, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, ENG, SPARE]
     notes: |-
       UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces
       is not what this note used to say. There is no single ring terminal carrying the harness. There
@@ -203,6 +288,16 @@ connectors:
       back to this bus that the old harness never had. The way list below is provisional until that
       count is known, and the frame is being powder coated, which removes the earth path those
       components were silently using.
+      WAY COUNT GREW 1 Sep 2026 with the relay decision. FIVE relay coils now earth here, not two -
+      K_MAIN, K_COIL, K_HORN, K_HI, K_LO. Each is only ~0.15A, so they cost way count rather than gauge.
+      NOTE THERE IS NO K_HORN WAY. Its coil- does not come here - it goes to the horn button, and the
+      button earths through LH CLUSTER. That is the stock ground-side switching preserved, and it is
+      why the horn relay costs one bus way rather than two.
+      LH CLUSTER IS A NEW WIRE AND A WORKED EXAMPLE OF BLOCKER 5. Stock, the horn button grounds
+      through the CLUSTER BODY - established 29 Aug 2026 when the unsleeved LH pigtail turned out to
+      carry seven leads and no eighth ground conductor. The frame is being powder coated, which removes
+      exactly that path, so the rebuild runs a real wire. Every other mounting-earthed component needs
+      the same treatment and the count is still unknown.
       Mask or scrape the stud back to bare metal. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V,
       which is the meter's floor - treat it as pass/fail, not a measurement.
 
@@ -212,19 +307,155 @@ connectors:
 
   PDM:
     type: Power distribution module
-    subtype: TBD - part not selected
-    pinlabels: [MAIN STUD, F1 IGN SW FEED, F2 KILL FEED, F3 COIL PWR, F4 SPARE, SW IN (Br), SW OUT (Br)]
+    subtype: Sealed modular, 60 cavities on the 280 footprint
+    manufacturer: MTA
+    mpn: "0301370"
+    additional_components:
+      - type: Top cover
+        manufacturer: MTA
+        mpn: "0301371"
+        qty: 1
+      - type: Secondary lock
+        subtype: SIX PER MODULE, not one - datasheet, 1 Sep 2026
+        manufacturer: MTA
+        mpn: "0301372"
+        qty: 6
+      - type: Mounting leg - male
+        subtype: 2 pcs reqd per module
+        manufacturer: MTA
+        mpn: "0300690"
+        qty: 2
+      - type: Mounting leg - female
+        subtype: 2 pcs reqd per module
+        manufacturer: MTA
+        mpn: "0300691"
+        qty: 2
+      # ⚠️ THE THREE QUANTITIES BELOW ARE PROVISIONAL AND WILL MOVE.
+      # Two separate reasons, and neither is arithmetic:
+      #   1. qty_multiplier cannot help here. It works off pincount, and this
+      #      connector has TEN logical ways - one per circuit - against the
+      #      real module's SIXTY cavities.
+      #   2. ** THE MODEL DRAWS THE RELAYS AS SEPARATE PARTS WIRED TO THE PDM,
+      #      BUT THEY PHYSICALLY SEAT IN IT. ** So W_HORN_PWR, W_COIL_PWR,
+      #      W_HEAD_SUPPLY, W_HI_PWR, W_LO_PWR, W_MAIN_SW_FEED and W_SW_BUS
+      #      are not harness wires at all - they are the point-to-point
+      #      jumpers inside the block. Until that is reconciled, no terminal
+      #      count taken off this drawing is trustworthy.
+      # 32 = 5 relays x 4 pins + 6 fuses x 2, which counts pins rather than
+      # cavities. 18 plugs assumes the ~10 unpopulated cavities inside a relay
+      # footprint are covered by the relay body; if they are open, plugs rise
+      # toward 28. THE MODULE DRAWING SETTLES THAT - it is not a guess worth
+      # refining without it.
+      - type: Terminal
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - QTY PROVISIONAL
+        manufacturer: MTA
+        mpn: 1708338-L
+        qty: 32
+      - type: Cavity plug
+        subtype: 2.8mm black - QTY PROVISIONAL. REQUIRED or the module is not sealed
+        manufacturer: MTA
+        mpn: "4550750"
+        qty: 18
+      # SEAL SIZE RESOLVED 1 Sep 2026 by the TXL decision - it follows the
+      # wire's INSULATION OD, not its gauge, so it could not be picked until
+      # the wire family was. TXL is thin-wall; GXL or SXL would need
+      # different seals in the same gauges. 12 AWG needs grey but does not
+      # enter this block - charging runs direct to the battery.
+      # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm.
+      # Caliper the delivered spool before ordering in quantity.
+      - type: Wire seal - red
+        subtype: 2.8mm, insul dia 1.2-2.1mm - for 18 AWG TXL (1.98mm)
+        manufacturer: MTA
+        mpn: "4550748"
+        qty: 12
+      - type: Wire seal - green
+        subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
+        manufacturer: MTA
+        mpn: "4550747"
+        qty: 20
+    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
       count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
       SWITCH, not the coils directly - see SP_YR. PART CHOICE - the relay decisions point at a sealed
       RTMR-style relay/fuse module rather than a plain blade fuse block: roughly 6-8 fused circuits and
       3-5 relay positions.
+      ** STILL OPEN 1 Sep 2026, AND CUSTOM / SEMI-CUSTOM IS IN PLAY. ** Do not read the pin list as a
+      chosen part's pinout - it is the circuit list the module has to satisfy, in a stable order so
+      the connection sets can reference it. A custom build would make the two-busbar split below
+      straightforward and free the way count from whatever a vendor happened to lay out; against
+      that, a bought sealed module arrives weatherproofed and already rated. The requirements the
+      pin list encodes are the same either way, which is why this decision does not block the rest
+      of the model.
+      ** CANDIDATE ROUTES, 1 Sep 2026: A METRI-PACK 280 ARRAY, OR THE MTA MODULAR FAMILY. ** MP280 is
+      a 2.8mm blade on 22-14 AWG - the range this harness actually uses - and it mates BOTH a MINI
+      (ATM) fuse and an ISO 280 micro relay, so one receptacle type still takes either and a
+      position's role is decided by what is pushed in. Micro 280 relays are 20A with 35A versions,
+      against a worst case of ~6.6A at K_MAIN, so every position sits well inside a 20A part.
+      ** BUS THE FEED SIDE WITH SOLID BAR, WHICHEVER ROUTE. ** A wire per fuse input is N crimps on
+      the main power path - the B06.4 mechanism rebuilt on purpose. This is also the thing to check
+      on MTA: most of its modules carry NO common power and wire each terminal separately, which is
+      the busbar problem in a nicer package. Two bars suit the hot/switched split above.
+      ** SETTLED 1 Sep 2026: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm
+      cavities, 30 MiniVal fuses or 10 micro relays or mixed, so one cavity type takes either. The
+      catalogue's only bussed module (0301697) is fuses-only, not waterproof, and carries a SINGLE
+      bus where this design needs two - so the two junctions get wired by hand instead.
+      ** ONE WIRE PER CAVITY - DO NOT DAISY-CHAIN. ** A sealed cavity takes one cable seal on one
+      wire, so the HOT and SWITCHED junctions are star points OUTSIDE the module. Keep HOT and
+      SWITCHED positions at opposite ends of the block: interleaved, a mis-landed feed wire puts F3
+      on permanent power, which is exactly the failure the split exists to prevent.
+      Full comparison and the assembly rules in docs/part-selection.md.
+      ** WHICH FUSES SIT BEHIND K_MAIN - DECIDED 1 Sep 2026, HYBRID. ** This was UNDEFINED until now:
+      the model drew every PDM pin from the outside and said nothing about the module's internal bus,
+      so whether a given fuse was switched or always-hot was not stated anywhere.
+      ** THIS IS ARCHITECTURE, NOT PART SELECTION, AND IT BINDS WHATEVER THE PDM TURNS OUT TO BE. **
+      THE PART IS NOT LOCKED - see the part note below. What the split means in practice:
+        - BOUGHT MODULE: a requirement it has to meet. Not every RTMR-style unit splits its fused
+          outputs across two sources, and one that cannot is disqualified by this, not adapted to.
+        - CUSTOM OR SEMI-CUSTOM: two separate busbars, hot and switched, and the fuse positions
+          land on one or the other. That is a build detail rather than a search filter, and it is
+          the arrangement this split describes most naturally.
+        HOT  - fed from MAIN STUD, live whenever the battery is:
+          F1 IGN SW FEED  - must be hot; it feeds the switch that drives K_MAIN.
+          F4 HORN PWR     - K_HORN's 30. Its coil is switched, so the horn is still dead with the key
+                            out; only the contact side is hot.
+          F5 HEADLAMP PWR - K_HI and K_LO commons, same arrangement.
+        SW   - fed from SW IN, downstream of K_MAIN, dead with the key out:
+          F2 KILL FEED    - the kill switch.
+          F3 COIL PWR     - K_COIL's 30. ** THIS ONE IS NOT NEGOTIABLE - see below. **
+      ** WHY K_COIL IS THE EXCEPTION. ** If F3 were hot and K_COIL's contact ever welded, the engine
+      would keep running with the key out AND THE KILL SWITCH WOULD HAVE NO EFFECT, because the kill
+      switch only drives that coil. Every other relay's welded-closed failure is a flat battery. That
+      one is a bike you cannot stop. The rule the rest of this file states - coils must die with the
+      key - is exactly this, and it survives a failed relay only if F3 is switched.
+      ** NO PARASITIC DRAW FROM THE HOT FUSES. ** An un-energised relay is an open contact, so F4 and
+      F5 sit at battery voltage against an open circuit and pass nothing. Hot here costs no drain.
+      WHAT THE HYBRID BUYS: K_MAIN carries about 6.6A - the coil circuit plus four relay coils - rather
+      than the roughly 9A of a full stack, and the headlamp and horn loads never cross its contacts at
+      all. It is the one relay whose failure kills the bike, so it is the one worth unloading.
+      ** RELAY COUNT IS NOW FIVE, 1 Sep 2026 ** - K_MAIN, K_COIL, K_HORN, K_HI, K_LO - which is at the
+      TOP of that range, not in the middle. Size the module for five positions plus a spare, or accept
+      that two of them live in separate sockets outside it. F4/F5 are new with the horn and beam relays.
+      SW AUX exists because the switched brown bus now feeds three relay coils rather than one.
       BASELINE FOR THE LAYOUT, mapped off the old box 28 Aug 2026 with every fuse pulled. Three
       independent holders, no internal bus, each carrying its printed name: 20A MAIN (W in, W/R out),
       10A HEAD (Bl/W in, Bl out to the dimmer), 10A TAIL (R/Bl and Br/W, orientation not yet measured).
       That is what the block has to cover as a floor, not a set of wires to reproduce - the old box and
       its fixed pigtail do not survive.
+
+  MF_RR:
+    type: Charging fuse
+    subtype: 30A inline, sealed holder - AT THE BATTERY END
+    pinlabels: [IN, OUT]
+    notes: |-
+      NEW PART, 1 Sep 2026, and it does not exist on the stock bike - which fused the charging output
+      nowhere. It protects the WIRE, not the regulator: a direct-to-battery DC pair is unfused by
+      definition unless something is put in it, and an unfused conductor onto a battery post is the one
+      thing a harness must not have.
+      AT THE BATTERY END DELIBERATELY - a fuse at the regulator end leaves the whole run unprotected.
+      RATING PROVISIONAL. 30A is a placeholder above the stock system's output and below the SH775's
+      35A; it cannot be set properly until the stator's rated wattage is known, which nothing on this
+      bike has yet stated. See blocker 4.
 
   IGN:
     <<: *ign_switch
@@ -241,10 +472,23 @@ connectors:
     <<: *alternator
   RR:
     type: Regulator / rectifier
-    subtype: Shindengen SH775 (Polaris 4012941), 3-phase 35A SERIES type - see docs/part-selection.md
+    subtype: 3-phase 35A SERIES type - see docs/part-selection.md
+    manufacturer: Shindengen
+    mpn: SH775
+    pn: "4012941"
     pinlabels: [AC1, AC2, AC3, DC+, GND]
+    additional_components:
+      # qty derives from the drawing, so these self-correct if AC3 is ever used.
+      - type: Terminal
+        subtype: Shindengen mating pigtail, FH009-FH020 family - MPN TBD, Eastern Beaver preferred
+        qty_multiplier: populated
+        qty: 1
+      - type: Cavity plug
+        subtype: seals the deliberately unterminated AC3 - MPN TBD
+        qty_multiplier: unpopulated
+        qty: 1
     notes: |-
-      ORDERED 19 Aug 2026 - used takeoff SH775, eBay, $45. This supersedes the 18 Aug decision to fit a
+      IN HAND 29 Aug 2026 - the Polaris ORV takeoff has arrived. ORDERED 19 Aug 2026, eBay, $45. This supersedes the 18 Aug decision to fit a
       Podtronics shunt first and measure: the used-unit price hit the point where the SH775 wins outright
       (a SERIES type open-circuits the stator rather than shorting it, so regulator and stator run cooler
       and the LED heat problem is cured at source). Temperature measurement is now validation, not a
@@ -257,30 +501,114 @@ connectors:
       FH009-FH020 family), $16-22 openly sold; Eastern Beaver preferred for correct crimps and DC gauge.
       OPEN CHECK - part-selection.md wants the DC pair heavy gauge and direct to the battery, fused at
       the battery end; the model currently routes DC+ to the PDM main stud. Reconcile before cutting
-      wire - and note that the stock harness took the opposite approach and ran the whole charging
-      current through the ignition switch, confirmed by continuity 28 Aug 2026. See W_RR_OUT. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
+      wire. The claim previously here - that the stock harness ran the whole charging current through
+      the ignition switch - is WITHDRAWN 29 Aug 2026; stock routes R/R DC out on W/R to B04.6 and the
+      starter-relay/fuse-box node, not through the switch. See W_RR_OUT. Leave room and a mount - the SH775 is larger than a Podtronics; mount where the airflow
       actually is. The stator's rated wattage has NOT been read off anything, only the 0.4 ohm and 75V
       AC test values. Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the
       ignition on, and never disconnect the battery while running.
 
   K_MAIN:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
+      ** ALL FIVE RELAYS ARE MICRO 280, NOT ISO MINI - CORRECTED 1 Sep 2026 ** when the PDM settled on
+      MTA 0301370. They were drawn as ISO mini while the block was undecided; the module's cavities are
+      the 2.8mm 280 footprint, so the relays that seat in it are ISO 280 micro. Nor are they separately
+      socketed - they plug into the module, which is what let the terminal count be taken from its
+      cavities rather than from five loose sockets. 20A parts, with 35A versions available; the heaviest
+      duty here is K_MAIN at about 6.6A, so every position sits well inside a 20A relay.
       UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a healthy
       0.1 ohm, so this is preventive rather than a repair, and it also stops the entire bike's supply from
       passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing).
+      CARRIES ABOUT 6.6A UNDER THE HYBRID SPLIT, not the roughly 9A a full stack would put through it -
+      the headlamp and horn loads are fed hot and bypass these contacts entirely. This is the one relay
+      whose failure kills the bike, which is what made it worth unloading. See the PDM notes.
 
   K_COIL:
     type: Relay
-    subtype: ISO mini, socketed
+    subtype: ISO 280 micro, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A)
       instead of passing ~6A through 44-year-old contacts. Socket it and keep it accessible - if it fails
       there is no spark. Fails safe (open = engine stops).
 
+
+  K_HORN:
+    type: Relay
+    subtype: ISO 280 micro, 20A - seats in the PDM
+    pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
+    notes: |-
+      UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026,
+      which is what unblocked it: the horn button return is its own black net, left bar to horn, OPEN
+      to the starter-trigger black. So the button switches the GROUND side in stock form, and this
+      relay drops straight into that shape - 86 takes switched brown, the button pulls 85 to ground,
+      contacts pass horn current. Behaviour at the bar is unchanged.
+      THE CASE IS THE CONTACTS, NOT THE LOAD. The horn is only ~2A, but the RIGHT cluster measured
+      3-5 ohm and the left is the same age and construction. 3 ohm at 2A is a 6V drop - a horn that
+      barely sounds. Coil current is ~0.15A, where that resistance stops mattering.
+
+  K_HI:
+    type: Relay
+    subtype: ISO 280 micro, 20A - seats in the PDM
+    pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
+    notes: |-
+      UPGRADE - high beam. See K_LO for the pair's design notes; they are one decision, not two.
+
+  K_LO:
+    type: Relay
+    subtype: ISO 280 micro, 20A - seats in the PDM
+    pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
+    notes: |-
+      UPGRADE - low beam, and the second half of the beam pair. TWO RELAYS RATHER THAN A CHANGEOVER,
+      decided 1 Sep 2026: the dimmer SELECTS between beams instead of switching one, so a single NO
+      relay cannot do it, and two independent relays are cheaper to source, socket and carry spares for
+      than one changeover unit.
+      ** THE WIPER IS MAKE-BEFORE-BREAK - THIS IS THE CONSTRAINT THE SCHEME HAS TO SURVIVE. ** Metered
+      28 Aug 2026 on the unplugged cluster: R/BK and R/Y are open in both settled positions but blip
+      CLOSED while the switch moves, so both coils energise together for the instant of the change.
+      That is normal for the type and harmless - but it is exactly the assumption a naive two-relay
+      wiring makes, so state it: BOTH BEAMS MAY BE LIT SIMULTANEOUSLY FOR A FRACTION OF A SECOND.
+      F5 must carry both beams at once without opening. With LED that is trivial; with the stock 50/35W
+      filaments it would have been 7A, which is why this only became comfortable alongside the LED
+      decision.
+      Bl is the COMMON and the supply - metered the same day, and corroborated independently from the
+      harness side by the HEAD fuse feeding Bl up to the bar. The dimmer now steers relay coils on
+      ~0.15A each instead of passing the full lamp load through the bar contacts.
+      DEFERRAL CLOSED 1 Sep 2026. This was held pending the LED headlight's measured draw, on the
+      argument that a unit under ~2A through a cleaned switch needs no relay. Overruled by decision:
+      relay everything that used to run through switch contacts directly. Still measure the draw on
+      the 87V 10A range - it sizes F5 - but it is no longer a gate.
+
+  LH:
+    <<: *lh_cluster
+    pinlabels: [Bl COMMON, R/BK HI, R/Y LO, O TURN FEED, G LEFT, Gy RIGHT, BK HORN, GND]
+    notes: |-
+      RETAINED STOCK PART - the rebuild keeps the switchgear, so the new harness has to mate this
+      pigtail. Only the horn and dimmer ways are drawn so far; the turn ways are listed to hold their
+      places and are NOT YET CONNECTED.
+      ** FIVE WAYS IN THE 6P, NOT SIX - design input 3b. ** The stock 6P carries a brown that feeds
+      NOTHING: it runs to a cavity the cluster does not populate, found 29 Aug 2026 by reading the far
+      half. Do not reproduce it. Bl arrives on its own flying lead rather than through the 6P, and the
+      horn BK is a separate spade - so the cluster's seven conductors are 5 in the 6P + Bl + BK.
+      ** GND IS A NEW WIRE. ** Stock, the horn button earths through the cluster body; powder coating
+      removes that path. See the GND bus notes.
+
+  HORN:
+    type: Horn
+    subtype: 12V 2A
+    pinlabels: [FEED, SW]
+
+  HEAD:
+    type: Headlight
+    subtype: LED - part not selected
+    pinlabels: [HI, LO, GND]
+    notes: |-
+      POLARITY MATTERS NOW. Filaments do not care which way round feed and ground are; LEDs do. This
+      is the feed/ground reference for the beam circuits - draw every lamp branch with both identified.
+      PART NOT SELECTED. Its measured draw sizes F5 and confirms the beam wire gauge; stock was 4.2A.
 
   COIL_L:
     <<: *coil
@@ -294,6 +622,15 @@ connectors:
   PTS_R:
     <<: *points
     subtype: RIGHT
+
+  SP_HEAD:
+    style: simple
+    type: Splice
+    subtype: headlamp supply - feeds both beam relay commons
+    notes: |-
+      One fused feed, two relay commons. Drawn as a splice rather than by reusing one cable on two
+      connection sets, because it IS one - and because the make-before-break blip puts both beams on
+      this node at once. Size it and F5 for both, not for one.
 
   SP_YR:
     style: simple
@@ -321,17 +658,20 @@ connectors:
 #   starter-relay branch, open to the coil-feed Y/R. Neither model
 #   carries it. A circuit missing from the factory transcription is a
 #   circuit that will not exist on the bike - find both its ends.
+#   ONE END IS NOW KNOWN: B06.1, a male bullet on the B06 branch, open
+#   to both B03 and B01.2. The other end is somewhere in the starter
+#   relay assembly - so this closes with blocker 6, not separately.
 # ---------------------------------------------------------------------
 
 cables:
 
   W_BAT_SOL:  {<<: *w6,  colors: [RD]}
-  W_SOL_SM:   {<<: *w6,  colors: [BK]}
+  W_SOL_SM:   {<<: *w6,  colors: [RD]}
   W_BAT_GND:
     <<: *w6
     colors: [BK]
     notes: Plain black, deliberately. The stock harness has BOTH Y/BK and BK/Y in it on two different ground nets, which cost this project a fortnight of dispute before the bench settled it - the new build does not inherit that ambiguity.
-  W_MAIN_IN:  {<<: *w14, colors: [WH]}
+  W_MAIN_IN:  {<<: *w14, colors: [RD]}
   W_MAIN_OUT:
     <<: *w14
     colors: [WH]
@@ -342,19 +682,19 @@ cables:
       That is topology, not age. Build the same step at the same place in new wire and it heats again.
       So: no gauge change at a connector on the main power path, and no bullet carrying it. One gauge
       from the fuse to the distribution stud, and a terminal rated for it.
-  W_IGN_FEED: {<<: *w16, colors: [WH]}
+  W_IGN_FEED: {<<: *w16, colors: [RD]}
   W_IGN_RET:
     <<: *w18
-    colors: [BN]
+    colors: [GY]
     notes: Ignition switch output - now drives the K_MAIN coil only (~0.15A), so this dropped from 16 to 18 AWG. The switch no longer carries the bike's load.
 
   W_RH_IN:
     <<: *w16
-    colors: [BN]
+    colors: [YE]
     notes: Fed from PDM F2. Low current now - this only has to run the kill switch and, through it, two relay coils.
   W_YR_TRIG:
     <<: *w18
-    colors: [YERD]
+    colors: [GY]
     notes: |-
       Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about
       0.3A instead of the stock ~6A. Still the node that makes the kill switch stop the engine - cutting
@@ -366,25 +706,34 @@ cables:
   W_SW_BUS:
     <<: *w14
     colors: [BN]
-    notes: Relay output - this is now the switched brown bus that feeds everything. Sized for total switched load, NOT for what the ignition switch used to pass.
+    notes: |-
+      Relay output - the switched brown bus. NO LONGER FEEDS EVERYTHING, 1 Sep 2026: under the hybrid
+      split it carries the coil circuit through F3 plus four relay coils, about 6.6A, while the horn and
+      headlamp loads are fed hot and never cross it. Kept at 14 AWG anyway - it is the main switched
+      path, the margin is cheap, and the load grows as the undrawn circuits land.
   W_KMAIN_GND:
     <<: *w18
     colors: [BK]
     notes: K_MAIN coil ground to the star bus.
   W_COIL_PWR:
     <<: *w16
-    colors: [BN]
-    notes: Fused coil power into the relay. Switched, NOT always-hot - coils must die with the key.
+    colors: [VT]
+    notes: |-
+      Fused coil power into the relay. ** SWITCHED, NOT ALWAYS-HOT, AND THIS IS THE ONE THAT CANNOT BE
+      TRADED. ** Coils must die with the key, and that has to hold even if K_COIL's contact welds - if
+      F3 were hot, a welded contact would leave the engine running with the key out and the kill switch
+      powerless, since the kill switch only drives this relay's coil. It is the sole exception to the
+      hybrid split for exactly that reason. See the PDM notes.
   W_K_GND:
     <<: *w18
     colors: [BK]
     notes: K_COIL coil ground to the star bus.
   W_YR_OUT:
     <<: *w16
-    colors: [YERD]
+    colors: [PK]
     notes: Relay output to the coil splice. Kept Y/R to match the stock coil-feed colour so the circuit still reads as factory.
-  W_COIL_L: {<<: *w16, colors: [YERD]}
-  W_COIL_R: {<<: *w16, colors: [YERD]}
+  W_COIL_L: {<<: *w16, colors: [PK]}
+  W_COIL_R: {<<: *w16, colors: [PK]}
   W_PTS_L:
     <<: *w18
     colors: [YE]
@@ -395,24 +744,115 @@ cables:
     notes: Black serves RIGHT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_RH_OUT:
     <<: *w18
-    colors: [BK]
+    colors: [VT]
     notes: Starter trigger. BK but NOT a ground - do not land it on the star bus.
   W_SOL_GND:
     <<: *w18
     colors: [BK]
     notes: Direct to the star bus. CONFIRMED 15 Aug 2026 - no neutral-switch interlock in this circuit.
+  # --- horn, relayed -------------------------------------------------
+  W_HORN_COIL:
+    <<: *w18
+    colors: [GY]
+    notes: Switched brown to the K_HORN coil. ~0.15A.
+  W_HORN_SW:
+    <<: *w18
+    colors: [VT]
+    notes: |-
+      Horn button return - relay coil ground side. BK but NOT a chassis ground; it lands on the relay,
+      not the bus. CONFIRMED as its own net 28 Aug 2026, open to the starter-trigger black. This is the
+      wire that used to carry the horn's full 2A through the cluster contacts; it now carries 0.15A.
+  W_LH_GND:
+    <<: *w18
+    colors: [BK]
+    notes: |-
+      NEW WIRE - no counterpart in the old harness. The cluster earthed through its own body and the
+      frame is being powder coated. Worked example of blocker 5.
+  W_HORN_PWR:
+    <<: *w16
+    colors: [OG]
+    notes: |-
+      Fused horn power from PDM F4 into the relay common. ALWAYS-HOT per the hybrid split - the horn is
+      still dead with the key out because its COIL is switched, and an open relay contact draws nothing.
+  W_HORN_FEED:
+    <<: *w16
+    colors: [PK]
+    notes: Relay output to the horn. Kept brown to match the stock feed colour.
+  W_HORN_GND:
+    <<: *w16
+    colors: [BK]
+    notes: |-
+      Horn return to the star bus. STOCK HAD NO SUCH WIRE - the horn's second terminal went to the
+      button. Relaying moves the switching to the coil side, so the load side now needs its own ground.
+
+  # --- headlight, relayed --------------------------------------------
+  W_HEAD_SUPPLY:
+    <<: *w16
+    colors: [BU]
+    notes: |-
+      Fused headlamp power from PDM F5 to the splice. ALWAYS-HOT per the hybrid split; the beams are
+      dead with the key out because both relay coils are switched. Bl is the dimmer's common and supply
+      in stock form - colour kept so the circuit still reads as factory. Sized for BOTH beams at once,
+      per the make-before-break note on K_LO.
+  W_HI_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_HI common.}
+  W_LO_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_LO common.}
+  W_DIM_COMMON:
+    <<: *w18
+    colors: [GN]
+    notes: |-
+      Switched supply up to the dimmer common. NOW A COIL-DRIVE WIRE, not a lamp feed - it carries the
+      two relay coils (~0.15A each, ~0.3A worst case during the make-before-break blip) instead of the
+      full lamp load. Dropped from 16 to 18 AWG for that reason.
+  W_HI_TRIG:
+    <<: *w18
+    colors: [GY]
+    notes: Dimmer HI output to the K_HI coil. Stock colour retained.
+  W_LO_TRIG:
+    <<: *w18
+    colors: [PK]
+    notes: Dimmer LO output to the K_LO coil. Stock colour retained.
+  W_KHI_GND:  {<<: *w18, colors: [BK], notes: K_HI coil ground to the star bus.}
+  W_KLO_GND:  {<<: *w18, colors: [BK], notes: K_LO coil ground to the star bus.}
+  W_HEAD_HI:
+    <<: *w16
+    colors: [OG]
+    notes: K_HI output to the HI filament. Stock colour retained.
+  W_HEAD_LO:
+    <<: *w16
+    colors: [VT]
+    notes: K_LO output to the LO filament. Stock colour retained.
+  W_HEAD_GND:
+    <<: *w16
+    colors: [BK]
+    notes: Headlight ground to the star bus. Stock earthed on BK/Y - ground Net B - which never reached the chassis ring. See the GND notes.
+
   W_ALT:     {<<: *w14, colors: [YE, YE]}
   W_RR_OUT:
-    <<: *w14
-    colors: [WH]
+    <<: *w12
+    colors: [RD]
     notes: |-
-      THE OPEN CHECK ON THIS ROUTE NOW HAS EVIDENCE BEHIND IT. In stock form the R/R output is brown
-      and lands on the switched brown bus, so every charging amp returns to the battery THROUGH THE
-      IGNITION SWITCH CONTACTS - measured 28 Aug 2026, not read off the diagram. Whatever this rebuild
-      does, it must not reproduce that. part-selection.md wants the DC pair heavy and direct to the
-      battery, fused at the battery end; this file still routes DC+ to the PDM main stud. Reconcile
-      before cutting - the stock arrangement is now a documented reason to prefer the direct route.
-  W_RR_GND:  {<<: *w14, colors: [BK]}
+      ** THIS NOTE PREVIOUSLY ASSERTED A WITHDRAWN CLAIM. CORRECTED 1 Sep 2026. ** It said the stock
+      R/R output is brown, lands on the switched brown bus, and therefore returns every charging amp
+      through the ignition switch contacts - presented as measured 28 Aug. That is NOT TRUE and was
+      withdrawn on 29 Aug at the head of this file, but the withdrawal never reached this cable. At the
+      bench the R/R half of B04.3 is populated on only THREE cavities - the brown one is EMPTY - and
+      the SH221-12's fourth lead leaves as a W/R male bullet to B04.6, joining the main power path.
+      Stock charging does NOT pass the ignition switch. Do not carry the old claim forward as a design
+      driver; the factory model was right before it was "corrected".
+      ** ROUTE RECONCILED 1 Sep 2026 - DC+ NOW GOES DIRECT TO THE BATTERY. ** This file used to land it
+      on the PDM main stud, against part-selection.md, and flagged the difference as an open check. The
+      check is closed in part-selection's favour, and NOT on the withdrawn argument: the SH775 is a
+      SERIES regulator and series units are sensitive to resistance in the DC path, so the pair runs
+      heavy and direct with the fuse at the battery end. That is a property of the part now in hand,
+      which the old routing predated.
+      Gauge raised from 14 to 12 AWG and colour to plain red to match a direct battery run. THE GAUGE IS
+      PROVISIONAL - blocker 4 stands, and the stator's rated wattage has still not been read off
+      anything.
+  W_RR_BATT:
+    <<: *w12
+    colors: [RD]
+    notes: Fuse to the battery positive. Kept as short as the mounting allows - see W_RR_OUT for why this path's resistance matters to a series regulator.
+  W_RR_GND:  {<<: *w12, colors: [BK], notes: "Gauge raised from 14 to 12 to match W_RR_OUT - the return carries the same current as the feed."}
 
 connections:
 
@@ -440,12 +880,12 @@ connections:
     - W_IGN_FEED: [1]
     - IGN: [1]
   # --- ignition switch drives the main relay coil only --------------
-  - - IGN: [2]
+  - - IGN: [3]
     - W_IGN_RET: [1]
     - K_MAIN: [3]
   - - K_MAIN: [4]
     - W_KMAIN_GND: [1]
-    - GND: [5]
+    - GND: [4]
 
   # --- main relay passes the whole switched bus ---------------------
   - - PDM: [1]
@@ -453,7 +893,7 @@ connections:
     - K_MAIN: [1]
   - - K_MAIN: [2]
     - W_SW_BUS: [1]
-    - PDM: [6]
+    - PDM: [8]
 
   # --- FIXED: fused feed to the KILL SWITCH, not to the coils --------
   - - PDM: [3]
@@ -466,7 +906,7 @@ connections:
     - K_COIL: [3]
   - - K_COIL: [4]
     - W_K_GND: [1]
-    - GND: [4]
+    - GND: [5]
 
   # --- relay passes the coil power ----------------------------------
   - - PDM: [4]
@@ -496,13 +936,71 @@ connections:
     - W_SOL_GND: [1]
     - GND: [3]
 
+  # --- horn: button drives the coil, contacts pass the load ----------
+  - - PDM: [9]
+    - W_HORN_COIL: [1]
+    - K_HORN: [3]
+  - - K_HORN: [4]
+    - W_HORN_SW: [1]
+    - LH: [7]
+  - - LH: [8]
+    - W_LH_GND: [1]
+    - GND: [8]
+  - - PDM: [5]
+    - W_HORN_PWR: [1]
+    - K_HORN: [1]
+  - - K_HORN: [2]
+    - W_HORN_FEED: [1]
+    - HORN: [1]
+  - - HORN: [2]
+    - W_HORN_GND: [1]
+    - GND: [9]
+
+  # --- headlight: dimmer drives two coils, relays pass the beams -----
+  - - PDM: [10]
+    - W_DIM_COMMON: [1]
+    - LH: [1]
+  - - LH: [2]
+    - W_HI_TRIG: [1]
+    - K_HI: [3]
+  - - LH: [3]
+    - W_LO_TRIG: [1]
+    - K_LO: [3]
+  - - K_HI: [4]
+    - W_KHI_GND: [1]
+    - GND: [6]
+  - - K_LO: [4]
+    - W_KLO_GND: [1]
+    - GND: [7]
+  - - PDM: [6]
+    - W_HEAD_SUPPLY: [1]
+    - SP_HEAD: [1]
+  - - SP_HEAD: [1]
+    - W_HI_PWR: [1]
+    - K_HI: [1]
+  - - SP_HEAD: [1]
+    - W_LO_PWR: [1]
+    - K_LO: [1]
+  - - K_HI: [2]
+    - W_HEAD_HI: [1]
+    - HEAD: [1]
+  - - K_LO: [2]
+    - W_HEAD_LO: [1]
+    - HEAD: [2]
+  - - HEAD: [3]
+    - W_HEAD_GND: [1]
+    - GND: [10]
+
   # --- charging ------------------------------------------------------
   - - ALT: [1,2]
     - W_ALT: [1,2]
     - RR: [1,2]
   - - RR: [4]
     - W_RR_OUT: [1]
-    - PDM: [1]
+    - MF_RR: [1]
+  - - MF_RR: [2]
+    - W_RR_BATT: [1]
+    - BATT: [1]
   - - RR: [5]
     - W_RR_GND: [1]
     - GND: [2]
@@ -510,11 +1008,16 @@ connections:
 # =====================================================================
 # NOT YET DRAWN
 #
-#   From the factory transcription, which is now complete enough to
-#   draw them: headlight + dimmer (with K_HORN and the beam relays),
-#   4x turn signals + flasher, horn, tail/brake, front/rear brake
-#   switches, instrument + indicator lamps, neutral indicator, 6P
-#   junctions, accessory leads.
+#   DRAWN 1 Sep 2026 and no longer on this list: the horn with K_HORN,
+#   and the headlight + dimmer with K_HI and K_LO.
+#
+#   Still from the factory transcription: 4x turn signals + flasher,
+#   tail/brake, front/rear brake switches, instrument + indicator
+#   lamps, neutral indicator, 6P junctions, accessory leads.
+#
+#   THE LH CLUSTER IS DRAWN BUT ONLY HALF CONNECTED. Its dimmer and
+#   horn ways carry wire; the turn ways (O/G/Gy) are listed to hold
+#   their places and go nowhere. Do not read the way list as complete.
 #
 #   NOT FROM THE FACTORY MODEL AT ALL, added 28 Aug 2026: the ground
 #   wires for every component that earths through its own mounting

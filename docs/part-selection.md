@@ -145,6 +145,15 @@ inference that a single-phase stator cannot drive one.
 
 ### SUPERSEDED, 19 Aug 2026 — SH775 ordered
 
+**IN HAND, 29 Aug 2026 — the Polaris ORV takeoff SH775 has arrived and is
+ready to fit.** The regulator decision is closed; what remains is the bench test
+before build and the connector question immediately below.
+
+> **Open, and cheap to close:** does this takeoff include its mating pigtails?
+> Salvage units are often cut with a tail of harness still attached. If it does,
+> "still to order: the two mating pigtails" below is already satisfied and the
+> Eastern Beaver order shrinks to crimps and DC wire. Check before ordering.
+
 **A used takeoff SH775 was found on eBay for $45 and ordered.** That is the
 "used / salvage from a wrecked Polaris" row in the source table below, at the
 bottom of its range — below the Podtronics price. The decision block that
@@ -160,6 +169,38 @@ longer holds, and the same override written for the OEM discount route applies:
 - **Bench-test the used unit before build** — unknown history, but a regulator
   either works or does not, and it is testable (each AC leg to ground reads
   infinity; verify 14.0–14.5 V behavior on the bike)
+
+### Right-bar 4P — a connector the rebuild must reproduce (29 Aug 2026)
+
+Most stock connectors are archival: the fuse box, the R/R and their housings are
+all replaced by new parts with their own terminations. **The right-bar 4P is
+not.** The rebuild retains the right-bar switchgear, so the new harness has to
+mate that pigtail.
+
+- It is the **smaller** of the two four-way rectangular series in this harness —
+  **not** the same part as the R/R's 4P (`B04.3`).
+- The harness half carries **male spades**; `B06.5` at the fuse box is the same
+  series in the opposite gender, and is the sample to measure without
+  disturbing the switchgear.
+- **Nothing has been measured on it** — no terminal width, no depth, no series
+  identification. Do that before ordering, and do not borrow `B04.3`'s 5.96 mm
+  blade or 24.5 mm depth; they are a different part.
+- Housing marks: a `4` and a small flower logo. A part-identification lead only.
+
+**The left-bar 6P (`B02.3`) is the same series in a 6-way size**, confirmed
+29 Aug 2026, and it is reproduced too. So the rebuild needs, from one family:
+
+| | Way count | Harness-side terminals |
+|---|---|---|
+| `B01.2` right bar | 4 | male spades |
+| `B02.3` left bar | **5 of 6 used** — do not buy a 6-way for it | male spades |
+| `B06.5` fuse box | 4 | female — **not** reproduced, but it is the measurable sample |
+
+That is three members of one series across the harness, in both genders, which
+makes identifying it worth real effort rather than a nicety. **No dimension has
+been measured on any of them.**
+
+The instrument 6P (`B00.1`) has not been examined as a part yet.
 
 **Still to order: the two mating pigtails** — 3-pin AC + 2-pin DC, Shindengen
 spec, covered under "Connectors" below. Eastern Beaver preferred for correct
@@ -372,6 +413,364 @@ several hundred dollars and an unproven fitment.
 
 ---
 
+## PDM — Metri-Pack 280 array, or MTA modular (1 Sep 2026)
+
+Direction under consideration: rather than buying a sealed RTMR-style module,
+build the fuse/relay block from **Metri-Pack 280** terminals — the MP280 inline
+fuse holder scaled up to an array — or assemble it from the **MTA modular**
+family. Both are live; they are compared at the foot of this section.
+
+> **Correction, same day.** This section first evaluated **Metri-Pack 630** and
+> was wrong about the series. The reasoning it rested on — that an ATO fuse
+> blade, an ISO mini relay pin and a 630 male are all the same 6.3 mm blade — is
+> true, but 630 is a 12–10 AWG terminal and this harness runs its branches on
+> 16–18 AWG. **280 is the right family**, and the rest of this section is
+> rewritten to it. The 630 note is not worth preserving; what survives from it
+> is the busbar argument, which applies to any DIY array and is kept below.
+
+### What 280 actually mates
+
+| | |
+|---|---|
+| Blade | **2.8 mm** |
+| Wire range | **22–14 AWG** — the range this harness uses |
+| Inline rating | up to **30 A**, intermittently 35 A |
+| Fuse it takes | **MINI / ATM / APM** — *not* the larger ATO |
+| Relay it takes | **ISO 280 "micro"** relays, also 2.8 mm |
+
+**The fuse-and-relay-on-one-terminal idea survives the correction**, just on
+different parts. Mini blade fuses and ISO 280 micro relays both present 2.8 mm
+blades, so a 280 receptacle takes either, and a position's role is still decided
+by what gets pushed into it. ISO 280 micro relays are commonly **20 A** with
+**35 A** versions available — against a worst case of ~6.6 A at `K_MAIN`, every
+position in this design is comfortably inside a 20 A part.
+
+**And the gauge problem disappears.** 22–14 AWG is exactly where this harness
+lives, so the terminals crimp properly onto real branch wire. That was the
+objection that killed 630, and it was the whole objection.
+
+### Still true: bus the feed side, don't build it from crimps
+
+The one thing a bought block gives you that an array of discrete terminals does
+not is **a stamped internal busbar**. Without it every fuse input needs its own
+wire back to a common point — N crimps and N joints on the main power path.
+
+**That is the `B06.4` failure mechanism rebuilt on purpose.** The old harness
+melted at a bullet where a gauge step met the 20 A MAIN circuit, and it is filed
+as a *design* finding precisely because a new build reproduces it if it
+reproduces the topology.
+
+⚠️ **This applies to MTA too, and it is the thing to check on the datasheet.**
+MTA's own literature notes that most modules have **no common power — each
+terminal is wired separately for maximum flexibility.** That flexibility is
+exactly the busbar problem in a different package. Bussed modules do exist;
+choosing them is the difference between a distribution block and a tidy row of
+individual crimps.
+
+So whichever route: **solid bus on the input side.** Which suits the hybrid
+split decided the same day, because it needs **two** buses anyway:
+
+| Bus | Fed from | Serves |
+|---|---|---|
+| HOT | main stud | F1 ign sw feed, F4 horn pwr, F5 headlamp pwr |
+| SWITCHED | `K_MAIN` output | F2 kill feed, F3 coil pwr |
+
+### Sealing
+
+Sealed MP280 terminals and housings are standard and Eastern Beaver sells
+weatherproof MP280 fuse holders off the shelf, so unlike 630 there is no
+tension here between sealing and gauge — sealed 280 already covers 22–14 AWG.
+Sealing at the **enclosure** (gasketed lid, sealed entry) is still worth
+preferring for a multi-position block: it is how production fuse boxes are
+built, and it keeps fuses serviceable.
+
+### The three routes, honestly
+
+| | What it is | Against it |
+|---|---|---|
+| **DIY MP280 array** | Terminals in a housing you lay out | You fabricate the bus, the retention and the enclosure. Most work, most control. |
+| **MTA modular** | Purpose-built modules that combine into one covered unit via frames and brackets — mini/maxi fuses, micro/mini/high-power relays, mixed in one module | Check bussing per module; most are individually wired. Way count set by which modules exist. |
+| **Ready-made sealed panel** | Sealed MINI/MICRO fuse & relay panels on MP280, already bussed, sold as one part | Least control over way count — the constraint that pushed this project toward custom in the first place. |
+
+**MTA is the strongest fit for the stated goal.** The reason to go custom here
+was never fabrication for its own sake — it was that five relay positions is the
+top of what RTMR-style units are scoped for, and the star-ground count is still
+unknown and still growing. A system explicitly designed so modules can be added
+or removed as a design changes answers that directly, without making the busbar,
+the enclosure and the retention into three separate problems to solve.
+
+### Candidate part: MTA 0301370 (looked at 1 Sep 2026)
+
+A sealed MTA module, **60 sealed 2.8 mm cavities on the 280 footprint**, which
+the maker states as *"30 MiniVal fuses or 10 Micro 280 relays or mixed relays
+and MiniVal fuses."*
+
+**This confirms the mix-and-match property from the manufacturer rather than by
+inference** — the same cavity takes a fuse or a relay, and the population is
+chosen at build time. It is the exact property this section was reaching for.
+
+#### It is three part numbers, not one
+
+| | |
+|---|---|
+| `0301370` | module / footprint |
+| `0301371` | cover |
+| `0301372` | secondary lock |
+
+#### Capacity against this design
+
+A relay occupies roughly three fuse positions (30 ÷ 10), so in cavities:
+
+| | Count | Cavities |
+|---|---|---|
+| Relays — `K_MAIN` `K_COIL` `K_HORN` `K_HI` `K_LO` | 5 | ~30 |
+| Fuses — F1–F6 | 6 | 12 |
+| **Used** | | **~42 of 60** |
+
+Roughly **30% spare**, which is the right shape for this project: the circuit
+count is still growing as the undrawn branches land, and that headroom is the
+whole reason for going modular rather than buying a fixed RTMR unit.
+
+#### ⚠️ Two things to confirm before ordering
+
+- **Cavity plugs for the ~18 unused ways.** A sealed connector is only sealed if
+  every cavity is filled. Unused ways need blanking plugs or the module's rating
+  is void — and on a bike that died of water in the sleeve, that is the failure
+  mode, not a technicality. Confirm the plug part number is available and order
+  them with the module.
+- **Seal-to-gauge range.** Sealed MP280 uses a cable seal sized to the wire.
+  Confirm the seals cover **16–18 AWG**, which is what these branches are, and
+  that the right seal is ordered per gauge rather than one size for everything.
+
+#### Revising the busbar concern — it is smaller than stated above
+
+60 individually sealed cavities means **no internal bus**: every terminal is its
+own crimped wire. That is what the general warning above is about, and it is
+true of this part.
+
+**But the count that matters is the number of junctions, not the number of
+crimps**, and for this design it is **two**:
+
+| Junction | Feeds |
+|---|---|
+| HOT | F1 in, F4 in, F5 in, `K_MAIN` 30 |
+| SWITCHED | F2 in, F3 in, `K_HORN` 86, dimmer common |
+
+Two four-way junctions, not one per fuse. That is a small, ordinary thing to
+solve — a pair of short busbars or stud blocks outside the module, or a bussed
+MTA power-input module alongside this one. **It does not argue against the
+part.** The earlier warning was written against a DIY array where the feed
+genuinely does fan out per position; applied here it overstates the problem, and
+the two-bus arrangement the hybrid split already calls for absorbs it.
+
+### Are any MTA modules bussed? Read off the catalogue, 1 Sep 2026
+
+Catalogue filed at `parts/MTA_Power_modular_solutions_2019_v1.1.pdf`.
+
+**Yes — and the bussed module is the wrong one for this bike.** Three findings,
+and they compound.
+
+#### 1. `0301697` is genuinely bussed, and the schematic says exactly how
+
+One `+` input feeds a single common bus. Thirteen fuse positions hang off it —
+5 MaxiCompact above, 5 MiniVal below, 3 M8Compact to the right — each with its
+own output. That is a real single-input bussed fuse block, not a row of
+independent holders.
+
+#### 2. But it holds no relays, and it is not waterproof
+
+`0301697` is 5 MiniVal + 5 MaxiCompact + 3 M8Compact. **All fuses.** There is no
+relay position in it, so it cannot be the block — at best it could be a fuse
+section alongside one.
+
+And it sits on the catalogue's **MODULES** pages, not the **WATERPROOF MODULES**
+pages. The waterproof range is `0301370`, `0301491`, `0301568`, `0301569` — plus
+`0301373` and `0301374`, which the catalogue describes as *"same module with
+integrated mounting brackets"*, i.e. bracket variants of the two they follow,
+**not bussed versions**. None of the waterproof modules shows a bus.
+
+#### 3. ⚠️ And it is ONE bus, which this design cannot use
+
+The schematic shows a single `+` common to all thirteen positions. **The hybrid
+split needs two independent buses** — HOT for F1/F4/F5, SWITCHED for F2/F3 — and
+a single-bus module cannot provide them. Two modules would, at 13 positions each
+where this design needs 3 and 2.
+
+So bussing exists in the MTA range, but every place it appears it is attached to
+something this bike does not want: fuses without relays, no sealing, and one
+common feed where the architecture requires two.
+
+#### What that settles
+
+**`0301370` remains the pick**, and the two feed buses get made outside it. That
+is the conclusion the previous section already reached on the junction count —
+two four-way junctions, not one per fuse — and the catalogue does not offer a
+better answer.
+
+**Worth considering: the buses may already exist as parts this build needs.**
+The HOT junction is electrically the main fuse's output; the SWITCHED junction
+is `K_MAIN`'s pin 87. If `MF` is mounted in a holder with a stud output, that
+stud *is* the HOT bus, and a small stud block off `K_MAIN` 87 is the switched
+one. Neither is a new part so much as a terminal already in the circuit doing a
+second job — which keeps the joint count down, and joint count on the main power
+path is the whole `B06.4` lesson.
+
+Elsewhere in the catalogue, bussing appears on the **MidiVal / MegaVal** side —
+the clip-together multiple fuse block, and the configurable C-MEC/PDU units with
+*"bussed MidiVal and MegaVal fuses"*. Those are high-current parts, relevant to
+`MF` and `MF_RR` if a holder is wanted for them, not to the branch circuits.
+
+### DECIDED 1 Sep 2026 — point-to-point the buses at assembly
+
+Accepted: the two feed junctions get wired by hand rather than bought as a
+busbar. That closes the bussing question and **settles `0301370` as the module**,
+since bussing was the only argument standing against it.
+
+Three rules make it safe, and the first is not obvious.
+
+#### 1. Star it outside the module — do not daisy-chain the cavities
+
+The tempting shape is a jumper from one fuse's input cavity to the next. **It
+does not work in a sealed module.** A daisy chain needs two wires at the first
+cavity — the feed in and the jumper out — and a sealed MP280 cavity takes **one
+cable seal on one wire**. Double-crimping into it defeats the sealing that is the
+entire reason for choosing a waterproof module.
+
+So: **one wire per cavity, always**, and the junction happens outside the module
+at a single star point per bus. Feed wires run from that point into their
+cavities individually.
+
+Ampacity is not the constraint either way — MP280 is a 30 A terminal and the
+whole switched side is under 10 A — so this is about the seal, not the current.
+
+#### 2. Keep HOT and SWITCHED physically apart in the layout
+
+Put all HOT-fed positions at one end of the module and all SWITCHED-fed
+positions at the other. **Do not interleave them.**
+
+The reason is the `K_COIL` safety property. If a feed wire is ever landed in the
+wrong cavity, an interleaved layout makes that a plausible slip — and bridging
+SWITCHED to HOT puts F3 on permanent power, which is the exact failure the
+hybrid split exists to prevent: a welded `K_COIL` would then leave the engine
+running with the key out and the kill switch powerless. Physical separation
+makes the mistake hard to make and easy to see.
+
+#### 3. Record the cavity map before populating
+
+`0301370` has 60 cavities and no printed circuit names. Which cavity is which is
+knowledge that exists only in whoever wired it, and this project already has a
+file's worth of evidence about what that costs — the stock harness had to have
+its connectors renumbered to physical cavities twice after being read off a
+diagram.
+
+Write the map down as it is built, in the same form as
+`measurements/connector-inventory.csv`: cavity number, circuit, wire colour,
+gauge. State the numbering rule first, before the first terminal goes in.
+
+### MTA associated components — real part numbers, 1 Sep 2026
+
+From the connection-system datasheet. These correct two quantities that had been
+assumed and add two parts that were missing entirely.
+
+| Part | MTA PN | Qty | |
+|---|---|---|---|
+| Secondary lock | `0301372` | **6** | ⚠️ **six per module**, not one |
+| Top cover | `0301371` | 1 | |
+| Mounting leg — male | `0300690` | 2 | ⚠️ was missing |
+| Mounting leg — female | `0300691` | 2 | ⚠️ was missing |
+| Cavity plug, 2.8 mm black | `4550750` | prov. | |
+
+#### Terminals — sized by conductor CSA
+
+| MTA PN | Range | |
+|---|---|---|
+| `1708337-L` | 0.35–0.75 mm² (22–20 AWG) | |
+| **`1708338-L`** | **1.0–2.0 mm² (18–16 AWG)** | **← this harness's branches** |
+| `1708339-L` | 2.5–4.0 mm² (14–12 AWG) | if any heavy leg enters the block |
+
+#### Wire seals — RESOLVED 1 Sep 2026 by the TXL decision
+
+Seals are sized by **insulation OD, not gauge**, so this could not be settled
+until the wire family was. **Wire decided: TXL from Prowire** — thin-wall XLPE,
+125 °C, SAE J1128.
+
+| AWG | TXL nominal OD | Seal | Margin to nearest bound |
+|---|---|---|---|
+| 18 | 0.078 in / **1.98 mm** | `4550748` red (1.2–2.1) | 0.12 mm |
+| 16 | 0.089 in / **2.26 mm** | `4550747` green (2.2–3.0) | **0.06 mm** |
+| 14 | 0.102 in / **2.59 mm** | `4550747` green | 0.39 mm |
+| 12 | 0.127 in / **3.23 mm** | `4550749` grey (3.1–3.7) | 0.13 mm |
+
+So the block needs **two seal part numbers**, red and green. Grey is not needed:
+12 AWG is the charging pair and runs direct to the battery, never entering the
+module.
+
+**⚠️ 16 AWG clears green's lower bound by 0.06 mm.** That is inside ordinary
+manufacturing tolerance on an extruded wall. It is very likely fine — green is
+the intended fit — but caliper the delivered spool before ordering seals in
+quantity. Same instrument as the gauge pass.
+
+#### ⚠️ 6 AWG is not TXL and cannot be
+
+TXL covers roughly **24 down to 8 AWG**. The three heavy cables — `W_BAT_SOL`
+(battery to starter relay), `W_SOL_SM` (relay to motor) and `W_BAT_GND` — are
+**6 AWG**, outside the range. They are battery/starter cable: a different
+product, different insulation, much larger OD.
+
+**Not specified yet**, and none of the decisions above carry over to it. None of
+it enters the PDM, and all three terminate in lugs rather than 280 terminals, so
+neither the seal nor the terminal choice applies. It needs its own line in the
+order.
+
+**The seal PN is coupled to the wire family, not just the gauge.** GXL or SXL in
+these same gauges would push 18 AWG out of red and into green. If the wire
+choice ever changes, the seals change with it — which is the kind of dependency
+that is invisible at order time and expensive at build time.
+
+#### ⚠️ 18 AWG sits in a gap between MTA's stated CSA bands
+
+`1708337-L` covers 0.35–0.75 mm² and `1708338-L` covers 1.0–2.0 mm². **18 AWG is
+0.82 mm², which is above the first and below the second.** MTA's own AWG labels
+resolve it — they call `1708338-L` the *18–16 AWG* terminal — so that is the
+part to use, and the CSA figures are evidently nominal band edges rather than
+hard limits. Worth a **pull test on the first crimp** rather than assuming.
+
+#### Fuses — MiniVal, by rating
+
+`0705090` 2 A · `0705100` 3 A · `0705101` 4 A · `0705110` 5 A · `0705120` 7.5 A ·
+`0705130` 10 A · `0705140` 15 A · `0705150` 20 A · `0705160` 25 A · `0705170` 30 A
+
+Not yet orderable: **F1–F6 have no ratings assigned.** Sizing them needs the LED
+headlight's measured draw and the final circuit list.
+
+#### Why the terminal and plug counts are still provisional
+
+Two reasons, and neither is arithmetic:
+
+1. `qty_multiplier` cannot help. It works off `pincount`, and `PDM` carries **10
+   logical ways** against the module's **60 cavities**.
+2. **The model draws the relays as separate parts wired to the `PDM`, but they
+   physically seat in it.** So `W_HORN_PWR`, `W_COIL_PWR`, `W_HEAD_SUPPLY`,
+   `W_HI_PWR`, `W_LO_PWR`, `W_MAIN_SW_FEED` and `W_SW_BUS` are not harness wires
+   at all — they are the point-to-point jumpers inside the block. Until that is
+   reconciled, no terminal count taken off this drawing is trustworthy.
+
+32 terminals counts pins (5 relays × 4 + 6 fuses × 2) rather than cavities. 18
+plugs assumes the ~10 unpopulated cavities inside a relay footprint are covered
+by the relay body; if they are open, plugs rise toward 28. **The module drawing
+settles it**, and it is not worth refining by guesswork before then.
+
+### Open before committing
+
+- **Which MTA modules are bussed.** The single most load-bearing question, per
+  the busbar argument above. Get it off the datasheet, not off a retailer page.
+- **Crimp tooling.** MP280 open-barrel dies, for the gauges in play.
+- **Fuse family follow-through.** Committing to 280 commits the bike to **MINI**
+  fuses throughout. Not a drawback, but it should be deliberate — it sets what
+  spares get carried.
+- **Enclosure and mounting.** Sets the footprint, so it comes before layout.
+- **Relay retention against vibration**, for whichever route.
+
 ## Sources
 
 - [Eastern Beaver — motorcycle rectifiers](https://www.easternbeaver.com/motorcycle-rectifiers/)
@@ -401,3 +800,14 @@ several hundred dollars and an unproven fitment.
 - [Electrex RR20 — GPZ305 / Z305LTD, three yellow leads](https://www.electrexworld.co.uk/acatalog/RR20_-_Regulator_Rectifier_GPZ305_GPZ400_GPZ600R.html)
 - [EX305 / GPZ305 stator 21003-1073](https://www.theolouwesmotors.com/product/21003-1073-stator-generator-kaw-gpz305-ex305-b1/)
 - [Rewinding single-phase to three-phase — feasibility](https://www.eng-tips.com/threads/how-to-rewind-a-stator-from-one-phase-to-three-phase.346823/)
+- [Metri-Pack series overview and FAQs](https://www.whiteproducts.com/metripack-faqs.php)
+- [MP280 sealed MINI fuse holder kit](https://ceautoelectricsupply.com/product/metri-pack-280-series-mini-fuse-holder-kit/)
+- [Weatherproof triple MP280 fuse holder — Eastern Beaver](https://www.easternbeaver.com/product/aptiv-triple-metri-280/)
+- [Sealed MINI/MICRO fuse & relay panel, ISO 280, bussed](https://www.delcity.net/store/fuses-fuse-accessories/panels-terminal-strip-connectors/sealed-mini/iso-280-relay-30-amp-bussed/)
+- [ISO 280 micro relay, 35 A](https://m.delcity.net/store/NO-ISO!280-Micro-Relay/p_932455.h_932457)
+- [Omron G8V micro 280 relay datasheet — terminal layout](https://www.mouser.com/datasheet/2/307/en-g8v-843959.pdf)
+- [Littelfuse ISO micro relay datasheet](https://www.littelfuse.com/assetdocs/iso-micro-relays-datasheet?assetguid=63d22cee-8589-4d39-894c-c99a4fd82919)
+- [MTA modular fuse & relay holding system](https://www.12voltplanet.co.uk/mta-modular-fuse-relay-holding-system.html)
+- MTA power and modular solutions catalogue — filed at `parts/MTA_Power_modular_solutions_2019_v1.1.pdf`
+- [MTA 0301370 — 60 sealed 2.8 mm cavities, 280 footprint](https://www.connectorid.com/products/mta-0301370-sealed-power-distribution-module-280-footprint)
+- [0301370 module, cover 0301371, secondary lock 0301372](https://katalog.miunske.com/en/product-catalogue/fuses/combinable-fuseholder/free-configuable-central-electric/id-0301370)
