@@ -637,7 +637,13 @@ connectors:
   HORN:
     type: Horn
     subtype: 12V 2A
-    pinlabels: [FEED, SW]
+    pinlabels: [FEED, GND]
+    notes: |-
+      ** WAY 2 IS GND HERE, NOT SW - RELABELLED 2 Sep 2026. ** The factory model calls it SW and is
+      right to: stock switched the horn's RETURN through the left cluster body. The rebuild moves
+      that switching to K_HORN's coil side, so this terminal is now a permanent chassis return. The
+      label was copied across with the part and would have told a builder there is a switched leg
+      here when there is not.
 
   HEAD:
     type: Headlight
@@ -948,22 +954,44 @@ cables:
   W_RH_OUT:
     <<: *w18
     colors: [YE]
-    notes: Starter trigger. BK but NOT a ground - do not land it on the star bus.
+    notes: |-
+      Starter trigger. YE on the rebuild's scheme, which is the point of that scheme: the STOCK wire
+      here was BLACK and was not a ground, and black is now ground-only precisely so this wire cannot
+      be mistaken for one. Do not land it on the star bus.
   W_SOL_GND:
     <<: *w18
     colors: [BK]
-    notes: Direct to the star bus. CONFIRMED 15 Aug 2026 - no neutral-switch interlock in this circuit.
+    notes: |-
+      ⛔ ** THIS WIRE IS IN DOUBT - IT MAY NOT EXIST. Corrected 2 Sep 2026. ** It was drawn, and this
+      note previously said "CONFIRMED 15 Aug 2026", on the claim that the relay's COIL- grounds
+      directly. THAT CLAIM IS WITHDRAWN - see the starter_relay note in kz305-common.yml. The
+      assembly is in hand and has exactly TWO small leads, Y/R and BK, BOTH ENDING IN BULLETS INTO
+      THE HARNESS. No ring, no eyelet, nothing that lands on engine or frame.
+      ** THE WITHDRAWAL REACHED THE COMMON ANCHOR AND THE FACTORY MODEL ON 2 Sep AND MISSED THIS
+      FILE. ** Caught in review. That is worse here than in the factory model: the factory drawing
+      records what the bike HAD, but a builder follows THIS one, and would have landed the relay's
+      coil return on the star bus on evidence the project had already discarded.
+      LEFT DRAWN rather than deleted, matching the factory model's treatment - there is no positive
+      account of what replaces it, and deleting it would assert the coil has no return, which is also
+      false. DO NOT BUILD THIS CONNECTION until the meter settles which lead is COIL- and where it
+      goes. The "no neutral-switch interlock" half stands; that was a separate observation.
   # --- horn, relayed -------------------------------------------------
   W_HORN_COIL:
     <<: *w18
     colors: [GY]
-    notes: Switched brown to the K_HORN coil. ~0.15A.
+    notes: |-
+      Switched power to the K_HORN coil, ~0.15A. GY not BN - it is a relay coil drive, and the
+      8-colour scheme groups those under grey. The note said "switched brown" until 2 Sep 2026,
+      left over from before the fold.
+      ⚠️ IT IS STILL FED FROM THE SWITCHED BUS (PDM SW OUT), so the horn is dead with the key out
+      even though F4 on the load side is always-hot. The colour describes the ROLE, not the source.
   W_HORN_SW:
     <<: *w18
     colors: [YE]
     notes: |-
-      Horn button return - relay coil ground side. BK but NOT a chassis ground; it lands on the relay,
-      not the bus. CONFIRMED as its own net 28 Aug 2026, open to the starter-trigger black. This is the
+      Horn button return - relay coil ground side. YE, not black: it lands on the relay rather than
+      the bus, and the stock wire here WAS black despite not being a chassis ground. Black is
+      ground-only on the rebuild's scheme for exactly this reason. CONFIRMED as its own net 28 Aug 2026, open to the starter-trigger black. This is the
       wire that used to carry the horn's full 2A through the cluster contacts; it now carries 0.15A.
   W_LH_GND:
     <<: *w18
