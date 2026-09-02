@@ -181,6 +181,7 @@ connections:
 #
 # STILL OPEN, and the ring-out added to the list as well as subtracting:
 #
+#   (this list is superseded - see the 2 Sep block at the foot)
 #   - horn button ground-side colour: prints as a hatched swatch in the
 #     switch table, unreadable. Drawn BK/W as a guess. (bench, #8)
 #   - electric accessory leads: TWO pairs drawn (one at the meters, one
@@ -331,4 +332,53 @@ connections:
 #     28 Aug, running off the double-female bullet node, but WHICH
 #     RELAY TERMINAL was not identified, so SP_WR draws two legs and
 #     not three. One look at the relay closes it.
+# =====================================================================
+#
+# =====================================================================
+# CLOSED 2 SEPTEMBER 2026 - the photograph session
+#
+# Five items closed in one sitting, from the pre-teardown photographs
+# plus the starter relay assembly in hand. Three of the five had stood
+# since 19 August.
+#
+#   - METER LAMP FEED. CLOSED. Not R at all: the speedo and tacho each
+#     carry a Br/W + BK/Y pigtail on male bullets, landing on B00.11's
+#     double-female - one slot each. Feed redrawn Br/W off BRW_HL,
+#     grounds retargeted from GND_CHASSIS to GND_NETB. The park
+#     behaviour went with the colour: Br/W is switched, so these lamps
+#     lit with the KEY, not in park.
+#   - THE LAST EMPTY DOUBLE-FEMALE. CLOSED, same finding. All six of
+#     B03, B08, B00.5, B00.7, B00.8 and B00.11 now have an account.
+#   - THE POD GROUND'S DESTINATION. This item was already stale - it
+#     was measured on 29 Aug at 0.1 ohm from B00.1's BK/Y to B10.5, so
+#     it IS Net B. Retired here for tidiness.
+#   - ELECTRIC ACCESSORY LEADS. The FEED half is closed: it is R/W,
+#     bolted to the BATTERY STUD under the boot, so PERMANENTLY LIVE,
+#     and the diagram's "switched" call is wrong. The earths were never
+#     connected at all. Still deliberately not modelled.
+#   - HORN BUTTON GROUND-SIDE COLOUR. Was already closed on 29 Aug -
+#     there is no such wire; the button grounds through the cluster
+#     body and pin 8 is drawn as a mounting ground.
+#
+# FOUR MODELLED SPLICES ARE NOW LOCATED ON THE PHYSICAL HARNESS, which
+# is worth stating together because each was drawn as an abstraction:
+#     SP_YR    = B03      SP_BRAKE = B04.2
+#     SP_SIG_R = B00.4    SP_SIG_L = B00.10
+#
+# STILL OPEN after 2 September:
+#   - THE STARTER RELAY COIL. "COIL- grounds directly" is WITHDRAWN -
+#     the assembly has two bullet leads and no ground of any kind. Both
+#     mate the B06 branch by gender complement, which identifies Y/R
+#     Net 2 as the coil feed. Which lead is which, and where the coil's
+#     return actually goes, needs the meter.
+#   - THE TWO HIDDEN SPLICES. Br/W (SP_BRW) and Net A (SP_NETA) are
+#     still inferred from conductor arithmetic and have never been
+#     seen. Both are under the tape. (#8)
+#   - B04 / B05 / B06 WIRE COUNTS. Not visible under the wrap. (#8)
+#   - THE POINTS AND CONDENSER LEADS. Never located. (#8)
+#   - B00.2's SPLICE COUNT. "Several splices downstream" was never a
+#     number; two are now named (both meter lamp grounds), so it is at
+#     least two.
+#   - THE HEADLIGHT'S GROUND. Drawn BK/Y, presumably onto B00.2, never
+#     recorded as a mate.
 # =====================================================================

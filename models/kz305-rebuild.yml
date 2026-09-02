@@ -72,7 +72,31 @@
 #   3. Fuse block part not selected - depends on final circuit count,
 #      which now also depends on 5, and the count grew again on 1 Sep
 #      when the relay policy took it to five relay positions.
-#   6. NEW BLOCKER, 1 Sep 2026 - THE STARTER RELAY ASSEMBLY IS NOT
+#   6. LARGELY CLOSED 2 Sep 2026 - THE STARTER RELAY ASSEMBLY IS MAPPED.
+#      Read visually with the part in hand. What it settled:
+#        - THE ACCESSORY FEED IS PERMANENTLY LIVE. An R/W ring bolts to
+#          the BATTERY STUD under the boot and runs 2in to a female
+#          bullet, which mates the second fuse box. The diagram's
+#          "switched" call is WRONG, and the run is unfused for those
+#          two inches. THE REBUILD MUST NOT REPRODUCE IT - an unfused
+#          conductor on a battery post is the one thing a harness must
+#          not have, the same rule that put MF_RR at the battery end.
+#        - Y/R NET 2 IS THE RELAY COIL FEED, by gender complement: the
+#          relay's female Y/R and male BK against B06.1 male Y/R and
+#          B06.2 female BK, on the branch that serves it.
+#        - THE W/R NODE IS ON THE ASSEMBLY, not the fuse-box pigtail as
+#          the 29 Aug record had it. So the melted joint hangs off the
+#          BATTERY stud - main power leaves the battery, passes one lug
+#          and steps down to 18-or-16 at a bullet, two connections from
+#          the post.
+#      STILL OPEN: which coil terminal takes the Y/R, and where the
+#      coil's return goes. "COIL- grounds directly" is WITHDRAWN - the
+#      assembly has no ring, eyelet or ground lead of any kind. Needs
+#      the meter. The SOL way numbers below are still the diagram's,
+#      not the part's.
+#   6b. SUPERSEDED - the original text of blocker 6 follows for the
+#      reasoning it carries.
+#      THE STARTER RELAY ASSEMBLY IS NOT
 #      MAPPED, AND TWO CIRCUITS DEPEND ON IT. Everything in the
 #      measurement log points AT the assembly and nothing IS it: no
 #      terminal map, no lead lengths, no measured gauge. What that
@@ -88,7 +112,15 @@
 #          and FUSE_4P both had to be renumbered to physical cavities
 #          once read; assume SOL will too.
 #      Capture sheet: measurements/starter-relay.md.
-#   7. ACCESSORY EARTHS WERE NEVER CONNECTED, 29 Aug 2026 - and that is
+#   7. ACCESSORY CIRCUIT - BOTH HALVES NOW KNOWN, 2 Sep 2026, AND
+#      NEITHER IS WHAT THE DIAGRAM SAYS. The FEED is permanently live
+#      off the battery post (blocker 6); the EARTHS were never connected
+#      at all. So the stock accessory circuit was a live wire with no
+#      return - provisioned, half-built, and left that way for 44 years.
+#      The rebuild draws accessory circuits with a real ground AND a
+#      fuse, or not at all. NOT YET DRAWN.
+#   7b. The original 29 Aug text, for its reasoning:
+#      ACCESSORY EARTHS WERE NEVER CONNECTED - and that is
 #      a design input, not a fault to reproduce. The accessory FEED was
 #      in service but BOTH accessory grounds sat open their whole lives
 #      on the oxidation evidence, so whatever was fed returned to the
@@ -1466,16 +1498,30 @@ connections:
 # =====================================================================
 # NOT YET DRAWN
 #
-#   DRAWN 1 Sep 2026 and no longer on this list: the horn with K_HORN,
-#   and the headlight + dimmer with K_HI and K_LO.
+#   DRAWN 1-2 Sep 2026 and no longer on this list: the horn with
+#   K_HORN; the headlight + dimmer with K_HI and K_LO; the instrument
+#   pod, meter lamps and neutral circuit; the tail lamp and both brake
+#   switches; and all four turn signals with the flasher and both dash
+#   indicators. LH and INSTR_6P are now FULLY POPULATED - every way on
+#   both retained connectors carries a circuit.
 #
-#   Still from the factory transcription: 4x turn signals + flasher,
-#   tail/brake, front/rear brake switches, instrument + indicator
-#   lamps, neutral indicator, 6P junctions, accessory leads.
+#   STILL NOT DRAWN:
+#     - ACCESSORY LEADS. Blocked on nothing technical now that blocker
+#       6 is answered - it is a DESIGN decision. Stock's was a live
+#       unfused feed with no return; whatever replaces it needs a fuse
+#       and a ground, and nobody has said what it is for.
+#     - CONDENSERS (CAP_L, CAP_R). The circuit is known - they sit in
+#       parallel across the points - but the physical leads have never
+#       been located, so nothing has been drawn that would have to be
+#       redrawn.
+#     - THE RH_4P WAY LIST. The rebuild retains the right-bar
+#       switchgear so it must mate that pigtail, and three of its stock
+#       ways exist only to serve the fuse detour this build does not
+#       reproduce. Revisit now the PDM circuit list is settled.
 #
-#   THE LH CLUSTER IS DRAWN BUT ONLY HALF CONNECTED. Its dimmer and
-#   horn ways carry wire; the turn ways (O/G/Gy) are listed to hold
-#   their places and go nowhere. Do not read the way list as complete.
+#   NOT COMING BACK, deliberately: the stock fuse holders, both stock
+#   ground nets, and the right-bar distribution splices. The PDM and
+#   the star bus replace them.
 #
 #   NOT FROM THE FACTORY MODEL AT ALL, added 28 Aug 2026: the ground
 #   wires for every component that earths through its own mounting
