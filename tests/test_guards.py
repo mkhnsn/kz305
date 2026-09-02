@@ -481,13 +481,42 @@ def test_black_is_only_ever_a_ground():
     common = COMMON.read_text(encoding="utf-8")
     doc = build.load(ROOT / "models" / "kz305-rebuild.yml", common)
 
-    # A ground wire is one that lands on the star bus, or the factory lead.
-    grounded = set()
+    # A ground wire is one that reaches the star bus, which is NOT the same
+    # as one that touches it. The pod's three indicator returns gather on
+    # SP_POD_GND, cross the instrument 6P on way 6, and only then reach the
+    # bus - so the net has to be walked, not pattern-matched.
+    #
+    # Walk it at PIN level rather than connector level. A pass-through like
+    # INSTR_6P carries five live circuits alongside that one ground way, and
+    # a connector-level walk would call all of them grounds.
+    cables = doc.get("cables") or {}
+    edges = []  # (cable, {(connector, pin), ...})
     for conn_set in doc.get("connections") or []:
         entries = [e for e in conn_set if isinstance(e, dict)]
-        names = [next(iter(e)) for e in entries]
-        if "GND" in names:
-            grounded.update(n for n in names if n in (doc.get("cables") or {}))
+        for idx, entry in enumerate(entries):
+            name = next(iter(entry))
+            if name not in cables:
+                continue
+            nodes = set()
+            for offset in (-1, 1):
+                j = idx + offset
+                if 0 <= j < len(entries):
+                    cn, pins = next(iter(entries[j].items()))
+                    if cn in (doc.get("connectors") or {}):
+                        nodes.update((cn, pin) for pin in pins)
+            edges.append((name, nodes))
+
+    reached = {(cn, pin) for cn, pin in
+               (n for _, ns in edges for n in ns) if cn == "GND"}
+    grounded, changed = set(), True
+    while changed:
+        changed = False
+        for cable, nodes in edges:
+            if cable in grounded or not (nodes & reached):
+                continue
+            grounded.add(cable)
+            reached |= nodes
+            changed = True
 
     allowed = grounded | {"W_PTS_R"}
 

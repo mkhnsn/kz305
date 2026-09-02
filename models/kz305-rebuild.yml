@@ -616,6 +616,76 @@ connectors:
       is the feed/ground reference for the beam circuits - draw every lamp branch with both identified.
       PART NOT SELECTED. Its measured draw sizes F5 and confirms the beam wire gauge; stock was 4.2A.
 
+  INSTR_6P:
+    <<: *junction6p
+    subtype: 6P connector, instrument pod
+    pinlabels: [L TURN, R TURN, NEUTRAL FEED, NEUTRAL SW, HIGH BEAM, POD GND]
+    notes: |-
+      RETAINED STOCK PART - the pod pigtail survives, so the new harness has to mate it.
+      ** CAVITY NUMBERS ARE THE STOCK ONES, READ AT THE BENCH 29 Aug 2026 ** - 3 rows of 2, mating
+      face, keyway up, top row first; harness side FEMALE. Do not renumber them to suit the rebuild:
+      the far half is the original pigtail and its cavities are fixed by the part.
+      Ways 1 and 2 are the turn indicators and are NOT YET CONNECTED - they land with the signals.
+
+  IND_N:
+    <<: *indicator
+    subtype: neutral indicator - LED
+  IND_HB:
+    <<: *indicator
+    subtype: high-beam indicator - LED
+  LAMP_SPD:
+    <<: *indicator
+    subtype: speedometer light - LED
+  LAMP_TAC:
+    <<: *indicator
+    subtype: tachometer light - LED
+
+  NSW:
+    <<: *neutral_switch
+
+  GND_ENG:
+    type: Engine ground point
+    subtype: block to star bus - HEAVY
+    pinlabels: [STUD]
+    notes: |-
+      ** THIS STRAP CARRIES STARTER CURRENT, AND IT IS THE BIGGEST CASE OF BLOCKER 5. ** The starter
+      motor grounds through its own case into the engine, so the engine-to-chassis path is the return
+      for the entire cranking current - well over 100A - not a signal earth. Stock relied on the
+      engine being bolted to a bare frame. ** THE FRAME IS BEING POWDER COATED, WHICH REMOVES EXACTLY
+      THAT PATH. ** Drawn at 6 AWG to match the rest of the heavy starter loop.
+      IT IS ALSO THE NEUTRAL SWITCH'S ONLY RETURN. NSW is a single-conductor case-grounding part -
+      sealed, with nowhere to add a wire - so it earths through the engine whatever we do. Without
+      this strap the neutral lamp does not work either, which is the cheap symptom of an expensive
+      problem: a bike that cranks through some accidental path instead.
+
+  SP_HI:
+    style: simple
+    type: Splice
+    subtype: high-beam net - lamp plus indicator
+    notes: The HI output feeds the headlight filament AND the dash indicator, so the indicator follows the beam rather than the switch. Same shape as stock, which took it off the same net.
+
+  SP_TAIL:
+    style: simple
+    type: Splice
+    subtype: tail / park net
+    notes: |-
+      Meter lamps hang here now; the tail lamp joins when that branch is drawn.
+      ** THIS IS WHAT PRESERVES PARK. ** Fed from IGN way 2, which the metered switch table puts on
+      battery in PARK (W-R) and on the fused tail feed in ON (R_Bl-R). So the meter lamps and tail
+      light in PARK with everything else dead, exactly as stock - and the ign_switch note's
+      "preserve park function" is a drawn circuit rather than an intention.
+
+  SP_POD_GND:
+    style: simple
+    type: Splice
+    subtype: pod common ground bus - 1 to 3
+    notes: |-
+      RETAINED - this splice is inside the pod PIGTAIL, not the pod, and the pigtail survives.
+      Observed 29 Aug 2026 and the count closes it at exactly three: six ways cross the 6P, eight
+      wires leave the pigtail, five ways are signal, so 5 + 3 = 8.
+      NOT a blocker 5 case - the pod already HAS a ground wire. It only needs re-terminating on the
+      new bus.
+
   COIL_L:
     <<: *coil
     subtype: LEFT
@@ -832,6 +902,67 @@ cables:
     colors: [BK]
     notes: Headlight ground to the star bus. Stock earthed on BK/Y - ground Net B - which never reached the chassis ring. See the GND notes.
 
+  # --- tail / park net, and the meter lamps on it ---------------------
+  W_TAIL_FEED:
+    <<: *w16
+    colors: [BN]
+    notes: PDM F6 to the ignition switch's TAIL1 way. Fused switched power in; the switch decides whether it or the battery feeds the tail net.
+  W_TAIL_OUT:
+    <<: *w16
+    colors: [BU]
+    notes: |-
+      IGN way 2 out to the tail net. Fed from W_TAIL_FEED in ON and DIRECTLY FROM THE BATTERY in
+      PARK - see SP_TAIL. Sized 16 AWG for the tail lamp that joins this net later, not for the two
+      LED meter lamps it carries today.
+  W_MTR_SPD: {<<: *w18, colors: [BU], notes: "Speedometer light, on the tail net so it lights in PARK - stock behaviour, kept."}
+  W_MTR_TAC: {<<: *w18, colors: [BU], notes: "Tachometer light, same net."}
+  W_GND_SPD: {<<: *w18, colors: [BK]}
+  W_GND_TAC: {<<: *w18, colors: [BK]}
+
+  # --- high beam indicator, off the beam net --------------------------
+  W_HEAD_HI2:
+    <<: *w16
+    colors: [BU]
+    notes: Splice to the HI filament. W_HEAD_HI now runs relay-to-splice rather than relay-to-lamp.
+  W_IND_HB:  {<<: *w18, colors: [BU], notes: "Splice to the instrument 6P - the dash high-beam indicator."}
+  W_IND_HB2: {<<: *w18, colors: [BU], notes: "Pod-side leg, 6P to the indicator."}
+  W_GND_HB:  {<<: *w18, colors: [BK], notes: "Indicator return into the pod ground splice."}
+
+  # --- neutral circuit -------------------------------------------------
+  W_IND_N_FEED:
+    <<: *w18
+    colors: [BN]
+    notes: PDM F7 to the instrument 6P - switched power for the neutral lamp.
+  W_IND_N_FEED2: {<<: *w18, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
+  W_NSW2:
+    <<: *w18
+    colors: [GY]
+    notes: |-
+      The lamp's RETURN, not a ground - it runs to the neutral switch, which closes to the engine
+      case only in neutral. GY rather than BK for exactly that reason: black is ground only, and
+      this wire is live whenever the key is on.
+  W_NSW:
+    <<: *w18
+    colors: [GY]
+    notes: |-
+      Harness-side leg, 6P to the switch. Stock ran LIGHT GREEN here and the factory model draws it
+      GN with a warning, because WireViz cannot separate LG from G. The rebuild sidesteps that: it
+      is GY on the function scheme and light green is not bought at all.
+      The 3.6 ohm contact resistance stops mattering with an LED - at ~20mA it costs ~0.07V against
+      ~1.1V for the old incandescent. Still worth cleaning, no longer worth chasing.
+
+  # --- pod ground and the engine strap ---------------------------------
+  W_POD_GND2: {<<: *w18, colors: [BK], notes: "Pod-side leg - three indicator returns onto one conductor at the splice."}
+  W_POD_GND:  {<<: *w18, colors: [BK], notes: "Harness-side leg, 6P to the star bus. Stock earthed this on Net B, which never reached the chassis ring."}
+  W_ENG_GND:
+    <<: *w6
+    colors: [BK]
+    notes: |-
+      ** ENGINE TO STAR BUS, AND IT CARRIES CRANKING CURRENT. ** The starter motor grounds through
+      its case into the engine, so this is the return for the whole starter draw - not a signal
+      earth. 6 AWG to match the rest of the heavy loop. See GND_ENG for why the powder coating makes
+      this a new part rather than a reproduction.
+
   W_ALT:     {<<: *w14, colors: [YE, YE]}
   W_RR_OUT:
     <<: *w12
@@ -989,6 +1120,9 @@ connections:
     - K_LO: [1]
   - - K_HI: [2]
     - W_HEAD_HI: [1]
+    - SP_HI: [1]
+  - - SP_HI: [1]
+    - W_HEAD_HI2: [1]
     - HEAD: [1]
   - - K_LO: [2]
     - W_HEAD_LO: [1]
@@ -996,6 +1130,67 @@ connections:
   - - HEAD: [3]
     - W_HEAD_GND: [1]
     - GND: [10]
+
+  # --- tail / park net: IGN way 2 is fed from battery in PARK ---------
+  - - PDM: [7]
+    - W_TAIL_FEED: [1]
+    - IGN: [4]
+  - - IGN: [2]
+    - W_TAIL_OUT: [1]
+    - SP_TAIL: [1]
+  - - SP_TAIL: [1]
+    - W_MTR_SPD: [1]
+    - LAMP_SPD: [1]
+  - - SP_TAIL: [1]
+    - W_MTR_TAC: [1]
+    - LAMP_TAC: [1]
+  - - LAMP_SPD: [2]
+    - W_GND_SPD: [1]
+    - GND: [12]
+  - - LAMP_TAC: [2]
+    - W_GND_TAC: [1]
+    - GND: [13]
+
+  # --- high-beam indicator follows the beam, not the switch ----------
+  - - SP_HI: [1]
+    - W_IND_HB: [1]
+    - INSTR_6P: [5]
+  - - INSTR_6P: [5]
+    - W_IND_HB2: [1]
+    - IND_HB: [1]
+  - - IND_HB: [2]
+    - W_GND_HB: [1]
+    - SP_POD_GND: [1]
+
+  # --- neutral: fed on way 3, returns on way 4 through the switch -----
+  - - PDM: [11]
+    - W_IND_N_FEED: [1]
+    - INSTR_6P: [3]
+  - - INSTR_6P: [3]
+    - W_IND_N_FEED2: [1]
+    - IND_N: [1]
+  - - IND_N: [2]
+    - W_NSW2: [1]
+    - INSTR_6P: [4]
+  - - INSTR_6P: [4]
+    - W_NSW: [1]
+    - NSW: [1]
+  # The neutral switch is a sealed single-conductor part - it earths through
+  # the engine case whatever we do, which is why the strap below matters.
+  - - NSW: [1]
+    - '-->'
+    - GND_ENG: [1]
+
+  # --- pod ground, and the engine strap it ultimately depends on -----
+  - - SP_POD_GND: [1]
+    - W_POD_GND2: [1]
+    - INSTR_6P: [6]
+  - - INSTR_6P: [6]
+    - W_POD_GND: [1]
+    - GND: [11]
+  - - GND_ENG: [1]
+    - W_ENG_GND: [1]
+    - GND: [14]
 
   # --- charging ------------------------------------------------------
   - - ALT: [1,2]
