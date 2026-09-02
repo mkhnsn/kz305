@@ -276,7 +276,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, SPARE]
     notes: |-
       UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces
       is not what this note used to say. There is no single ring terminal carrying the harness. There
@@ -379,7 +379,7 @@ connectors:
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
     # list is ALLOCATION order, not physical cavity order; the cavity map
     # is a separate artefact and is not written yet.
-    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW), F8 BRAKE PWR (SW)]
+    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW), F8 BRAKE PWR (SW), F9 SIGNAL PWR (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
       count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
@@ -615,6 +615,41 @@ connectors:
       POLARITY MATTERS NOW. Filaments do not care which way round feed and ground are; LEDs do. This
       is the feed/ground reference for the beam circuits - draw every lamp branch with both identified.
       PART NOT SELECTED. Its measured draw sizes F5 and confirms the beam wire gauge; stock was 4.2A.
+
+  FLASHER:
+    type: Turn signal flasher
+    subtype: load-independent solid-state, 3-pin
+    pinlabels: [B+, LOAD, GND]
+    notes: |-
+      ** THREE PIN, AND THE GROUND WIRE GOES IN WHETHER THE CHOSEN PART NEEDS IT OR NOT. ** A 2-pin
+      unit drops into the stock socket and is the common form; 3-pin adds a dedicated ground and is
+      the more consistent design. The wire costs nothing in a harness being built from scratch and it
+      keeps 3-pin parts on the table forever instead of locking the bike to 2-pin.
+      LOAD-INDEPENDENT is the requirement, not a preference - a thermal flasher's rate depends on the
+      current through it, so LED lamps make it flash far too fast or not at all. Want a wide current
+      range, roughly 0.05-10A, so it drives LED now and would still drive filament on a revert.
+      BUY ONE WITH REVERSE-POLARITY PROTECTION. Electronic flashers are polarity-sensitive where the
+      stock thermal unit was not, and the cheap ones often omit it.
+      ** THE SHARED-INDICATOR BACKFEED DOES NOT APPLY TO THIS BIKE. ** It has SEPARATE left and right
+      dash indicators, so the two circuits are never bridged. Bikes with one shared indicator lamp
+      backfeed through it once the lamps are LED; this one cannot. Part choice is issue #11.
+
+  SIG_FL: {<<: *signal_lamp, subtype: "front left - LED"}
+  SIG_FR: {<<: *signal_lamp, subtype: "front right - LED"}
+  SIG_RL: {<<: *signal_lamp, subtype: "rear left - LED"}
+  SIG_RR: {<<: *signal_lamp, subtype: "rear right - LED"}
+  IND_L: {<<: *indicator, subtype: "left turn indicator - LED"}
+  IND_R: {<<: *indicator, subtype: "right turn indicator - LED"}
+
+  SP_SIG_L:
+    style: simple
+    type: Splice
+    subtype: left turn net - 1 to 3
+    notes: One switch output feeds the front lamp, the rear lamp and the dash indicator. Same on the right.
+  SP_SIG_R:
+    style: simple
+    type: Splice
+    subtype: right turn net - 1 to 3
 
   TAIL:
     <<: *taillight
@@ -958,6 +993,47 @@ cables:
   W_GND_SPD: {<<: *w18, colors: [BK]}
   W_GND_TAC: {<<: *w18, colors: [BK]}
 
+  # --- turn signals -----------------------------------------------------
+  W_FLASH_IN:
+    <<: *w16
+    colors: [BN]
+    notes: PDM F9 to the flasher. Switched, so the signals die with the key.
+  W_FLASH_OUT:
+    <<: *w16
+    colors: [BU]
+    notes: |-
+      Flasher to the turn switch's feed way. BU rather than GN to keep the POWER INTO the switch
+      distinct from the SWITCHED OUTPUTS either side of it - the three land on adjacent ways of the
+      same cluster connector.
+  W_FLASH_GND:
+    <<: *w18
+    colors: [BK]
+    notes: Flasher ground. Drawn even though a 2-pin part would not use it - see FLASHER.
+  W_SIG_L:
+    <<: *w18
+    colors: [GN]
+    notes: |-
+      ** LEFT IS GN AND RIGHT IS GY, DELIBERATELY. ** This is one of the few places colour is still
+      the control. The front-left and front-right feeds run in the same bundle to the same place at
+      the headlight shell, the lamps have no pinout to read, and swapping them gives a bike that
+      indicates the wrong way - a safety fault, not an annoyance. Costs no extra SKU: GY is already
+      bought in 18 AWG for the relay coil drives.
+  W_SIG_R:  {<<: *w18, colors: [GY], notes: "Turn switch RIGHT output. GY not GN - see W_SIG_L."}
+  W_SIG_FL: {<<: *w18, colors: [GN]}
+  W_SIG_RL: {<<: *w18, colors: [GN]}
+  W_SIG_FR: {<<: *w18, colors: [GY]}
+  W_SIG_RR: {<<: *w18, colors: [GY]}
+  W_IND_L:  {<<: *w18, colors: [GN], notes: "Left splice to the instrument 6P way 1."}
+  W_IND_L2: {<<: *w18, colors: [GN], notes: "Pod-side leg to the left dash indicator."}
+  W_IND_R:  {<<: *w18, colors: [GY], notes: "Right splice to the instrument 6P way 2."}
+  W_IND_R2: {<<: *w18, colors: [GY], notes: "Pod-side leg to the right dash indicator."}
+  W_GND_SIG_FL: {<<: *w18, colors: [BK]}
+  W_GND_SIG_FR: {<<: *w18, colors: [BK]}
+  W_GND_SIG_RL: {<<: *w18, colors: [BK]}
+  W_GND_SIG_RR: {<<: *w18, colors: [BK]}
+  W_GND_IND_L:  {<<: *w18, colors: [BK], notes: "Into the pod ground splice - see SP_POD_GND."}
+  W_GND_IND_R:  {<<: *w18, colors: [BK], notes: "Into the pod ground splice - completes its 1-to-3."}
+
   # --- tail lamp and the brake circuit --------------------------------
   W_TAIL_RUN:
     <<: *w18
@@ -1241,6 +1317,70 @@ connections:
   - - NSW: [1]
     - '-->'
     - GND_ENG: [1]
+
+  # --- turn signals: flasher, switch, three lamps a side --------------
+  - - PDM: [13]
+    - W_FLASH_IN: [1]
+    - FLASHER: [1]
+  - - FLASHER: [2]
+    - W_FLASH_OUT: [1]
+    - LH: [4]
+  - - FLASHER: [3]
+    - W_FLASH_GND: [1]
+    - GND: [20]
+  - - LH: [5]
+    - W_SIG_L: [1]
+    - SP_SIG_L: [1]
+  - - LH: [6]
+    - W_SIG_R: [1]
+    - SP_SIG_R: [1]
+  - - SP_SIG_L: [1]
+    - W_SIG_FL: [1]
+    - SIG_FL: [1]
+  - - SP_SIG_L: [1]
+    - W_SIG_RL: [1]
+    - SIG_RL: [1]
+  - - SP_SIG_R: [1]
+    - W_SIG_FR: [1]
+    - SIG_FR: [1]
+  - - SP_SIG_R: [1]
+    - W_SIG_RR: [1]
+    - SIG_RR: [1]
+
+  # --- dash indicators, through the pod 6P ways reserved for them -----
+  - - SP_SIG_L: [1]
+    - W_IND_L: [1]
+    - INSTR_6P: [1]
+  - - INSTR_6P: [1]
+    - W_IND_L2: [1]
+    - IND_L: [1]
+  - - SP_SIG_R: [1]
+    - W_IND_R: [1]
+    - INSTR_6P: [2]
+  - - INSTR_6P: [2]
+    - W_IND_R2: [1]
+    - IND_R: [1]
+
+  # --- signal lamp grounds - each its own wire to the bus -------------
+  - - SIG_FL: [2]
+    - W_GND_SIG_FL: [1]
+    - GND: [16]
+  - - SIG_FR: [2]
+    - W_GND_SIG_FR: [1]
+    - GND: [17]
+  - - SIG_RL: [2]
+    - W_GND_SIG_RL: [1]
+    - GND: [18]
+  - - SIG_RR: [2]
+    - W_GND_SIG_RR: [1]
+    - GND: [19]
+  # The two dash indicators join the pod's own bus, completing its 1-to-3.
+  - - IND_L: [2]
+    - W_GND_IND_L: [1]
+    - SP_POD_GND: [1]
+  - - IND_R: [2]
+    - W_GND_IND_R: [1]
+    - SP_POD_GND: [1]
 
   # --- tail lamp joins the park-fed net -------------------------------
   - - SP_TAIL: [1]

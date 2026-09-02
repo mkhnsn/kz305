@@ -66,9 +66,17 @@
 #      WH  fused main power, pre-relay
 #      BN  switched power - the bus and its fused feeds
 #      YE  ignition, coil, starter trigger
-#      GY  control and trigger signals - relay coil drives, switch returns
+#      GY  control and trigger signals - relay coil drives, switch
+#          returns, and the RIGHT turn circuit
 #      BU  lighting supply and HIGH beam
-#      GN  LOW beam, dimmer common, signals
+#      GN  LOW beam, dimmer common, and the LEFT turn circuit
+#
+#    ** LEFT IS GN AND RIGHT IS GY ON PURPOSE. ** The front-left and
+#    front-right signal feeds run in the same bundle to the same place
+#    at the headlight shell, and a signal lamp has no pinout to read, so
+#    colour is the only thing that separates them. Swapping them gives a
+#    bike that indicates the wrong way - a safety fault rather than an
+#    annoyance. It costs no extra SKU: GY is already bought in 18 AWG.
 #
 #    ** WHY EIGHT AND NOT MORE - SIZED 2 Sep 2026 ON BOM COST. ** Every
 #    colour is a spool PER GAUGE, so the cost driver is (colour x gauge)

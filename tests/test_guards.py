@@ -397,6 +397,14 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     #                 about twelve ways, the whole usable palette on one
     #                 connector.
     #   LH RH IGN   - retained switchgear, each with a read cavity map.
+    #   INSTR_6P    - the pod pigtail, cavity map read at the bench
+    #                 29 Aug 2026 and its numbers fixed by the part. Added
+    #                 2 Sep 2026 with the signals: its way 2 (right turn)
+    #                 and way 4 (neutral switch lead) are both GY. The risk
+    #                 that mattered was NOT here - it was the front-left and
+    #                 front-right feeds sharing a bundle at the headlight
+    #                 shell with no pinout to read, and that is fixed by
+    #                 splitting the turn circuits GN left / GY right.
     #   COIL_L/R    - the points leads are in a FACTORY BRAIDED JACKET,
     #                 unmistakable against new TXL whatever colour it is,
     #                 and the coil terminals are marked.
@@ -405,7 +413,7 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     # other check. That is what this guard is for.
     exempt = {
         "GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "BATT", "SOL",
-        "PDM", "LH", "RH", "IGN", "COIL_L", "COIL_R",
+        "PDM", "LH", "RH", "IGN", "INSTR_6P", "COIL_L", "COIL_R",
         "K_MAIN", "K_COIL", "K_HORN", "K_HI", "K_LO",
     }
 

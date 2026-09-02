@@ -22,7 +22,7 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-134 labels for 67 wires.
+172 labels for 86 wires.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -54,8 +54,26 @@ again, one wire at a time, and it is not recoverable any other way.
 | `DIM_COMMON` | PDM-10 | `>LH-1` | GN | 18 AWG |
 | `ENG_GND` | GND-14 | `>GND_ENG-1` | BK | 6 AWG |
 | `ENG_GND` | GND_ENG-1 | `>GND-14` | BK | 6 AWG |
+| `FLASH_GND` | FLASHER-3 | `>GND-20` | BK | 18 AWG |
+| `FLASH_GND` | GND-20 | `>FLASHER-3` | BK | 18 AWG |
+| `FLASH_IN` | FLASHER-1 | `>PDM-13` | BN | 16 AWG |
+| `FLASH_IN` | PDM-13 | `>FLASHER-1` | BN | 16 AWG |
+| `FLASH_OUT` | FLASHER-2 | `>LH-4` | BU | 16 AWG |
+| `FLASH_OUT` | LH-4 | `>FLASHER-2` | BU | 16 AWG |
 | `GND_HB` | IND_HB-2 | `>SP_POD_GND-1` | BK | 18 AWG |
 | `GND_HB` | SP_POD_GND-1 | `>IND_HB-2` | BK | 18 AWG |
+| `GND_IND_L` | IND_L-2 | `>SP_POD_GND-1` | BK | 18 AWG |
+| `GND_IND_L` | SP_POD_GND-1 | `>IND_L-2` | BK | 18 AWG |
+| `GND_IND_R` | IND_R-2 | `>SP_POD_GND-1` | BK | 18 AWG |
+| `GND_IND_R` | SP_POD_GND-1 | `>IND_R-2` | BK | 18 AWG |
+| `GND_SIG_FL` | GND-16 | `>SIG_FL-2` | BK | 18 AWG |
+| `GND_SIG_FL` | SIG_FL-2 | `>GND-16` | BK | 18 AWG |
+| `GND_SIG_FR` | GND-17 | `>SIG_FR-2` | BK | 18 AWG |
+| `GND_SIG_FR` | SIG_FR-2 | `>GND-17` | BK | 18 AWG |
+| `GND_SIG_RL` | GND-18 | `>SIG_RL-2` | BK | 18 AWG |
+| `GND_SIG_RL` | SIG_RL-2 | `>GND-18` | BK | 18 AWG |
+| `GND_SIG_RR` | GND-19 | `>SIG_RR-2` | BK | 18 AWG |
+| `GND_SIG_RR` | SIG_RR-2 | `>GND-19` | BK | 18 AWG |
 | `GND_SPD` | GND-12 | `>LAMP_SPD-2` | BK | 18 AWG |
 | `GND_SPD` | LAMP_SPD-2 | `>GND-12` | BK | 18 AWG |
 | `GND_TAC` | GND-13 | `>LAMP_TAC-2` | BK | 18 AWG |
@@ -94,10 +112,18 @@ again, one wire at a time, and it is not recoverable any other way.
 | `IND_HB` | SP_HI-1 | `>INSTR_6P-5` | BU | 18 AWG |
 | `IND_HB2` | IND_HB-1 | `>INSTR_6P-5` | BU | 18 AWG |
 | `IND_HB2` | INSTR_6P-5 | `>IND_HB-1` | BU | 18 AWG |
+| `IND_L` | INSTR_6P-1 | `>SP_SIG_L-1` | GN | 18 AWG |
+| `IND_L` | SP_SIG_L-1 | `>INSTR_6P-1` | GN | 18 AWG |
+| `IND_L2` | IND_L-1 | `>INSTR_6P-1` | GN | 18 AWG |
+| `IND_L2` | INSTR_6P-1 | `>IND_L-1` | GN | 18 AWG |
 | `IND_N_FEED` | INSTR_6P-3 | `>PDM-11` | BN | 18 AWG |
 | `IND_N_FEED` | PDM-11 | `>INSTR_6P-3` | BN | 18 AWG |
 | `IND_N_FEED2` | IND_N-1 | `>INSTR_6P-3` | BN | 18 AWG |
 | `IND_N_FEED2` | INSTR_6P-3 | `>IND_N-1` | BN | 18 AWG |
+| `IND_R` | INSTR_6P-2 | `>SP_SIG_R-1` | GY | 18 AWG |
+| `IND_R` | SP_SIG_R-1 | `>INSTR_6P-2` | GY | 18 AWG |
+| `IND_R2` | IND_R-1 | `>INSTR_6P-2` | GY | 18 AWG |
+| `IND_R2` | INSTR_6P-2 | `>IND_R-1` | GY | 18 AWG |
 | `KHI_GND` | GND-6 | `>K_HI-4` | BK | 18 AWG |
 | `KHI_GND` | K_HI-4 | `>GND-6` | BK | 18 AWG |
 | `KLO_GND` | GND-7 | `>K_LO-4` | BK | 18 AWG |
@@ -144,6 +170,18 @@ again, one wire at a time, and it is not recoverable any other way.
 | `RR_GND` | RR-5 | `>GND-2` | BK | 12 AWG |
 | `RR_OUT` | MF_RR-1 | `>RR-4` | RD | 12 AWG |
 | `RR_OUT` | RR-4 | `>MF_RR-1` | RD | 12 AWG |
+| `SIG_FL` | SIG_FL-1 | `>SP_SIG_L-1` | GN | 18 AWG |
+| `SIG_FL` | SP_SIG_L-1 | `>SIG_FL-1` | GN | 18 AWG |
+| `SIG_FR` | SIG_FR-1 | `>SP_SIG_R-1` | GY | 18 AWG |
+| `SIG_FR` | SP_SIG_R-1 | `>SIG_FR-1` | GY | 18 AWG |
+| `SIG_L` | LH-5 | `>SP_SIG_L-1` | GN | 18 AWG |
+| `SIG_L` | SP_SIG_L-1 | `>LH-5` | GN | 18 AWG |
+| `SIG_R` | LH-6 | `>SP_SIG_R-1` | GY | 18 AWG |
+| `SIG_R` | SP_SIG_R-1 | `>LH-6` | GY | 18 AWG |
+| `SIG_RL` | SIG_RL-1 | `>SP_SIG_L-1` | GN | 18 AWG |
+| `SIG_RL` | SP_SIG_L-1 | `>SIG_RL-1` | GN | 18 AWG |
+| `SIG_RR` | SIG_RR-1 | `>SP_SIG_R-1` | GY | 18 AWG |
+| `SIG_RR` | SP_SIG_R-1 | `>SIG_RR-1` | GY | 18 AWG |
 | `SOL_GND` | GND-3 | `>SOL-4` | BK | 18 AWG |
 | `SOL_GND` | SOL-4 | `>GND-3` | BK | 18 AWG |
 | `SOL_SM` | SM-1 | `>SOL-2` | RD | 6 AWG |
