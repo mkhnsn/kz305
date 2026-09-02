@@ -908,9 +908,21 @@ the components inward is the only direction left.
 half of a connector. A third is not unthinkable — but `B00.11` had *both* slots
 populated, so whatever they were, they were in service.
 
-**The strongest remaining candidate is the rear brake switch**, whose own feed
-is unaccounted for since the front moved to `B00.5`. That leaves one slot with
-no candidate at all.
+**⛔ The rear brake switch is no longer a candidate — it was found elsewhere.**
+Its pigtail carries a brown and a blue, and its harness-side pair is `B04.4` +
+`B04.2` at `B04`, 650 mm along the trunk, which is the right footpeg. Both leave
+at the same breakout with the same length, exactly mirroring `B00.5`/`B00.6` at
+the front.
+
+**So `B00.11` now has NO candidate for either slot.** It got harder, not easier
+— and that is the honest state. Both its consumers were in service, both were on
+`Br/W`, and nothing known on this bike wants that.
+
+Worth noting what the pattern says: the two brake switches turned out to be
+**mirror pairs at their own breakouts** — `B00.5`/`B00.6` at the headlight,
+`B04.4`/`B04.2` at the footpeg. If `B00.11`'s two legs follow the same habit,
+they are a **two-wire subsystem** rather than two unrelated taps, and finding
+either one finds both.
 
 ### What it costs if it stays unknown
 

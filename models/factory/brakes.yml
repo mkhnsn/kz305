@@ -39,12 +39,26 @@ connectors:
   RBRK:
     <<: *brake_switch
     subtype: rear, frame mounted
-    pinlabels: [Br/W IN, Bl OUT]
-    notes: READ OFF THE SCAN 19 Aug 2026 - drawn beside the regulator/rectifier, feed reads Br/W (same broken stroke as the front switch), output Bl. In parallel with the front switch as assumed. Bench-verify at the ring-out; this is a scan read, not a meter fact.
+    pinlabels: [Br IN, Bl OUT]
+    notes: |-
+      READ OFF THE SCAN 19 Aug 2026 - drawn beside the regulator/rectifier, feed read Br/W (same
+      broken stroke as the front switch), output Bl, in parallel with the front switch AS ASSUMED.
+      ** THE FEED IS REDRAWN PLAIN Br, 2 Sep 2026. ** The switch's pigtail carries a brown and a
+      blue, read from the photographs - the same pair as the front switch, whose feed was confirmed
+      at the part the same day. Its harness-side pair is B04.4 (Br, female bullet) and B04.2 (Bl,
+      the 2-to-1 merge), which leave B04 at the same breakout and the same length.
+      "In parallel with the front switch" was an assumption on 19 Aug and is now supported: both
+      switches take brown in and return blue into one net, merging at B04.2 to feed the tail lamp.
   SP_BRAKE:
     style: simple
     type: Splice
-    subtype: brake lamp feed
+    subtype: brake lamp feed - and it is B04.2
+    notes: |-
+      ** LOCATED 2 Sep 2026: THIS NODE IS B04.2. ** Two blue wires crimped into ONE bullet terminal -
+      electrically a splice, mechanically a shared crimp - flagged on 28 Aug as a strong candidate for
+      exactly this and now supported by the rear switch's pigtail read. The front switch's output
+      arrives from B00.6, the rear switch's plugs into the bullet, and one blue leaves for the tail
+      lamp at B10.4. Blue Net 1 throughout: 0.0 ohm to B00.6, 0.1 ohm to B10.4.
   SP_R:
     style: simple
     type: Splice
@@ -82,17 +96,20 @@ cables:
       which is SP_BR here. Working rule 1: the bench outranks the document.
   W_BRK_FEED_R:
     <<: *w18
-    colors: [BNWH]
+    colors: [BN]
     notes: |-
-      ** STILL DRAWN Br/W FROM THE RIGHT BAR, AND ITS ONLY EVIDENCE HAS JUST COLLAPSED. ** This came
-      from the same 600 dpi broken stroke, in the same session, by the same method that turned out to
-      be wrong for the front switch - and "in parallel with the front switch" was recorded on 19 Aug
-      as an assumption, not a reading.
-      LEFT AS DRAWN rather than moved to match the front, because doubt is not evidence and this
-      project leaves a contradiction drawn rather than guessing a fix. The drawing therefore shows two
-      brake switches fed from DIFFERENT NETS, which looks wrong and honestly represents what is known.
-      Verify at the ring-out, or from the photographs: ring the rear switch's feed against the brown
-      net and against the Br/W net.
+      ** REDRAWN 2 Sep 2026 - PLAIN Br, LIKE THE FRONT. ** The rear switch's own pigtail was read from
+      the photographs and carries a BROWN and a BLUE, the same pair as the front. So both brake
+      switches were misrouted by the same 600 dpi broken stroke on 19 Aug, and both are on the plain
+      brown bus rather than Br/W.
+      ** ITS PAIR IS B04.4 AND B04.2 **, and the geometry is what settles it rather than the colour
+      alone: both leave B04 at the SAME breakout (200mm) with the SAME length (60mm), so they are a
+      pair travelling together - exactly mirroring B00.5/B00.6 at the front. B04.4 is a brown female
+      bullet already measured onto the brown net (0.7 ohm to B00.1) with its consumer unnamed until
+      now, and B04.2 was flagged on 28 Aug as a strong candidate for SP_BRAKE. B04 sits at 650mm
+      along the trunk, which is the right footpeg.
+      NOT OBSERVED MATED, so this is one step short of the front switch's evidence. If the pigtail's
+      brown turns out to carry a white tracer after all, B00.11 comes back into play as its feed.
   W_BRK_OUT_F:  {<<: *w18, colors: [BU]}
   W_BRK_OUT_R:  {<<: *w18, colors: [BU]}
 
@@ -107,7 +124,7 @@ connections:
   - - SP_BR: [1]
     - W_BRK_FEED_F: [1]
     - FBRK: [1]
-  - - RH_4P: [2]
+  - - SP_BR: [1]
     - W_BRK_FEED_R: [1]
     - RBRK: [1]
   - - FBRK: [2]
