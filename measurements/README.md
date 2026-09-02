@@ -744,6 +744,63 @@ measurement applies to continuity as much as to length — a drifting reading is
 evidence about the probe or the terminal, and deleting it leaves the next reader
 unable to tell a clean result from a tidied-up one.
 
+## `B00.5` — tentatively the front brake switch, 2026-09-02
+
+From the pre-teardown photographs, **read as tentative and recorded as such**.
+
+| | |
+|---|---|
+| Slots populated | **ONE of two** — not both, and not neither |
+| What was in it | a **brown** wire |
+| Where that brown goes | into a **sleeve, alongside a blue** from another `B00.x` |
+
+**The only blue at the headlight junction is `B00.6`** — Blue Net 1, the brake
+circuit, measured 0.0 Ω to `B04.2` and 0.1 Ω to `B10.4` on 28 Aug. So the sleeve
+carries a switched-brown feed out and a brake-circuit blue back.
+
+A brown feed and a blue return, sleeved as a pair, leaving the headlight
+junction toward the lever perch, **is the front brake switch**. It also matches
+the 17 Aug note that `FBRK` *"has its own pair of bullet connectors"* — `B00.5`
+is a double-female and `B00.6` is a male, which is exactly a mated pair of
+opposite genders.
+
+### ⚠️ This conflicts with the 19 August feed correction
+
+`models/factory/brakes.yml` currently says:
+
+> **FEED CORRECTED 19 Aug 2026 off the 600 dpi scan** — the feed lead reads
+> `Br/W` (pale, broken stroke), not plain `Br`, and it comes from the right-bar
+> 4P's `Br/W` leg.
+
+The photograph says **plain `Br`, from the headlight junction**. Those are
+different wires from different places.
+
+**Weigh them honestly.** The 19 Aug claim is a scan read of a pale broken stroke
+at 600 dpi — the exact class of evidence that has been wrong on this harness
+three times, and the reason the base-colour-first convention exists. The
+photograph is a direct read of a physical wire. But it is also **tentative**, and
+a single-slot observation in a crowded headlight shell is easy to miscount.
+
+Neither is promoted yet. What settles it is one reading: **ring `B00.5`'s brown
+against the plain-brown net and against the `Br/W` net.** They are separate nets
+with known members, so the answer is unambiguous.
+
+### The rebuild's decision survives either answer
+
+Worth stating so this does not read as blocking. `Br/W` is the **input** to the
+TAIL fuse and plain `Br` is the raw switched bus — **both are upstream of any
+fuse**. So the finding that the stock brake lamp was protected by nothing
+smaller than the 20 A main holds whichever wire fed it, and `F8 BRAKE PWR` in
+the rebuild is correct either way.
+
+### What the other slot means
+
+If only one slot was populated, the second was **spare capacity, not a lost
+consumer**. That is a different kind of answer from the accessory points, which
+were established as never connected at all — here the node was in service with
+room to spare. Do not go looking for a second brake-switch consumer that the
+count says was never there.
+
 ## Words used precisely
 
 | Word | Means |

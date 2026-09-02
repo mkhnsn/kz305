@@ -12,7 +12,26 @@ connectors:
     <<: *brake_switch
     subtype: front, at the lever perch
     pinlabels: [Br/W IN, Bl OUT]
-    notes: CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of bullet connectors. FEED CORRECTED 19 Aug 2026 off the 600 dpi scan - the feed lead reads Br/W (pale, broken stroke), not plain Br, and it comes from the right-bar 4P's Br/W leg. This matches the 15 Aug inventory that found Br/W in the right-bar 4P with a loose Bl/W alongside. Output reads solid Bl to the brake filament net.
+    notes: |-
+      CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of
+      bullet connectors. FEED CORRECTED 19 Aug 2026 off the 600 dpi scan - the feed lead reads Br/W
+      (pale, broken stroke), not plain Br, and it comes from the right-bar 4P's Br/W leg. This matches
+      the 15 Aug inventory that found Br/W in the right-bar 4P with a loose Bl/W alongside. Output
+      reads solid Bl to the brake filament net.
+      ** THE FEED IS IN DISPUTE AGAIN AS OF 2 Sep 2026, AND THE CHALLENGER IS A PHOTOGRAPH. ** The
+      pre-teardown photographs show B00.5 - a PLAIN BROWN at the HEADLIGHT JUNCTION - with one of its
+      two slots populated, and that brown running into a sleeve alongside a blue from B00.6. B00.6 is
+      Blue Net 1, the brake circuit. A brown feed and a blue return, sleeved as a pair, heading for
+      the lever perch, is this switch - and B00.5 double-female against B00.6 male is exactly the
+      "own pair of bullet connectors" recorded on 17 Aug.
+      SO THE FEED IS EITHER Br/W FROM THE RIGHT BAR OR PLAIN Br FROM THE HEADLIGHT JUNCTION. The
+      19 Aug claim is a 600 dpi read of a pale broken stroke, which is the class of evidence this
+      project has been wrong about three times; the photograph is a direct read but is recorded as
+      TENTATIVE. Neither is promoted. One reading settles it: ring B00.5's brown against the
+      plain-brown net and against the Br/W net.
+      NOT LEFT AS A LOOSE END FOR THE REBUILD - both candidate feeds are UPSTREAM of any fuse (Br/W
+      is the TAIL fuse's input, plain Br is the raw switched bus), so the finding that this lamp was
+      protected by nothing smaller than the 20A main holds either way. See measurements/README.
   RBRK:
     <<: *brake_switch
     subtype: rear, frame mounted
