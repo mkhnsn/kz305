@@ -964,6 +964,59 @@ So two components in the drawing are fed from a colour that **does not exist at
 the front of this harness**, on a scan read the model already flags as marginal
 between R and Br.
 
+### 2026-09-02, from the photographs: the tach bundle is WHITE and BLACK
+
+A bundle running up to the **tachometer** carries a **white** and a **black**
+wire. The black lands on **one of the `BK/Y`s in the `B00` cluster**; the white
+appears to go to **`B00.4`** — *"from what I can tell"*, and that hedge is
+carried forward as recorded rather than smoothed away.
+
+**The colours are data. The white's destination is not yet.**
+
+#### ✅ The ground half also closes part of `B00.2`
+
+`B00.2` was logged as *"a common ground collection with several splices
+downstream"*, and **several was never a number**. The tach lamp's black is one
+of them. So the meter lamps ground into the front `BK/Y` collection — Net B —
+rather than anywhere exotic, and `B00.2`'s fan-out is one member less mysterious.
+
+#### ⛔ And the feed is not R, which kills the drawing's colour outright
+
+The models feed both meter lamps plain **R**. The wire at the lamp is **white**.
+
+That is now **three independent reasons** the `SP_R` → meter lamp drawing is
+wrong: the scan flagged itself as marginal, no plain R exists at the front of
+the harness, and the wire in the photograph is a different colour entirely.
+**Fifth time a scan-derived colour has failed on this harness.**
+
+#### ⚠️ But `B00.4` collides with a measurement
+
+`B00.4` is **grey**, and it was **metered**: 0.2 Ω to `B00.1`'s grey on 28 Aug.
+Grey is the **right-turn circuit** — the left cluster's turn switch gives *R is
+O to Gy*, and the pod 6P carries Gy on way 2 as the right indicator.
+
+**A tachometer lamp on the right-turn net would flash with the indicator.** That
+is almost certainly not what the bike did.
+
+So one of these is off:
+
+- the white lands somewhere **other** than `B00.4` — the hedge, and the crowded
+  headlight shell makes it easy
+- there is an **unlogged bullet** at `B00` that the 12-branch count missed
+- `B00.4` is not what the 28 Aug reading says — **least likely**, since that was
+  a meter reading rather than a colour call
+
+#### The tidy answer is still available
+
+A pod-side **white** mating a harness-side **`Br/W`** is completely ordinary —
+the pod pigtail is a child harness and its internal colours need not match the
+main loom. **So `B00.11` = the two meter lamps survives this**, and would still
+close both open items at once.
+
+**One reading decides it.** Ring the tach's white against `B00.4`'s grey, against
+`B00.11`, and against `B10.2`'s R. Three probes, and every outcome is
+informative.
+
 ### Three ways that resolves, and one of them changes the rebuild
 
 **(a) A tap under the tape.** The `R` run from the ignition switch to the tail

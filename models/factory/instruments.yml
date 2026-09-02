@@ -91,6 +91,15 @@ cables:
       Three ways out: a splice off the R run under the tape, which Step 3 would find and which would
       preserve this drawing; or they are B00.11's two unexplained consumers, which would need the
       already-flagged R-vs-Br call to have gone the wrong way; or something not yet imagined.
+      ** THE COLOUR IS WRONG REGARDLESS, 2 Sep 2026. ** A bundle running to the TACHOMETER carries a
+      WHITE and a BLACK wire - photographed, not inferred. So the lamp end is not R by any reading.
+      That is three independent reasons this drawing's colour fails: the scan flagged itself
+      marginal, no plain R exists at the front of the harness, and the wire is a different colour.
+      The BLACK half lands on one of the BK/Y bullets at B00, which also puts a number on one of
+      B00.2's unenumerated "several splices downstream".
+      A pod-side WHITE mating a harness-side Br/W is ordinary - the pod pigtail is a child harness
+      and its colours need not match the loom - so B00.11 as the feed survives this and would still
+      close both open items at once.
       ⚠️ IF IT IS B00.11, THE PARK BEHAVIOUR FALLS WITH THE COLOUR. Br/W is switched, so the lamps
       would light with the key and NOT in park - and "live with the tail, light in PARK" comes from
       the same scan read as the colour does. models/kz305-rebuild.yml builds SP_TAIL around park-fed
