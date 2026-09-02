@@ -67,9 +67,22 @@ the `B06.4` mechanism**, so it is a design finding if present, not a detail.
 |---|---|---|
 | `B04` | 10 | **more wires than children = another splice** |
 | `B05` | 2 | |
-| `B06` | 9 | |
+| `B06` | **8** | ⚠️ corrected from 9 — see below |
 
 Count them as the tape comes off, before the bundle relaxes and wires move.
+
+⚠️ **`B06` was recorded as 9 and is 8.** Its children are `B06.1`–`B06.4` at one
+wire each plus `B06.5`'s four: **1+1+1+1+4 = 8**. Found in review 2 Sep 2026.
+
+**This mattered more than an off-by-one usually does.** The prediction's only
+purpose is the stop condition below, and an inflated one is a **silent false
+negative**: a real 9-conductor `B06` — that is, exactly one hidden splice —
+would have read as a clean match against 9 and never been looked for. On the
+branch carrying the starter relay, the fuse box and the melted main power path.
+
+Re-derive the other two at the bench rather than trusting them: `B04` = 10 and
+`B05` = 2 both check out against the log today, but so did `B06` until someone
+added it up.
 
 ### 3. ~~`B00.11`'s two legs~~ — WITHDRAWN, unwrapping cannot see them
 

@@ -466,6 +466,15 @@ input; if no it died with the old wire.
 
 ## Double-female bullet terminals: one harness wire, two empty slots
 
+⚠️ **SEVEN, not six — corrected 2026-09-02 in review.** `B10.5.1` also ends in a
+double-female, and its own log entry calls it *"third 1-to-2 distribution node
+found (with `B03` and `B08`)"*. It was never in this list, never in the sweep,
+and never in the "all six closed" claim. It is `BK/Y` at the tail fan — **Net
+B** — so its unknown consumers are ground-side, which feeds directly into the
+count of Net B earth points that the star bus's way count depends on. Nothing
+records whether its slots were populated or what mated it. **It is the one node
+of the seven with no account at all.**
+
 Six branches end in a double-female bullet terminal — `B03`, `B08`, `B00.5`,
 `B00.7`, `B00.8`, `B00.11`. In every case the **harness contributes one wire**
 into the crimp, and the terminal presents two receptacle slots that are **both
