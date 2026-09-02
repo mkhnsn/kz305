@@ -931,6 +931,80 @@ the rebuilt bike.** That is the standing rule in `kz305-rebuild.yml`, and it is
 the actual price of leaving this open — not untidiness. If `B00.11`'s second
 consumer is never identified, the rebuild silently drops whatever it was.
 
+## Confidence audit at the bars, 2026-09-02
+
+Asked directly: what near the handlebars is not accounted for. Working from
+**components inward** rather than from branches outward, because that is the
+direction that finds a missing circuit.
+
+### ⛔ The meter lamps have NO connection point anywhere in the harness
+
+**This is the biggest gap at the front, and it is larger than `B00.11`.**
+
+The pod carries **six lamps**. Four are fully accounted for — left turn, right
+turn, neutral and high beam, all crossing the instrument 6P on ways 1, 2, 3/4
+and 5, with the pod's ground bus on way 6. The arithmetic closes exactly: five
+signal ways plus a 1→3 ground splice is the eight conductors counted leaving the
+pigtail.
+
+**The other two — the speedometer and tachometer illumination — are not in the
+6P at all**, and `instruments.yml` says so: *"the meter illumination lamps sit
+outside the 6P span and route on their own bullets."*
+
+⚠️ **Which bullets? There is no answer anywhere in the log.**
+
+| | |
+|---|---|
+| Drawn as | `SP_R` → `W_MTR_SPD` / `W_MTR_TAC`, plain **R** |
+| Source | the 600 dpi scan, 19 Aug |
+| The model's own caveat | *"R vs Br is scan-marginal — confirm at the ring-out"*, and *"the speedo read is partly obscured by a connector symbol"* |
+| Plain **R** in the entire branch log | **exactly one — `B10.2`, at 1360 mm.** The tail end. |
+
+So two components in the drawing are fed from a colour that **does not exist at
+the front of this harness**, on a scan read the model already flags as marginal
+between R and Br.
+
+### Three ways that resolves, and one of them changes the rebuild
+
+**(a) A tap under the tape.** The `R` run from the ignition switch to the tail
+passes the whole length of the loom; the meter lamps could splice off it
+mid-trunk. **Step 3 would find this** — it is a splice inside the loom, unlike
+the empty double-females. This preserves the drawing.
+
+**(b) They are `B00.11`'s two consumers.** Two lamps, two slots, both at the
+front, both wanting switched power, on a node that is a 1→2 fan-out — which is
+precisely what a double-female is for. It would close `B00.11` and the meter
+lamps in one move, and it requires only that the scan's already-flagged R-vs-Br
+call went the wrong way.
+
+**(c) Something not yet imagined.** Kept open because the last four sessions
+each produced one.
+
+⚠️ **If (b) is right, the rebuild is wrong about park.** `Br/W` is switched, so
+the meter lamps would light **with the key and not in PARK** — where the drawing
+has them on the tail net specifically so they *do*. `SP_TAIL` in
+`kz305-rebuild.yml` was built around that behaviour. The claim *"meter lamps
+live with the tail, so they light in PARK too"* comes from **the same scan read
+as the colour**, so if the colour falls, the behaviour falls with it.
+
+### Lower confidence, in order
+
+| Item | Why it is soft |
+|---|---|
+| **`B00.4` / `B00.10` turn merges** | Both are 2-to-1 shared crimps read as *"suits front signal plus dash indicator"*. That is **inference from a conductor count**, not a read of where either leg goes. Plausible, unverified. |
+| **`B00.2`'s downstream splices** | Described at the bench as *"a common ground collection with several splices downstream"*. **Several was never a number.** It is the front ground node and its fan-out is unenumerated. |
+| **The headlight's ground** | Drawn `BK/Y`, presumably onto `B00.2`. Never recorded as a mate. |
+| **`B01.4` neutral switch lead** | Logged *"pending ring-out confirmation"*. Since corroborated by the 6P cavity map putting LG on way 4, so this one is nearly closed. |
+
+### What is solid at the bars
+
+Not everything is shaky, and it is worth saying which: the ignition switch
+(`B00.3`, identified by elimination with both halves read), both bar clusters
+(`B01.x`, `B02.x`, cavity maps read), the front brake switch (`B00.5`/`B00.6`,
+**confirmed at the part**), the horn (`B01.3`), the headlight filament feeds
+(`B00.9`, `B00.12`, both mated to the headlight pigtail when recorded), and all
+four pod telltales.
+
 ## Words used precisely
 
 | Word | Means |

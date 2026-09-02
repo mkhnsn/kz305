@@ -78,7 +78,23 @@ cables:
   W_MTR_SPD:
     <<: *w18
     colors: [RD]
-    notes: Reads R (solid) off the scan - meter lamps live with the tail, so they light in PARK too. The tach read is clean; the speedo read is partly obscured by a connector symbol. R vs Br is scan-marginal - confirm at the ring-out.
+    notes: |-
+      Reads R (solid) off the scan - meter lamps live with the tail, so they light in PARK too. The
+      tach read is clean; the speedo read is partly obscured by a connector symbol. R vs Br is
+      scan-marginal - confirm at the ring-out.
+      ** ESCALATED 2 Sep 2026: THESE TWO LAMPS HAVE NO CONNECTION POINT ANYWHERE IN THE BRANCH LOG. **
+      The pod's other four lamps are fully accounted for across the 6P, and this file's own header
+      says the meter lamps "sit outside the 6P span and route on their own bullets" - but WHICH
+      bullets has never been answered. THE ONLY PLAIN R IN THE ENTIRE LOG IS B10.2, AT 1360mm, THE
+      TAIL END. Nothing plain-R exists at the front of this harness, so as drawn these two cables
+      start nowhere.
+      Three ways out: a splice off the R run under the tape, which Step 3 would find and which would
+      preserve this drawing; or they are B00.11's two unexplained consumers, which would need the
+      already-flagged R-vs-Br call to have gone the wrong way; or something not yet imagined.
+      ⚠️ IF IT IS B00.11, THE PARK BEHAVIOUR FALLS WITH THE COLOUR. Br/W is switched, so the lamps
+      would light with the key and NOT in park - and "live with the tail, light in PARK" comes from
+      the same scan read as the colour does. models/kz305-rebuild.yml builds SP_TAIL around park-fed
+      meter lamps and would need revising. See measurements/README.
   W_MTR_TAC: {<<: *w18, colors: [RD]}
 
   # --- pod indicator feeds crossing the 6P ---------------------------

@@ -748,6 +748,13 @@ connectors:
       battery in PARK (W-R) and on the fused tail feed in ON (R_Bl-R). So the meter lamps and tail
       light in PARK with everything else dead, exactly as stock - and the ign_switch note's
       "preserve park function" is a drawn circuit rather than an intention.
+      ⚠️ ** THE METER LAMPS' HALF OF THAT RESTS ON A SCAN READ THAT IS NOW IN DOUBT, 2 Sep 2026. **
+      Stock's meter lamps have NO connection point anywhere in the branch log, and the only plain R
+      in the whole harness is at the tail. If they turn out to be B00.11's consumers they are on
+      Br/W, which is switched - so they lit with the KEY and not in park, and this splice should feed
+      the tail lamp only. THE TAIL LAMP'S PARK BEHAVIOUR IS NOT IN DOUBT; only the meter lamps'.
+      Nothing to change until the question settles - the wiring is identical either way, it is only
+      whether the two meter feeds belong on this node or on F7. See measurements/README.
 
   SP_POD_GND:
     style: simple
