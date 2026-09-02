@@ -146,6 +146,24 @@ Both slide on from the wire end and a crimped terminal will not pass either.
 Order: label, seal, strip, crimp, shrink. Getting it wrong means cutting the
 terminal off and starting that wire again.
 
+## Verification
+
+`docs/verification-plan.md` is the plan for proving the model against the real
+harness — organised by session (what you need in hand), with the ordering
+constraints that make some sessions gate others.
+
+`docs/claims-register.md` is generated, and inventories every dated or
+status-marked claim in the models and measurement logs, classified by **how it
+was established**:
+
+```sh
+.venv/bin/python3 tools/claims_register.py > docs/claims-register.md
+```
+
+The evidence classes are ranked by this project's own failure record, not by
+prior belief — `meter` has never been overturned, `scan` has failed five times.
+Regenerate after any model change; the register is a coverage map, not a verdict.
+
 ## Tests
 
 ```sh
