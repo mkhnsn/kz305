@@ -22,7 +22,7 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-118 labels for 59 wires.
+134 labels for 67 wires.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -32,6 +32,18 @@ again, one wire at a time, and it is not recoverable any other way.
 | `BAT_GND` | GND-1 | `>BATT-2` | BK | 6 AWG |
 | `BAT_SOL` | BATT-1 | `>SOL-1` | RD | 6 AWG |
 | `BAT_SOL` | SOL-1 | `>BATT-1` | RD | 6 AWG |
+| `BRAKE` | SP_BRAKE-1 | `>TAIL-2` | GN | 18 AWG |
+| `BRAKE` | TAIL-2 | `>SP_BRAKE-1` | GN | 18 AWG |
+| `BRK_FEED` | PDM-12 | `>SP_BRK_FEED-1` | BN | 16 AWG |
+| `BRK_FEED` | SP_BRK_FEED-1 | `>PDM-12` | BN | 16 AWG |
+| `BRK_FEED_F` | FBRK-1 | `>SP_BRK_FEED-1` | BN | 18 AWG |
+| `BRK_FEED_F` | SP_BRK_FEED-1 | `>FBRK-1` | BN | 18 AWG |
+| `BRK_FEED_R` | RBRK-1 | `>SP_BRK_FEED-1` | BN | 18 AWG |
+| `BRK_FEED_R` | SP_BRK_FEED-1 | `>RBRK-1` | BN | 18 AWG |
+| `BRK_OUT_F` | FBRK-2 | `>SP_BRAKE-1` | GN | 18 AWG |
+| `BRK_OUT_F` | SP_BRAKE-1 | `>FBRK-2` | GN | 18 AWG |
+| `BRK_OUT_R` | RBRK-2 | `>SP_BRAKE-1` | GN | 18 AWG |
+| `BRK_OUT_R` | SP_BRAKE-1 | `>RBRK-2` | GN | 18 AWG |
 | `COIL_L` | COIL_L-1 | `>SP_YR-1` | YE | 16 AWG |
 | `COIL_L` | SP_YR-1 | `>COIL_L-1` | YE | 16 AWG |
 | `COIL_PWR` | K_COIL-1 | `>PDM-4` | YE | 16 AWG |
@@ -48,6 +60,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `GND_SPD` | LAMP_SPD-2 | `>GND-12` | BK | 18 AWG |
 | `GND_TAC` | GND-13 | `>LAMP_TAC-2` | BK | 18 AWG |
 | `GND_TAC` | LAMP_TAC-2 | `>GND-13` | BK | 18 AWG |
+| `GND_TAIL` | GND-15 | `>TAIL-3` | BK | 18 AWG |
+| `GND_TAIL` | TAIL-3 | `>GND-15` | BK | 18 AWG |
 | `HEAD_GND` | GND-10 | `>HEAD-3` | BK | 16 AWG |
 | `HEAD_GND` | HEAD-3 | `>GND-10` | BK | 16 AWG |
 | `HEAD_HI` | K_HI-2 | `>SP_HI-1` | BU | 16 AWG |
@@ -140,6 +154,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `TAIL_FEED` | PDM-7 | `>IGN-4` | BN | 16 AWG |
 | `TAIL_OUT` | IGN-2 | `>SP_TAIL-1` | BU | 16 AWG |
 | `TAIL_OUT` | SP_TAIL-1 | `>IGN-2` | BU | 16 AWG |
+| `TAIL_RUN` | SP_TAIL-1 | `>TAIL-1` | BU | 18 AWG |
+| `TAIL_RUN` | TAIL-1 | `>SP_TAIL-1` | BU | 18 AWG |
 | `YR_OUT` | K_COIL-2 | `>SP_YR-1` | YE | 16 AWG |
 | `YR_OUT` | SP_YR-1 | `>K_COIL-2` | YE | 16 AWG |
 | `YR_TRIG` | K_COIL-3 | `>RH-2` | GY | 18 AWG |

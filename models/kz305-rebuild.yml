@@ -276,7 +276,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SPARE]
     notes: |-
       UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces
       is not what this note used to say. There is no single ring terminal carrying the harness. There
@@ -379,7 +379,7 @@ connectors:
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
     # list is ALLOCATION order, not physical cavity order; the cavity map
     # is a separate artefact and is not written yet.
-    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW)]
+    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW), F8 BRAKE PWR (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
       count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
@@ -615,6 +615,45 @@ connectors:
       POLARITY MATTERS NOW. Filaments do not care which way round feed and ground are; LEDs do. This
       is the feed/ground reference for the beam circuits - draw every lamp branch with both identified.
       PART NOT SELECTED. Its measured draw sizes F5 and confirms the beam wire gauge; stock was 4.2A.
+
+  TAIL:
+    <<: *taillight
+    subtype: tail / brake - LED
+    notes: |-
+      ** DUAL INTENSITY IS THE THING TO VERIFY ON THE CHOSEN LED UNIT. ** A filament tail/brake lamp
+      makes two brightnesses out of two filaments in one bulb and does not care about polarity. An
+      LED unit may do it with two inputs, or with one input and a driver, or not at all. Pick the
+      part before assuming this three-way footprint fits it, and check that TAIL and BRAKE can be
+      driven simultaneously - stock lights the tail continuously and the brake ON TOP of it.
+      No license lamp on the US/Canada bike; this lamp lights the plate.
+
+  FBRK:
+    <<: *brake_switch
+    subtype: front, at the lever perch
+    pinlabels: [FEED, OUT]
+    notes: RETAINED STOCK PART, on its own pair of bullets rather than in the right-bar branch. Ways renamed from the factory model's colour labels - the rebuild's colours are different.
+  RBRK:
+    <<: *brake_switch
+    subtype: rear, frame mounted
+    pinlabels: [FEED, OUT]
+    notes: RETAINED STOCK PART, in parallel with the front switch. Stock topology was read off the scan rather than metered - bench-verify at the ring-out.
+
+  SP_BRK_FEED:
+    style: simple
+    type: Splice
+    subtype: brake switch feed - 1 to 2
+    notes: |-
+      ** THIS FIXES A STOCK DEFICIENCY, AND IT IS WORTH BEING EXPLICIT ABOUT. ** Stock fed both brake
+      switches from Br/W, which is UPSTREAM of the TAIL fuse - so the brake lamp was protected by
+      nothing smaller than the 20A main. The rebuild gives the brake circuit its OWN fuse, F8.
+      That also stops one blown fuse taking the tail and the brake together, which a shared feed
+      would have done.
+
+  SP_BRAKE:
+    style: simple
+    type: Splice
+    subtype: brake lamp feed - two switches, one lamp
+    notes: Front and rear switches are in parallel; either one lights the lamp.
 
   INSTR_6P:
     <<: *junction6p
@@ -919,6 +958,28 @@ cables:
   W_GND_SPD: {<<: *w18, colors: [BK]}
   W_GND_TAC: {<<: *w18, colors: [BK]}
 
+  # --- tail lamp and the brake circuit --------------------------------
+  W_TAIL_RUN:
+    <<: *w18
+    colors: [BU]
+    notes: Tail net to the tail filament. Lights in ON and in PARK - see SP_TAIL.
+  W_BRK_FEED:
+    <<: *w16
+    colors: [BN]
+    notes: PDM F8 to the brake splice. Its own fuse, unlike stock - see SP_BRK_FEED.
+  W_BRK_FEED_F: {<<: *w18, colors: [BN], notes: "Splice to the front switch, at the lever perch."}
+  W_BRK_FEED_R: {<<: *w18, colors: [BN], notes: "Splice to the rear switch, frame mounted."}
+  W_BRK_OUT_F:  {<<: *w18, colors: [GN], notes: "Front switch out to the brake lamp splice."}
+  W_BRK_OUT_R:  {<<: *w18, colors: [GN], notes: "Rear switch out to the brake lamp splice."}
+  W_BRAKE:
+    <<: *w18
+    colors: [GN]
+    notes: Brake splice to the lamp's BRAKE input. Distinct colour from the tail feed because the two land on adjacent ways of the same lamp and reversing them would give a lamp that is bright until you brake.
+  W_GND_TAIL:
+    <<: *w18
+    colors: [BK]
+    notes: Tail lamp return to the star bus. Stock earthed it on Net B, which never reached the chassis ring.
+
   # --- high beam indicator, off the beam net --------------------------
   W_HEAD_HI2:
     <<: *w16
@@ -1180,6 +1241,34 @@ connections:
   - - NSW: [1]
     - '-->'
     - GND_ENG: [1]
+
+  # --- tail lamp joins the park-fed net -------------------------------
+  - - SP_TAIL: [1]
+    - W_TAIL_RUN: [1]
+    - TAIL: [1]
+  - - TAIL: [3]
+    - W_GND_TAIL: [1]
+    - GND: [15]
+
+  # --- brake: own fuse, two switches in parallel ----------------------
+  - - PDM: [12]
+    - W_BRK_FEED: [1]
+    - SP_BRK_FEED: [1]
+  - - SP_BRK_FEED: [1]
+    - W_BRK_FEED_F: [1]
+    - FBRK: [1]
+  - - SP_BRK_FEED: [1]
+    - W_BRK_FEED_R: [1]
+    - RBRK: [1]
+  - - FBRK: [2]
+    - W_BRK_OUT_F: [1]
+    - SP_BRAKE: [1]
+  - - RBRK: [2]
+    - W_BRK_OUT_R: [1]
+    - SP_BRAKE: [1]
+  - - SP_BRAKE: [1]
+    - W_BRAKE: [1]
+    - TAIL: [2]
 
   # --- pod ground, and the engine strap it ultimately depends on -----
   - - SP_POD_GND: [1]
