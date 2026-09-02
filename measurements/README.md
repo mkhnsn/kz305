@@ -4,6 +4,38 @@ Raw bench data, kept separate from the models. The models are *derived*: a
 measurement is evidence, and evidence does not get edited to agree with a
 drawing.
 
+## What the lengths are FOR — restated 2026-09-02
+
+**The harness will be built in place on the bike and trimmed to final length
+there.** That changes what this log is, and it is worth being explicit so nobody
+later mistakes its precision for a requirement.
+
+The lengths are **a spacing and quantity record, not a cut list**:
+
+- **How far apart the components sit**, so the new harness is laid out with the
+  right branch order and the right slack — which is what `trunk-map.md` captures
+  and the schematic cannot.
+- **How much wire to buy, per gauge.** Sum the branches, add the routing slack
+  and a margin for trimming.
+- **A sanity check while building** — if a run in place comes out wildly
+  different from the logged branch, something is routed wrong.
+
+What they are **not**: numbers to cut against. Trimming happens on the bike.
+
+### Two consequences
+
+- **Transferring lengths into the rebuild model drops in priority.** The BOM
+  needs a total per gauge to place an order, not a per-wire figure, and a
+  per-wire figure would imply a precision the build does not use.
+- **The `provisional` status on every row stops mattering much.** Nobody will
+  cut against them, so a re-measure pass would confirm numbers that no longer
+  gate anything. Leave them.
+
+**This does not retroactively relax issue #2.** Capturing spacing before the
+loom came apart was still the one irreversible step, and it was still right to
+gate everything behind it — you cannot measure how far apart two things were
+after you have cut the thing that held them apart.
+
 ## Why lengths are not catalogued on the schematic
 
 `out/kz305-factory.svg` labels every cable with its designator, so it is
