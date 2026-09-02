@@ -867,29 +867,57 @@ The 19 Aug read may have got the **net right and the route wrong**, which is a
 much smaller error than it looked, and an easy one to make from a diagram that
 draws nets rather than routes.
 
-### ⚠️ Which means continuity cannot settle it — but Step 3 can
+### ⚠️ Continuity cannot settle it — and NEITHER CAN STEP 3
 
 **A ring-out is useless here.** Every point on `Br/W` reads continuous with
 every other by definition, so no meter reading distinguishes a feed taken at the
 bar from one taken at the headlight.
 
-**What settles it is routing**, and that makes this the one empty-slot question
-Step 3 *can* answer — a correction to the claim elsewhere in these notes that
-unwrapping cannot help with any of them:
+**And unwrapping cannot help either — a claim made here on 2 Sep and withdrawn
+the same day.** `B00.11` is a single *harness* wire ending in a double-female
+bullet, and it was already disconnected when the `B00.x` cluster was counted.
+Its two consumers plugged in **from outside**: they are component leads or child
+harnesses, not conductors in the main loom. Step 3 opens the loom, and a wire
+that was never in the loom does not appear.
 
-- If a `Br/W` runs **rearward from `B00.11` inside the trunk**, the rear brake
-  switch is fed from the front and the 19 Aug route is wrong.
-- If no such wire exists in the trunk, the feed is taken at the bar and
-  `B00.11`'s consumers are something else entirely.
+The general rule stands after all: **none of the empty double-females can be
+answered by unwrapping.** Only the photographs and the components themselves.
 
-Either way it is visible the moment the tape comes off. **Add it to the Step 3
-list**: trace `B00.11`'s two legs by eye as the loom opens.
+### So the search is component-side, not harness-side
 
-### What is still unaccounted for
+The productive question is not *"where does this wire go"* but **"which parts on
+this bike have a brown-base lead that nothing else accounts for"**. Working from
+the components inward is the only direction left.
 
-Even granting the rear brake switch, that is **one** of two slots. The second
-consumer has no candidate at all. It wants unfused switched power at the front
-of the bike, and everything obvious at the headlight is already accounted for.
+**Everything currently on the brown nets, so it can be ruled out:**
+
+| Consumer | Fed | Where |
+|---|---|---|
+| Horn | `Br` | `SP_BR` |
+| Flasher | `Br` | `SP_BR` |
+| Neutral indicator | `Br` | 6P way 3 |
+| Kill switch | `Br` | `RH_4P` way 1 |
+| **Front** brake switch | `Br` | **`B00.5`** — confirmed 2 Sep |
+| TAIL fuse input | `Br/W` | `B06.5` |
+| Right-bar `Br/W` leg | `Br/W` | `B01.2` way 2 |
+| `B04.4` | `Br` | female bullet, consumer still unnamed |
+| `B04.3` R/R cavity | `Br` | **DEAD** — cavity empty on the R/R half |
+| Left-bar 6P brown | `Br` | **DEAD** — feeds nothing |
+
+**Two dead ways are already known on this bike**, both found by reading the far
+half of a connector. A third is not unthinkable — but `B00.11` had *both* slots
+populated, so whatever they were, they were in service.
+
+**The strongest remaining candidate is the rear brake switch**, whose own feed
+is unaccounted for since the front moved to `B00.5`. That leaves one slot with
+no candidate at all.
+
+### What it costs if it stays unknown
+
+**A circuit missing from the transcription is a circuit that will not exist on
+the rebuilt bike.** That is the standing rule in `kz305-rebuild.yml`, and it is
+the actual price of leaving this open — not untidiness. If `B00.11`'s second
+consumer is never identified, the rebuild silently drops whatever it was.
 
 ## Words used precisely
 
