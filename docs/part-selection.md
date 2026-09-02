@@ -667,6 +667,66 @@ Write the map down as it is built, in the same form as
 `measurements/connector-inventory.csv`: cavity number, circuit, wire colour,
 gauge. State the numbering rule first, before the first terminal goes in.
 
+### MTA associated components — real part numbers, 1 Sep 2026
+
+From the connection-system datasheet. These correct two quantities that had been
+assumed and add two parts that were missing entirely.
+
+| Part | MTA PN | Qty | |
+|---|---|---|---|
+| Secondary lock | `0301372` | **6** | ⚠️ **six per module**, not one |
+| Top cover | `0301371` | 1 | |
+| Mounting leg — male | `0300690` | 2 | ⚠️ was missing |
+| Mounting leg — female | `0300691` | 2 | ⚠️ was missing |
+| Cavity plug, 2.8 mm black | `4550750` | prov. | |
+
+#### Terminals — sized by conductor CSA
+
+| MTA PN | Range | |
+|---|---|---|
+| `1708337-L` | 0.35–0.75 mm² (22–20 AWG) | |
+| **`1708338-L`** | **1.0–2.0 mm² (18–16 AWG)** | **← this harness's branches** |
+| `1708339-L` | 2.5–4.0 mm² (14–12 AWG) | if any heavy leg enters the block |
+
+#### ⚠️ Wire seals are sized by INSULATION OD, not by gauge
+
+| MTA PN | Insulation dia. | Colour |
+|---|---|---|
+| `4550748` | 1.2–2.1 mm | red |
+| `4550747` | 2.2–3.0 mm | green |
+| `4550749` | 3.1–3.7 mm | grey |
+
+**This cannot be looked up — it has to be measured.** Two 18 AWG wires with
+different insulation walls take different seals, and the seal is what makes the
+module waterproof. It lands on the same calipers as the gauge pass: **measure
+the insulation OD of the wire actually bought**, then choose. Ordering seals
+before choosing wire is ordering blind.
+
+#### Fuses — MiniVal, by rating
+
+`0705090` 2 A · `0705100` 3 A · `0705101` 4 A · `0705110` 5 A · `0705120` 7.5 A ·
+`0705130` 10 A · `0705140` 15 A · `0705150` 20 A · `0705160` 25 A · `0705170` 30 A
+
+Not yet orderable: **F1–F6 have no ratings assigned.** Sizing them needs the LED
+headlight's measured draw and the final circuit list.
+
+#### Why the terminal and plug counts are still provisional
+
+Two reasons, and neither is arithmetic:
+
+1. `qty_multiplier` cannot help. It works off `pincount`, and `PDM` carries **10
+   logical ways** against the module's **60 cavities**.
+2. **The model draws the relays as separate parts wired to the `PDM`, but they
+   physically seat in it.** So `W_HORN_PWR`, `W_COIL_PWR`, `W_HEAD_SUPPLY`,
+   `W_HI_PWR`, `W_LO_PWR`, `W_MAIN_SW_FEED` and `W_SW_BUS` are not harness wires
+   at all — they are the point-to-point jumpers inside the block. Until that is
+   reconciled, no terminal count taken off this drawing is trustworthy.
+
+32 terminals counts pins (5 relays × 4 + 6 fuses × 2) rather than cavities. 18
+plugs assumes the ~10 unpopulated cavities inside a relay footprint are covered
+by the relay body; if they are open, plugs rise toward 28. **The module drawing
+settles it**, and it is not worth refining by guesswork before then.
+
 ### Open before committing
 
 - **Which MTA modules are bussed.** The single most load-bearing question, per

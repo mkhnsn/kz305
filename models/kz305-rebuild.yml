@@ -311,29 +311,55 @@ connectors:
     manufacturer: MTA
     mpn: "0301370"
     additional_components:
-      - type: Cover
-        subtype: for 0301370
+      - type: Top cover
         manufacturer: MTA
         mpn: "0301371"
         qty: 1
       - type: Secondary lock
-        subtype: for 0301370
+        subtype: SIX PER MODULE, not one - datasheet, 1 Sep 2026
         manufacturer: MTA
         mpn: "0301372"
-        qty: 1
-      # ⚠️ THESE TWO ARE HAND-ENTERED AND WILL DRIFT. Everywhere else the BOM
-      # derives terminal and plug counts with qty_multiplier, but that works
-      # off pincount - and this connector has TEN logical ways (one per
-      # circuit) against the real module's SIXTY cavities. The multipliers
-      # would compute against the wrong number, so the figures below are
-      # manual: ~5 relays at ~6 cavities plus 6 fuses at 2, and the balance
-      # of 60 as plugs. Reconcile against the cavity map when it is written.
+        qty: 6
+      - type: Mounting leg - male
+        subtype: 2 pcs reqd per module
+        manufacturer: MTA
+        mpn: "0300690"
+        qty: 2
+      - type: Mounting leg - female
+        subtype: 2 pcs reqd per module
+        manufacturer: MTA
+        mpn: "0300691"
+        qty: 2
+      # ⚠️ THE THREE QUANTITIES BELOW ARE PROVISIONAL AND WILL MOVE.
+      # Two separate reasons, and neither is arithmetic:
+      #   1. qty_multiplier cannot help here. It works off pincount, and this
+      #      connector has TEN logical ways - one per circuit - against the
+      #      real module's SIXTY cavities.
+      #   2. ** THE MODEL DRAWS THE RELAYS AS SEPARATE PARTS WIRED TO THE PDM,
+      #      BUT THEY PHYSICALLY SEAT IN IT. ** So W_HORN_PWR, W_COIL_PWR,
+      #      W_HEAD_SUPPLY, W_HI_PWR, W_LO_PWR, W_MAIN_SW_FEED and W_SW_BUS
+      #      are not harness wires at all - they are the point-to-point
+      #      jumpers inside the block. Until that is reconciled, no terminal
+      #      count taken off this drawing is trustworthy.
+      # 32 = 5 relays x 4 pins + 6 fuses x 2, which counts pins rather than
+      # cavities. 18 plugs assumes the ~10 unpopulated cavities inside a relay
+      # footprint are covered by the relay body; if they are open, plugs rise
+      # toward 28. THE MODULE DRAWING SETTLES THAT - it is not a guess worth
+      # refining without it.
       - type: Terminal
-        subtype: Metri-Pack 280 sealed female, 16-18 AWG - MPN TBD, confirm seal size per gauge
-        qty: 42
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - QTY PROVISIONAL
+        manufacturer: MTA
+        mpn: 1708338-L
+        qty: 32
       - type: Cavity plug
-        subtype: sealed blank for unused ways - MPN TBD, REQUIRED or the module is not sealed
+        subtype: 2.8mm black - QTY PROVISIONAL. REQUIRED or the module is not sealed
+        manufacturer: MTA
+        mpn: "4550750"
         qty: 18
+      - type: Wire seal
+        subtype: "2.8mm - ** SIZE NOT CHOSEN - selected by INSULATION OD, not gauge. 4550748 red 1.2-2.1mm / 4550747 green 2.2-3.0mm / 4550749 gray 3.1-3.7mm. Measure the chosen wire. **"
+        manufacturer: MTA
+        qty: 32
     pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
