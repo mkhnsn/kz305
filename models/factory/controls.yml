@@ -2,89 +2,53 @@
 #
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
-# See models/kz305-factory.yml for the model-wide notes.
+# See models/factory/00-notes.yml for the model-wide notes.
 
 connectors:
   RH:
     <<: *rh_cluster
     pinlabels: [Br STOP IN, Y/R STOP OUT, Y/R BTN IN, BK BTN OUT]
-    notes: Four leads leave the switch housing directly - no connector at the switch. MAPPED by unsleeving 17 Aug 2026. Contacts degraded - button 5 ohm, kill 3 ohm; clean before reuse.
+    notes: Four leads leave the switch housing directly - no connector at the switch [bench 17 Aug 2026]. ⚠️ Contacts degraded - button 5 ohm, kill 3 ohm [meter 15 Aug 2026]; clean before reuse.
   SP_RH_YR:
     style: simple
     type: Splice
     subtype: 2 to 1, Y/R
-    notes: MAPPED 17 Aug 2026. The two Y/R leads from the switch housing join here and continue as a single Y/R to the 4P. This is the shared node - kill switch output and starter button input are the same net - and it is what carries the coil feed out of the branch. Confirms the topology the models already assumed.
+    notes: The two Y/R leads from the switch housing join here and continue as a single Y/R to the 4P [bench 17 Aug 2026, re-checked 29 Aug]. Kill switch output and starter button input are the same net, and this is what carries the coil feed out of the branch.
   SP_RH_BR:
     style: simple
     type: Splice
     subtype: 1 to 3, Br
     notes: |-
-      MAPPED 17 Aug 2026 by unsleeving - four legs, and the splice itself is a physical observation
-      that stands. What it does is now in question. The 19 Aug reading, that the Br leg ENERGISES the
-      switched bus and the Br/W leg ORIGINATES both brake-switch feeds, does not survive the 28 Aug
-      ring-out: the switched brown is one net fed directly by the ignition switch, and Br/W is
-      continuous from the FUSE BOX to this 4P. Both of those legs now look like arrivals rather than
-      departures.
-      That reverses the direction of this node - a distribution point fed on brown from the bus, with
-      Bl/W and Br/W as through-connections rather than outputs. It also raises a question the ring-out
-      cannot answer with the switchgear unplugged, which is how it was measured: tying Br to Br/W here
-      would join the switched bus to the TAIL fuse's output when the cluster is mated. Either this
-      splice is misread or holder 3 is oriented the other way. Not redrawn on inference - unsleeve it
-      again with the net map in hand.
-      ** DONE, 29 Aug 2026. THE SPLICE IS CONFIRMED AS MAPPED. ** The subharness was unsleeved a
-      second time with the net map in hand: Bl/W, Br and Br/W join and leave as a single brown to the
-      switch. Four legs, exactly as drawn. SP_RH_YR is confirmed at the same time (one Y/R splitting
-      into two at the switchgear) and BK is continuous from the 4P to the switches with no splice.
-      ** SO THE OTHER HORN OF THE DISJUNCTION HOLDS: holder 3 is oriented the other way. ** Reading
-      (b) - Br/W in, R/Bl out - and it is now drawn that way. Reading (a) is not merely less likely
-      but impossible: the metered switch table connects R/BK to R in ON and nothing else to either,
-      so under (a) the TAIL fuse would be fed from a pin with no source. See FUSE_TAIL.
-      ** WHAT THIS NODE ACTUALLY IS: the distribution point for switched-ignition power. ** Brown
-      arrives from the bus on way 1 of the 4P and leaves three ways - to the kill switch as Br, to
-      the TAIL fuse as Br/W, and to the HEAD fuse as Bl/W. That last leg also closes the standing
-      question of WHAT FEEDS Bl/W, and fixes its direction as a feed OUT of this branch into the
-      HEAD fuse, matching that fuse's settled orientation.
-      ** DESIGN FINDING, and it is a real one: BOTH 10A FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. **
-      The fuse box's two 10A circuits are not fed from the fuse box end at all. They are fed from a
-      splice inside the right-hand switch pigtail, which is itself fed from the brown bus. That is
-      why Br/W and Bl/W both run between the fuse box and the right-bar branch - a pairing this model
-      circled for weeks without an explanation. The rebuild has no reason to reproduce the detour.
+      THE DISTRIBUTION POINT FOR SWITCHED-IGNITION POWER. Brown arrives from the bus on way 1 of the
+      4P and leaves three ways - to the kill switch as Br, to the TAIL fuse as Br/W, and to the HEAD
+      fuse as Bl/W. Four legs, mapped by unsleeving twice, the second time with the net map in hand
+      [bench 17 and 29 Aug 2026].
+      ** DESIGN FINDING: BOTH 10A FUSE FEEDS GO UP TO THE HANDLEBAR AND BACK. ** The fuse box's two
+      10A circuits are not fed from the fuse box end at all. They are fed from this splice inside the
+      right-hand switch pigtail, which is itself fed from the brown bus. That is why Br/W and Bl/W
+      both run between the fuse box and the right-bar branch. The rebuild has no reason to reproduce
+      the detour.
   RH_4P:
     type: Junction
     subtype: 4-pin connector, right bar
     pinlabels: [Br, Br/W, Y/R, BK]
     notes: |-
-      Wire count now reconciles - 4 leads at the switch become 4 pins here plus one bullet. The two Y/R
-      merge 2-to-1; the single Br expands to Br plus Br/W, with Bl/W leaving separately.
-      ** WAY-LIST CONFIRMED AGAINST THE CONNECTOR, 4-of-4, 29 Aug 2026. ** The bench cavity order -
-      mating face, keyway up, left to right, top row first - is Br, Br/W, Y/R, BK, exactly as drawn.
-      No renumber needed, unlike FUSE_4P whose ways turned out to be grouped by holder rather than
-      recorded. This connector's pin numbers were a record all along.
-      ** BOTH HALVES READ AND THE MIRROR CHECKS OUT 4-of-4. ** All four ways populated on each side,
-      every mated pair matching on colour. Terminals are male on the harness side, female on the
-      subharness side.
-      ** THE WIRE COUNT CLOSES ON THE CONNECTOR, NOT JUST ON PAPER. ** 4 ways here plus the Bl/W
-      flying bullet is 5 conductors leaving the switchgear, which is what this note's reconciliation
-      predicted from the switch's 4 leads through SP_RH_YR and SP_RH_BR. The splices' EXISTENCE is
-      therefore corroborated from outside the sleeve; what SP_RH_BR CONNECTS remains open.
-      PHYSICAL: 4-way rectangular, the SMALLER of the two four-way series in this harness, with MALE
-      spades on the harness side. B06.5 at the fuse box is the same series in the opposite gender.
-      NOT the same part as the R/R's 4P - see measurements/README on why type is load-bearing.
-      PART SELECTION: this one IS reproduced. The rebuild retains the right-bar switchgear, so the new
-      harness has to mate its pigtail in the male half of this series. The series is not yet identified
-      and no dimension has been measured on it.
+      Cavity order - mating face, keyway up, left to right, top row first - is Br, Br/W, Y/R, BK,
+      exactly as drawn. Both halves read, mirror 4-of-4, every mated pair matching on colour. Male
+      spades on the harness side, female on the subharness side. [bench 29 Aug 2026]
+      THE WIRE COUNT CLOSES ON THE CONNECTOR: 4 ways here plus the Bl/W flying bullet is 5 conductors
+      leaving the switchgear, from the switch's 4 leads through SP_RH_YR and SP_RH_BR [arith
+      29 Aug 2026]. The splices are corroborated from outside the sleeve as well as by unsleeving.
+      PHYSICAL: 4-way rectangular, the SMALLER of the two four-way series in this harness. B06.5 at
+      the fuse box is the same series in the opposite gender. NOT the same part as the R/R's 4P.
+      PART SELECTION: this one IS reproduced - the rebuild retains the right-bar switchgear, so the
+      new harness has to mate its pigtail in the male half of this series. ⚠️ THE SERIES IS NOT
+      IDENTIFIED AND NO DIMENSION HAS BEEN MEASURED ON IT. [OPEN]
   RH_BLW:
     type: Bullet connector
     subtype: Bl/W, right bar
     pinlabels: [Bl/W]
-    notes: |-
-      Mates Bl/W to Bl/W across the bullet, and the conductor runs to the fuse box - the 17 Aug trace
-      and the 28 Aug net map agree on that much.
-      ** DIRECTION SETTLED 29 Aug 2026: this is a feed OUT of the branch, into the HEAD fuse. ** The
-      second unsleeving puts Bl/W on SP_RH_BR together with the switched brown, so it carries bus
-      power down to the fuse rather than bringing power up. That matches the HEAD fuse's own settled
-      orientation (Bl/W in, Bl out) and closes the 17 Aug reading, which had it the other way round.
-      The harness half is B01.1, a male bullet; the subharness carries the female flying lead.
+    notes: A feed OUT of the branch, into the HEAD fuse - Bl/W sits on SP_RH_BR together with the switched brown, so it carries bus power down to the fuse [bench 29 Aug 2026]. The harness half is B01.1, a male bullet; the subharness carries the female flying lead.
   SP_YR:
     style: simple
     type: Splice
@@ -92,51 +56,40 @@ connectors:
     notes: |-
       The kill switch output feeds BOTH ignition coils and the starter button from this node. Killing
       the engine works by cutting coil power here.
-      ** LOCATED 2 Sep 2026 FROM THE PRE-TEARDOWN PHOTOGRAPHS: THIS NODE IS B03. ** A single Y/R off
-      the trunk at 460mm from the datum, 140mm long, ending in a DOUBLE-FEMALE BULLET whose two slots
-      fed one ignition coil each. The harness contributes one wire; the two coil feeds were external
-      male bullets, unplugged at teardown, which is why both slots read empty on the bench.
-      Corroborated without being steered: B03 rings 0.2 Ohm to B01, the right-bar junction, so its
-      Y/R is the kill switch output - exactly what this splice is drawn as carrying.
-      ** IT IS NOT A HIDDEN SPLICE - IT IS AN ACCESSIBLE BULLET NODE. ** That matters for the
-      rebuild, which wants this point kept accessible and documented as the plug-in for an EI module
-      later. Stock already made it so; the rebuild is preserving a property rather than adding one.
-      Closes one of the six empty double-females - see measurements/trunk-map.md.
+      THIS NODE IS B03: a single Y/R off the trunk at 460mm from the datum, 140mm long, ending in a
+      DOUBLE-FEMALE BULLET whose two slots fed one ignition coil each [photo 2 Sep 2026]. The harness
+      contributes one wire; the two coil feeds were external male bullets, unplugged at teardown.
+      Corroborated independently: B03 rings 0.2 ohm to B01, the right-bar junction, so its Y/R is the
+      kill switch output [meter 28 Aug 2026].
+      IT IS AN ACCESSIBLE BULLET NODE, NOT A HIDDEN SPLICE. That matters for the rebuild, which wants
+      this point kept accessible as the plug-in for an EI module later - stock already made it so.
 
 cables:
   W_RH_IN:
     <<: *w18
     colors: [BUWH]
-    notes: |-
-      REPINNED 28 Aug 2026 onto the fuse panel's Bl/W way, which is now identified - it was drawn on
-      the way the deleted FUSE_A used. The conductor is unchanged and the topology is unchanged: Bl/W
-      between the fuse box and this bullet, which is exactly the harness pair the bench found and has
-      not yet rung.
-      ** DIRECTION SETTLED 29 Aug 2026: a feed OUT of the branch into the HEAD fuse. ** Bl/W sits on
-      SP_RH_BR with the switched brown, so this conductor carries bus power DOWN to the fuse box. The
-      17 Aug reading, which called it the feed into the branch, is closed against. Both readings stay
-      in the record; the deciding evidence is the second unsleeving, not a ring-out.
+    notes: Bl/W between the fuse box and the right-bar bullet, running DOWN to the HEAD fuse [bench 29 Aug 2026]. See RH_BLW.
   # --- kill switch output: coils AND starter button -----------------
   W_YR_OUT:
     <<: *w16
     colors: [YERD]
     notes: THE critical stock detail. Kill switch output. Feeds the coil splice and, internally to the cluster, the starter button. Cutting this is how the engine stop switch stops the engine.
 
-  # --- right-bar branch internals, mapped by unsleeving 17 Aug -------
+  # --- right-bar branch internals, mapped by unsleeving --------------
   W_RH_BR_SW:  {<<: *w18, colors: [BN]}
   W_RH_BR:     {<<: *w18, colors: [BN]}
   W_RH_BRW:
     <<: *w18
     colors: [BNWH]
-    notes: Same net as the kill switch feed on the switch side of the 4P. BEYOND THE 4P THE SOURCE HAS CHANGED - 28 Aug 2026 continuity makes Br/W at this connector continuous with the fuse box (see W_BRW_HARNESS on the backbone sheet), so the brake-switch feeds are fed from there rather than generated at this splice. Measured with the switchgear unplugged, so the two halves were separate nets during the reading.
+    notes: Br/W at this connector is continuous with the fuse box [meter 28 Aug 2026, switchgear unplugged], so this leg is an arrival rather than a departure - see W_BRW_HARNESS on the backbone sheet.
   W_BR_BUS:
     <<: *w16
     colors: [BN]
-    notes: The right-bar brown leg, joining the Br trunk just aft of the bar drop. STILL DRAWN, BUT NO LONGER THE SOURCE - 28 Aug 2026 continuity puts the ignition switch's brown output on this net at 0.0 ohm, so the bus is fed at the switch and this leg is a tap off it, not what energises it. The connection is the same wire either way; only the arrow of causation changed.
+    notes: The right-bar brown leg, joining the Br trunk just aft of the bar drop. A TAP off the bus, not its source - the ignition switch's brown output is on this net at 0.0 ohm [meter 28 Aug 2026].
   W_RH_BLW:
     <<: *w18
     colors: [BUWH]
-    notes: Same net as the kill switch feed, leaving on a bullet rather than the 4P. Destination not traced.
+    notes: The Bl/W leg leaving on a bullet rather than the 4P, carrying bus power down to the HEAD fuse.
   W_RH_YR1:    {<<: *w18, colors: [YERD]}
   W_RH_YR2:    {<<: *w18, colors: [YERD]}
   W_RH_YR_OUT: {<<: *w18, colors: [YERD]}
@@ -174,7 +127,7 @@ connections:
     - W_YR_OUT: [1]
     - SP_YR: [1]
 
-  # --- Bl/W between the fuse panel and the right bar - direction open --
+  # --- Bl/W: a feed out of the branch, into the HEAD fuse -------------
   - - FUSE_4P: [3]
     - W_RH_IN: [1]
     - RH_BLW: [1]

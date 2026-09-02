@@ -8,101 +8,73 @@
 #
 #   wireviz -f hps -p kz305-common.yml kz305-factory.yml
 #
-# Render with -f hps (no TSV). WireViz always defaults a missing length
-# to 0, so a BOM for this file would report "0 m" for every wire. There
-# is no BOM for a harness we are not building - that belongs to
-# kz305-rebuild.yml.
+# NO LENGTHS, and no BOM. This is a reference drawing, not a cut list.
+# WireViz defaults a missing length to 0, so a BOM here would print
+# "0 m" for every wire and read as measured. Render with -f hps.
 #
-# Source: KZ305-A1/A2/B1/C1/D1 wiring diagram, 1981 KZ305A supplement
-# printed p.255, read at 600 dpi, plus bench work 13-15 Aug 2026.
+# Sources: the KZ305-A1/A2/B1/C1/D1 wiring diagram (1981 KZ305A
+# supplement, printed p.255) at 600 dpi, in the repo as
+# KZ305-B1-wiring-diagram-600dpi.png; bench and meter work 13 Aug -
+# 2 Sep 2026; pre-teardown photographs.
 #
-# NO LENGTHS. This is a reference drawing, not a cut list. Inventing
-# placeholder lengths for a harness we are not building would put fake
-# numbers in the BOM.
+# ---------------------------------------------------------------------
+# HOW TO READ A NOTE IN THESE FILES
 #
-# COVERAGE: full-vehicle as of 19 Aug 2026, off the 600 dpi scan -
-# lighting, horn, instruments, brake switches, both 6P junctions and
-# the fuse topology. Source scans live in the repo:
-# KZ305-B1-wiring-diagram-600dpi.png.
+# Every claim carries ONE evidence tag naming how it was established:
 #
-# REVISED 28 Aug 2026 BY RING-OUT. The first pass with a meter across
-# the whole harness, every pigtail disconnected, changed four things
-# this drawing had asserted from the scan:
+#   [meter]   continuity or resistance, with the harness disconnected
+#   [bench]   the part or the wire in hand, read directly
+#   [photo]   the pre-teardown photographs
+#   [arith]   deduced from a conductor, way or gender count
+#   [scan]    read off the 600 dpi diagram or its printed tables
+#   [OPEN]    not established - stated as a question, not a fact
 #
-#   - THE FUSE CASCADE DOES NOT EXIST. The box has no internal bus and
-#     no brown reaches it. Three independent holders, printed MAIN,
-#     HEAD and TAIL. FUSE_A and SP_BLW are deleted.
-#   - THERE ARE TWO GROUND NETS, not one, and only one of them reaches
-#     the ring terminal. See GND_CHASSIS and GND_NETB.
-#   - THE R/R OUTPUT is brown and lands on the switched brown bus, not
-#     white to the solenoid - so charging current runs through the
-#     ignition switch.
-#     ** WITHDRAWN 29 Aug 2026. THIS WAS WRONG AND IS THE ONE ITEM ON
-#     THIS LIST THAT DID NOT SURVIVE. ** It rested on the R/R 4P having
-#     no spare pin. At the bench the R/R half of that connector is
-#     populated on THREE cavities only - the brown cavity is EMPTY -
-#     and the SH221-12's fourth lead leaves as a W/R male bullet to
-#     B04.6, the only female W/R terminal in the harness. The R/R
-#     output is W/R onto the main power net, which is what this
-#     drawing said BEFORE the 28 Aug revision. The original reading
-#     off the scan was right. Charging does NOT pass the ignition
-#     switch. See RR, W_RR_OUT and SP_WR.
-#     The brown at the R/R connector IS still on the switched bus -
-#     that meter reading stands. What fell was the inference that the
-#     R/R drives it.
-#   - THE BROWN BUS is fed by the ignition switch directly, not
-#     energised through the right-bar branch.
+# The tags are ranked by this project's own failure record, not by
+# prior belief: the meter has never produced a withdrawn claim and the
+# scan has produced twelve. See docs/overturned-claims.md, and treat
+# anything tagged [scan] as provisional - especially a colour.
 #
-# METHOD NOTE, worth more than the correction itself: the 28 Aug error
-# was not a bad measurement. Every reading behind it was correct. It
-# was an argument from PIN COUNT - "four ways, four functions, no
-# spare" - which is a statement about a drawing, not an observation of
-# a harness. BOTH HALVES OF A CONNECTOR HAVE TO BE LOOKED AT. An
-# unpopulated cavity is invisible from the harness side and will
-# silently invert a conclusion.
+# These notes state what is CURRENTLY held true. They do not carry the
+# history of how each claim got there; that is in
+# archive/models-2026-09-02/ and in the git log.
+# ---------------------------------------------------------------------
 #
-# THAT RULE HAS NOW PAID TWICE. Reading both halves of every multi-way
-# connector found a second dead way on 29 Aug - the switched brown at
-# the LEFT-BAR 6P also lands on a cavity its cluster does not populate.
-# Two dead ways in the four multi-way connectors checked so far.
+# ---------------------------------------------------------------------
+# STANDING RULES, each earned by a specific error
 #
-# HYPOTHESIS worth carrying into the remaining connectors: this loom is
-# catalogued for A1/A2/B1/C1/D1, so a way that is dead on a B1 may be
-# live on another variant. It explains both instances, and it predicts
-# more - which is what makes it testable rather than decorative.
+#   1. THE BENCH OUTRANKS THE DOCUMENT. Where a reading and the diagram
+#      disagree, the reading wins and the diagram is annotated.
+#   2. BOTH HALVES OF EVERY MULTI-WAY CONNECTOR GET READ. An
+#      unpopulated cavity is invisible from the harness side and will
+#      silently invert a conclusion drawn from way count.
+#   3. BASE COLOUR FIRST, ALWAYS. Br/W is not W/Br; Y/BK is not BK/Y.
+#      Both members of each pair physically exist on this bike.
+#   4. NEVER IDENTIFY A LEAD BY COLOUR ALONE. Four colours in this
+#      harness carry more than one circuit - see kz305-common.yml.
+#   5. A STOCK WAY COUNT IS NOT A CIRCUIT COUNT. Two ways in this
+#      harness feed nothing at all.
+#   6. WHERE THE BENCH CONTRADICTS THE DRAWING WITHOUT ESTABLISHING
+#      WHAT REPLACES IT, THE DRAWING IS LEFT AS IT WAS and the note
+#      says so. A reference drawing that guesses is worse than one
+#      that says it does not know.
+# ---------------------------------------------------------------------
 #
-# For the rebuild the consequence is concrete: a stock way count is NOT
-# a circuit count. Ways that serve nothing on this bike should not be
-# reproduced, and they are only visible by reading the far half.
+# ---------------------------------------------------------------------
+# IN-SLEEVE SPLICES WITH COLOUR CHANGES
 #
-# Where the bench contradicted the drawing without establishing what
-# replaces it, the drawing is LEFT AS IT WAS with the conflict written
-# into the notes - see MF/W_IGN_FEED and SP_RH_BR. A reference drawing
-# that guesses is worse than one that says it does not know.
-#
-# Remaining unknowns are listed at the foot of signals.yml; all are
-# bench items, none block the drawing.
-#
-# Anything marked TBD is unverified. The harness is on the bench; ring
-# it out rather than trusting this drawing.
-#
-# !! IN-SLEEVE SPLICES WITH COLOUR CHANGES
-#
-# CONFIRMED 17 Aug 2026, in ONE place: inside the RIGHT-BAR switchgear
-# branch, a wire changes colour at a splice within the sleeve. Not
-# observed in the main trunk. Elsewhere is UNKNOWN, not clean - nobody
-# has unwrapped the rest yet.
-#
-# Every circuit below is drawn as a single wire end to end, which is how
+# Every circuit here is drawn as a single wire end to end, which is how
 # the diagram presents it. Wherever an in-sleeve splice exists that is
-# not how the harness is built, so:
-#   - a cable's single colour here may be two colours on the bike
-#   - a "wire" here may physically be a junction
-#   - the rebuild BOM would be wrong about wire count and colour
+# not how the harness is built, so a cable's single colour here may be
+# two colours on the bike, and a "wire" here may be a junction.
 #
-# The right-bar branch is MAPPED as of 17 Aug 2026 and is drawn below
-# with its real splices - SP_RH_YR and SP_RH_BR. The rest of the harness
-# has not been unwrapped. Do not treat these cable colours
-# as a shopping list until harness-ringout-procedure.md steps 3-4 are
-# done.
+# The RIGHT-BAR branch is mapped and is drawn with its real splices
+# (SP_RH_YR, SP_RH_BR) [bench]. The LEFT-BAR branch is unsleeved and
+# contains no splices at all [bench]. The main trunk has NOT been
+# unwrapped - two splices in it (SP_BRW, SP_NETA) are inferred from
+# conductor counts and have never been seen.
+#
+# Do not treat these cable colours as a shopping list until steps 3-4
+# of docs/harness-ringout-procedure.md are done.
+#
+# OPEN ITEMS are listed at the foot of signals.yml.
 # =====================================================================

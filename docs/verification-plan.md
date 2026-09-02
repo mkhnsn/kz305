@@ -35,7 +35,8 @@ is the only thing that says whether a claim needs re-testing.
 
 ## Evidence classes, ranked by this project's own failure record
 
-Not a prior. This is the observed record.
+Not a prior. This is the observed record, enumerated in
+`docs/overturned-claims.md`.
 
 | Class | Record |
 |---|---|
@@ -43,12 +44,14 @@ Not a prior. This is the observed record.
 | `bench` | Wire or part in hand. The base-colour-first convention exists to keep this class clean. |
 | `arith` | Sound where the premises hold — **the premises are the risk.** `B06`'s child sum was wrong by one and would have hidden a splice. |
 | `photo` | **Mixed and under-tested.** One in-session failure: white read as grey in a crowded shell. `docs/kz305-b1-wiring.md` bans colour reads from photographs outright, and that rule was not applied to the 2 Sep closures. |
-| `scan` | **Five failures.** 600 dpi cannot resolve a tracer. |
+| `scan` | **Twelve failures**, five of them base-versus-tracer. 600 dpi cannot resolve a tracer. |
 
-⚠️ **The asymmetry worth fixing.** The scan rule has withdrawn five claims and
-is invoked everywhere. The photograph rule has one confirmed in-session failure
-and has withdrawn nothing — the photo reads that happened not to collide with an
-existing measurement were kept without being tested.
+⚠️ **The asymmetry worth fixing.** Enumerating the record on 2 Sep put the scan's
+failure count at **twelve**, not the five previously carried — the earlier number
+was remembered rather than counted. The photograph rule still has a sample of
+three: one failure, two successes, and it has withdrawn nothing. The photo reads
+that happened not to collide with an existing measurement were kept without being
+tested, and five of them are load-bearing. That is what Session A is for.
 
 ## ⚠️ Ordering — what must happen before what
 

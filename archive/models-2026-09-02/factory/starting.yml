@@ -1,0 +1,50 @@
+# STARTING — Starter motor and trigger circuit.
+#
+# Part of the factory reference model. Rendered as a sheet on its own,
+# and merged with the other subsystems for the combined drawing.
+# See models/kz305-factory.yml for the model-wide notes.
+
+connectors:
+  SM:
+    <<: *starter_motor
+
+cables:
+  # --- heavy starter path -------------------------------------------
+  W_SOL_SM:   {<<: *w6, colors: [BK]}
+
+  # --- starter trigger ----------------------------------------------
+  W_START:
+    <<: *w18
+    colors: [BK]
+    notes: Starter button output to relay COIL+. BK but NOT a ground. CONFIRMED 28 Aug 2026 by continuity - a black net of its own from the right-bar 4P to the starter-relay branch, open to the horn-button black. Corroborated by a switch table transcribed weeks earlier from an unrelated source (Push = Y/R to BK) and by the 15 Aug note recording COIL+ as the BK lead from the start button.
+  W_SOL_GND:
+    <<: *w18
+    colors: [BK]
+    notes: |-
+      ** THIS WIRE IS IN DOUBT AS OF 2 Sep 2026 - IT MAY NOT EXIST. ** It was drawn on the 15 Aug
+      claim that COIL- grounds directly. The relay assembly is now in hand and has exactly TWO small
+      leads, both ending in BULLETS into the harness - no ring, no eyelet, nothing that lands on
+      engine or frame. See measurements/starter-relay.md.
+      LEFT DRAWN rather than deleted, because unlike the horn ground wire on 29 Aug there is no
+      positive account of what replaces it yet. Deleting it would assert the coil has no return,
+      which is also false. The meter settles it.
+      The "no neutral-switch interlock" half stands - that was a separate observation.
+
+connections:
+  # --- heavy starter path -------------------------------------------
+  - - SOL: [2]
+    - W_SOL_SM: [1]
+    - SM: [1]
+
+  # --- starter trigger ----------------------------------------------
+  - - RH_4P: [4]
+    - W_START: [1]
+    - SOL: [3]
+  - - SOL: [4]
+    - W_SOL_GND: [1]
+    - GND_CHASSIS: [1]
+
+  # --- starter motor case ground -------------------------------------
+  - - SM: [1]
+    - '-->'
+    - GND_ENG: [1]

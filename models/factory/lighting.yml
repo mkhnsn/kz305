@@ -2,66 +2,42 @@
 #
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
-# See models/kz305-factory.yml for the model-wide notes.
+# See models/factory/00-notes.yml for the model-wide notes.
 #
-# TRANSCRIBED 19 Aug 2026 off the 600 dpi scan, and the dimmer is now
-# METER-CONFIRMED on the switch itself, 28 Aug 2026, cluster unplugged:
-# Bl is the common, R/BK is HI, R/Y is LO. Closes procedure item 5.6,
-# open since 13 Aug. The scan and the meter agree.
-#
-# The Bl common is fed from FUSE_HEAD - holder 2 of the fuse box,
-# printed HEAD - and that leg is measured end to end: fuse box to the
-# left-bar junction on the harness side, and Bl as the dimmer common on
-# the switch side, established independently the same day. The CASCADE
-# the earlier note described (FUSE_HEAD fed off FUSE_A's Bl/W) does not
-# exist - the box has no internal bus. See the backbone sheet.
+# The dimmer is metered on the switch itself: Bl is the common, R/BK is
+# HI, R/Y is LO. Its Bl common is fed from FUSE_HEAD - holder 2 of the
+# fuse box, printed HEAD - and that leg is measured end to end.
 
 connectors:
   LH:
     <<: *lh_cluster
     pinlabels: [R/BK HI, Bl COMMON, R/Y LO, G, O, Gy, BK HORN, CASE GND]
     notes: |-
-      DIMMER CLOSED 28 Aug 2026 - metered on the unplugged cluster, Bl common (0.1 ohm to R/BK in HI,
-      0.1 ohm to R/Y in LO, R/BK to R/Y open in both), confirming the 19 Aug printed table. The wiper
-      is MAKE-BEFORE-BREAK - both beam outputs blip together while the switch moves. Turn switch - R
-      is O to Gy, L is G to O. The horn BK and the button's ground-side lead run separately from the
-      cluster 6P at the headstock.
-      ** THE OVER-SUBSCRIBED WAY LIST IS RESOLVED, 29 Aug 2026, AND THIS NOTE HAD IT WRONG. ** It
-      said the 6P carries G, O, Gy, Bl, R/BK, R/Y, and then could not find a way for the switched
-      brown that the ring-out had reached this junction on. The 6P was read at the bench and carries
-      R/BK, Br, Gy, R/Y, Or, Gn - BROWN IS IN IT AND BLUE IS NOT. Blue arrives on its own flying
-      lead, B02.2, a female bullet alongside the connector. There was never a seventh conductor; Bl
-      was assigned to the wrong one.
-      Layout is 3 rows of 2. Ways, top row first, are R/BK and Br, then Gy and R/Y, then Or and Gn.
-      ** WHAT THE BROWN FEEDS - ANSWERED 29 Aug 2026. NOTHING. ** Both halves were read and the
-      mirror is 5 of 6: the cluster half of the brown's cavity is EMPTY. Every other pair matches on
-      colour. The harness carries a live switched-ignition wire to a way the left cluster does not
-      populate, and the question was never what it feeds.
-      This is the SECOND such way on this harness - B04.3's brown at the R/R is the other. Two in
-      four multi-way connectors checked. HYPOTHESIS: this loom serves KZ305-A1/A2/B1/C1/D1 and ways
-      dead on a B1 are live on another variant; a left-cluster brown would suit a headlight on/off
-      switch that some markets had and this bike does not. Not established, but it explains both
-      observations and predicts more dead ways as the remaining connectors are read.
-      ** PIN 8 IS NOT A WIRE - CORRECTED 29 Aug 2026. ** It was drawn as a horn-ground conductor
-      W_HORN_GND, coloured BK/W off a hatched swatch in the printed table that is unreadable at
-      600 dpi. There is no such wire. The cluster carries SEVEN leads - five through the 6P, the
-      blue bullet, and B02.1's plain BK spade - so the horn button grounds through the CLUSTER BODY.
-      Pin 8 is relabelled CASE GND and drawn with the mounting-ground marker rather than a cable.
-      WHAT MAKES THIS SAFE TO REDRAW rather than merely likely: the LH pigtail was UNSLEEVED on
-      29 Aug and contains NO SPLICES - every conductor runs straight through. With no splice, the
-      pigtail's conductor count IS the cluster's lead count, so nothing can be hiding. Without that
-      the count would have been an argument from way count, and one of those inverted the R/R
-      conclusion the same day.
-      NEGATIVE RESULT WORTH KEEPING: no splices in this branch, against TWO in the right-bar branch
-      (SP_RH_YR and SP_RH_BR). The bars are not symmetric, and the left one is as simple as it looks.
+      DIMMER: Bl common, 0.1 ohm to R/BK in HI and to R/Y in LO, R/BK to R/Y open in both [meter
+      28 Aug 2026, cluster unplugged]. ⚠️ THE WIPER IS MAKE-BEFORE-BREAK - both beam outputs blip
+      together while the switch moves. Turn switch - R is O to Gy, L is G to O.
+      THE CLUSTER CARRIES SEVEN LEADS: five through the 6P, the blue on its own flying bullet
+      (B02.2), and B02.1's plain BK spade. The 6P is 3 rows of 2 and carries, top row first, R/BK
+      and Br, then Gy and R/Y, then Or and Gn - BROWN IS IN IT AND BLUE IS NOT [bench 29 Aug 2026].
+      ⚠️ THE BROWN FEEDS NOTHING. Both halves read, mirror 5-of-6: the cluster half of the brown's
+      cavity is EMPTY while every other pair matches on colour [bench 29 Aug 2026]. The harness
+      carries a live switched-ignition wire to a way the left cluster does not populate. This is the
+      SECOND such way on this harness - B04.3's brown at the R/R is the other. Hypothesis: the loom
+      serves A1/A2/B1/C1/D1 and these ways are live on other variants. [OPEN]
+      PIN 8 IS NOT A WIRE. The horn button grounds through the CLUSTER BODY - the pigtail was
+      unsleeved and contains NO SPLICES, so its conductor count IS the cluster's lead count and
+      nothing can be hiding [bench 29 Aug 2026]. Pin 8 is CASE GND, drawn with the mounting-ground
+      marker rather than a cable.
+      NEGATIVE RESULT WORTH KEEPING: no splices in this branch, against TWO in the right-bar branch.
+      The bars are not symmetric, and the left one is as simple as it looks.
   HEAD:
     <<: *headlight
-    notes: Feeds read off the scan 19 Aug 2026 - R/BK to HI, R/Y to LO, BK/Y ground. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.
+    notes: R/BK to HI, R/Y to LO, BK/Y ground [scan 19 Aug 2026]. Polarity matters for the LED rebuild - this drawing is the feed/ground reference.
   HORN:
     type: Horn
     subtype: 12V 2A
     pinlabels: [FEED, SW]
-    notes: Br feed off the accessory bus; the button switches the GROUND side, exactly the topology K_HORN in the rebuild assumes. 2A nominal - the relay case rests on the measured 3-5 ohm cluster contacts, not the load.
+    notes: Br feed off the accessory bus; the button switches the GROUND side, which is the topology K_HORN in the rebuild assumes. 2A nominal - the relay case rests on the measured 3-5 ohm cluster contacts, not the load.
   SP_HI:
     style: simple
     type: Splice
@@ -73,7 +49,7 @@ cables:
   W_DIM_FEED:
     <<: *w16
     colors: [BU]
-    notes: CONFIRMED END TO END 28 Aug 2026. Blue is two nets in this harness - this one and the brake feed - and they are open to each other. This is the fused headlight supply, fuse box to the left-bar junction on the harness side, dimmer common on the switch side, each measured separately the same day. Repinned onto the fuse panel's identified Bl way.
+    notes: The fused headlight supply, fuse box to the left-bar junction on the harness side, dimmer common on the switch side, each measured separately [meter 28 Aug 2026]. ⚠️ Blue is TWO nets in this harness - this one and the brake feed - and they are open to each other.
   W_HI:      {<<: *w18, colors: [RDBK]}
   W_HI_HEAD: {<<: *w18, colors: [RDBK]}
   W_LO:      {<<: *w18, colors: [RDYE]}
@@ -84,7 +60,7 @@ cables:
   W_HORN_SW:
     <<: *w18
     colors: [BK]
-    notes: CONFIRMED 28 Aug 2026 by continuity - the horn button return is its own black net, left-bar junction to horn, open to the starter-trigger black. Corroborated from two independent directions that were not used to steer each other - this ring-out, and a switch table transcribed weeks earlier from an unrelated source giving the horn button as BK to ground. Two of the four black roles the models warn about are now separated by measurement.
+    notes: The horn button return is its own black net, left-bar junction to horn, open to the starter-trigger black [meter 28 Aug 2026]. Corroborated from an independent direction - a switch table transcribed weeks earlier from an unrelated source gives the horn button as BK to ground. Two of the four black roles the models warn about are separated by measurement.
 
 connections:
   # --- headlight through the dimmer -----------------------------------

@@ -401,8 +401,11 @@ several hundred dollars and an unproven fitment.
 - **Confirm the stator's rated output in watts.** The 180 W universal units are
   assumed comfortably above this bike's load, but the figure has not been read
   off anything — only the 0.4 Ω and 75 V AC test values are confirmed.
-- **Confirm where the DC output lands.** `models/kz305-factory.yml` models it
-  as returning to the battery stud, which is NOT confirmed off the scan (#15).
+- ~~Confirm where the DC output lands.~~ **CLOSED.** It is W/R onto the main
+  power net at B04.6, established by elimination [arith 29 Aug 2026] — the
+  harness holds exactly two W/R terminals and a male bullet can only mate the
+  female. See `models/factory/charging.yml`. ⚠️ It reopens if an untagged W/R
+  female bullet is ever found.
 
 ### Fitting rules, whichever unit is chosen
 

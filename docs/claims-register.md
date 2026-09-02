@@ -14,39 +14,43 @@ it is wrong.
 | `meter` | **Highest.** No continuity reading has been overturned. |
 | `bench` | High. A wire or part in hand; the base-colour convention exists to keep it that way. |
 | `arith` | High where premises hold — but the premises are the risk. `B06`'s child sum was wrong by one and would have hidden a splice. |
-| `photo` | **Mixed, and under-tested.** One in-session failure (white read as grey in a crowded shell). `docs/kz305-b1-wiring.md` bans colour reads from photographs outright. |
-| `scan` | **Lowest. Five failures.** 600 dpi cannot resolve a tracer. |
+| `photo` | **Mixed, and under-tested.** One failure and two successes — a sample of three. `docs/kz305-b1-wiring.md` bans colour reads from photographs outright. |
+| `scan` | **Lowest. Twelve failures**, five of them base-versus-tracer. 600 dpi cannot resolve a tracer. |
 | `unstated` | Unknown — the line carries a status marker but names no evidence. |
+
+The ranking is the enumerated record in `docs/overturned-claims.md`, not a prior.
+A claim in `models/` classified `unstated` is a note that skipped the evidence-tag
+convention — see `models/factory/00-notes.yml`.
 
 ## Counts
 
 | Marker | n |
 |---|---|
-| OPEN | 111 |
-| MEASURED | 87 |
-| CONFIRMED | 79 |
-| IDENTIFIED | 50 |
-| CLOSED | 39 |
-| ESTABLISHED | 23 |
-| WITHDRAWN | 18 |
-| CORRECTED | 16 |
-| RESOLVED | 12 |
-| SUPERSEDED | 8 |
-| OVERTURNED | 5 |
-| IN DOUBT | 5 |
-| TENTATIVE | 4 |
+| OPEN | 112 |
+| MEASURED | 63 |
+| CONFIRMED | 40 |
+| IDENTIFIED | 38 |
+| CLOSED | 17 |
+| ESTABLISHED | 13 |
+| RESOLVED | 11 |
+| WITHDRAWN | 8 |
+| CORRECTED | 8 |
+| OVERTURNED | 6 |
+| SUPERSEDED | 6 |
+| TENTATIVE | 3 |
+| IN DOUBT | 2 |
 | NOT KNOWN | 1 |
 
 | Evidence | n |
 |---|---|
-| `unstated` | 257 |
-| `meter` | 161 |
-| `bench` | 20 |
-| `photo` | 13 |
-| `scan` | 6 |
+| `unstated` | 172 |
+| `meter` | 130 |
+| `bench` | 15 |
+| `photo` | 9 |
 | `arith` | 1 |
+| `scan` | 1 |
 
-## ⚠️ Standing claims on the weaker evidence classes — 137
+## ⚠️ Standing claims on the weaker evidence classes — 70
 
 These assert something is settled while resting on scan, photograph or
 unstated evidence. **Each needs one confirming test**, or an explicit
@@ -57,11 +61,6 @@ note that it is accepted unverified.
 | `measurements/README.md` | 799 | RESOLVED | `photo` | **Resolved in the photograph's favour**, and not on a coin-toss: the switch was |
 | `measurements/connector-inventory.csv` | 50 | IDENTIFIED | `photo` | B00.11,,double-female bullet,1,,Br/W,,"the TWO METER LAMPS - speedo and tacho, one per slot",component,BRW_HL,2026-09-02,provisional,"** IDENTIFIED 20 |
 | `measurements/trunk-map.md` | 106 | CLOSED | `photo` | \| **On-bike photo folder** \| 2026-09-02 — sifted. Closed four items in one sitting and located four modelled splices \| |
-| `models/factory/brakes.yml` | 47 | CONFIRMED | `photo` | blue, read from the photographs - the same pair as the front switch, whose feed was confirmed |
-| `models/factory/signals.yml` | 263 | CLOSED | `photo` | # CLOSED 29 Aug 2026, from the pre-teardown photographs and the wire: |
-| `models/factory/signals.yml` | 338 | CLOSED | `photo` | # CLOSED 2 SEPTEMBER 2026 - the photograph session |
-| `models/factory/signals.yml` | 340 | CLOSED | `photo` | # Five items closed in one sitting, from the pre-teardown photographs |
-| `models/factory/instruments.yml` | 123 | CONFIRMED | `scan` | notes: CONFIRMED 19 Aug 2026 off the 600 dpi scan - the neutral indicator feed is Br off the accessory bus, crossing the instrument 6P. Was previously |
 | `measurements/README.md` | 53 | CONFIRMED | `unstated` | the confirmed 1→3 splice inside the right-bar branch. On the bench that is |
 | `measurements/README.md` | 109 | RESOLVED | `unstated` | unresolved dispute for a fortnight before it turned out both wires existed. |
 | `measurements/README.md` | 143 | ESTABLISHED | `unstated` | ## Possible bench-vs-model: `W_ALT` gauge — NOT ESTABLISHED |
@@ -109,90 +108,28 @@ note that it is accepted unverified.
 | `measurements/trunk-map.md` | 77 | CLOSED | `unstated` | \| **A SEVENTH double-female — `B10.5.1`** \| ⚠️ Found in review 2 Sep 2026. The "all six closed" sweep listed `B03` `B08` `B00.5` `B00.7` `B00.8` `B00. |
 | `measurements/trunk-map.md` | 87 | CLOSED | `unstated` | ### Closed |
 | `measurements/trunk-map.md` | 103 | IDENTIFIED | `unstated` | \| Unidentified nets \| 2026-09-02 — **every branch's net is named** \| |
-| `models/factory/00-notes.yml` | 91 | CONFIRMED | `unstated` | # CONFIRMED 17 Aug 2026, in ONE place: inside the RIGHT-BAR switchgear |
-| `models/factory/backbone.yml` | 27 | IDENTIFIED | `unstated` | #   Every one of those six wires had already been identified from the |
-| `models/factory/backbone.yml` | 45 | ESTABLISHED | `unstated` | # B00.7 and B08, both established never connected. Yet W_GND_TAIL, |
-| `models/factory/backbone.yml` | 107 | IDENTIFIED | `unstated` | IDENTIFIED 28 Aug 2026 - holder 1 of the original three-holder glass box, printed MAIN, W on one |
-| `models/factory/backbone.yml` | 112 | IDENTIFIED | `unstated` | so the main power net has an identified SOURCE as well as an identified fuse. This also |
-| `models/factory/backbone.yml` | 139 | IDENTIFIED | `unstated` | IDENTIFIED 28 Aug 2026 and its ORIENTATION IS SETTLED. Bl is the dimmer's supply (meter-confirmed |
-| `models/factory/backbone.yml` | 148 | CLOSED | `unstated` | ** CLOSED 29 Aug 2026: WHAT FEEDS Bl/W IS THE SWITCHED BROWN BUS. ** The right-bar pigtail was |
-| `models/factory/backbone.yml` | 173 | CONFIRMED | `unstated` | confirmed as mapped - Bl/W, Br and Br/W join and leave as a single brown. The splice is not |
-| `models/factory/backbone.yml` | 187 | IDENTIFIED | `unstated` | WAYS IDENTIFIED 28 Aug 2026. The fuse box joins the harness on a fixed pigtail - the 20A main's |
-| `models/factory/backbone.yml` | 237 | IDENTIFIED | `unstated` | ** IDENTIFIED 2 Sep 2026: BOTH SLOTS FED A METER LAMP. ** The speedometer and tachometer each |
-| `models/factory/backbone.yml` | 263 | IDENTIFIED | `unstated` | node was still mated, with the relay terminal unidentified; IDENTIFIED 29 Aug 2026 as the |
-| `models/factory/backbone.yml` | 268 | CONFIRMED | `unstated` | ** THE NODE IS NOT IN THE HARNESS AT ALL. ** Confirmed 29 Aug 2026 with the starter and |
-| `models/factory/backbone.yml` | 281 | IDENTIFIED | `unstated` | measurement; what changed is that one of those points is now identified as the charging output |
-| `models/factory/backbone.yml` | 298 | ESTABLISHED | `unstated` | switched or permanently live - IS NOT ESTABLISHED. |
-| `models/factory/backbone.yml` | 302 | CONFIRMED | `unstated` | model assigned it to the wrong cable. W_RR_OUT itself is W/R, white base, confirmed with the |
-| `models/factory/backbone.yml` | 354 | IDENTIFIED | `unstated` | ** MATE IDENTIFIED 29 Aug 2026: the W/Bl output of FUSE_AUX, the second fuse box. ** Its female |
-| `models/factory/backbone.yml` | 406 | IDENTIFIED | `unstated` | IDENTIFIED 29 Aug 2026: it is the "blue-family wire" of the diagram's Electric Accessory Leads, |
-| `models/factory/backbone.yml` | 414 | ESTABLISHED | `unstated` | The battery earth strap, NOT a harness lead - established 28 Aug 2026 when the harness's own ring |
-| `models/factory/backbone.yml` | 434 | IDENTIFIED | `unstated` | the STARTER RELAY" but left undrawn because the relay terminal was unidentified. It is the |
-| `models/factory/backbone.yml` | 441 | IDENTIFIED | `unstated` | bullet node on the fuse-box pigtail. Drawn now because the node has a second identified leg |
-| `models/factory/backbone.yml` | 458 | IDENTIFIED | `unstated` | unidentified leg to the starter relay. None of them is the ignition switch. The open question |
-| `models/factory/brakes.yml` | 10 | CONFIRMED | `unstated` | notes: CONFIRMED off the diagram 17 Aug 2026 - RED feeds the tail filament, BLUE the brake filament, BK/Y grounds. Blue brake circuit ties to the Bl/W |
-| `models/factory/brakes.yml` | 16 | CONFIRMED | `unstated` | CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of |
-| `models/factory/brakes.yml` | 84 | CLOSED | `unstated` | ** CLOSED 29 Aug 2026 - WHERE THE R/Bl PIN PICKS UP ITS POWER. ** From the TAIL fuse's output. |
-| `models/factory/charging.yml` | 7 | ESTABLISHED | `unstated` | # CONNECTOR IDENTITY ESTABLISHED 28 Aug 2026. The yellow collision - |
-| `models/factory/charging.yml` | 25 | IDENTIFIED | `unstated` | PART IDENTIFIED 29 Aug 2026: SHINDENGEN SH221-12, named off the unit itself, and stock. |
-| `models/factory/controls.yml` | 36 | CONFIRMED | `unstated` | switch. Four legs, exactly as drawn. SP_RH_YR is confirmed at the same time (one Y/R splitting |
-| `models/factory/controls.yml` | 59 | CONFIRMED | `unstated` | ** WAY-LIST CONFIRMED AGAINST THE CONNECTOR, 4-of-4, 29 Aug 2026. ** The bench cavity order - |
-| `models/factory/controls.yml` | 74 | IDENTIFIED | `unstated` | harness has to mate its pigtail in the male half of this series. The series is not yet identified |
-| `models/factory/controls.yml` | 111 | IDENTIFIED | `unstated` | REPINNED 28 Aug 2026 onto the fuse panel's Bl/W way, which is now identified - it was drawn on |
-| `models/factory/controls.yml` | 117 | CLOSED | `unstated` | 17 Aug reading, which called it the feed into the branch, is closed against. Both readings stay |
-| `models/factory/instruments.yml` | 94 | RESOLVED | `unstated` | ** RESOLVED 2 Sep 2026 - REDRAWN Br/W OFF BRW_HL (branch B00.11). ** The speedometer and |
-| `models/factory/lighting.yml` | 8 | CONFIRMED | `unstated` | # METER-CONFIRMED on the switch itself, 28 Aug 2026, cluster unplugged: |
-| `models/factory/lighting.yml` | 15 | ESTABLISHED | `unstated` | # the switch side, established independently the same day. The CASCADE |
-| `models/factory/lighting.yml` | 29 | RESOLVED | `unstated` | ** THE OVER-SUBSCRIBED WAY LIST IS RESOLVED, 29 Aug 2026, AND THIS NOTE HAD IT WRONG. ** It |
-| `models/factory/lighting.yml` | 43 | ESTABLISHED | `unstated` | switch that some markets had and this bike does not. Not established, but it explains both |
-| `models/factory/signals.yml` | 16 | CONFIRMED | `unstated` | notes: CONFIRMED 2-PIN off the diagram, 17 Aug 2026 - brown in, orange out, NO ground terminal. This is why an electronic 3-pin flasher needs a wire t |
-| `models/factory/signals.yml` | 28 | CONFIRMED | `unstated` | CONFIRMED 28 Aug 2026 - a physical two-into-one crimp at the headlight junction, not a modelling |
-| `models/factory/signals.yml` | 41 | CONFIRMED | `unstated` | notes: CONFIRMED 28 Aug 2026 - mirrors SP_SIG_L. Green and grey came back structurally identical on the meter. |
-| `models/factory/signals.yml` | 50 | CONFIRMED | `unstated` | notes: G feeds BOTH left lamps and the left indicator. Forced by wire count, not assumed - the switch has only two signal outputs for four lamps. CONF |
-| `models/factory/signals.yml` | 61 | ESTABLISHED | `unstated` | # --- lamp grounds - net NOT established ----------------------------- |
-| `models/factory/signals.yml` | 140 | CLOSED | `unstated` | # CLOSED by the ring-out and the fuse-box session: |
-| `models/factory/signals.yml` | 149 | CLOSED | `unstated` | # CLOSED 29 Aug 2026, by reading the R/R half of its connector: |
-| `models/factory/signals.yml` | 161 | CLOSED | `unstated` | # CLOSED 29 Aug 2026, by unsleeving the right-bar pigtail a second time: |
-| `models/factory/signals.yml` | 163 | CONFIRMED | `unstated` | #     brown. Four legs, exactly as drawn. SP_RH_YR confirmed with it, |
-| `models/factory/signals.yml` | 166 | CONFIRMED | `unstated` | #     not preferred - with the splice confirmed, reading (a) would feed |
-| `models/factory/signals.yml` | 197 | CLOSED | `unstated` | # CLOSED 29 Aug 2026 at the instrument 6P: |
-| `models/factory/signals.yml` | 210 | CLOSED | `unstated` | # ALSO CLOSED 29 Aug 2026, by looking inside the pod pigtail: |
-| `models/factory/signals.yml` | 227 | CLOSED | `unstated` | # CLOSED 29 Aug 2026 at the ignition switch connector: |
-| `models/factory/signals.yml` | 257 | CLOSED | `unstated` | #   - BROWN AT THE LEFT-BAR 6P - CLOSED 29 Aug 2026. It feeds NOTHING. |
-| `models/factory/signals.yml` | 274 | CLOSED | `unstated` | #     closed. For these two the answer was not lost at teardown; there |
-| `models/factory/signals.yml` | 292 | CLOSED | `unstated` | # CLOSED 29 Aug 2026 by unsleeving the left-bar pigtail: |
-| `models/factory/signals.yml` | 312 | IDENTIFIED | `unstated` | #     ** IDENTIFIED AND DRAWN 29 Aug 2026: it is the ELECTRIC ACCESSORY |
-| `models/factory/signals.yml` | 333 | IDENTIFIED | `unstated` | #     RELAY TERMINAL was not identified, so SP_WR draws two legs and |
-| `models/factory/signals.yml` | 344 | CLOSED | `unstated` | #   - METER LAMP FEED. CLOSED. Not R at all: the speedo and tacho each |
-| `models/factory/signals.yml` | 350 | CLOSED | `unstated` | #   - THE LAST EMPTY DOUBLE-FEMALE. CLOSED, same finding. All six of |
-| `models/factory/signals.yml` | 355 | CLOSED | `unstated` | #   - ELECTRIC ACCESSORY LEADS. The FEED half is closed: it is R/W, |
-| `models/factory/signals.yml` | 359 | CLOSED | `unstated` | #   - HORN BUTTON GROUND-SIDE COLOUR. Was already closed on 29 Aug - |
+| `models/factory/00-notes.yml` | 23 | ESTABLISHED | `unstated` | # Every claim carries ONE evidence tag naming how it was established: |
+| `models/factory/backbone.yml` | 15 | IDENTIFIED | `unstated` | # Every one of those six wires was identified from the harness side by |
+| `models/factory/backbone.yml` | 182 | IDENTIFIED | `unstated` | The main power path, and it has an identified source: the regulator/rectifier's DC output. |
+| `models/factory/charging.yml` | 39 | ESTABLISHED | `unstated` | ⚠️ GAUGE NOT ESTABLISHED. Both yellows look like the harness's common size rather than heavier, |
+| `models/factory/signals.yml` | 140 | CLOSED | `unstated` | # Everything closed has been folded into the notes it belongs to. This |
+| `models/factory/signals.yml` | 141 | RESOLVED | `unstated` | # is only what is still unresolved, with what would settle it. |
+| `models/factory/signals.yml` | 142 | CLOSED | `unstated` | # The full record of closed and withdrawn claims is in |
+| `models/factory/signals.yml` | 150 | CONFIRMED | `unstated` | #     confirmed it. See docs/verification-plan.md. |
+| `models/factory/signals.yml` | 154 | IDENTIFIED | `unstated` | #     built. Y/R Net 2 is identified as the coil feed by gender |
+| `models/factory/signals.yml` | 177 | IDENTIFIED | `unstated` | #     reproduced by the rebuild and none is identified by part number |
 | `models/kz305-common.yml` | 5 | CONFIRMED | `unstated` | # holds only things true of the parts themselves, plus bench-confirmed |
-| `models/kz305-common.yml` | 18 | RESOLVED | `unstated` | # !! Y/BK AND BK/Y ARE BOTH IN THIS HARNESS - RESOLVED 28 Aug 2026 |
-| `models/kz305-common.yml` | 124 | CONFIRMED | `unstated` | #            button return. Two of those four are now CONFIRMED as separate |
-| `models/kz305-common.yml` | 256 | CONFIRMED | `unstated` | METER-CONFIRMED 15 Aug 2026, all six pin pairs in all four positions. ON = W-Br and R_Bl-R. |
-| `models/kz305-common.yml` | 266 | CONFIRMED | `unstated` | CONNECTOR CONFIRMED as this switch 29 Aug 2026: 4 ways, W R Br R/Bl, 4-of-4 on the mirror, and |
-| `models/kz305-common.yml` | 275 | CONFIRMED | `unstated` | METER-CONFIRMED 15 Aug 2026 - RUN = Br-Y_R, Push = Y_R-BK, interlock holds. WARNING contacts |
-| `models/kz305-common.yml` | 277 | CONFIRMED | `unstated` | ** CLEANING IS A PLANNED BUILD STEP, CONFIRMED 1 Sep 2026, AND THE RELAY SCHEME DEPENDS ON IT. ** |
-| `models/kz305-common.yml` | 288 | CONFIRMED | `unstated` | notes: DIMMER METER-CONFIRMED 28 Aug 2026, cluster unplugged - Bl is the common (the only pin present in both positions), R/BK is HI, R/Y is LO. Close |
-| `models/kz305-common.yml` | 294 | CONFIRMED | `unstated` | notes: CONFIRMED 15 Aug 2026 - one wire, grounds through the engine case. 4 ohm in neutral (3.6 lead-corrected), open in gear. Indicator only, NOT a c |
-| `models/kz305-rebuild.yml` | 75 | CLOSED | `unstated` | #   6. LARGELY CLOSED 2 Sep 2026 - THE STARTER RELAY ASSEMBLY IS MAPPED. |
-| `models/kz305-rebuild.yml` | 207 | IDENTIFIED | `unstated` | #      Every lamp branch must be drawn with feed and ground identified, |
-| `models/kz305-rebuild.yml` | 251 | CONFIRMED | `unstated` | #     the left cluster were transcribed 19 Aug, and 28 Aug confirmed the |
-| `models/kz305-rebuild.yml` | 279 | CLOSED | `unstated` | #       - THE WIPER IS MAKE-BEFORE-BREAK. R/BK and R/Y blip closed |
-| `models/kz305-rebuild.yml` | 313 | ESTABLISHED | `unstated` | UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces |
-| `models/kz305-rebuild.yml` | 391 | RESOLVED | `unstated` | # SEAL SIZE RESOLVED 1 Sep 2026 by the TXL decision - it follows the |
-| `models/kz305-rebuild.yml` | 466 | CLOSED | `unstated` | switch only drives that coil. Every other relay's welded-closed failure is a flat battery. That |
-| `models/kz305-rebuild.yml` | 582 | CONFIRMED | `unstated` | UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026, |
-| `models/kz305-rebuild.yml` | 609 | CLOSED | `unstated` | CLOSED while the switch moves, so both coils energise together for the instant of the change. |
-| `models/kz305-rebuild.yml` | 654 | IDENTIFIED | `unstated` | is the feed/ground reference for the beam circuits - draw every lamp branch with both identified. |
-| `models/kz305-rebuild.yml` | 800 | IDENTIFIED | `unstated` | The stock node was B00.11, a Br/W double-female with one slot per meter lamp - identified |
-| `models/kz305-rebuild.yml` | 848 | ESTABLISHED | `unstated` | ** STOCK ALREADY MADE IT ACCESSIBLE, established 2 Sep 2026. ** This node is B03 on the old |
-| `models/kz305-rebuild.yml` | 966 | CONFIRMED | `unstated` | note previously said "CONFIRMED 15 Aug 2026", on the claim that the relay's COIL- grounds |
-| `models/kz305-rebuild.yml` | 994 | CONFIRMED | `unstated` | ground-only on the rebuild's scheme for exactly this reason. CONFIRMED as its own net 28 Aug 2026, open to the starter-trigger black. This is the |
-| `models/kz305-rebuild.yml` | 1203 | CLOSED | `unstated` | check is closed in part-selection's favour, and NOT on the withdrawn argument: the SH775 is a |
+| `models/kz305-common.yml` | 28 | CONFIRMED | `unstated` | #            CONFIRMED separate nets, open to each other. |
+| `models/kz305-common.yml` | 267 | CLOSED | `unstated` | CLOSED while the switch moves, so both beam outputs are tied for the instant of the change. |
+| `models/kz305-rebuild.yml` | 58 | RESOLVED | `unstated` | #   are deliberately not resolved in this file. |
+| `models/kz305-rebuild.yml` | 167 | IDENTIFIED | `unstated` | #      branch must be drawn with feed and ground identified, and the |
+| `models/kz305-rebuild.yml` | 257 | RESOLVED | `unstated` | # SEAL SIZE RESOLVED 1 Sep 2026 by the TXL decision - it follows the |
+| `models/kz305-rebuild.yml` | 308 | CLOSED | `unstated` | only drives that coil. Every other relay's welded-closed failure is a flat battery; that one is |
+| `models/kz305-rebuild.yml` | 414 | CONFIRMED | `unstated` | UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026, |
+| `models/kz305-rebuild.yml` | 479 | IDENTIFIED | `unstated` | is the feed/ground reference for the beam circuits - draw every lamp branch with both identified. |
+| `models/kz305-rebuild.yml` | 667 | ESTABLISHED | `unstated` | ** STOCK ALREADY MADE IT ACCESSIBLE, established 2 Sep 2026. ** This node is B03 on the old |
 
-## Withdrawn, doubted or open — 139
+## Withdrawn, doubted or open — 126
 
 | File | Line | Marker | Claim |
 |---|---|---|---|
@@ -263,79 +200,66 @@ note that it is accepted unverified.
 | `measurements/switch-tests.md` | 23 | OPEN | Open since 13 Aug. Getting it wrong lights both filaments at once, and it was |
 | `measurements/switch-tests.md` | 47 | OPEN | `R/BK` ↔ `R/Y` is open in both settled positions but **blips closed while the |
 | `measurements/trunk-map.md` | 79 | WITHDRAWN | \| **Starter relay coil polarity** \| ⛔ *"`COIL-` grounds directly"* is **withdrawn** — the assembly has two bullet leads and no ground of any kind. Whi |
-| `models/factory/00-notes.yml` | 40 | WITHDRAWN | #     ** WITHDRAWN 29 Aug 2026. THIS WAS WRONG AND IS THE ONE ITEM ON |
-| `models/factory/backbone.yml` | 12 | OPEN | #     individually and every one is open to the other five. The scan |
-| `models/factory/backbone.yml` | 31 | WITHDRAWN | # So the "one 10A fuse carries the whole bike" argument is withdrawn. |
-| `models/factory/backbone.yml` | 76 | OPEN | to the R/R to the headlight junction - and it is OPEN TO THE CHASSIS RING ENTIRELY. |
-| `models/factory/backbone.yml` | 79 | OPEN | why every point on it reads open with the harness on the bench - its returns are all outside the |
-| `models/factory/backbone.yml` | 324 | OPEN | outside, which is independent of the photographs: a mated slot ages differently from an open |
-| `models/factory/brakes.yml` | 34 | TENTATIVE | TENTATIVE. Neither is promoted. One reading settles it: ring B00.5's brown against the |
-| `models/factory/charging.yml` | 27 | WITHDRAWN | ** THE "NO SPARE PIN" ARGUMENT IS WITHDRAWN 29 Aug 2026. ** It ran: single phase, four ways, |
-| `models/factory/charging.yml` | 40 | OPEN | OPEN, and not a fault: why a stock harness runs brown into a cavity the stock R/R never |
-| `models/factory/charging.yml` | 55 | WITHDRAWN | 28 Aug. The 28 Aug "correction" to brown, running to the switched-ignition bus, is WITHDRAWN on |
-| `models/factory/charging.yml` | 72 | WITHDRAWN | DESIGN CONSEQUENCE WITHDRAWN: charging does NOT return through the ignition switch contacts. |
-| `models/factory/controls.yml` | 69 | OPEN | therefore corroborated from outside the sleeve; what SP_RH_BR CONNECTS remains open. |
-| `models/factory/controls.yml` | 177 | OPEN | # --- Bl/W between the fuse panel and the right bar - direction open -- |
-| `models/factory/instruments.yml` | 102 | OPEN | Grounds retargeted from GND_CHASSIS to GND_NETB - BK/Y is Net B, which is open to the chassis |
-| `models/factory/instruments.yml` | 110 | OPEN | close both open items at once. |
-| `models/factory/instruments.yml` | 161 | OPEN | through the chassis ring terminal, which it is open to. |
-| `models/factory/lighting.yml` | 10 | OPEN | # open since 13 Aug. The scan and the meter agree. |
-| `models/factory/lighting.yml` | 25 | OPEN | 0.1 ohm to R/Y in LO, R/BK to R/Y open in both), confirming the 19 Aug printed table. The wiper |
-| `models/factory/signals.yml` | 144 | OPEN | #     R/Y LO. (procedure 5.6, open since 13 Aug) |
-| `models/factory/signals.yml` | 155 | WITHDRAWN | #   - THE IGNITION-SWITCH CHARGING PATH. Withdrawn - it never existed. |
-| `models/factory/signals.yml` | 170 | OPEN | #     fuse's output. Open since 19 Aug. |
-| `models/factory/signals.yml` | 182 | OPEN | # STILL OPEN, and the ring-out added to the list as well as subtracting: |
-| `models/factory/signals.yml` | 219 | OPEN | # STILL OPEN, added 29 Aug 2026: |
-| `models/factory/signals.yml` | 254 | OPEN | #     open to the modelled coil-feed Y/R. It is a circuit this model |
-| `models/factory/signals.yml` | 267 | OPEN | #     differently from an open one. Net A has no load and never had |
-| `models/factory/signals.yml` | 319 | OPEN | #     STILL OPEN: where it takes power from. The net has only its two |
-| `models/factory/signals.yml` | 368 | OPEN | # STILL OPEN after 2 September: |
-| `models/factory/signals.yml` | 369 | WITHDRAWN | #   - THE STARTER RELAY COIL. "COIL- grounds directly" is WITHDRAWN - |
-| `models/factory/starting.yml` | 24 | IN DOUBT | ** THIS WIRE IS IN DOUBT AS OF 2 Sep 2026 - IT MAY NOT EXIST. ** It was drawn on the 15 Aug |
-| `models/kz305-common.yml` | 38 | OPEN | #    a graphviz HTML-like label, where those characters open and close |
-| `models/kz305-common.yml` | 126 | OPEN | #            starter trigger (right bar to relay), open to each other. |
-| `models/kz305-common.yml` | 131 | OPEN | #            that is open to it and is MISSING FROM THESE MODELS entirely. |
-| `models/kz305-common.yml` | 133 | OPEN | #            Two nets, open to each other. |
-| `models/kz305-common.yml` | 144 | OPEN | #      Y/BK vs BK/Y - the two ground nets, open to each other. |
-| `models/kz305-common.yml` | 231 | WITHDRAWN | ** "COIL- GROUNDS DIRECTLY" IS WITHDRAWN, 2 Sep 2026. ** That claim stood here from 15 Aug and |
-| `models/kz305-common.yml` | 236 | OPEN | and OPEN to the ground net. |
-| `models/kz305-common.yml` | 241 | NOT KNOWN | WHAT REPLACES IT IS NOT KNOWN. Ground-side switching would fit the metered Push = Y/R to BK, |
-| `models/kz305-common.yml` | 242 | OPEN | but Y/R Net 2 is OPEN to the bar's Y/R, so they are not one wire and the loop does not close |
-| `models/kz305-common.yml` | 257 | OPEN | PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. Preserve park function. |
-| `models/kz305-rebuild.yml` | 18 | WITHDRAWN | #      THE FUSE-CASCADE ARGUMENT IS WITHDRAWN. It was read off the |
-| `models/kz305-rebuild.yml` | 34 | WITHDRAWN | #          ** WITHDRAWN 29 Aug 2026. THIS IS NOT TRUE. ** It rested |
-| `models/kz305-rebuild.yml` | 92 | OPEN | #      STILL OPEN: which coil terminal takes the Y/R, and where the |
-| `models/kz305-rebuild.yml` | 93 | WITHDRAWN | #      coil's return goes. "COIL- grounds directly" is WITHDRAWN - the |
-| `models/kz305-rebuild.yml` | 125 | OPEN | #      in service but BOTH accessory grounds sat open their whole lives |
-| `models/kz305-rebuild.yml` | 186 | OPEN | #      genuine fix is a SERIES regulator, which open-circuits the stator |
-| `models/kz305-rebuild.yml` | 195 | OPEN | #      series option is open to this bike and is now the top pick. |
-| `models/kz305-rebuild.yml` | 224 | OPEN | #   there is no spark. It fails SAFE (open = engine stops, which is what |
-| `models/kz305-rebuild.yml` | 231 | OPEN | #     Fails safe (open = bike dead, key does nothing). |
-| `models/kz305-rebuild.yml` | 253 | OPEN | #     left bar to horn, open to the starter-trigger black. So the button |
-| `models/kz305-rebuild.yml` | 269 | OPEN | #     and the supply, R/BK is HI, R/Y is LO. Open since 13 Aug, and it |
-| `models/kz305-rebuild.yml` | 316 | OPEN | is OPEN to it and earths through the child harnesses at component mounting points - engine block, |
-| `models/kz305-rebuild.yml` | 378 | OPEN | # footprint are covered by the relay body; if they are open, plugs rise |
-| `models/kz305-rebuild.yml` | 421 | OPEN | ** STILL OPEN 1 Sep 2026, AND CUSTOM / SEMI-CUSTOM IS IN PLAY. ** Do not read the pin list as a |
-| `models/kz305-rebuild.yml` | 469 | OPEN | ** NO PARASITIC DRAW FROM THE HOT FUSES. ** An un-energised relay is an open contact, so F4 and |
-| `models/kz305-rebuild.yml` | 470 | OPEN | F5 sit at battery voltage against an open circuit and pass nothing. Hot here costs no drain. |
-| `models/kz305-rebuild.yml` | 531 | OPEN | (a SERIES type open-circuits the stator rather than shorting it, so regulator and stator run cooler |
-| `models/kz305-rebuild.yml` | 540 | OPEN | OPEN CHECK - part-selection.md wants the DC pair heavy gauge and direct to the battery, fused at |
-| `models/kz305-rebuild.yml` | 543 | WITHDRAWN | the ignition switch - is WITHDRAWN 29 Aug 2026; stock routes R/R DC out on W/R to B04.6 and the |
-| `models/kz305-rebuild.yml` | 562 | OPEN | passing through a 44-year-old switch. Fails safe (open = bike dead, key does nothing). |
-| `models/kz305-rebuild.yml` | 574 | OPEN | there is no spark. Fails safe (open = engine stops). |
-| `models/kz305-rebuild.yml` | 583 | OPEN | which is what unblocked it: the horn button return is its own black net, left bar to horn, OPEN |
-| `models/kz305-rebuild.yml` | 608 | OPEN | 28 Aug 2026 on the unplugged cluster: R/BK and R/Y are open in both settled positions but blip |
-| `models/kz305-rebuild.yml` | 792 | IN DOUBT | now feeds the TAIL LAMP ONLY, whose park behaviour was never in doubt - it rests on the metered |
-| `models/kz305-rebuild.yml` | 851 | OPEN | reproduce: it needs no tools to open and it is where an EI module would tap. |
-| `models/kz305-rebuild.yml` | 867 | OPEN | #   starter-relay branch, open to the coil-feed Y/R. Neither model |
-| `models/kz305-rebuild.yml` | 870 | OPEN | #   ONE END IS NOW KNOWN: B06.1, a male bullet on the B06 branch, open |
-| `models/kz305-rebuild.yml` | 965 | IN DOUBT | ⛔ ** THIS WIRE IS IN DOUBT - IT MAY NOT EXIST. Corrected 2 Sep 2026. ** It was drawn, and this |
-| `models/kz305-rebuild.yml` | 967 | WITHDRAWN | directly. THAT CLAIM IS WITHDRAWN - see the starter_relay note in kz305-common.yml. The |
-| `models/kz305-rebuild.yml` | 1007 | OPEN | still dead with the key out because its COIL is switched, and an open relay contact draws nothing. |
-| `models/kz305-rebuild.yml` | 1193 | WITHDRAWN | ** THIS NOTE PREVIOUSLY ASSERTED A WITHDRAWN CLAIM. CORRECTED 1 Sep 2026. ** It said the stock |
-| `models/kz305-rebuild.yml` | 1196 | WITHDRAWN | withdrawn on 29 Aug at the head of this file, but the withdrawal never reached this cable. At the |
-| `models/kz305-rebuild.yml` | 1202 | OPEN | on the PDM main stud, against part-selection.md, and flagged the difference as an open check. The |
+| `models/factory/00-notes.yml` | 30 | OPEN | #   [OPEN]    not established - stated as a question, not a fact |
+| `models/factory/00-notes.yml` | 33 | WITHDRAWN | # prior belief: the meter has never produced a withdrawn claim and the |
+| `models/factory/00-notes.yml` | 79 | OPEN | # OPEN ITEMS are listed at the foot of signals.yml. |
+| `models/factory/backbone.yml` | 8 | OPEN | # terminals traced individually and every one is open to the other five. |
+| `models/factory/backbone.yml` | 39 | OPEN | connected to anything [photo + bench 29 Aug 2026]. Every BK/Y point measures OPEN to it. |
+| `models/factory/backbone.yml` | 50 | OPEN | 0.0-0.3 ohm from the tail to the R/R to the headlight junction - and it is OPEN TO THE CHASSIS |
+| `models/factory/backbone.yml` | 54 | OPEN | elsewhere. That is why every point on it reads open with the harness on the bench - its returns |
+| `models/factory/backbone.yml` | 60 | OPEN | its own child harness. See blocker 5 in the rebuild. [OPEN] |
+| `models/factory/backbone.yml` | 163 | OPEN | the whole reason the procedure unwraps before ringing out rather than after. [OPEN] |
+| `models/factory/backbone.yml` | 213 | OPEN | mate at all, and W/BK is a colour that appears NOWHERE else in this project's map. [OPEN] |
+| `models/factory/backbone.yml` | 223 | OPEN | it. [OPEN] |
+| `models/factory/backbone.yml` | 232 | OPEN | open one [bench 29 Aug 2026]. |
+| `models/factory/backbone.yml` | 267 | OPEN | [OPEN] |
+| `models/factory/backbone.yml` | 310 | OPEN | one node for both. Splitting them is a real change and has not been made. [OPEN] |
+| `models/factory/backbone.yml` | 336 | OPEN | common wire, but that is an eyeball comparison. [OPEN] |
+| `models/factory/brakes.yml` | 51 | OPEN | Do not reproduce it in the rebuild without evidence. [OPEN] |
+| `models/factory/charging.yml` | 30 | OPEN | the loom serves A1/A2/B1/C1/D1 and this way is live on another variant. [OPEN] |
+| `models/factory/charging.yml` | 42 | OPEN | gauge pass. [OPEN] |
+| `models/factory/charging.yml` | 60 | OPEN | notes: Net B - it rings continuous with every other black-base point in the harness and OPEN to the chassis ring terminal [meter 28 Aug 2026]. The onl |
+| `models/factory/lighting.yml` | 16 | OPEN | DIMMER: Bl common, 0.1 ohm to R/BK in HI and to R/Y in LO, R/BK to R/Y open in both [meter |
+| `models/factory/lighting.yml` | 26 | OPEN | serves A1/A2/B1/C1/D1 and these ways are live on other variants. [OPEN] |
+| `models/factory/lighting.yml` | 63 | OPEN | notes: The horn button return is its own black net, left-bar junction to horn, open to the starter-trigger black [meter 28 Aug 2026]. Corroborated fro |
+| `models/factory/signals.yml` | 66 | OPEN | # the rebuild's star bus. [OPEN] |
+| `models/factory/signals.yml` | 138 | OPEN | # OPEN ITEMS — the factory model's remaining unknowns |
+| `models/factory/signals.yml` | 152 | WITHDRAWN | #     where the return goes. "COIL- grounds directly" is withdrawn and |
+| `models/factory/starting.yml` | 19 | OPEN | notes: Starter button output to relay COIL+. BK but NOT a ground - a black net of its own from the right-bar 4P to the starter-relay branch, open to t |
+| `models/factory/starting.yml` | 25 | WITHDRAWN | directly, which is WITHDRAWN - the assembly is in hand and has exactly TWO small leads, both |
+| `models/factory/starting.yml` | 30 | OPEN | [OPEN] |
+| `models/kz305-common.yml` | 33 | OPEN | #            branch, open to it. Net 2 is the starter relay's coil |
+| `models/kz305-common.yml` | 36 | OPEN | #            dimmer. Two nets, open to each other. |
+| `models/kz305-common.yml` | 48 | OPEN | #                   harness-wide return. Open to each other. |
+| `models/kz305-common.yml` | 125 | OPEN | #    into a graphviz HTML-like label, where those characters open and |
+| `models/kz305-common.yml` | 213 | OPEN | B06.2 is Black Net 2, 0.2 ohm to the start button and OPEN to the ground net [meter 28 Aug]. |
+| `models/kz305-common.yml` | 217 | NOT KNOWN | ⚠️ WHERE THE COIL'S RETURN GOES IS NOT KNOWN, and which lead is which is not known. Ground-side |
+| `models/kz305-common.yml` | 218 | OPEN | switching would fit the metered Push = Y/R to BK, but Y/R Net 2 is OPEN to the bar's Y/R, so |
+| `models/kz305-common.yml` | 220 | OPEN | redraw the circuit until it does. [OPEN] |
+| `models/kz305-common.yml` | 234 | OPEN | PARK = W-R only. OFF and LOCK fully open. Contact 0.1 ohm, healthy. PRESERVE PARK FUNCTION. |
+| `models/kz305-common.yml` | 243 | OPEN | The BATT white is visibly heavier than the harness's common wire - eyeball only. [OPEN] |
+| `models/kz305-common.yml` | 266 | OPEN | ⚠️ THE WIPER IS MAKE-BEFORE-BREAK. R_BK to R_Y is open in both settled positions but blips |
+| `models/kz305-rebuild.yml` | 11 | OPEN | # Open items on the as-built record are at the foot of |
+| `models/kz305-rebuild.yml` | 38 | WITHDRAWN | #      directly" is withdrawn and nothing has replaced it - W_SOL_GND |
+| `models/kz305-rebuild.yml` | 89 | OPEN | #   starter-relay branch, open to the coil-feed Y/R. It is the starter |
+| `models/kz305-rebuild.yml` | 159 | OPEN | #      regulator open-circuits the stator instead of shorting it, so |
+| `models/kz305-rebuild.yml` | 187 | OPEN | BK/Y net that is OPEN to it and earths through the child harnesses at component mounting points |
+| `models/kz305-rebuild.yml` | 244 | OPEN | # footprint are covered by the relay body; if they are open, plugs rise |
+| `models/kz305-rebuild.yml` | 310 | OPEN | NO PARASITIC DRAW FROM THE HOT FUSES - an un-energised relay is an open contact, so F4 and F5 |
+| `models/kz305-rebuild.yml` | 311 | OPEN | sit at battery voltage against an open circuit and pass nothing. |
+| `models/kz305-rebuild.yml` | 365 | OPEN | IN HAND - a Polaris ORV takeoff, $45 [bench 29 Aug 2026]. A SERIES regulator: it open-circuits |
+| `models/kz305-rebuild.yml` | 380 | OPEN | values. It is what sizes MF_RR. [OPEN] |
+| `models/kz305-rebuild.yml` | 394 | OPEN | (open = bike dead, key does nothing). |
+| `models/kz305-rebuild.yml` | 406 | OPEN | there is no spark. Fails safe (open = engine stops). |
+| `models/kz305-rebuild.yml` | 415 | OPEN | which is what unblocked it: the horn button return is its own black net, left bar to horn, OPEN |
+| `models/kz305-rebuild.yml` | 439 | OPEN | and R/Y are open in both settled positions but blip CLOSED while the switch moves, so both coils |
+| `models/kz305-rebuild.yml` | 670 | OPEN | reproduce: it needs no tools to open and it is where an EI module would tap. |
+| `models/kz305-rebuild.yml` | 763 | WITHDRAWN | directly, which is WITHDRAWN - the assembly has exactly TWO small leads, Y/R and BK, BOTH ENDING |
+| `models/kz305-rebuild.yml` | 768 | OPEN | blocker 3. [OPEN] |
+| `models/kz305-rebuild.yml` | 784 | OPEN | earth. Its own net, open to the starter-trigger black [meter 28 Aug 2026]. |
+| `models/kz305-rebuild.yml` | 798 | OPEN | still dead with the key out because its COIL is switched, and an open relay contact draws nothing. |
+| `models/kz305-rebuild.yml` | 988 | OPEN | stands, and the stator's rated wattage has still not been read off anything. [OPEN] |
 
 ---
 
-458 marked claims across 22 files.
+328 marked claims across 22 files.

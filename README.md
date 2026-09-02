@@ -161,8 +161,28 @@ was established**:
 ```
 
 The evidence classes are ranked by this project's own failure record, not by
-prior belief — `meter` has never been overturned, `scan` has failed five times.
-Regenerate after any model change; the register is a coverage map, not a verdict.
+prior belief. `docs/overturned-claims.md` is that record: every claim asserted
+and later withdrawn, with the class of evidence that produced the wrong version.
+`meter` has never produced one; `scan` has produced twelve.
+
+Every note in the models carries one explicit evidence tag — `[meter 29 Aug
+2026]`, `[bench 2 Sep 2026]`, `[OPEN]` — and the register reads those directly.
+A claim in `models/` that comes back `unstated` is a note that skipped the
+convention. Regenerate after any model change; the register is a coverage map,
+not a verdict.
+
+## What the notes are, and are not
+
+Model notes state **what is currently held true**, with one evidence tag. They
+do not carry the history of how a claim got there — no superseded readings, no
+record of what a wire used to be drawn as. That history is in
+`archive/models-2026-09-02/`, in `docs/overturned-claims.md` where it still does
+work, and in the git log.
+
+The convention is set out at the top of `models/factory/00-notes.yml`. Open
+questions stay in the notes, tagged `[OPEN]`, because an open question is part
+of what is true now; the factory model's full open list is at the foot of
+`models/factory/signals.yml`.
 
 ## Tests
 

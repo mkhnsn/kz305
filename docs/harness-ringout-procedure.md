@@ -276,7 +276,7 @@ that does not appear in the table is something you have not explained yet.
 | Step | Updates |
 |---|---|
 | 1 | Lengths throughout `models/kz305-rebuild.yml`; unblocks the BOM |
-| 2 | Connector pinouts in `models/kz305-factory.yml` |
+| 2 | Connector pinouts in `models/factory/*.yml` |
 | 3 | **Splice nodes** — the factory model currently draws every circuit as one wire end to end. Each colour-changing splice needs a real node in the drawing, or the model is wrong about what the harness physically is |
 | 4 | The connection map |
 | 5.1 | Settles the BK/Y vs Y/BK dispute |

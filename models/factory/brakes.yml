@@ -2,75 +2,53 @@
 #
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
-# See models/kz305-factory.yml for the model-wide notes.
+# See models/factory/00-notes.yml for the model-wide notes.
 
 connectors:
   TAIL:
     <<: *taillight
-    notes: CONFIRMED off the diagram 17 Aug 2026 - RED feeds the tail filament, BLUE the brake filament, BK/Y grounds. Blue brake circuit ties to the Bl/W found loose at the right cluster and the light blue lead on the front brake switch. No license lamp exists on the US/Canada diagram - the tail lamp lights the plate.
+    notes: RED feeds the tail filament, BLUE the brake filament, BK/Y grounds [scan 17 Aug 2026]. No license lamp exists on the US/Canada diagram - the tail lamp lights the plate.
   FBRK:
     <<: *brake_switch
     subtype: front, at the lever perch
     pinlabels: [Br IN, Bl OUT]
     notes: |-
-      CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of
-      bullet connectors. That pair is now named: B00.5 (plain Br, double-female) and B00.6 (Bl, male),
-      both at the HEADLIGHT JUNCTION.
-      ** THE 19 Aug FEED CORRECTION IS OVERTURNED, 2 Sep 2026. ** It read Br/W off a pale broken
-      stroke at 600 dpi and routed the feed from the right-bar 4P. The switch has since been checked
-      physically and its leads are that B00.5/B00.6 pair - plain Br in, Bl out, from the brown bus at
-      the front of the bike, not Br/W from the bar. Two independent routes agreed before the check:
-      B00.6 is Blue Net 1 (the brake circuit, 0.0 ohm to B04.2), and B00.5's brown sleeves with it.
-      This is the fourth time a 600 dpi read of a base-versus-tracer has been wrong on this harness.
-      ** THE FEED IS IN DISPUTE AGAIN AS OF 2 Sep 2026, AND THE CHALLENGER IS A PHOTOGRAPH. ** The
-      pre-teardown photographs show B00.5 - a PLAIN BROWN at the HEADLIGHT JUNCTION - with one of its
-      two slots populated, and that brown running into a sleeve alongside a blue from B00.6. B00.6 is
-      Blue Net 1, the brake circuit. A brown feed and a blue return, sleeved as a pair, heading for
-      the lever perch, is this switch - and B00.5 double-female against B00.6 male is exactly the
-      "own pair of bullet connectors" recorded on 17 Aug.
-      SO THE FEED IS EITHER Br/W FROM THE RIGHT BAR OR PLAIN Br FROM THE HEADLIGHT JUNCTION. The
-      19 Aug claim is a 600 dpi read of a pale broken stroke, which is the class of evidence this
-      project has been wrong about three times; the photograph is a direct read but is recorded as
-      TENTATIVE. Neither is promoted. One reading settles it: ring B00.5's brown against the
-      plain-brown net and against the Br/W net.
-      NOT LEFT AS A LOOSE END FOR THE REBUILD - both candidate feeds are UPSTREAM of any fuse (Br/W
-      is the TAIL fuse's input, plain Br is the raw switched bus), so the finding that this lamp was
-      protected by nothing smaller than the 20A main holds either way. See measurements/README.
+      NOT part of the right-bar switchgear branch - it has its own pair of bullets at the HEADLIGHT
+      JUNCTION, B00.5 (plain Br, double-female) and B00.6 (Bl, male) [bench 2 Sep 2026].
+      Fed plain Br from the brown bus, returning Bl into the brake net. B00.6 is Blue Net 1, 0.0 ohm
+      to B04.2 [meter 28 Aug 2026]; B00.5's brown sleeves with it and both run to the lever perch
+      [photo 2 Sep 2026].
   RBRK:
     <<: *brake_switch
     subtype: rear, frame mounted
     pinlabels: [Br IN, Bl OUT]
     notes: |-
-      READ OFF THE SCAN 19 Aug 2026 - drawn beside the regulator/rectifier, feed read Br/W (same
-      broken stroke as the front switch), output Bl, in parallel with the front switch AS ASSUMED.
-      ** THE FEED IS REDRAWN PLAIN Br, 2 Sep 2026. ** The switch's pigtail carries a brown and a
-      blue, read from the photographs - the same pair as the front switch, whose feed was confirmed
-      at the part the same day. Its harness-side pair is B04.4 (Br, female bullet) and B04.2 (Bl,
-      the 2-to-1 merge), which leave B04 at the same breakout and the same length.
-      "In parallel with the front switch" was an assumption on 19 Aug and is now supported: both
-      switches take brown in and return blue into one net, merging at B04.2 to feed the tail lamp.
+      In parallel with the front switch - brown in, blue out, both returning into one net at B04.2.
+      Its pigtail carries a brown and a blue, the same pair as the front [photo 2 Sep 2026].
+      Its harness-side pair is B04.4 (Br, female bullet) and B04.2 (Bl). Both leave B04 at the same
+      breakout and the same length, so they travel together, mirroring B00.5/B00.6 at the front
+      [arith 2 Sep 2026]. B04 sits at 650mm along the trunk, which is the right footpeg.
+      NOT OBSERVED MATED - one step short of the front switch's evidence.
   SP_BRAKE:
     style: simple
     type: Splice
     subtype: brake lamp feed - and it is B04.2
     notes: |-
-      ** LOCATED 2 Sep 2026: THIS NODE IS B04.2. ** Two blue wires crimped into ONE bullet terminal -
-      electrically a splice, mechanically a shared crimp - flagged on 28 Aug as a strong candidate for
-      exactly this and now supported by the rear switch's pigtail read. The front switch's output
-      arrives from B00.6, the rear switch's plugs into the bullet, and one blue leaves for the tail
-      lamp at B10.4. Blue Net 1 throughout: 0.0 ohm to B00.6, 0.1 ohm to B10.4.
+      Two blue wires crimped into ONE bullet terminal - electrically a splice, mechanically a shared
+      crimp [bench 28 Aug 2026]. The front switch's output arrives from B00.6, the rear switch's
+      plugs into the bullet, and one blue leaves for the tail lamp at B10.4.
+      Blue Net 1 throughout: 0.0 ohm to B00.6, 0.1 ohm to B10.4 [meter 28 Aug 2026].
   SP_R:
     style: simple
     type: Splice
     subtype: tail/city R net
     notes: |-
-      The R output of the ignition switch feeds the tail filament. Live in ON and PARK.
-      ** THE METER LAMPS CAME OFF THIS NODE 2 Sep 2026. ** They were drawn here on a 600 dpi read of
-      plain R; the photographs show both meter pigtails are Br/W and they land on B00.11 instead. So
-      this splice now has ONE consumer and may not be a physical node at all - a degenerate splice is
+      The R output of the ignition switch feeds the tail filament. Live in ON and PARK [meter
+      15 Aug 2026, from the switch table].
+      ⚠️ THIS SPLICE HAS ONE CONSUMER AND MAY NOT BE A PHYSICAL NODE AT ALL - a degenerate splice is
       what a straight run looks like when the model was told there were two legs. Left drawn because
-      the tail's park behaviour still depends on this pin, and because Step 3 may yet find a real
-      junction here. Do not reproduce it in the rebuild without evidence.
+      the tail's park behaviour depends on this pin and step 3 may yet find a real junction here.
+      Do not reproduce it in the rebuild without evidence. [OPEN]
 
 cables:
   W_GND_TAIL:   {<<: *w18, colors: [BKYE]}
@@ -79,15 +57,9 @@ cables:
     <<: *w18
     colors: [RD]
     notes: |-
-      Tail filament feed off the ignition switch R pin. In ON it is fed through R/Bl; in PARK straight
-      off W. Preserve that.
-      ** CLOSED 29 Aug 2026 - WHERE THE R/Bl PIN PICKS UP ITS POWER. ** From the TAIL fuse's output.
-      Holder 3 is settled as Br/W in, R/Bl out, and B00.3's fourth way is R/Bl on BOTH halves. The
-      chain is: switched brown bus, right-bar splice, Br/W, TAIL fuse, R/Bl, this switch pin, bridged
-      to R in ON, tail lamp.
-      COLOUR CORRECTED at the same time: the pin is R/Bl, not R/BK. The printed table gives R/BK and
-      the scan cannot separate them; both halves of the connector read red-base-blue-tracer. The
-      "reads R or R/BK" wording here was chasing a colour that is not on this circuit.
+      Tail filament feed off the ignition switch R pin, which is fed from the TAIL fuse's output on
+      R/Bl [meter 29 Aug 2026]. The chain is: switched brown bus, right-bar splice, Br/W, TAIL fuse,
+      R/Bl, this switch pin, bridged to R in ON, tail lamp.
       NOTE PARK BYPASSES THE TAIL FUSE - W straight to R. That is a design property, not wear, so it
       is inherited by any rebuild that preserves park.
   W_TAIL_RUN:  {<<: *w18, colors: [RD]}
@@ -95,28 +67,11 @@ cables:
   W_BRK_FEED_F:
     <<: *w18
     colors: [BN]
-    notes: |-
-      ** REDRAWN 2 Sep 2026 - PLAIN Br FROM THE BROWN BUS, NOT Br/W FROM THE RIGHT BAR. ** It was
-      drawn BNWH off RH_4P way 2 on a 600 dpi read of a pale broken stroke, 19 Aug. The switch has
-      now been checked physically and its pair of leads is B00.5 (plain Br, double-female) and B00.6
-      (Bl, male) at the HEADLIGHT JUNCTION. B00.5 is one of the nine points on the single brown net,
-      which is SP_BR here. Working rule 1: the bench outranks the document.
+    notes: Plain Br from the brown bus - B00.5 is one of the nine points on that single net [bench 2 Sep 2026]. See FBRK.
   W_BRK_FEED_R:
     <<: *w18
     colors: [BN]
-    notes: |-
-      ** REDRAWN 2 Sep 2026 - PLAIN Br, LIKE THE FRONT. ** The rear switch's own pigtail was read from
-      the photographs and carries a BROWN and a BLUE, the same pair as the front. So both brake
-      switches were misrouted by the same 600 dpi broken stroke on 19 Aug, and both are on the plain
-      brown bus rather than Br/W.
-      ** ITS PAIR IS B04.4 AND B04.2 **, and the geometry is what settles it rather than the colour
-      alone: both leave B04 at the SAME breakout (200mm) with the SAME length (60mm), so they are a
-      pair travelling together - exactly mirroring B00.5/B00.6 at the front. B04.4 is a brown female
-      bullet already measured onto the brown net (0.7 ohm to B00.1) with its consumer unnamed until
-      now, and B04.2 was flagged on 28 Aug as a strong candidate for SP_BRAKE. B04 sits at 650mm
-      along the trunk, which is the right footpeg.
-      NOT OBSERVED MATED, so this is one step short of the front switch's evidence. If the pigtail's
-      brown turns out to carry a white tracer after all, B00.11 comes back into play as its feed.
+    notes: Plain Br, like the front, from B04.4 - a brown female bullet on the brown net at 0.7 ohm to B00.1 [meter 28 Aug 2026], its consumer identified from the switch pigtail [photo 2 Sep 2026].
   W_BRK_OUT_F:  {<<: *w18, colors: [BU]}
   W_BRK_OUT_R:  {<<: *w18, colors: [BU]}
 

@@ -3,9 +3,15 @@
 classified by HOW it was established.
 
 This exists because the project's claims come from sources with very different
-demonstrated reliability, and nothing anywhere records which claim rests on
+demonstrated reliability, and nothing anywhere recorded which claim rests on
 which. A design review on 2 Sep 2026 found several claims that had been
 withdrawn in one file and left standing in another.
+
+Since the 2 Sep notes cleanup, the model files carry an EXPLICIT evidence tag -
+"[meter 29 Aug 2026]", "[bench 2 Sep 2026]", "[OPEN]". Those are read directly.
+The regex fallback below still classifies the measurement logs and any note that
+predates the convention, and a rising `unstated` count in models/ means the
+convention is being skipped.
 
     .venv/bin/python3 tools/claims_register.py > docs/claims-register.md
 """
@@ -39,7 +45,15 @@ MARKER = re.compile(
 DATED = re.compile(r"\b(\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+20\d\d|20\d\d-\d\d-\d\d)")
 
 
+# The explicit tag written by the notes convention. Preferred over the regexes
+# below, which infer a class from prose and can only ever be a heuristic.
+TAG = re.compile(r"\[(meter|bench|photo|scan|arith|inherit)\b", re.I)
+
+
 def classify(text):
+    m = TAG.search(text)
+    if m:
+        return m.group(1).lower()
     for name, pattern, label in CLASSES:
         if re.search(pattern, text, re.I):
             return label
@@ -83,10 +97,13 @@ def main():
     print("| `meter` | **Highest.** No continuity reading has been overturned. |")
     print("| `bench` | High. A wire or part in hand; the base-colour convention exists to keep it that way. |")
     print("| `arith` | High where premises hold — but the premises are the risk. `B06`'s child sum was wrong by one and would have hidden a splice. |")
-    print("| `photo` | **Mixed, and under-tested.** One in-session failure (white read as grey in a crowded shell). `docs/kz305-b1-wiring.md` bans colour reads from photographs outright. |")
-    print("| `scan` | **Lowest. Five failures.** 600 dpi cannot resolve a tracer. |")
+    print("| `photo` | **Mixed, and under-tested.** One failure and two successes — a sample of three. `docs/kz305-b1-wiring.md` bans colour reads from photographs outright. |")
+    print("| `scan` | **Lowest. Twelve failures**, five of them base-versus-tracer. 600 dpi cannot resolve a tracer. |")
     print("| `unstated` | Unknown — the line carries a status marker but names no evidence. |")
     print()
+    print("The ranking is the enumerated record in `docs/overturned-claims.md`, not a prior.")
+    print("A claim in `models/` classified `unstated` is a note that skipped the evidence-tag")
+    print("convention — see `models/factory/00-notes.yml`.\n")
 
     print("## Counts\n")
     print("| Marker | n |")

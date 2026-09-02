@@ -2,7 +2,7 @@
 #
 # Part of the factory reference model. Rendered as a sheet on its own,
 # and merged with the other subsystems for the combined drawing.
-# See models/kz305-factory.yml for the model-wide notes.
+# See models/factory/00-notes.yml for the model-wide notes.
 
 connectors:
   SM:
@@ -16,19 +16,18 @@ cables:
   W_START:
     <<: *w18
     colors: [BK]
-    notes: Starter button output to relay COIL+. BK but NOT a ground. CONFIRMED 28 Aug 2026 by continuity - a black net of its own from the right-bar 4P to the starter-relay branch, open to the horn-button black. Corroborated by a switch table transcribed weeks earlier from an unrelated source (Push = Y/R to BK) and by the 15 Aug note recording COIL+ as the BK lead from the start button.
+    notes: Starter button output to relay COIL+. BK but NOT a ground - a black net of its own from the right-bar 4P to the starter-relay branch, open to the horn-button black [meter 28 Aug 2026]. Corroborated by a switch table from an unrelated source (Push = Y/R to BK).
   W_SOL_GND:
     <<: *w18
     colors: [BK]
     notes: |-
-      ** THIS WIRE IS IN DOUBT AS OF 2 Sep 2026 - IT MAY NOT EXIST. ** It was drawn on the 15 Aug
-      claim that COIL- grounds directly. The relay assembly is now in hand and has exactly TWO small
-      leads, both ending in BULLETS into the harness - no ring, no eyelet, nothing that lands on
-      engine or frame. See measurements/starter-relay.md.
-      LEFT DRAWN rather than deleted, because unlike the horn ground wire on 29 Aug there is no
-      positive account of what replaces it yet. Deleting it would assert the coil has no return,
-      which is also false. The meter settles it.
-      The "no neutral-switch interlock" half stands - that was a separate observation.
+      ⛔ ** THIS WIRE MAY NOT EXIST. ** It was drawn on the claim that the relay's COIL- grounds
+      directly, which is WITHDRAWN - the assembly is in hand and has exactly TWO small leads, both
+      ending in BULLETS into the harness. No ring, no eyelet, nothing that lands on engine or frame
+      [bench 2 Sep 2026]. See measurements/starter-relay.md.
+      LEFT DRAWN rather than deleted because there is no positive account of what replaces it, and
+      deleting it would assert the coil has no return, which is also false. The meter settles it.
+      [OPEN]
 
 connections:
   # --- heavy starter path -------------------------------------------
