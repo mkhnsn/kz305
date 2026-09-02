@@ -71,7 +71,27 @@ the `B06.4` mechanism**, so it is a design finding if present, not a detail.
 
 Count them as the tape comes off, before the bundle relaxes and wires move.
 
-### 3. Leads that have never been located at all
+### 3. `B00.11`'s two legs — the one empty-slot question unwrapping CAN answer
+
+`B00.11` fed **two wires**, one definitely `Br/W` and one brown-base with an
+unresolvable tracer. The likely candidate for one is the **rear brake switch**.
+
+**A meter cannot settle this.** `Br/W` is one net — `B01.2`, `B00.11` and
+`B06.5` are all continuous, which is why the hidden splice must exist — so every
+point reads continuous with every other and no reading distinguishes a feed
+taken at the bar from one taken at the headlight junction.
+
+**Routing settles it, and routing is what unwrapping shows.**
+
+- A `Br/W` running **rearward from `B00.11` inside the trunk** → the rear brake
+  switch is fed from the front, and the 19 Aug route is wrong (its *net* was
+  right either way).
+- **No such wire** → the feed is taken at the bar, and `B00.11`'s consumers are
+  something else.
+
+Trace both legs by eye as the tape comes off, before the bundle relaxes.
+
+### 4. Leads that have never been located at all
 
 **The left points lead and both condenser leads.** The trunk's yellow pair
 turned out to be the alternator — proven by continuity on 28 Aug — so the

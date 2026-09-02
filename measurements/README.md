@@ -836,6 +836,61 @@ were established as never connected at all — here the node was in service with
 room to spare. Do not go looking for a second brake-switch consumer that the
 count says was never there.
 
+## `B00.11` — both slots were in service, 2026-09-02
+
+From the photographs. **`B00.11` fed TWO wires**, so unlike `B00.5` it was fully
+populated — a 1→2 fan-out, not a node with spare capacity.
+
+| Slot | Colour |
+|---|---|
+| 1 | **`Br/W`**, definite |
+| 2 | **brown base at least** — tracer not resolvable |
+
+**Electrically that second colour does not matter.** Both slots of a
+double-female are the same node, so both consumers sit on the `Br/W` net
+whatever their own jacket says. The uncertainty is about identifying the wire
+later, not about what it carries.
+
+### The rear brake switch — and why the 19 August read may not be wrong at all
+
+The obvious candidate for one of these is the **rear brake switch**, physically
+at the right footpeg. That looked like a conflict with the 19 Aug claim that its
+feed comes *"from the right-bar 4P's `Br/W` leg"*.
+
+**It is not a conflict. `Br/W` is ONE NET.** `B01.2` at the right bar,
+`B00.11` at the headlight junction and `B06.5` at the fuse box are all
+continuous — that is the whole reason a hidden splice has to exist. So *"fed
+from the right-bar 4P"* and *"fed from `B00.11`"* are two **points on the same
+net**, not two competing claims.
+
+The 19 Aug read may have got the **net right and the route wrong**, which is a
+much smaller error than it looked, and an easy one to make from a diagram that
+draws nets rather than routes.
+
+### ⚠️ Which means continuity cannot settle it — but Step 3 can
+
+**A ring-out is useless here.** Every point on `Br/W` reads continuous with
+every other by definition, so no meter reading distinguishes a feed taken at the
+bar from one taken at the headlight.
+
+**What settles it is routing**, and that makes this the one empty-slot question
+Step 3 *can* answer — a correction to the claim elsewhere in these notes that
+unwrapping cannot help with any of them:
+
+- If a `Br/W` runs **rearward from `B00.11` inside the trunk**, the rear brake
+  switch is fed from the front and the 19 Aug route is wrong.
+- If no such wire exists in the trunk, the feed is taken at the bar and
+  `B00.11`'s consumers are something else entirely.
+
+Either way it is visible the moment the tape comes off. **Add it to the Step 3
+list**: trace `B00.11`'s two legs by eye as the loom opens.
+
+### What is still unaccounted for
+
+Even granting the rear brake switch, that is **one** of two slots. The second
+consumer has no candidate at all. It wants unfused switched power at the front
+of the bike, and everything obvious at the headlight is already accounted for.
+
 ## Words used precisely
 
 | Word | Means |
