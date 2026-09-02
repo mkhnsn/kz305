@@ -47,6 +47,182 @@ relay itself.
 numbers are **from the diagram, not from the part** — they have never been
 checked against the housing, and the cavity rule below governs if they disagree.
 
+## Bench read, 2026-09-02 — VISUAL ONLY, no meter
+
+⚠️ **Method is `visual` throughout.** Nothing below is a continuity or resistance
+reading. What eyes are good for — what is bolted to what, colour, gender, way
+count, whether a lead is discrete or shared — is recorded as fact. Gauge and
+ohms are **not** recorded and are still open.
+
+### The assembly, as it sits
+
+**Two lugs and two small wires.**
+
+| | |
+|---|---|
+| Small wires | **`Y/R`** and **`BK`** |
+| Lug A | **EMPTY** — its lead was removed at teardown |
+| Lug B | heavy ~6 in cable, ring both ends, red boot at the far end — **battery** — plus a normal-gauge **`W/R`** ending in a **double-female bullet**, *and this is the one that melted* |
+
+So **Lug B is the battery stud** and Lug A is the motor stud, whose cable is
+absent. That also explains the empty lug without inventing anything: the starter
+cable comes off with the motor.
+
+### ✅ CLOSED — the accessory feed is PERMANENTLY LIVE, and the diagram is wrong
+
+Under the battery boot, alongside the heavy cable's ring, sits **a second ring
+terminal on an `R/W` wire, running about 2 in to a female bullet.** It is
+unconnected now but is plainly made to bolt to **the battery stud itself**.
+
+That answers the question this whole capture sheet was opened for, and it
+answers it **without a meter** — a lug on a post is topology, where a meter
+reading through a de-energised relay would only have been evidence about
+topology.
+
+> **The second fuse box is fed straight off the battery post.** The chain is
+> battery `+` → `R/W` ring → 2 in → female bullet → the second box's `R/W` male
+> → its fuses → `W/Bl` → `B09`, the rear accessory pickup.
+
+**The 44-year-old diagram calls the Electric Accessory Leads a *switched* feed.
+It is not.** It is permanently live, and it is **unfused for the first two
+inches out of the battery post**.
+
+Consequences, and they are design ones rather than curiosities:
+
+- Any accessory on that circuit could flatten the battery with the key out, and
+  did so for forty-four years without anyone writing it down.
+- **The rebuild must not reproduce it.** An unfused conductor on a battery post
+  is the one thing a harness must not have — the same rule that put `MF_RR` at
+  the battery end of the charging run.
+- It also explains the asymmetry recorded on 29 Aug: the accessory **feed** was
+  in service while both accessory **earths** sat open. A permanently-live feed
+  that nothing was earthed to is a circuit half-built, not a circuit in use.
+
+### ✅ The two coil leads mate `B06.1` and `B06.2` — by gender complement
+
+Terminations read 2 Sep 2026:
+
+| Lead | Termination | Gauge |
+|---|---|---|
+| `Y/R` | **female** bullet | same as the others, 18 or 16, probably 18 |
+| `BK` | **male** bullet | same |
+| `W/R` | double-female bullet | same |
+
+The harness's two unaccounted-for small bullets on the `B06` branch are:
+
+| | | |
+|---|---|---|
+| `B06.1` | `Y/R` | **male** |
+| `B06.2` | `BK` | **female** |
+
+**Every one is the complement of its opposite number.** Same branch, same
+colours, opposite genders, and the assembly carries exactly two small leads
+against exactly two unaccounted-for small bullets. Neither mate was recorded
+while connected, so this is inference — but it is inference with nothing else it
+could be.
+
+**That identifies `Y/R` Net 2's other end: the starter relay coil.** The circuit
+has been unidentified since 28 Aug and is listed in the models' colour-collision
+warning as *"a SECOND, independent Y/R net that is MISSING FROM THESE MODELS
+entirely."* One end is now named.
+
+### ⛔ OVERTURNED — `COIL-` does NOT ground directly at the relay
+
+`models/kz305-common.yml` has carried this on the `starter_relay` template since
+15 Aug 2026:
+
+> `COIL+` is fed `BK` from the starter button. **`COIL-` grounds directly,
+> CONFIRMED 15 Aug 2026.**
+
+**Both coil leads end in bullets that go into the harness.** There is no ring
+terminal, no eyelet, and nothing on this assembly that lands on the engine or
+the frame. Whatever grounds that coil, it is not a wire leaving this part.
+
+Nor does the harness side rescue it: `B06.2` is **Black Net 2**, measured
+0.2 Ω to the start button on 28 Aug and **open to the ground net**. So neither
+coil lead reaches earth by any path this project has measured.
+
+**What replaces it is NOT yet known.** The likely shape is ground-side
+switching — `Y/R` feeding the coil live and the button pulling the other side
+down — which would also fit the metered *Push = `Y/R` to `BK`*. But `Y/R` Net 2
+is open to the bar's `Y/R`, so the two are not the same wire and the loop does
+not close on the evidence in hand. **This needs the meter.**
+
+Working rule 1 applies: the bench outranks the document, and a direct read of
+what a wire terminates in is as direct as this project gets. The claim comes
+out; the replacement waits.
+
+### ✅ CORRECTED — the `W/R` double-female is on THIS assembly
+
+Read directly, part in hand: the double-female bullet is **on the starter relay
+subassembly**, and both the fuse-box pigtail's `W/R` and the main harness's
+`W/R` join into it.
+
+The 29 Aug record said the opposite — *"a double-female bullet on the FUSE-BOX
+PIGTAIL, not in the loom"* — and it was written after the node had already been
+unplugged, from memory of the 28 Aug mate record. **The part in hand wins.**
+
+So the three-way node is:
+
+| | |
+|---|---|
+| Node itself | starter relay assembly, `W/R`, double-female, off the **battery** stud |
+| Leg 1 | main harness `B06.4`, male `W/R` — ⚠️ **the melted one** |
+| Leg 2 | fuse-box pigtail `W/R` |
+
+**This puts the melting in a different place than the log has it.** The node is
+not a harness feature at all — it hangs off the battery stud of the relay, so
+the whole main power path leaves the battery, passes one lug, and steps down to
+18-or-16 gauge at a bullet. That is the gauge step, and it is two connections
+from the battery with nothing but the 20 A MAIN downstream of it.
+
+### ⚠️ OPEN — coil polarity, which lead is which
+
+The two small wires are **`Y/R`** and **`BK`**. The models draw the coil as fed
+**`BK`** from the start button on `COIL+`, with `COIL-` grounding directly, and
+there is no `Y/R` anywhere in the drawn starter circuit.
+
+**This is very likely `Y/R` Net 2 finding its other end.** `B06.1` is a `Y/R`
+male bullet on the `B06` branch — the branch that serves this assembly — open to
+the coil-feed `Y/R` and unidentified since 28 Aug. A `Y/R` on the relay is
+exactly what it has been missing.
+
+If so, the circuit is **ground-side switched**: `Y/R` feeds `COIL+` live from
+the kill switch, and the start button pulls `COIL-` to earth through the `BK`.
+That matches the metered switch table — *Push = `Y/R` to `BK`* — as well as the
+drawn version does, and it would **overturn** the current drawing.
+
+**Not settled by eye.** Which wire is which needs the meter. Recorded as a
+question, not a finding.
+
+### ⚠️ OPEN — where the `W/R` double-female actually lives
+
+The `W/R` double-female bullet is **on this assembly**, on the battery stud. The
+29 Aug record has the three-way `W/R` node as *"a double-female bullet on the
+FUSE-BOX PIGTAIL, not in the loom"*. Both cannot be describing the same object
+unless one of them named the wrong pigtail.
+
+Reconcile before either is relied on. The 29 Aug entry was written after the
+node had already been unplugged, and says so.
+
+### Recorded lengths
+
+| | |
+|---|---|
+| Battery cable, relay lug to battery ring | ~6 in / ~150 mm |
+| `R/W` ring to its female bullet | ~2 in / ~50 mm |
+
+Both are **eyeball estimates**, not tape.
+
+### Still open on this assembly
+
+- **Gauge of anything.** Needs calipers. This is the circuit that melted and the
+  gauge step is the finding, so it is deliberately left blank.
+- **Coil polarity** — see above.
+- **Terminal map and cavity rule** — the housing's own markings, if any.
+- **Coil ground** — where the `BK` terminates.
+- Ohms on every path.
+
 ## Readings to take
 
 Take them in this order — item 2 is the one that unblocks the accessory

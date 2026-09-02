@@ -226,7 +226,21 @@ templates:
   starter_relay: &starter_relay
     type: Starter relay
     pinlabels: [BAT STUD, MOTOR STUD, COIL+, COIL-]
-    notes: Green corrosion on both studs on the original - replace. COIL+ is fed BK from the starter button. COIL- grounds directly, CONFIRMED 15 Aug 2026.
+    notes: |-
+      Green corrosion on both studs on the original - replace.
+      ** "COIL- GROUNDS DIRECTLY" IS WITHDRAWN, 2 Sep 2026. ** That claim stood here from 15 Aug and
+      is falsified by the assembly in hand: the relay has exactly TWO small leads, Y/R ending in a
+      FEMALE bullet and BK in a MALE bullet, and neither is a ring, an eyelet or anything that lands
+      on the engine or frame. Nothing on this part reaches earth.
+      The harness side does not rescue it either - B06.2 is Black Net 2, 0.2 ohm to the start button
+      and OPEN to the ground net.
+      ** THE COIL LEADS MATE B06.1 AND B06.2 BY GENDER COMPLEMENT ** - B06.1 is a MALE Y/R and B06.2
+      a FEMALE BK, exactly opposite to the relay's pair, on the branch that serves this assembly.
+      That also identifies Y/R NET 2, which the colour-collision note below still lists as missing
+      from these models.
+      WHAT REPLACES IT IS NOT KNOWN. Ground-side switching would fit the metered Push = Y/R to BK,
+      but Y/R Net 2 is OPEN to the bar's Y/R, so they are not one wire and the loop does not close
+      on present evidence. Needs the meter. Do not redraw the circuit until it does.
 
   starter_motor: &starter_motor
     type: Starter motor

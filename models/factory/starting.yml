@@ -20,7 +20,15 @@ cables:
   W_SOL_GND:
     <<: *w18
     colors: [BK]
-    notes: CONFIRMED direct to ground 15 Aug 2026. No neutral-switch interlock in this circuit.
+    notes: |-
+      ** THIS WIRE IS IN DOUBT AS OF 2 Sep 2026 - IT MAY NOT EXIST. ** It was drawn on the 15 Aug
+      claim that COIL- grounds directly. The relay assembly is now in hand and has exactly TWO small
+      leads, both ending in BULLETS into the harness - no ring, no eyelet, nothing that lands on
+      engine or frame. See measurements/starter-relay.md.
+      LEFT DRAWN rather than deleted, because unlike the horn ground wire on 29 Aug there is no
+      positive account of what replaces it yet. Deleting it would assert the coil has no return,
+      which is also false. The meter settles it.
+      The "no neutral-switch interlock" half stands - that was a separate observation.
 
 connections:
   # --- heavy starter path -------------------------------------------
