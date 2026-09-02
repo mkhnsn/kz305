@@ -102,7 +102,7 @@ connections:
     - HEAD: [2]
   - - HEAD: [3]
     - W_GND_HEAD: [1]
-    - GND_CHASSIS: [1]
+    - GND_NETB: [1]
 
   # --- horn, ground-side switched --------------------------------------
   - - SP_BR: [1]

@@ -147,4 +147,4 @@ connections:
   # --- tail lamp ground ----------------------------------------------
   - - TAIL: [3]
     - W_GND_TAIL: [1]
-    - GND_CHASSIS: [1]
+    - GND_NETB: [1]

@@ -39,6 +39,17 @@
 connectors:
   BATT:
     <<: *battery
+  # ⚠️ SEVEN Net B GROUNDS WERE DRAWN ON THIS NODE UNTIL 2 Sep 2026. Found in
+  # design review. GND_CHASSIS is declared Net A, and Net A is PROVEN to have
+  # no load and never to have had one - its only members are this ring plus
+  # B00.7 and B08, both established never connected. Yet W_GND_TAIL,
+  # W_GND_HEAD and the four signal-lamp grounds were landed here, all coloured
+  # BKYE, which IS Net B and is measured OPEN to this ring. The cable colours
+  # contradicted the node they landed on, in the model's own notation.
+  # Moved to GND_NETB. The meter lamp and pod grounds had already been moved on
+  # 2 Sep; the instance was fixed and the class was not.
+  # W_BAT_GND IS DELIBERATELY LEFT HERE and is a separate question - see its
+  # note. W_SOL_GND is left pending the coil polarity reading.
   GND_CHASSIS:
     type: Chassis ground
     subtype: single Y/BK ring terminal — ground Net A
@@ -399,7 +410,19 @@ cables:
   W_BAT_GND:
     <<: *w6
     colors: [BKYE]
-    notes: The battery earth strap, NOT a harness lead - established 28 Aug 2026 when the harness's own ring terminal turned out to be 16-18 AWG Y/BK. This strap is separate hardware that lands on the same mount. Drawn because it is a real path, not because the loom carries it.
+    notes: |-
+      The battery earth strap, NOT a harness lead - established 28 Aug 2026 when the harness's own ring
+      terminal turned out to be 16-18 AWG Y/BK. This strap is separate hardware that lands on the same
+      mount. Drawn because it is a real path, not because the loom carries it.
+      ** LEFT ON GND_CHASSIS WHEN SIX NET B GROUNDS WERE MOVED OFF IT, 2 Sep 2026, AND ITS COLOUR IS
+      WRONG. ** It stays because it is the CHASSIS CONNECTION ITSELF rather than a net member - it
+      lands on the mount, not on the Y/BK ring. But it is drawn BKYE, which is the Net B code, and a
+      6 AWG battery strap is not a BK/Y harness wire. The colour is a modelling convenience that now
+      reads as a net claim.
+      ** THE UNDERLYING CONFUSION IS THAT GND_CHASSIS IS DOING TWO JOBS: ** it is the Net A ring
+      terminal AND the physical chassis mount those two things share. Those are different objects and
+      the model uses one node for both, which is what let six Net B leads land here unnoticed.
+      Splitting them is a real change and is not being made on review alone.
   # --- main feed ----------------------------------------------------
   W_MAIN:
     <<: *w14

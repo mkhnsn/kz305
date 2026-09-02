@@ -538,3 +538,70 @@ def test_black_is_only_ever_a_ground():
         "black is reserved for grounds, and these are not grounds:\n  "
         + "\n  ".join(offenders)
     )
+
+
+def test_ground_leads_land_on_the_net_their_colour_declares():
+    """A BK/Y lead must not land on a node declared Net A, and vice versa.
+
+    The two ground nets are MEASURED OPEN to each other - that is the finding
+    the whole ground rework rests on - so a cable's colour code and the node it
+    lands on make a checkable pair. `BKYE` is Net B; `YEBK` is Net A.
+
+    This exists because six Net B leads sat on the Net A node undetected until
+    a design review on 2 Sep 2026: W_GND_TAIL, W_GND_HEAD and the four
+    signal-lamp grounds, every one of them BKYE, landed on GND_CHASSIS, which
+    the model itself subtitles "ground Net A". Net A is proven to have no load
+    and never to have had one. The meter lamp and pod grounds had been moved to
+    GND_NETB days earlier, so the instance was fixed and the class was not.
+
+    W_BAT_GND is exempt: it is the battery strap, separate hardware landing on
+    the chassis mount rather than a member of either net. Its BKYE is a
+    modelling convenience and is documented as such in backbone.yml.
+    """
+    sys.path.insert(0, str(ROOT))
+    import build
+    from wireviz import wv_merge
+
+    common = COMMON.read_text(encoding="utf-8")
+    doc = wv_merge.merge(
+        [(str(p), build.load(p, common)) for p in FACTORY]
+    )
+
+    # Which ground code each node declares, read from its own subtype.
+    node_net = {}
+    for name, spec in (doc.get("connectors") or {}).items():
+        sub = ((spec or {}).get("subtype") or "").lower()
+        if "net a" in sub:
+            node_net[name] = "YEBK"
+        elif "net b" in sub:
+            node_net[name] = "BKYE"
+    assert node_net, "guard is a no-op - no node declares a ground net"
+
+    exempt = {"W_BAT_GND"}
+    cables = doc.get("cables") or {}
+
+    problems = []
+    for conn_set in doc.get("connections") or []:
+        entries = [e for e in conn_set if isinstance(e, dict)]
+        for idx, entry in enumerate(entries):
+            cable = next(iter(entry))
+            if cable not in cables or cable in exempt:
+                continue
+            colour = "".join((cables[cable] or {}).get("colors") or [])
+            if colour not in ("BKYE", "YEBK"):
+                continue
+            for offset in (-1, 1):
+                j = idx + offset
+                if not 0 <= j < len(entries):
+                    continue
+                node = next(iter(entries[j]))
+                declared = node_net.get(node)
+                if declared and declared != colour:
+                    problems.append(
+                        f"{cable} ({colour}) lands on {node}, declared {declared}"
+                    )
+
+    assert not problems, (
+        "ground leads on a node whose net they are measured OPEN to:\n  "
+        + "\n  ".join(sorted(set(problems)))
+    )
