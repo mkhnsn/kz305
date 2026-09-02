@@ -11,13 +11,17 @@ connectors:
   FBRK:
     <<: *brake_switch
     subtype: front, at the lever perch
-    pinlabels: [Br/W IN, Bl OUT]
+    pinlabels: [Br IN, Bl OUT]
     notes: |-
       CONFIRMED 17 Aug 2026 - NOT part of the right-bar switchgear branch; it has its own pair of
-      bullet connectors. FEED CORRECTED 19 Aug 2026 off the 600 dpi scan - the feed lead reads Br/W
-      (pale, broken stroke), not plain Br, and it comes from the right-bar 4P's Br/W leg. This matches
-      the 15 Aug inventory that found Br/W in the right-bar 4P with a loose Bl/W alongside. Output
-      reads solid Bl to the brake filament net.
+      bullet connectors. That pair is now named: B00.5 (plain Br, double-female) and B00.6 (Bl, male),
+      both at the HEADLIGHT JUNCTION.
+      ** THE 19 Aug FEED CORRECTION IS OVERTURNED, 2 Sep 2026. ** It read Br/W off a pale broken
+      stroke at 600 dpi and routed the feed from the right-bar 4P. The switch has since been checked
+      physically and its leads are that B00.5/B00.6 pair - plain Br in, Bl out, from the brown bus at
+      the front of the bike, not Br/W from the bar. Two independent routes agreed before the check:
+      B00.6 is Blue Net 1 (the brake circuit, 0.0 ohm to B04.2), and B00.5's brown sleeves with it.
+      This is the fourth time a 600 dpi read of a base-versus-tracer has been wrong on this harness.
       ** THE FEED IS IN DISPUTE AGAIN AS OF 2 Sep 2026, AND THE CHALLENGER IS A PHOTOGRAPH. ** The
       pre-teardown photographs show B00.5 - a PLAIN BROWN at the HEADLIGHT JUNCTION - with one of its
       two slots populated, and that brown running into a sleeve alongside a blue from B00.6. B00.6 is
@@ -67,8 +71,28 @@ cables:
       is inherited by any rebuild that preserves park.
   W_TAIL_RUN:  {<<: *w18, colors: [RD]}
   W_BRAKE:     {<<: *w18, colors: [BU]}
-  W_BRK_FEED_F: {<<: *w18, colors: [BNWH]}
-  W_BRK_FEED_R: {<<: *w18, colors: [BNWH]}
+  W_BRK_FEED_F:
+    <<: *w18
+    colors: [BN]
+    notes: |-
+      ** REDRAWN 2 Sep 2026 - PLAIN Br FROM THE BROWN BUS, NOT Br/W FROM THE RIGHT BAR. ** It was
+      drawn BNWH off RH_4P way 2 on a 600 dpi read of a pale broken stroke, 19 Aug. The switch has
+      now been checked physically and its pair of leads is B00.5 (plain Br, double-female) and B00.6
+      (Bl, male) at the HEADLIGHT JUNCTION. B00.5 is one of the nine points on the single brown net,
+      which is SP_BR here. Working rule 1: the bench outranks the document.
+  W_BRK_FEED_R:
+    <<: *w18
+    colors: [BNWH]
+    notes: |-
+      ** STILL DRAWN Br/W FROM THE RIGHT BAR, AND ITS ONLY EVIDENCE HAS JUST COLLAPSED. ** This came
+      from the same 600 dpi broken stroke, in the same session, by the same method that turned out to
+      be wrong for the front switch - and "in parallel with the front switch" was recorded on 19 Aug
+      as an assumption, not a reading.
+      LEFT AS DRAWN rather than moved to match the front, because doubt is not evidence and this
+      project leaves a contradiction drawn rather than guessing a fix. The drawing therefore shows two
+      brake switches fed from DIFFERENT NETS, which looks wrong and honestly represents what is known.
+      Verify at the ring-out, or from the photographs: ring the rear switch's feed against the brown
+      net and against the Br/W net.
   W_BRK_OUT_F:  {<<: *w18, colors: [BU]}
   W_BRK_OUT_R:  {<<: *w18, colors: [BU]}
 
@@ -80,7 +104,7 @@ connections:
   - - SP_R: [1]
     - W_TAIL_RUN: [1]
     - TAIL: [1]
-  - - RH_4P: [2]
+  - - SP_BR: [1]
     - W_BRK_FEED_F: [1]
     - FBRK: [1]
   - - RH_4P: [2]

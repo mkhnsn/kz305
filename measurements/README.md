@@ -744,7 +744,7 @@ measurement applies to continuity as much as to length — a drifting reading is
 evidence about the probe or the terminal, and deleting it leaves the next reader
 unable to tell a clean result from a tidied-up one.
 
-## `B00.5` — tentatively the front brake switch, 2026-09-02
+## `B00.5` — CONFIRMED the front brake switch, 2026-09-02
 
 From the pre-teardown photographs, **read as tentative and recorded as such**.
 
@@ -764,7 +764,13 @@ the 17 Aug note that `FBRK` *"has its own pair of bullet connectors"* — `B00.5
 is a double-female and `B00.6` is a male, which is exactly a mated pair of
 opposite genders.
 
-### ⚠️ This conflicts with the 19 August feed correction
+### ✅ CONFIRMED at the switch — and the 19 August feed correction is overturned
+
+**The switch itself was checked**, same day, and its pair of leads is that
+`B00.5` / `B00.6` pair. Not inference from a sleeve any more: the physical part
+and the physical wires.
+
+### The claim that comes out
 
 `models/factory/brakes.yml` currently says:
 
@@ -781,9 +787,38 @@ three times, and the reason the base-colour-first convention exists. The
 photograph is a direct read of a physical wire. But it is also **tentative**, and
 a single-slot observation in a crowded headlight shell is easy to miscount.
 
-Neither is promoted yet. What settles it is one reading: **ring `B00.5`'s brown
-against the plain-brown net and against the `Br/W` net.** They are separate nets
-with known members, so the answer is unambiguous.
+**Resolved in the photograph's favour**, and not on a coin-toss: the switch was
+checked directly. Working rule 1 — the bench outranks the document.
+`W_BRK_FEED_F` is redrawn as plain `Br` off `SP_BR`, the brown bus.
+
+**This is the fourth time a 600 dpi read of a base-versus-tracer has been wrong
+on this harness.** `Y/BK` vs `BK/Y`, `R/BK` vs `R/Bl` at TAIL1, the horn ground
+wire that does not exist, and now this. The pattern is not that the scan is
+careless — it is that **600 dpi cannot resolve a tracer**, and every claim
+resting on one is provisional until a wire is in hand.
+
+### ⚠️ The rear switch inherits the doubt, and is left drawn
+
+`RBRK`'s feed came from **the same broken stroke, the same session, the same
+method** — and "in parallel with the front switch" was recorded on 19 Aug as an
+*assumption*, not a reading. Its only evidence has just collapsed.
+
+It is **left drawn as `Br/W` from the right bar** rather than moved to match the
+front, because doubt is not evidence and this project leaves a contradiction
+drawn rather than guessing a fix. The drawing therefore shows two brake switches
+fed from **different nets**, which looks wrong and honestly represents what is
+known.
+
+### And it re-opens a question `B00.11` might answer
+
+If the brake switches were the `Br/W` consumers, `B00.11` — `Br/W` at the
+headlight junction with two empty slots — was the obvious candidate for their
+node. The front is now elsewhere, so **`B00.11`'s consumers are unknown again**.
+
+One shape fits both open items at once: **`B00.11` feeding the rear brake
+switch.** It would explain `B00.11`, preserve half the 19 Aug read, and account
+for the rear switch's feed. It is a hypothesis, not a finding — but it is the
+first thing to test against the photographs.
 
 ### The rebuild's decision survives either answer
 
