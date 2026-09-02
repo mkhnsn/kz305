@@ -22,7 +22,7 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-172 labels for 86 wires.
+174 labels for 87 wires.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -144,10 +144,12 @@ again, one wire at a time, and it is not recoverable any other way.
 | `MAIN_OUT` | PDM-1 | `>MF-2` | WH | 14 AWG |
 | `MAIN_SW_FEED` | K_MAIN-1 | `>PDM-1` | WH | 14 AWG |
 | `MAIN_SW_FEED` | PDM-1 | `>K_MAIN-1` | WH | 14 AWG |
-| `MTR_SPD` | LAMP_SPD-1 | `>SP_TAIL-1` | BU | 18 AWG |
-| `MTR_SPD` | SP_TAIL-1 | `>LAMP_SPD-1` | BU | 18 AWG |
-| `MTR_TAC` | LAMP_TAC-1 | `>SP_TAIL-1` | BU | 18 AWG |
-| `MTR_TAC` | SP_TAIL-1 | `>LAMP_TAC-1` | BU | 18 AWG |
+| `MTR_FEED` | PDM-11 | `>SP_MTR-1` | BN | 18 AWG |
+| `MTR_FEED` | SP_MTR-1 | `>PDM-11` | BN | 18 AWG |
+| `MTR_SPD` | LAMP_SPD-1 | `>SP_MTR-1` | BN | 18 AWG |
+| `MTR_SPD` | SP_MTR-1 | `>LAMP_SPD-1` | BN | 18 AWG |
+| `MTR_TAC` | LAMP_TAC-1 | `>SP_MTR-1` | BN | 18 AWG |
+| `MTR_TAC` | SP_MTR-1 | `>LAMP_TAC-1` | BN | 18 AWG |
 | `NSW` | INSTR_6P-4 | `>NSW-1` | GY | 18 AWG |
 | `NSW` | NSW-1 | `>INSTR_6P-4` | GY | 18 AWG |
 | `NSW2` | IND_N-2 | `>INSTR_6P-4` | GY | 18 AWG |

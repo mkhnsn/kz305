@@ -24,7 +24,16 @@ connectors:
     style: simple
     type: Splice
     subtype: left turn feed
-    notes: CONFIRMED 28 Aug 2026 - a physical two-into-one crimp at the headlight junction, not a modelling convenience. The green net rings four points through it, and the grey net mirrors it exactly.
+    notes: |-
+      CONFIRMED 28 Aug 2026 - a physical two-into-one crimp at the headlight junction, not a modelling
+      convenience. The green net rings four points through it, and the grey net mirrors it exactly.
+      ** LOCATED 2 Sep 2026: THIS NODE IS B00.10, AND SP_SIG_R IS B00.4. ** The 28 Aug reading called
+      the two-into-one "front signal plus dash indicator" by inference from the conductor count. The
+      photographs now show the front turn signals carry a two-wire pigtail - a coloured lead and a
+      black - plugging in here, which is the front-signal half read directly rather than deduced.
+      This also cleared up a misattribution the same day: a "white and black" bundle reported at the
+      gauges turned out to be these grey and black signal leads, in a crowded shell. The gauges are
+      Br/W and BK/Y and land on B00.11.
   SP_SIG_R:
     style: simple
     type: Splice

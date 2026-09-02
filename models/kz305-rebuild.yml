@@ -748,13 +748,23 @@ connectors:
       battery in PARK (W-R) and on the fused tail feed in ON (R_Bl-R). So the meter lamps and tail
       light in PARK with everything else dead, exactly as stock - and the ign_switch note's
       "preserve park function" is a drawn circuit rather than an intention.
-      ⚠️ ** THE METER LAMPS' HALF OF THAT RESTS ON A SCAN READ THAT IS NOW IN DOUBT, 2 Sep 2026. **
-      Stock's meter lamps have NO connection point anywhere in the branch log, and the only plain R
-      in the whole harness is at the tail. If they turn out to be B00.11's consumers they are on
-      Br/W, which is switched - so they lit with the KEY and not in park, and this splice should feed
-      the tail lamp only. THE TAIL LAMP'S PARK BEHAVIOUR IS NOT IN DOUBT; only the meter lamps'.
-      Nothing to change until the question settles - the wiring is identical either way, it is only
-      whether the two meter feeds belong on this node or on F7. See measurements/README.
+      ** THE METER LAMPS CAME OFF THIS NODE 2 Sep 2026 - see SP_MTR. ** They were here because the
+      scan made them plain R off the tail net "so they light in PARK too". The photographs show Br/W
+      pigtails onto B00.11, which is switched, so stock's meter lamps died with the key. This splice
+      now feeds the TAIL LAMP ONLY, whose park behaviour was never in doubt - it rests on the metered
+      switch table, not on the scan.
+
+  SP_MTR:
+    style: simple
+    type: Splice
+    subtype: meter lamp feed - 1 to 2
+    notes: |-
+      The stock node was B00.11, a Br/W double-female with one slot per meter lamp - identified
+      2 Sep 2026 and the last of the six empty double-females to close.
+      ** THESE LAMPS ARE SWITCHED, NOT PARK-FED. ** They were drawn on SP_TAIL until 2 Sep on the
+      strength of a 600 dpi read that made them plain R off the tail net "so they light in PARK too".
+      The photographs show Br/W pigtails landing on B00.11, and Br/W is switched - so stock's meter
+      lamps died with the key and the park claim fell with the colour that carried it.
 
   SP_POD_GND:
     style: simple
@@ -999,8 +1009,12 @@ cables:
       IGN way 2 out to the tail net. Fed from W_TAIL_FEED in ON and DIRECTLY FROM THE BATTERY in
       PARK - see SP_TAIL. Sized 16 AWG for the tail lamp that joins this net later, not for the two
       LED meter lamps it carries today.
-  W_MTR_SPD: {<<: *w18, colors: [BU], notes: "Speedometer light, on the tail net so it lights in PARK - stock behaviour, kept."}
-  W_MTR_TAC: {<<: *w18, colors: [BU], notes: "Tachometer light, same net."}
+  W_MTR_FEED:
+    <<: *w18
+    colors: [BN]
+    notes: PDM F7 to the meter lamp splice. Switched instrument power, sharing the fuse with the neutral lamp.
+  W_MTR_SPD: {<<: *w18, colors: [BN], notes: "Speedometer light. SWITCHED, not park-fed - see SP_MTR."}
+  W_MTR_TAC: {<<: *w18, colors: [BN], notes: "Tachometer light, same net."}
   W_GND_SPD: {<<: *w18, colors: [BK]}
   W_GND_TAC: {<<: *w18, colors: [BK]}
 
@@ -1286,10 +1300,13 @@ connections:
   - - IGN: [2]
     - W_TAIL_OUT: [1]
     - SP_TAIL: [1]
-  - - SP_TAIL: [1]
+  - - PDM: [11]
+    - W_MTR_FEED: [1]
+    - SP_MTR: [1]
+  - - SP_MTR: [1]
     - W_MTR_SPD: [1]
     - LAMP_SPD: [1]
-  - - SP_TAIL: [1]
+  - - SP_MTR: [1]
     - W_MTR_TAC: [1]
     - LAMP_TAC: [1]
   - - LAMP_SPD: [2]

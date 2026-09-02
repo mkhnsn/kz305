@@ -931,132 +931,70 @@ the rebuilt bike.** That is the standing rule in `kz305-rebuild.yml`, and it is
 the actual price of leaving this open — not untidiness. If `B00.11`'s second
 consumer is never identified, the rebuild silently drops whatever it was.
 
-## Confidence audit at the bars, 2026-09-02
+## Confidence audit at the bars — CLOSED OUT 2026-09-02
 
-Asked directly: what near the handlebars is not accounted for. Working from
-**components inward** rather than from branches outward, because that is the
-direction that finds a missing circuit.
+Asked what near the handlebars was unaccounted for. The audit found one large
+gap and it is now closed, along with the last of the six empty double-females.
 
-### ⛔ The meter lamps have NO connection point anywhere in the harness
+### ✅ The meter lamps — found, and the drawing was wrong twice over
 
-**This is the biggest gap at the front, and it is larger than `B00.11`.**
+The pod carries six lamps. Four were already accounted for across the instrument
+6P. The **speedometer and tachometer** were not in the 6P at all and had **no
+connection point anywhere in the branch log**.
 
-The pod carries **six lamps**. Four are fully accounted for — left turn, right
-turn, neutral and high beam, all crossing the instrument 6P on ways 1, 2, 3/4
-and 5, with the pod's ground bus on way 6. The arithmetic closes exactly: five
-signal ways plus a 1→3 ground splice is the eight conductors counted leaving the
-pigtail.
+**They each carry a two-wire pigtail: `Br/W` and `BK/Y`, on male bullets.**
+`B00.11` is a `Br/W` double-female with two slots. Two lamps, two slots, matching
+colour, matching gender.
 
-**The other two — the speedometer and tachometer illumination — are not in the
-6P at all**, and `instruments.yml` says so: *"the meter illumination lamps sit
-outside the 6P span and route on their own bullets."*
+| | Was drawn | Is |
+|---|---|---|
+| Feed | plain **R** off `SP_R`, the tail net | **`Br/W`** off `B00.11` |
+| Ground | `GND_CHASSIS` | **`GND_NETB`** — `BK/Y` is Net B, *open* to the chassis ring |
 
-⚠️ **Which bullets? There is no answer anywhere in the log.**
+Fed from a colour that does not exist at the front of this harness, and earthing
+on a net they never touch. Both halves came from the same 600 dpi read.
 
-| | |
+### ⚠️ The park behaviour fell with the colour
+
+`Br/W` is **switched**, so stock's meter lamps lit with the **key** and not in
+PARK. The claim that they *"live with the tail, so they light in PARK too"* came
+from the same scan read, and the two go together.
+
+`kz305-rebuild.yml` had them on `SP_TAIL` for that reason. They now hang off
+`SP_MTR` — a 1→2 splice reproducing `B00.11` — fed from **F7 INSTR PWR**.
+`SP_TAIL` feeds the tail lamp only, whose park behaviour was never in doubt: it
+rests on the metered switch table, not the scan.
+
+### ✅ `B00.4` and `B00.10` — confirmed, not inferred
+
+Both were logged 28 Aug as two-into-one crimps that *"suit front signal plus dash
+indicator"* — inference from a conductor count. The photographs show the **front
+turn signals carry a two-wire pigtail**, a coloured lead and a black, plugging in
+here. So `B00.4` is `SP_SIG_R` and `B00.10` is `SP_SIG_L`, read rather than
+deduced.
+
+### ⛔ Retraction, kept on the record
+
+An earlier read the same day reported a **white and black** bundle at the tach
+landing on `B00.4`. **That was wrong** — they were these grey and black *signal*
+leads, misattributed in a crowded shell.
+
+Kept rather than quietly dropped, because it is why `B00.4` briefly appeared to
+collide with a measured net, and because the misread produced a real result:
+chasing it is what confirmed both signal splices.
+
+**The lesson is the shell, not the reader.** Nine branches leave `B00` within
+100 mm of each other and several are two-into-one crimps. Attributing a lead to
+a specific bullet from a photograph of that cluster is genuinely hard, and a
+read there deserves the same hedge a scan colour gets.
+
+### Still soft at the bars
+
+| Item | Why |
 |---|---|
-| Drawn as | `SP_R` → `W_MTR_SPD` / `W_MTR_TAC`, plain **R** |
-| Source | the 600 dpi scan, 19 Aug |
-| The model's own caveat | *"R vs Br is scan-marginal — confirm at the ring-out"*, and *"the speedo read is partly obscured by a connector symbol"* |
-| Plain **R** in the entire branch log | **exactly one — `B10.2`, at 1360 mm.** The tail end. |
-
-So two components in the drawing are fed from a colour that **does not exist at
-the front of this harness**, on a scan read the model already flags as marginal
-between R and Br.
-
-### 2026-09-02, from the photographs: the tach bundle is WHITE and BLACK
-
-A bundle running up to the **tachometer** carries a **white** and a **black**
-wire. The black lands on **one of the `BK/Y`s in the `B00` cluster**; the white
-appears to go to **`B00.4`** — *"from what I can tell"*, and that hedge is
-carried forward as recorded rather than smoothed away.
-
-**The colours are data. The white's destination is not yet.**
-
-#### ✅ The ground half also closes part of `B00.2`
-
-`B00.2` was logged as *"a common ground collection with several splices
-downstream"*, and **several was never a number**. The tach lamp's black is one
-of them. So the meter lamps ground into the front `BK/Y` collection — Net B —
-rather than anywhere exotic, and `B00.2`'s fan-out is one member less mysterious.
-
-#### ⛔ And the feed is not R, which kills the drawing's colour outright
-
-The models feed both meter lamps plain **R**. The wire at the lamp is **white**.
-
-That is now **three independent reasons** the `SP_R` → meter lamp drawing is
-wrong: the scan flagged itself as marginal, no plain R exists at the front of
-the harness, and the wire in the photograph is a different colour entirely.
-**Fifth time a scan-derived colour has failed on this harness.**
-
-#### ⚠️ But `B00.4` collides with a measurement
-
-`B00.4` is **grey**, and it was **metered**: 0.2 Ω to `B00.1`'s grey on 28 Aug.
-Grey is the **right-turn circuit** — the left cluster's turn switch gives *R is
-O to Gy*, and the pod 6P carries Gy on way 2 as the right indicator.
-
-**A tachometer lamp on the right-turn net would flash with the indicator.** That
-is almost certainly not what the bike did.
-
-So one of these is off:
-
-- the white lands somewhere **other** than `B00.4` — the hedge, and the crowded
-  headlight shell makes it easy
-- there is an **unlogged bullet** at `B00` that the 12-branch count missed
-- `B00.4` is not what the 28 Aug reading says — **least likely**, since that was
-  a meter reading rather than a colour call
-
-#### The tidy answer is still available
-
-A pod-side **white** mating a harness-side **`Br/W`** is completely ordinary —
-the pod pigtail is a child harness and its internal colours need not match the
-main loom. **So `B00.11` = the two meter lamps survives this**, and would still
-close both open items at once.
-
-**One reading decides it.** Ring the tach's white against `B00.4`'s grey, against
-`B00.11`, and against `B10.2`'s R. Three probes, and every outcome is
-informative.
-
-### Three ways that resolves, and one of them changes the rebuild
-
-**(a) A tap under the tape.** The `R` run from the ignition switch to the tail
-passes the whole length of the loom; the meter lamps could splice off it
-mid-trunk. **Step 3 would find this** — it is a splice inside the loom, unlike
-the empty double-females. This preserves the drawing.
-
-**(b) They are `B00.11`'s two consumers.** Two lamps, two slots, both at the
-front, both wanting switched power, on a node that is a 1→2 fan-out — which is
-precisely what a double-female is for. It would close `B00.11` and the meter
-lamps in one move, and it requires only that the scan's already-flagged R-vs-Br
-call went the wrong way.
-
-**(c) Something not yet imagined.** Kept open because the last four sessions
-each produced one.
-
-⚠️ **If (b) is right, the rebuild is wrong about park.** `Br/W` is switched, so
-the meter lamps would light **with the key and not in PARK** — where the drawing
-has them on the tail net specifically so they *do*. `SP_TAIL` in
-`kz305-rebuild.yml` was built around that behaviour. The claim *"meter lamps
-live with the tail, so they light in PARK too"* comes from **the same scan read
-as the colour**, so if the colour falls, the behaviour falls with it.
-
-### Lower confidence, in order
-
-| Item | Why it is soft |
-|---|---|
-| **`B00.4` / `B00.10` turn merges** | Both are 2-to-1 shared crimps read as *"suits front signal plus dash indicator"*. That is **inference from a conductor count**, not a read of where either leg goes. Plausible, unverified. |
-| **`B00.2`'s downstream splices** | Described at the bench as *"a common ground collection with several splices downstream"*. **Several was never a number.** It is the front ground node and its fan-out is unenumerated. |
-| **The headlight's ground** | Drawn `BK/Y`, presumably onto `B00.2`. Never recorded as a mate. |
-| **`B01.4` neutral switch lead** | Logged *"pending ring-out confirmation"*. Since corroborated by the 6P cavity map putting LG on way 4, so this one is nearly closed. |
-
-### What is solid at the bars
-
-Not everything is shaky, and it is worth saying which: the ignition switch
-(`B00.3`, identified by elimination with both halves read), both bar clusters
-(`B01.x`, `B02.x`, cavity maps read), the front brake switch (`B00.5`/`B00.6`,
-**confirmed at the part**), the horn (`B01.3`), the headlight filament feeds
-(`B00.9`, `B00.12`, both mated to the headlight pigtail when recorded), and all
-four pod telltales.
+| **`B00.2`'s downstream splices** | *"Several"* was never a number. Two are now named — both meter lamp grounds — so the count is *at least* two. The rest are unenumerated. |
+| **The headlight's ground** | Drawn `BK/Y`, presumably onto `B00.2`. Still never recorded as a mate. |
+| **`B01.4` neutral switch lead** | Logged *"pending ring-out confirmation"*, since corroborated by the 6P cavity map. Nearly closed. |
 
 ## Words used precisely
 

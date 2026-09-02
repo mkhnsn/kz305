@@ -223,8 +223,19 @@ connectors:
     subtype: double-female bullet, both slots empty
     pinlabels: [Br/W]
     notes: |-
-      The Br/W endpoint at the headlight junction (branch B00.11). One harness wire in the crimp and
-      TWO receptacle slots, BOTH EMPTY - whatever plugged in came off at teardown, before this
+      ** IDENTIFIED 2 Sep 2026: BOTH SLOTS FED A METER LAMP. ** The speedometer and tachometer each
+      carry a two-wire pigtail - Br/W and BK/Y on male bullets - read from the pre-teardown
+      photographs. Two lamps, two slots, matching colour, matching gender. This closes the last of the
+      six empty double-females AND the question of where the meter lamps connect, which had no answer
+      anywhere in the branch log.
+      ** CONSEQUENCE: THE METER LAMPS ARE ON Br/W, WHICH IS SWITCHED. ** They light with the KEY and
+      NOT in park. The old drawing fed them plain R off the tail net specifically so they would light
+      in park, and that came from the same 600 dpi read as the colour - both fall together. See
+      W_MTR_SPD.
+      Their BK/Y grounds land on the B00.2 collection, which puts two names to its unenumerated
+      "several splices downstream".
+      HISTORICAL: the Br/W endpoint at the headlight junction (branch B00.11). One harness wire in the
+      crimp and TWO receptacle slots, BOTH EMPTY - whatever plugged in came off at teardown, before this
       project's tagging existed, and is recorded nowhere. Modelled so the drawing carries the third
       endpoint the meter found; what it fed is a permanent gap in the as-built record, recoverable
       only from the on-bike photographs or from the components themselves.

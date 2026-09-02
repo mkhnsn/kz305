@@ -18,8 +18,8 @@ why the measurement log keys on physical branch IDs instead.
 | `W_BAT_SOL` | BATT | SOL | RD | 6 AWG |
 | `W_BL_UP` | FUSE_HEAD | FUSE_4P | BU | 18 AWG |
 | `W_BRAKE` | SP_BRAKE | TAIL | BU | 18 AWG |
-| `W_BRK_FEED_F` | RH_4P | FBRK | BNWH | 18 AWG |
-| `W_BRK_FEED_R` | RH_4P | RBRK | BNWH | 18 AWG |
+| `W_BRK_FEED_F` | SP_BR | FBRK | BN | 18 AWG |
+| `W_BRK_FEED_R` | SP_BR | RBRK | BN | 18 AWG |
 | `W_BRK_OUT_F` | FBRK | SP_BRAKE | BU | 18 AWG |
 | `W_BRK_OUT_R` | RBRK | SP_BRAKE | BU | 18 AWG |
 | `W_BRW_HARNESS` | FUSE_4P | SP_BRW | BNWH | 18 AWG |
@@ -43,8 +43,8 @@ why the measurement log keys on physical branch IDs instead.
 | `W_GND_SIG_FR` | SIG_FR | GND_CHASSIS | BKYE | 18 AWG |
 | `W_GND_SIG_RL` | SIG_RL | GND_CHASSIS | BKYE | 18 AWG |
 | `W_GND_SIG_RR` | SIG_RR | GND_CHASSIS | BKYE | 18 AWG |
-| `W_GND_SPD` | LAMP_SPD | GND_CHASSIS | BKYE | 18 AWG |
-| `W_GND_TAC` | LAMP_TAC | GND_CHASSIS | BKYE | 18 AWG |
+| `W_GND_SPD` | LAMP_SPD | GND_NETB | BKYE | 18 AWG |
+| `W_GND_TAC` | LAMP_TAC | GND_NETB | BKYE | 18 AWG |
 | `W_GND_TAIL` | TAIL | GND_CHASSIS | BKYE | 18 AWG |
 | `W_HI` | LH | SP_HI | RDBK | 18 AWG |
 | `W_HI_HEAD` | SP_HI | HEAD | RDBK | 18 AWG |
@@ -62,8 +62,8 @@ why the measurement log keys on physical branch IDs instead.
 | `W_LO` | LH | HEAD | RDYE | 18 AWG |
 | `W_MAIN` | SOL | SP_WR | WHRD | 14 AWG |
 | `W_MAIN_OUT` | MF | SP_WR | WHRD | 14 AWG |
-| `W_MTR_SPD` | SP_R | LAMP_SPD | RD | 18 AWG |
-| `W_MTR_TAC` | SP_R | LAMP_TAC | RD | 18 AWG |
+| `W_MTR_SPD` | BRW_HL | LAMP_SPD | BNWH | 18 AWG |
+| `W_MTR_TAC` | BRW_HL | LAMP_TAC | BNWH | 18 AWG |
 | `W_NSW` | INSTR_6P | NSW | GN | 18 AWG |
 | `W_NSW2` | IND_N | INSTR_6P | GN | 18 AWG |
 | `W_POD_GND` | INSTR_6P | GND_NETB | BKYE | 18 AWG |

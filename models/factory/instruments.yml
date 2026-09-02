@@ -77,7 +77,7 @@ cables:
   # --- meter illumination - tail/city net ----------------------------
   W_MTR_SPD:
     <<: *w18
-    colors: [RD]
+    colors: [BNWH]
     notes: |-
       Reads R (solid) off the scan - meter lamps live with the tail, so they light in PARK too. The
       tach read is clean; the speedo read is partly obscured by a connector symbol. R vs Br is
@@ -91,8 +91,16 @@ cables:
       Three ways out: a splice off the R run under the tape, which Step 3 would find and which would
       preserve this drawing; or they are B00.11's two unexplained consumers, which would need the
       already-flagged R-vs-Br call to have gone the wrong way; or something not yet imagined.
-      ** THE COLOUR IS WRONG REGARDLESS, 2 Sep 2026. ** A bundle running to the TACHOMETER carries a
-      WHITE and a BLACK wire - photographed, not inferred. So the lamp end is not R by any reading.
+      ** RESOLVED 2 Sep 2026 - REDRAWN Br/W OFF BRW_HL (branch B00.11). ** The speedometer and
+      tachometer each carry a two-wire pigtail, Br/W and BK/Y on male bullets, read from the
+      photographs. Two lamps, two slots on B00.11's double-female, matching colour, matching gender.
+      An earlier read the same day reported a WHITE and BLACK bundle at the tach; that was retracted -
+      it was the front turn signals' grey and black, misattributed in a crowded shell.
+      ** THE PARK BEHAVIOUR FALLS WITH THE COLOUR. ** Br/W is switched, so these lamps light with the
+      KEY and NOT in park. The old drawing fed them plain R off the tail net specifically so they
+      WOULD light in park, and that claim came from the same 600 dpi read as the colour did. Both go.
+      Grounds retargeted from GND_CHASSIS to GND_NETB - BK/Y is Net B, which is open to the chassis
+      ring, so the old drawing had them earthing on a net they never touch.
       That is three independent reasons this drawing's colour fails: the scan flagged itself
       marginal, no plain R exists at the front of the harness, and the wire is a different colour.
       The BLACK half lands on one of the BK/Y bullets at B00, which also puts a number on one of
@@ -104,7 +112,7 @@ cables:
       would light with the key and NOT in park - and "live with the tail, light in PARK" comes from
       the same scan read as the colour does. models/kz305-rebuild.yml builds SP_TAIL around park-fed
       meter lamps and would need revising. See measurements/README.
-  W_MTR_TAC: {<<: *w18, colors: [RD]}
+  W_MTR_TAC: {<<: *w18, colors: [BNWH]}
 
   # --- pod indicator feeds crossing the 6P ---------------------------
   W_IND_HB:  {<<: *w18, colors: [RDBK]}
@@ -157,18 +165,18 @@ cables:
 
 connections:
   # --- meter illumination off the tail R net -------------------------
-  - - SP_R: [1]
+  - - BRW_HL: [1]
     - W_MTR_SPD: [1]
     - LAMP_SPD: [1]
-  - - SP_R: [1]
+  - - BRW_HL: [1]
     - W_MTR_TAC: [1]
     - LAMP_TAC: [1]
   - - LAMP_SPD: [2]
     - W_GND_SPD: [1]
-    - GND_CHASSIS: [1]
+    - GND_NETB: [1]
   - - LAMP_TAC: [2]
     - W_GND_TAC: [1]
-    - GND_CHASSIS: [1]
+    - GND_NETB: [1]
 
   # --- high-beam indicator off the HI net -----------------------------
   - - SP_HI: [1]

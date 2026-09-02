@@ -63,7 +63,14 @@ connectors:
     style: simple
     type: Splice
     subtype: tail/city R net
-    notes: The R output of the ignition switch feeds the tail filament AND the meter illumination lamps. Live in ON and PARK.
+    notes: |-
+      The R output of the ignition switch feeds the tail filament. Live in ON and PARK.
+      ** THE METER LAMPS CAME OFF THIS NODE 2 Sep 2026. ** They were drawn here on a 600 dpi read of
+      plain R; the photographs show both meter pigtails are Br/W and they land on B00.11 instead. So
+      this splice now has ONE consumer and may not be a physical node at all - a degenerate splice is
+      what a straight run looks like when the model was told there were two legs. Left drawn because
+      the tail's park behaviour still depends on this pin, and because Step 3 may yet find a real
+      junction here. Do not reproduce it in the rebuild without evidence.
 
 cables:
   W_GND_TAIL:   {<<: *w18, colors: [BKYE]}
