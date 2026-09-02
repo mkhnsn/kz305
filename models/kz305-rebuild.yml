@@ -356,10 +356,23 @@ connectors:
         manufacturer: MTA
         mpn: "4550750"
         qty: 18
-      - type: Wire seal
-        subtype: "2.8mm - ** SIZE NOT CHOSEN - selected by INSULATION OD, not gauge. 4550748 red 1.2-2.1mm / 4550747 green 2.2-3.0mm / 4550749 gray 3.1-3.7mm. Measure the chosen wire. **"
+      # SEAL SIZE RESOLVED 1 Sep 2026 by the TXL decision - it follows the
+      # wire's INSULATION OD, not its gauge, so it could not be picked until
+      # the wire family was. TXL is thin-wall; GXL or SXL would need
+      # different seals in the same gauges. 12 AWG needs grey but does not
+      # enter this block - charging runs direct to the battery.
+      # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm.
+      # Caliper the delivered spool before ordering in quantity.
+      - type: Wire seal - red
+        subtype: 2.8mm, insul dia 1.2-2.1mm - for 18 AWG TXL (1.98mm)
         manufacturer: MTA
-        qty: 32
+        mpn: "4550748"
+        qty: 12
+      - type: Wire seal - green
+        subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
+        manufacturer: MTA
+        mpn: "4550747"
+        qty: 20
     pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit

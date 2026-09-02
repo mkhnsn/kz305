@@ -688,19 +688,52 @@ assumed and add two parts that were missing entirely.
 | **`1708338-L`** | **1.0–2.0 mm² (18–16 AWG)** | **← this harness's branches** |
 | `1708339-L` | 2.5–4.0 mm² (14–12 AWG) | if any heavy leg enters the block |
 
-#### ⚠️ Wire seals are sized by INSULATION OD, not by gauge
+#### Wire seals — RESOLVED 1 Sep 2026 by the TXL decision
 
-| MTA PN | Insulation dia. | Colour |
-|---|---|---|
-| `4550748` | 1.2–2.1 mm | red |
-| `4550747` | 2.2–3.0 mm | green |
-| `4550749` | 3.1–3.7 mm | grey |
+Seals are sized by **insulation OD, not gauge**, so this could not be settled
+until the wire family was. **Wire decided: TXL from Prowire** — thin-wall XLPE,
+125 °C, SAE J1128.
 
-**This cannot be looked up — it has to be measured.** Two 18 AWG wires with
-different insulation walls take different seals, and the seal is what makes the
-module waterproof. It lands on the same calipers as the gauge pass: **measure
-the insulation OD of the wire actually bought**, then choose. Ordering seals
-before choosing wire is ordering blind.
+| AWG | TXL nominal OD | Seal | Margin to nearest bound |
+|---|---|---|---|
+| 18 | 0.078 in / **1.98 mm** | `4550748` red (1.2–2.1) | 0.12 mm |
+| 16 | 0.089 in / **2.26 mm** | `4550747` green (2.2–3.0) | **0.06 mm** |
+| 14 | 0.102 in / **2.59 mm** | `4550747` green | 0.39 mm |
+| 12 | 0.127 in / **3.23 mm** | `4550749` grey (3.1–3.7) | 0.13 mm |
+
+So the block needs **two seal part numbers**, red and green. Grey is not needed:
+12 AWG is the charging pair and runs direct to the battery, never entering the
+module.
+
+**⚠️ 16 AWG clears green's lower bound by 0.06 mm.** That is inside ordinary
+manufacturing tolerance on an extruded wall. It is very likely fine — green is
+the intended fit — but caliper the delivered spool before ordering seals in
+quantity. Same instrument as the gauge pass.
+
+#### ⚠️ 6 AWG is not TXL and cannot be
+
+TXL covers roughly **24 down to 8 AWG**. The three heavy cables — `W_BAT_SOL`
+(battery to starter relay), `W_SOL_SM` (relay to motor) and `W_BAT_GND` — are
+**6 AWG**, outside the range. They are battery/starter cable: a different
+product, different insulation, much larger OD.
+
+**Not specified yet**, and none of the decisions above carry over to it. None of
+it enters the PDM, and all three terminate in lugs rather than 280 terminals, so
+neither the seal nor the terminal choice applies. It needs its own line in the
+order.
+
+**The seal PN is coupled to the wire family, not just the gauge.** GXL or SXL in
+these same gauges would push 18 AWG out of red and into green. If the wire
+choice ever changes, the seals change with it — which is the kind of dependency
+that is invisible at order time and expensive at build time.
+
+#### ⚠️ 18 AWG sits in a gap between MTA's stated CSA bands
+
+`1708337-L` covers 0.35–0.75 mm² and `1708338-L` covers 1.0–2.0 mm². **18 AWG is
+0.82 mm², which is above the first and below the second.** MTA's own AWG labels
+resolve it — they call `1708338-L` the *18–16 AWG* terminal — so that is the
+part to use, and the CSA figures are evidently nominal band edges rather than
+hard limits. Worth a **pull test on the first crimp** rather than assuming.
 
 #### Fuses — MiniVal, by rating
 
