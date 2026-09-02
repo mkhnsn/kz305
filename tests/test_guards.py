@@ -385,7 +385,29 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     #   SOL         - 6 AWG battery cable comes in red and black only, so
     #                 W_BAT_SOL and W_SOL_SM are both RD. They are lugs on
     #                 separate studs and cannot physically be interchanged.
-    exempt = {"GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "BATT", "SOL"}
+    #
+    # And components that IDENTIFY THEMSELVES, so colour is not the control
+    # there - scoped 2 Sep 2026 when the palette was sized on BOM cost.
+    # Forcing colour uniqueness everywhere pushed the palette to eleven and
+    # would have gone past thirteen once signals and instruments landed,
+    # at roughly one spool PER GAUGE each.
+    #   K_*         - relays. 30/85/86/87 are moulded on the part.
+    #   PDM         - 60 cavities, a cavity map, printed labels, and HOT at
+    #                 one end / SWITCHED at the other. At full draw it needs
+    #                 about twelve ways, the whole usable palette on one
+    #                 connector.
+    #   LH RH IGN   - retained switchgear, each with a read cavity map.
+    #   COIL_L/R    - the points leads are in a FACTORY BRAIDED JACKET,
+    #                 unmistakable against new TXL whatever colour it is,
+    #                 and the coil terminals are marked.
+    #
+    # What is left - lamps, splices, free bullets - is where a swap has no
+    # other check. That is what this guard is for.
+    exempt = {
+        "GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "BATT", "SOL",
+        "PDM", "LH", "RH", "IGN", "COIL_L", "COIL_R",
+        "K_MAIN", "K_COIL", "K_HORN", "K_HI", "K_LO",
+    }
 
     cables = {n: (c or {}).get("colors") for n, c in (doc.get("cables") or {}).items()}
     connectors = doc.get("connectors") or {}
@@ -436,4 +458,46 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     assert not problems, (
         "two circuits share a colour on one connector, which solid-colour "
         "wiring cannot afford:\n  " + "\n  ".join(problems)
+    )
+
+
+def test_black_is_only_ever_a_ground():
+    """BK must not appear on anything but a ground wire.
+
+    This is the single most load-bearing rule in the solid-colour scheme and
+    the one that survives every palette size, because it is the stock trap:
+    the factory harness ran the starter trigger on a black wire that was NOT
+    an earth, and `models/factory/starting.yml` still carries the warning.
+    Under the rebuild's scheme black means ground and nothing else, so a
+    black wire is always safe to land on the star bus.
+
+    ONE EXCEPTION, and it is not ours to fix: W_PTS_R is the right contact
+    breaker lead, black, in a factory braided jacket. It is an existing part
+    rather than wire we buy.
+    """
+    sys.path.insert(0, str(ROOT))
+    import build
+
+    common = COMMON.read_text(encoding="utf-8")
+    doc = build.load(ROOT / "models" / "kz305-rebuild.yml", common)
+
+    # A ground wire is one that lands on the star bus, or the factory lead.
+    grounded = set()
+    for conn_set in doc.get("connections") or []:
+        entries = [e for e in conn_set if isinstance(e, dict)]
+        names = [next(iter(e)) for e in entries]
+        if "GND" in names:
+            grounded.update(n for n in names if n in (doc.get("cables") or {}))
+
+    allowed = grounded | {"W_PTS_R"}
+
+    offenders = sorted(
+        name
+        for name, cable in (doc.get("cables") or {}).items()
+        if "BK" in ((cable or {}).get("colors") or []) and name not in allowed
+    )
+
+    assert not offenders, (
+        "black is reserved for grounds, and these are not grounds:\n  "
+        + "\n  ".join(offenders)
     )

@@ -276,7 +276,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, ENG, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, SPARE]
     notes: |-
       UPGRADE - replaces the stock earth arrangement, and 28 Aug 2026 established that what it replaces
       is not what this note used to say. There is no single ring terminal carrying the harness. There
@@ -373,7 +373,13 @@ connectors:
         manufacturer: MTA
         mpn: "4550747"
         qty: 20
-    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 SPARE, SW IN (Br), SW OUT (Br), SW AUX (Br)]
+    # ⚠️ WAYS ARE APPENDED, NEVER INSERTED. Connection sets reference this
+    # connector BY INDEX, so inserting a way silently repoints every
+    # reference after it - which is exactly how FUSE_4P went wrong on
+    # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
+    # list is ALLOCATION order, not physical cavity order; the cavity map
+    # is a separate artefact and is not written yet.
+    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus 2x 10A glass fuses. Cavity map PROVISIONAL; the circuit
       count is not final while the star-ground wire count is unknown (blocker 5). F2 feeds the KILL
@@ -717,7 +723,7 @@ cables:
     notes: K_MAIN coil ground to the star bus.
   W_COIL_PWR:
     <<: *w16
-    colors: [VT]
+    colors: [YE]
     notes: |-
       Fused coil power into the relay. ** SWITCHED, NOT ALWAYS-HOT, AND THIS IS THE ONE THAT CANNOT BE
       TRADED. ** Coils must die with the key, and that has to hold even if K_COIL's contact welds - if
@@ -730,10 +736,10 @@ cables:
     notes: K_COIL coil ground to the star bus.
   W_YR_OUT:
     <<: *w16
-    colors: [PK]
+    colors: [YE]
     notes: Relay output to the coil splice. Kept Y/R to match the stock coil-feed colour so the circuit still reads as factory.
-  W_COIL_L: {<<: *w16, colors: [PK]}
-  W_COIL_R: {<<: *w16, colors: [PK]}
+  W_COIL_L: {<<: *w16, colors: [YE]}
+  W_COIL_R: {<<: *w16, colors: [YE]}
   W_PTS_L:
     <<: *w18
     colors: [YE]
@@ -744,7 +750,7 @@ cables:
     notes: Black serves RIGHT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_RH_OUT:
     <<: *w18
-    colors: [VT]
+    colors: [YE]
     notes: Starter trigger. BK but NOT a ground - do not land it on the star bus.
   W_SOL_GND:
     <<: *w18
@@ -757,7 +763,7 @@ cables:
     notes: Switched brown to the K_HORN coil. ~0.15A.
   W_HORN_SW:
     <<: *w18
-    colors: [VT]
+    colors: [YE]
     notes: |-
       Horn button return - relay coil ground side. BK but NOT a chassis ground; it lands on the relay,
       not the bus. CONFIRMED as its own net 28 Aug 2026, open to the starter-trigger black. This is the
@@ -770,13 +776,13 @@ cables:
       frame is being powder coated. Worked example of blocker 5.
   W_HORN_PWR:
     <<: *w16
-    colors: [OG]
+    colors: [BU]
     notes: |-
       Fused horn power from PDM F4 into the relay common. ALWAYS-HOT per the hybrid split - the horn is
       still dead with the key out because its COIL is switched, and an open relay contact draws nothing.
   W_HORN_FEED:
     <<: *w16
-    colors: [PK]
+    colors: [YE]
     notes: Relay output to the horn. Kept brown to match the stock feed colour.
   W_HORN_GND:
     <<: *w16
@@ -809,17 +815,17 @@ cables:
     notes: Dimmer HI output to the K_HI coil. Stock colour retained.
   W_LO_TRIG:
     <<: *w18
-    colors: [PK]
+    colors: [GN]
     notes: Dimmer LO output to the K_LO coil. Stock colour retained.
   W_KHI_GND:  {<<: *w18, colors: [BK], notes: K_HI coil ground to the star bus.}
   W_KLO_GND:  {<<: *w18, colors: [BK], notes: K_LO coil ground to the star bus.}
   W_HEAD_HI:
     <<: *w16
-    colors: [OG]
+    colors: [BU]
     notes: K_HI output to the HI filament. Stock colour retained.
   W_HEAD_LO:
     <<: *w16
-    colors: [VT]
+    colors: [GN]
     notes: K_LO output to the LO filament. Stock colour retained.
   W_HEAD_GND:
     <<: *w16

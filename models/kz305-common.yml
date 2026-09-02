@@ -58,18 +58,43 @@
 #    no tracers there are no pairs left to reverse. That is a real gain,
 #    not merely a cost of the decision.
 #
-#    THE PRICE is that colour alone now separates fewer circuits, so the
-#    scheme was chosen to guarantee that NO TWO WIRES ON ONE CONNECTOR
-#    SHARE A COLOUR unless they are the same net. Eleven solids:
+#    THE PRICE is that colour alone separates fewer circuits. The scheme
+#    is therefore FUNCTION-BASED, and deliberately SMALL - EIGHT solids:
 #
 #      BK  ground ONLY - never a signal, never a feed
 #      RD  always-hot / battery / unfused main
 #      WH  fused main power, pre-relay
-#      BN  switched bus
-#      YE  ignition feed          PK  coil feed, and LO beam trigger
-#      VT  starter trigger, coil power, horn return, LO beam
-#      GY  relay coil drives      OG  horn power, HI beam
-#      BU  headlamp supply        GN  dimmer common
+#      BN  switched power - the bus and its fused feeds
+#      YE  ignition, coil, starter trigger
+#      GY  control and trigger signals - relay coil drives, switch returns
+#      BU  lighting supply and HIGH beam
+#      GN  LOW beam, dimmer common, signals
+#
+#    ** WHY EIGHT AND NOT MORE - SIZED 2 Sep 2026 ON BOM COST. ** Every
+#    colour is a spool PER GAUGE, so the cost driver is (colour x gauge)
+#    SKUs, not the colour count:
+#
+#      11 colours -> 21 SKUs      8 colours -> 17 SKUs
+#       7 colours -> 16 SKUs      5 colours -> 15 SKUs
+#
+#    Below about seven the saving stops: SKU count is dominated by the
+#    gauge spread, so dropping colours costs safety distinctions and buys
+#    almost nothing. Eight is the knee, and it is where HIGH and LOW beam
+#    stay different colours - reversed beams being a fault you would
+#    actually notice and have to chase.
+#
+#    ** WHERE COLOUR IS NOT THE CONTROL. ** An earlier pass forced every
+#    connector to have no two wires alike, which pushed the palette to
+#    eleven and would have pushed it past thirteen once the signals and
+#    instruments landed. That was over-applied. Colour only has to
+#    disambiguate where NOTHING ELSE DOES:
+#      - RELAYS identify themselves. 30/85/86/87 are moulded on the part.
+#      - MAPPED CONNECTORS have a cavity map and a printed label - the
+#        PDM, the bar clusters, the instrument 6P.
+#      - THE POINTS LEADS are in a factory braided jacket, unmistakable
+#        against new TXL whatever colour it is.
+#    What is left - lamps, splices, free bullets - is where a swap has no
+#    other check, and that is what the guard still enforces.
 #
 #    ⚠️ TWO DOCUMENTED EXCEPTIONS, both forced by parts we do not make:
 #      - W_PTS_R is BLACK and is NOT a ground. It is a factory contact
