@@ -790,6 +790,10 @@ connectors:
       Factory topology preserved - the kill switch output feeds both coils here, which is what makes the
       engine stop switch actually stop the engine. Keep this splice ACCESSIBLE and documented; it is the
       plug-in point for an EI module later.
+      ** STOCK ALREADY MADE IT ACCESSIBLE, established 2 Sep 2026. ** This node is B03 on the old
+      harness - a double-female bullet at 460mm along the trunk, one slot per coil. So the rebuild is
+      PRESERVING a property rather than adding one, and a bullet node is a reasonable form to
+      reproduce: it needs no tools to open and it is where an EI module would tap.
 
 # ---------------------------------------------------------------------
 # CARRY-OVER FROM THE FACTORY BRANCH MAP (17 Aug 2026, revised 28 Aug)

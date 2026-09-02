@@ -88,8 +88,20 @@ connectors:
   SP_YR:
     style: simple
     type: Splice
-    subtype: Y/R coil feed
-    notes: The kill switch output feeds BOTH ignition coils and the starter button from this node. Killing the engine works by cutting coil power here.
+    subtype: Y/R coil feed - and it is B03
+    notes: |-
+      The kill switch output feeds BOTH ignition coils and the starter button from this node. Killing
+      the engine works by cutting coil power here.
+      ** LOCATED 2 Sep 2026 FROM THE PRE-TEARDOWN PHOTOGRAPHS: THIS NODE IS B03. ** A single Y/R off
+      the trunk at 460mm from the datum, 140mm long, ending in a DOUBLE-FEMALE BULLET whose two slots
+      fed one ignition coil each. The harness contributes one wire; the two coil feeds were external
+      male bullets, unplugged at teardown, which is why both slots read empty on the bench.
+      Corroborated without being steered: B03 rings 0.2 Ohm to B01, the right-bar junction, so its
+      Y/R is the kill switch output - exactly what this splice is drawn as carrying.
+      ** IT IS NOT A HIDDEN SPLICE - IT IS AN ACCESSIBLE BULLET NODE. ** That matters for the
+      rebuild, which wants this point kept accessible and documented as the plug-in for an EI module
+      later. Stock already made it so; the rebuild is preserving a property rather than adding one.
+      Closes one of the six empty double-females - see measurements/trunk-map.md.
 
 cables:
   W_RH_IN:
