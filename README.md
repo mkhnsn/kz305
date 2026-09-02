@@ -126,6 +126,26 @@ have to be reconciled against the cavity map when it is written; see
 Unknown part numbers are written into the `subtype` as `MPN TBD` rather than
 left blank, so the BOM doubles as the procurement gap list.
 
+## Wire labels
+
+The rebuild uses **solid colours only** — no tracer wire — so a printed
+heat-shrink label is a wire's identity, not a convenience. `docs/label-schedule.md`
+is generated, never hand-written:
+
+```sh
+.venv/bin/python3 tools/label_schedule.py > docs/label-schedule.md
+```
+
+Two labels per wire, and **each names the far end** — that is the question you
+have when you are holding one end of a wire in a loom. The `W_` prefix is
+dropped: every wire has it, so it carries no information, and heat shrink on
+18 AWG has very little room.
+
+⚠️ **The label and the cavity seal both go on before the terminal is crimped.**
+Both slide on from the wire end and a crimped terminal will not pass either.
+Order: label, seal, strip, crimp, shrink. Getting it wrong means cutting the
+terminal off and starting that wire again.
+
 ## Tests
 
 ```sh

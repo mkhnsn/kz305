@@ -47,6 +47,42 @@
 # Two-color leads are primary-then-secondary. Y/R and R/Y are DIFFERENT
 # wires; so are Br/W and W/Br. Base manual, printed 33, item 18.
 #
+# !! THE REBUILD USES SOLID COLOURS ONLY - DECIDED 1 Sep 2026
+#
+#    No tracer wire. Custom striped TXL carries minimum order quantities
+#    that make no sense for one bike, so identification moves to PRINTED
+#    HEAT-SHRINK LABELS plus docs/label-schedule.md.
+#
+#    ** THIS KILLS THE REVERSED-PAIR FAILURE MODE OUTRIGHT. ** Y/BK vs
+#    BK/Y cost this project a fortnight; Br/W vs W/Br bit it twice. With
+#    no tracers there are no pairs left to reverse. That is a real gain,
+#    not merely a cost of the decision.
+#
+#    THE PRICE is that colour alone now separates fewer circuits, so the
+#    scheme was chosen to guarantee that NO TWO WIRES ON ONE CONNECTOR
+#    SHARE A COLOUR unless they are the same net. Eleven solids:
+#
+#      BK  ground ONLY - never a signal, never a feed
+#      RD  always-hot / battery / unfused main
+#      WH  fused main power, pre-relay
+#      BN  switched bus
+#      YE  ignition feed          PK  coil feed, and LO beam trigger
+#      VT  starter trigger, coil power, horn return, LO beam
+#      GY  relay coil drives      OG  horn power, HI beam
+#      BU  headlamp supply        GN  dimmer common
+#
+#    ⚠️ TWO DOCUMENTED EXCEPTIONS, both forced by parts we do not make:
+#      - W_PTS_R is BLACK and is NOT a ground. It is a factory contact
+#        breaker lead in a braided jacket - do not strip it, and do not
+#        land it on the star bus.
+#      - The 6 AWG heavy path is red/black battery cable, so W_BAT_SOL
+#        and W_SOL_SM are both RD at SOL. They are lugs on separate
+#        studs and cannot physically be interchanged.
+#
+#    THE FACTORY MODEL IS UNAFFECTED. It records what the bike HAD, in
+#    the stock two-colour codes, and remains the cross-reference. Only
+#    the rebuild changes.
+#
 # !! COLOR COLLISION - never identify a lead by color alone. The ring-out
 #    of 28 Aug 2026 turned this from a warning into a measurement: THREE of
 #    the eight colours rung carry more than one circuit.
