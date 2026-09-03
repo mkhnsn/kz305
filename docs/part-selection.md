@@ -689,34 +689,59 @@ the disagreement is harmless — do not order four of one.
 | Secondary lock | `0301372` | **6** | ⚠️ six per module, not one |
 | Mounting leg | `0300690` | 2 | gender disputed — see above |
 | Mounting leg | `0300691` | 2 | |
-| Terminal, 18–16 AWG | `1708338-L` | 30 | 14x 18 AWG + 16x 16 AWG |
-| Terminal, 14–12 AWG | `1708339-L` | 5 | ⚠️ was missing entirely until 3 Sep |
-| Wire seal, red | `4550748` | 14 | 18 AWG |
-| Wire seal, green | `4550747` | 21 | 16 AWG and 14 AWG |
-| Cavity plug | `4550750` | 25 | 60 less 35 populated |
+| Terminal, 18–16 AWG | `1708338-L` | 36 | 14x 18 AWG + 22x 16 AWG |
+| Terminal, 14–12 AWG | `1708339-L` | 2 | ⚠️ was missing entirely until 3 Sep |
+| Wire seal, red | `4550748` | 14 | 18 AWG — unchanged by #50 |
+| Wire seal, green | `4550747` | 24 | 16 AWG and 14 AWG |
+| Cavity plug | `4550750` | 22 | 60 less 38 populated |
 
 #### Where the quantities come from — derived, 3 Sep 2026
 
-**One terminal and one seal per populated cavity.** A relay pin is a cavity that
-a terminated wire enters from below, exactly like a fuse leg, so relay positions
-cost terminals — they are not free because the relay plugs in from the top.
+**One terminal and one seal per wire.** A relay pin is a cavity that a terminated
+wire enters from below, exactly like a fuse leg, so relay positions cost
+terminals — they are not free because the relay plugs in from the top.
 
-    9 fuses  x 2 cavities = 18
-    5 relays x 4 pins     = 20
-    ----------------------------
-    populated             = 38   of the module's 60
+##### The drawing converges on the part
 
-These replace a hand count of *"5 relays x 4 pins + 6 fuses x 2 = 32"*, whose
-arithmetic was right and whose fuse count was three stale.
+Two independent derivations now agree to the wire:
 
-**The model draws 35 of those 38.** The difference is the feed side: the two
-buses are drawn as four `PDM` ways (MAIN STUD, SW IN / OUT / AUX) rather than as
-nine individual fuse-input cavities, because this module has **no internal
-busbar** and the junctions get point-to-pointed at assembly. Drawing them is
-#50. The quantities follow what is **drawn**, so the BOM stays equal to its
-drawing — internal check: terminals total 35, seals total 35.
+    walking the connection sets  ->  38 wire-ends enter the module
+    9 fuses x 2 + 5 relays x 4   ->  38 cavities exist to receive them
 
-Gauge split of the 35 landings: **18 AWG x14, 16 AWG x16, 14 AWG x5.**
+and **no cavity carries more than one wire**, which a sealed cavity requires —
+it takes one seal on one wire. That equality is the check on both numbers. If a
+later edit breaks it, one of them is wrong.
+
+They did not agree before `SP_HOT` and `SP_SW` were drawn (#50): the nine
+fuse-input wires existed nowhere, standing in as four abstract "bus ways", and
+two cavities carried two wires each.
+
+Gauge split of the 38: **18 AWG x14, 16 AWG x22, 14 AWG x2.**
+
+Only **two** 14 AWG legs still enter the block — `K_MAIN`'s 30 and 87.
+`W_MAIN_OUT` now terminates outside it, on `SP_HOT`.
+
+##### ⚠️ These are DESIGN quantities, not order quantities
+
+Order over. Crimps get wasted, and if the 16 AWG spool misses green's 2.2 mm
+bound those circuits move to 14 AWG, which needs `1708339-L` instead. Green seals
+survive that; the terminal does not — so hedge on terminals, the cheapest line in
+the order.
+
+| Part | Design | Suggested order |
+|---|---|---|
+| `1708338-L` | 36 | 100 |
+| `1708339-L` | 2 | 30 |
+| `1708337-L` | 0 | 10 — insurance for the 18 AWG band gap below |
+| `4550747` green | 24 | 60 |
+| `4550748` red | 14 | 40 |
+| `4550750` plug | 22 | 40 |
+
+**The red seal count did not move**, which matters given it is the line that was
+out of stock: drawing the buses added 16 AWG wires, not 18.
+
+An unplugged cavity means the module is not sealed, which is the entire reason
+this part was chosen.
 
 #### Supplier — checked 3 Sep 2026
 

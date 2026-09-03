@@ -228,63 +228,50 @@ connectors:
         manufacturer: MTA
         mpn: "0300691"
         qty: 2
-      # QUANTITIES DERIVED FROM THE CONNECTION SETS, 3 Sep 2026. They replace a
-      # hand count of "5 relays x 4 pins + 6 fuses x 2 = 32", whose arithmetic was
-      # right and whose fuse count was three stale.
+      # QUANTITIES DERIVED FROM THE CONNECTION SETS. Recomputed 3 Sep 2026 once
+      # SP_HOT and SP_SW were drawn (#50), which put the nine fuse-input wires
+      # into the model for the first time.
       #
-      # ONE TERMINAL AND ONE SEAL PER POPULATED CAVITY. A relay pin is a cavity a
-      # terminated wire enters from below, exactly like a fuse leg, so relay
-      # positions cost terminals - they are not free because the relay plugs in.
+      # ** THE DRAWING NOW CONVERGES ON THE PART. ** Two independent derivations
+      # agree to the wire:
       #
-      #   9 fuses  x 2 cavities = 18
-      #   5 relays x 4 pins     = 20
-      #   ----------------------------
-      #   populated             = 38   of the module's 60
+      #   walking the connection sets  -> 38 wire-ends enter the module
+      #   9 fuses x 2 + 5 relays x 4   -> 38 cavities exist to receive them
       #
-      # ⚠️ THE MODEL DRAWS 35 OF THOSE 38. The difference is the feed side: the
-      # two buses are drawn as four PDM ways (MAIN STUD, SW IN/OUT/AUX) rather
-      # than as nine individual fuse-input cavities, because this module has NO
-      # INTERNAL BUSBAR and the junctions are point-to-pointed at assembly.
-      # Drawing them is issue #50; the quantities below follow what is DRAWN, so
-      # the BOM stays equal to its drawing.
+      # and no cavity carries more than one wire, which a sealed cavity requires -
+      # it takes one seal on one wire. That equality is the check on both numbers;
+      # if a later edit breaks it, one of them is wrong.
       #
-      # Gauge split of the 35 drawn cavity landings: 18 AWG x14, 16 AWG x16,
-      # 14 AWG x5.
+      # ONE TERMINAL AND ONE SEAL PER WIRE. A relay pin is a cavity a terminated
+      # wire enters from below, exactly like a fuse leg, so relay positions cost
+      # terminals - they are not free because the relay plugs in from the top.
       #
-      # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order well over -
-      # the count rises with #50, crimps get wasted, and if the 16 AWG spool
-      # misses the green seal's 2.2mm bound those circuits move to 14 AWG, which
-      # needs 1708339-L instead. Green seals survive that; the terminal does not.
+      # Gauge split of the 38: 18 AWG x14, 16 AWG x22, 14 AWG x2.
+      #
+      # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order over - crimps
+      # get wasted, and if the 16 AWG spool misses the green seal's 2.2mm bound
+      # (#61) those circuits move to 14 AWG, which needs 1708339-L instead. Green
+      # seals survive that; the terminal does not.
       - type: Terminal
-        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 16x 16 AWG
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 22x 16 AWG
         manufacturer: MTA
         mpn: 1708338-L
-        qty: 30
-      # ⚠️ WAS MISSING ENTIRELY until 3 Sep 2026. W_MAIN_OUT, W_MAIN_SW_FEED and
-      # W_SW_BUS are 14 AWG and enter this block; 1708338-L stops at 2.0 sq mm.
+        qty: 36
+      # The only 14 AWG legs still entering the block are K_MAIN's 30 and 87.
+      # W_MAIN_OUT now terminates OUTSIDE it, on SP_HOT.
       - type: Terminal
-        subtype: Sealed 2.8mm, 2.5-4.0 sq mm (14-12 AWG) - the 14 AWG main and switched-bus legs
+        subtype: Sealed 2.8mm, 2.5-4.0 sq mm (14-12 AWG) - K_MAIN 30 and 87
         manufacturer: MTA
         mpn: 1708339-L
-        qty: 5
-      # Plugs are 60 less whatever is terminated - 25 on what is drawn, 22 at full
-      # population. The relay FOOTPRINT is 6 cavities, from the catalogue stating
-      # the same module as 30 MiniVal (x2 cavities = 60) OR 10 micro relays
-      # (60/10 = 6). Our relays are 4-pin, so each leaves 2 cavities open inside
-      # its own footprint - 10 in total, and they still need plugging: the module
-      # seals at the WIRE-ENTRY face, and a relay body on top does not close a
-      # hole in the bottom.
-      # Drawn basis chosen deliberately: if #50's fuse-input wires never
-      # materialise those three cavities stay open, and a spare plug is harmless
-      # where a missing one means the module is not sealed.
+        qty: 2
+      # 60 cavities less the 38 populated. Includes the 10 that sit unused inside
+      # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
+      # body on top does not close a hole in the bottom.
       - type: Cavity plug
-        subtype: 2.8mm black - 60 cavities less 35 populated. REQUIRED or the module is not sealed
+        subtype: 2.8mm black - 60 cavities less 38 populated. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
-        qty: 25
-      # SEALS FOLLOW THE WIRE'S INSULATION OD, NOT ITS GAUGE, which is why they
-      # could not be picked until the wire family was. TXL is thin-wall; GXL or
-      # SXL would need different seals in the same gauges.
+        qty: 22
       # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
       # the delivered spool - issue #61. If it misses, those circuits move to
       # 14 AWG, which is ALSO green, so this quantity holds either way.
@@ -297,14 +284,14 @@ connectors:
         subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
         manufacturer: MTA
         mpn: "4550747"
-        qty: 21
+        qty: 24
     # ⚠️ WAYS ARE APPENDED, NEVER INSERTED. Connection sets reference this
     # connector BY INDEX, so inserting a way silently repoints every
     # reference after it - which is exactly how FUSE_4P went wrong on
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
     # list is ALLOCATION order, not physical cavity order; the cavity map
     # is a separate artefact and is not written yet.
-    pinlabels: [MAIN STUD, F1 IGN SW FEED (HOT), F2 KILL FEED (SW), F3 COIL PWR (SW), F4 HORN PWR (HOT), F5 HEADLAMP PWR (HOT), F6 TAIL/PARK PWR (SW), SW IN (Br), SW OUT (Br), SW AUX (Br), F7 INSTR PWR (SW), F8 BRAKE PWR (SW), F9 SIGNAL PWR (SW)]
+    pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus two 10A glass fuses, and the fixed pigtail they came
       on. Do not read the pin list as a chosen part's pinout: it is the CIRCUIT LIST the module has to
@@ -343,6 +330,50 @@ connectors:
       keeping only F1 hot. Issues #48-#51 also bear on this block.
       RELAY COUNT IS FIVE, at the TOP of what an RTMR-style module carries. Size for five positions
       plus a spare, or accept that two live in separate sockets outside it.
+
+  SP_HOT:
+    style: simple
+    type: Splice
+    subtype: always-hot bus - 1 in, 4 out
+    notes: |-
+      ** THE MODULE HAS NO INTERNAL BUSBAR, SO THIS JUNCTION IS REAL AND HAS TO BE BUILT. ** Every
+      MTA 0301370 cavity is wired separately, so the hot feed side is a harness node OUTSIDE the
+      sealed block. It was implicit in the PDM way list until 3 Sep 2026 and therefore invisible to
+      review - see issue #50.
+      FIVE CONDUCTORS: W_MAIN_OUT in from the 20A fuse, then W_MAIN_SW_FEED to K_MAIN's 30 and the
+      F1, F4 and F5 inputs.
+      ** BUILT AS CASCADED 2-INTO-1 SPLICES, NOT A STUD. ** Three splices for four branches. Modelled
+      as ONE node the way the factory model's SP_BR is - a trunk with taps - because that is what it
+      is electrically; the cascade is a build form, not a topology.
+      ⚠️ THE TRUNK CARRIES CUMULATIVE CURRENT, NOT BRANCH CURRENT. The segment nearest the fuse
+      carries everything downstream of it - up to 20A - and can taper as branches leave. Size each
+      segment for what passes through it, not for the branch it feeds.
+      ⚠️ ORDER THE CASCADE SO THE HEAVIEST BRANCH LEAVES FIRST. In a cascade the last branch's current
+      passes through every splice before it, so putting the big load at the far end puts the most
+      joints in series with the most current. K_MAIN's 30 is the heavy one here.
+      WHY A CASCADE RATHER THAN A STUD: sealed crimp splices under adhesive heat-shrink, distributed
+      along the loom, against four ring terminals stacked on one post. Stock practice on this bike -
+      SP_RH_BR is a 1-to-3 and SP_BRAKE a 2-into-1 shared crimp. It also avoids a bolted joint that
+      can loosen. The old harness did NOT fail at a splice; it failed at a separable bullet with a
+      gauge step in it.
+  SP_SW:
+    style: simple
+    type: Splice
+    subtype: switched bus - 1 in, 8 out
+    notes: |-
+      ** THE BIGGER OF THE TWO, AND THE ONE WORTH DESIGNING. ** K_MAIN's 87 output feeds it and eight
+      branches leave: the F2, F3, F6, F7, F8 and F9 inputs, plus the two relay-coil taps that were
+      drawn as PDM ways SW OUT and SW AUX.
+      ** SEVEN CASCADED 2-INTO-1 SPLICES ** for eight branches, modelled as one node - same treatment
+      as SP_HOT.
+      ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
+      block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
+      cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
+      ⚠️ CARRIES THE WHOLE SWITCHED LOAD, about 6.6A, through its first segment. Same taper and same
+      ordering rule as SP_HOT.
+      ⚠️ TWO OF THE EIGHT BRANCHES ARE UNFUSED - the SW OUT and SW AUX coil taps, one of which runs to
+      the handlebar. That is issue #49 and it is not resolved by drawing this node; it is made
+      visible by it.
 
   MF_RR:
     type: Charging fuse
@@ -650,6 +681,18 @@ connectors:
       ⚠️ THAT CLOSURE RESTS ON THE PHOTOGRAPHS ALONE and has never been metered. If it is wrong these
       lamps belong on SP_TAIL. See docs/verification-plan.md, session A.
 
+  SP_INSTR:
+    style: simple
+    type: Splice
+    subtype: instrument feed - 1 to 2
+    notes: |-
+      F7 feeds BOTH the meter lamps and the neutral lamp, which until 3 Sep 2026 was drawn as two
+      cables on ONE PDM way - against the one-wire-per-cavity rule a sealed cavity imposes, since it
+      takes one seal on one wire. Found by the same count that produced SP_HOT and SP_SW (#50).
+      So the fuse output leaves on a single wire and splits in the loom. A 2-into-1, same build form
+      as the two feed buses.
+      Load is three LED lamps, so this node is about sealing and terminal count rather than current.
+
   SP_POD_GND:
     style: simple
     type: Splice
@@ -744,6 +787,16 @@ cables:
       split it carries the coil circuit through F3 plus four relay coils, about 6.6A, while the horn and
       headlamp loads are fed hot and never cross it. Kept at 14 AWG anyway - it is the main switched
       path, the margin is cheap, and the load grows as the undrawn circuits land.
+  # --- the two feed-side buses, outside the module - see SP_HOT / SP_SW ---
+  W_HOT_F1:  {<<: *w16, colors: [RD], notes: "Hot bus to the F1 cavity. RD - always-hot per the scheme."}
+  W_HOT_F4:  {<<: *w16, colors: [RD], notes: "Hot bus to the F4 cavity."}
+  W_HOT_F5:  {<<: *w16, colors: [RD], notes: "Hot bus to the F5 cavity."}
+  W_SW_F2:   {<<: *w16, colors: [BN], notes: "Switched bus to the F2 cavity. BN - switched power."}
+  W_SW_F3:   {<<: *w16, colors: [BN], notes: "Switched bus to the F3 cavity."}
+  W_SW_F6:   {<<: *w16, colors: [BN], notes: "Switched bus to the F6 cavity."}
+  W_SW_F7:   {<<: *w18, colors: [BN], notes: "Switched bus to the F7 cavity."}
+  W_SW_F8:   {<<: *w18, colors: [BN], notes: "Switched bus to the F8 cavity."}
+  W_SW_F9:   {<<: *w18, colors: [BN], notes: "Switched bus to the F9 cavity."}
   W_KMAIN_GND:
     <<: *w18
     colors: [BK]
@@ -887,6 +940,10 @@ cables:
       IGN way 2 out to the tail net. Fed from W_TAIL_FEED in ON and DIRECTLY FROM THE BATTERY in
       PARK - see SP_TAIL. Sized 16 AWG for the tail lamp that joins this net later, not for the two
       LED meter lamps it carries today.
+  W_INSTR_FEED:
+    <<: *w18
+    colors: [BN]
+    notes: PDM F7 out to the instrument splice - one wire per cavity. Splits at SP_INSTR into the meter feed and the neutral lamp feed.
   W_MTR_FEED:
     <<: *w18
     colors: [BN]
@@ -1038,7 +1095,7 @@ connections:
     - MF: [1]
   - - MF: [2]
     - W_MAIN_OUT: [1]
-    - PDM: [1]
+    - SP_HOT: [1]
 
   # --- ignition switch loop -----------------------------------------
   - - PDM: [2]
@@ -1053,12 +1110,39 @@ connections:
     - GND: [4]
 
   # --- main relay passes the whole switched bus ---------------------
-  - - PDM: [1]
+  - - SP_HOT: [1]
     - W_MAIN_SW_FEED: [1]
     - K_MAIN: [1]
+  - - SP_HOT: [1]
+    - W_HOT_F1: [1]
+    - PDM: [14]
+  - - SP_HOT: [1]
+    - W_HOT_F4: [1]
+    - PDM: [15]
+  - - SP_HOT: [1]
+    - W_HOT_F5: [1]
+    - PDM: [16]
   - - K_MAIN: [2]
     - W_SW_BUS: [1]
-    - PDM: [8]
+    - SP_SW: [1]
+  - - SP_SW: [1]
+    - W_SW_F2: [1]
+    - PDM: [17]
+  - - SP_SW: [1]
+    - W_SW_F3: [1]
+    - PDM: [18]
+  - - SP_SW: [1]
+    - W_SW_F6: [1]
+    - PDM: [19]
+  - - SP_SW: [1]
+    - W_SW_F7: [1]
+    - PDM: [20]
+  - - SP_SW: [1]
+    - W_SW_F8: [1]
+    - PDM: [21]
+  - - SP_SW: [1]
+    - W_SW_F9: [1]
+    - PDM: [22]
 
   # --- FIXED: fused feed to the KILL SWITCH, not to the coils --------
   - - PDM: [3]
@@ -1102,7 +1186,7 @@ connections:
     - GND: [3]
 
   # --- horn: button drives the coil, contacts pass the load ----------
-  - - PDM: [9]
+  - - SP_SW: [1]
     - W_HORN_COIL: [1]
     - K_HORN: [3]
   - - K_HORN: [4]
@@ -1122,7 +1206,7 @@ connections:
     - GND: [9]
 
   # --- headlight: dimmer drives two coils, relays pass the beams -----
-  - - PDM: [10]
+  - - SP_SW: [1]
     - W_DIM_COMMON: [1]
     - LH: [1]
   - - LH: [2]
@@ -1167,6 +1251,9 @@ connections:
     - W_TAIL_OUT: [1]
     - SP_TAIL: [1]
   - - PDM: [11]
+    - W_INSTR_FEED: [1]
+    - SP_INSTR: [1]
+  - - SP_INSTR: [1]
     - W_MTR_FEED: [1]
     - SP_MTR: [1]
   - - SP_MTR: [1]
@@ -1194,7 +1281,7 @@ connections:
     - SP_POD_GND: [1]
 
   # --- neutral: fed on way 3, returns on way 4 through the switch -----
-  - - PDM: [11]
+  - - SP_INSTR: [1]
     - W_IND_N_FEED: [1]
     - INSTR_6P: [3]
   - - INSTR_6P: [3]
