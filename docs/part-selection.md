@@ -689,11 +689,11 @@ the disagreement is harmless — do not order four of one.
 | Secondary lock | `0301372` | **6** | ⚠️ six per module, not one |
 | Mounting leg | `0300690` | 2 | gender disputed — see above |
 | Mounting leg | `0300691` | 2 | |
-| Terminal, 18–16 AWG | `1708338-L` | 36 | 14x 18 AWG + 22x 16 AWG |
+| Terminal, 18–16 AWG | `1708338-L` | 38 | 14x 18 AWG + 24x 16 AWG |
 | Terminal, 14–12 AWG | `1708339-L` | 2 | ⚠️ was missing entirely until 3 Sep |
 | Wire seal, red | `4550748` | 14 | 18 AWG — unchanged by #50 |
-| Wire seal, green | `4550747` | 24 | 16 AWG and 14 AWG |
-| Cavity plug | `4550750` | 22 | 60 less 38 populated |
+| Wire seal, green | `4550747` | 26 | 16 AWG and 14 AWG |
+| Cavity plug | `4550750` | 20 | 60 less 40 populated |
 
 #### Where the quantities come from — derived, 3 Sep 2026
 
@@ -705,8 +705,8 @@ terminals — they are not free because the relay plugs in from the top.
 
 Two independent derivations now agree to the wire:
 
-    walking the connection sets  ->  38 wire-ends enter the module
-    9 fuses x 2 + 5 relays x 4   ->  38 cavities exist to receive them
+    walking the connection sets   ->  40 wire-ends enter the module
+    10 fuses x 2 + 5 relays x 4   ->  40 cavities exist to receive them
 
 and **no cavity carries more than one wire**, which a sealed cavity requires —
 it takes one seal on one wire. That equality is the check on both numbers. If a
@@ -716,7 +716,7 @@ They did not agree before `SP_HOT` and `SP_SW` were drawn (#50): the nine
 fuse-input wires existed nowhere, standing in as four abstract "bus ways", and
 two cavities carried two wires each.
 
-Gauge split of the 38: **18 AWG x14, 16 AWG x22, 14 AWG x2.**
+Gauge split of the 40: **18 AWG x14, 16 AWG x24, 14 AWG x2.**
 
 Only **two** 14 AWG legs still enter the block — `K_MAIN`'s 30 and 87.
 `W_MAIN_OUT` now terminates outside it, on `SP_HOT`.
@@ -730,12 +730,12 @@ the order.
 
 | Part | Design | Suggested order |
 |---|---|---|
-| `1708338-L` | 36 | 100 |
+| `1708338-L` | 38 | 100 |
 | `1708339-L` | 2 | 30 |
 | `1708337-L` | 0 | 10 — insurance for the 18 AWG band gap below |
-| `4550747` green | 24 | 60 |
+| `4550747` green | 26 | 60 |
 | `4550748` red | 14 | 40 |
-| `4550750` plug | 22 | 40 |
+| `4550750` plug | 20 | 40 |
 
 **The red seal count did not move**, which matters given it is the line that was
 out of stock: drawing the buses added 16 AWG wires, not 18.
@@ -940,6 +940,54 @@ that is invisible at order time and expensive at build time.
 resolve it — they call `1708338-L` the *18–16 AWG* terminal — so that is the
 part to use, and the CSA figures are evidently nominal band edges rather than
 hard limits. Worth a **pull test on the first crimp** rather than assuming.
+
+### USB-C PD charger — replaces the stock accessory circuit
+
+**Decided 3 Sep 2026.** The factory accessory provision is not reproduced in any
+form. What it actually was: an `R/W` feed **bolted to the battery stud**,
+permanently live and unfused for two inches, running to a second fuse box — with
+**both of its earth points never connected to anything** [bench 2 Sep 2026]. A
+live wire with no return, provisioned and left that way for 44 years.
+
+One circuit replaces it: **F10, switched, individually fused, with a real ground
+to the star bus.**
+
+#### Why switched rather than always-hot
+
+⚠️ **This bike has no parasitic load at all today** — points ignition, no ECU, no
+clock, no alarm. A PD charger left hot would be the first one, and a phone left
+plugged in overnight will flatten a 10 Ah battery. Making it hot by default would
+rebuild the exact fault this circuit exists to correct.
+
+It is a **one-wire change at the PDM** if always-on charging is ever wanted —
+move F10's input from `SP_SW` to `SP_HOT`. Worth knowing it is cheap; not worth
+doing by default.
+
+#### Selection criteria
+
+- **12 V input, PD output.** 20–45 W is the sensible range for a bike. More
+  output means more input current and a bigger fuse for no real gain.
+- ⚠️ **It must tolerate the charging system, not just the battery.** Target is
+  14.0–14.5 V running, and a permanent-magnet alternator with the battery
+  disconnected can transient well above that. The SH775 being a **series**
+  regulator helps — it open-circuits the stator rather than shunting it.
+- **Sealing follows the hybrid connector policy**: sealed if it lives on the bar
+  or anywhere exposed, stock-style bullets acceptable only if it sits inside the
+  headlight shell or under the seat. Water in the sleeve killed the original
+  harness.
+- **A socket with a cap or a captive lead**, not an open receptacle. An
+  unoccupied USB-C socket on a motorcycle collects water and grit.
+
+#### ⚠️ Sizing F10 — inrush, not just running current
+
+Input current is roughly **output watts ÷ (12 V × efficiency)**, so a 45 W unit
+draws about **4.4 A** in. But a PD converter has a **capacitive input**, and a
+fuse chosen on running current alone can nuisance-blow at switch-on. Size for
+inrush, and prefer a slow-blow characteristic if the chosen unit specifies one.
+
+**Its own fuse, not shared.** A USB socket is the circuit most likely to meet a
+failed cable or a passenger's unknown device, and that must not take the
+instruments with it.
 
 #### Fuses — MiniVal IS the standard Mini blade fuse
 

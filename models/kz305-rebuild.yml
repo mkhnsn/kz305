@@ -40,14 +40,19 @@
 #      still the diagram's, not the part's, and both IGN and FUSE_4P
 #      had to be renumbered once read.
 #
-#   4. THE ACCESSORY CIRCUIT IS NOT DRAWN. Both halves of the stock
-#      arrangement are now known and NEITHER is what the diagram says:
-#      the FEED is permanently live off the battery post, unfused for
-#      two inches, and the EARTHS were never connected at all. So stock
-#      provisioned a live wire with no return and left it that way for
-#      44 years. The rebuild draws accessory circuits with a real
-#      ground AND a fuse, or not at all. That is a decision, not a
-#      transcription.
+#   4. RESOLVED 3 Sep 2026 - THE STOCK ACCESSORY CIRCUIT IS NOT
+#      REPRODUCED, and a USB-C PD charger replaces it.
+#      Both halves of the stock arrangement were known and NEITHER was
+#      what the diagram says: the FEED is permanently live off the
+#      battery post, unfused for two inches, and the EARTHS were never
+#      connected at all. A live wire with no return, provisioned and
+#      left that way for 44 years. Nothing about it is worth keeping -
+#      not the topology, not the second fuse box, not the four bullet
+#      pickups.
+#      What replaces it is ONE circuit on F10, SWITCHED, individually
+#      fused, with a real ground to the star bus. See the USB node.
+#      The part is not selected and that is now a parts question
+#      rather than a design one - it sizes F10 and nothing else.
 #
 #   LENGTHS ARE NOT A BLOCKER. The harness is built in place on the
 #   bike and trimmed to final length there. Step 1 measured 46 branches
@@ -180,7 +185,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, USB, SPARE]
     notes: |-
       UPGRADE - one bus replacing the stock arrangement of one ring terminal and many scattered earth
       points. Stock has TWO ground nets: a small Y/BK net that reaches the ring, and a harness-wide
@@ -235,8 +240,8 @@ connectors:
       # ** THE DRAWING NOW CONVERGES ON THE PART. ** Two independent derivations
       # agree to the wire:
       #
-      #   walking the connection sets  -> 38 wire-ends enter the module
-      #   9 fuses x 2 + 5 relays x 4   -> 38 cavities exist to receive them
+      #   walking the connection sets   -> 40 wire-ends enter the module
+      #   10 fuses x 2 + 5 relays x 4   -> 40 cavities exist to receive them
       #
       # and no cavity carries more than one wire, which a sealed cavity requires -
       # it takes one seal on one wire. That equality is the check on both numbers;
@@ -246,17 +251,17 @@ connectors:
       # wire enters from below, exactly like a fuse leg, so relay positions cost
       # terminals - they are not free because the relay plugs in from the top.
       #
-      # Gauge split of the 38: 18 AWG x14, 16 AWG x22, 14 AWG x2.
+      # Gauge split of the 40: 18 AWG x14, 16 AWG x24, 14 AWG x2.
       #
       # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order over - crimps
       # get wasted, and if the 16 AWG spool misses the green seal's 2.2mm bound
       # (#61) those circuits move to 14 AWG, which needs 1708339-L instead. Green
       # seals survive that; the terminal does not.
       - type: Terminal
-        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 22x 16 AWG
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 24x 16 AWG
         manufacturer: MTA
         mpn: 1708338-L
-        qty: 36
+        qty: 38
       # The only 14 AWG legs still entering the block are K_MAIN's 30 and 87.
       # W_MAIN_OUT now terminates OUTSIDE it, on SP_HOT.
       - type: Terminal
@@ -264,14 +269,14 @@ connectors:
         manufacturer: MTA
         mpn: 1708339-L
         qty: 2
-      # 60 cavities less the 38 populated. Includes the 10 that sit unused inside
+      # 60 cavities less the 40 populated. Includes the 10 that sit unused inside
       # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
       # body on top does not close a hole in the bottom.
       - type: Cavity plug
-        subtype: 2.8mm black - 60 cavities less 38 populated. REQUIRED or the module is not sealed
+        subtype: 2.8mm black - 60 cavities less 40 populated. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
-        qty: 22
+        qty: 20
       # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
       # the delivered spool - issue #61. If it misses, those circuits move to
       # 14 AWG, which is ALSO green, so this quantity holds either way.
@@ -284,14 +289,14 @@ connectors:
         subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
         manufacturer: MTA
         mpn: "4550747"
-        qty: 24
+        qty: 26
     # ⚠️ WAYS ARE APPENDED, NEVER INSERTED. Connection sets reference this
     # connector BY INDEX, so inserting a way silently repoints every
     # reference after it - which is exactly how FUSE_4P went wrong on
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
     # list is ALLOCATION order, not physical cavity order; the cavity map
     # is a separate artefact and is not written yet.
-    pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW)]
+    pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW), F10 OUT, F10 IN (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus two 10A glass fuses, and the fixed pigtail they came
       on. Do not read the pin list as a chosen part's pinout: it is the CIRCUIT LIST the module has to
@@ -359,12 +364,12 @@ connectors:
   SP_SW:
     style: simple
     type: Splice
-    subtype: switched bus - 1 in, 8 out
+    subtype: switched bus - 1 in, 9 out
     notes: |-
-      ** THE BIGGER OF THE TWO, AND THE ONE WORTH DESIGNING. ** K_MAIN's 87 output feeds it and eight
-      branches leave: the F2, F3, F6, F7, F8 and F9 inputs, plus the two relay-coil taps that were
-      drawn as PDM ways SW OUT and SW AUX.
-      ** SEVEN CASCADED 2-INTO-1 SPLICES ** for eight branches, modelled as one node - same treatment
+      ** THE BIGGER OF THE TWO, AND THE ONE WORTH DESIGNING. ** K_MAIN's 87 output feeds it and nine
+      branches leave: the F2, F3, F6, F7, F8, F9 and F10 inputs, plus the two relay-coil taps that
+      were drawn as PDM ways SW OUT and SW AUX.
+      ** EIGHT CASCADED 2-INTO-1 SPLICES ** for nine branches, modelled as one node - same treatment
       as SP_HOT.
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
@@ -519,6 +524,29 @@ connectors:
       ** GND IS A NEW WIRE. ** Stock, the horn button earths through the cluster body; powder coating
       removes that path. See the GND bus notes.
 
+  USB:
+    type: USB-C PD charger
+    subtype: 12V in - part not selected
+    pinlabels: ["+12V", GND]
+    notes: |-
+      NEW CIRCUIT, 3 Sep 2026, and it REPLACES the stock accessory provision rather than extending it.
+      Stock ran an R/W feed bolted to the battery stud - permanently live, unfused for two inches -
+      to a second fuse box, and its two earth points were never connected at all [bench 2 Sep 2026].
+      A live wire with no return, provisioned and left that way for 44 years. None of it is
+      reproduced.
+      ** SWITCHED, NOT ALWAYS-HOT, AND THAT IS THE WHOLE POINT OF REPLACING IT. ** Fed from F10 on
+      the switched bus, so it dies with the key.
+      ⚠️ THIS BIKE HAS NO PARASITIC LOAD AT ALL TODAY - points ignition, no ECU, no clock, no alarm.
+      A PD charger left hot would be the first, and a phone left plugged in overnight would flatten a
+      10Ah battery. Making it hot is a one-wire change at the PDM if that is ever wanted; making it
+      hot BY DEFAULT would rebuild the exact fault this circuit exists to correct.
+      ** IT GETS ITS OWN FUSE. ** F10, not shared. A USB socket is the circuit most likely to meet a
+      failed cable or a passenger's unknown device, and that must not take the instruments with it.
+      ⚠️ PART NOT SELECTED - see docs/part-selection.md for the criteria. Its input current sizes F10
+      and is not knowable until a unit is chosen: roughly output watts over 12V times efficiency, so
+      a 45W unit draws about 4.4A in.
+      ⚠️ SIZE F10 FOR INRUSH, NOT JUST STEADY DRAW. A PD converter has capacitive input, and a fuse
+      chosen on running current alone can nuisance-blow at switch-on.
   HORN:
     type: Horn
     subtype: 12V 2A
@@ -797,6 +825,7 @@ cables:
   W_SW_F7:   {<<: *w18, colors: [BN], notes: "Switched bus to the F7 cavity."}
   W_SW_F8:   {<<: *w18, colors: [BN], notes: "Switched bus to the F8 cavity."}
   W_SW_F9:   {<<: *w18, colors: [BN], notes: "Switched bus to the F9 cavity."}
+  W_SW_F10:  {<<: *w16, colors: [BN], notes: "Switched bus to the F10 cavity - the USB charger."}
   W_KMAIN_GND:
     <<: *w18
     colors: [BK]
@@ -952,6 +981,18 @@ cables:
   W_MTR_TAC: {<<: *w18, colors: [BN], notes: "Tachometer light, same net."}
   W_GND_SPD: {<<: *w18, colors: [BK]}
   W_GND_TAC: {<<: *w18, colors: [BK]}
+
+  # --- USB-C PD charger, replacing the stock accessory circuit ----------
+  W_USB_FEED:
+    <<: *w16
+    colors: [BN]
+    notes: |-
+      PDM F10 to the charger. SWITCHED - it dies with the key, deliberately. See USB.
+      16 AWG covers a 45W unit at about 4.4A in with margin; confirm against the chosen part.
+  W_USB_GND:
+    <<: *w16
+    colors: [BK]
+    notes: Charger return to the star bus. Stock's accessory earths were never connected to anything - this circuit has a real one.
 
   # --- turn signals -----------------------------------------------------
   W_FLASH_IN:
@@ -1143,6 +1184,17 @@ connections:
   - - SP_SW: [1]
     - W_SW_F9: [1]
     - PDM: [22]
+  - - SP_SW: [1]
+    - W_SW_F10: [1]
+    - PDM: [24]
+
+  # --- USB-C PD charger ---------------------------------------------
+  - - PDM: [23]
+    - W_USB_FEED: [1]
+    - USB: [1]
+  - - USB: [2]
+    - W_USB_GND: [1]
+    - GND: [21]
 
   # --- FIXED: fused feed to the KILL SWITCH, not to the coils --------
   - - PDM: [3]
