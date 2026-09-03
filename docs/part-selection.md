@@ -753,21 +753,45 @@ available**, so that line may ship, backorder or drop off the invoice silently.
       and the module is not retained without all of them.
 - [ ] **Red seals present, or explicitly backordered?**
 
-###### With the module in hand, two open questions become answerable by looking
+###### The relay footprint is 6 cavities — settled by arithmetic, not by looking
 
-Both are currently blocked on a drawing nobody has:
+The catalogue states the same module as **30 MiniVal fuses OR 10 Micro 280
+relays**. A MiniVal straddles 2 cavities, so 30 x 2 = 60 confirms the grid, and
+60 / 10 relays = **6 cavities per relay footprint**. Two independent capacity
+claims on one part, and they agree.
 
-- [ ] **How many cavities a relay footprint actually occupies**, and whether the
-      unused ones sit under the relay body or stay open. This is the whole basis
-      of the cavity-plug count — see #51.
-- [ ] **Whether the fuse and relay positions are fixed or free.** The pin list in
-      the model is *allocation* order and explicitly not a cavity map (#10). If
-      the module constrains which positions can take a relay, that constrains the
-      HOT/SWITCHED layout too — and keeping those at opposite ends of the block
-      is a safety requirement, not a preference.
+Our relays are 4-pin (30 / 87 / 86 / 85), so **each leaves 2 cavities unused
+inside its own footprint** — 10 across five relays.
 
-Do both before the first terminal goes in, and write the cavity map down as it is
-built rather than after.
+    9 fuses  x 2 pins                = 18 terminated
+    5 relays x 4 pins                = 20 terminated
+    5 relays x 2 unused in footprint = 10 open, under the relay body
+    free cavities outside a footprint = 12
+    ------------------------------------------------
+    60
+
+**So the plug count is 60 less whatever is terminated** — 22 at full population,
+25 on what the model currently draws. The old "18, or up to 28" spread came from
+not knowing the footprint; it is gone. The residual uncertainty is ±3 and it is
+just #50's undrawn fuse feeds.
+
+⚠️ **Assume an unused cavity under a relay body still needs a plug.** The module
+seals at the *wire-entry* face; a relay body sitting on top does not close a hole
+in the bottom. Not verified on the part, but plugs are pennies and the order
+carries 40.
+
+###### Positions are free — the cavities are uniform
+
+A cavity's role is decided by what is pushed into it, which is what makes the
+HOT-and-SWITCHED-at-opposite-ends layout a free choice rather than something to
+check for. The catalogue render bears it out: fuses grouped at one end, relays at
+the other.
+
+The one alignment constraint left is minor — a relay needs **6 contiguous
+cavities on the right grid pitch**, so a relay cannot begin on an arbitrary
+column. That affects where the five relays sit within their end of the block, not
+whether the split is possible. Settle it while writing the cavity map (#10),
+with the part in hand.
 
 ##### ⚠️ `4550748` red is the constrained line — 3 Sep 2026
 

@@ -267,10 +267,16 @@ connectors:
         manufacturer: MTA
         mpn: 1708339-L
         qty: 5
-      # Plugs follow the DRAWN population like everything else - 60 less 35 - and
-      # not the 38 above. Deliberate: if #50's fuse-input wires never materialise
-      # those three cavities stay open and need plugging, and a spare plug is
-      # harmless where a missing one means the module is not sealed.
+      # Plugs are 60 less whatever is terminated - 25 on what is drawn, 22 at full
+      # population. The relay FOOTPRINT is 6 cavities, from the catalogue stating
+      # the same module as 30 MiniVal (x2 cavities = 60) OR 10 micro relays
+      # (60/10 = 6). Our relays are 4-pin, so each leaves 2 cavities open inside
+      # its own footprint - 10 in total, and they still need plugging: the module
+      # seals at the WIRE-ENTRY face, and a relay body on top does not close a
+      # hole in the bottom.
+      # Drawn basis chosen deliberately: if #50's fuse-input wires never
+      # materialise those three cavities stay open, and a spare plug is harmless
+      # where a missing one means the module is not sealed.
       - type: Cavity plug
         subtype: 2.8mm black - 60 cavities less 35 populated. REQUIRED or the module is not sealed
         manufacturer: MTA
