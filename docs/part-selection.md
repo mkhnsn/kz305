@@ -736,6 +736,40 @@ every line**, so the block can be a single order.
 | `4550750` cavity plug | listed | |
 | `4550747` green seal | ⚠️ **has a product page but did not appear on the wire-seals collection listing — confirm stock before ordering** | this is the largest seal line |
 
+##### ⚠️ `4550748` red is the constrained line — 3 Sep 2026
+
+Out of stock at ConnectorID; everything else on the list is available. Red is the
+**18 AWG** seal and the design needs 14 of them.
+
+**There is no substitute inside the MTA range.** The three seals are red
+1.2–2.1, green 2.2–3.0, grey 3.1–3.7. 18 AWG TXL is 1.98 mm, which only red
+covers — grey is nowhere near and green starts above it.
+
+**Do not substitute a Delphi/Aptiv Metri-Pack 280 seal either.** "280" names the
+2.8 mm blade, not the cavity. The seal has to seal against *MTA's* cavity wall,
+and its outside profile is that manufacturer's geometry. A seal that fits the
+wire and not the bore leaves the module unsealed while looking assembled.
+
+###### ⚠️ Do NOT solve this by moving 18 AWG to 16 AWG
+
+It is the tempting fix — green is in stock and covers 16 AWG — and it is
+backwards. It would put **every wire in the block on the one seal with the
+marginal fit**, and the two margins fail in opposite directions:
+
+| Seal | Wire | Margin | Fails if the wire runs |
+|---|---|---|---|
+| red | 18 AWG, 1.98 mm | 0.12 mm to the **upper** bound | **fat** |
+| green | 16 AWG, 2.26 mm | 0.06 mm to the **lower** bound | **thin** |
+
+TXL is a thin-wall product, so running thin is the more plausible direction —
+which is precisely what green is exposed to. Consolidating onto green doubles
+down on the riskier of the two. Keep the split, and buy red from a second
+supplier: TME, Express Technology or Miunske all list MTA.
+
+Red does not gate the build start either. Seals go on before the terminal is
+crimped, so the 16 and 14 AWG circuits and the whole mechanical assembly can
+proceed while red is on backorder.
+
 ##### ⚠️ Order the `-L` suffix on terminals
 
 ConnectorID lists `1708338` **twice** — once as a **reel** and once as
