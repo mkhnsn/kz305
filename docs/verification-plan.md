@@ -15,19 +15,24 @@ mechanically. Regenerate it after any model change:
 
 ## What the register says today
 
-**448 marked claims.** The distribution is the finding:
+**328 marked claims**, after the 2 Sep notes cleanup folded out the duplicate
+restatements. The distribution:
 
 | Evidence | n | |
 |---|---|---|
-| `unstated` | **257** | ⚠️ more than half name no evidence at all |
-| `meter` | 161 | |
-| `bench` | 20 | |
-| `photo` | 13 | |
-| `scan` | 6 | |
+| `unstated` | 172 | 47 in `measurements/`, 20 in `models/`, rest are `[OPEN]` |
+| `meter` | 130 | |
+| `bench` | 15 | |
+| `photo` | 9 | |
 | `arith` | 1 | |
+| `scan` | 1 | |
 
-**137 standing claims rest on scan, photograph or unstated evidence** while
-asserting something is settled.
+**70 standing claims rest on scan, photograph or unstated evidence** while
+asserting something is settled — down from 137, and the drop is duplicate
+restatements rather than claims that got tested.
+
+⚠️ The 47 `unstated` lines in `measurements/` are the remaining gap: that
+directory was not part of the notes cleanup and does not carry evidence tags.
 
 The `unstated` majority is the actionable part. This project is good at
 recording *what* it concluded and inconsistent at recording *how* — and "how"
