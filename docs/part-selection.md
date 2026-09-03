@@ -825,8 +825,39 @@ resolve it — they call `1708338-L` the *18–16 AWG* terminal — so that is t
 part to use, and the CSA figures are evidently nominal band edges rather than
 hard limits. Worth a **pull test on the first crimp** rather than assuming.
 
-#### Fuses — MiniVal, by rating
+#### Fuses — MiniVal IS the standard Mini blade fuse
 
+**Any reputable Mini / ATM / APM blade fuse fits.** MTA's "miniVAL" is their
+brand name for the industry-standard part, not a proprietary body — confirmed
+3 Sep 2026 against MTA's own automotive fuse catalogue:
+
+| | miniVAL per MTA | Standard Mini (ATM/APM) |
+|---|---|---|
+| Body | 16.2 x 11.1 x 4 mm | same |
+| Blade width | **2.8 mm** | same — this is the "280" in the module's footprint |
+| Colour code | 2A grey · 3A violet · 4A pink · 5A light brown · 7.5A brown · 10A red · 15A blue · 20A yellow · 25A white · 30A green | identical |
+
+The colour code being standard matters at the bench: rating is readable at a
+glance without pulling the fuse, on a block that will be mounted and sealed.
+
+⚠️ **Two MTA parts to NOT buy by mistake:**
+
+- **uniVAL** — MTA's *standard/ATO* size fuse, 19 x 20 x 4.5 mm on a 5.25 mm
+  blade. Physically larger and will not seat in a 280 cavity. The names are one
+  letter apart in a catalogue that lists them side by side.
+- **MiniVal Low Profile** — a separate MTA line with a different body. Sold under
+  a similar name by the same distributors.
+
+So buy a **variety kit** now rather than specific values — ratings are not
+assigned yet (#41), and the block takes 9 fuses whose values all depend on LED
+parts that are not selected. A kit costs less than one wrong guess.
+
+⚠️ **Do not cheap out on the fuses themselves.** This harness exists because a
+joint on the main power path melted. No-name blade fuses vary in blade plating
+and hold-current accuracy; Littelfuse, Bussmann or MTA cost a few dollars more
+across the whole set.
+
+MTA's own part numbers, if you want them to match the block:
 `0705090` 2 A · `0705100` 3 A · `0705101` 4 A · `0705110` 5 A · `0705120` 7.5 A ·
 `0705130` 10 A · `0705140` 15 A · `0705150` 20 A · `0705160` 25 A · `0705170` 30 A
 
