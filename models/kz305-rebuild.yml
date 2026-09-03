@@ -214,7 +214,7 @@ connectors:
         mpn: "0301371"
         qty: 1
       - type: Secondary lock
-        subtype: SIX PER MODULE, not one - datasheet, 1 Sep 2026
+        subtype: SIX PER MODULE, not one
         manufacturer: MTA
         mpn: "0301372"
         qty: 6
@@ -228,49 +228,70 @@ connectors:
         manufacturer: MTA
         mpn: "0300691"
         qty: 2
-      # ⚠️ THE THREE QUANTITIES BELOW ARE PROVISIONAL AND WILL MOVE.
-      # Two separate reasons, and neither is arithmetic:
-      #   1. qty_multiplier cannot help here. It works off pincount, and this
-      #      connector has TEN logical ways - one per circuit - against the
-      #      real module's SIXTY cavities.
-      #   2. ** THE MODEL DRAWS THE RELAYS AS SEPARATE PARTS WIRED TO THE PDM,
-      #      BUT THEY PHYSICALLY SEAT IN IT. ** So W_HORN_PWR, W_COIL_PWR,
-      #      W_HEAD_SUPPLY, W_HI_PWR, W_LO_PWR, W_MAIN_SW_FEED and W_SW_BUS
-      #      are not harness wires at all - they are the point-to-point
-      #      jumpers inside the block. Until that is reconciled, no terminal
-      #      count taken off this drawing is trustworthy.
-      # 32 = 5 relays x 4 pins + 6 fuses x 2, which counts pins rather than
-      # cavities. 18 plugs assumes the ~10 unpopulated cavities inside a relay
-      # footprint are covered by the relay body; if they are open, plugs rise
-      # toward 28. THE MODULE DRAWING SETTLES THAT - it is not a guess worth
-      # refining without it.
+      # QUANTITIES DERIVED FROM THE CONNECTION SETS, 3 Sep 2026. They replace a
+      # hand count of "5 relays x 4 pins + 6 fuses x 2 = 32", whose arithmetic was
+      # right and whose fuse count was three stale.
+      #
+      # ONE TERMINAL AND ONE SEAL PER POPULATED CAVITY. A relay pin is a cavity a
+      # terminated wire enters from below, exactly like a fuse leg, so relay
+      # positions cost terminals - they are not free because the relay plugs in.
+      #
+      #   9 fuses  x 2 cavities = 18
+      #   5 relays x 4 pins     = 20
+      #   ----------------------------
+      #   populated             = 38   of the module's 60
+      #
+      # ⚠️ THE MODEL DRAWS 35 OF THOSE 38. The difference is the feed side: the
+      # two buses are drawn as four PDM ways (MAIN STUD, SW IN/OUT/AUX) rather
+      # than as nine individual fuse-input cavities, because this module has NO
+      # INTERNAL BUSBAR and the junctions are point-to-pointed at assembly.
+      # Drawing them is issue #50; the quantities below follow what is DRAWN, so
+      # the BOM stays equal to its drawing.
+      #
+      # Gauge split of the 35 drawn cavity landings: 18 AWG x14, 16 AWG x16,
+      # 14 AWG x5.
+      #
+      # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order well over -
+      # the count rises with #50, crimps get wasted, and if the 16 AWG spool
+      # misses the green seal's 2.2mm bound those circuits move to 14 AWG, which
+      # needs 1708339-L instead. Green seals survive that; the terminal does not.
       - type: Terminal
-        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - QTY PROVISIONAL
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 16x 16 AWG
         manufacturer: MTA
         mpn: 1708338-L
-        qty: 32
+        qty: 30
+      # ⚠️ WAS MISSING ENTIRELY until 3 Sep 2026. W_MAIN_OUT, W_MAIN_SW_FEED and
+      # W_SW_BUS are 14 AWG and enter this block; 1708338-L stops at 2.0 sq mm.
+      - type: Terminal
+        subtype: Sealed 2.8mm, 2.5-4.0 sq mm (14-12 AWG) - the 14 AWG main and switched-bus legs
+        manufacturer: MTA
+        mpn: 1708339-L
+        qty: 5
+      # Plugs follow the DRAWN population like everything else - 60 less 35 - and
+      # not the 38 above. Deliberate: if #50's fuse-input wires never materialise
+      # those three cavities stay open and need plugging, and a spare plug is
+      # harmless where a missing one means the module is not sealed.
       - type: Cavity plug
-        subtype: 2.8mm black - QTY PROVISIONAL. REQUIRED or the module is not sealed
+        subtype: 2.8mm black - 60 cavities less 35 populated. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
-        qty: 18
-      # SEAL SIZE RESOLVED 1 Sep 2026 by the TXL decision - it follows the
-      # wire's INSULATION OD, not its gauge, so it could not be picked until
-      # the wire family was. TXL is thin-wall; GXL or SXL would need
-      # different seals in the same gauges. 12 AWG needs grey but does not
-      # enter this block - charging runs direct to the battery.
-      # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm.
-      # Caliper the delivered spool before ordering in quantity.
+        qty: 25
+      # SEALS FOLLOW THE WIRE'S INSULATION OD, NOT ITS GAUGE, which is why they
+      # could not be picked until the wire family was. TXL is thin-wall; GXL or
+      # SXL would need different seals in the same gauges.
+      # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
+      # the delivered spool - issue #61. If it misses, those circuits move to
+      # 14 AWG, which is ALSO green, so this quantity holds either way.
       - type: Wire seal - red
         subtype: 2.8mm, insul dia 1.2-2.1mm - for 18 AWG TXL (1.98mm)
         manufacturer: MTA
         mpn: "4550748"
-        qty: 12
+        qty: 14
       - type: Wire seal - green
         subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
         manufacturer: MTA
         mpn: "4550747"
-        qty: 20
+        qty: 21
     # ⚠️ WAYS ARE APPENDED, NEVER INSERTED. Connection sets reference this
     # connector BY INDEX, so inserting a way silently repoints every
     # reference after it - which is exactly how FUSE_4P went wrong on

@@ -670,18 +670,75 @@ Write the map down as it is built, in the same form as
 `measurements/connector-inventory.csv`: cavity number, circuit, wire colour,
 gauge. State the numbering rule first, before the first terminal goes in.
 
-### MTA associated components — real part numbers, 1 Sep 2026
+### MTA associated components — part numbers and design quantities
 
-From the connection-system datasheet. These correct two quantities that had been
-assumed and add two parts that were missing entirely.
+Part numbers from the MTA connection-system datasheet, **corroborated against
+distributor listings 3 Sep 2026** — the catalogue filed at
+`parts/MTA_Power_modular_solutions_2019_v1.1.pdf` is a 13-page marketing
+overview and carries **module part numbers only**, so none of the accessories
+below appear in it.
+
+⚠️ **`0300690` and `0300691` are listed with opposite genders by different
+distributors.** You need two of each, so order both part numbers at qty 2 and
+the disagreement is harmless — do not order four of one.
 
 | Part | MTA PN | Qty | |
 |---|---|---|---|
-| Secondary lock | `0301372` | **6** | ⚠️ **six per module**, not one |
+| Module, 60 cavity waterproof | `0301370` | 1 | |
 | Top cover | `0301371` | 1 | |
-| Mounting leg — male | `0300690` | 2 | ⚠️ was missing |
-| Mounting leg — female | `0300691` | 2 | ⚠️ was missing |
-| Cavity plug, 2.8 mm black | `4550750` | prov. | |
+| Secondary lock | `0301372` | **6** | ⚠️ six per module, not one |
+| Mounting leg | `0300690` | 2 | gender disputed — see above |
+| Mounting leg | `0300691` | 2 | |
+| Terminal, 18–16 AWG | `1708338-L` | 30 | 14x 18 AWG + 16x 16 AWG |
+| Terminal, 14–12 AWG | `1708339-L` | 5 | ⚠️ was missing entirely until 3 Sep |
+| Wire seal, red | `4550748` | 14 | 18 AWG |
+| Wire seal, green | `4550747` | 21 | 16 AWG and 14 AWG |
+| Cavity plug | `4550750` | 25 | 60 less 35 populated |
+
+#### Where the quantities come from — derived, 3 Sep 2026
+
+**One terminal and one seal per populated cavity.** A relay pin is a cavity that
+a terminated wire enters from below, exactly like a fuse leg, so relay positions
+cost terminals — they are not free because the relay plugs in from the top.
+
+    9 fuses  x 2 cavities = 18
+    5 relays x 4 pins     = 20
+    ----------------------------
+    populated             = 38   of the module's 60
+
+These replace a hand count of *"5 relays x 4 pins + 6 fuses x 2 = 32"*, whose
+arithmetic was right and whose fuse count was three stale.
+
+**The model draws 35 of those 38.** The difference is the feed side: the two
+buses are drawn as four `PDM` ways (MAIN STUD, SW IN / OUT / AUX) rather than as
+nine individual fuse-input cavities, because this module has **no internal
+busbar** and the junctions get point-to-pointed at assembly. Drawing them is
+#50. The quantities follow what is **drawn**, so the BOM stays equal to its
+drawing — internal check: terminals total 35, seals total 35.
+
+Gauge split of the 35 landings: **18 AWG x14, 16 AWG x16, 14 AWG x5.**
+
+#### ⚠️ These are DESIGN quantities, not order quantities
+
+Order well over. The count rises when #50 lands, crimps get wasted, and the
+16 AWG seal margin is unresolved (#61).
+
+**Green seals survive the seal question either way** — if the 16 AWG spool misses
+green's 2.2 mm bound those circuits move to 14 AWG, which is also green. What
+changes is the *terminal*: `1708338-L` becomes `1708339-L`. So hedge on
+terminals, which are the cheapest line in the order, not on seals.
+
+| Part | Design | Suggested order |
+|---|---|---|
+| `1708338-L` | 30 | 100 |
+| `1708339-L` | 5 | 30 |
+| `1708337-L` | 0 | 10 — insurance for the 18 AWG band gap below |
+| `4550747` green | 21 | 60 |
+| `4550748` red | 14 | 40 |
+| `4550750` plug | 25 | 40 |
+
+An unplugged cavity means the module is not sealed, which is the entire reason
+this part was chosen.
 
 #### Terminals — sized by conductor CSA
 
