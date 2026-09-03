@@ -718,6 +718,36 @@ drawing — internal check: terminals total 35, seals total 35.
 
 Gauge split of the 35 landings: **18 AWG x14, 16 AWG x16, 14 AWG x5.**
 
+#### Supplier — checked 3 Sep 2026
+
+**ConnectorID (connectorid.com) is an authorised MTA distributor and carries
+every line**, so the block can be a single order.
+
+| Part | Stock / price seen | |
+|---|---|---|
+| `0301370` module | listed | |
+| `0301371` cover | listed | |
+| `0301372` secondary lock | $0.52, MOQ 1 | listing independently states **"6 pcs required per module"** |
+| `0300690` | 732 in stock, $1.14 | |
+| `0300691` | 629 in stock, $1.14 | |
+| `1708338-L` | loose piece, MOQ 1 | |
+| `1708339-L` | listed | |
+| `4550748` red seal | $0.45 | |
+| `4550750` cavity plug | listed | |
+| `4550747` green seal | ⚠️ **has a product page but did not appear on the wire-seals collection listing — confirm stock before ordering** | this is the largest seal line |
+
+##### ⚠️ Order the `-L` suffix on terminals
+
+ConnectorID lists `1708338` **twice** — once as a **reel** and once as
+`1708338-L`, a **loose piece with MOQ 1**. The `-L` is the one you want. Dropping
+the suffix buys a reel of thousands.
+
+##### ⚠️ The bracket gender conflict is on ConnectorID's own site
+
+Their URL slug for `0300690` reads `mounting-bracket-male` while the page title
+reads *"Mounting Bracket Female"*. Other distributors disagree with each other
+too. **Order two of each part number** and the question never has to be settled.
+
 #### ⚠️ These are DESIGN quantities, not order quantities
 
 Order well over. The count rises when #50 lands, crimps get wasted, and the
