@@ -736,6 +736,39 @@ every line**, so the block can be a single order.
 | `4550750` cavity plug | listed | |
 | `4550747` green seal | ⚠️ **has a product page but did not appear on the wire-seals collection listing — confirm stock before ordering** | this is the largest seal line |
 
+##### Order placed 3 Sep 2026 — ConnectorID, whole block on one invoice
+
+The cart accepted `4550748` red despite the listing showing **in stock but 0
+available**, so that line may ship, backorder or drop off the invoice silently.
+**Check the packing slip against the order confirmation**, not against memory.
+
+###### On arrival — receiving check
+
+- [ ] **`1708338-L` is loose pieces, not a reel.** The two listings sit next to
+      each other; a reel is thousands and is the wrong product, not a bonus.
+- [ ] **Two each of `0300690` and `0300691`** — the distributors disagree on
+      which is male, so confirm you have a matched pair by looking at them, not
+      by reading the bag.
+- [ ] **Count the secondary locks — six.** The likeliest line to arrive short,
+      and the module is not retained without all of them.
+- [ ] **Red seals present, or explicitly backordered?**
+
+###### With the module in hand, two open questions become answerable by looking
+
+Both are currently blocked on a drawing nobody has:
+
+- [ ] **How many cavities a relay footprint actually occupies**, and whether the
+      unused ones sit under the relay body or stay open. This is the whole basis
+      of the cavity-plug count — see #51.
+- [ ] **Whether the fuse and relay positions are fixed or free.** The pin list in
+      the model is *allocation* order and explicitly not a cavity map (#10). If
+      the module constrains which positions can take a relay, that constrains the
+      HOT/SWITCHED layout too — and keeping those at opposite ends of the block
+      is a safety requirement, not a preference.
+
+Do both before the first terminal goes in, and write the cavity map down as it is
+built rather than after.
+
 ##### ⚠️ `4550748` red is the constrained line — 3 Sep 2026
 
 Out of stock at ConnectorID; everything else on the list is available. Red is the
