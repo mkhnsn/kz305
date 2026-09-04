@@ -207,6 +207,19 @@ connectors:
   MF:
     <<: *main_fuse
     subtype: 20A inline, sealed holder
+    notes: |-
+      ** PROTECTION AND DISTRIBUTION ARE SEPARATE PARTS - decided 4 Sep 2026. ** A stud-terminal fuse
+      holder doubling as the hot bus was considered and dropped: it couples the fuse RATING to the
+      joint count, and the stud fuse families do not reach down to where this circuit belongs.
+      MEGA/AMG starts at 60A and MIDI/AMI at 30A, both above what 14 AWG can carry. Distribution moved
+      to SP_HOT instead, which is a power stud.
+      ⚠️ THIS FUSE PROTECTS THE WIRE, NOT THE LOADS - every circuit downstream has its own fuse. So
+      the rating and the conductor move together, and BIGGER IS NOT BETTER. Load is about 11A
+      (K_MAIN's switched side at 6.6A plus the horn and headlamp fuses), so 20A on 14 AWG is already
+      generous.
+      ⚠️ AND THE RATING IS COUPLED TO ISSUE #49. SW OUT and SW AUX leave the switched bus UNFUSED,
+      protected by nothing smaller than this fuse. Raising it raises their threshold with it. Settle
+      #49 before settling this rating. [OPEN]
 
   PDM:
     type: Power distribution module
@@ -347,9 +360,13 @@ connectors:
       review - see issue #50.
       FIVE CONDUCTORS: W_MAIN_OUT in from the 20A fuse, then W_MAIN_SW_FEED to K_MAIN's 30 and the
       F1, F4 and F5 inputs.
-      ** BUILT AS CASCADED 2-INTO-1 SPLICES, NOT A STUD. ** Three splices for four branches. Modelled
-      as ONE node the way the factory model's SP_BR is - a trunk with taps - because that is what it
-      is electrically; the cascade is a build form, not a topology.
+      ** BUILT AS A POWER STUD - decided 4 Sep 2026 **, superseding the cascaded-splice plan. Five
+      ring terminals on one insulated post. Modelled as ONE node the way the factory model's SP_BR is
+      - a trunk with taps - and the build form is a note, not a topology, so this decision does not
+      change the drawing.
+      WHY THE STUD WON: it is inspectable and serviceable where a crimped splice pack is neither, and
+      the old harness failed at a hidden joint on this exact circuit. It also decouples the joint
+      count from the fuse rating - see MF.
       ⚠️ THE TRUNK CARRIES CUMULATIVE CURRENT, NOT BRANCH CURRENT. The segment nearest the fuse
       carries everything downstream of it - up to 20A - and can taper as branches leave. Size each
       segment for what passes through it, not for the branch it feeds.
@@ -369,16 +386,27 @@ connectors:
       ** THE BIGGER OF THE TWO, AND THE ONE WORTH DESIGNING. ** K_MAIN's 87 output feeds it and nine
       branches leave: the F2, F3, F6, F7, F8, F9 and F10 inputs, plus the two relay-coil taps that
       were drawn as PDM ways SW OUT and SW AUX.
-      ** EIGHT CASCADED 2-INTO-1 SPLICES ** for nine branches, modelled as one node - same treatment
-      as SP_HOT.
+      ** BUILT AS A PASS-THROUGH POWER POST **, studded both sides, so the nine rings split across two
+      faces rather than stacking on one. ⚠️ NINE RING TERMINALS ON A SINGLE STUD IS TOO MANY - common
+      practice stops around three or four, and a tall stack loses clamp force on the outer rings as
+      the plastic relaxes. Splitting 5/4 is the reason to buy the pass-through part rather than a
+      plain post.
+      Modelled as one node - same treatment as SP_HOT, and the build form does not change the drawing.
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
       cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
       ⚠️ CARRIES THE WHOLE SWITCHED LOAD, about 6.6A, through its first segment. Same taper and same
       ordering rule as SP_HOT.
-      ⚠️ TWO OF THE EIGHT BRANCHES ARE UNFUSED - the SW OUT and SW AUX coil taps, one of which runs to
+      ⚠️ TWO OF THE NINE BRANCHES ARE UNFUSED - the SW OUT and SW AUX coil taps, one of which runs to
       the handlebar. That is issue #49 and it is not resolved by drawing this node; it is made
-      visible by it.
+      visible by it. Their only protection is MF, so MF's rating cannot be settled before #49 is.
+      ⚠️ BOTH STAR POSTS NEED A BOOT OR AN ENCLOSURE. They are exposed metal on the two highest-current
+      nets, and water in the sleeve is what killed the original harness. Do not leave them open
+      because the module beside them is sealed.
+      ⚠️ DO NOT USE A BLACK POST FOR THIS ONE. Black is GROUND-ONLY in the rebuild's colour scheme -
+      the rule exists because the stock harness put a non-ground on black and it cost this project
+      time. A black post carrying switched power contradicts the scheme at the joint where a mistake
+      is most expensive. Red for both, labelled HOT and SW.
 
   MF_RR:
     type: Charging fuse
