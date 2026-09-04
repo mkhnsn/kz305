@@ -331,11 +331,14 @@ metal-to-metal, and both models had it on `GND_ENG`. That node's note
 already admits it is broader than its name — "grounds through its own
 mounting" — so the drawing is not wrong, but the *path* is frame, not case.
 
-⚠️ **THE FRAME IS BEING POWDER COATED.** This is another component that
-loses its earth to the coating, alongside the left cluster and the engine
-strap. Either mask both tab landings or give the bracket a ground wire it
-has never had. **A points ignition with no condenser earth burns its
-contacts.**
+⚠️ **THE FRAME IS ALREADY POWDER COATED — MASKING IS NOT AVAILABLE.** The
+window closed before this project counted what depended on it.
+
+So the bracket gets **`W_CAP_GND`**: a ring terminal captured under one of
+the two mounting bolts, wired to the star bus. That is better than abrading
+the landing anyway — the coating under the ring stops mattering entirely.
+**A points ignition with no condenser earth arcs its contacts and burns
+them.**
 
 ## Not captured
 

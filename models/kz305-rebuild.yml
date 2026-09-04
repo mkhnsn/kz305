@@ -27,9 +27,11 @@
 #      back to the bus. Those wires do not exist in the old harness and
 #      appear nowhere in either model. The count is the count of ground
 #      Net B's earth points and it is NOT YET KNOWN.
-#      ⚠️ THE FRAME IS BEING POWDER COATED, WHICH REMOVES EXACTLY THE
-#      PATH THOSE COMPONENTS WERE SILENTLY USING. This is the one
-#      blocker on an external clock - see issue #54.
+#      ⚠️ THE FRAME IS ALREADY POWDER COATED. That path is GONE, and
+#      MASKING IS NO LONGER AN OPTION - the window closed before this
+#      project counted what depended on it. Every mounting-earthed
+#      component now needs a wire or an abraded landing; there is no
+#      third choice. See issue #54.
 #      Until it closes, the GND bus way count is a guess and the PDM
 #      circuit count is not final.
 #
@@ -185,7 +187,7 @@ connectors:
   GND:
     type: Star ground bus
     subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, USB, SPARE]
+    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, USB, CAP, SPARE]
     notes: |-
       UPGRADE - one bus replacing the stock arrangement of one ring terminal and many scattered earth
       points. Stock has TWO ground nets: a small Y/BK net that reaches the ring, and a harness-wide
@@ -200,7 +202,8 @@ connectors:
       way rather than two.
       LH CLUSTER IS A NEW WIRE AND THE WORKED EXAMPLE OF BLOCKER 2. Stock, the horn button grounds
       through the CLUSTER BODY [bench 29 Aug 2026]; powder coating removes exactly that path.
-      Mask or scrape the stud back to bare metal. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V,
+      ⚠️ SCRAPE THE STUD BACK TO BARE METAL - masking was never done and the frame is already coated,
+      so abrading at the landing is the only route left. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V,
       which is the meter's floor - treat it as pass/fail, not a measurement.
       ⚠️ THE CRANKING RETURN SHARES THIS BUS with the signal grounds - see issue #44.
 
@@ -822,9 +825,13 @@ connectors:
       with a shared two-wire pigtail about 8 inches long, clamped to the bracket halfway along. YELLOW
       and BLUE, each ending in a male bullet. 0.24 +/- 0.02 uF, 1000 V DC, parallel across the points.
       Drawn as two connectors because they are electrically independent; ONE line in the BOM.
-      ⚠️ IT EARTHS THROUGH TWO MOUNTING TABS TO THE FRAME, and the frame is being powder coated -
-      which removes that path. This is a blocker-2 component: mask the two tab landings, or give it a
-      ground wire it has never had. Do not assume the bracket bolts through to bare metal.
+      ⚠️ IT EARTHED THROUGH TWO MOUNTING TABS TO THE FRAME, AND THAT PATH IS GONE. The frame is
+      ALREADY powder coated, so masking - the cheap fix - is no longer available.
+      ** SO IT GETS A GROUND WIRE, W_CAP_GND. ** A ring terminal captured under one of the two
+      mounting bolts, wired to the star bus. That is better than abrading the landing anyway: the
+      coating under the ring stops mattering entirely, and this is an ignition earth - a points
+      ignition with no condenser return burns its contacts.
+      The bracket has no ground provision of its own, so the ring goes under the existing bolt.
       ⚠️ THESE LEADS ARE NOT HARNESS WIRE. Like the points leads and the pod pigtail, they are factory
       pigtails on a retained part - see issue #52. Do not cut them, do not label them, and do not
       count them in the wire order.
@@ -950,6 +957,15 @@ cables:
     <<: *w18
     colors: [YE]
     notes: Yellow serves LEFT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
+  W_CAP_GND:
+    <<: *w18
+    colors: [BK]
+    notes: |-
+      NEW WIRE - no counterpart in the old harness. The condenser bracket earthed through its mounting
+      tabs to the frame, and the frame is already powder coated.
+      A ring terminal captured under one of the two mounting bolts, to the star bus. THIS IS AN
+      IGNITION EARTH: a points ignition with no condenser return arcs its contacts and burns them.
+      Unlike the other blocker-2 cases this one cannot be solved by masking, because the window closed.
   W_CAP_L:
     <<: *w18
     colors: [YE]
@@ -1360,6 +1376,10 @@ connections:
   - - CAP_R: [2]
     - '-->'
     - GND_ENG: [1]
+  # The bracket's own earth - a ring under a mounting bolt, not the coating.
+  - - CAP_L: [2]
+    - W_CAP_GND: [1]
+    - GND: [22]
 
   # --- starter trigger ----------------------------------------------
   - - RH: [3]
