@@ -22,7 +22,7 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-174 labels for 87 wires.
+204 labels for 102 wires.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -50,8 +50,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `COIL_PWR` | PDM-4 | `>K_COIL-1` | YE | 16 AWG |
 | `COIL_R` | COIL_R-1 | `>SP_YR-1` | YE | 16 AWG |
 | `COIL_R` | SP_YR-1 | `>COIL_R-1` | YE | 16 AWG |
-| `DIM_COMMON` | LH-1 | `>PDM-10` | GN | 18 AWG |
-| `DIM_COMMON` | PDM-10 | `>LH-1` | GN | 18 AWG |
+| `DIM_COMMON` | LH-1 | `>SP_RLY-1` | GN | 18 AWG |
+| `DIM_COMMON` | SP_RLY-1 | `>LH-1` | GN | 18 AWG |
 | `ENG_GND` | GND-14 | `>GND_ENG-1` | BK | 6 AWG |
 | `ENG_GND` | GND_ENG-1 | `>GND-14` | BK | 6 AWG |
 | `FLASH_GND` | FLASHER-3 | `>GND-20` | BK | 18 AWG |
@@ -94,8 +94,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `HI_PWR` | SP_HEAD-1 | `>K_HI-1` | BU | 16 AWG |
 | `HI_TRIG` | K_HI-3 | `>LH-2` | GY | 18 AWG |
 | `HI_TRIG` | LH-2 | `>K_HI-3` | GY | 18 AWG |
-| `HORN_COIL` | K_HORN-3 | `>PDM-9` | GY | 18 AWG |
-| `HORN_COIL` | PDM-9 | `>K_HORN-3` | GY | 18 AWG |
+| `HORN_COIL` | K_HORN-3 | `>SP_RLY-1` | GY | 18 AWG |
+| `HORN_COIL` | SP_RLY-1 | `>K_HORN-3` | GY | 18 AWG |
 | `HORN_FEED` | HORN-1 | `>K_HORN-2` | YE | 16 AWG |
 | `HORN_FEED` | K_HORN-2 | `>HORN-1` | YE | 16 AWG |
 | `HORN_GND` | GND-9 | `>HORN-2` | BK | 16 AWG |
@@ -104,6 +104,12 @@ again, one wire at a time, and it is not recoverable any other way.
 | `HORN_PWR` | PDM-5 | `>K_HORN-1` | BU | 16 AWG |
 | `HORN_SW` | K_HORN-4 | `>LH-7` | YE | 18 AWG |
 | `HORN_SW` | LH-7 | `>K_HORN-4` | YE | 18 AWG |
+| `HOT_F1` | PDM-14 | `>SP_HOT-1` | RD | 16 AWG |
+| `HOT_F1` | SP_HOT-1 | `>PDM-14` | RD | 16 AWG |
+| `HOT_F4` | PDM-15 | `>SP_HOT-1` | RD | 16 AWG |
+| `HOT_F4` | SP_HOT-1 | `>PDM-15` | RD | 16 AWG |
+| `HOT_F5` | PDM-16 | `>SP_HOT-1` | RD | 16 AWG |
+| `HOT_F5` | SP_HOT-1 | `>PDM-16` | RD | 16 AWG |
 | `IGN_FEED` | IGN-1 | `>PDM-2` | RD | 16 AWG |
 | `IGN_FEED` | PDM-2 | `>IGN-1` | RD | 16 AWG |
 | `IGN_RET` | IGN-3 | `>K_MAIN-3` | GY | 18 AWG |
@@ -116,14 +122,16 @@ again, one wire at a time, and it is not recoverable any other way.
 | `IND_L` | SP_SIG_L-1 | `>INSTR_6P-1` | GN | 18 AWG |
 | `IND_L2` | IND_L-1 | `>INSTR_6P-1` | GN | 18 AWG |
 | `IND_L2` | INSTR_6P-1 | `>IND_L-1` | GN | 18 AWG |
-| `IND_N_FEED` | INSTR_6P-3 | `>PDM-11` | BN | 18 AWG |
-| `IND_N_FEED` | PDM-11 | `>INSTR_6P-3` | BN | 18 AWG |
+| `IND_N_FEED` | INSTR_6P-3 | `>SP_INSTR-1` | BN | 18 AWG |
+| `IND_N_FEED` | SP_INSTR-1 | `>INSTR_6P-3` | BN | 18 AWG |
 | `IND_N_FEED2` | IND_N-1 | `>INSTR_6P-3` | BN | 18 AWG |
 | `IND_N_FEED2` | INSTR_6P-3 | `>IND_N-1` | BN | 18 AWG |
 | `IND_R` | INSTR_6P-2 | `>SP_SIG_R-1` | GY | 18 AWG |
 | `IND_R` | SP_SIG_R-1 | `>INSTR_6P-2` | GY | 18 AWG |
 | `IND_R2` | IND_R-1 | `>INSTR_6P-2` | GY | 18 AWG |
 | `IND_R2` | INSTR_6P-2 | `>IND_R-1` | GY | 18 AWG |
+| `INSTR_FEED` | PDM-11 | `>SP_INSTR-1` | BN | 18 AWG |
+| `INSTR_FEED` | SP_INSTR-1 | `>PDM-11` | BN | 18 AWG |
 | `KHI_GND` | GND-6 | `>K_HI-4` | BK | 18 AWG |
 | `KHI_GND` | K_HI-4 | `>GND-6` | BK | 18 AWG |
 | `KLO_GND` | GND-7 | `>K_LO-4` | BK | 18 AWG |
@@ -140,12 +148,12 @@ again, one wire at a time, and it is not recoverable any other way.
 | `LO_TRIG` | LH-3 | `>K_LO-3` | GN | 18 AWG |
 | `MAIN_IN` | MF-1 | `>SOL-1` | RD | 14 AWG |
 | `MAIN_IN` | SOL-1 | `>MF-1` | RD | 14 AWG |
-| `MAIN_OUT` | MF-2 | `>PDM-1` | WH | 14 AWG |
-| `MAIN_OUT` | PDM-1 | `>MF-2` | WH | 14 AWG |
-| `MAIN_SW_FEED` | K_MAIN-1 | `>PDM-1` | WH | 14 AWG |
-| `MAIN_SW_FEED` | PDM-1 | `>K_MAIN-1` | WH | 14 AWG |
-| `MTR_FEED` | PDM-11 | `>SP_MTR-1` | BN | 18 AWG |
-| `MTR_FEED` | SP_MTR-1 | `>PDM-11` | BN | 18 AWG |
+| `MAIN_OUT` | MF-2 | `>SP_HOT-1` | WH | 14 AWG |
+| `MAIN_OUT` | SP_HOT-1 | `>MF-2` | WH | 14 AWG |
+| `MAIN_SW_FEED` | K_MAIN-1 | `>SP_HOT-1` | WH | 14 AWG |
+| `MAIN_SW_FEED` | SP_HOT-1 | `>K_MAIN-1` | WH | 14 AWG |
+| `MTR_FEED` | SP_INSTR-1 | `>SP_MTR-1` | BN | 18 AWG |
+| `MTR_FEED` | SP_MTR-1 | `>SP_INSTR-1` | BN | 18 AWG |
 | `MTR_SPD` | LAMP_SPD-1 | `>SP_MTR-1` | BN | 18 AWG |
 | `MTR_SPD` | SP_MTR-1 | `>LAMP_SPD-1` | BN | 18 AWG |
 | `MTR_TAC` | LAMP_TAC-1 | `>SP_MTR-1` | BN | 18 AWG |
@@ -166,6 +174,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `RH_IN` | RH-1 | `>PDM-3` | YE | 16 AWG |
 | `RH_OUT` | RH-3 | `>SOL-3` | YE | 18 AWG |
 | `RH_OUT` | SOL-3 | `>RH-3` | YE | 18 AWG |
+| `RLY_PWR` | PDM-25 | `>SP_RLY-1` | BN | 18 AWG |
+| `RLY_PWR` | SP_RLY-1 | `>PDM-25` | BN | 18 AWG |
 | `RR_BATT` | BATT-1 | `>MF_RR-2` | RD | 12 AWG |
 | `RR_BATT` | MF_RR-2 | `>BATT-1` | RD | 12 AWG |
 | `RR_GND` | GND-2 | `>RR-5` | BK | 12 AWG |
@@ -188,14 +198,34 @@ again, one wire at a time, and it is not recoverable any other way.
 | `SOL_GND` | SOL-4 | `>GND-3` | BK | 18 AWG |
 | `SOL_SM` | SM-1 | `>SOL-2` | RD | 6 AWG |
 | `SOL_SM` | SOL-2 | `>SM-1` | RD | 6 AWG |
-| `SW_BUS` | K_MAIN-2 | `>PDM-8` | BN | 14 AWG |
-| `SW_BUS` | PDM-8 | `>K_MAIN-2` | BN | 14 AWG |
+| `SW_BUS` | K_MAIN-2 | `>SP_SW-1` | BN | 14 AWG |
+| `SW_BUS` | SP_SW-1 | `>K_MAIN-2` | BN | 14 AWG |
+| `SW_F10` | PDM-24 | `>SP_SW-1` | BN | 16 AWG |
+| `SW_F10` | SP_SW-1 | `>PDM-24` | BN | 16 AWG |
+| `SW_F11` | PDM-26 | `>SP_SW-1` | BN | 18 AWG |
+| `SW_F11` | SP_SW-1 | `>PDM-26` | BN | 18 AWG |
+| `SW_F2` | PDM-17 | `>SP_SW-1` | BN | 16 AWG |
+| `SW_F2` | SP_SW-1 | `>PDM-17` | BN | 16 AWG |
+| `SW_F3` | PDM-18 | `>SP_SW-1` | BN | 16 AWG |
+| `SW_F3` | SP_SW-1 | `>PDM-18` | BN | 16 AWG |
+| `SW_F6` | PDM-19 | `>SP_SW-1` | BN | 16 AWG |
+| `SW_F6` | SP_SW-1 | `>PDM-19` | BN | 16 AWG |
+| `SW_F7` | PDM-20 | `>SP_SW-1` | BN | 18 AWG |
+| `SW_F7` | SP_SW-1 | `>PDM-20` | BN | 18 AWG |
+| `SW_F8` | PDM-21 | `>SP_SW-1` | BN | 18 AWG |
+| `SW_F8` | SP_SW-1 | `>PDM-21` | BN | 18 AWG |
+| `SW_F9` | PDM-22 | `>SP_SW-1` | BN | 18 AWG |
+| `SW_F9` | SP_SW-1 | `>PDM-22` | BN | 18 AWG |
 | `TAIL_FEED` | IGN-4 | `>PDM-7` | BN | 16 AWG |
 | `TAIL_FEED` | PDM-7 | `>IGN-4` | BN | 16 AWG |
 | `TAIL_OUT` | IGN-2 | `>SP_TAIL-1` | BU | 16 AWG |
 | `TAIL_OUT` | SP_TAIL-1 | `>IGN-2` | BU | 16 AWG |
 | `TAIL_RUN` | SP_TAIL-1 | `>TAIL-1` | BU | 18 AWG |
 | `TAIL_RUN` | TAIL-1 | `>SP_TAIL-1` | BU | 18 AWG |
+| `USB_FEED` | PDM-23 | `>USB-1` | BN | 16 AWG |
+| `USB_FEED` | USB-1 | `>PDM-23` | BN | 16 AWG |
+| `USB_GND` | GND-21 | `>USB-2` | BK | 16 AWG |
+| `USB_GND` | USB-2 | `>GND-21` | BK | 16 AWG |
 | `YR_OUT` | K_COIL-2 | `>SP_YR-1` | YE | 16 AWG |
 | `YR_OUT` | SP_YR-1 | `>K_COIL-2` | YE | 16 AWG |
 | `YR_TRIG` | K_COIL-3 | `>RH-2` | GY | 18 AWG |
