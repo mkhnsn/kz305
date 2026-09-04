@@ -689,11 +689,11 @@ the disagreement is harmless — do not order four of one.
 | Secondary lock | `0301372` | **6** | ⚠️ six per module, not one |
 | Mounting leg | `0300690` | 2 | gender disputed — see above |
 | Mounting leg | `0300691` | 2 | |
-| Terminal, 18–16 AWG | `1708338-L` | 38 | 14x 18 AWG + 24x 16 AWG |
+| Terminal, 18–16 AWG | `1708338-L` | 40 | 16x 18 AWG + 24x 16 AWG |
 | Terminal, 14–12 AWG | `1708339-L` | 2 | ⚠️ was missing entirely until 3 Sep |
-| Wire seal, red | `4550748` | 14 | 18 AWG — unchanged by #50 |
+| Wire seal, red | `4550748` | 16 | 18 AWG |
 | Wire seal, green | `4550747` | 26 | 16 AWG and 14 AWG |
-| Cavity plug | `4550750` | 20 | 60 less 40 populated |
+| Cavity plug | `4550750` | 18 | 60 less 42 populated |
 
 #### Where the quantities come from — derived, 3 Sep 2026
 
@@ -705,8 +705,8 @@ terminals — they are not free because the relay plugs in from the top.
 
 Two independent derivations now agree to the wire:
 
-    walking the connection sets   ->  40 wire-ends enter the module
-    10 fuses x 2 + 5 relays x 4   ->  40 cavities exist to receive them
+    walking the connection sets   ->  42 wire-ends enter the module
+    11 fuses x 2 + 5 relays x 4   ->  42 cavities exist to receive them
 
 and **no cavity carries more than one wire**, which a sealed cavity requires —
 it takes one seal on one wire. That equality is the check on both numbers. If a
@@ -716,7 +716,7 @@ They did not agree before `SP_HOT` and `SP_SW` were drawn (#50): the nine
 fuse-input wires existed nowhere, standing in as four abstract "bus ways", and
 two cavities carried two wires each.
 
-Gauge split of the 40: **18 AWG x14, 16 AWG x24, 14 AWG x2.**
+Gauge split of the 42: **18 AWG x16, 16 AWG x24, 14 AWG x2.**
 
 Only **two** 14 AWG legs still enter the block — `K_MAIN`'s 30 and 87.
 `W_MAIN_OUT` now terminates outside it, on `SP_HOT`.
@@ -730,15 +730,15 @@ the order.
 
 | Part | Design | Suggested order |
 |---|---|---|
-| `1708338-L` | 38 | 100 |
+| `1708338-L` | 40 | 100 |
 | `1708339-L` | 2 | 30 |
 | `1708337-L` | 0 | 10 — insurance for the 18 AWG band gap below |
 | `4550747` green | 26 | 60 |
-| `4550748` red | 14 | 40 |
-| `4550750` plug | 20 | 40 |
+| `4550748` red | 16 | 40 |
+| `4550750` plug | 18 | 40 |
 
-**The red seal count did not move**, which matters given it is the line that was
-out of stock: drawing the buses added 16 AWG wires, not 18.
+Everything still sits inside the ordered quantities — the design has moved four
+times since the order was placed and has not once threatened a line.
 
 An unplugged cavity means the module is not sealed, which is the entire reason
 this part was chosen.
@@ -880,7 +880,7 @@ terminals, which are the cheapest line in the order, not on seals.
 | `1708339-L` | 5 | 30 |
 | `1708337-L` | 0 | 10 — insurance for the 18 AWG band gap below |
 | `4550747` green | 21 | 60 |
-| `4550748` red | 14 | 40 |
+| `4550748` red | 16 | 40 |
 | `4550750` plug | 25 | 40 |
 
 An unplugged cavity means the module is not sealed, which is the entire reason

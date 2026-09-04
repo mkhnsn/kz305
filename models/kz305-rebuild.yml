@@ -217,9 +217,10 @@ connectors:
       the rating and the conductor move together, and BIGGER IS NOT BETTER. Load is about 11A
       (K_MAIN's switched side at 6.6A plus the horn and headlamp fuses), so 20A on 14 AWG is already
       generous.
-      ⚠️ AND THE RATING IS COUPLED TO ISSUE #49. SW OUT and SW AUX leave the switched bus UNFUSED,
-      protected by nothing smaller than this fuse. Raising it raises their threshold with it. Settle
-      #49 before settling this rating. [OPEN]
+      ** 20A STANDS, AND #49 IS WHAT FREED IT (4 Sep 2026). ** While two 18 AWG branches left the
+      switched bus unfused, this fuse was their only protection and its rating was hostage to them.
+      They now leave through F11, so nothing downstream depends on this rating except the 14 AWG main
+      feed itself - which is what it is sized for.
 
   PDM:
     type: Power distribution module
@@ -253,8 +254,8 @@ connectors:
       # ** THE DRAWING NOW CONVERGES ON THE PART. ** Two independent derivations
       # agree to the wire:
       #
-      #   walking the connection sets   -> 40 wire-ends enter the module
-      #   10 fuses x 2 + 5 relays x 4   -> 40 cavities exist to receive them
+      #   walking the connection sets   -> 42 wire-ends enter the module
+      #   11 fuses x 2 + 5 relays x 4   -> 42 cavities exist to receive them
       #
       # and no cavity carries more than one wire, which a sealed cavity requires -
       # it takes one seal on one wire. That equality is the check on both numbers;
@@ -264,17 +265,17 @@ connectors:
       # wire enters from below, exactly like a fuse leg, so relay positions cost
       # terminals - they are not free because the relay plugs in from the top.
       #
-      # Gauge split of the 40: 18 AWG x14, 16 AWG x24, 14 AWG x2.
+      # Gauge split of the 42: 18 AWG x16, 16 AWG x24, 14 AWG x2.
       #
       # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order over - crimps
       # get wasted, and if the 16 AWG spool misses the green seal's 2.2mm bound
       # (#61) those circuits move to 14 AWG, which needs 1708339-L instead. Green
       # seals survive that; the terminal does not.
       - type: Terminal
-        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 14x 18 AWG + 24x 16 AWG
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 16x 18 AWG + 24x 16 AWG
         manufacturer: MTA
         mpn: 1708338-L
-        qty: 38
+        qty: 40
       # The only 14 AWG legs still entering the block are K_MAIN's 30 and 87.
       # W_MAIN_OUT now terminates OUTSIDE it, on SP_HOT.
       - type: Terminal
@@ -282,14 +283,14 @@ connectors:
         manufacturer: MTA
         mpn: 1708339-L
         qty: 2
-      # 60 cavities less the 40 populated. Includes the 10 that sit unused inside
+      # 60 cavities less the 42 populated. Includes the 10 that sit unused inside
       # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
       # body on top does not close a hole in the bottom.
       - type: Cavity plug
-        subtype: 2.8mm black - 60 cavities less 40 populated. REQUIRED or the module is not sealed
+        subtype: 2.8mm black - 60 cavities less 42 populated. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
-        qty: 20
+        qty: 18
       # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
       # the delivered spool - issue #61. If it misses, those circuits move to
       # 14 AWG, which is ALSO green, so this quantity holds either way.
@@ -297,7 +298,7 @@ connectors:
         subtype: 2.8mm, insul dia 1.2-2.1mm - for 18 AWG TXL (1.98mm)
         manufacturer: MTA
         mpn: "4550748"
-        qty: 14
+        qty: 16
       - type: Wire seal - green
         subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
         manufacturer: MTA
@@ -309,7 +310,7 @@ connectors:
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
     # list is ALLOCATION order, not physical cavity order; the cavity map
     # is a separate artefact and is not written yet.
-    pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW), F10 OUT, F10 IN (SW)]
+    pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW), F10 OUT, F10 IN (SW), F11 OUT, F11 IN (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus two 10A glass fuses, and the fixed pigtail they came
       on. Do not read the pin list as a chosen part's pinout: it is the CIRCUIT LIST the module has to
@@ -360,13 +361,11 @@ connectors:
       review - see issue #50.
       FIVE CONDUCTORS: W_MAIN_OUT in from the 20A fuse, then W_MAIN_SW_FEED to K_MAIN's 30 and the
       F1, F4 and F5 inputs.
-      ** BUILT AS A POWER STUD - decided 4 Sep 2026 **, superseding the cascaded-splice plan. Five
-      ring terminals on one insulated post. Modelled as ONE node the way the factory model's SP_BR is
-      - a trunk with taps - and the build form is a note, not a topology, so this decision does not
-      change the drawing.
-      WHY THE STUD WON: it is inspectable and serviceable where a crimped splice pack is neither, and
-      the old harness failed at a hidden joint on this exact circuit. It also decouples the joint
-      count from the fuse rating - see MF.
+      ** BUILT AS CASCADED 2-INTO-1 SPLICES. ** Three splices for four branches. A power stud was
+      considered on 4 Sep 2026 and dropped - it has to be mounted, insulated, booted and found a home,
+      and none of that earns its place for five conductors in a loom that is otherwise sealed crimps.
+      Modelled as ONE node the way the factory model's SP_BR is - a trunk with taps - so the build
+      form is a note rather than a topology, and this decision does not change the drawing.
       ⚠️ THE TRUNK CARRIES CUMULATIVE CURRENT, NOT BRANCH CURRENT. The segment nearest the fuse
       carries everything downstream of it - up to 20A - and can taper as branches leave. Size each
       segment for what passes through it, not for the branch it feeds.
@@ -381,32 +380,23 @@ connectors:
   SP_SW:
     style: simple
     type: Splice
-    subtype: switched bus - 1 in, 9 out
+    subtype: switched bus - 1 in, 8 out - FUSE INPUTS ONLY
     notes: |-
-      ** THE BIGGER OF THE TWO, AND THE ONE WORTH DESIGNING. ** K_MAIN's 87 output feeds it and nine
-      branches leave: the F2, F3, F6, F7, F8, F9 and F10 inputs, plus the two relay-coil taps that
-      were drawn as PDM ways SW OUT and SW AUX.
-      ** BUILT AS A PASS-THROUGH POWER POST **, studded both sides, so the nine rings split across two
-      faces rather than stacking on one. ⚠️ NINE RING TERMINALS ON A SINGLE STUD IS TOO MANY - common
-      practice stops around three or four, and a tall stack loses clamp force on the outer rings as
-      the plastic relaxes. Splitting 5/4 is the reason to buy the pass-through part rather than a
-      plain post.
-      Modelled as one node - same treatment as SP_HOT, and the build form does not change the drawing.
+      ** THE BIGGER OF THE TWO. ** K_MAIN's 87 output feeds it and eight branches leave - the F2, F3,
+      F6, F7, F8, F9, F10 and F11 inputs.
+      ** IT FEEDS FUSE INPUTS AND NOTHING ELSE - the rule that settled issue #49, 4 Sep 2026. ** This
+      node sits downstream of K_MAIN and UPSTREAM of every individual fuse, so anything tapped
+      straight off it is protected by nothing smaller than MF. Two loads used to hang here directly.
+      They now leave through F11. Do not add a ninth branch that is not a fuse input.
+      ** BUILT AS CASCADED 2-INTO-1 SPLICES ** - seven of them for eight branches, same reasoning as
+      SP_HOT and modelled the same way.
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
       cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
       ⚠️ CARRIES THE WHOLE SWITCHED LOAD, about 6.6A, through its first segment. Same taper and same
       ordering rule as SP_HOT.
-      ⚠️ TWO OF THE NINE BRANCHES ARE UNFUSED - the SW OUT and SW AUX coil taps, one of which runs to
-      the handlebar. That is issue #49 and it is not resolved by drawing this node; it is made
-      visible by it. Their only protection is MF, so MF's rating cannot be settled before #49 is.
-      ⚠️ BOTH STAR POSTS NEED A BOOT OR AN ENCLOSURE. They are exposed metal on the two highest-current
-      nets, and water in the sleeve is what killed the original harness. Do not leave them open
-      because the module beside them is sealed.
-      ⚠️ DO NOT USE A BLACK POST FOR THIS ONE. Black is GROUND-ONLY in the rebuild's colour scheme -
-      the rule exists because the stock harness put a non-ground on black and it cost this project
-      time. A black post carrying switched power contradicts the scheme at the joint where a mistake
-      is most expensive. Red for both, labelled HOT and SW.
+      Every branch is now fused, so MF is no longer the sole protection for anything leaving here -
+      which is what freed MF's rating to be chosen on wire protection alone.
 
   MF_RR:
     type: Charging fuse
@@ -737,6 +727,23 @@ connectors:
       ⚠️ THAT CLOSURE RESTS ON THE PHOTOGRAPHS ALONE and has never been metered. If it is wrong these
       lamps belong on SP_TAIL. See docs/verification-plan.md, session A.
 
+  SP_RLY:
+    style: simple
+    type: Splice
+    subtype: relay coil supply - F11 out, 1 to 2
+    notes: |-
+      ** THIS NODE EXISTS TO SETTLE ISSUE #49. ** The horn relay's coil and the dimmer common used to
+      tap SP_SW directly, upstream of every fuse, so their only protection was MF at 20A. One of them
+      - the dimmer common - runs UP TO THE HANDLEBAR, which is the longest and most-flexed run on the
+      bike and the classic chafe location. 18 AWG behind a 20A fuse is not protected; it is the fuse.
+      Both now leave through F11 instead, and SP_SW feeds fuse inputs only.
+      ONE FUSE FOR BOTH, not two. They are one functional group - switched supply to relay coils - and
+      the shared-failure exposure is already there: F11 opening drops both beams, but so does F5, which
+      feeds both beam relay commons through SP_HEAD. Splitting them would cost the last spare fuse
+      position and buy no isolation that F5 does not already deny.
+      Load is about 0.45A worst case - three coils at ~0.15A, all three live for the instant of the
+      dimmer's make-before-break blip.
+
   SP_INSTR:
     style: simple
     type: Splice
@@ -854,6 +861,8 @@ cables:
   W_SW_F8:   {<<: *w18, colors: [BN], notes: "Switched bus to the F8 cavity."}
   W_SW_F9:   {<<: *w18, colors: [BN], notes: "Switched bus to the F9 cavity."}
   W_SW_F10:  {<<: *w16, colors: [BN], notes: "Switched bus to the F10 cavity - the USB charger."}
+  W_SW_F11:  {<<: *w18, colors: [BN], notes: "Switched bus to the F11 cavity - relay coil supply."}
+  W_RLY_PWR: {<<: *w18, colors: [BN], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
   W_KMAIN_GND:
     <<: *w18
     colors: [BK]
@@ -1215,6 +1224,14 @@ connections:
   - - SP_SW: [1]
     - W_SW_F10: [1]
     - PDM: [24]
+  - - SP_SW: [1]
+    - W_SW_F11: [1]
+    - PDM: [26]
+
+  # --- F11: fused supply for the relay coils that used to tap SP_SW ---
+  - - PDM: [25]
+    - W_RLY_PWR: [1]
+    - SP_RLY: [1]
 
   # --- USB-C PD charger ---------------------------------------------
   - - PDM: [23]
@@ -1266,7 +1283,7 @@ connections:
     - GND: [3]
 
   # --- horn: button drives the coil, contacts pass the load ----------
-  - - SP_SW: [1]
+  - - SP_RLY: [1]
     - W_HORN_COIL: [1]
     - K_HORN: [3]
   - - K_HORN: [4]
@@ -1286,7 +1303,7 @@ connections:
     - GND: [9]
 
   # --- headlight: dimmer drives two coils, relays pass the beams -----
-  - - SP_SW: [1]
+  - - SP_RLY: [1]
     - W_DIM_COMMON: [1]
     - LH: [1]
   - - LH: [2]

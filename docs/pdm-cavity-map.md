@@ -44,19 +44,22 @@ each side and SWITCHED needs seven.
 | | |
 |---|---|
 | Cavities mapped | 60 of 60 |
-| **Wired** — 10 fuses × 2 + **5 live** relays × 4 | **40** |
-| Cavity plugs — 60 less wired | **20** |
-| Spare fuse positions | 2 (column 10) |
+| **Wired** — 11 fuses × 2 + **5 live** relays × 4 | **42** |
+| Cavity plugs — 60 less wired | **18** |
+| Spare fuse positions | **1** (column 10, rows 5–6) |
 | Spare relay position | 1 (columns 6–7, rows 4–6) |
 
 The plug count is unchanged from the five-relay plan: the sixth relay is a
 *reserved position*, not a populated one, so its six cavities were never wired
 and were already inside the 20.
 
-⚠️ **12 fuse positions is the ceiling with six relays** (60 − 36 = 24 = 12). If
-issue #49 is resolved by fusing the two unfused branches, that is 12 fuses in 12
-positions and **no spare left**. The trade was one relay position against the
-whole fuse margin.
+⚠️ **12 fuse positions is the ceiling with six relays** (60 − 36 = 24 = 12).
+**Eleven are now used.** #49 was settled by fusing the two unfused branches
+together on F11 rather than separately, which is what left a spare at all — see
+`SP_RLY` for why one fuse and not two.
+
+**One spare fuse position remains**, at column 10 rows 5–6. The next fused
+circuit fills the block.
 
 ## Still needed from the part
 
