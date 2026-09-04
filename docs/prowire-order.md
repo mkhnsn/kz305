@@ -9,40 +9,66 @@ Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 printed heat-shrink plus `docs/label-schedule.md`. Do not substitute a striped
 wire for a missing solid.
 
-| Gauge | Colour | Conductors | Est. need | **Order** |
-|---|---|---|---|---|
-| 18 AWG | BK | 16 | 50 ft | **100 ft** |
-| 18 AWG | BN | 12 | 37 ft | **50 ft** |
-| 18 AWG | GY | 9 | 28 ft | **50 ft** |
-| 18 AWG | GN | 9 | 28 ft | **50 ft** |
-| 18 AWG | YE | 2 | 6 ft | 25 ft |
-| 18 AWG | BU | 2 | 6 ft | 25 ft |
-| 16 AWG | BN | 8 | 22 ft | **50 ft** |
-| 16 AWG | BU | 8 | 22 ft | **50 ft** |
-| 16 AWG | YE | 6 | 17 ft | 25 ft |
-| 16 AWG | RD | 4 | 11 ft | 25 ft |
-| 16 AWG | BK | 3 | 8 ft | 25 ft |
-| 16 AWG | GN | 1 | 3 ft | 25 ft |
-| 14 AWG | WH | 2 | 4 ft | 25 ft |
-| 14 AWG | YE | 2 | 4 ft | 25 ft |
-| 14 AWG | BN | 1 | 2 ft | 25 ft |
-| 12 AWG | RD | 3 | 10 ft | 25 ft |
-| 12 AWG | BK | 1 | 3 ft | 25 ft |
+**Prowire sells by the foot.** The 25/50/100 ft steps in an earlier draft of this
+sheet were an assumption about spools and they were wrong — they cost **$120** on
+their own. Order the footage, not a spool.
 
-**625 spool feet for 89 conductors.** The ratio is the minimum-spool tax, not
-waste.
+Prices below are per foot as quoted 4 Sep 2026.
 
-### What is deliberately NOT in this count
+| Gauge | Colour | Item | $/ft | Cond. | **Order ft** | **$** |
+|---|---|---|---|---|---|---|
+| 18 | BK | `TXL-18-0` | 0.257 | 16 | **75** | 19.28 |
+| 18 | BN | `TXL-18-1` | 0.228 | 12 | **45** | 10.26 |
+| 18 | GY | `TXL-18-8` | 0.175 | 9 | **35** | 6.12 |
+| 18 | GN | `TXL-18-5` | 0.211 | 9 | **35** | 7.38 |
+| 18 | YE | `TXL-18-4` | 0.254 | 2 | 10 | 2.54 |
+| 18 | BU | `TXL-18-LB` | 0.288 | 2 | 10 | 2.88 |
+| 16 | BN | `TXL-16-1` | 0.234 | 8 | **30** | 7.02 |
+| 16 | BU | `TXL-16-LB` | 0.263 | 8 | **30** | 7.89 |
+| 16 | YE | `TXL-16-4` | 0.414 | 6 | 20 | 8.28 |
+| 16 | RD | `TXL-16-2` | 0.439 | 4 | 15 | 6.58 |
+| 16 | BK | `TXL-16-0` | 0.450 | 3 | 12 | 5.40 |
+| 16 | GN | `TXL-16-5` | 0.461 | 1 | 8 | 3.69 |
+| 14 | WH | `TXL-14-9` | 0.510 | 2 | 8 | 4.08 |
+| 14 | YE | `TXL-14-4` | 0.613 | 2 | 10 | 6.13 |
+| 14 | BN | `TXL-14-1` | 0.542 | 1 | 6 | 3.25 |
+| 12 | RD | `TXL-12-2` | 0.949 | 3 | 12 | 11.39 |
+| 12 | BK | `TXL-12-0` | 1.501 | 1 | 6 | 9.01 |
 
-**13 conductors that live inside retained parts** — the instrument pod pigtail
-(9) and the points and condenser leads (4). They are drawn in the model because
-the circuits are real, but they are existing wire on parts the rebuild keeps.
-Do not buy them, do not cut them, do not label them. See issue #52.
+**≈ $121** for 89 conductors, against $242 for the same wire in spool steps.
 
-⚠️ **`W_ALT` is left IN the count and may not belong there.** Two 14 AWG YE
-conductors, alternator to regulator. If the stator's own pigtail is retained the
-way the pod's is, this is 25 ft bought for nothing. **Check the stator before
-ordering that line.**
+### Where the money actually is
+
+⚠️ **The heavy gauges are 43% of a spool-step order for 9 of 89 conductors.**
+`12 AWG BK` alone is **$1.50/ft** — 3.3x the red, 6x the 18 AWG grey — and it
+exists for **one wire**, `W_RR_GND`. In spool steps that single conductor cost
+$37.52. At 6 ft it costs $9.01.
+
+Colour also moves the price 2–3x *within* a gauge: 16 AWG brown is $0.234 and
+16 AWG green is $0.461.
+
+### Three optional cuts
+
+| Cut | Saves | Cost |
+|---|---|---|
+| **`W_ALT` → drop `14 AWG YE`** if the stator has its own pigtail like the pod does | $6.13 | none, if true — **check the stator first** |
+| **`W_HEAD_LO` → 18 AWG GN**, dropping the `16 AWG GN` SKU | $3.69 | 18 AWG is ~10 A rated and the beam is 4.2 A on filament over a short run |
+| **The three 16 AWG BK grounds → 18 AWG BK**, dropping that SKU | ~$2.30 | horn ground is 2 A, headlight 4.2 A — both comfortable on 18 |
+
+All three together: **≈ $109**, and two fewer SKUs.
+
+### ⚠️ Do not shave below this
+
+Getting to $100 means cutting into the margin, and **a re-order costs more in
+shipping than the wire saved.** The margin above is roughly 1.5x the estimate,
+which covers crimps that get redone and the build-in-place approach where wire is
+trimmed on the bike rather than cut to a list.
+
+### ⚠️ `TXL-16-1` brown is backordered
+
+Flagged at 50 ft in the cart and likely at 30 ft too. That may split the
+shipment and add a second delivery charge — worth asking for a lead time before
+checkout rather than after.
 
 ## 2. Heavy cable — 4 conductors, NOT TXL
 
