@@ -831,6 +831,9 @@ connectors:
       mounting bolts, wired to the star bus. That is better than abrading the landing anyway: the
       coating under the ring stops mattering entirely, and this is an ignition earth - a points
       ignition with no condenser return burns its contacts.
+      ONE TAB IS ENOUGH [bench 4 Sep 2026]. Both cans share the one bracket, so the bracket IS the
+      node and the two tabs are the same conductor - one carries, the other is mechanical support.
+      A single ring under one bolt is therefore electrically complete rather than a compromise.
       The bracket has no ground provision of its own, so the ring goes under the existing bolt.
       ⚠️ THESE LEADS ARE NOT HARNESS WIRE. Like the points leads and the pod pigtail, they are factory
       pigtails on a retained part - see issue #52. Do not cut them, do not label them, and do not

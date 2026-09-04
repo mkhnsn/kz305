@@ -340,9 +340,19 @@ the landing anyway — the coating under the ring stops mattering entirely.
 **A points ignition with no condenser earth arcs its contacts and burns
 them.**
 
+## One tab is enough — confirmed 4 Sep 2026
+
+**Both cans share the one bracket, so the bracket IS the node.** The two
+mounting tabs are the same conductor; only one has to carry current and the
+second is mechanical support.
+
+So `W_CAP_GND` — a single ring under one bolt — is electrically complete,
+not a compromise. **No topology change**, which was the open question when
+the wire was added.
+
 ## Not captured
 
-- Whether the two tabs are both electrically necessary or one is just
-  mechanical support.
 - What the two male bullets mate on the harness side. The points leads are
-  the obvious candidate, but that is inference, not observation.
+  the obvious candidate, but that is inference, not observation — and
+  inference by symmetry is exactly what put a black wire in this model when
+  the real one is blue.
