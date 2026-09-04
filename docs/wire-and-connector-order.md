@@ -54,37 +54,41 @@ About **700 spool feet** for roughly 100 ft of actual wire. That ratio is the
 minimum-spool tax, not waste — and it is the argument for the consolidations
 below.
 
-### ⚠️ Four SKUs exist for a single conductor
+### 17 SKUs — one consolidated away
 
-A whole spool for one wire is the cost problem that folded the palette from
-eleven colours to eight in the first place. Two can be removed for nothing:
+`W_MAIN_IN` was the only 14 AWG RD in the harness, so a whole spool bought one
+wire. **Rounded up to 12 AWG RD**, which is already on the list for the charging
+pair. Upsizing the shortest, highest-current feed on the bike costs nothing, and
+it never enters the PDM so the seal table does not care.
 
-| SKU | Wire | Fix |
+Three single-conductor SKUs remain and all three stay: `W_SW_BUS` (14 AWG BN)
+keeps its margin on the main switched path, `W_RR_GND` (12 AWG BK) cannot share
+a spool because black is ground-only, and `W_HEAD_LO` (16 AWG GN) stays at 16 for
+filament headroom.
+
+### Gauges are settled — sized for INCANDESCENT
+
+**Decided 4 Sep 2026.** The bike may run filament lamps for a while before the
+LED conversion, so everything is sized for the STOCK load and rounded up. That is
+the conservative direction, and it means **no gauge changes if the lamp decision
+changes.**
+
+Checked against the filament worst case, and nothing needed to move:
+
+| Wire | Gauge | Filament load |
 |---|---|---|
-| **14 AWG RD** | `W_MAIN_IN` | **Move to 12 AWG RD**, already on the list. Upsizing the battery-to-fuse feed costs nothing and it never enters the PDM, so the seal table does not care. |
-| **16 AWG GN** | `W_HEAD_LO` | **Move to 18 AWG GN** — but only once #60 gives the LED headlight's measured draw. Do not downsize a beam feed on an assumption. |
-| 14 AWG BN | `W_SW_BUS` | **Keep.** It carries the whole switched load, and the model kept it at 14 AWG deliberately for margin on the main switched path. |
-| 12 AWG BK | `W_RR_GND` | **Keep.** Charging return, same current as the feed, and black is ground-only so it cannot share another colour's spool. |
+| `W_HEAD_HI` / `W_HEAD_LO` | 16 AWG | 4.2 A on a 50 W beam |
+| `W_HEAD_SUPPLY`, `W_HI_PWR`, `W_LO_PWR` | 16 AWG | 7 A with both beams lit during the blip |
+| `W_BRAKE` | 18 AWG | 2.25 A, 27 W |
+| `W_SIG_*` | 18 AWG | 1.9 A each, 23 W |
+| `W_TAIL_RUN` | 18 AWG | 0.7 A, 8 W |
 
-### ⚠️ Two gauges are provisional — order them last
+**#61 is closed by decision.** Green seal on 16 AWG, no caliper pass. The margin
+is 0.06 mm against a nominal and green is the intended fit; the risk did not
+justify gating a wire order on it.
 
-- **12 AWG** (`W_RR_OUT`, `W_RR_BATT`, `W_RR_GND`) is inherited, not calculated.
-  It follows the stator's rated output, which has never been read off anything —
-  **#59**.
-- **16 AWG BU / GN** beam feeds follow the LED headlight's measured draw — **#60**.
-
-Neither blocks the other sixteen SKUs.
-
-### ⚠️ Resolve #61 by asking, not by calipering
-
-The 16 AWG seal margin — 2.26 mm nominal against green's 2.2 mm lower bound,
-**0.06 mm** — was filed as "caliper the delivered spool". That is
-chicken-and-egg: 24 conductors of 16 AWG enter the PDM, so a miss would change
-the order after it arrives.
-
-**Ask Prowire for the actual insulation OD of their 16 AWG TXL before ordering.**
-It costs an email and settles the question for free. Caliper on arrival anyway,
-but do not make the buy blind.
+**12 AWG is settled too** — the stator is taken as 20 A, `MF_RR` at 30 A. See
+#59.
 
 ## 2. Prowire — consumables
 

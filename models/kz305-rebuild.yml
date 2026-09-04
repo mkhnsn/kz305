@@ -345,6 +345,24 @@ connectors:
       WHAT THE HYBRID BUYS: K_MAIN carries about 6.6A rather than the roughly 9A of a full stack, and
       the headlamp and horn loads never cross its contacts at all. It is the one relay whose failure
       kills the bike, so it is the one worth unloading.
+      ** FUSE RATINGS ASSIGNED 4 Sep 2026, SIZED FOR INCANDESCENT. ** The bike may run filament lamps
+      for a while before the LED conversion, so every rating below covers the STOCK load, not the LED
+      one. That is the conservative direction and it means the ratings do not change if the lamp
+      decision does.
+        F1   5A   ign switch feed - K_MAIN coil, plus the tail lamp in PARK (see #48)
+        F2   5A   kill switch feed - K_COIL coil only, ~0.15A
+        F3  10A   both ignition coils, ~6A on points
+        F4  10A   horn, 2A nominal but inrush is well above it
+        F5  15A   headlamp. 4.2A on one 50W beam, 7A with BOTH lit during the dimmer's
+                  make-before-break blip, and cold-filament inrush is several times that for a
+                  few milliseconds. 10A would nuisance-blow on a cold start.
+        F6   5A   tail / park, 8W filament
+        F7   5A   instruments - three 3.4W lamps
+        F8  7.5A  brake, 27W filament plus cold inrush
+        F9  10A   signals - two 23W lamps a side plus the indicator
+        F10 7.5A  USB-C PD, ~4.4A at 45W, and PD converters have capacitive inrush
+        F11  5A   relay coil supply, ~0.45A worst case
+      MiniVal part numbers are in docs/part-selection.md. Buy a variety kit rather than singles.
       ⚠️ THE SPLIT IS UNDER REVIEW - see issue #45, which recommends moving F4/F5 to switched and
       keeping only F1 hot. Issues #48-#51 also bear on this block.
       RELAY COUNT IS FIVE, at the TOP of what an RTMR-style module carries. Size for five positions
@@ -408,9 +426,12 @@ connectors:
       definition unless something is put in it, and an unfused conductor onto a battery post is the one
       thing a harness must not have.
       AT THE BATTERY END DELIBERATELY - a fuse at the regulator end leaves the whole run unprotected.
-      RATING PROVISIONAL. 30A is a placeholder above the stock system's output and below the SH775's
-      35A; it cannot be set properly until the stator's rated wattage is known, which nothing on this
-      bike has yet stated. See blocker 4.
+      ** 30A, ON A CALLED STATOR OUTPUT OF 20A - decided 4 Sep 2026. ** Nothing on this bike states
+      the stator's rated wattage and chasing it was blocking a $2 part. 20A is taken as the working
+      figure; 30A sits above it so normal charging never opens the fuse, and below the SH775's 35A.
+      12 AWG carries 30A comfortably, so the fuse still protects its conductor.
+      SIZE UP LATER IF THE CHARGING TEST SAYS SO - target 14.0-14.5V at 3-5k. A fuse is the cheapest
+      thing on this harness to change.
 
   IGN:
     <<: *ign_switch
@@ -810,7 +831,14 @@ cables:
     <<: *w6
     colors: [BK]
     notes: Plain black, deliberately. The stock harness has BOTH Y/BK and BK/Y in it on two different ground nets, which cost this project a fortnight of dispute before the bench settled it - the new build does not inherit that ambiguity.
-  W_MAIN_IN:  {<<: *w14, colors: [RD]}
+  W_MAIN_IN:
+    <<: *w12
+    colors: [RD]
+    notes: |-
+      Battery / starter relay stud to the main fuse. ROUNDED UP FROM 14 TO 12 AWG, 4 Sep 2026 - it
+      was the only 14 AWG RD in the harness, so a whole spool bought one wire. 12 AWG RD is already
+      on the list for the charging pair, and upsizing the shortest, highest-current feed on the bike
+      costs nothing. It does not enter the PDM, so the cavity seal table does not care.
   W_MAIN_OUT:
     <<: *w14
     colors: [WH]
