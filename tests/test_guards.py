@@ -479,9 +479,16 @@ def test_black_is_only_ever_a_ground():
     Under the rebuild's scheme black means ground and nothing else, so a
     black wire is always safe to land on the star bus.
 
-    ONE EXCEPTION, and it is not ours to fix: W_PTS_R is the right contact
-    breaker lead, black, in a factory braided jacket. It is an existing part
-    rather than wire we buy.
+    TWO EXCEPTIONS, and neither is ours to fix. Both are factory pigtails on
+    retained parts rather than wire we buy, so the rebuild's colour scheme
+    cannot reach them:
+
+      W_PTS_R  the right contact breaker lead, black, in a braided jacket
+      W_CAP_R  the right condenser lead, black, on the stock condenser
+
+    Both are signal leads on the points circuit and MUST NOT be landed on
+    the star bus. That is exactly why they are named here rather than
+    silently allowed - an exemption list is a place a builder can read.
     """
     sys.path.insert(0, str(ROOT))
     import build
@@ -526,7 +533,7 @@ def test_black_is_only_ever_a_ground():
             reached |= nodes
             changed = True
 
-    allowed = grounded | {"W_PTS_R"}
+    allowed = grounded | {"W_PTS_R", "W_CAP_R"}
 
     offenders = sorted(
         name

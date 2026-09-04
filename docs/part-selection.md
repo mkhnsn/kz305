@@ -941,6 +941,43 @@ resolve it — they call `1708338-L` the *18–16 AWG* terminal — so that is t
 part to use, and the CSA figures are evidently nominal band edges rather than
 hard limits. Worth a **pull test on the first crimp** rather than assuming.
 
+### 6 AWG heavy cable — settled 4 Sep 2026
+
+`W_BAT_SOL`, `W_SOL_SM`, `W_BAT_GND` and `W_ENG_GND`. **Not TXL** — TXL runs
+roughly 24 to 8 AWG and 6 is outside it. None of these enters the PDM and all
+four terminate in lugs rather than 280 terminals, so none of the seal or terminal
+decisions carries over.
+
+**Buy welding or battery cable**, red and black, with tinned copper lugs and
+adhesive heat-shrink boots. There is nothing to determine here: the gauge is set
+by the cranking current, the lugs are set by the stud sizes, and both are
+standard. Fine-strand welding cable is preferred over battery cable for
+flexibility around the engine.
+
+⚠️ **`W_ENG_GND` carries the whole cranking return** — the starter grounds through
+its case into the engine, so this strap is not a signal earth. See `GND_ENG`.
+
+### Coil suppression — settled 4 Sep 2026
+
+**Buy relays with an integral flyback diode.** A relay coil is an inductor;
+opening it produces a reverse spike of several hundred volts.
+
+Stock had nothing to absorb it because stock had no relays and no semiconductors.
+This harness adds five relays, a solid-state flasher, a series regulator and a
+USB PD converter — **every one of those is a semiconductor that did not exist on
+the bike before.**
+
+Integral rather than discrete: it is a catalogue option at no meaningful cost, it
+cannot be forgotten at assembly, and it cannot be wired backwards the way a loose
+diode can.
+
+⚠️ **An integral diode makes 85/86 polarity mandatory.** A diode-suppressed relay
+wired backwards is a dead short across the coil. 86 is COIL+ and 85 is COIL− on
+every relay here.
+
+The starter solenoid is a stock part with no integral option — fit a discrete
+diode across its coil, cathode to the Y/R feed.
+
 ### USB-C PD charger — replaces the stock accessory circuit
 
 **Decided 3 Sep 2026.** The factory accessory provision is not reproduced in any

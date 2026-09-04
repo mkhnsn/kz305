@@ -485,9 +485,19 @@ connectors:
 
   K_MAIN:
     type: Relay
-    subtype: ISO 280 micro, 20A - seats in the PDM
+    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
+      ** BUY RELAYS WITH AN INTEGRAL FLYBACK DIODE - decided 4 Sep 2026, closing issue #46. ** A relay
+      coil is an inductor; opening it produces a reverse spike of several hundred volts. Stock had
+      nothing to absorb it because stock had no relays and no semiconductors. This harness adds five
+      relays, a solid-state flasher, a series regulator and a USB PD converter - and every one of
+      those is a semiconductor that did not exist on the bike before.
+      Integral rather than discrete: it is a catalogue option at no meaningful cost, it cannot be
+      left out at assembly, and it cannot be wired backwards as a loose diode can.
+      ⚠️ AN INTEGRAL DIODE MAKES 85/86 POLARITY MANDATORY. A diode-suppressed relay wired backwards is
+      a dead short across the coil. 86 is COIL+ and 85 is COIL- on every relay in this harness, and
+      the label schedule carries it.
       ALL FIVE RELAYS ARE ISO 280 MICRO and SEAT IN THE PDM rather than in separate sockets - the
       module's cavities are the 2.8mm 280 footprint. 20A parts (35A versions available) against a
       worst case of about 6.6A here, so every position sits well inside its rating.
@@ -500,7 +510,7 @@ connectors:
 
   K_COIL:
     type: Relay
-    subtype: ISO 280 micro, 20A - seats in the PDM
+    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A)
@@ -510,7 +520,7 @@ connectors:
 
   K_HORN:
     type: Relay
-    subtype: ISO 280 micro, 20A - seats in the PDM
+    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026,
@@ -524,14 +534,14 @@ connectors:
 
   K_HI:
     type: Relay
-    subtype: ISO 280 micro, 20A - seats in the PDM
+    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - high beam. See K_LO for the pair's design notes; they are one decision, not two.
 
   K_LO:
     type: Relay
-    subtype: ISO 280 micro, 20A - seats in the PDM
+    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - low beam, and the second half of the beam pair. TWO RELAYS RATHER THAN A CHANGEOVER:
@@ -800,6 +810,23 @@ connectors:
   PTS_R:
     <<: *points
     subtype: RIGHT
+  CAP_L:
+    <<: *capacitor
+    subtype: LEFT - STOCK PART
+    notes: |-
+      DRAWN 4 Sep 2026, closing issue #47. A points ignition does not work without condensers - they
+      are what stops the contacts arcing as they open, and without them the points burn in hours.
+      They were in the factory model and absent from this one, which would have read as a decision to
+      delete them.
+      STOCK PARTS, in hand. 0.24 +/- 0.02 uF, 1000 V DC. Parallel across the points, case-grounded
+      through their own mounting.
+      ⚠️ THESE LEADS ARE NOT HARNESS WIRE. Like the points leads and the pod pigtail, they are factory
+      pigtails on a retained part - see issue #52. Do not cut them, do not label them, and do not
+      count them in the wire order.
+  CAP_R:
+    <<: *capacitor
+    subtype: RIGHT - STOCK PART
+    notes: Stock part, parallel across the right points. Same caveats as CAP_L - factory pigtail, not harness wire.
 
   SP_HEAD:
     style: simple
@@ -918,6 +945,18 @@ cables:
     <<: *w18
     colors: [YE]
     notes: Yellow serves LEFT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
+  W_CAP_L:
+    <<: *w18
+    colors: [YE]
+    notes: STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52. Drawn because the circuit is real; not cut, not labelled, not ordered.
+  W_CAP_R:
+    <<: *w18
+    colors: [BK]
+    notes: |-
+      STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52.
+      ⚠️ BLACK AND NOT A GROUND, the same documented exception as W_PTS_R. It is a factory lead on a
+      retained part, so the rebuild's ground-only-black rule cannot reach it. Do not land it on the
+      star bus.
   W_PTS_R:
     <<: *w18
     colors: [BK]
@@ -1301,6 +1340,20 @@ connections:
   - - COIL_R: [2]
     - W_PTS_R: [1]
     - PTS_R: [1]
+
+  # --- condensers, parallel across the points, case-grounded ---------
+  - - PTS_L: [1]
+    - W_CAP_L: [1]
+    - CAP_L: [1]
+  - - PTS_R: [1]
+    - W_CAP_R: [1]
+    - CAP_R: [1]
+  - - CAP_L: [2]
+    - '-->'
+    - GND_ENG: [1]
+  - - CAP_R: [2]
+    - '-->'
+    - GND_ENG: [1]
 
   # --- starter trigger ----------------------------------------------
   - - RH: [3]
