@@ -761,67 +761,67 @@ every line**, so the block can be a single order.
 | `4550750` cavity plug | listed | |
 | `4550747` green seal | ⚠️ **has a product page but did not appear on the wire-seals collection listing — confirm stock before ordering** | this is the largest seal line |
 
-##### Order placed 3 Sep 2026 — ConnectorID, whole block on one invoice
+##### Order placed 3 Sep 2026, shipped complete 4 Sep — ConnectorID
 
-The cart accepted `4550748` red despite the listing showing **in stock but 0
-available**, so that line may ship, backorder or drop off the invoice silently.
-**Check the packing slip against the order confirmation**, not against memory.
+**All eleven lines in one box, red seals included.** The listing read *"in stock"*
+and *"0 available"* simultaneously and the cart accepted it anyway; the seals
+shipped. That was a display artefact, not a backorder — recorded because the
+warning below was written when it looked like a real shortage.
+
+| Part | Design | Ordered | Cover |
+|---|---|---|---|
+| `0301370` module | 1 | 1 | |
+| `0301371` cover | 1 | 1 | |
+| `0301372` secondary lock | 6 | 8 | |
+| `0300690` bracket | 2 | 2 | |
+| `0300691` bracket | 2 | 2 | |
+| `1708338-L` terminal 18–16 | 38 | 100 | 2.6x |
+| `1708339-L` terminal 14–12 | 2 | 30 | 15x |
+| `1708337-L` terminal 22–20 | 0 | 10 | insurance — see below |
+| `4550747` green seal | 26 | 60 | 2.3x |
+| `4550748` red seal | 14 | 40 | 2.9x |
+| `4550750` cavity plug | 20 | 40 | 2.0x |
+
+The invoice labels `0300690` **male** and `0300691` **female**, agreeing with
+Express Technology and against the ConnectorID page title. Two of each were
+ordered, so it never had to be settled.
+
+###### Why there are ten terminals in the box for a part the design does not use
+
+`1708337-L` covers 0.35–0.75 mm². **18 AWG is 0.82 mm²** — above that band and
+below `1708338-L`'s 1.0 mm². MTA's own AWG labelling calls `1708338-L` the 18–16
+terminal, so it is the right part, but the CSA figures are evidently nominal band
+edges rather than hard limits.
+
+**Pull-test the first 18 AWG crimp** when the Prowire spool arrives. If it is
+loose, these ten are the fallback and save a reorder.
 
 ###### On arrival — receiving check
 
-- [ ] **`1708338-L` is loose pieces, not a reel.** The two listings sit next to
-      each other; a reel is thousands and is the wrong product, not a bonus.
-- [ ] **Two each of `0300690` and `0300691`** — the distributors disagree on
-      which is male, so confirm you have a matched pair by looking at them, not
-      by reading the bag.
-- [ ] **Count the secondary locks — six.** The likeliest line to arrive short,
-      and the module is not retained without all of them.
-- [ ] **Red seals present, or explicitly backordered?**
+- [ ] **`1708338-L` is loose pieces.** The line item carries the `-L` suffix and
+      reads x100, so this looks right; confirm it is not a reel in the box.
+- [ ] **Two each of `0300690` and `0300691`**, and they mate to each other.
+- [ ] **Count the secondary locks — eight**, six of which are required.
+- [ ] **Red seals present.** Per the shipping notice they are.
 
-###### The relay footprint is 6 cavities — settled by arithmetic, not by looking
+###### With the module in hand — the last thing blocking the cavity map
 
-The catalogue states the same module as **30 MiniVal fuses OR 10 Micro 280
-relays**. A MiniVal straddles 2 cavities, so 30 x 2 = 60 confirms the grid, and
-60 / 10 relays = **6 cavities per relay footprint**. Two independent capacity
-claims on one part, and they agree.
+Settle the **grid pitch and relay footprint alignment**. The footprint is six
+cavities (#51), but a relay needs six *contiguous* cavities on the right
+alignment, so it cannot begin on an arbitrary column. That constrains where the
+five relays sit within their end of the block.
 
-Our relays are 4-pin (30 / 87 / 86 / 85), so **each leaves 2 cavities unused
-inside its own footprint** — 10 across five relays.
+It is the only piece of #10 that needs the part rather than arithmetic. Write the
+cavity map down as it is built, in the form of
+`measurements/connector-inventory.csv` — cavity number, circuit, wire colour,
+gauge — and state the numbering rule before the first terminal goes in.
 
-    9 fuses  x 2 pins                = 18 terminated
-    5 relays x 4 pins                = 20 terminated
-    5 relays x 2 unused in footprint = 10 open, under the relay body
-    free cavities outside a footprint = 12
-    ------------------------------------------------
-    60
+##### `4550748` red — the stock scare, and why the analysis still stands
 
-**So the plug count is 60 less whatever is terminated** — 22 at full population,
-25 on what the model currently draws. The old "18, or up to 28" spread came from
-not knowing the footprint; it is gone. The residual uncertainty is ±3 and it is
-just #50's undrawn fuse feeds.
-
-⚠️ **Assume an unused cavity under a relay body still needs a plug.** The module
-seals at the *wire-entry* face; a relay body sitting on top does not close a hole
-in the bottom. Not verified on the part, but plugs are pennies and the order
-carries 40.
-
-###### Positions are free — the cavities are uniform
-
-A cavity's role is decided by what is pushed into it, which is what makes the
-HOT-and-SWITCHED-at-opposite-ends layout a free choice rather than something to
-check for. The catalogue render bears it out: fuses grouped at one end, relays at
-the other.
-
-The one alignment constraint left is minor — a relay needs **6 contiguous
-cavities on the right grid pitch**, so a relay cannot begin on an arbitrary
-column. That affects where the five relays sit within their end of the block, not
-whether the split is possible. Settle it while writing the cavity map (#10),
-with the part in hand.
-
-##### ⚠️ `4550748` red is the constrained line — 3 Sep 2026
-
-Out of stock at ConnectorID; everything else on the list is available. Red is the
-**18 AWG** seal and the design needs 14 of them.
+Red showed as unavailable at order time and shipped anyway. The reasoning below
+is kept because it is about the DESIGN, not the stock level, and it decides what
+to do if red is ever genuinely short. Red is the **18 AWG** seal and the design
+needs 14.
 
 **There is no substitute inside the MTA range.** The three seals are red
 1.2–2.1, green 2.2–3.0, grey 3.1–3.7. 18 AWG TXL is 1.98 mm, which only red
