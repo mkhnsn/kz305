@@ -37,6 +37,7 @@ currently held true, with one evidence tag. The working-out lives in
 | 20 | The W/R bullet node is on the fuse-box pigtail | bench | bench | 2 Sep 2026 |
 | 21 | A white-and-black bundle runs to the tachometer | photo | photo | 2 Sep 2026 |
 | 22 | Seven Net B grounds land on the Net A chassis ring | inherit | review | 2 Sep 2026 |
+| 23 | The right condenser lead is black | inherit | bench | 4 Sep 2026 |
 
 `inherit` means the claim was never established at all — it was carried
 across from the diagram or from an earlier note and never questioned.
@@ -44,7 +45,7 @@ across from the diagram or from an earlier note and never questioned.
 
 ## What the record says
 
-**Twelve of the twenty-two were produced by the scan.** Reading the 600 dpi
+**Twelve of the twenty-three were produced by the scan.** Reading the 600 dpi
 diagram is by a wide margin this project's largest single source of
 withdrawn claims, and the failures are not random: **five of the twelve are
 base-versus-tracer** (#2, #13, #14, #15, #17). At 600 dpi a thin tracer
@@ -73,3 +74,18 @@ others** (#18 and #22 were both found in review, not at the bench). Both had
 been correctly withdrawn elsewhere in the repo first. Fixing the instance
 and not the class is this project's second failure mode, and unlike the
 first it is not about evidence at all.
+
+**`inherit` is now the second-largest category, and it is the quietest.**
+Four entries (#4, #22, #23, and the ground-net colours) were never
+established at all — carried across by symmetry or from the diagram and
+never questioned. They produce no conflict to notice, which is why three of
+the four were found by review or by picking the part up rather than by
+anything failing.
+
+#23 is the cleanest example. The right condenser lead was drawn black
+purely because the right *points* lead is black and the condenser
+parallels it. Nothing checked it. The black-is-never-a-signal guard then
+flagged it, an exemption was written to silence the guard — **and the
+exemption was covering a wrong colour rather than a real exception.** The
+lead is blue. An exemption list is exactly where this class of error hides,
+so keep it short and check a new entry against the part before adding it.

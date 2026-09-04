@@ -19,10 +19,19 @@ connectors:
     subtype: RIGHT
   CAP_L:
     <<: *capacitor
-    subtype: LEFT
+    subtype: LEFT - one half of a single bracketed assembly
+    notes: |-
+      ** THE TWO CONDENSERS ARE ONE PART, NOT TWO ** [bench 4 Sep 2026]. A single bracket carrying two
+      cans stacked axially, like batteries end to end, with a shared two-wire pigtail about 8 inches
+      long that is clamped to the bracket halfway along its run. Drawn as two connectors because they
+      are two electrically independent components; ONE line in any BOM.
+      ⚠️ IT EARTHS THROUGH ITS MOUNTING TABS TO THE FRAME - not to the engine case, despite sitting on
+      GND_ENG here. Two tabs, metal-to-metal. THE FRAME IS BEING POWDER COATED, which removes exactly
+      that path, so this is another blocker-5 component: it needs masked mounting points or a ground
+      wire it has never had. See the rebuild.
   CAP_R:
     <<: *capacitor
-    subtype: RIGHT
+    subtype: RIGHT - the other half of the same assembly
 
 cables:
   # --- coil feeds ------------------------------------------------
@@ -38,7 +47,17 @@ cables:
     colors: [BK]
     notes: Black serves RIGHT [bench 15 Aug 2026, stamped plate], corroborated by the diagram at the coil block. ⚠️ BK also serves the starter trigger and the grounds - this lead is NOT one.
   W_CAP_L: {<<: *w18, colors: [YE]}
-  W_CAP_R: {<<: *w18, colors: [BK]}
+  W_CAP_R:
+    <<: *w18
+    colors: [BU]
+    notes: |-
+      ** BLUE, NOT BLACK - CORRECTED 4 Sep 2026 with the part in hand. ** It was drawn BK by symmetry
+      with W_PTS_R, the right points lead, on the assumption that a condenser lead matches the points
+      lead it parallels. It does not: the assembly's pigtail is YELLOW and BLUE, both ending in male
+      bullets.
+      ⚠️ SO BLUE HAS A THIRD ROLE ON THIS BIKE - brake lamp feed, fused headlight supply, and this.
+      The first two are measured open to each other; this one is a third net again. See the colour
+      collision note in kz305-common.yml.
 
 connections:
   # --- coil primaries to the points ---------------------------------

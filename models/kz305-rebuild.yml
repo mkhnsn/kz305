@@ -818,8 +818,13 @@ connectors:
       are what stops the contacts arcing as they open, and without them the points burn in hours.
       They were in the factory model and absent from this one, which would have read as a decision to
       delete them.
-      STOCK PARTS, in hand. 0.24 +/- 0.02 uF, 1000 V DC. Parallel across the points, case-grounded
-      through their own mounting.
+      ** ONE PART, NOT TWO ** [bench 4 Sep 2026]. A single bracket carrying two cans stacked axially,
+      with a shared two-wire pigtail about 8 inches long, clamped to the bracket halfway along. YELLOW
+      and BLUE, each ending in a male bullet. 0.24 +/- 0.02 uF, 1000 V DC, parallel across the points.
+      Drawn as two connectors because they are electrically independent; ONE line in the BOM.
+      ⚠️ IT EARTHS THROUGH TWO MOUNTING TABS TO THE FRAME, and the frame is being powder coated -
+      which removes that path. This is a blocker-2 component: mask the two tab landings, or give it a
+      ground wire it has never had. Do not assume the bracket bolts through to bare metal.
       ⚠️ THESE LEADS ARE NOT HARNESS WIRE. Like the points leads and the pod pigtail, they are factory
       pigtails on a retained part - see issue #52. Do not cut them, do not label them, and do not
       count them in the wire order.
@@ -951,12 +956,13 @@ cables:
     notes: STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52. Drawn because the circuit is real; not cut, not labelled, not ordered.
   W_CAP_R:
     <<: *w18
-    colors: [BK]
+    colors: [BU]
     notes: |-
       STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52.
-      ⚠️ BLACK AND NOT A GROUND, the same documented exception as W_PTS_R. It is a factory lead on a
-      retained part, so the rebuild's ground-only-black rule cannot reach it. Do not land it on the
-      star bus.
+      ** BLUE, NOT BLACK - corrected 4 Sep 2026 with the part in hand. ** It was drawn black by
+      symmetry with the right points lead. It is not, and the black-is-never-a-signal guard had
+      already been given an exemption for it - an exemption that was covering a wrong colour rather
+      than a real exception. The exemption is withdrawn.
   W_PTS_R:
     <<: *w18
     colors: [BK]

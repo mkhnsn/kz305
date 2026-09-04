@@ -32,8 +32,10 @@
 #            independent Y/R net on the fuse-box and starter-relay
 #            branch, open to it. Net 2 is the starter relay's coil
 #            feed, identified by gender complement [arith 2 Sep 2026].
-#      Bl  = brake lamp feed AND the fused headlight supply to the
-#            dimmer. Two nets, open to each other.
+#      Bl  = brake lamp feed, the fused headlight supply to the dimmer,
+#            AND the right condenser lead [bench 4 Sep 2026]. THREE
+#            roles. The first two are measured open to each other; the
+#            third is on the points circuit and is a third net again.
 #
 #    AND THE REVERSED PAIRS. Not collisions, but worse - they LOOK like
 #    the same wire written two ways, and on this bike BOTH members of

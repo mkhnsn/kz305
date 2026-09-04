@@ -295,3 +295,51 @@ wires the star bus needs**. It is not yet known.
 Unlike the fuse box, the relay assembly is **not** being replaced by the rebuild
 as a decided matter. Whether it survives is open. Map it as an as-built
 reference either way — the topology is what the design findings rest on.
+
+---
+
+# Condenser assembly — bench, 4 Sep 2026
+
+Recorded here rather than in a new file because it is the same kind of
+capture: a small subassembly, read visually with the part in hand.
+
+| | |
+|---|---|
+| Form | **ONE bracket carrying TWO cans**, stacked axially — end to end like batteries |
+| Leads | **YELLOW and BLUE**, one per can |
+| Terminals | male bullet on each |
+| Ground | through the **case** to the **FRAME**, via **two mounting tabs** |
+| Pigtail | about **8 inches** total, clamped to the bracket **halfway along** |
+| Electrical | 0.24 ± 0.02 µF, 1000 V DC (printed spec) |
+
+Method: `bench` — part in hand, visual. Nothing here is metered.
+
+## ⚠️ Two findings, not one
+
+**1. The right lead is BLUE, not black.** Both models drew it `BK` by
+symmetry with `W_PTS_R`, the right points lead, on the assumption that a
+condenser lead matches the points lead it parallels. It does not. See
+`docs/overturned-claims.md` #23 — and note the guard exemption that briefly
+existed to accommodate the wrong colour.
+
+**So blue has THREE roles on this bike**: brake lamp feed, fused headlight
+supply, and this. The first two are measured open to each other; this is a
+third net again.
+
+**2. It earths to the FRAME, not the engine.** Two mounting tabs,
+metal-to-metal, and both models had it on `GND_ENG`. That node's note
+already admits it is broader than its name — "grounds through its own
+mounting" — so the drawing is not wrong, but the *path* is frame, not case.
+
+⚠️ **THE FRAME IS BEING POWDER COATED.** This is another component that
+loses its earth to the coating, alongside the left cluster and the engine
+strap. Either mask both tab landings or give the bracket a ground wire it
+has never had. **A points ignition with no condenser earth burns its
+contacts.**
+
+## Not captured
+
+- Whether the two tabs are both electrically necessary or one is just
+  mechanical support.
+- What the two male bullets mate on the harness side. The points leads are
+  the obvious candidate, but that is inference, not observation.
