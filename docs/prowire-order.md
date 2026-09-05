@@ -126,51 +126,65 @@ the PDM and all four terminate in lugs.
 
 Fine-strand **welding** cable preferred for flexibility around the engine.
 
-## 4. Splice heat-shrink and splice hardware — 35 joints
+## 4. Splice hardware — SETTLED
 
-The feed buses are cascades, so the joint count is far above the splice count in
-the drawing: `SP_SW` is 8 joints and `SP_HOT` is 4. `SP_POD_GND`'s 3 already
-exist inside the retained pod pigtail.
+**Step-down insulated butt splices, yellow-to-blue.** That is the right choice
+and the arithmetic backs it: two 16 AWG conductors together are about 2 mm²,
+which is 14 AWG equivalent, so the pair goes in the **yellow** (12–10) barrel and
+the single leg in the **blue** (16–14). A straight blue-to-blue would not close
+on the pair.
 
-⚠️ **How the splices are actually made is not decided** — crimped parallel splice,
-crimped butt splice, or soldered. Each needs different consumables, and the
-adhesive shrink goes over whichever. Settle it before buying 35 joints' worth.
-
-Sizing is simple now the harness is one gauge — every conductor is 2.4 mm:
-
-| Item | For | Qty |
-|---|---|---|
-| Adhesive-lined 3:1, **3/8 in** | 2-into-1 on 16 AWG | ~10 ft |
-| Adhesive-lined 3:1, **1/2 in** | the heavier cascade joints | ~4 ft |
-| Adhesive-lined 3:1, **3/16 in** | single-wire ends, terminal necks | ~8 ft |
-
-Buy roughly double — a splice that has to be redone consumes two lengths.
-
-## 5. Inline fuse holders — 2, and both are unsourced
-
-| Item | Note |
-|---|---|
-| `MF` — 20 A inline, sealed | main; its output feeds `SP_HOT` |
-| `MF_RR` — 30 A inline, sealed | charging. ⚠️ **at the battery end**, not the regulator end |
-
-Neither appears on any supplier list yet.
-
-## 6. Labels
-
-`docs/label-schedule.md` — two per wire, each naming the far end. With no
-tracers these **are** the identification scheme.
-
-⚠️ **Printable heat-shrink is usually a printer-specific consumable**, not a
-generic wire-supply line — most likely a Brady or Dymo cartridge. Check before
-assuming Prowire stocks it.
-
-## 7. Loom and protection
+⚠️ **Blue-to-red is now the rarer case.** With the harness all 16 AWG, the only
+places a 16-to-18 step-down applies are joints onto retained pigtails. Order a
+few, not a handful.
 
 | Item | Qty |
 |---|---|
-| Braided sleeving or split loom, 1/2 in — trunk | 10 ft |
-| Braided sleeving or split loom, 1/4 in — branches | 25 ft |
-| Harness tape, non-adhesive cloth | 2 rolls |
+| Step-down butt splice, **yellow-to-blue** | 35 + spares — **45** |
+| Step-down butt splice, blue-to-red | ~6 |
+
+## 5. Heat shrink and sleeving — Prowire
+
+Adhesive-lined dual wall, over every splice. Sizing is simple now the harness is
+one gauge — every conductor is 2.4 mm and every splice barrel is a yellow butt
+splice:
+
+| Item | For | Qty |
+|---|---|---|
+| Adhesive-lined 3:1, **1/2 in** | over a yellow-barrel step-down splice | ~12 ft |
+| Adhesive-lined 3:1, **3/16 in** | single-wire ends, terminal necks | ~8 ft |
+| Braided sleeving or split loom, 1/2 in — trunk | | 10 ft |
+| Braided sleeving or split loom, 1/4 in — branches | | 25 ft |
+
+Buy roughly double on the adhesive shrink — a splice that has to be redone
+consumes two lengths.
+
+**Already in hand:** HD nickel-plated ring terminals, cloth harness tape.
+
+## 6. Inline fuse holders — MP630, NOT a Prowire line
+
+`MF` and `MF_RR` both take the **Metri-Pack 630 pull-to-seat ATC holder**,
+`MP630 1214 ATC Set` — housing, cover, seal and loose terminals, about $5.75
+each. All four wires are in the terminal's 12–14 AWG band:
+
+| Holder | Wire | Gauge |
+|---|---|---|
+| `MF` | `W_MAIN_IN` | 12 AWG |
+| `MF` | `W_MAIN_OUT` | 14 AWG |
+| `MF_RR` | `W_RR_OUT` | 12 AWG |
+| `MF_RR` | `W_RR_BATT` | 12 AWG |
+
+⚠️ **They take ATC (regular blade) fuses, not MiniVal.** The PDM is MiniVal
+throughout, so the build carries **two fuse form factors** and they do not
+interchange. Buy an **ATC 20 A and ATC 30 A** separately from the MiniVal kit.
+
+⚠️ **Pull-to-seat**: the wire threads through the seal and housing *before* it is
+crimped, then pulls back to lock. Same discipline as the MTA cavities and the
+printed labels — **seal on, label on, crimp last.** A crimped terminal will not
+pass back through.
+
+Buy a couple of spare `MP630-1214 F` terminals at $0.48 — cheap insurance on a
+pull-to-seat joint you cannot redo without withdrawing the lead.
 
 ## 8. Tools
 

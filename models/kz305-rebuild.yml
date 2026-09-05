@@ -209,8 +209,25 @@ connectors:
 
   MF:
     <<: *main_fuse
-    subtype: 20A inline, sealed holder
+    subtype: 20A ATC, Metri-Pack 630 sealed pull-to-seat holder
+    mpn: MP630 1214 ATC Set
+    additional_components:
+      - type: Fuse
+        subtype: ATC / ATO regular blade, 20A yellow - NOT MiniVal
+        qty: 1
     notes: |-
+      ** MP630 1214 PULL-TO-SEAT HOLDER, decided 4 Sep 2026. ** Set includes housing, cover, seal and
+      loose terminals. Both of this holder's wires are in range - W_MAIN_IN is 12 AWG and W_MAIN_OUT
+      is 14 AWG, against the terminal's 12-14 AWG band.
+      ⚠️ IT TAKES AN ATC (REGULAR BLADE) FUSE, NOT A MiniVal. The PDM is MiniVal throughout, so the
+      build carries TWO fuse form factors and they are not interchangeable. Buy ATC 20A and 30A
+      separately from the MiniVal kit.
+      ⚠️ PULL-TO-SEAT MEANS THE WIRE THREADS THROUGH THE SEAL AND HOUSING BEFORE IT IS CRIMPED, then
+      pulls back to lock. Same discipline as the MTA cavities and the printed labels: seal first,
+      label first, crimp last. A crimped terminal will not pass back through, so a mistake here costs
+      the whole lead.
+      ⚠️ A THIRD TERMINAL FAMILY. The harness now uses MTA 280 in the PDM, MP630 here, and 090 at the
+      connectors. Check the crimp tool covers pull-to-seat 630 before assuming.
       ** PROTECTION AND DISTRIBUTION ARE SEPARATE PARTS - decided 4 Sep 2026. ** A stud-terminal fuse
       holder doubling as the hot bus was considered and dropped: it couples the fuse RATING to the
       joint count, and the stud fuse families do not reach down to where this circuit belongs.
@@ -430,8 +447,13 @@ connectors:
 
   MF_RR:
     type: Charging fuse
-    subtype: 30A inline, sealed holder - AT THE BATTERY END
+    subtype: 30A ATC, Metri-Pack 630 sealed pull-to-seat holder - AT THE BATTERY END
+    mpn: MP630 1214 ATC Set
     pinlabels: [IN, OUT]
+    additional_components:
+      - type: Fuse
+        subtype: ATC / ATO regular blade, 30A green - NOT MiniVal
+        qty: 1
     notes: |-
       NEW PART, 1 Sep 2026, and it does not exist on the stock bike - which fused the charging output
       nowhere. It protects the WIRE, not the regulator: a direct-to-battery DC pair is unfused by
