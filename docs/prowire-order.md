@@ -132,59 +132,70 @@ Fine-strand **welding** cable preferred for flexibility around the engine.
 take every wire at a node in from the *same* end and crimp once, so one splice
 serves a whole node instead of a cascade of two-into-ones.
 
-**$1.60 against $25.20**, and 13 crimps instead of 35.
+**About $10 against $25.20**, and 14 crimps instead of 35.
 
 ⚠️ **It also makes the drawing honest.** `SP_HOT` and `SP_SW` are modelled as
 single nodes with a note that the cascade was a build form. With a parallel
 splice they *are* single nodes — the model and the bench now agree.
 
-### Sizing — barrel capacity is total conductor area
+### ⚠️ Sizing — use the CONDUCTOR area, not the nominal metric size
 
-16 AWG TXL is 1.0 mm² per Prowire's own chart, so wires-per-barrel is simply
-capacity ÷ 1.0:
+Prowire's chart calls 16 AWG TXL "1 mm²". **That is the nominal metric size
+designation, not the conductor area.** The real figure from the stranding is:
 
-| Barrel | Molex | Capacity | Max 16 AWG wires | $ |
+    19 strands x 0.287 mm  =  1.23 mm2 of copper
+
+Using 1.0 would overstate what fits in a barrel by a quarter. At **85% fill**,
+which is what leaves room to actually insert the wires:
+
+| Barrel | Molex | Bore | Max 16 AWG wires | $1 / $25 |
 |---|---|---|---|---|
-| 16-14 GA | `19205-0001` | 2.08 mm² | 2 | 0.082 |
-| **12-10 GA** | **`19205-0003`** | **5.26 mm²** | **5** | 0.105 |
-| 8 GA | — | 8.37 mm² | 8 | 0.286 |
+| 16-14 GA | `19205-0001` | 2.08 mm² | **1** — useless for splicing | .157 / .141 |
+| **12-10 GA** | **`19205-0003`** | 5.26 mm² | **3** | .202 / .182 |
+| **8 GA** | **`19205-0004`** | 8.37 mm² | **5** | .549 / .494 |
+
+⚠️ **The 16-14 barrel cannot take two 16 AWG wires.** Two conductors is 2.46 mm²
+against a 2.08 mm² bore. A 16-14 *butt* splice takes one wire per end, which is a
+different thing — even `SP_TAIL`'s two wires need the 12-10.
+
+### Which barrel per node
 
 | Splice | Wires | Barrel |
 |---|---|---|
-| `SP_HOT` | 5 | 12-10 |
-| `SP_SIG_L` `SP_SIG_R` | 4 | 12-10 |
+| `SP_HOT` | 5 | **8 GA** |
+| `SP_SIG_L` `SP_SIG_R` | 4 | **8 GA** |
 | `SP_RLY` `SP_YR` `SP_HEAD` `SP_HI` `SP_INSTR` `SP_MTR` `SP_BRK_FEED` `SP_BRAKE` | 3 | 12-10 |
-| `SP_TAIL` | 2 | 16-14 |
-| `SP_POD_GND` | 4 | — inside the retained pod pigtail, already made |
+| `SP_TAIL` | 2 | 12-10 |
+| `SP_POD_GND` | 4 | — inside the retained pod pigtail |
 
-### ⚠️ `SP_SW` is the one that does not fit — split it into three
+### ⚠️ `SP_SW` still has to be split — but only in two
 
-Nine wires is 9.0 mm², which needs a **6 GA** barrel — and Prowire's own note says
-the recommended `Sargent 4235 CT` only covers **up to 8 ga**, with 6 ga needing
-the separate `Molex 19294-0008`. **A second crimp tool for one splice.**
+Nine wires is 11.06 mm², past even the 8 GA bore. Split with one link wire:
 
-Split it instead, with two short link wires:
+    A:  K_MAIN 87 in + 3 branches + link   = 5 wires   8 GA
+    B:  link + 4 branches                  = 5 wires   8 GA
 
-    A:  K_MAIN 87 in + 3 branches + link1     = 5 wires   12-10
-    B:  link1 + 2 branches + link2            = 4 wires   12-10
-    C:  link2 + 3 branches                    = 4 wires   12-10
-
-Everything stays in **one barrel size and one tool**, and it is still three crimps
-against the eight the cascade needed.
+Two crimps, both inside the `Sargent 4235 CT`'s range, and no second tool.
 
 ### Order
 
 | Item | Molex | Qty | $ |
 |---|---|---|---|
-| Parallel splice **12-10 GA** | `19205-0003` | **20** | 2.10 |
-| Parallel splice 16-14 GA | `19205-0001` | 5 | 0.41 |
+| Parallel splice **12-10 GA** | `19205-0003` | **25** | 4.55 |
+| Parallel splice **8 GA** | `19205-0004` | **10** | 5.49 |
 
-⚠️ **Do not buy the 595-piece kit** at $163. It is a hundred times the cost of
-what this harness needs.
+≈ **$10**, against $25.20 for the step-down butt splices — and 14 crimps rather
+than 35.
+
+⚠️ **Do the first crimp as a test.** The 85% fill rule is a convention, not a
+datasheet figure, and it is the only assumption between this table and a barrel
+you cannot get the wires into. Buying 25 and 10 leaves plenty to fail one on.
+
+⚠️ **Do not buy the 595-piece kit** at $163.
 
 ⚠️ **These are uninsulated**, so the adhesive shrink is the insulation *and* the
-strain relief — and more so than with a butt splice, because every wire exits
-one side and the barrel's far end has nothing holding it.
+strain relief — more so than with a butt splice, because every wire exits one
+side and the barrel's far end has nothing holding it.
 
 ## 5. Heat shrink — Sumitomo W5DL 3:1 dual wall
 
@@ -193,7 +204,7 @@ one side and the barrel's far end has nothing holding it.
 
 | Need | Size | Item | Qty |
 |---|---|---|---|
-| 15 splices | **3/8″** | `W5DL-3/8-0` | 2 × 4 ft |
+| 14 splices | **3/8″** | `W5DL-3/8-0` | 2 × 4 ft |
 | Ring terminal necks | **3/16″** | `W5DL-3/16-0` | 2 × 4 ft |
 
 Parallel splices are "shorty" and there are 15 rather than 35 joints, so this
