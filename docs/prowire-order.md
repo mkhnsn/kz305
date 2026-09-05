@@ -90,78 +90,97 @@ At the 100 ft tier: **$0.229 against $0.257.** The heavier wire costs less on th
 highest-count colour, which is why consolidating came out a wash on cost rather
 than a penalty.
 
-## 2. Heavy cable — 4 conductors, NOT TXL
+## 2. Ring terminals — 22, and they do not fit on one stud
+
+Every ground lands on `GND`, and each landing needs a ring:
+
+| Gauge | Rings |
+|---|---|
+| 16 AWG | **19** |
+| 12 AWG | 1 |
+| 6 AWG (lugs) | 2 |
+
+⚠️ **`GND` is drawn as "to bare chassis stud" and that is not buildable.**
+Twenty-two rings will not stack on one post — the same objection that sent
+`SP_SW` to a cascade, and worse here because two of them are 6 AWG lugs.
+
+It needs a **ground bus bar** with several studs. And the choice is tied to
+**#44**, still open: the engine strap carries **the whole cranking return, well
+over 100 A**, and putting it on the same bar as nineteen signal grounds is
+exactly what that issue says not to do.
+
+**Do not buy ground hardware until #44 is decided.** Everything else here is
+independent of it.
+
+## 3. Heavy cable — 4 conductors, NOT TXL
 
 TXL runs roughly 24 to 8 AWG, so 6 AWG is a different product. None of it enters
 the PDM and all four terminate in lugs.
 
 | Item | Qty |
 |---|---|
-| 6 AWG welding or battery cable, **RED** | 6 ft |
-| 6 AWG welding or battery cable, **BLACK** | 8 ft |
-| Tinned copper lugs, 6 AWG — sizes to suit the battery, solenoid and engine studs | 8 + spares |
+| 6 AWG welding or battery cable, **RED** — `W_BAT_SOL`, `W_SOL_SM` | 6 ft |
+| 6 AWG welding or battery cable, **BLACK** — `W_BAT_GND`, `W_ENG_GND` | 6 ft |
+| Tinned lugs, 6 AWG, stud sizes to suit battery / solenoid / engine | 8 + spares |
 | Adhesive heat-shrink boots for the lugs | 8 |
 
-Fine-strand **welding** cable is preferred over battery cable for flexibility
-around the engine. `W_ENG_GND` carries the whole cranking return.
+Fine-strand **welding** cable preferred for flexibility around the engine.
 
-## 3. Splice heat-shrink — adhesive-lined, dual wall
+## 4. Splice heat-shrink and splice hardware — 35 joints
 
-The two feed buses are cascades, so the physical joint count is much higher than
-the splice count in the drawing:
+The feed buses are cascades, so the joint count is far above the splice count in
+the drawing: `SP_SW` is 8 joints and `SP_HOT` is 4. `SP_POD_GND`'s 3 already
+exist inside the retained pod pigtail.
 
-| | |
+⚠️ **How the splices are actually made is not decided** — crimped parallel splice,
+crimped butt splice, or soldered. Each needs different consumables, and the
+adhesive shrink goes over whichever. Settle it before buying 35 joints' worth.
+
+Sizing is simple now the harness is one gauge — every conductor is 2.4 mm:
+
+| Item | For | Qty |
+|---|---|---|
+| Adhesive-lined 3:1, **3/8 in** | 2-into-1 on 16 AWG | ~10 ft |
+| Adhesive-lined 3:1, **1/2 in** | the heavier cascade joints | ~4 ft |
+| Adhesive-lined 3:1, **3/16 in** | single-wire ends, terminal necks | ~8 ft |
+
+Buy roughly double — a splice that has to be redone consumes two lengths.
+
+## 5. Inline fuse holders — 2, and both are unsourced
+
+| Item | Note |
 |---|---|
-| Splice nodes in the model | 14 |
-| **Physical 2-into-1 joints** | **38** |
-| Less `SP_POD_GND`, which is inside the retained pod pigtail | −3 |
-| **To build** | **35** |
+| `MF` — 20 A inline, sealed | main; its output feeds `SP_HOT` |
+| `MF_RR` — 30 A inline, sealed | charging. ⚠️ **at the battery end**, not the regulator end |
 
-`SP_SW` alone is 8 joints and `SP_HOT` is 4.
+Neither appears on any supplier list yet.
 
-| Item | Qty |
-|---|---|
-| Adhesive-lined 3:1, **1/4 in** — over a 2-into-1 on 18/16 AWG | ~6 ft |
-| Adhesive-lined 3:1, **3/8 in** — the heavier bus joints | ~3 ft |
-| Adhesive-lined 3:1, **1/8 in** — single-wire ends and terminal necks | ~6 ft |
+## 6. Labels
 
-Buy roughly double. A splice that has to be redone consumes two lengths.
-
-## 4. Labels
-
-`docs/label-schedule.md` — **two per wire, each naming the far end.** With no
-tracers, these *are* the identification scheme.
-
-⚠️ The generated schedule currently lists **205** labels because it counts every
-cable in the model. Subtract the 13 retained-pigtail conductors: **about 178
-labels for 89 wires.**
+`docs/label-schedule.md` — two per wire, each naming the far end. With no
+tracers these **are** the identification scheme.
 
 ⚠️ **Printable heat-shrink is usually a printer-specific consumable**, not a
-generic Prowire line. Check whether they stock printable sleeve or whether this
-needs a Brady/Dymo-type cartridge instead — this is the one line most likely not
-to be orderable here.
+generic wire-supply line — most likely a Brady or Dymo cartridge. Check before
+assuming Prowire stocks it.
 
-## 5. Loom and protection
+## 7. Loom and protection
 
 | Item | Qty |
 |---|---|
-| Braided sleeving or split loom, 1/2 in — main trunk | 10 ft |
+| Braided sleeving or split loom, 1/2 in — trunk | 10 ft |
 | Braided sleeving or split loom, 1/4 in — branches | 25 ft |
-| Harness tape, non-adhesive cloth type | 2 rolls |
+| Harness tape, non-adhesive cloth | 2 rolls |
 
-Trunk extent is about 1.4 m; branches are short and numerous.
+## 8. Tools
 
-## 6. Tools — check before ordering elsewhere
-
-- **MTA 280 crimper** for the `1708338-L` / `1708339-L` terminals already in
-  hand. Open-barrel, and the correct die matters more on a sealed terminal
-  because the seal has to sit right behind the crimp.
+- **MTA 280 crimper** for the `1708338-L` terminals already in hand. The die
+  matters more on a sealed terminal because the seal must sit right behind the
+  crimp.
 - **090-series crimper** for the connector order (#37).
-- A **pull tester** is not needed, but ⚠️ **pull-test the first 18 AWG crimp by
-  hand** — 18 AWG is 0.82 mm², which sits in the gap between MTA's stated CSA
-  bands, and 10 `1708337-L` are in the box as the fallback.
-
----
+- ⚠️ **Pull-test the first crimp.** 16 AWG is 1.0 mm², mid-range in
+  `1708338-L`'s 1.0–2.0 mm² band, so it should be clean — the 10 `1708337-L` in
+  the box are the fallback if not.
 
 ## These are ORDER quantities
 
