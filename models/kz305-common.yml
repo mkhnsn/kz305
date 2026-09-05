@@ -81,7 +81,7 @@
 #      YE  ignition, coil, starter trigger
 #      GY  control and trigger signals - relay coil drives, switch
 #          returns, and the RIGHT turn circuit
-#      BU  lighting supply and HIGH beam
+#      BU  lighting supply and HIGH beam  - USE LIGHT BLUE, see below
 #      GN  LOW beam, dimmer common, and the LEFT turn circuit
 #
 #    11 colours is 21 SKUs; 8 is 17; 7 is 16; 5 is 15. Below about

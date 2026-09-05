@@ -43,9 +43,39 @@ $15.20 — twice the wire for 1.35x the money. ⚠️ **If a line needs more tha
 **≈ $140**, and the two 100 ft lines are deliberate — at $0.229/ft the second
 50 ft costs $7.70, which is the cheapest insurance in this build.
 
-⚠️ **Three lines are estimated.** I have real tier tables only for 16 BK, RD, BU
-and TAN; GN, GY, YE and BN are extrapolated from the consistent 32% pattern.
-Check them in the cart.
+### Actual cart, 4 Sep 2026 — **$144.51**
+
+| Line | Ft | $ |
+|---|---|---|
+| `TXL-16-1` brown | 100 | 17.60 |
+| `TXL-16-0` black | 100 | 22.90 |
+| `TXL-16-4` yellow | 50 | 14.00 |
+| `TXL-16-LB` light blue | 50 | 13.15 |
+| `TXL-16-5` dark green | 50 | 15.60 |
+| `TXL-16-8` gray | 50 | 12.45 |
+| `TXL-16-2` red | 15 | 7.03 |
+| `TXL-14-9` white | 10 | 5.46 |
+| `TXL-12-2` red | 12 | 12.17 |
+| `TXL-12-0` black | 10 | 16.03 |
+
+The four extrapolated lines came in within a few percent of the 32%-drop
+estimate, so the pattern holds across colours.
+
+### ⚠️ Take light blue, not dark blue
+
+Prowire stocks both within 3% of each other. **Dark blue and black are hard to
+separate** in a headlight shell or under a seat with a torch — and black is
+**ground-only** in this scheme precisely so a builder can trust it on sight.
+
+Blue is 10 conductors and black is 19: the two biggest groups in the harness,
+and the two you least want to confuse. The point of solid colours plus printed
+labels is that the colour is readable *before* you read the label.
+
+### `TXL-16-1` brown is backordered to 7 Sep
+
+48,000 ft inbound, so it is a three-day wait rather than a supply problem.
+⚠️ **Check whether it holds the whole order or ships split** — a second delivery
+charge costs more than the three days are worth.
 
 ### The one line that cannot be fixed
 
