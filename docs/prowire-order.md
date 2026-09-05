@@ -178,22 +178,28 @@ ends into.
 | eight 3-wire nodes + `SP_TAIL` | 2–3 | **12-10** |
 | `SP_SIG_L` `SP_SIG_R` | 4 | **8 GA** |
 | `SP_HOT` | 5 | **8 GA** |
-| `SP_SW` | 9 | **8 GA x2** — see below |
+| `SP_SW` | 9 | **6 GA** — see below |
 | `SP_POD_GND` | 4 | — inside the retained pod pigtail |
 
-### ⚠️ `SP_SW` splits in two — confirmed, not avoided
+### `SP_SW` is one crimp on a 6 GA
 
-The 8 GA bore is **4.20 mm**, not the 5.0–5.3 mm this sheet extrapolated. **The
-wall grows faster than the bore**: 0.90 → 1.20 → **1.65 mm** across the three
-sizes, so projecting from OD-minus-ID totals under-called it by 0.9 mm.
+Nine wires need **4.68 mm ideal / 5.15 mm practical**. The 8 GA bore is 4.20 mm
+and will not take them — but the **6 GA** estimates at 5.1–5.3 mm from two
+independent methods, which clears it.
 
-Nine wires need **4.68 mm ideal / 5.15 mm practical**. A 4.20 bore does not take
-them. Split with one link wire, both halves in 8 GA:
+⚠️ **Prowire's note says the `Sargent 4235 CT` only covers up to 8 ga**, with
+6 ga needing the `Molex 19294-0008`. That is moot here — the bolt-cutter-style
+lug crimper already on the bench handles the larger barrels, and it is needed
+anyway for the eight 6 AWG battery and engine lugs.
+
+⚠️ **The 6 GA bore is an ESTIMATE, not a datasheet figure** — the last
+extrapolation on this page was wrong by 0.9 mm. If it measures under 5.15 mm,
+fall back to two 8 GA crimps with one link wire:
 
     A:  K_MAIN 87 in + 3 branches + link   = 5 wires
     B:  link + 4 branches                  = 5 wires
 
-Five conductors need 3.83 mm against the 4.20 bore — comfortable.
+Buy a few 6 GA either way; they are pennies and the fallback costs nothing.
 
 ### Order
 
@@ -201,9 +207,10 @@ Five conductors need 3.83 mm against the 4.20 bore — comfortable.
 |---|---|---|---|
 | Parallel splice **12-10 GA** | `19205-0003` | **25** | 4.55 |
 | Parallel splice **8 GA** | `19205-0004` | **10** | 5.49 |
+| Parallel splice **6 GA** | — | **5** | ~2.75 |
 
-≈ **$10**, against $25.20 for step-down butt splices — and **14 crimps** rather
-than 35: nine 12-10 and five 8 GA.
+≈ **$13**, against $25.20 for step-down butt splices — and **13 crimps** rather
+than 35: nine 12-10, three 8 GA, one 6 GA.
 
 ⚠️ **Make the first crimp a deliberate test** anyway. The 10% insertion allowance
 is a convention, not a datasheet figure.
