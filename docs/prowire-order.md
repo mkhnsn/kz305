@@ -126,40 +126,67 @@ the PDM and all four terminate in lugs.
 
 Fine-strand **welding** cable preferred for flexibility around the engine.
 
-## 4. Splice hardware — SETTLED
+## 4. Splice hardware — SETTLED, with part numbers
 
-**Step-down insulated butt splices, yellow-to-blue.** That is the right choice
-and the arithmetic backs it: two 16 AWG conductors together are about 2 mm²,
-which is 14 AWG equivalent, so the pair goes in the **yellow** (12–10) barrel and
-the single leg in the **blue** (16–14). A straight blue-to-blue would not close
-on the pair.
+**Molex uninsulated step-down butt splices**, and the arithmetic backs the
+choice: two 16 AWG conductors are 2.0 mm² of copper but sit side by side, so they
+need the **12–10** barrel, not the 16–14. The single leg goes in the 16–14 end.
 
-⚠️ **Blue-to-red is now the rarer case.** With the harness all 16 AWG, the only
-places a 16-to-18 step-down applies are joints onto retained pigtails. Order a
-few, not a handful.
+| Item | Molex | $ | Qty |
+|---|---|---|---|
+| Step-down, **12-10 to 16-14** — the 2-into-1 | `19215-0023` | 0.72 | **45** |
+| Step-down, 16-14 to 18-22 — retained pigtails only | `19215-0013` | 0.59 | 6 |
 
-| Item | Qty |
-|---|---|
-| Step-down butt splice, **yellow-to-blue** | 35 + spares — **45** |
-| Step-down butt splice, blue-to-red | ~6 |
+⚠️ **These are uninsulated**, so the adhesive shrink below is not optional — it is
+the insulation *and* the strain relief.
 
-## 5. Heat shrink and sleeving — Prowire
+## 5. Heat shrink — Sumitomo W5DL 3:1 dual wall
 
-Adhesive-lined dual wall, over every splice. Sizing is simple now the harness is
-one gauge — every conductor is 2.4 mm and every splice barrel is a yellow butt
-splice:
+Sized against the real numbers. **One size covers all 35 splices**, not two as an
+earlier draft said — every joint in this harness is the same 2-into-1 on the same
+barrel, including the `SP_HOT` and `SP_SW` cascades.
 
-| Item | For | Qty |
+| Need | Over | Down to | Size | Item |
+|---|---|---|---|---|
+| **35 splices** | 6.4 mm barrel | 2.4 mm wire | **3/8″** | `W5DL-3/8-0` |
+| Ring terminal necks | ~4 mm | 2.4 mm wire | **3/16″** | `W5DL-3/16-0` |
+
+⚠️ **1/4″ will NOT go over a splice.** Supplied ID is 6.3 mm against a 6.4 mm
+barrel — it is the one size that looks right and isn't.
+
+⚠️ **3/8″ recovers to 3.43 mm against a 2.4 mm wire**, so it does not close
+tight on the single leg. **That is what the adhesive is for** — dual-wall glue
+flows and fills the 1 mm gap. It is the correct choice anyway, because nothing
+in the 3:1 range both clears the barrel and closes on the wire.
+
+Sold in 4 ft lengths: 35 splices × ~40 mm ≈ 5 ft, so **3 lengths of 3/8″**
+(~$24) and **2 of 3/16″** (~$14). Buy the spare — a splice redone consumes two.
+
+⚠️ **Their table has a typo**: 1/8″ is listed recovering to 0.06 mm. The inch
+column says 0.023″, which is **0.58 mm**. Every other row converts correctly.
+
+## 5b. Flexo Clean Cut sleeving — no hot knife needed
+
+Cuts with scissors and does not fray. Sized from the bundle diameter,
+`d × √N × 1.15`:
+
+| Bundle | Wires | OD | Sleeve |
+|---|---|---|---|
+| Main trunk | ~25–30 | 14–15 mm | **3/4″** `CCP075BK` |
+| Medium branches | ~8 | 8 mm | **1/2″** `CCP050BK` |
+| Small branches | 2–4 | 4–6 mm | **1/4″** `CCP025BK` |
+
+Expandable braid covers roughly its nominal to 1.5× nominal, so 3/4″ takes the
+fattest trunk section **and still slides over a connector** — which is the reason
+to go a size up rather than fit the bundle exactly.
+
+| Item | Ft | $ |
 |---|---|---|
-| Adhesive-lined 3:1, **1/2 in** | over a yellow-barrel step-down splice | ~12 ft |
-| Adhesive-lined 3:1, **3/16 in** | single-wire ends, terminal necks | ~8 ft |
-| Braided sleeving or split loom, 1/2 in — trunk | | 10 ft |
-| Braided sleeving or split loom, 1/4 in — branches | | 25 ft |
+| `CCP075BK` 3/4″ | 10 | 8.40 |
+| `CCP050BK` 1/2″ | 15 | 10.07 |
+| `CCP025BK` 1/4″ | 25 | 10.93 |
 
-Buy roughly double on the adhesive shrink — a splice that has to be redone
-consumes two lengths.
-
-**Already in hand:** HD nickel-plated ring terminals, cloth harness tape.
+≈ **$29**, and it retires the hot-knife line entirely.
 
 ## 6. Inline fuse holders — MP630, NOT a Prowire line
 
