@@ -1230,7 +1230,23 @@ cables:
       earth. 6 AWG to match the rest of the heavy loop. See GND_ENG for why the powder coating makes
       this a new part rather than a reproduction.
 
-  W_ALT:     {<<: *w14, colors: [YE, YE]}
+  W_ALT:
+    <<: *w16
+    colors: [YE, YE]
+    notes: |-
+      ** 16 AWG TO MATCH THE STATOR, NOT 14 - decided 4 Sep 2026, and NOT on cost. ** The stator has
+      its own pigtail of about 8 inches ending in BULLETS [bench 4 Sep 2026], and it reads 16 AWG.
+      ** A GAUGE STEP AT A BULLET ON A CURRENT PATH IS THE MECHANISM THAT MELTED THE ORIGINAL
+      HARNESS. ** That is this project's single most important condition finding - see W_MAIN_OUT, and
+      B06.4 in the factory model, where the 20A main met a smaller conductor at a separable joint.
+      Running 14 AWG into a 16 AWG stator lead would rebuild that step on the charging circuit, which
+      is a continuous-duty path rather than an intermittent one.
+      So the standing "round up liberally" rule is deliberately NOT applied here. Matching beats
+      upsizing whenever the joint is a bullet.
+      ⚠️ THE SAME CHECK APPLIES AT THE OTHER END. The R/R mating pigtail comes from Eastern Beaver at
+      whatever gauge they supply. Ask before ordering, and match it too. [OPEN]
+      NOTE THE HARNESS STILL SUPPLIES THIS RUN - the stator's 8 inches does not reach the regulator,
+      so this is wire we buy, not a retained pigtail like the pod's.
   W_RR_OUT:
     <<: *w12
     colors: [RD]

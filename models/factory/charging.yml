@@ -36,10 +36,12 @@ cables:
     <<: *w14
     colors: [YE, YE]
     notes: |-
-      ⚠️ GAUGE NOT ESTABLISHED. Both yellows look like the harness's common size rather than heavier,
-      which would make them 18 AWG - but no wire in this harness has had its gauge measured with a
-      tool, and "the common size" is itself an unverified label. The modelled 14 AWG stands until the
-      gauge pass. [OPEN]
+      ⚠️ GAUGE NOT ESTABLISHED, and the two ends may not agree. The harness yellows look like the
+      common size rather than heavier, which would make them 18 AWG; the STATOR's own pigtail - about
+      8 inches, ending in bullets - reads 16 AWG [bench 4 Sep 2026]. Both are eyeball reads.
+      If that difference is real then stock had a gauge step at these bullets, which is the same
+      mechanism that failed at B06.4. Not established, and not worth establishing on a harness being
+      replaced - but the REBUILD matches the stator at 16 AWG rather than inheriting either. [OPEN]
   W_RR_OUT:
     <<: *w14
     colors: [WHRD]

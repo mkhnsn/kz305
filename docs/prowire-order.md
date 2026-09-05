@@ -25,17 +25,16 @@ Prices below are per foot as quoted 4 Sep 2026.
 | 18 | BU | `TXL-18-LB` | 0.288 | 2 | 10 | 2.88 |
 | 16 | BN | `TXL-16-1` | 0.234 | 8 | **30** | 7.02 |
 | 16 | BU | `TXL-16-LB` | 0.263 | 8 | **30** | 7.89 |
-| 16 | YE | `TXL-16-4` | 0.414 | 6 | 20 | 8.28 |
+| 16 | YE | `TXL-16-4` | 0.414 | **8** | **30** | 12.42 |
 | 16 | RD | `TXL-16-2` | 0.439 | 4 | 15 | 6.58 |
 | 16 | BK | `TXL-16-0` | 0.450 | 3 | 12 | 5.40 |
 | 16 | GN | `TXL-16-5` | 0.461 | 1 | 8 | 3.69 |
 | 14 | WH | `TXL-14-9` | 0.510 | 2 | 8 | 4.08 |
-| 14 | YE | `TXL-14-4` | 0.613 | 2 | 10 | 6.13 |
 | 14 | BN | `TXL-14-1` | 0.542 | 1 | 6 | 3.25 |
 | 12 | RD | `TXL-12-2` | 0.949 | 3 | 12 | 11.39 |
 | 12 | BK | `TXL-12-0` | 1.501 | 1 | 6 | 9.01 |
 
-**≈ $121** for 89 conductors, against $242 for the same wire in spool steps.
+**≈ $119** for 89 conductors, against $242 for the same wire in spool steps.
 
 ### Where the money actually is
 
@@ -51,11 +50,14 @@ Colour also moves the price 2–3x *within* a gauge: 16 AWG brown is $0.234 and
 
 | Cut | Saves | Cost |
 |---|---|---|
-| **`W_ALT` → drop `14 AWG YE`** if the stator has its own pigtail like the pod does | $6.13 | none, if true — **check the stator first** |
 | **`W_HEAD_LO` → 18 AWG GN**, dropping the `16 AWG GN` SKU | $3.69 | 18 AWG is ~10 A rated and the beam is 4.2 A on filament over a short run |
 | **The three 16 AWG BK grounds → 18 AWG BK**, dropping that SKU | ~$2.30 | horn ground is 2 A, headlight 4.2 A — both comfortable on 18 |
 
-All three together: **≈ $109**, and two fewer SKUs.
+Both together: **≈ $113**, and two fewer SKUs.
+
+`W_ALT` is already resolved and folded in above — **16 SKUs, not 17.** The stator
+turned out to have only 8 inches of pigtail, so the harness still supplies that
+run; what changed is the gauge. See below.
 
 ### ⚠️ Do not shave below this
 
@@ -63,6 +65,20 @@ Getting to $100 means cutting into the margin, and **a re-order costs more in
 shipping than the wire saved.** The margin above is roughly 1.5x the estimate,
 which covers crimps that get redone and the build-in-place approach where wire is
 trimmed on the bike rather than cut to a list.
+
+### ⚠️ `W_ALT` matches the stator at 16 AWG — and not for the money
+
+The stator's pigtail is about 8 inches, ends in **bullets**, and reads 16 AWG.
+Running 14 AWG into it would put **a gauge step at a bullet on a
+continuous-duty current path** — the exact mechanism that melted the original
+harness at `B06.4`.
+
+So the standing *round up liberally* rule is deliberately **not** applied here.
+**Matching beats upsizing whenever the joint is a bullet.** It happens to save
+$2 and a SKU; that is not why.
+
+⚠️ **The same check applies at the other end.** The R/R mating pigtail comes from
+Eastern Beaver at whatever gauge they supply — ask, and match it too.
 
 ### ⚠️ `TXL-16-1` brown is backordered
 
