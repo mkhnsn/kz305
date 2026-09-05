@@ -138,44 +138,60 @@ serves a whole node instead of a cascade of two-into-ones.
 single nodes with a note that the cascade was a build form. With a parallel
 splice they *are* single nodes — the model and the bench now agree.
 
-### ⚠️ Sizing — use the CONDUCTOR area, not the nominal metric size
+### Sizing — from the published bore, by circle packing
 
-Prowire's chart calls 16 AWG TXL "1 mm²". **That is the nominal metric size
-designation, not the conductor area.** The real figure from the stranding is:
+The splice datasheets give the **bore ID**, which beats inferring capacity from
+the AWG rating. 16 AWG TXL's conductor bundle is **1.29 mm** OD — matching the
+1.29–1.45 mm measured off the stock harness.
 
-    19 strands x 0.287 mm  =  1.23 mm2 of copper
+Minimum bore to insert N conductors, from optimal circle-in-circle packing plus
+10% for actually getting them in:
 
-Using 1.0 would overstate what fits in a barrel by a quarter. At **85% fill**,
-which is what leaves room to actually insert the wires:
+| N | Ideal | Practical |
+|---|---|---|
+| 2 | 2.58 | 2.84 |
+| 3 | 2.78 | **3.06** |
+| 4 | 3.11 | 3.43 |
+| 5 | 3.48 | 3.83 |
+| 9 | 4.68 | 5.15 |
 
-| Barrel | Molex | Bore | Max 16 AWG wires | $1 / $25 |
-|---|---|---|---|---|
-| 16-14 GA | `19205-0001` | 2.08 mm² | **1** — useless for splicing | .157 / .141 |
-| **12-10 GA** | **`19205-0003`** | 5.26 mm² | **3** | .202 / .182 |
-| **8 GA** | **`19205-0004`** | 8.37 mm² | **5** | .549 / .494 |
+| Splice | Molex | Bore ID | Takes |
+|---|---|---|---|
+| 22-18 | `19207-0001` | 1.50 mm | 1 |
+| 16-14 | `19205-0001` | 2.30 mm | **1** |
+| **12-10** | **`19205-0003`** | **3.30 mm** | **3** |
+| 8 GA | `19205-0004` | ⚠️ not published | ~8–10 |
 
-⚠️ **The 16-14 barrel cannot take two 16 AWG wires.** Two conductors is 2.46 mm²
-against a 2.08 mm² bore. A 16-14 *butt* splice takes one wire per end, which is a
-different thing — even `SP_TAIL`'s two wires need the 12-10.
+⚠️ **Drop the 16-14 entirely.** Its 2.30 mm bore will not take two 16 AWG
+conductors — they need 2.84 mm. A 16-14 *butt* splice takes one wire per end,
+which is a different geometry. Even `SP_TAIL`'s two wires go in a 12-10.
+
+**Two independent methods agree on 3 per 12-10 barrel**: 85% fill by area, and
+circle packing by diameter. Four is geometrically possible (3.11 vs 3.30) but
+leaves 0.19 mm of total clearance, which is not something you insert stranded
+ends into.
 
 ### Which barrel per node
 
 | Splice | Wires | Barrel |
 |---|---|---|
-| `SP_HOT` | 5 | **8 GA** |
+| eight 3-wire nodes + `SP_TAIL` | 2–3 | **12-10** |
 | `SP_SIG_L` `SP_SIG_R` | 4 | **8 GA** |
-| `SP_RLY` `SP_YR` `SP_HEAD` `SP_HI` `SP_INSTR` `SP_MTR` `SP_BRK_FEED` `SP_BRAKE` | 3 | 12-10 |
-| `SP_TAIL` | 2 | 12-10 |
+| `SP_HOT` | 5 | **8 GA** |
+| `SP_SW` | 9 | **8 GA — if the bore allows, see below** |
 | `SP_POD_GND` | 4 | — inside the retained pod pigtail |
 
-### ⚠️ `SP_SW` still has to be split — but only in two
+### ⚠️ Ask Prowire for the 8 GA bore ID before ordering
 
-Nine wires is 11.06 mm², past even the 8 GA bore. Split with one link wire:
+It is the one dimension not published. Extrapolating the wall from the two known
+parts (1.80 mm on the 16-14, 2.40 mm on the 12-10) puts an 8 GA bore around
+**5.0–5.3 mm**, which would take **8 to 10** conductors.
 
-    A:  K_MAIN 87 in + 3 branches + link   = 5 wires   8 GA
-    B:  link + 4 branches                  = 5 wires   8 GA
+**If it is 5.15 mm or more, `SP_SW` is a single crimp** and the split disappears.
+If it is under, split it in two as `in + 3 + link` and `link + 4`, both 5 wires.
 
-Two crimps, both inside the `Sargent 4235 CT`'s range, and no second tool.
+Either way the 8 GA is inside the `Sargent 4235 CT`'s stated range, so no second
+tool.
 
 ### Order
 
@@ -184,12 +200,11 @@ Two crimps, both inside the `Sargent 4235 CT`'s range, and no second tool.
 | Parallel splice **12-10 GA** | `19205-0003` | **25** | 4.55 |
 | Parallel splice **8 GA** | `19205-0004` | **10** | 5.49 |
 
-≈ **$10**, against $25.20 for the step-down butt splices — and 14 crimps rather
+≈ **$10**, against $25.20 for step-down butt splices — and 13–14 crimps rather
 than 35.
 
-⚠️ **Do the first crimp as a test.** The 85% fill rule is a convention, not a
-datasheet figure, and it is the only assumption between this table and a barrel
-you cannot get the wires into. Buying 25 and 10 leaves plenty to fail one on.
+⚠️ **Make the first crimp a deliberate test** anyway. The 10% insertion allowance
+is a convention, not a datasheet figure.
 
 ⚠️ **Do not buy the 595-piece kit** at $163.
 
