@@ -38,6 +38,7 @@ currently held true, with one evidence tag. The working-out lives in
 | 21 | A white-and-black bundle runs to the tachometer | photo | photo | 2 Sep 2026 |
 | 22 | Seven Net B grounds land on the Net A chassis ring | inherit | review | 2 Sep 2026 |
 | 23 | The right condenser lead is black | inherit | bench | 4 Sep 2026 |
+| 24 | The harness's common wire size is 18 AWG | inherit | bench | 4 Sep 2026 |
 
 `inherit` means the claim was never established at all — it was carried
 across from the diagram or from an earlier note and never questioned.
@@ -45,7 +46,7 @@ across from the diagram or from an earlier note and never questioned.
 
 ## What the record says
 
-**Twelve of the twenty-three were produced by the scan.** Reading the 600 dpi
+**Twelve of the twenty-four were produced by the scan.** Reading the 600 dpi
 diagram is by a wide margin this project's largest single source of
 withdrawn claims, and the failures are not random: **five of the twelve are
 base-versus-tracer** (#2, #13, #14, #15, #17). At 600 dpi a thin tracer
@@ -76,11 +77,18 @@ and not the class is this project's second failure mode, and unlike the
 first it is not about evidence at all.
 
 **`inherit` is now the second-largest category, and it is the quietest.**
-Four entries (#4, #22, #23, and the ground-net colours) were never
+Five entries (#4, #22, #23, #24, and the ground-net colours) were never
 established at all — carried across by symmetry or from the diagram and
 never questioned. They produce no conflict to notice, which is why three of
 the four were found by review or by picking the part up rather than by
 anything failing.
+
+#24 is the most consequential. **"The harness's common size is 18 AWG"** was
+carried for three weeks as the baseline every other gauge was eyeballed
+against — and the factory model's own note admitted it was "itself an
+unverified label". One caliper reading on a stripped conductor
+(1.29–1.45 mm against 16 AWG's 1.291 mm nominal) retired it. Kawasaki used
+16 AWG, and the rebuild now does too.
 
 #23 is the cleanest example. The right condenser lead was drawn black
 purely because the right *points* lead is black and the condenser

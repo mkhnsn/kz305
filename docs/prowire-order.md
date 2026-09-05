@@ -3,88 +3,62 @@
 Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 **order** quantities, not design quantities — see the note at the foot.
 
-## 1. TXL wire — 17 SKUs
+## 1. TXL wire — 10 SKUs, all 16 AWG above 14
 
-⚠️ **Solid colours only.** The rebuild uses no tracer wire; identification is
-printed heat-shrink plus `docs/label-schedule.md`. Do not substitute a striped
-wire for a missing solid.
+⚠️ **Solid colours only.** No tracer wire; identification is printed heat-shrink
+plus `docs/label-schedule.md`.
 
-**Prowire sells by the foot.** The 25/50/100 ft steps in an earlier draft of this
-sheet were an assumption about spools and they were wrong — they cost **$120** on
-their own. Order the footage, not a spool.
+**The harness is all 16 AWG.** A stripped stock conductor measures 1.29–1.45 mm
+against 16 AWG's 1.291 mm nominal `[bench 4 Sep 2026]` — Kawasaki used 16, and
+the "common size is 18 AWG" label it replaced was never measured. Consolidating
+to match collapsed **15 SKUs to 10** and left **one cavity seal** instead of two.
 
-Prices below are per foot as quoted 4 Sep 2026.
+### Prowire tier structure — the break is at 50 ft
 
-| Gauge | Colour | Item | $/ft | Cond. | **Order ft** | **$** |
+| | 10 ft | 25 ft | **50 ft** | 100 ft |
+|---|---|---|---|---|
+| 16 BK | .480 | .450 | **.304** | .229 |
+| 16 RD | .469 | .439 | **.297** | .223 |
+| 16 BU | .415 | .389 | **.263** | .196 |
+
+**A consistent 32% unit drop at 50 ft.** 25 ft of 16 BK is $11.25 and 50 ft is
+$15.20 — twice the wire for 1.35x the money. ⚠️ **If a line needs more than about
+25 ft, buy 50.** Minimum is 10 ft, not 25.
+
+### The order
+
+| Gauge | Colour | Item | Cond. | Need | **Buy** | $ |
 |---|---|---|---|---|---|---|
-| 18 | BK | `TXL-18-0` | 0.257 | 16 | **75** | 19.28 |
-| 18 | BN | `TXL-18-1` | 0.228 | 12 | **45** | 10.26 |
-| 18 | GY | `TXL-18-8` | 0.175 | 9 | **35** | 6.12 |
-| 18 | GN | `TXL-18-5` | 0.211 | 9 | **35** | 7.38 |
-| 18 | YE | `TXL-18-4` | 0.254 | 2 | 10 | 2.54 |
-| 18 | BU | `TXL-18-LB` | 0.288 | 2 | 10 | 2.88 |
-| 16 | BN | `TXL-16-1` | 0.234 | 8 | **30** | 7.02 |
-| 16 | BU | `TXL-16-LB` | 0.263 | 8 | **30** | 7.89 |
-| 16 | YE | `TXL-16-4` | 0.414 | **8** | **30** | 12.42 |
-| 16 | RD | `TXL-16-2` | 0.439 | 4 | 15 | 6.58 |
-| 16 | BK | `TXL-16-0` | 0.450 | 3 | 12 | 5.40 |
-| 16 | GN | `TXL-16-5` | 0.461 | 1 | 8 | 3.69 |
-| 14 | WH | `TXL-14-9` | 0.510 | 2 | 8 | 4.08 |
-| 14 | BN | `TXL-14-1` | 0.542 | 1 | 6 | 3.25 |
-| 12 | RD | `TXL-12-2` | 0.949 | 3 | 12 | 11.39 |
-| 12 | BK | `TXL-12-0` | 1.501 | 1 | 6 | 9.01 |
+| 16 | BN | `TXL-16-1` | 21 | ~63 ft | **100** | ~19 |
+| 16 | BK | `TXL-16-0` | 19 | ~57 ft | **100** | 22.90 |
+| 16 | YE | `TXL-16-4` | 10 | ~30 ft | **50** | ~14 |
+| 16 | BU | `TXL-16-LB` | 10 | ~30 ft | **50** | 13.15 |
+| 16 | GN | `TXL-16-5` | 10 | ~30 ft | **50** | ~16 |
+| 16 | GY | `TXL-16-8` | 9 | ~27 ft | **50** | ~15 |
+| 16 | RD | `TXL-16-2` | 4 | ~12 ft | 15 | ~7 |
+| 14 | WH | `TXL-14-9` | 2 | ~5 ft | 10 | ~5 |
+| 12 | RD | `TXL-12-2` | 3 | ~10 ft | 12 | 11.39 |
+| 12 | BK | `TXL-12-0` | 1 | ~3 ft | 10 | 15.01 |
 
-**≈ $119** for 89 conductors, against $242 for the same wire in spool steps.
+**≈ $140**, and the two 100 ft lines are deliberate — at $0.229/ft the second
+50 ft costs $7.70, which is the cheapest insurance in this build.
 
-### Where the money actually is
+⚠️ **Three lines are estimated.** I have real tier tables only for 16 BK, RD, BU
+and TAN; GN, GY, YE and BN are extrapolated from the consistent 32% pattern.
+Check them in the cart.
 
-⚠️ **The heavy gauges are 43% of a spool-step order for 9 of 89 conductors.**
-`12 AWG BK` alone is **$1.50/ft** — 3.3x the red, 6x the 18 AWG grey — and it
-exists for **one wire**, `W_RR_GND`. In spool steps that single conductor cost
-$37.52. At 6 ft it costs $9.01.
+### The one line that cannot be fixed
 
-Colour also moves the price 2–3x *within* a gauge: 16 AWG brown is $0.234 and
-16 AWG green is $0.461.
+**`TXL-12-0` at $1.501/ft, 10 ft minimum, for one 3 ft wire** — `W_RR_GND`, the
+charging return. It cannot fold into another SKU: black is ground-only, and a
+~20 A return will not go to 16 AWG. $15 for $4.50 of wire is simply the cost of
+that circuit.
 
-### Three optional cuts
+### 16 AWG black is cheaper than 18 AWG black
 
-| Cut | Saves | Cost |
-|---|---|---|
-| **`W_HEAD_LO` → 18 AWG GN**, dropping the `16 AWG GN` SKU | $3.69 | 18 AWG is ~10 A rated and the beam is 4.2 A on filament over a short run |
-| **The three 16 AWG BK grounds → 18 AWG BK**, dropping that SKU | ~$2.30 | horn ground is 2 A, headlight 4.2 A — both comfortable on 18 |
-
-Both together: **≈ $113**, and two fewer SKUs.
-
-`W_ALT` is already resolved and folded in above — **16 SKUs, not 17.** The stator
-turned out to have only 8 inches of pigtail, so the harness still supplies that
-run; what changed is the gauge. See below.
-
-### ⚠️ Do not shave below this
-
-Getting to $100 means cutting into the margin, and **a re-order costs more in
-shipping than the wire saved.** The margin above is roughly 1.5x the estimate,
-which covers crimps that get redone and the build-in-place approach where wire is
-trimmed on the bike rather than cut to a list.
-
-### ⚠️ `W_ALT` matches the stator at 16 AWG — and not for the money
-
-The stator's pigtail is about 8 inches, ends in **bullets**, and reads 16 AWG.
-Running 14 AWG into it would put **a gauge step at a bullet on a
-continuous-duty current path** — the exact mechanism that melted the original
-harness at `B06.4`.
-
-So the standing *round up liberally* rule is deliberately **not** applied here.
-**Matching beats upsizing whenever the joint is a bullet.** It happens to save
-$2 and a SKU; that is not why.
-
-⚠️ **The same check applies at the other end.** The R/R mating pigtail comes from
-Eastern Beaver at whatever gauge they supply — ask, and match it too.
-
-### ⚠️ `TXL-16-1` brown is backordered
-
-Flagged at 50 ft in the cart and likely at 30 ft too. That may split the
-shipment and add a second delivery charge — worth asking for a lead time before
-checkout rather than after.
+At the 100 ft tier: **$0.229 against $0.257.** The heavier wire costs less on the
+highest-count colour, which is why consolidating came out a wash on cost rather
+than a penalty.
 
 ## 2. Heavy cable — 4 conductors, NOT TXL
 

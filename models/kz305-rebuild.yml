@@ -268,24 +268,31 @@ connectors:
       # wire enters from below, exactly like a fuse leg, so relay positions cost
       # terminals - they are not free because the relay plugs in from the top.
       #
-      # Gauge split of the 42: 18 AWG x16, 16 AWG x24, 14 AWG x2.
+      # Gauge split of the 42: 16 AWG x41, 14 AWG x1.
+      #
+      # ** ONE SEAL, NOT TWO - 4 Sep 2026. ** Every cavity wire is now 16 or 14
+      # AWG and both take the GREEN seal, so red 4550748 drops to zero. That also
+      # makes Prowire's contradictory OD columns moot: 18 AWG was the only gauge
+      # where the inch and mm figures implied different seals, and there is no
+      # 18 AWG left in this harness.
       #
       # ⚠️ THESE ARE DESIGN QUANTITIES, NOT ORDER QUANTITIES. Order over - crimps
       # get wasted, and if the 16 AWG spool misses the green seal's 2.2mm bound
       # (#61) those circuits move to 14 AWG, which needs 1708339-L instead. Green
       # seals survive that; the terminal does not.
       - type: Terminal
-        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 16x 18 AWG + 24x 16 AWG
+        subtype: Sealed 2.8mm, 1.0-2.0 sq mm (18-16 AWG) - 41x 16 AWG
         manufacturer: MTA
         mpn: 1708338-L
-        qty: 40
-      # The only 14 AWG legs still entering the block are K_MAIN's 30 and 87.
-      # W_MAIN_OUT now terminates OUTSIDE it, on SP_HOT.
+        qty: 41
+      # ONE 14 AWG leg enters the block - W_MAIN_SW_FEED to K_MAIN's 30. W_SW_BUS
+      # went to 16 AWG with everything else, and W_MAIN_OUT terminates OUTSIDE on
+      # SP_HOT.
       - type: Terminal
-        subtype: Sealed 2.8mm, 2.5-4.0 sq mm (14-12 AWG) - K_MAIN 30 and 87
+        subtype: Sealed 2.8mm, 2.5-4.0 sq mm (14-12 AWG) - W_MAIN_SW_FEED only
         manufacturer: MTA
         mpn: 1708339-L
-        qty: 2
+        qty: 1
       # 60 cavities less the 42 populated. Includes the 10 that sit unused inside
       # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
       # body on top does not close a hole in the bottom.
@@ -297,16 +304,18 @@ connectors:
       # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
       # the delivered spool - issue #61. If it misses, those circuits move to
       # 14 AWG, which is ALSO green, so this quantity holds either way.
+      # ⚠️ ZERO. Kept as a line so the decision is visible rather than absent:
+      # 40 were bought before the harness went all-16, and they are now spare.
       - type: Wire seal - red
-        subtype: 2.8mm, insul dia 1.2-2.1mm - for 18 AWG TXL (1.98mm)
+        subtype: NOT USED - no 18 AWG remains in the harness
         manufacturer: MTA
         mpn: "4550748"
-        qty: 16
+        qty: 0
       - type: Wire seal - green
         subtype: 2.8mm, insul dia 2.2-3.0mm - for 16 AWG TXL (2.26mm) and 14 AWG TXL (2.59mm)
         manufacturer: MTA
         mpn: "4550747"
-        qty: 26
+        qty: 42
     # ⚠️ WAYS ARE APPENDED, NEVER INSERTED. Connection sets reference this
     # connector BY INDEX, so inserting a way silently repoints every
     # reference after it - which is exactly how FUSE_4P went wrong on
@@ -893,7 +902,7 @@ cables:
       from the fuse to the distribution stud, and a terminal rated for it.
   W_IGN_FEED: {<<: *w16, colors: [RD]}
   W_IGN_RET:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: Ignition switch output - now drives the K_MAIN coil only (~0.15A), so this dropped from 16 to 18 AWG. The switch no longer carries the bike's load.
 
@@ -902,7 +911,7 @@ cables:
     colors: [YE]
     notes: Fed from PDM F2. Low current now - this only has to run the kill switch and, through it, two relay coils.
   W_YR_TRIG:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: |-
       Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about
@@ -913,13 +922,17 @@ cables:
     colors: [WH]
     notes: Main stud to the relay common. Short run inside the PDM; protected by the 20A main. Individual circuits are fused downstream of the relay.
   W_SW_BUS:
-    <<: *w14
+    <<: *w16
     colors: [BN]
     notes: |-
-      Relay output - the switched brown bus. NO LONGER FEEDS EVERYTHING, 1 Sep 2026: under the hybrid
-      split it carries the coil circuit through F3 plus four relay coils, about 6.6A, while the horn and
-      headlamp loads are fed hot and never cross it. Kept at 14 AWG anyway - it is the main switched
-      path, the margin is cheap, and the load grows as the undrawn circuits land.
+      Relay output - the switched brown bus. Under the hybrid split it carries the coil circuit through
+      F3 plus the relay coils, about 6.6A, while the horn and headlamp loads are fed hot and never
+      cross it.
+      ** DROPPED FROM 14 TO 16 AWG, 4 Sep 2026. ** It was the only 14 AWG BN in the harness, so a whole
+      minimum quantity bought one wire, and 16 AWG BN is already on the list at eight conductors.
+      16 AWG carries 6.6A with room to spare on a run this short.
+      NOTE THIS IS A ROUND-DOWN, against the standing round-up rule, and it is justified by the SKU
+      rather than by the load. If the switched bus ever grows past about 10A, revisit it.
   # --- the two feed-side buses, outside the module - see SP_HOT / SP_SW ---
   W_HOT_F1:  {<<: *w16, colors: [RD], notes: "Hot bus to the F1 cavity. RD - always-hot per the scheme."}
   W_HOT_F4:  {<<: *w16, colors: [RD], notes: "Hot bus to the F4 cavity."}
@@ -927,14 +940,14 @@ cables:
   W_SW_F2:   {<<: *w16, colors: [BN], notes: "Switched bus to the F2 cavity. BN - switched power."}
   W_SW_F3:   {<<: *w16, colors: [BN], notes: "Switched bus to the F3 cavity."}
   W_SW_F6:   {<<: *w16, colors: [BN], notes: "Switched bus to the F6 cavity."}
-  W_SW_F7:   {<<: *w18, colors: [BN], notes: "Switched bus to the F7 cavity."}
-  W_SW_F8:   {<<: *w18, colors: [BN], notes: "Switched bus to the F8 cavity."}
-  W_SW_F9:   {<<: *w18, colors: [BN], notes: "Switched bus to the F9 cavity."}
+  W_SW_F7:   {<<: *w16, colors: [BN], notes: "Switched bus to the F7 cavity."}
+  W_SW_F8:   {<<: *w16, colors: [BN], notes: "Switched bus to the F8 cavity."}
+  W_SW_F9:   {<<: *w16, colors: [BN], notes: "Switched bus to the F9 cavity."}
   W_SW_F10:  {<<: *w16, colors: [BN], notes: "Switched bus to the F10 cavity - the USB charger."}
-  W_SW_F11:  {<<: *w18, colors: [BN], notes: "Switched bus to the F11 cavity - relay coil supply."}
-  W_RLY_PWR: {<<: *w18, colors: [BN], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
+  W_SW_F11:  {<<: *w16, colors: [BN], notes: "Switched bus to the F11 cavity - relay coil supply."}
+  W_RLY_PWR: {<<: *w16, colors: [BN], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
   W_KMAIN_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: K_MAIN coil ground to the star bus.
   W_COIL_PWR:
@@ -947,7 +960,7 @@ cables:
       powerless, since the kill switch only drives this relay's coil. It is the sole exception to the
       hybrid split for exactly that reason. See the PDM notes.
   W_K_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: K_COIL coil ground to the star bus.
   W_YR_OUT:
@@ -957,11 +970,11 @@ cables:
   W_COIL_L: {<<: *w16, colors: [YE]}
   W_COIL_R: {<<: *w16, colors: [YE]}
   W_PTS_L:
-    <<: *w18
+    <<: *w16
     colors: [YE]
     notes: Yellow serves LEFT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_CAP_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: |-
       NEW WIRE - no counterpart in the old harness. The condenser bracket earthed through its mounting
@@ -970,11 +983,11 @@ cables:
       IGNITION EARTH: a points ignition with no condenser return arcs its contacts and burns them.
       Unlike the other blocker-2 cases this one cannot be solved by masking, because the window closed.
   W_CAP_L:
-    <<: *w18
+    <<: *w16
     colors: [YE]
     notes: STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52. Drawn because the circuit is real; not cut, not labelled, not ordered.
   W_CAP_R:
-    <<: *w18
+    <<: *w16
     colors: [BU]
     notes: |-
       STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52.
@@ -983,18 +996,18 @@ cables:
       already been given an exemption for it - an exemption that was covering a wrong colour rather
       than a real exception. The exemption is withdrawn.
   W_PTS_R:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: Black serves RIGHT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_RH_OUT:
-    <<: *w18
+    <<: *w16
     colors: [YE]
     notes: |-
       Starter trigger. YE on the rebuild's scheme, which is the point of that scheme: the STOCK wire
       here was BLACK and was not a ground, and black is now ground-only precisely so this wire cannot
       be mistaken for one. Do not land it on the star bus.
   W_SOL_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: |-
       ⛔ ** DO NOT BUILD THIS CONNECTION. ** It was drawn on the claim that the relay's COIL- grounds
@@ -1006,7 +1019,7 @@ cables:
       blocker 3. [OPEN]
   # --- horn, relayed -------------------------------------------------
   W_HORN_COIL:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: |-
       Switched power to the K_HORN coil, ~0.15A. GY not BN - it is a relay coil drive, and the
@@ -1014,7 +1027,7 @@ cables:
       ⚠️ IT IS FED FROM THE SWITCHED BUS (PDM SW OUT), so the horn is dead with the key out even
       though F4 on the load side is always-hot. The colour describes the ROLE, not the source.
   W_HORN_SW:
-    <<: *w18
+    <<: *w16
     colors: [YE]
     notes: |-
       Horn button return - the relay's coil ground side, not a chassis ground. YE, not black: black is
@@ -1023,7 +1036,7 @@ cables:
       This is the wire that used to carry the horn's full 2A through the cluster contacts; it now
       carries 0.15A.
   W_LH_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: |-
       NEW WIRE - no counterpart in the old harness. The cluster earthed through its own body and the
@@ -1057,22 +1070,22 @@ cables:
   W_HI_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_HI common.}
   W_LO_PWR:  {<<: *w16, colors: [BU], notes: Splice to the K_LO common.}
   W_DIM_COMMON:
-    <<: *w18
+    <<: *w16
     colors: [GN]
     notes: |-
       Switched supply up to the dimmer common. NOW A COIL-DRIVE WIRE, not a lamp feed - it carries the
       two relay coils (~0.15A each, ~0.3A worst case during the make-before-break blip) instead of the
       full lamp load. Dropped from 16 to 18 AWG for that reason.
   W_HI_TRIG:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: Dimmer HI output to the K_HI coil. Stock colour retained.
   W_LO_TRIG:
-    <<: *w18
+    <<: *w16
     colors: [GN]
     notes: Dimmer LO output to the K_LO coil. Stock colour retained.
-  W_KHI_GND:  {<<: *w18, colors: [BK], notes: K_HI coil ground to the star bus.}
-  W_KLO_GND:  {<<: *w18, colors: [BK], notes: K_LO coil ground to the star bus.}
+  W_KHI_GND:  {<<: *w16, colors: [BK], notes: K_HI coil ground to the star bus.}
+  W_KLO_GND:  {<<: *w16, colors: [BK], notes: K_LO coil ground to the star bus.}
   W_HEAD_HI:
     <<: *w16
     colors: [BU]
@@ -1099,17 +1112,17 @@ cables:
       PARK - see SP_TAIL. Sized 16 AWG for the tail lamp that joins this net later, not for the two
       LED meter lamps it carries today.
   W_INSTR_FEED:
-    <<: *w18
+    <<: *w16
     colors: [BN]
     notes: PDM F7 out to the instrument splice - one wire per cavity. Splits at SP_INSTR into the meter feed and the neutral lamp feed.
   W_MTR_FEED:
-    <<: *w18
+    <<: *w16
     colors: [BN]
     notes: PDM F7 to the meter lamp splice. Switched instrument power, sharing the fuse with the neutral lamp.
-  W_MTR_SPD: {<<: *w18, colors: [BN], notes: "Speedometer light. SWITCHED, not park-fed - see SP_MTR."}
-  W_MTR_TAC: {<<: *w18, colors: [BN], notes: "Tachometer light, same net."}
-  W_GND_SPD: {<<: *w18, colors: [BK]}
-  W_GND_TAC: {<<: *w18, colors: [BK]}
+  W_MTR_SPD: {<<: *w16, colors: [BN], notes: "Speedometer light. SWITCHED, not park-fed - see SP_MTR."}
+  W_MTR_TAC: {<<: *w16, colors: [BN], notes: "Tachometer light, same net."}
+  W_GND_SPD: {<<: *w16, colors: [BK]}
+  W_GND_TAC: {<<: *w16, colors: [BK]}
 
   # --- USB-C PD charger, replacing the stock accessory circuit ----------
   W_USB_FEED:
@@ -1136,11 +1149,11 @@ cables:
       distinct from the SWITCHED OUTPUTS either side of it - the three land on adjacent ways of the
       same cluster connector.
   W_FLASH_GND:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: Flasher ground. Drawn even though a 2-pin part would not use it - see FLASHER.
   W_SIG_L:
-    <<: *w18
+    <<: *w16
     colors: [GN]
     notes: |-
       ** LEFT IS GN AND RIGHT IS GY, DELIBERATELY. ** This is one of the few places colour is still
@@ -1148,41 +1161,41 @@ cables:
       the headlight shell, the lamps have no pinout to read, and swapping them gives a bike that
       indicates the wrong way - a safety fault, not an annoyance. Costs no extra SKU: GY is already
       bought in 18 AWG for the relay coil drives.
-  W_SIG_R:  {<<: *w18, colors: [GY], notes: "Turn switch RIGHT output. GY not GN - see W_SIG_L."}
-  W_SIG_FL: {<<: *w18, colors: [GN]}
-  W_SIG_RL: {<<: *w18, colors: [GN]}
-  W_SIG_FR: {<<: *w18, colors: [GY]}
-  W_SIG_RR: {<<: *w18, colors: [GY]}
-  W_IND_L:  {<<: *w18, colors: [GN], notes: "Left splice to the instrument 6P way 1."}
-  W_IND_L2: {<<: *w18, colors: [GN], notes: "Pod-side leg to the left dash indicator."}
-  W_IND_R:  {<<: *w18, colors: [GY], notes: "Right splice to the instrument 6P way 2."}
-  W_IND_R2: {<<: *w18, colors: [GY], notes: "Pod-side leg to the right dash indicator."}
-  W_GND_SIG_FL: {<<: *w18, colors: [BK]}
-  W_GND_SIG_FR: {<<: *w18, colors: [BK]}
-  W_GND_SIG_RL: {<<: *w18, colors: [BK]}
-  W_GND_SIG_RR: {<<: *w18, colors: [BK]}
-  W_GND_IND_L:  {<<: *w18, colors: [BK], notes: "Into the pod ground splice - see SP_POD_GND."}
-  W_GND_IND_R:  {<<: *w18, colors: [BK], notes: "Into the pod ground splice - completes its 1-to-3."}
+  W_SIG_R:  {<<: *w16, colors: [GY], notes: "Turn switch RIGHT output. GY not GN - see W_SIG_L."}
+  W_SIG_FL: {<<: *w16, colors: [GN]}
+  W_SIG_RL: {<<: *w16, colors: [GN]}
+  W_SIG_FR: {<<: *w16, colors: [GY]}
+  W_SIG_RR: {<<: *w16, colors: [GY]}
+  W_IND_L:  {<<: *w16, colors: [GN], notes: "Left splice to the instrument 6P way 1."}
+  W_IND_L2: {<<: *w16, colors: [GN], notes: "Pod-side leg to the left dash indicator."}
+  W_IND_R:  {<<: *w16, colors: [GY], notes: "Right splice to the instrument 6P way 2."}
+  W_IND_R2: {<<: *w16, colors: [GY], notes: "Pod-side leg to the right dash indicator."}
+  W_GND_SIG_FL: {<<: *w16, colors: [BK]}
+  W_GND_SIG_FR: {<<: *w16, colors: [BK]}
+  W_GND_SIG_RL: {<<: *w16, colors: [BK]}
+  W_GND_SIG_RR: {<<: *w16, colors: [BK]}
+  W_GND_IND_L:  {<<: *w16, colors: [BK], notes: "Into the pod ground splice - see SP_POD_GND."}
+  W_GND_IND_R:  {<<: *w16, colors: [BK], notes: "Into the pod ground splice - completes its 1-to-3."}
 
   # --- tail lamp and the brake circuit --------------------------------
   W_TAIL_RUN:
-    <<: *w18
+    <<: *w16
     colors: [BU]
     notes: Tail net to the tail filament. Lights in ON and in PARK - see SP_TAIL.
   W_BRK_FEED:
     <<: *w16
     colors: [BN]
     notes: PDM F8 to the brake splice. Its own fuse, unlike stock - see SP_BRK_FEED.
-  W_BRK_FEED_F: {<<: *w18, colors: [BN], notes: "Splice to the front switch, at the lever perch."}
-  W_BRK_FEED_R: {<<: *w18, colors: [BN], notes: "Splice to the rear switch, frame mounted."}
-  W_BRK_OUT_F:  {<<: *w18, colors: [GN], notes: "Front switch out to the brake lamp splice."}
-  W_BRK_OUT_R:  {<<: *w18, colors: [GN], notes: "Rear switch out to the brake lamp splice."}
+  W_BRK_FEED_F: {<<: *w16, colors: [BN], notes: "Splice to the front switch, at the lever perch."}
+  W_BRK_FEED_R: {<<: *w16, colors: [BN], notes: "Splice to the rear switch, frame mounted."}
+  W_BRK_OUT_F:  {<<: *w16, colors: [GN], notes: "Front switch out to the brake lamp splice."}
+  W_BRK_OUT_R:  {<<: *w16, colors: [GN], notes: "Rear switch out to the brake lamp splice."}
   W_BRAKE:
-    <<: *w18
+    <<: *w16
     colors: [GN]
     notes: Brake splice to the lamp's BRAKE input. Distinct colour from the tail feed because the two land on adjacent ways of the same lamp and reversing them would give a lamp that is bright until you brake.
   W_GND_TAIL:
-    <<: *w18
+    <<: *w16
     colors: [BK]
     notes: Tail lamp return to the star bus. Stock earthed it on Net B, which never reached the chassis ring.
 
@@ -1191,25 +1204,25 @@ cables:
     <<: *w16
     colors: [BU]
     notes: Splice to the HI filament. W_HEAD_HI now runs relay-to-splice rather than relay-to-lamp.
-  W_IND_HB:  {<<: *w18, colors: [BU], notes: "Splice to the instrument 6P - the dash high-beam indicator."}
-  W_IND_HB2: {<<: *w18, colors: [BU], notes: "Pod-side leg, 6P to the indicator."}
-  W_GND_HB:  {<<: *w18, colors: [BK], notes: "Indicator return into the pod ground splice."}
+  W_IND_HB:  {<<: *w16, colors: [BU], notes: "Splice to the instrument 6P - the dash high-beam indicator."}
+  W_IND_HB2: {<<: *w16, colors: [BU], notes: "Pod-side leg, 6P to the indicator."}
+  W_GND_HB:  {<<: *w16, colors: [BK], notes: "Indicator return into the pod ground splice."}
 
   # --- neutral circuit -------------------------------------------------
   W_IND_N_FEED:
-    <<: *w18
+    <<: *w16
     colors: [BN]
     notes: PDM F7 to the instrument 6P - switched power for the neutral lamp.
-  W_IND_N_FEED2: {<<: *w18, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
+  W_IND_N_FEED2: {<<: *w16, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
   W_NSW2:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: |-
       The lamp's RETURN, not a ground - it runs to the neutral switch, which closes to the engine
       case only in neutral. GY rather than BK for exactly that reason: black is ground only, and
       this wire is live whenever the key is on.
   W_NSW:
-    <<: *w18
+    <<: *w16
     colors: [GY]
     notes: |-
       Harness-side leg, 6P to the switch. Stock ran LIGHT GREEN here and the factory model draws it
@@ -1219,8 +1232,8 @@ cables:
       ~1.1V for the old incandescent. Still worth cleaning, no longer worth chasing.
 
   # --- pod ground and the engine strap ---------------------------------
-  W_POD_GND2: {<<: *w18, colors: [BK], notes: "Pod-side leg - three indicator returns onto one conductor at the splice."}
-  W_POD_GND:  {<<: *w18, colors: [BK], notes: "Harness-side leg, 6P to the star bus. Stock earthed this on Net B, which never reached the chassis ring."}
+  W_POD_GND2: {<<: *w16, colors: [BK], notes: "Pod-side leg - three indicator returns onto one conductor at the splice."}
+  W_POD_GND:  {<<: *w16, colors: [BK], notes: "Harness-side leg, 6P to the star bus. Stock earthed this on Net B, which never reached the chassis ring."}
   W_ENG_GND:
     <<: *w6
     colors: [BK]
