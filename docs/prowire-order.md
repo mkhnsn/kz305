@@ -126,44 +126,84 @@ the PDM and all four terminate in lugs.
 
 Fine-strand **welding** cable preferred for flexibility around the engine.
 
-## 4. Splice hardware — SETTLED, with part numbers
+## 4. Splice hardware — Molex Versakrimp PARALLEL splices
 
-**Molex uninsulated step-down butt splices**, and the arithmetic backs the
-choice: two 16 AWG conductors are 2.0 mm² of copper but sit side by side, so they
-need the **12–10** barrel, not the 16–14. The single leg goes in the 16–14 end.
+**Changed 5 Sep 2026 from step-down butt splices.** Parallel "shorty" splices
+take every wire at a node in from the *same* end and crimp once, so one splice
+serves a whole node instead of a cascade of two-into-ones.
 
-| Item | Molex | $ | Qty |
+**$1.60 against $25.20**, and 13 crimps instead of 35.
+
+⚠️ **It also makes the drawing honest.** `SP_HOT` and `SP_SW` are modelled as
+single nodes with a note that the cascade was a build form. With a parallel
+splice they *are* single nodes — the model and the bench now agree.
+
+### Sizing — barrel capacity is total conductor area
+
+16 AWG TXL is 1.0 mm² per Prowire's own chart, so wires-per-barrel is simply
+capacity ÷ 1.0:
+
+| Barrel | Molex | Capacity | Max 16 AWG wires | $ |
+|---|---|---|---|---|
+| 16-14 GA | `19205-0001` | 2.08 mm² | 2 | 0.082 |
+| **12-10 GA** | **`19205-0003`** | **5.26 mm²** | **5** | 0.105 |
+| 8 GA | — | 8.37 mm² | 8 | 0.286 |
+
+| Splice | Wires | Barrel |
+|---|---|---|
+| `SP_HOT` | 5 | 12-10 |
+| `SP_SIG_L` `SP_SIG_R` | 4 | 12-10 |
+| `SP_RLY` `SP_YR` `SP_HEAD` `SP_HI` `SP_INSTR` `SP_MTR` `SP_BRK_FEED` `SP_BRAKE` | 3 | 12-10 |
+| `SP_TAIL` | 2 | 16-14 |
+| `SP_POD_GND` | 4 | — inside the retained pod pigtail, already made |
+
+### ⚠️ `SP_SW` is the one that does not fit — split it into three
+
+Nine wires is 9.0 mm², which needs a **6 GA** barrel — and Prowire's own note says
+the recommended `Sargent 4235 CT` only covers **up to 8 ga**, with 6 ga needing
+the separate `Molex 19294-0008`. **A second crimp tool for one splice.**
+
+Split it instead, with two short link wires:
+
+    A:  K_MAIN 87 in + 3 branches + link1     = 5 wires   12-10
+    B:  link1 + 2 branches + link2            = 4 wires   12-10
+    C:  link2 + 3 branches                    = 4 wires   12-10
+
+Everything stays in **one barrel size and one tool**, and it is still three crimps
+against the eight the cascade needed.
+
+### Order
+
+| Item | Molex | Qty | $ |
 |---|---|---|---|
-| Step-down, **12-10 to 16-14** — the 2-into-1 | `19215-0023` | 0.72 | **45** |
-| Step-down, 16-14 to 18-22 — retained pigtails only | `19215-0013` | 0.59 | 6 |
+| Parallel splice **12-10 GA** | `19205-0003` | **20** | 2.10 |
+| Parallel splice 16-14 GA | `19205-0001` | 5 | 0.41 |
 
-⚠️ **These are uninsulated**, so the adhesive shrink below is not optional — it is
-the insulation *and* the strain relief.
+⚠️ **Do not buy the 595-piece kit** at $163. It is a hundred times the cost of
+what this harness needs.
+
+⚠️ **These are uninsulated**, so the adhesive shrink is the insulation *and* the
+strain relief — and more so than with a butt splice, because every wire exits
+one side and the barrel's far end has nothing holding it.
 
 ## 5. Heat shrink — Sumitomo W5DL 3:1 dual wall
 
-Sized against the real numbers. **One size covers all 35 splices**, not two as an
-earlier draft said — every joint in this harness is the same 2-into-1 on the same
-barrel, including the `SP_HOT` and `SP_SW` cascades.
+**3/8″ covers every splice.** A 12-10 barrel is ~6 mm and a 5-wire bundle is
+~6.2 mm; 3/8″ supplies at 9.5 mm, so it clears both.
 
-| Need | Over | Down to | Size | Item |
-|---|---|---|---|---|
-| **35 splices** | 6.4 mm barrel | 2.4 mm wire | **3/8″** | `W5DL-3/8-0` |
-| Ring terminal necks | ~4 mm | 2.4 mm wire | **3/16″** | `W5DL-3/16-0` |
+| Need | Size | Item | Qty |
+|---|---|---|---|
+| 15 splices | **3/8″** | `W5DL-3/8-0` | 2 × 4 ft |
+| Ring terminal necks | **3/16″** | `W5DL-3/16-0` | 2 × 4 ft |
 
-⚠️ **1/4″ will NOT go over a splice.** Supplied ID is 6.3 mm against a 6.4 mm
-barrel — it is the one size that looks right and isn't.
+Parallel splices are "shorty" and there are 15 rather than 35 joints, so this
+drops from 3 lengths of 3/8″ to 2.
 
-⚠️ **3/8″ recovers to 3.43 mm against a 2.4 mm wire**, so it does not close
-tight on the single leg. **That is what the adhesive is for** — dual-wall glue
-flows and fills the 1 mm gap. It is the correct choice anyway, because nothing
-in the 3:1 range both clears the barrel and closes on the wire.
-
-Sold in 4 ft lengths: 35 splices × ~40 mm ≈ 5 ft, so **3 lengths of 3/8″**
-(~$24) and **2 of 3/16″** (~$14). Buy the spare — a splice redone consumes two.
+⚠️ **1/4″ still will not go over a splice** — 6.3 mm supplied against a ~6 mm
+barrel plus wall. It remains the size that looks right and isn't.
 
 ⚠️ **Their table has a typo**: 1/8″ is listed recovering to 0.06 mm. The inch
-column says 0.023″, which is **0.58 mm**. Every other row converts correctly.
+column says 0.023″ = **0.58 mm**. Every other row converts correctly.
 
 ## 5b. Flexo Clean Cut sleeving — no hot knife needed
 
