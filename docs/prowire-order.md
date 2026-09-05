@@ -155,12 +155,12 @@ Minimum bore to insert N conductors, from optimal circle-in-circle packing plus
 | 5 | 3.48 | 3.83 |
 | 9 | 4.68 | 5.15 |
 
-| Splice | Molex | Bore ID | Takes |
-|---|---|---|---|
-| 22-18 | `19207-0001` | 1.50 mm | 1 |
-| 16-14 | `19205-0001` | 2.30 mm | **1** |
-| **12-10** | **`19205-0003`** | **3.30 mm** | **3** |
-| 8 GA | `19205-0004` | ⚠️ not published | ~8–10 |
+| Splice | Molex | OD | Bore ID | Wall | Takes |
+|---|---|---|---|---|---|
+| 22-18 | `19207-0001` | 3.30 | 1.50 | 0.90 | 1 |
+| 16-14 | `19205-0001` | 4.10 | 2.30 | 0.90 | **1** |
+| **12-10** | **`19205-0003`** | 5.70 | **3.30** | 1.20 | **3** |
+| **8 GA** | **`19205-0004`** | 7.50 | **4.20** | 1.65 | **5** |
 
 ⚠️ **Drop the 16-14 entirely.** Its 2.30 mm bore will not take two 16 AWG
 conductors — they need 2.84 mm. A 16-14 *butt* splice takes one wire per end,
@@ -178,20 +178,22 @@ ends into.
 | eight 3-wire nodes + `SP_TAIL` | 2–3 | **12-10** |
 | `SP_SIG_L` `SP_SIG_R` | 4 | **8 GA** |
 | `SP_HOT` | 5 | **8 GA** |
-| `SP_SW` | 9 | **8 GA — if the bore allows, see below** |
+| `SP_SW` | 9 | **8 GA x2** — see below |
 | `SP_POD_GND` | 4 | — inside the retained pod pigtail |
 
-### ⚠️ Ask Prowire for the 8 GA bore ID before ordering
+### ⚠️ `SP_SW` splits in two — confirmed, not avoided
 
-It is the one dimension not published. Extrapolating the wall from the two known
-parts (1.80 mm on the 16-14, 2.40 mm on the 12-10) puts an 8 GA bore around
-**5.0–5.3 mm**, which would take **8 to 10** conductors.
+The 8 GA bore is **4.20 mm**, not the 5.0–5.3 mm this sheet extrapolated. **The
+wall grows faster than the bore**: 0.90 → 1.20 → **1.65 mm** across the three
+sizes, so projecting from OD-minus-ID totals under-called it by 0.9 mm.
 
-**If it is 5.15 mm or more, `SP_SW` is a single crimp** and the split disappears.
-If it is under, split it in two as `in + 3 + link` and `link + 4`, both 5 wires.
+Nine wires need **4.68 mm ideal / 5.15 mm practical**. A 4.20 bore does not take
+them. Split with one link wire, both halves in 8 GA:
 
-Either way the 8 GA is inside the `Sargent 4235 CT`'s stated range, so no second
-tool.
+    A:  K_MAIN 87 in + 3 branches + link   = 5 wires
+    B:  link + 4 branches                  = 5 wires
+
+Five conductors need 3.83 mm against the 4.20 bore — comfortable.
 
 ### Order
 
@@ -200,8 +202,8 @@ tool.
 | Parallel splice **12-10 GA** | `19205-0003` | **25** | 4.55 |
 | Parallel splice **8 GA** | `19205-0004` | **10** | 5.49 |
 
-≈ **$10**, against $25.20 for step-down butt splices — and 13–14 crimps rather
-than 35.
+≈ **$10**, against $25.20 for step-down butt splices — and **14 crimps** rather
+than 35: nine 12-10 and five 8 GA.
 
 ⚠️ **Make the first crimp a deliberate test** anyway. The 10% insertion allowance
 is a convention, not a datasheet figure.
