@@ -167,26 +167,52 @@ column says 0.023″, which is **0.58 mm**. Every other row converts correctly.
 
 ## 5b. Flexo Clean Cut sleeving — no hot knife needed
 
-Cuts with scissors and does not fray. Sized from the bundle diameter,
-`d × √N × 1.15`:
+Cuts with scissors, does not fray. Sized from bundle diameter, `d × √N × 1.15`,
+and the footage derived from the **48 branch lengths measured off the old
+harness** rather than estimated.
 
-| Bundle | Wires | OD | Sleeve |
+### The split is lopsided — it is almost all 1/4″
+
+| | Branches | Raw need |
+|---|---|---|
+| 1/4″ | **48 of 50** | 20.1 ft |
+| 1/2″ | 2 | 1.0 ft |
+
+The old harness's branches are mostly 1–3 conductors. **1/4″ Clean Cut expands to
+about 9.5 mm**, which covers up to roughly 8 conductors, so it swallows nearly
+everything that leaves the trunk.
+
+### The trunk is not one size
+
+It thins out toward the back:
+
+| Section | Conductors | OD | Sleeve |
 |---|---|---|---|
-| Main trunk | ~25–30 | 14–15 mm | **3/4″** `CCP075BK` |
-| Medium branches | ~8 | 8 mm | **1/2″** `CCP050BK` |
-| Small branches | 2–4 | 4–6 mm | **1/4″** `CCP025BK` |
+| Front — headlight, both clusters, instruments, front signals | ~25–30 | 14–15 mm | **3/4″** |
+| Rear — tail, brake, rear signals, flasher | ~10 | 9 mm | **1/2″** |
 
-Expandable braid covers roughly its nominal to 1.5× nominal, so 3/4″ takes the
-fattest trunk section **and still slides over a connector** — which is the reason
-to go a size up rather than fit the bundle exactly.
+### Order
 
 | Item | Ft | $ |
 |---|---|---|
-| `CCP075BK` 3/4″ | 10 | 8.40 |
-| `CCP050BK` 1/2″ | 15 | 10.07 |
-| `CCP025BK` 1/4″ | 25 | 10.93 |
+| `CCP025BK` 1/4″ | **35** | 15.30 |
+| `CCP050BK` 1/2″ | **10** | 6.71 |
+| `CCP075BK` 3/4″ | **10** | 8.40 |
 
-≈ **$29**, and it retires the hot-knife line entirely.
+≈ **$30**, and it retires the hot-knife line entirely.
+
+**Margin is 1.6× on branches and 1.5× on the trunk**, for two reasons beyond
+ordinary waste:
+
+- ⚠️ **The old harness had no star ground.** The rebuild adds ~19 ground returns
+  that run alongside existing branches, so every branch gets one conductor
+  fatter than the measured geometry.
+- Sleeving overlaps at each breakout, so 48 branches means 48 overlaps.
+
+⚠️ **Check the spool pricing before buying by the foot.** Clean Cut lists "as low
+as" rates and offers 50/75/100 ft spools, so a **50 ft spool of 1/4″ may beat
+35 ft loose** — the same tier trap as the wire, where assuming a flat rate cost
+$120.
 
 ## 6. Inline fuse holders — MP630, NOT a Prowire line
 
