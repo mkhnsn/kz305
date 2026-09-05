@@ -209,10 +209,18 @@ ordinary waste:
   fatter than the measured geometry.
 - Sleeving overlaps at each breakout, so 48 branches means 48 overlaps.
 
-⚠️ **Check the spool pricing before buying by the foot.** Clean Cut lists "as low
-as" rates and offers 50/75/100 ft spools, so a **50 ft spool of 1/4″ may beat
-35 ft loose** — the same tier trap as the wire, where assuming a flat rate cost
-$120.
+### Buy loose — the spool is not a break, checked 5 Sep 2026
+
+    35 ft loose @ $0.437/ft  = $15.29
+    100 ft spool             = $43.20   ($0.432/ft)
+
+**A 1.1% discount.** The spool costs $27.91 more for 65 ft you do not need, and
+only wins if the loose rate ever exceeds $1.23/ft.
+
+⚠️ **The tier lesson from the wire does not transfer.** TXL drops **32% at the
+50 ft break**, which is what makes "buy up to the break" right there. Clean Cut
+is essentially flat-priced. The rule is **check the tiers**, not *buy up to the
+break* — generalising the wrong one would have cost $28 here.
 
 ## 6. Inline fuse holders — MP630, NOT a Prowire line
 
