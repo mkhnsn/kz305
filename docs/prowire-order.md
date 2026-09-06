@@ -3,22 +3,37 @@
 Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 **order** quantities, not design quantities — see the note at the foot.
 
-## ⚠️ AMEND THE PLACED ORDER — `TXL-14-4`, 10 ft
-
-**Order Q25134 is on hold until the 7 Sep brown restock, so it can still be
-amended. Do this before it releases.**
+## Outstanding after order Q25134 — `TXL-14-4`, ~8 ft
 
 `W_ALT` went back to 14 AWG on 6 Sep because the Furukawa QLW 250 at the
-regulator will not take anything smaller — 14 AWG is its smallest socket. That
-re-adds a SKU the 4 Sep consolidation had removed, and **14 AWG yellow is not in
-the placed order.**
+regulator will not take anything smaller. That re-added a SKU the 4 Sep
+consolidation had removed, and the order had already closed.
 
-Two conductors at about 3 ft each. **10 ft covers it**, roughly $6.50 — against a
-second shipping charge of $33.60 if it is missed.
+**Not chased, and it blocks nothing.** In order:
 
-Everything else still covers: `12 AWG BK` now carries `W_GND_MAIN` as well as
-`W_RR_GND`, two conductors against the 10 ft ordered, and `16 AWG YE` drops from
-10 conductors to 8 against 50 ft ordered.
+1. **Check the shelf** — 14 AWG yellow TXL may already be on hand. Two conductors
+   over a short run from the stator bullets to the regulator; **8 ft is plenty**.
+2. Otherwise buy it anywhere later. It is roughly $7 of wire.
+
+⚠️ **It cannot delay the build.** The charging circuit is among the last things
+connected, and its connectors are in the Corsa Technic order which has not been
+placed either. There is no sequence where this is the long pole.
+
+### If a substitute is ever needed
+
+The two AC leads are **isolated in their own connector at the regulator and touch
+nothing else in the harness**, and the factory model records that the two AC legs
+are **interchangeable** into a single-phase bridge — so swapping them is harmless.
+
+Yellow is there to match stock, not to disambiguate: the scheme has no role for AC
+phases, and its own note flags yellow as colliding with the ignition role. Spare
+14 AWG white would serve at no real cost, though the order only leaves about 5 ft
+of it against ~6 ft needed.
+
+### Everything else still covers
+
+`12 AWG BK` now carries `W_GND_MAIN` as well as `W_RR_GND` — two conductors
+against 10 ft ordered. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
 
 ## 1. TXL wire — 11 SKUs, all 16 AWG above 14
 
