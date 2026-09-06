@@ -9,66 +9,69 @@ hard to find — deliberate, not a side effect.
 
 ## Two orders — 6 Sep 2026
 
-Corsa Technic is out of stock on 6-way and 8-way HW female housings, and those
-are also what the junction connectors mate into. Cycle Terminal covers the gap.
+**All standard HW090 from Cycle Terminal. Only the specialty parts from Corsa.**
 
-⚠️ **Prefer the larger housings if Cycle Terminal has them.** Splitting `LH` and
-`INSTR_6P` across 3-ways works, but it puts **two identical 3-way connectors on
-the same component** — cross-pluggable, and on `LH` a swap crosses switched power
-with the flasher output. One housing per component removes the hazard entirely.
+### ⚠️ Gender convention — decide before ordering
 
-### Cycle Terminal
+**Harness side FEMALE, component side MALE**, on every connection. A disconnected
+harness then has no exposed live pins, which matters most at `IGN` and `LH` where
+the harness side is fed from the PDM.
+
+That convention also falls out naturally at the junctions: their bussed half is
+**male**, so the wires land in a **female** housing — consistent with everything
+else.
+
+### Cycle Terminal — all HW090
+
+| Item | Female | Male | For |
+|---|---|---|---|
+| 3-way | 1 | 1 | `RH` right cluster |
+| 4-way | 1 | 1 | `IGN` ignition switch |
+| 6-way | 1 | 1 | `INSTR_6P` pod |
+| 8-way | **5** | 1 | `LH` **+ 4 junction mating halves** |
+| 14-way | **1** | — | `SP_SW` junction mating half |
+
+⚠️ **Five 8-way females, one 8-way male.** Four of the females are the mating
+halves for the `HW.JC-8P` junctions and have no male partner to buy — the
+junction *is* their partner. This is the line most likely to be mis-ordered.
+
+| Consumable | Qty | Need |
+|---|---|---|
+| HW090 terminals | **100** | 77 |
+| HW090 wire seals | **100** | 77 |
+| HW090 cavity plugs | **20** | 3 |
+
+⚠️ **Check whether CT's housings already include terminals and seals** — many of
+their listings do. If so, reduce the loose count rather than double-buying.
+
+### Corsa Technic — specialty only
 
 | Item | Qty | For |
 |---|---|---|
-| HW090 **8-way female** housing | **4** | mating half for each `HW.JC-8P` |
-| HW090 **14-way female** housing | **1** | mating half for `HW.JC-14P-1` |
-| HW090 **8-way** pair (socket + pin) | 1 | `LH` left cluster |
-| HW090 **6-way** pair | 1 | `INSTR_6P` pod |
-| HW090 **4-way** pair | 1 | `IGN` ignition switch |
-
-⚠️ **The junction's mating half must match its way count** — the bussed half is
-one housing and cannot be split across smaller connectors. This is why the
-8-way shortage blocks the junctions and not just the clusters.
-
-⚠️ **Check whether CT's housings ship with terminals and seals.** Their listings
-often do; Corsa's are sold as kits. Do not double-buy.
-
-### Corsa Technic
-
-| Item | Qty | For |
-|---|---|---|
-| `HW.JC-8P` junction | **4** | `SP_GND` — 3 needed, 4th for spare |
-| `HW.JC-14P-1` junction | **1** | `SP_SW` |
-| HW090 **3-way** pair | 1 | `RH` right cluster |
-| `QLW-3S-2` grey | 1 | R/R **AC**, 14 AWG sockets |
+| `HW.JC-8P` bussed junction | **4** | `SP_GND` — 3 needed, 4th for spare |
+| `HW.JC-14P-1` bussed junction | **1** | `SP_SW` |
+| `QLW-3S-2` grey | 1 | R/R **AC** — ⚠️ select **14 AWG** sockets |
 | `QLW-3S-1` black | 1 | R/R **DC** |
-| HW090 terminals | **100** | 77 needed |
-| HW090 wire seals | **100** | 77 needed |
-| HW090 cavity plugs | 20 | 3 needed in `SP_SW` |
-| QLW 250 cavity plugs | 6 | 2 needed |
+| QLW 250 cavity plug | 6 | 2 needed — both connectors run 2 of 3 ways |
 | ISO 280 micro relay, integral diode | **6** | 5 fitted + PDM spare, #46 |
+
+The QLW kits ship with 3 contacts and 3 seals each; only 2 of each are used per
+connector, so the spares are built in. **Cavity plugs are not included** in
+Corsa's kits — Cycle Terminal's set lists one, Corsa's does not.
 
 ### Terminal count
 
 | | |
 |---|---|
-| `IGN` 4 + `INSTR_6P` 6 + `RH` 3 + `LH` 8, **both halves** | 42 |
+| `IGN` 4 + `INSTR_6P` 6 + `RH` 3 + `LH` 8, both halves | 42 |
 | Junction mating halves — `SP_GND` 24, `SP_SW` 11 | 35 |
 | **Total** | **77 — buy 100** |
 
 The bussed halves take no terminals. Terminals are shared across the MT / HM / HW
-sealed 090 families, so buy them wherever is convenient.
+sealed 090 families, so one part number covers every housing above.
 
-### If Cycle Terminal is also short on 6/8-way
-
-The parallel splices already bought from Prowire cover both junctions —
-**25 × 12-10, 10 × 8 GA, 5 × 6 GA**. `SP_GND` becomes about three 6 GA splices and
-`SP_SW` one. Nothing is blocked.
-
-⚠️ **The cost is serviceability, and it lands hardest on `SP_GND`** — blocker 2's
-ground count is *not final*, so that bus is the one most likely to gain a wire.
-`SP_SW` has the weaker case now that F10 and F11 have landed.
+⚠️ **The seal bore against TXL's 2.26–2.40 mm is still unverified**, and it
+affects all 100. Ask for the range, or buy ten and try one before committing.
 
 ## R/R connectors — IDENTIFIED, 6 Sep 2026
 
