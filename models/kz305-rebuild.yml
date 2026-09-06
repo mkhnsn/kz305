@@ -1308,8 +1308,20 @@ cables:
       is a continuous-duty path rather than an intermittent one.
       So the standing "round up liberally" rule is deliberately NOT applied here. Matching beats
       upsizing whenever the joint is a bullet.
-      ⚠️ THE SAME CHECK APPLIES AT THE OTHER END. The R/R mating pigtail comes from Eastern Beaver at
-      whatever gauge they supply. Ask before ordering, and match it too. [OPEN]
+      ⚠️ ** THE R/R CONNECTOR WILL NOT TAKE 16 AWG - found 6 Sep 2026. ** The SH775's AC side is a
+      FURUKAWA QLW 250, 6.3mm contacts, and both vendors state its range as 2.00-8.00 sq mm (12-14
+      AWG). 16 AWG is 1.23 sq mm - BELOW THE MINIMUM. The terminal will not crimp on it and the seal
+      will not close on its insulation.
+      TWO WAYS OUT, in order:
+        1. Corsa Technic's listing has SELECTABLE socket and seal sizes. If a 16 AWG socket exists for
+           this housing, nothing changes.
+        2. Otherwise run this leg at 14 AWG.
+      ** OPTION 2 COSTS LESS THAN THE 4 Sep REASONING SUGGESTS. ** That decision said matching beats
+      upsizing when the joint is a bullet, which holds when BOTH sides are ours to choose. Here the
+      stator's own lead is fixed at 16 AWG, so it is the limiting conductor either way - running 14 on
+      our side does not make it worse, it just puts the step at a factory bullet we do not control.
+      And 16 AWG at the called 20A stator output is marginal on its own account.
+      [OPEN - check the socket-size dropdown first]
       NOTE THE HARNESS STILL SUPPLIES THIS RUN - the stator's 8 inches does not reach the regulator,
       so this is wire we buy, not a retained pigtail like the pod's.
   W_RR_OUT:

@@ -74,6 +74,42 @@ expensive thing to get wrong.
 - **Cavity plugs** for any unused ways.
 - **The five ISO 280 micro relays** with integral flyback diode (#46) — not yet
   sourced from anyone.
-- **The Shindengen `FH009`–`FH020` R/R pigtails**, 3-pin AC + 2-pin DC. Currently
-  assigned to Eastern Beaver; if Corsa Technic carries them, that is one fewer
-  order and one fewer shipping charge.
+## R/R connectors — IDENTIFIED, 6 Sep 2026
+
+**Furukawa QLW 250 series**, and the part numbers match exactly across Corsa
+Technic and Cycle Terminal — two independent vendors agreeing is better
+identification than either alone.
+
+| | Furukawa P/N | Corsa kit | Role |
+|---|---|---|---|
+| Grey | `QLW-A-3F-GR` | `QLW-3S-2` | **AC** — 3 ways, 2 used, 1 plugged |
+| Black | `QLW-A-B3F-B` | `QLW-3S-1` | **DC** — 3 ways, 2 used, 1 plugged |
+
+Colour is the keying: it is what stops AC being plugged into DC. 6.3 mm contacts,
+34 A, single-wire sealed.
+
+Cycle Terminal also sells them as a pair — `QLW-3F Set`, $16.95, with 6 terminals,
+5 seals and a cavity plug — against roughly $15.90 for the two Corsa kits.
+
+### ⚠️ The AC side will not take 16 AWG
+
+Both vendors give the range as **2.00–8.00 mm² (12–14 AWG)**. `W_ALT` is 16 AWG =
+**1.23 mm²**, below the minimum. The terminal will not crimp on it and the seal
+will not close on its insulation.
+
+| Wire | Gauge | mm² | |
+|---|---|---|---|
+| `W_ALT` | 16 AWG | 1.23 | ⚠️ **below minimum** |
+| `W_RR_OUT` | 12 AWG | 3.31 | OK |
+| `W_RR_GND` | 12 AWG | 3.31 | OK |
+
+**Check Corsa's socket and seal dropdowns first** — the listing offers selectable
+sizes, so a 16 AWG socket may exist for this housing. If not, run `W_ALT` at
+14 AWG; see its note in the model for why that costs less than the 4 Sep
+gauge-matching decision implies.
+
+### ⚠️ Cavity plugs
+
+Both connectors run 2 of 3 ways. Corsa's kits list housing + 3 contacts +
+3 seals and **no plug**; Cycle Terminal's set includes one. Two plugs are needed
+either way — `AC3` is deliberately unterminated and the DC side has a spare way.
