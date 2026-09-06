@@ -3,7 +3,24 @@
 Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 **order** quantities, not design quantities — see the note at the foot.
 
-## 1. TXL wire — 10 SKUs, all 16 AWG above 14
+## ⚠️ AMEND THE PLACED ORDER — `TXL-14-4`, 10 ft
+
+**Order Q25134 is on hold until the 7 Sep brown restock, so it can still be
+amended. Do this before it releases.**
+
+`W_ALT` went back to 14 AWG on 6 Sep because the Furukawa QLW 250 at the
+regulator will not take anything smaller — 14 AWG is its smallest socket. That
+re-adds a SKU the 4 Sep consolidation had removed, and **14 AWG yellow is not in
+the placed order.**
+
+Two conductors at about 3 ft each. **10 ft covers it**, roughly $6.50 — against a
+second shipping charge of $33.60 if it is missed.
+
+Everything else still covers: `12 AWG BK` now carries `W_GND_MAIN` as well as
+`W_RR_GND`, two conductors against the 10 ft ordered, and `16 AWG YE` drops from
+10 conductors to 8 against 50 ft ordered.
+
+## 1. TXL wire — 11 SKUs, all 16 AWG above 14
 
 ⚠️ **Solid colours only.** No tracer wire; identification is printed heat-shrink
 plus `docs/label-schedule.md`.

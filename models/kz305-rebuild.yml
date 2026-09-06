@@ -1296,34 +1296,21 @@ cables:
       this a new part rather than a reproduction.
 
   W_ALT:
-    <<: *w16
+    <<: *w14
     colors: [YE, YE]
     notes: |-
-      ** 16 AWG TO MATCH THE STATOR, NOT 14 - decided 4 Sep 2026, and NOT on cost. ** The stator has
-      its own pigtail of about 8 inches ending in BULLETS [bench 4 Sep 2026], and it reads 16 AWG.
-      ** A GAUGE STEP AT A BULLET ON A CURRENT PATH IS THE MECHANISM THAT MELTED THE ORIGINAL
-      HARNESS. ** That is this project's single most important condition finding - see W_MAIN_OUT, and
-      B06.4 in the factory model, where the 20A main met a smaller conductor at a separable joint.
-      Running 14 AWG into a 16 AWG stator lead would rebuild that step on the charging circuit, which
-      is a continuous-duty path rather than an intermittent one.
-      So the standing "round up liberally" rule is deliberately NOT applied here. Matching beats
-      upsizing whenever the joint is a bullet.
-      ⚠️ ** THE R/R CONNECTOR WILL NOT TAKE 16 AWG - found 6 Sep 2026. ** The SH775's AC side is a
-      FURUKAWA QLW 250, 6.3mm contacts, and both vendors state its range as 2.00-8.00 sq mm (12-14
-      AWG). 16 AWG is 1.23 sq mm - BELOW THE MINIMUM. The terminal will not crimp on it and the seal
-      will not close on its insulation.
-      TWO WAYS OUT, in order:
-        1. Corsa Technic's listing has SELECTABLE socket and seal sizes. If a 16 AWG socket exists for
-           this housing, nothing changes.
-        2. Otherwise run this leg at 14 AWG.
-      ** OPTION 2 COSTS LESS THAN THE 4 Sep REASONING SUGGESTS. ** That decision said matching beats
-      upsizing when the joint is a bullet, which holds when BOTH sides are ours to choose. Here the
-      stator's own lead is fixed at 16 AWG, so it is the limiting conductor either way - running 14 on
-      our side does not make it worse, it just puts the step at a factory bullet we do not control.
-      And 16 AWG at the called 20A stator output is marginal on its own account.
-      [OPEN - check the socket-size dropdown first]
-      NOTE THE HARNESS STILL SUPPLIES THIS RUN - the stator's 8 inches does not reach the regulator,
-      so this is wire we buy, not a retained pigtail like the pod's.
+      ** 14 AWG - SETTLED 6 Sep 2026 BY THE CONNECTOR, not by the conductor. ** The SH775's AC side is
+      a Furukawa QLW 250 (grey, QLW-A-3F-GR) and 14 AWG is the SMALLEST socket the housing accepts;
+      its stated range is 2.00-8.00 sq mm. 16 AWG is 1.23 sq mm and will neither crimp nor seal.
+      THIS REVERSES THE 4 Sep DROP TO 16 AWG, and the reversal costs little. That decision held that
+      matching beats upsizing when the joint is a bullet - true when BOTH sides are ours to choose.
+      The stator's own lead is fixed at about 16 AWG, so it is the limiting conductor either way:
+      running 14 here does not make it worse, it puts the step at a factory bullet we do not control.
+      16 AWG at the called 20A stator output was marginal on its own account.
+      THE STATOR'S 8 INCH PIGTAIL DOES NOT REACH THE REGULATOR, so this is wire we buy, not a retained
+      pigtail like the pod's.
+      ⚠️ YELLOW COLLIDES WITH THE SCHEME'S IGNITION ROLE but is kept to match stock. These two are
+      isolated in their own connector at the regulator and touch nothing else.
   W_RR_OUT:
     <<: *w12
     colors: [RD]
