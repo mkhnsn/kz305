@@ -7,6 +7,72 @@ sealed 090 (#37), so the stock housings get cut off the retained pigtails and a
 new connector goes on each end. That is a one-way door on parts that are getting
 hard to find — deliberate, not a side effect.
 
+## Order quantities
+
+Derived from the model. **Buy spares on terminals, seals and plugs** — a bad
+crimp on a sealed or pull-to-seat terminal is not recoverable.
+
+### HW 090 connectors — one SOCKET kit **and** one PIN kit each
+
+The stock housings get cut off, so both ends of every connection are new.
+
+| Node | Ways | Socket kit | Pin kit | Terminals |
+|---|---|---|---|---|
+| `IGN` ignition switch | 4 | 1 | 1 | 8 |
+| `INSTR_6P` pod | 6 | 1 | 1 | 12 |
+| `RH` right cluster | 3 | 1 | 1 | 6 |
+| `LH` left cluster | 8 | 1 | 1 | 16 |
+| | | | | **42** |
+
+⚠️ **Check 3-way and 8-way exist in HW090.** If not: `RH` takes a 4-way with one
+cavity plugged; `LH` falls back to the stock split (see below).
+
+### Junctions
+
+| For | Part | Qty | Terminals |
+|---|---|---|---|
+| `SP_GND` | `HW.JC-8P` | **4** | 24 |
+| `SP_SW` | `HW.JC-14P-1` | **1** | 11 |
+| | | | **35** |
+
+⚠️ **Four `HW.JC-8P`, not three.** Three gives 24 positions for 19 grounds, two
+jumper pairs and a lead — **exactly full, no spare**. Blocker 2's ground count is
+not final, and a fourth is $6.
+
+⚠️ **Check whether the junction ships with its mating housing.** The bussed half
+takes no terminals; the wires land in a separate housing that needs its own.
+
+### R/R — Furukawa QLW 250
+
+| Part | Furukawa | Qty | Role |
+|---|---|---|---|
+| `QLW-3S-2` | `QLW-A-3F-GR` grey | 1 | AC — 2 of 3 ways |
+| `QLW-3S-1` | `QLW-A-B3F-B` black | 1 | DC — 2 of 3 ways |
+
+⚠️ **Select 14 AWG sockets and the matching seal size.** 14 AWG is the smallest
+the housing takes, which is what forced `W_ALT` back up from 16.
+
+### Terminals, seals, plugs
+
+| Item | Need | **Buy** |
+|---|---|---|
+| HW090 terminals | 77 | **100** |
+| HW090 wire seals | 77 | **100** |
+| HW090 cavity plugs | 3 (`SP_SW`) | **20** |
+| QLW 250 cavity plugs | 2 | **6** |
+
+Terminals are shared across the MT / HM / HW sealed 090 families, so one part
+number covers everything.
+
+### Relays — if Corsa carries them
+
+**6 × ISO 280 micro, 20 A, integral flyback diode** (#46). Five fitted, one for
+the PDM's spare position. Sourced from nobody yet, so worth pricing here rather
+than becoming another order.
+
+⚠️ **Integral diode makes 85/86 polarity mandatory** — wired backwards it is a
+dead short across the coil.
+
 ## Multi-way connectors
 
 | Node | Ways used | Housing | Note |
