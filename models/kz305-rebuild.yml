@@ -185,27 +185,26 @@ connectors:
     <<: *battery
 
   GND:
-    type: Star ground bus
-    subtype: to bare chassis stud
-    pinlabels: [BATT, RR, SOL, K_MAIN, K_COIL, K_HI, K_LO, LH CLUSTER, HORN, HEAD, POD, MTR SPD, MTR TAC, ENG, TAIL, SIG FL, SIG FR, SIG RL, SIG RR, FLASHER, USB, CAP, SPARE]
+    type: Star ground point
+    subtype: bolted, to a bare-metal plate
+    pinlabels: [BATT NEG, RR RETURN, ENGINE STRAP, SIGNAL BUS]
     notes: |-
-      UPGRADE - one bus replacing the stock arrangement of one ring terminal and many scattered earth
-      points. Stock has TWO ground nets: a small Y/BK net that reaches the ring, and a harness-wide
-      BK/Y net that is OPEN to it and earths through the child harnesses at component mounting points
-      [meter 28 Aug 2026]. The big net is ONE net, so it is one thing to re-terminate.
-      ⚠️ THE WAY LIST IS PROVISIONAL - see blocker 2. Every component that earthed through its
-      mounting needs a wire back to this bus that the old harness never had, and that count is not
-      known.
-      FIVE RELAY COILS EARTH HERE at ~0.15A each, so they cost way count rather than gauge. THERE IS
-      NO K_HORN WAY - its coil- goes to the horn button, and the button earths through LH CLUSTER.
-      That is the stock ground-side switching preserved, and it is why the horn relay costs one bus
-      way rather than two.
-      LH CLUSTER IS A NEW WIRE AND THE WORKED EXAMPLE OF BLOCKER 2. Stock, the horn button grounds
-      through the CLUSTER BODY [bench 29 Aug 2026]; powder coating removes exactly that path.
-      ⚠️ SCRAPE THE STUD BACK TO BARE METAL - masking was never done and the frame is already coated,
-      so abrading at the landing is the only route left. Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V,
-      which is the meter's floor - treat it as pass/fail, not a measurement.
-      ⚠️ THE CRANKING RETURN SHARES THIS BUS with the signal grounds - see issue #44.
+      ** FOUR LANDINGS, NOT TWENTY-TWO - issue #44 settled 6 Sep 2026. ** This node used to collect
+      every ground in the harness, which is not buildable: twenty-two rings will not stack on one
+      stud, and two of them are 6 AWG lugs.
+      The grounds are now split BY DUTY, and the split is forced by current rather than chosen:
+        1 BATT NEG      6 AWG, direct
+        2 RR RETURN     12 AWG, direct - see below
+        3 ENGINE STRAP  6 AWG, direct. Carries the WHOLE CRANKING RETURN, well over 100A
+        4 SIGNAL BUS    one lead up from SP_GND, which collects the nineteen signal returns
+      ** THE HEAVY RETURNS NEVER TOUCH A CONNECTOR. ** No 090 or 250 junction is rated for a tenth of
+      cranking current. These are bolted, and the bolt IS the star point.
+      ⚠️ W_RR_GND IS TREATED AS HEAVY, and that was not obvious. It is 12 AWG carrying the charging
+      return - up to the 30A of MF_RR - so putting it on a 22A signal junction would push that current
+      through a bus shared with nineteen lamp and relay returns. Found while splitting the node.
+      ⚠️ THE FRAME IS ALREADY POWDER COATED, so this is a bare-metal plate or a scraped landing, NOT
+      "the frame". Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor -
+      treat it as pass/fail, not a measurement.
 
   MF:
     <<: *main_fuse
@@ -397,6 +396,21 @@ connectors:
       RELAY COUNT IS FIVE, at the TOP of what an RTMR-style module carries. Size for five positions
       plus a spare, or accept that two live in separate sockets outside it.
 
+  SP_GND:
+    style: simple
+    type: Splice
+    subtype: signal ground bus - 19 returns, sealed junctions
+    notes: |-
+      ** SEALED JUNCTION CONNECTORS, NOT A BUS BAR - issue #44, 6 Sep 2026. ** Three HW.JC-8P sealed
+      junctions (8 ways, all pins bussed, 22A) jumpered together: 24 positions for nineteen returns,
+      two internal jumpers and one lead out to the bolted star point.
+      WHY NOT A BAR: a bar is unsealed, and water in the sleeve is what killed the original harness.
+      These are sealed, they use the same 090 terminals as the rest of the connector order, and a
+      circuit can be removed by pulling a terminal rather than cutting a crimp.
+      LOAD IS ABOUT 5-8A across nineteen 16 AWG returns, against a 22A rating.
+      ⚠️ THE CHARGING RETURN IS NOT HERE. W_RR_GND goes direct to the bolted point - see GND.
+      ⚠️ 24 POSITIONS FOR 19 GROUNDS PLUS 2 JUMPER PAIRS AND A LEAD IS EXACTLY FULL. Buy a fourth
+      junction if any spare capacity is wanted; blocker 2's ground count is not final.
   SP_HOT:
     style: simple
     type: Splice
@@ -408,9 +422,16 @@ connectors:
       review - see issue #50.
       FIVE CONDUCTORS: W_MAIN_OUT in from the 20A fuse, then W_MAIN_SW_FEED to K_MAIN's 30 and the
       F1, F4 and F5 inputs.
-      ** BUILT AS CASCADED 2-INTO-1 SPLICES. ** Three splices for four branches. A power stud was
-      considered on 4 Sep 2026 and dropped - it has to be mounted, insulated, booted and found a home,
-      and none of that earns its place for five conductors in a loom that is otherwise sealed crimps.
+      ** BUILT AS ONE CRIMPED PARALLEL SPLICE - Molex 19205-0004, 8 GA. ** Five conductors in a
+      4.20mm bore, which needs 3.83mm. One crimp, no cascade.
+      ** AND IT STAYS A CRIMP RATHER THAN A JUNCTION CONNECTOR - issue #44, 6 Sep 2026. ** SP_SW moved
+      to a sealed junction for serviceability; this node deliberately did not. It is the
+      HIGHEST-CURRENT node in the harness at about 16A, and unlike SP_SW its membership is settled -
+      F1, F4, F5 and K_MAIN's 30, none of them likely to change.
+      A crimp has ZERO mated interfaces; a junction has two per wire. On the main feed of a vibrating
+      motorcycle that difference is the whole reason this rebuild bans bullets on the main path.
+      Serviceability is worth paying interfaces for where the design is still moving. It is not worth
+      paying them where it is settled.
       Modelled as ONE node the way the factory model's SP_BR is - a trunk with taps - so the build
       form is a note rather than a topology, and this decision does not change the drawing.
       ⚠️ THE TRUNK CARRIES CUMULATIVE CURRENT, NOT BRANCH CURRENT. The segment nearest the fuse
@@ -435,8 +456,13 @@ connectors:
       node sits downstream of K_MAIN and UPSTREAM of every individual fuse, so anything tapped
       straight off it is protected by nothing smaller than MF. Two loads used to hang here directly.
       They now leave through F11. Do not add a ninth branch that is not a fuse input.
-      ** BUILT AS CASCADED 2-INTO-1 SPLICES ** - seven of them for eight branches, same reasoning as
-      SP_HOT and modelled the same way.
+      ** BUILT AS A SEALED JUNCTION CONNECTOR - HW.JC-14P-1, issue #44, 6 Sep 2026. ** Fourteen ways
+      as TWO 7-way buses, 22A, jumpered together to take all nine conductors with three spare.
+      ⚠️ PUT THE HEAVY BRANCHES ON BUS A - the side K_MAIN's 87 feeds directly, F3 coil power
+      especially. The jumper to bus B then carries only F7, F8 and F9, which is a couple of amps.
+      WHY A CONNECTOR HERE AND A CRIMP AT SP_HOT: this node changed TWICE in one week - F10 when the
+      USB circuit landed, F11 when #49 closed - and each change would have meant cutting and
+      re-crimping. The circuit list is still moving. SP_HOT's is not.
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
       cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
@@ -968,6 +994,10 @@ cables:
   W_SW_F10:  {<<: *w16, colors: [BN], notes: "Switched bus to the F10 cavity - the USB charger."}
   W_SW_F11:  {<<: *w16, colors: [BN], notes: "Switched bus to the F11 cavity - relay coil supply."}
   W_RLY_PWR: {<<: *w16, colors: [BN], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
+  W_GND_MAIN:
+    <<: *w12
+    colors: [BK]
+    notes: The signal ground bus up to the bolted star point. Carries all nineteen returns, about 5-8A, so it is 12 AWG rather than 16 - it is the only conductor on that path and there is no second route home.
   W_KMAIN_GND:
     <<: *w16
     colors: [BK]
@@ -1309,6 +1339,9 @@ connections:
   - - BATT: [2]
     - W_BAT_GND: [1]
     - GND: [1]
+  - - SP_GND: [1]
+    - W_GND_MAIN: [1]
+    - GND: [4]
 
   # --- main feed through the 20A fuse --------------------------------
   - - SOL: [1]
@@ -1328,7 +1361,7 @@ connections:
     - K_MAIN: [3]
   - - K_MAIN: [4]
     - W_KMAIN_GND: [1]
-    - GND: [4]
+    - SP_GND: [1]
 
   # --- main relay passes the whole switched bus ---------------------
   - - SP_HOT: [1]
@@ -1382,7 +1415,7 @@ connections:
     - USB: [1]
   - - USB: [2]
     - W_USB_GND: [1]
-    - GND: [21]
+    - SP_GND: [1]
 
   # --- FIXED: fused feed to the KILL SWITCH, not to the coils --------
   - - PDM: [3]
@@ -1395,7 +1428,7 @@ connections:
     - K_COIL: [3]
   - - K_COIL: [4]
     - W_K_GND: [1]
-    - GND: [5]
+    - SP_GND: [1]
 
   # --- relay passes the coil power ----------------------------------
   - - PDM: [4]
@@ -1433,7 +1466,7 @@ connections:
   # The bracket's own earth - a ring under a mounting bolt, not the coating.
   - - CAP_L: [2]
     - W_CAP_GND: [1]
-    - GND: [22]
+    - SP_GND: [1]
 
   # --- starter trigger ----------------------------------------------
   - - RH: [3]
@@ -1441,7 +1474,7 @@ connections:
     - SOL: [3]
   - - SOL: [4]
     - W_SOL_GND: [1]
-    - GND: [3]
+    - SP_GND: [1]
 
   # --- horn: button drives the coil, contacts pass the load ----------
   - - SP_RLY: [1]
@@ -1452,7 +1485,7 @@ connections:
     - LH: [7]
   - - LH: [8]
     - W_LH_GND: [1]
-    - GND: [8]
+    - SP_GND: [1]
   - - PDM: [5]
     - W_HORN_PWR: [1]
     - K_HORN: [1]
@@ -1461,7 +1494,7 @@ connections:
     - HORN: [1]
   - - HORN: [2]
     - W_HORN_GND: [1]
-    - GND: [9]
+    - SP_GND: [1]
 
   # --- headlight: dimmer drives two coils, relays pass the beams -----
   - - SP_RLY: [1]
@@ -1475,10 +1508,10 @@ connections:
     - K_LO: [3]
   - - K_HI: [4]
     - W_KHI_GND: [1]
-    - GND: [6]
+    - SP_GND: [1]
   - - K_LO: [4]
     - W_KLO_GND: [1]
-    - GND: [7]
+    - SP_GND: [1]
   - - PDM: [6]
     - W_HEAD_SUPPLY: [1]
     - SP_HEAD: [1]
@@ -1499,7 +1532,7 @@ connections:
     - HEAD: [2]
   - - HEAD: [3]
     - W_HEAD_GND: [1]
-    - GND: [10]
+    - SP_GND: [1]
 
   # --- tail / park net: IGN way 2 is fed from battery in PARK ---------
   - - PDM: [7]
@@ -1522,10 +1555,10 @@ connections:
     - LAMP_TAC: [1]
   - - LAMP_SPD: [2]
     - W_GND_SPD: [1]
-    - GND: [12]
+    - SP_GND: [1]
   - - LAMP_TAC: [2]
     - W_GND_TAC: [1]
-    - GND: [13]
+    - SP_GND: [1]
 
   # --- high-beam indicator follows the beam, not the switch ----------
   - - SP_HI: [1]
@@ -1566,7 +1599,7 @@ connections:
     - LH: [4]
   - - FLASHER: [3]
     - W_FLASH_GND: [1]
-    - GND: [20]
+    - SP_GND: [1]
   - - LH: [5]
     - W_SIG_L: [1]
     - SP_SIG_L: [1]
@@ -1603,16 +1636,16 @@ connections:
   # --- signal lamp grounds - each its own wire to the bus -------------
   - - SIG_FL: [2]
     - W_GND_SIG_FL: [1]
-    - GND: [16]
+    - SP_GND: [1]
   - - SIG_FR: [2]
     - W_GND_SIG_FR: [1]
-    - GND: [17]
+    - SP_GND: [1]
   - - SIG_RL: [2]
     - W_GND_SIG_RL: [1]
-    - GND: [18]
+    - SP_GND: [1]
   - - SIG_RR: [2]
     - W_GND_SIG_RR: [1]
-    - GND: [19]
+    - SP_GND: [1]
   # The two dash indicators join the pod's own bus, completing its 1-to-3.
   - - IND_L: [2]
     - W_GND_IND_L: [1]
@@ -1627,7 +1660,7 @@ connections:
     - TAIL: [1]
   - - TAIL: [3]
     - W_GND_TAIL: [1]
-    - GND: [15]
+    - SP_GND: [1]
 
   # --- brake: own fuse, two switches in parallel ----------------------
   - - PDM: [12]
@@ -1655,10 +1688,10 @@ connections:
     - INSTR_6P: [6]
   - - INSTR_6P: [6]
     - W_POD_GND: [1]
-    - GND: [11]
+    - SP_GND: [1]
   - - GND_ENG: [1]
     - W_ENG_GND: [1]
-    - GND: [14]
+    - GND: [3]
 
   # --- charging ------------------------------------------------------
   - - ALT: [1,2]
