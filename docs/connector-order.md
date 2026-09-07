@@ -77,20 +77,27 @@ a ruined female one comes out of the eleven already in the box.
 14. The three installed `SP_GND` junctions use **24 of 24** positions with nothing
 spare, and the fourth is held as an uninstalled spare set rather than fitted.
 
-### Corsa Technic — specialty only
+### Cycle Terminal — also the Furukawa R/R pair
 
 | Item | Qty | For |
 |---|---|---|
-| `HW.JC-8P` bussed junction | **4** | `SP_GND` — 3 needed, 4th for spare |
-| `HW.JC-14P-1` bussed junction | **1** | `SP_SW` |
-| `QLW-3S-2` grey | 1 | R/R **AC** — ⚠️ select **14 AWG** sockets |
-| `QLW-3S-1` black | 1 | R/R **DC** |
-| QLW 250 cavity plug | 6 | 2 needed — both connectors run 2 of 3 ways |
-| ISO 280 micro relay, integral diode | **6** | 5 fitted + PDM spare, #46 |
+| `QLW-A-3F-GR` grey | 1 | R/R **AC** — ⚠️ **14 AWG** sockets |
+| `QLW-A-B3F-B` black | 1 | R/R **DC** |
 
-The QLW kits ship with 3 contacts and 3 seals each; only 2 of each are used per
-connector, so the spares are built in. **Cavity plugs are not included** in
-Corsa's kits — Cycle Terminal's set lists one, Corsa's does not.
+Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals and
+**a cavity plug**, which Corsa's kits do not include. Both connectors run 2 of
+3 ways, so a second plug is still wanted.
+
+### Corsa Technic — the junctions, and nothing else it turns out
+
+| Item | Qty | For |
+|---|---|---|
+| `HW.JC-8P` bussed junction | **4** | `SP_GND` — 3 fitted, 4th a spare set |
+| `HW.JC-14P-1` bussed junction | **1** | `SP_SW` |
+| ISO 280 micro relay, integral diode | **6** | 5 fitted + PDM spare, #46 — **if carried** |
+
+The junctions are the reason this order exists: neither Cycle Terminal nor
+Eastern Beaver stocks them.
 
 ### Terminal count
 
@@ -103,8 +110,26 @@ Corsa's kits — Cycle Terminal's set lists one, Corsa's does not.
 The bussed halves take no terminals. Terminals are shared across the MT / HM / HW
 sealed 090 families, so one part number covers every housing above.
 
-⚠️ **The seal bore against TXL's 2.26–2.40 mm is still unverified**, and it
-affects all 100. Ask for the range, or buy ten and try one before committing.
+#### The seal bore against TXL — ACCEPTED UNVERIFIED, 6 Sep 2026
+
+HW090 seals are built around Japanese OEM wire, roughly **2.0–2.2 mm** insulation
+OD. **TXL 16 AWG is 2.26–2.40 mm.** Whether the seal closes on it is **not
+established, and the order proceeds anyway** — chasing a specification for a
+$30 line was not worth stalling everything else.
+
+Recorded as accepted rather than dropped, because if it does bite the reason
+needs to be findable:
+
+- **Most likely fine.** Elastomeric seals have real range, and these vendors sell
+  to people using aftermarket wire every day.
+- **The failure shows up at assembly**, as a seal that will not seat or a cavity
+  that will not close.
+- ⚠️ **Test-fit ONE seal before crimping 77.** That costs nothing and turns a
+  discovered-late problem into a discovered-early one.
+- **If it is too tight**: ask Cycle Terminal whether an alternative seal size
+  exists for HW090, the way Corsa's QLW listing offers selectable sizes. Failing
+  that, the sheltered connectors can run a marginal seal and the exposed ones
+  cannot.
 
 ## R/R connectors — IDENTIFIED, 6 Sep 2026
 
