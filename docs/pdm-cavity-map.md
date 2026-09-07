@@ -63,6 +63,18 @@ circuit fills the block.
 
 ## Still needed from the part
 
+- [ ] ⚠️ **Confirm two relays can sit ADJACENT.** Cycle Terminal's 4-circuit
+      MP280 box carries an explicit warning: *"Only 1 Relay per housing! You
+      cannot fit 2 relays side by side."* That is 8 cavities holding either 4
+      fuses **or one relay** — so the relay body overhangs its four pins by a
+      wide margin.
+      This layout puts **two relays in every column-pair**, stacked. If the
+      bodies foul, the six-relay plan collapses to three.
+      **MTA's own catalogue says the 0301370 takes 10 micro relays**, which
+      implies adjacency is designed in — 60 cavities over 10 relays is exactly
+      the 6-cavity footprint assumed here. But that is inference from a capacity
+      claim, and the CT warning is a direct observation on a different housing.
+      Settle it with the module in hand before the first terminal goes in.
 - [ ] **Confirm 6 × 10**, and that fuses pair rows (1,2) (3,4) (5,6).
 - [ ] **Which cavity of a relay footprint is 30 / 85 / 86 / 87**, and which two
       of the six are unused. Six cavities, four pins. Until this is read, the
