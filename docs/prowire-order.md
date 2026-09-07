@@ -11,9 +11,17 @@ consolidation had removed, and the order had already closed.
 
 **Not chased, and it blocks nothing.** In order:
 
-1. **Check the shelf** — 14 AWG yellow TXL may already be on hand. Two conductors
-   over a short run from the stator bullets to the regulator; **8 ft is plenty**.
-2. Otherwise buy it anywhere later. It is roughly $7 of wire.
+**RESOLVED 6 Sep 2026 — 8 ft of M22759/16-14 yellow from Corsa Technic**, not
+TXL. MIL-spec ETFE Tefzel: same 2.0 mm² conductor and 19/27 stranding, but a
+**2.36 mm OD against TXL 14's 2.59–2.70** and a 150 °C rating against 125.
+
+⚠️ **It is the only non-TXL run in the harness**, and the thinner wall is the
+thing to watch — any seal sized for TXL 14 will be loose on it. It meets exactly
+one sealed interface, the Furukawa QLW at the regulator, whose kit seals are
+stated for 2–3 mm² wire. 2.36 mm sits inside that. Confirm at assembly.
+
+⚠️ **ETFE is tougher to strip than XLPE** — right die, and check for nicked
+strands.
 
 ⚠️ **It cannot delay the build.** The charging circuit is among the last things
 connected, and its connectors are in the Corsa Technic order which has not been

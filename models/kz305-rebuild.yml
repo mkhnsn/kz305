@@ -1319,6 +1319,22 @@ cables:
       16 AWG at the called 20A stator output was marginal on its own account.
       THE STATOR'S 8 INCH PIGTAIL DOES NOT REACH THE REGULATOR, so this is wire we buy, not a retained
       pigtail like the pod's.
+      ** IT IS THE ONE NON-TXL RUN IN THE HARNESS - M22759/16-14, decided 6 Sep 2026. ** The Prowire
+      order closed before 14 AWG yellow could be added, so this pair comes from Corsa as MIL-spec
+      ETFE Tefzel. Same conductor - 2.0 sq mm nominal, 19/27 stranding - but a THINNER WALL and a
+      higher rating:
+        insulation OD  2.36mm   against TXL 14's 2.59-2.70
+        temperature    150 C    against 125
+      ⚠️ THE THINNER WALL IS THE THING TO WATCH. Any seal or gland sized for TXL 14 will be loose on
+      this. It only meets one sealed interface - the Furukawa QLW at the regulator - and Cycle
+      Terminal's kit seals are stated for 2-3 sq mm wire, which 2.36mm sits inside. Confirm at
+      assembly rather than assuming.
+      ⚠️ ETFE IS TOUGHER TO STRIP THAN XLPE. Use the right die and check for nicked strands; it does
+      not tear the way TXL does.
+      ⚠️ ITS 17.5A DERATED RATING IS BELOW THE 20A CALLED FOR THE STATOR. That figure is bundle-derated
+      and this pair runs as two conductors over a short free-air span, so it is not a real limit - and
+      the stator's own 16 AWG lead is the binding conductor regardless. Noted so the number is not a
+      surprise later.
       ⚠️ YELLOW COLLIDES WITH THE SCHEME'S IGNITION ROLE but is kept to match stock. These two are
       isolated in their own connector at the regulator and touch nothing else.
   W_RR_OUT:
