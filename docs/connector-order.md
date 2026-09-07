@@ -21,7 +21,7 @@ That convention also falls out naturally at the junctions: their bussed half is
 **male**, so the wires land in a **female** housing — consistent with everything
 else.
 
-### Cycle Terminal — all HW090
+### Cycle Terminal — all HW090, ALL IN STOCK 6 Sep 2026
 
 | Item | Female | Male | For |
 |---|---|---|---|
@@ -34,6 +34,11 @@ else.
 ⚠️ **Five 8-way females, one 8-way male.** Four of the females are the mating
 halves for the `HW.JC-8P` junctions and have no male partner to buy — the
 junction *is* their partner. This is the line most likely to be mis-ordered.
+
+✅ **The 14-way female is in stock**, which was the risk item: the
+`HW.JC-14P-1` was already bought from Corsa and would have been stranded without
+it. No extra `HW.JC-8P` is needed, and `SP_SW` stays a single junction rather
+than two 8-ways jumpered.
 
 #### Terminals and seals come WITH the housings — 6 Sep 2026
 
@@ -88,16 +93,15 @@ Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals a
 **a cavity plug**, which Corsa's kits do not include. Both connectors run 2 of
 3 ways, so a second plug is still wanted.
 
-### Corsa Technic — the junctions, and nothing else it turns out
+### Corsa Technic — PLACED 6 Sep 2026
 
-| Item | Qty | For |
-|---|---|---|
-| `HW.JC-8P` bussed junction | **4** | `SP_GND` — 3 fitted, 4th a spare set |
-| `HW.JC-14P-1` bussed junction | **1** | `SP_SW` |
-| ISO 280 micro relay, integral diode | **6** | 5 fitted + PDM spare, #46 — **if carried** |
+| Item | Qty |
+|---|---|
+| `HW.JC-8P` bussed junction | 4 |
+| `HW.JC-14P-1` bussed junction | 1 |
+| M22759/16-14 yellow, `W_ALT` | 8 ft |
 
-The junctions are the reason this order exists: neither Cycle Terminal nor
-Eastern Beaver stocks them.
+⚠️ **The relays were not in it.** They move to the Cycle Terminal cart below.
 
 ### Terminal count
 
