@@ -35,14 +35,32 @@ else.
 halves for the `HW.JC-8P` junctions and have no male partner to buy — the
 junction *is* their partner. This is the line most likely to be mis-ordered.
 
-| Consumable | Qty | Need |
-|---|---|---|
-| HW090 terminals | **100** | 77 |
-| HW090 wire seals | **100** | 77 |
-| HW090 cavity plugs | **20** | 3 |
+#### Terminals and seals come WITH the housings — 6 Sep 2026
 
-⚠️ **Check whether CT's housings already include terminals and seals** — many of
-their listings do. If so, reduce the loose count rather than double-buying.
+Cycle Terminal includes exactly one way's worth per housing, so the kits above
+supply **88 terminals and 88 seals against the 77 needed**:
+
+    3-way pair       3 x 2 =   6
+    4-way pair       4 x 2 =   8
+    6-way pair       6 x 2 =  12
+    8-way pair       8 x 2 =  16
+    8-way female x4  8 x 4 =  32
+    14-way female   14 x 1 =  14
+                             ---
+                              88
+
+**No loose terminals are required.** That retires the "buy 100" line entirely —
+it was written before this was known.
+
+| Consumable | Qty | Why |
+|---|---|---|
+| HW090 terminals | **25** | spares only. A bad crimp on a sealed terminal is not recoverable |
+| HW090 wire seals | **25** | spares only |
+| HW090 cavity plugs | **20** | only **3** needed — see below — but blocker 2 may change the ground count |
+
+⚠️ **Only three cavity plugs are actually needed.** `SP_SW`'s 14-way runs 11 of
+14. The three installed `SP_GND` junctions use **24 of 24** positions with nothing
+spare, and the fourth is held as an uninstalled spare set rather than fitted.
 
 ### Corsa Technic — specialty only
 
