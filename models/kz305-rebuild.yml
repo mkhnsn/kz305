@@ -233,9 +233,15 @@ connectors:
       MEGA/AMG starts at 60A and MIDI/AMI at 30A, both above what 14 AWG can carry. Distribution moved
       to SP_HOT instead, which is a power stud.
       ⚠️ THIS FUSE PROTECTS THE WIRE, NOT THE LOADS - every circuit downstream has its own fuse. So
-      the rating and the conductor move together, and BIGGER IS NOT BETTER. Load is about 11A
-      (K_MAIN's switched side at 6.6A plus the horn and headlamp fuses), so 20A on 14 AWG is already
-      generous.
+      the rating and the conductor move together, and BIGGER IS NOT BETTER.
+      ** 20A EXACTLY, AND NEITHER NEIGHBOURING SIZE WORKS - checked 6 Sep 2026. ** SP_HOT's worst case
+      on filament lamps is about 15.4A, all coincident:
+        K_MAIN switched side, F3 coils plus relay coils   6.4A
+        F4 horn                                           2.0A
+        F5 headlamp, BOTH beams during the dimmer blip    7.0A
+      A 15A fuse is BELOW that and nuisance-blows on every cold dip. A 30A fuse does not protect
+      W_MAIN_OUT, which is 14 AWG and good for about 20A. 20A leaves 30% margin and protects its
+      conductor, which is the only job it has.
       ** 20A STANDS, AND #49 IS WHAT FREED IT (4 Sep 2026). ** While two 18 AWG branches left the
       switched bus unfused, this fuse was their only protection and its rating was hostage to them.
       They now leave through F11, so nothing downstream depends on this rating except the 14 AWG main
