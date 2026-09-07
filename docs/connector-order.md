@@ -52,10 +52,25 @@ supply **88 terminals and 88 seals against the 77 needed**:
 **No loose terminals are required.** That retires the "buy 100" line entirely —
 it was written before this was known.
 
+#### ⚠️ Spares must be weighted MALE
+
+The junction mating halves are all female — 35 of the 56 female terminals — so the
+kits carry female spares and **no male spare at all**:
+
+| | Female | Male |
+|---|---|---|
+| Needed | 56 | 21 |
+| Supplied by the kits | 67 | 21 |
+| **Spare** | **11** | **0** |
+
+Every male terminal that ships gets used. A ruined male crimp means a re-order;
+a ruined female one comes out of the eleven already in the box.
+
 | Consumable | Qty | Why |
 |---|---|---|
-| HW090 terminals | **25** | spares only. A bad crimp on a sealed terminal is not recoverable |
-| HW090 wire seals | **25** | spares only |
+| HW090 terminals — **MALE** | **15** | zero spare included |
+| HW090 terminals — female | **10** | 11 already spare; belt and braces |
+| HW090 wire seals | **15** | not gendered, 11 already spare |
 | HW090 cavity plugs | **20** | only **3** needed — see below — but blocker 2 may change the ground count |
 
 ⚠️ **Only three cavity plugs are actually needed.** `SP_SW`'s 14-way runs 11 of
