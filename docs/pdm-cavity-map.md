@@ -63,23 +63,21 @@ circuit fills the block.
 
 ## Still needed from the part
 
-- [ ] ⚠️ **Confirm two relays can sit ADJACENT.** Cycle Terminal's 4-circuit
-      MP280 box carries an explicit warning: *"Only 1 Relay per housing! You
-      cannot fit 2 relays side by side."* That is 8 cavities holding either 4
-      fuses **or one relay** — so the relay body overhangs its four pins by a
-      wide margin.
-      This layout puts **two relays in every column-pair**, stacked. If the
-      bodies foul, the six-relay plan collapses to three.
-      **MTA's own catalogue says the 0301370 takes 10 micro relays**, which
-      implies adjacency is designed in — 60 cavities over 10 relays is exactly
-      the 6-cavity footprint assumed here. But that is inference from a capacity
-      claim, and the CT warning is a direct observation on a different housing.
-      ** THE RELAY'S NUMBERS ARE NOW KNOWN, so this is one measurement away. **
-      Song Chuan 303: body **16 x 15 mm**, pins **8.1 x 7.8 mm** apart, blades
-      2.8 x 0.8 mm. Measure the module's cavity PITCH and the answer falls out —
-      a relay needs `ceil(16/pitch)` x `ceil(15/pitch)` cavities of clearance,
-      and two abreast need twice the width.
-      Settle it with the module in hand before the first terminal goes in.
+⚠️ **The cavity PITCH is still the number that decides the map.** Song Chuan 303
+is a 16 x 15 mm body on pins 8.1 x 7.8 mm apart. A relay needs
+`ceil(16/pitch)` x `ceil(15/pitch)` cavities, and this map assumes **3 rows x 2
+columns = 6**. Adjacency is settled; the footprint's shape is not.
+
+- [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
+      the vendor's product photo of a populated `0301370`: a **row of relays sits
+      shoulder to shoulder** along one edge with fuses filling the rest. The
+      six-relay layout stands.
+      Cycle Terminal's *"Only 1 Relay per housing! You cannot fit 2 relays side by
+      side"* turns out to be specific to **their 4-circuit MP280 box** — 8
+      cavities where one relay body spans most of the housing — and not a property
+      of micro 280 relays. `[photo 6 Sep 2026]`
+      The photo also shows relays **grouped at one end with fuses in the
+      remainder**, which is the arrangement this map already assumes.
 - [ ] **Confirm 6 × 10**, and that fuses pair rows (1,2) (3,4) (5,6).
 - [ ] **Which cavity of a relay footprint is 30 / 85 / 86 / 87**, and which two
       of the six are unused. Six cavities, four pins. Until this is read, the
