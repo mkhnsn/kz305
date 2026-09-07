@@ -545,19 +545,29 @@ connectors:
 
   K_MAIN:
     type: Relay
-    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
+    subtype: Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
-      ** BUY RELAYS WITH AN INTEGRAL FLYBACK DIODE - decided 4 Sep 2026, closing issue #46. ** A relay
-      coil is an inductor; opening it produces a reverse spike of several hundred volts. Stock had
-      nothing to absorb it because stock had no relays and no semiconductors. This harness adds five
-      relays, a solid-state flasher, a series regulator and a USB PD converter - and every one of
-      those is a semiconductor that did not exist on the bike before.
-      Integral rather than discrete: it is a catalogue option at no meaningful cost, it cannot be
-      left out at assembly, and it cannot be wired backwards as a loose diode can.
-      ⚠️ AN INTEGRAL DIODE MAKES 85/86 POLARITY MANDATORY. A diode-suppressed relay wired backwards is
-      a dead short across the coil. 86 is COIL+ and 85 is COIL- on every relay in this harness, and
-      the label schedule carries it.
+      ** PART IDENTIFIED 6 Sep 2026: SONG CHUAN 303 SERIES, ULTRA MICRO 280. ** 303-1AH-C-xx, SPNO,
+      AgSnO contacts, 16x15x23.7mm body on 2.8x0.8mm blades. Sold by Cycle Terminal as SCMR20.
+      ** COIL SUPPRESSION IS INTEGRAL EITHER WAY - BOTH VARIANTS EXIST. ** A relay coil is an
+      inductor; opening it produces a reverse spike of several hundred volts, and this harness adds
+      five relays, a solid-state flasher, a series regulator and a USB PD converter - every one a
+      semiconductor the bike never had.
+        -R1  resistor, 1.1k 1/2W across the coil.  91 mA.  NO POLARITY CONSTRAINT.
+        -D1  1N4007 diode, anode on terminal 85.   80 mA.  Clamps harder, polarity CRITICAL.
+      ** R1 IS THE PICK. ** The design already has the polarity right - 86 is COIL+, 85 is COIL-, and
+      D1's anode-on-85 matches it - so this is a BUILD risk, not a design one. With six relays and a
+      builder working from labels, a wrong-way diode relay is a dead short across the coil; a
+      wrong-way resistor relay simply works. The 11 mA costs nothing and what the suppression protects
+      survives a 40V spike comfortably.
+      ⚠️ COIL IS 91 mA, NOT THE 150 mA THIS MODEL ASSUMED. Five relays draw 455 mA, not 750. That eases
+      K_MAIN and, more to the point, the 3-5 ohm cluster contacts that justify relaying at all.
+      ⚠️ LAMP LOAD IS RATED 16A STEADY, not the headline 20A - with 80A inrush allowed, which covers
+      cold filament easily. Nothing here approaches either: the heaviest is K_MAIN at about 6.4A.
+      ⚠️ DATASHEET NOTE 7: the 20A type wants MIN 3.0 sq mm wire. That applies at the full 20A rating.
+      Our heaviest relay circuit is 6.4A on 16 AWG, which is fine - but do not load one to 20A without
+      taking the wire to 12 AWG.
       ALL FIVE RELAYS ARE ISO 280 MICRO and SEAT IN THE PDM rather than in separate sockets - the
       module's cavities are the 2.8mm 280 footprint. 20A parts (35A versions available) against a
       worst case of about 6.6A here, so every position sits well inside its rating.
@@ -570,7 +580,7 @@ connectors:
 
   K_COIL:
     type: Relay
-    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
+    subtype: Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps coil current out of the kill switch. The kill switch now drives this coil (~0.15A)
@@ -580,7 +590,7 @@ connectors:
 
   K_HORN:
     type: Relay
-    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
+    subtype: Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026,
@@ -594,14 +604,14 @@ connectors:
 
   K_HI:
     type: Relay
-    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
+    subtype: Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - high beam. See K_LO for the pair's design notes; they are one decision, not two.
 
   K_LO:
     type: Relay
-    subtype: ISO 280 micro, 20A, INTEGRAL FLYBACK DIODE - seats in the PDM
+    subtype: Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
     pinlabels: [30 COMMON, 87 NO, 86 COIL+, 85 COIL-]
     notes: |-
       UPGRADE - low beam, and the second half of the beam pair. TWO RELAYS RATHER THAN A CHANGEOVER:

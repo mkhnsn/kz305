@@ -74,6 +74,11 @@ circuit fills the block.
       implies adjacency is designed in — 60 cavities over 10 relays is exactly
       the 6-cavity footprint assumed here. But that is inference from a capacity
       claim, and the CT warning is a direct observation on a different housing.
+      ** THE RELAY'S NUMBERS ARE NOW KNOWN, so this is one measurement away. **
+      Song Chuan 303: body **16 x 15 mm**, pins **8.1 x 7.8 mm** apart, blades
+      2.8 x 0.8 mm. Measure the module's cavity PITCH and the answer falls out —
+      a relay needs `ceil(16/pitch)` x `ceil(15/pitch)` cavities of clearance,
+      and two abreast need twice the width.
       Settle it with the module in hand before the first terminal goes in.
 - [ ] **Confirm 6 × 10**, and that fuses pair rows (1,2) (3,4) (5,6).
 - [ ] **Which cavity of a relay footprint is 30 / 85 / 86 / 87**, and which two
