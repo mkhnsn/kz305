@@ -351,6 +351,9 @@ connectors:
       satisfy, in a stable order so the connection sets can reference it. The physical cavity map is a
       separate artefact and is not written yet.
       ⚠️ THE CIRCUIT COUNT IS NOT FINAL while the star-ground wire count is unknown - blocker 2.
+      ** IN HAND 9 Sep 2026. 108 x 71 x 60 mm with the lid on **, and the cavity grid is confirmed
+      as 6 ROWS x 10 COLUMNS with fuses spanning two rows within a column - three per column [bench].
+      Both of the cavity map's provisional reads hold; see docs/pdm-cavity-map.md.
       ** PART: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm cavities taking 30
       MiniVal fuses or 10 micro relays or a mix, so one cavity type takes either and a position's role
       is decided by what is pushed in. The catalogue's only bussed module (0301697) is fuses-only, not

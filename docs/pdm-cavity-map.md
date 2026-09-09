@@ -1,8 +1,11 @@
 # PDM cavity map — MTA 0301370
 
-⚠️ **PROVISIONAL.** The grid and the fuse row-pairing are read off product
-photographs, not off the part. Confirm both before the first terminal goes in,
-and correct this file rather than working around it.
+✅ **CONFIRMED 9 Sep 2026 with the module in hand** `[bench]`. The grid is
+**6 rows x 10 columns**, and a MiniVal spans **two rows within one column** —
+rows (1,2), (3,4) or (5,6). Both assumptions this map was built on hold, so the
+layout below stands as drawn.
+
+**Module: 108 x 71 x 60 mm with the lid on.**
 
 ## The grid
 
@@ -63,10 +66,14 @@ circuit fills the block.
 
 ## Still needed from the part
 
-⚠️ **The cavity PITCH is still the number that decides the map.** Song Chuan 303
-is a 16 x 15 mm body on pins 8.1 x 7.8 mm apart. A relay needs
-`ceil(16/pitch)` x `ceil(15/pitch)` cavities, and this map assumes **3 rows x 2
-columns = 6**. Adjacency is settled; the footprint's shape is not.
+⚠️ **The relay FOOTPRINT is the last open item** — how many cavities one covers,
+and in what shape. This map assumes **3 rows x 2 columns = 6**, from the
+catalogue's "30 MiniVal **or** 10 micro relays" over 60 cavities.
+
+Adjacency is settled `[photo]` and the grid is settled `[bench]`. What remains is
+one look with a relay in hand, which arrives with the Cycle Terminal order. If a
+relay turns out to cover a different shape, only the relay block moves — the
+fuse columns and the HOT/SWITCHED separation are unaffected.
 
 - [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
       the vendor's product photo of a populated `0301370`: a **row of relays sits
@@ -78,12 +85,12 @@ columns = 6**. Adjacency is settled; the footprint's shape is not.
       of micro 280 relays. `[photo 6 Sep 2026]`
       The photo also shows relays **grouped at one end with fuses in the
       remainder**, which is the arrangement this map already assumes.
-- [ ] **Confirm 6 × 10**, and that fuses pair rows (1,2) (3,4) (5,6).
+- [x] ~~Confirm 6 × 10, and that fuses pair rows (1,2) (3,4) (5,6).~~ **Both confirmed 9 Sep 2026** `[bench]`.
 - [ ] **Which cavity of a relay footprint is 30 / 85 / 86 / 87**, and which two
       of the six are unused. Six cavities, four pins. Until this is read, the
       relay rows above name a footprint, not a pinout.
-- [ ] **Whether the moulding fixes fuse positions** or a fuse can sit in any
-      adjacent row pair. The layout assumes fixed pairs.
+- [x] ~~Whether the moulding fixes fuse positions.~~ **Confirmed** — fuses pair
+      (1,2) (3,4) (5,6) within a column, three per column, exactly as assumed.
 
 ⚠️ **The 10 unused-in-footprint cavities still need plugs.** The module seals at
 the wire-entry face, so a relay body on top does not close a hole in the bottom.
