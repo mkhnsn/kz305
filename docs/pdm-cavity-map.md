@@ -6,6 +6,7 @@ rows (1,2), (3,4) or (5,6). Both assumptions this map was built on hold, so the
 layout below stands as drawn.
 
 **Module: 108 x 71 x 60 mm with the lid on.**
+**Cavity pitch: 7.91 mm rows, 7.67 mm columns** — a near-square grid `[bench]`.
 
 ## The grid
 
@@ -66,14 +67,35 @@ circuit fills the block.
 
 ## Still needed from the part
 
-⚠️ **The relay FOOTPRINT is the last open item** — how many cavities one covers,
-and in what shape. This map assumes **3 rows x 2 columns = 6**, from the
-catalogue's "30 MiniVal **or** 10 micro relays" over 60 cavities.
+### The relay's PINS are a 2 x 2 — confirmed by the pitch
 
-Adjacency is settled `[photo]` and the grid is settled `[bench]`. What remains is
-one look with a relay in hand, which arrives with the Cycle Terminal order. If a
-relay turns out to cover a different shape, only the relay block moves — the
-fuse columns and the HOT/SWITCHED separation are unaffected.
+Song Chuan 303 pins are 8.1 x 7.8 mm apart. Against the measured pitch:
+
+    8.1 / 7.91 = 1.02 pitches
+    7.8 / 7.67 = 1.02 pitches
+
+**Both land on adjacent cavities.** The four pins occupy a clean 2 x 2 block, not
+the 3 x 2 an earlier draft of this map implied.
+
+⚠️ **But the body is 16 x 15 mm over a pin block only ~8 mm square**, so it
+overhangs and blocks neighbouring cavities. The catalogue's **10 relays in 60
+cavities = 6 cavities each** is consistent with that: **4 pinned, 2 blocked.**
+
+### ⚠️ What is still open is the footprint's ORIENTATION
+
+Six cavities can be **3 rows x 2 columns** or **2 rows x 3 columns**, and they
+give different layouts:
+
+| | Relays per column-group | Column-groups in 10 | Total |
+|---|---|---|---|
+| 3 rows x 2 cols | 2 | 5 | **10** ✅ matches the catalogue |
+| 2 rows x 3 cols | 3 | 3 | 9 |
+
+The 3 x 2 orientation is the one that yields the catalogue's ten, so this map
+keeps it. **Confirm with a relay in hand** when the Cycle Terminal order lands.
+
+If it turns out to be 2 x 3, only the relay block moves — the fuse columns and
+the HOT/SWITCHED separation are unaffected.
 
 - [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
       the vendor's product photo of a populated `0301370`: a **row of relays sits
