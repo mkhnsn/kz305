@@ -5,7 +5,10 @@
 rows (1,2), (3,4) or (5,6). Both assumptions this map was built on hold, so the
 layout below stands as drawn.
 
-**Module: 108 x 71 x 60 mm with the lid on.**
+**Module envelope: 107.6 x 72 x 60 mm with the lid on** `[datasheet]` — the
+manufacturer's dimensioned drawing (`parts/mta-0301370-dimensions.png`). The
+9 Sep bench calipers read 108 x 71 x 60, so the two agree to within a
+millimetre; use the datasheet figures for enclosure and mounting layout.
 **Cavity pitch: 7.91 mm rows, 7.67 mm columns** — a near-square grid `[bench]`.
 
 ## The grid

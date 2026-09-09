@@ -520,6 +520,11 @@ chosen at build time. It is the exact property this section was reaching for.
 | `0301371` | cover |
 | `0301372` | secondary lock |
 
+**Envelope: 107.6 x 72 x 60 mm** with the lid on, from the manufacturer's
+dimensioned drawing (`parts/mta-0301370-dimensions.png`). The module in hand
+measured 108 x 71 x 60 on 9 Sep, which agrees. That is the box the enclosure and
+mounting have to swallow — before wire exit clearance below the mating face.
+
 #### Capacity against this design
 
 A relay occupies roughly three fuse positions (30 ÷ 10), so in cavities:
@@ -1091,6 +1096,7 @@ settles it**, and it is not worth refining by guesswork before then.
   fuses throughout. Not a drawback, but it should be deliberate — it sets what
   spares get carried.
 - **Enclosure and mounting.** Sets the footprint, so it comes before layout.
+  The module itself is 107.6 x 72 x 60 mm lidded; add wire exit depth below it.
 - **Relay retention against vibration**, for whichever route.
 
 ## Sources
