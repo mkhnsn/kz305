@@ -319,7 +319,7 @@ connectors:
       # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
       # body on top does not close a hole in the bottom.
       - type: Cavity plug
-        subtype: 2.8mm black - 60 cavities less 42 populated. REQUIRED or the module is not sealed
+        subtype: 2.8mm black - 60 cavities less 42 wired. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
         qty: 18

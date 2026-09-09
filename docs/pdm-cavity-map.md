@@ -23,47 +23,38 @@ connectors a renumber. So `cavity = (row − 1) × 10 + column`.
 ## Layout
 
 ```
-        c1        c2   c3    c4   c5    c6   c7        c8       c9      c10
- r1   F1 IN   ┌──────────┐┌──────────┐┌──────────┐   F2 IN    F7 IN   F10 IN
- r2   F1 OUT  │  K_MAIN  ││   K_HI   ││  K_HORN  │   F2 OUT   F7 OUT  F10 OUT
- r3   F4 IN   └──────────┘└──────────┘└──────────┘   F3 IN    F8 IN   spare
- r4   F4 OUT  ┌──────────┐┌──────────┐┌──────────┐   F3 OUT   F8 OUT  spare
- r5   F5 IN   │  K_COIL  ││   K_LO   ││  SPARE   │   F6 IN    F9 IN   spare
- r6   F5 OUT  └──────────┘└──────────┘└──────────┘   F6 OUT   F9 OUT  spare
+        c1       c2      c3   c4     c5   c6       c7       c8       c9      c10
+ r1   F1 IN    spare   ┌──────────┐┌──────────┐   F2 IN    F7 IN   F10 IN    spare
+ r2   F1 OUT   spare   │  K_MAIN  ││   K_LO   │   F2 OUT   F7 OUT  F10 OUT   spare
+ r3   F4 IN    spare   └──────────┘└──────────┘   F3 IN    F8 IN   F11 IN    spare
+ r4   F4 OUT   spare   ┌──────────┐┌──────────┐   F3 OUT   F8 OUT  F11 OUT   spare
+ r5   F5 IN    spare   │  K_COIL  ││  K_HORN  │   F6 IN    F9 IN    spare    spare
+ r6   F5 OUT   spare   └──────────┘└──────────┘   F6 OUT   F9 OUT   spare    spare
+                       ┌──────────┐┌──────────┐
+                       │   K_HI   ││  SPARE   │   (rows 3-4 and 5-6 of c3-c6)
+                       └──────────┘└──────────┘
 
-      ── HOT ──  ────────── 6 relays ──────────  ────── SWITCHED ──────
+      ──── HOT ────   ──── 6 relays ────   ──────── SWITCHED ────────
 ```
 
-**The relay block physically separates HOT from SWITCHED.** A mis-landed feed
-wire would have to cross six columns of relays to put F3 on permanent power,
-which is the failure the split exists to prevent. That is stronger than merely
-placing them at opposite ends.
+Each relay is **2 rows x 2 columns**. Three stack per column-pair, so six relays
+fit in **four columns** — c3–c4 and c5–c6.
 
-Column 1 holds exactly three fuse positions and HOT needs exactly three. The
-asymmetry is forced by the 3/7 fuse split — a symmetric layout leaves 6 positions
-each side and SWITCHED needs seven.
+**The relay block still separates HOT from SWITCHED**, which is the property that
+matters: a mis-landed feed wire would have to cross four columns of relays to put
+F3 on permanent power.
 
 ## Counts
 
 | | |
 |---|---|
-| Cavities mapped | 60 of 60 |
-| **Wired** — 11 fuses × 2 + **5 live** relays × 4 | **42** |
-| Cavity plugs — 60 less wired | **18** |
-| Spare fuse positions | **1** (column 10, rows 5–6) |
-| Spare relay position | 1 (columns 6–7, rows 4–6) |
-
-The plug count is unchanged from the five-relay plan: the sixth relay is a
-*reserved position*, not a populated one, so its six cavities were never wired
-and were already inside the 20.
-
-⚠️ **12 fuse positions is the ceiling with six relays** (60 − 36 = 24 = 12).
-**Eleven are now used.** #49 was settled by fusing the two unfused branches
-together on F11 rather than separately, which is what left a spare at all — see
-`SP_RLY` for why one fuse and not two.
-
-**One spare fuse position remains**, at column 10 rows 5–6. The next fused
-circuit fills the block.
+| **Fuse positions** | **18** — c1–c2 gives 6, c7–c10 gives 12 |
+| Fuses used | 11 |
+| **Spare fuse positions** | **7** |
+| Relay positions | 6 |
+| Relays fitted | 5, one spare |
+| **Wired cavities** — 11 fuses x2 + 5 live relays x4 | **42** |
+| **Cavity plugs** — 60 less wired | **18** |
 
 ## Still needed from the part
 
