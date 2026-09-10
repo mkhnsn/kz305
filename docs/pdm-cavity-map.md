@@ -5,6 +5,12 @@
 rows (1,2), (3,4) or (5,6). Both assumptions this map was built on hold, so the
 layout below stands as drawn.
 
+✅ **RELAY FIT CONFIRMED 10 Sep 2026 with relays in hand** `[bench]` — both the
+**2 x 2** and the **3 x 2** pin footprints. They seat as this map draws them, and
+**the bodies do not overhang into a neighbouring relay's cavities**: the module
+was loaded up solid with relays (unpinned) and every one seated. A relay costs
+its own footprint and nothing more.
+
 **Module envelope: 107.6 x 72 x 60 mm with the lid on** `[datasheet]` — the
 manufacturer's dimensioned drawing (`parts/mta-0301370-dimensions.png`). The
 9 Sep bench calipers read 108 x 71 x 60, so the two agree to within a
@@ -17,7 +23,10 @@ millimetre; use the datasheet figures for enclosure and mounting layout.
 both of the catalogue's capacity claims fall out at once:
 
 - a **fuse** spans 2 cavities *within a column* → 3 per column × 10 = **30 MiniVal** ✓
-- a **relay** spans 3 rows × 2 columns → 2 per column-pair × 5 = **10 micro relays** ✓
+- a **relay** spans its own pins and no more — 2 x 2 for a 4-pin, 3 x 2 for a
+  5-pin `[bench 10 Sep]`. The catalogue's **10 micro relays** is therefore a
+  conservative figure rather than the physical ceiling; this design needs six, so
+  the gap never has to be resolved.
 
 Numbering is **mating face, keyway up, left to right, top row first** — the
 project convention, stated before the first terminal per the rule that cost two
@@ -61,7 +70,7 @@ F3 on permanent power.
 
 ## Still needed from the part
 
-### The relay's PINS are a 2 x 2 — confirmed by the pitch
+### ✅ The relay's PINS are a 2 x 2 — predicted by the pitch, confirmed on the bench
 
 Song Chuan 303 pins are 8.1 x 7.8 mm apart. Against the measured pitch:
 
@@ -69,27 +78,26 @@ Song Chuan 303 pins are 8.1 x 7.8 mm apart. Against the measured pitch:
     7.8 / 7.67 = 1.02 pitches
 
 **Both land on adjacent cavities.** The four pins occupy a clean 2 x 2 block, not
-the 3 x 2 an earlier draft of this map implied.
+the 3 x 2 an earlier draft of this map implied — and relays in hand seat that way
+`[bench 10 Sep]`. Five-pin relays take a 3 x 2, likewise as drawn.
 
-⚠️ **But the body is 16 x 15 mm over a pin block only ~8 mm square**, so it
-overhangs and blocks neighbouring cavities. The catalogue's **10 relays in 60
-cavities = 6 cavities each** is consistent with that: **4 pinned, 2 blocked.**
+#### ✅ The body does NOT steal a neighbour's cavities
 
-### ⚠️ What is still open is the footprint's ORIENTATION
+An earlier draft read the **16 x 15 mm body over a ~8 mm pin block** as
+overhanging into surrounding cavities, and inferred **4 pinned + 2 blocked** from
+the catalogue's 10-relay figure. **That inference was wrong.** A 2 x 2 of this
+grid is 15.8 x 15.3 mm — the body is the same size as its own footprint, so
+neighbouring relays butt against each other rather than over each other. Loading
+the module solid with relays confirmed it: every one seated `[bench 10 Sep]`.
 
-Six cavities can be **3 rows x 2 columns** or **2 rows x 3 columns**, and they
-give different layouts:
+Consequences, all of which favour this design:
 
-| | Relays per column-group | Column-groups in 10 | Total |
-|---|---|---|---|
-| 3 rows x 2 cols | 2 | 5 | **10** ✅ matches the catalogue |
-| 2 rows x 3 cols | 3 | 3 | 9 |
-
-The 3 x 2 orientation is the one that yields the catalogue's ten, so this map
-keeps it. **Confirm with a relay in hand** when the Cycle Terminal order lands.
-
-If it turns out to be 2 x 3, only the relay block moves — the fuse columns and
-the HOT/SWITCHED separation are unaffected.
+- A relay costs **4 cavities**, not 6. The Counts table below was already drawn
+  that way and now stands on the part rather than on an assumption.
+- There are **no unused-in-footprint cavities** to reason about — every cavity is
+  either wired or free for a plug.
+- **The footprint's orientation question is closed.** It was only ever open
+  because six cavities could be 3 x 2 or 2 x 3; the footprint is four.
 
 - [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
       the vendor's product photo of a populated `0301370`: a **row of relays sits
@@ -102,15 +110,20 @@ the HOT/SWITCHED separation are unaffected.
       The photo also shows relays **grouped at one end with fuses in the
       remainder**, which is the arrangement this map already assumes.
 - [x] ~~Confirm 6 × 10, and that fuses pair rows (1,2) (3,4) (5,6).~~ **Both confirmed 9 Sep 2026** `[bench]`.
-- [ ] **Which cavity of a relay footprint is 30 / 85 / 86 / 87**, and which two
-      of the six are unused. Six cavities, four pins. Until this is read, the
-      relay rows above name a footprint, not a pinout.
+- [x] ~~**Confirm the relay footprint and its orientation.**~~ **RESOLVED 10 Sep
+      2026** `[bench]` — relays in hand, both 2 x 2 and 3 x 2, seat as drawn and
+      do not overhang each other.
+- [ ] **Which cavity of the 2 x 2 is 30 / 85 / 86 / 87.** Four cavities, four
+      pins, so nothing is spare — but until the pin roles are read off the relay,
+      the relay rows above name a footprint, not a pinout. **This is now the only
+      thing the relay block still owes.**
 - [x] ~~Whether the moulding fixes fuse positions.~~ **Confirmed** — fuses pair
       (1,2) (3,4) (5,6) within a column, three per column, exactly as assumed.
 
-⚠️ **The 10 unused-in-footprint cavities still need plugs.** The module seals at
-the wire-entry face, so a relay body on top does not close a hole in the bottom.
-They are already inside the 20.
+⚠️ **All 18 unwired cavities need plugs.** The module seals at the wire-entry
+face, so a relay body on top does not close a hole in the bottom. With the
+footprint settled at four cavities there is no separate under-body population to
+count: 60 cavities less 42 wired is **18**, the figure in the Counts table.
 
 ## Build rule
 

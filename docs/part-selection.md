@@ -809,15 +809,19 @@ loose, these ten are the fallback and save a reorder.
 - [ ] **Count the secondary locks — eight**, six of which are required.
 - [ ] **Red seals present.** Per the shipping notice they are.
 
-###### With the module in hand — the last thing blocking the cavity map
+###### With the module in hand — ✅ settled 9–10 Sep 2026
 
-Settle the **grid pitch and relay footprint alignment**. The footprint is six
-cavities (#51), but a relay needs six *contiguous* cavities on the right
-alignment, so it cannot begin on an arbitrary column. That constrains where the
-five relays sit within their end of the block.
+Grid pitch and relay footprint alignment, the last piece of #10 that needed the
+part rather than arithmetic, are both read off the bench:
 
-It is the only piece of #10 that needs the part rather than arithmetic. Write the
-cavity map down as it is built, in the form of
+- **Pitch 7.91 mm rows x 7.67 mm columns**, grid 6 x 10 `[bench 9 Sep]`.
+- **The relay footprint is four cavities, not six** — a 2 x 2 for a 4-pin, 3 x 2
+  for a 5-pin — and the bodies do **not** overhang into neighbouring cavities.
+  Relays in hand of both sizes seat as the map draws them, and a module loaded
+  solid with relays took every one `[bench 10 Sep]`. #51's six-cavity footprint,
+  and the alignment constraint that came with it, are both retired.
+
+Write the cavity map down as it is built, in the form of
 `measurements/connector-inventory.csv` — cavity number, circuit, wire colour,
 gauge — and state the numbering rule before the first terminal goes in.
 
@@ -1082,10 +1086,11 @@ Two reasons, and neither is arithmetic:
    at all — they are the point-to-point jumpers inside the block. Until that is
    reconciled, no terminal count taken off this drawing is trustworthy.
 
-32 terminals counts pins (5 relays × 4 + 6 fuses × 2) rather than cavities. 18
-plugs assumes the ~10 unpopulated cavities inside a relay footprint are covered
-by the relay body; if they are open, plugs rise toward 28. **The module drawing
-settles it**, and it is not worth refining by guesswork before then.
+32 terminals counts pins (5 relays × 4 + 6 fuses × 2) rather than cavities. The
+**18 plugs figure is now firm** `[bench 10 Sep]`: the relay footprint is four
+cavities with no unpopulated ways under the body, so there is no separate
+under-body population to cover and no path to the feared 28. What is still
+provisional here is the *terminal* count, for reason 2 above — the jumpers.
 
 ### Open before committing
 

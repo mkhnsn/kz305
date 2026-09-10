@@ -354,6 +354,11 @@ connectors:
       ** IN HAND 9 Sep 2026. 107.6 x 72 x 60 mm with the lid on per the datasheet drawing **, and the cavity grid is confirmed
       as 6 ROWS x 10 COLUMNS with fuses spanning two rows within a column - three per column [bench].
       Both of the cavity map's provisional reads hold; see docs/pdm-cavity-map.md.
+      ** RELAY FIT CONFIRMED 10 Sep 2026 [bench]. ** Relays in hand, both 2x2 and 3x2 pin footprints,
+      seat as the cavity map draws them, and the bodies DO NOT overhang into a neighbour's cavities -
+      a module loaded solid with relays took every one. A relay costs 4 cavities, not the 6 an earlier
+      draft inferred, so the 18 cavity plugs is firm. Still open: which cavity of the 2x2 is
+      30 / 85 / 86 / 87.
       ** PART: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm cavities taking 30
       MiniVal fuses or 10 micro relays or a mix, so one cavity type takes either and a position's role
       is decided by what is pushed in. The catalogue's only bussed module (0301697) is fuses-only, not
