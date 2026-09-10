@@ -969,9 +969,9 @@ flexibility around the engine.
 ⚠️ **`W_ENG_GND` carries the whole cranking return** — the starter grounds through
 its case into the engine, so this strap is not a signal earth. See `GND_ENG`.
 
-### Coil suppression — settled 4 Sep 2026
+### Coil suppression — settled 4 Sep, **variant revised 6 Sep 2026**
 
-**Buy relays with an integral flyback diode.** A relay coil is an inductor;
+**Buy relays with integral coil suppression.** A relay coil is an inductor;
 opening it produces a reverse spike of several hundred volts.
 
 Stock had nothing to absorb it because stock had no relays and no semiconductors.
@@ -983,9 +983,23 @@ Integral rather than discrete: it is a catalogue option at no meaningful cost, i
 cannot be forgotten at assembly, and it cannot be wired backwards the way a loose
 diode can.
 
-⚠️ **An integral diode makes 85/86 polarity mandatory.** A diode-suppressed relay
-wired backwards is a dead short across the coil. 86 is COIL+ and 85 is COIL− on
-every relay here.
+#### ⚠️ Superseded: this section originally said *diode*. It is **resistor**.
+
+The 4 Sep text specified an integral **flyback diode**, which makes 85/86
+polarity mandatory — a diode-suppressed relay fitted backwards is a dead short
+across the coil. When the part was identified on 6 Sep the Song Chuan 303 turned
+out to offer both, and **`-R1` (1.1 kΩ resistor, 91 mA, no polarity constraint)
+is the pick** over `-D1` (1N4007, anode on 85, 80 mA, polarity critical).
+
+The reasoning is on `K_MAIN` in `models/kz305-rebuild.yml` and is a **build**
+argument, not an electrical one: the design already has the polarity right, so
+with six relays and a builder working from labels, a wrong-way diode relay is a
+dead short while a wrong-way resistor relay simply works. The extra 11 mA buys
+that. What the suppression protects survives a 40 V spike comfortably.
+
+**86 is COIL+ and 85 is COIL− on every relay here** regardless — the design is
+drawn that way and should be built that way. With `-R1` a reversal is merely
+harmless rather than destructive, which is the point.
 
 The starter solenoid is a stock part with no integral option — fit a discrete
 diode across its coil, cathode to the Y/R feed.

@@ -106,9 +106,10 @@ Consequences, all of which favour this design:
   drawn that way and now stands on the part rather than on an assumption.
 - There are **no unused-in-footprint cavities** to reason about — every cavity is
   either wired or free for a plug.
-- **The orientation question is closed.** It was only ever open because six
+- **The footprint-SHAPE question is closed.** It was only ever open because six
   cavities could be 3 x 2 or 2 x 3; the 6-way is a 3 x 2, and this map's relays
-  are 4-way anyway.
+  are 4-way anyway. ⚠️ Not to be confused with the relay's **rotation**, which
+  the bench fit opened up as a new problem — see *Keying the relay orientation*.
 
 - [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
       the vendor's product photo of a populated `0301370`: a **row of relays sits
@@ -126,10 +127,74 @@ Consequences, all of which favour this design:
       (3 x 2). Both seat as drawn and neither overhangs a neighbour.
 - [ ] **Which cavity of the 4-way 2 x 2 is 30 / 85 / 86 / 87.** Four cavities,
       four pins, so nothing is spare — but until the pin roles are read off the
-      relay, the relay rows above name a footprint, not a pinout. **This is now
-      the only thing the relay block still owes.**
+      relay, the relay rows above name a footprint, not a pinout.
+      **Read it looking for one property first: are 85 and 86 DIAGONAL to each
+      other?** If they are, the orientation-keying problem below dissolves. This
+      one read now decides two things.
+- [ ] **Key the relay orientation, or establish that it needs no key.** New
+      10 Sep 2026 — a 2 x 2 accepts the relay 180° round. See the section below;
+      it blocks on the pin-map read above.
 - [x] ~~Whether the moulding fixes fuse positions.~~ **Confirmed** — fuses pair
       (1,2) (3,4) (5,6) within a column, three per column, exactly as assumed.
+
+## ⚠️ OPEN — keying the relay ORIENTATION
+
+Raised 10 Sep 2026 `[bench]`. A 4-way relay's footprint is a 2 x 2, and **a 2 x 2
+is symmetric under 180°** — so every relay position accepts the relay two ways
+round. The 16 x 15 mm body against a 15.8 x 15.3 mm footprint blocks the 90°
+rotations once the block is packed, but nothing blocks 180°.
+
+**Do not design a label as the first line of defence.** Work the list in order;
+the cheap fixes are above the expensive ones and the first one may cost nothing.
+
+### 1. First find out whether it is already self-keying — this may be a non-issue
+
+180° maps each pin to its diagonal opposite. So everything depends on where the
+coil pins sit:
+
+| Coil pins 85/86 are… | What 180° does | Verdict |
+|---|---|---|
+| **on one diagonal** (contacts on the other) | coil → coil, contact → contact | **harmless** ✅ |
+| **side by side** | coil ↔ contact | **real fault** ⛔ |
+
+In the harmless case the only consequences are coil polarity reversed and
+contacts swapped — and **neither matters to this design**: the relay is
+`-R1` resistor-suppressed with **no polarity constraint** (see part-selection,
+Coil suppression), and an SPNO contact set is non-polar. A rotated relay would
+simply work.
+
+**So the open pin-map item below is not just bookkeeping — read it looking for
+this specific property first.** If the coil pins are diagonal, the keying problem
+dissolves and nothing needs building.
+
+### 2. If they are side by side, prefer fixing it at the PART
+
+Check whether a 303-series variant, or another Ultra Micro 280 relay, puts the
+coil on the diagonal. A part that cannot be fitted wrongly beats any fixture
+bolted on afterwards, and this is a spec-sheet question answerable before
+ordering the remaining relays.
+
+### 3. Physical key — a printed plate over the relay field
+
+A 1–2 mm plate with a body-shaped cutout per position, sitting between the module
+face and the relay bodies. A plain rectangle keys the 90°s only; it keys 180° too
+**if the cutout picks up an asymmetric feature on the relay body** — a chamfer, a
+label recess, a moulded rib. **Look at the body in hand for a feature to catch**
+before assuming this route works. The cover `0301371` is the other place such an
+insert could live.
+
+### 4. Baseline regardless — a witness mark, not a label
+
+With the relay correctly seated, draw a **paint-pen stripe across the joint**: up
+the side of the relay body and onto the module face. Correct orientation is then
+a stripe that lines up, checkable at a glance, per relay, with no document to
+consult. This is the torque-stripe trick and it beats a printed label on all
+three counts that matter here: it is per-position rather than per-block, it is
+readable at the roadside in bad light, and a relay swapped in wrongly announces
+itself instead of hiding.
+
+⚠️ A label on the lid is worth having as well, but it is documentation. **It is
+not a key** — it is only consulted by someone who already suspects a problem.
 
 ⚠️ **All 18 unwired cavities need plugs.** The module seals at the wire-entry
 face, so a relay body on top does not close a hole in the bottom. With the
