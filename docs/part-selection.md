@@ -815,11 +815,14 @@ Grid pitch and relay footprint alignment, the last piece of #10 that needed the
 part rather than arithmetic, are both read off the bench:
 
 - **Pitch 7.91 mm rows x 7.67 mm columns**, grid 6 x 10 `[bench 9 Sep]`.
-- **The relay footprint is four cavities, not six** — a 2 x 2 for a 4-pin, 3 x 2
-  for a 5-pin — and the bodies do **not** overhang into neighbouring cavities.
-  Relays in hand of both sizes seat as the map draws them, and a module loaded
-  solid with relays took every one `[bench 10 Sep]`. #51's six-cavity footprint,
-  and the alignment constraint that came with it, are both retired.
+- **Micro 280 relays come in two sizes — 4-way (2 x 2 of cavities) and 6-way
+  (3 x 2)** — and a relay costs its own way count and nothing more. The bodies do
+  **not** overhang into neighbouring cavities. Relays in hand of both sizes seat
+  as the map draws them, and a module loaded solid with relays took every one
+  `[bench 10 Sep]`. So #51's premise — that a 4-way relay occupies six cavities
+  because the body blocks two — is retired, and with it the alignment constraint
+  that came from needing six *contiguous* cavities. This design uses six 4-way
+  positions.
 
 Write the cavity map down as it is built, in the form of
 `measurements/connector-inventory.csv` — cavity number, circuit, wire colour,
@@ -1087,7 +1090,7 @@ Two reasons, and neither is arithmetic:
    reconciled, no terminal count taken off this drawing is trustworthy.
 
 32 terminals counts pins (5 relays × 4 + 6 fuses × 2) rather than cavities. The
-**18 plugs figure is now firm** `[bench 10 Sep]`: the relay footprint is four
+**18 plugs figure is now firm** `[bench 10 Sep]`: a 4-way relay occupies four
 cavities with no unpopulated ways under the body, so there is no separate
 under-body population to cover and no path to the feared 28. What is still
 provisional here is the *terminal* count, for reason 2 above — the jumpers.
