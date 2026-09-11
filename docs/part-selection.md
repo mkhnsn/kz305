@@ -1001,6 +1001,15 @@ that. What the suppression protects survives a 40 V spike comfortably.
 drawn that way and should be built that way. With `-R1` a reversal is merely
 harmless rather than destructive, which is the point.
 
+⚠️ **`-R1` became load-bearing on 10 Sep 2026.** The relay's pins read
+**30/87 on one diagonal, 85/86 on the other** `[bench]`, which means the 2 x 2
+footprint accepts the relay 180° round with no electrical consequence — and that
+is *only* true for a resistor. A `-D1` fitted backwards is a dead short across
+the coil. So this is no longer a preference between two acceptable variants:
+**a diode relay in this module is a latent short.** Test the coil of any relay of
+unknown provenance with a DMM both ways round — a resistor reads the same in
+both directions, a diode does not.
+
 The starter solenoid is a stock part with no integral option — fit a discrete
 diode across its coil, cathode to the Y/R feed.
 

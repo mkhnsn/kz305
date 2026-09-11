@@ -73,7 +73,12 @@ All six relay positions are **4-way**. A 6-way relay fits the module fine
 `[bench]` but takes 6 cavities, so substituting one costs two of the spare fuse
 positions.
 
-## Still needed from the part
+## What the part settled
+
+Everything this section once listed as open is now read off the module and the
+relays in hand. **The only thing still owed is a bench test, not a measurement:
+confirm the knockoff relays are resistor-suppressed and not diode-suppressed** —
+see *The two conditions this rests on*, below.
 
 ### ✅ The 4-way relay's PINS are a 2 x 2 — predicted by the pitch, confirmed on the bench
 
@@ -108,8 +113,8 @@ Consequences, all of which favour this design:
   either wired or free for a plug.
 - **The footprint-SHAPE question is closed.** It was only ever open because six
   cavities could be 3 x 2 or 2 x 3; the 6-way is a 3 x 2, and this map's relays
-  are 4-way anyway. ⚠️ Not to be confused with the relay's **rotation**, which
-  the bench fit opened up as a new problem — see *Keying the relay orientation*.
+  are 4-way anyway. The relay's **rotation** is a separate question, also now
+  closed — see *the relay needs NO key*.
 
 - [x] ~~**Confirm two relays can sit adjacent.**~~ **RESOLVED 6 Sep 2026** from
       the vendor's product photo of a populated `0301370`: a **row of relays sits
@@ -125,76 +130,82 @@ Consequences, all of which favour this design:
 - [x] ~~**Confirm the relay footprint and its orientation.**~~ **RESOLVED 10 Sep
       2026** `[bench]` — relays of both sizes in hand, 4-way (2 x 2) and 6-way
       (3 x 2). Both seat as drawn and neither overhangs a neighbour.
-- [ ] **Which cavity of the 4-way 2 x 2 is 30 / 85 / 86 / 87.** Four cavities,
-      four pins, so nothing is spare — but until the pin roles are read off the
-      relay, the relay rows above name a footprint, not a pinout.
-      **Read it looking for one property first: are 85 and 86 DIAGONAL to each
-      other?** If they are, the orientation-keying problem below dissolves. This
-      one read now decides two things.
-- [ ] **Key the relay orientation, or establish that it needs no key.** New
-      10 Sep 2026 — a 2 x 2 accepts the relay 180° round. See the section below;
-      it blocks on the pin-map read above.
+- [x] ~~**Which cavity of the 4-way 2 x 2 is 30 / 85 / 86 / 87.**~~ **READ
+      10 Sep 2026** `[bench]` — **30/87 on one diagonal, 85/86 on the other.**
+- [x] ~~**Key the relay orientation.**~~ **NO KEY NEEDED** — the diagonal pairing
+      makes a 180° rotation contact-to-contact and coil-to-coil, and this design
+      cares about neither. See the section below for the two conditions it rests
+      on; **one is a bench test owed on the knockoff relays.**
 - [x] ~~Whether the moulding fixes fuse positions.~~ **Confirmed** — fuses pair
       (1,2) (3,4) (5,6) within a column, three per column, exactly as assumed.
 
-## ⚠️ OPEN — keying the relay ORIENTATION
+## ✅ RESOLVED — the relay needs NO key
 
-Raised 10 Sep 2026 `[bench]`. A 4-way relay's footprint is a 2 x 2, and **a 2 x 2
-is symmetric under 180°** — so every relay position accepts the relay two ways
-round. The 16 x 15 mm body against a 15.8 x 15.3 mm footprint blocks the 90°
-rotations once the block is packed, but nothing blocks 180°.
+Raised and closed 10 Sep 2026 `[bench]`. A 4-way relay's footprint is a 2 x 2,
+and **a 2 x 2 is symmetric under 180°**, so every position accepts the relay two
+ways round. The 16 x 15 mm body against a 15.8 x 15.3 mm footprint blocks the 90°
+rotations once the block is packed, but nothing blocks the 180°.
 
-**Do not design a label as the first line of defence.** Work the list in order;
-the cheap fixes are above the expensive ones and the first one may cost nothing.
+**It does not need blocking.** Pins read off the relay in hand `[bench 10 Sep]`:
 
-### 1. First find out whether it is already self-keying — this may be a non-issue
+```
+        30 ─────── 86          contacts on one diagonal
+         │  ╲   ╱  │           coil     on the other
+         │    ╳    │
+         │  ╱   ╲  │
+        85 ─────── 87
+```
 
-180° maps each pin to its diagonal opposite. So everything depends on where the
-coil pins sit:
+180° maps each pin to its diagonal opposite, so it sends **contact → contact and
+coil → coil**. Neither swap matters to this design:
 
-| Coil pins 85/86 are… | What 180° does | Verdict |
-|---|---|---|
-| **on one diagonal** (contacts on the other) | coil → coil, contact → contact | **harmless** ✅ |
-| **side by side** | coil ↔ contact | **real fault** ⛔ |
+- **Contacts are SPNO** — a make contact is non-polar, so 30 and 87 are
+  interchangeable.
+- **The coil is `-R1` resistor-suppressed** — 1.1 kΩ across the coil, explicitly
+  **no polarity constraint**. 85 and 86 are interchangeable.
 
-In the harmless case the only consequences are coil polarity reversed and
-contacts swapped — and **neither matters to this design**: the relay is
-`-R1` resistor-suppressed with **no polarity constraint** (see part-selection,
-Coil suppression), and an SPNO contact set is non-polar. A rotated relay would
-simply work.
+**A relay fitted backwards in this module simply works.** No plate, no label, no
+witness mark, no orientation to teach a future builder.
 
-**So the open pin-map item below is not just bookkeeping — read it looking for
-this specific property first.** If the coil pins are diagonal, the keying problem
-dissolves and nothing needs building.
+### ⚠️ The two conditions this rests on
 
-### 2. If they are side by side, prefer fixing it at the PART
+Both are already project decisions, but they are now **load-bearing** rather than
+preferences, and a build that quietly breaks either loses the property:
 
-Check whether a 303-series variant, or another Ultra Micro 280 relay, puts the
-coil on the diagonal. A part that cannot be fitted wrongly beats any fixture
-bolted on afterwards, and this is a spec-sheet question answerable before
-ordering the remaining relays.
+1. **EVERY relay must be `-R1` resistor, never `-D1` diode.** A diode relay
+   fitted 180° round has its 1N4007 reversed across the coil — **a dead short**.
+   This is the exact failure the R1 choice was made to avoid, and rotation
+   freedom now makes it unavoidable rather than unlikely.
+   ⚠️ **The Amazon relays in hand are knockoffs and their suppression is not
+   known.** Test before fitting: put a DMM across the coil pins and read it
+   **both ways round**. A resistor reads the same in both directions; a diode
+   reads differently. Anything asymmetric is a `-D1` and must not go in.
+2. **4-way SPNO only.** A changeover relay (87a) or a 6-way is a different
+   analysis — its rotation is not free. If a position ever needs one, the keying
+   question reopens **for that position**.
 
-### 3. Physical key — a printed plate over the relay field
+### Cavity convention — pick one and stay with it
 
-A 1–2 mm plate with a body-shaped cutout per position, sitting between the module
-face and the relay bodies. A plain rectangle keys the 90°s only; it keys 180° too
-**if the cutout picks up an asymmetric feature on the relay body** — a chamfer, a
-label recess, a moulded rib. **Look at the body in hand for a feature to catch**
-before assuming this route works. The cover `0301371` is the other place such an
-insert could live.
+Rotation freedom applies to the **relay**, not the **wires**: the coil wires and
+the contact wires still land in fixed cavities, so each 2 x 2 must have its
+diagonals assigned. Any assignment works; this map uses, for a relay on rows
+*r, r+1* and columns *c, c+1*:
 
-### 4. Baseline regardless — a witness mark, not a label
+| Cavity | Role |
+|---|---|
+| (r, c) upper-left | **30** contact |
+| (r+1, c+1) lower-right | **87** contact |
+| (r, c+1) upper-right | **86** COIL+ |
+| (r+1, c) lower-left | **85** COIL− |
 
-With the relay correctly seated, draw a **paint-pen stripe across the joint**: up
-the side of the relay body and onto the module face. Correct orientation is then
-a stripe that lines up, checkable at a glance, per relay, with no document to
-consult. This is the torque-stripe trick and it beats a printed label on all
-three counts that matter here: it is per-position rather than per-block, it is
-readable at the roadside in bad light, and a relay swapped in wrongly announces
-itself instead of hiding.
+Contacts on the ↘ diagonal, coil on the ↙. **86 is COIL+ and 85 is COIL−** as the
+design draws them everywhere else — kept for documentation consistency, not
+because the part cares.
 
-⚠️ A label on the lid is worth having as well, but it is documentation. **It is
-not a key** — it is only consulted by someone who already suspects a problem.
+⚠️ **Pin naming uncertainty, harmless.** The second coil pin read as
+**86 or possibly 88** on the knockoff moulding. The geometry is what this section
+depends on — coil pair on one diagonal — and that is unambiguous either way. If a
+genuine Song Chuan is bought later, read its marking and correct this line.
 
 ⚠️ **All 18 unwired cavities need plugs.** The module seals at the wire-entry
 face, so a relay body on top does not close a hole in the bottom. With the

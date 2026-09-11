@@ -359,7 +359,16 @@ connectors:
       draws them and the bodies DO NOT overhang into a neighbour's cavities: a module loaded solid
       with relays took every one. A relay costs its own way count and nothing more, so a 4-way costs
       4 cavities and not the 6 an earlier draft inferred, and the 18 cavity plugs is firm. All six
-      relay positions here are 4-WAY. Still open: which cavity of the 2x2 is 30 / 85 / 86 / 87.
+      relay positions here are 4-WAY.
+      ** PIN GEOMETRY READ 10 Sep 2026 [bench]: 30 AND 87 ARE ONE DIAGONAL, 85 AND 86 THE OTHER. ** A
+      2x2 accepts the relay 180 degrees round, and that rotation maps each pin to its diagonal
+      opposite - so it lands CONTACT-TO-CONTACT and COIL-TO-COIL. Contacts are SPNO and non-polar; the
+      R1 coil has no polarity constraint. A RELAY FITTED BACKWARDS SIMPLY WORKS, so no keying, label
+      or witness mark is needed. Cavity convention in docs/pdm-cavity-map.md.
+      ⚠️ THIS MAKES -R1 LOAD-BEARING, NOT A PREFERENCE. A -D1 diode relay fitted 180 round is a dead
+      short across the coil. The knockoff relays on the bench have UNKNOWN suppression: read the coil
+      with a DMM BOTH WAYS ROUND before fitting - a resistor reads the same both ways, a diode does
+      not. Anything asymmetric is a D1 and does not go in.
       ** PART: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm cavities taking 30
       MiniVal fuses or 10 micro relays or a mix, so one cavity type takes either and a position's role
       is decided by what is pushed in. The catalogue's only bussed module (0301697) is fuses-only, not
