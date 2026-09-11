@@ -192,6 +192,9 @@ templates:
   # different insulation and a much larger OD. NOT SPECIFIED YET, and it
   # does not inherit the seal or terminal decisions above: none of it
   # enters the PDM, and all three terminate in lugs rather than 280s.
+  # Lug holes are M6 at the relay studs and the starter motor terminal
+  # [bench 11 Sep 2026]; the battery-post and star-bus ends are still open.
+  # Bought long and cut to fit on the bike - no cut lengths.
   w6:  &w6  {gauge: 6 AWG,  type: Battery cable - SPEC TBD}
   w12: &w12 {gauge: 12 AWG, type: TXL, supplier: Prowire}
   w14: &w14 {gauge: 14 AWG, type: TXL, supplier: Prowire}
@@ -241,6 +244,7 @@ templates:
     pinlabels: [BAT STUD, MOTOR STUD, COIL+, COIL-]
     notes: |-
       Green corrosion on both studs on the original - replace.
+      BOTH STUDS ARE M6 [bench 11 Sep 2026] - the 6 AWG lugs at BAT STUD and MOTOR STUD are M6 rings.
       ** NOTHING ON THIS PART REACHES EARTH. ** The assembly has exactly TWO small leads, Y/R ending
       in a FEMALE bullet and BK in a MALE bullet. Neither is a ring, an eyelet, or anything that
       lands on the engine or frame [bench 2 Sep 2026]. The harness side does not supply one either -
@@ -256,7 +260,7 @@ templates:
   starter_motor: &starter_motor
     type: Starter motor
     pinlabels: [POS]
-    notes: Grounds through the case.
+    notes: Grounds through the case. POS terminal is M6 [bench 11 Sep 2026] - W_SOL_SM lands on an M6 ring.
 
   # ---- switches ----------------------------------------------------
   ign_switch: &ign_switch

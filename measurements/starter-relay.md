@@ -68,6 +68,19 @@ So **Lug B is the battery stud** and Lug A is the motor stud, whose cable is
 absent. That also explains the empty lug without inventing anything: the starter
 cable comes off with the motor.
 
+### ✅ Stud threads — M6 on every heavy landing `[bench 11 Sep 2026]`
+
+| Landing | Thread |
+|---|---|
+| Relay battery stud (Lug B) | **M6** |
+| Relay motor stud (Lug A) | **M6** |
+| Starter motor terminal | **M6** |
+
+So all three 6 AWG cables take **M6 ring lugs** at the relay and motor ends.
+This is the stud read #42 was waiting on. The battery cable stays at its
+**150 mm** eyeball figure by decision — the heavy cables are bought long and
+cut to fit on the bike, so a tape length is not needed.
+
 ### ✅ CLOSED — the accessory feed is PERMANENTLY LIVE, and the diagram is wrong
 
 Under the battery boot, alongside the heavy cable's ring, sits **a second ring
