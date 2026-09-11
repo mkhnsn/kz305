@@ -1166,14 +1166,15 @@ cables:
       frame is being powder coated. Worked example of blocker 2.
   W_HORN_PWR:
     <<: *w16
-    colors: [BU]
+    colors: [RD]
     notes: |-
       Fused horn power from PDM F4 into the relay common. ALWAYS-HOT per the hybrid split - the horn is
       still dead with the key out because its COIL is switched, and an open relay contact draws nothing.
+      RD for always-hot, the same as W_IGN_FEED off F1 (#57, 10 Sep 2026).
   W_HORN_FEED:
     <<: *w16
-    colors: [YE]
-    notes: Relay output to the horn. ⚠️ DRAWN YE, WHICH IS OFF THE FUNCTION SCHEME - so is W_HORN_PWR on BU. Both are load-side horn wires and the scheme has no horn role; resolve with the palette, not by copying stock colours.
+    colors: [BN]
+    notes: Relay output to the horn - K_HORN's 87. BN for switched power, the relay's output role (#57, 10 Sep 2026).
   W_HORN_GND:
     <<: *w16
     colors: [BK]
