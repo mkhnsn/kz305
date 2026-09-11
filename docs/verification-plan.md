@@ -100,8 +100,12 @@ for anything gauge-related.
 - **The gauge pass** (#38) — no wire on this harness has ever had its gauge
   measured. Every value is an eyeball estimate against an unverified 18 AWG
   baseline.
-- **16 AWG TXL insulation OD** against the green seal's 2.2 mm lower bound —
-  **0.06 mm margin**, and the seal is what makes the module waterproof.
+- ⚠️ **16 AWG TXL insulation OD** against the green seal's 2.2 mm lower bound.
+  **MEASURED 10 Sep 2026: 2.20–2.21 mm at four points** `[bench]`, against a
+  published nominal of 2.26 — so the margin is **0.00–0.01 mm, not 0.06**. In
+  spec, sitting on the bound. **Not closed:** the sample was a previous batch,
+  calipers compress XLPE, and ovality was not checked. **Re-measure the build
+  spool with a micrometer, rotated 90°.** See `docs/part-selection.md`.
 - **`B04.3` blade width** (#37), and terminal width plus depth on each retained
   connector — the five-member "small" family has **no measurements at all**.
 - **The starter relay's two heavy cables** — that is the circuit that melted and

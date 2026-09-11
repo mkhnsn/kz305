@@ -739,6 +739,11 @@ bound those circuits move to 14 AWG, which needs `1708339-L` instead. Green seal
 survive that; the terminal does not — so hedge on terminals, the cheapest line in
 the order.
 
+⚠️ **This hedge came within 0.01 mm of being needed.** 16 AWG TXL measured
+**2.20–2.21 mm** on 10 Sep against a 2.26 nominal — on the bound rather than
+0.06 above it. Still in band, and the 30 `1708339-L` ordered against a design of
+2 cover all 24 circuits if it ever goes the other way. See *Wire seals*.
+
 | Part | Design | Suggested order |
 |---|---|---|
 | `1708338-L` | 40 | 100 |
@@ -958,10 +963,72 @@ So the block needs **two seal part numbers**, red and green. Grey is not needed:
 12 AWG is the charging pair and runs direct to the battery, never entering the
 module.
 
-**⚠️ 16 AWG clears green's lower bound by 0.06 mm.** That is inside ordinary
-manufacturing tolerance on an extruded wall. It is very likely fine — green is
-the intended fit — but caliper the delivered spool before ordering seals in
-quantity. Same instrument as the gauge pass.
+**⚠️ 16 AWG clears green's lower bound by 0.06 mm** on the published nominal.
+That is inside ordinary manufacturing tolerance on an extruded wall, so the table
+above was always a prediction rather than a measurement.
+
+##### ⚠️ MEASURED 10 Sep 2026 — the margin is gone `[bench]`
+
+Prowire 16 AWG TXL, calipered at four points: **2.20, 2.21, 2.21, 2.20 mm.**
+
+| | OD | Margin to green's 2.2 mm bound |
+|---|---|---|
+| Published nominal | 2.26 mm | 0.06 mm |
+| **Measured** | **2.20–2.21 mm** | **0.00–0.01 mm** |
+
+**The wire is in spec and sits exactly on the bound.** Green remains the correct
+seal — it is still the only MTA seal that covers 16 AWG at all, and 2.2 is a
+stated working limit rather than a failure point. What is gone is the room to
+absorb anything: a batch 0.02 mm thinner is out of band, and **the seal is the
+single thing making this module waterproof on a bike that died of water.**
+
+⚠️ **Three caveats on the reading itself, all of which point the same way:**
+
+1. **It was a previous batch, same PN** — representative, but not the spool the
+   harness will be built from. Extruded wall varies batch to batch, which is the
+   exact variable in play.
+2. **Calipers compress XLPE.** Soft insulation under caliper jaws reads *low*, so
+   the true OD may be nearer nominal than 2.20. A micrometer with a ratchet or
+   friction thimble applies constant force and is the better instrument here.
+3. **Ovality was not checked.** Four points along the wire is not four points
+   *around* it. An extruded wall can be slightly oval, and the seal leaks on the
+   **minor** axis while gripping on the major. Rotate 90° at one point and read
+   both axes.
+
+##### What to do about it — in order, cheapest first
+
+1. **Re-measure the actual build spool, rotated 90°, with a micrometer.** Two
+   minutes, and it may put the number back near 2.26.
+2. **Physical check at the first crimp.** Fit a green seal on 16 AWG, insert into
+   a cavity, and look at how much the seal compresses and how much resistance it
+   takes. A seal at the bottom of its band still has visible interference; one
+   that slides in freely does not.
+3. **The fallback already exists and is already funded** — see below.
+
+##### The 16 → 14 AWG fallback, and why it is affordable
+
+If the delivered spool genuinely misses the bound, the 24 sixteen-gauge circuits
+move to **14 AWG**, which sits at 2.59 mm — **0.39 mm inside green**, comfortably
+mid-band. This was anticipated at order time:
+
+| | Design | Ordered | Needed if all 24 move |
+|---|---|---|---|
+| `4550747` green seal | 26 | 60 | 26 — **unchanged**, green covers both |
+| `1708339-L` terminal (14–12) | 2 | **30** | 26 — **fits, 4 spare** |
+
+**The terminals were deliberately over-ordered 15× against design for exactly
+this.** Green seals survive the change; the terminal does not, and that was the
+line hedged.
+
+⚠️ **What is NOT covered: the wire itself.** Moving 24 circuits to 14 AWG means a
+new Prowire order in the affected colours, and 14 AWG is stiffer in a block where
+every wire turns through 90° under the mating face. This is a real cost — it is
+a fallback, not a free switch. **Do steps 1 and 2 before reaching for it.**
+
+⚠️ 14 AWG has its own band-edge story: at 2.08 mm² it falls between
+`1708338-L`'s 1.0–2.0 and `1708339-L`'s 2.5–4.0, the same gap 18 AWG sits in.
+MTA's own AWG labelling calls `1708339-L` the 14–12 terminal and the two existing
+14 AWG legs already use it, so this is settled by precedent rather than by CSA.
 
 #### ⚠️ 6 AWG is not TXL and cannot be
 
