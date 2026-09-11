@@ -68,8 +68,10 @@
 #   off the old harness before anything was cut, and that map sets
 #   component spacing - it is a reference, not a cut list.
 #
-#   DESIGN DECISIONS AWAITING A CALL are filed as issues #44-#55 and
-#   are deliberately not resolved in this file.
+#   DESIGN DECISIONS AWAITING A CALL were filed as issues #44-#55 and
+#   are deliberately not resolved in this file. As of 10 Sep 2026 the
+#   open ones are #45 #47 #48 #52 #53 #55, plus #46 narrowed to the
+#   solenoid; #44 #49 #50 #51 #54 are closed.
 # ---------------------------------------------------------------------
 #
 # ---------------------------------------------------------------------
@@ -349,14 +351,14 @@ connectors:
     # connector BY INDEX, so inserting a way silently repoints every
     # reference after it - which is exactly how FUSE_4P went wrong on
     # 29 Aug. F7 therefore sits after SW AUX rather than beside F6. This
-    # list is ALLOCATION order, not physical cavity order; the cavity map
-    # is a separate artefact and is not written yet.
+    # list is ALLOCATION order, not physical cavity order; the physical
+    # cavity map is docs/pdm-cavity-map.md.
     pinlabels: [MAIN STUD - VESTIGIAL, F1 OUT, F2 OUT, F3 OUT, F4 OUT, F5 OUT, F6 OUT, SW IN - VESTIGIAL, SW OUT - VESTIGIAL, SW AUX - VESTIGIAL, F7 OUT, F8 OUT, F9 OUT, F1 IN (HOT), F4 IN (HOT), F5 IN (HOT), F2 IN (SW), F3 IN (SW), F6 IN (SW), F7 IN (SW), F8 IN (SW), F9 IN (SW), F10 OUT, F10 IN (SW), F11 OUT, F11 IN (SW)]
     notes: |-
       UPGRADE - replaces the stock 20A main plus two 10A glass fuses, and the fixed pigtail they came
       on. Do not read the pin list as a chosen part's pinout: it is the CIRCUIT LIST the module has to
-      satisfy, in a stable order so the connection sets can reference it. The physical cavity map is a
-      separate artefact and is not written yet.
+      satisfy, in a stable order so the connection sets can reference it. The physical cavity map is
+      docs/pdm-cavity-map.md - written, and confirmed against the part 9-10 Sep 2026.
       ⚠️ THE CIRCUIT COUNT IS NOT FINAL while the star-ground wire count is unknown - blocker 2.
       ** IN HAND 9 Sep 2026. 107.6 x 72 x 60 mm with the lid on per the datasheet drawing **, and the cavity grid is confirmed
       as 6 ROWS x 10 COLUMNS with fuses spanning two rows within a column - three per column [bench].
@@ -424,7 +426,9 @@ connectors:
         F11  5A   relay coil supply, ~0.45A worst case
       MiniVal part numbers are in docs/part-selection.md. Buy a variety kit rather than singles.
       ⚠️ THE SPLIT IS UNDER REVIEW - see issue #45, which recommends moving F4/F5 to switched and
-      keeping only F1 hot. Issues #48-#51 also bear on this block.
+      keeping only F1 hot. ⚠️ THAT DECISION MOVES THE CAVITY MAP: docs/pdm-cavity-map.md draws F1, F4
+      and F5 in the HOT columns, so settle #45 before the block is populated. #48 also bears on this
+      block; #49-#51 are closed.
       RELAY COUNT IS FIVE, at the TOP of what an RTMR-style module carries. Size for five positions
       plus a spare, or accept that two live in separate sockets outside it.
 

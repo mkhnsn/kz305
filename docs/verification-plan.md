@@ -15,21 +15,22 @@ mechanically. Regenerate it after any model change:
 
 ## What the register says today
 
-**328 marked claims**, after the 2 Sep notes cleanup folded out the duplicate
-restatements. The distribution:
+**349 marked claims** as of the 10 Sep 2026 regeneration, up from 328 on 2 Sep.
+The distribution:
 
-| Evidence | n | |
-|---|---|---|
-| `unstated` | 172 | 47 in `measurements/`, 20 in `models/`, rest are `[OPEN]` |
-| `meter` | 130 | |
-| `bench` | 15 | |
-| `photo` | 9 | |
-| `arith` | 1 | |
-| `scan` | 1 | |
+| Evidence | 2 Sep | 10 Sep | |
+|---|---|---|---|
+| `unstated` | 172 | **186** | most are `[OPEN]` markers |
+| `meter` | 130 | **134** | |
+| `bench` | 15 | **18** | the PDM and relay reads |
+| `photo` | 9 | 9 | unchanged — Session A is what converts these |
+| `arith` | 1 | 1 | |
+| `scan` | 1 | 1 | |
 
-**70 standing claims rest on scan, photograph or unstated evidence** while
-asserting something is settled — down from 137, and the drop is duplicate
-restatements rather than claims that got tested.
+**81 standing claims rest on scan, photograph or unstated evidence** while
+asserting something is settled, against 70 on 2 Sep. The rise has not been
+broken down, so it could be new notes that skipped the evidence tag or
+reclassification; the register's own list is where to look.
 
 ⚠️ The 47 `unstated` lines in `measurements/` are the remaining gap: that
 directory was not part of the notes cleanup and does not carry evidence tags.
@@ -67,10 +68,11 @@ Three constraints, and only the first is currently recorded:
    *intact* has to be taken before it is unwrapped. Unwrapping is irreversible
    and there is no second chance at a continuity path through an assembled
    harness.
-3. **The ground count before the frame goes to the coater.** Masking depends on
-   knowing which mounting points get a wire, and that count is still being
-   converted branch by branch. **Either the count finishes first or the frame
-   waits** (#54).
+3. ~~**The ground count before the frame goes to the coater.**~~ **Moot — the
+   frame is already powder coated** (#54 closed). The window closed before the
+   count finished, so masking is no longer an option: every mounting-earthed
+   component now needs a wire or an abraded landing. The ground count is still
+   open as **blocker 2**, but it no longer races anything.
 
 ## Session A — meter, harness intact
 
@@ -94,19 +96,20 @@ findings on the project's second-weakest evidence class.
 
 ## Session B — calipers and a gauge tool
 
-**Needs:** digital calipers, wire gauge tool or micrometer. Also gates Session D
-for anything gauge-related.
+**Needs:** digital calipers, wire gauge tool or micrometer.
 
-- **The gauge pass** (#38) — no wire on this harness has ever had its gauge
-  measured. Every value is an eyeball estimate against an unverified 18 AWG
-  baseline.
+- ~~**The gauge pass** (#38)~~ — **moot for the rebuild, closed 4 Sep 2026.**
+  Every rebuild gauge is chosen from load, not inherited from the old harness,
+  so it gates nothing. Archaeology only.
 - ~~**16 AWG TXL insulation OD** against the green seal's 2.2 mm lower bound.~~
   ✅ **CLOSED 10 Sep 2026** `[bench]`. Calipered **2.20–2.21 mm** at four points
   against a 2.26 nominal, so it sits on the bound rather than 0.06 above it — but
   **a green seal test-fitted on that wire is very snug**, which is the property
   the number was a proxy for. Gauge stays 16 AWG. See `docs/part-selection.md`.
-- **`B04.3` blade width** (#37), and terminal width plus depth on each retained
-  connector — the five-member "small" family has **no measurements at all**.
+- ~~**`B04.3` blade width** (#37), and terminal width plus depth on each retained
+  connector~~ — **moot since #37 was rescoped 4 Sep 2026.** The rebuild
+  standardises on sealed 090 and cuts the stock housings off the retained
+  pigtails, so nothing on the old connectors has to be identified or mated.
 - **The starter relay's two heavy cables** — that is the circuit that melted and
   the gauge step is the finding. Currently eyeball, and the relay is on the bench.
 
@@ -135,9 +138,11 @@ for anything gauge-related.
 
 ## Session E — parts in hand
 
-- **Identify the retained connector series** (#37). Five interfaces, zero part
-  numbers, and it gates *ordering* rather than assembly — the longest lead item
-  in the project.
+- ~~**Identify the retained connector series** (#37)~~ — **moot since the 4 Sep
+  rescope**: sealed 090 everywhere, stock housings cut off. What #37 still owes is
+  two checks against the new family — 090's current rating against the beam
+  feeds, and whether 16 AWG (1.31 mm²) closes in a 090 terminal rated to about
+  1.25 mm².
 - **`SOL`'s way numbers** off the housing, not the diagram. `IGN` and `FUSE_4P`
   both needed renumbering once actually read.
 - **Bullet genders** for the relay's `Y/R` and `BK`, which are recorded but
