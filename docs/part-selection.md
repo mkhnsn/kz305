@@ -527,13 +527,19 @@ mounting have to swallow — before wire exit clearance below the mating face.
 
 #### Capacity against this design
 
-A relay occupies roughly three fuse positions (30 ÷ 10), so in cavities:
+⚠️ **Superseded by the measured map** — kept because the conclusion held. The
+1 Sep arithmetic assumed a relay occupies roughly three fuse positions (30 ÷ 10):
 
 | | Count | Cavities |
 |---|---|---|
 | Relays — `K_MAIN` `K_COIL` `K_HORN` `K_HI` `K_LO` | 5 | ~30 |
 | Fuses — F1–F6 | 6 | 12 |
 | **Used** | | **~42 of 60** |
+
+Both inputs turned out wrong and the error cancelled: a 4-way relay takes **4**
+cavities rather than ~6 `[bench 10 Sep]`, and the design grew to **11 fuses**
+rather than 6. The real figure is **42 of 60** — the same number by a different
+route. See `docs/pdm-cavity-map.md` for the authoritative counts.
 
 Roughly **30% spare**, which is the right shape for this project: the circuit
 count is still growing as the undrawn branches land, and that headroom is the
@@ -1087,9 +1093,10 @@ glance without pulling the fuse, on a block that will be mounted and sealed.
 - **MiniVal Low Profile** — a separate MTA line with a different body. Sold under
   a similar name by the same distributors.
 
-So buy a **variety kit** now rather than specific values — ratings are not
-assigned yet (#41), and the block takes 9 fuses whose values all depend on LED
-parts that are not selected. A kit costs less than one wrong guess.
+So buy a **variety kit** now rather than specific values. **Ratings were
+assigned 4 Sep 2026 (#41, closed)** — F1–F11, listed on `PDM` in
+`models/kz305-rebuild.yml` — but a kit still costs less than one wrong guess, and
+the split is under review in #45.
 
 ⚠️ **Do not cheap out on the fuses themselves.** This harness exists because a
 joint on the main power path melted. No-name blade fuses vary in blade plating
@@ -1100,8 +1107,17 @@ MTA's own part numbers, if you want them to match the block:
 `0705090` 2 A · `0705100` 3 A · `0705101` 4 A · `0705110` 5 A · `0705120` 7.5 A ·
 `0705130` 10 A · `0705140` 15 A · `0705150` 20 A · `0705160` 25 A · `0705170` 30 A
 
-Not yet orderable: **F1–F6 have no ratings assigned.** Sizing them needs the LED
-headlight's measured draw and the final circuit list.
+✅ **Orderable. All eleven ratings were assigned 4 Sep 2026** (#41):
+
+| F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 | F10 | F11 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 5 A | 5 A | 10 A | 10 A | **15 A** | 5 A | 5 A | 7.5 A | 10 A | 7.5 A | 5 A |
+
+⚠️ **Sized for INCANDESCENT on purpose.** The bike may run filament lamps before
+the LED conversion, so every rating covers the stock load. **That is why the LED
+headlight (#60) and the USB PD charger (#64) do not gate this** — their draw can
+only be lower, and a rating sized for the heavier load stays correct either way.
+Reasoning per fuse is on `PDM` in `models/kz305-rebuild.yml`.
 
 #### Why the terminal and plug counts are still provisional
 

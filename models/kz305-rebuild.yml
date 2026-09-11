@@ -15,11 +15,18 @@
 # ---------------------------------------------------------------------
 # BLOCKERS - do not cut wire against this file yet
 #
-#   1. GAUGE IS UNMEASURED, HARNESS-WIDE. Not one wire has had its
-#      gauge taken with a tool; every bench value is an eyeball
-#      estimate against an unverified 18 AWG baseline. Do not size
-#      rebuild wire against the measurement log until the gauge pass
-#      is done.
+#   1. RETIRED 4 Sep 2026 - GAUGE IS MOOT FOR THE REBUILD (#38 closed).
+#      This existed so new wire would not be sized against unverified
+#      old wire: not one wire has had its gauge taken with a tool, and
+#      every bench value is an eyeball estimate against an unverified
+#      18 AWG baseline. THE REBUILD NO LONGER INHERITS ANY OF THEM -
+#      every gauge is chosen from load and rounded up liberally, sized
+#      for INCANDESCENT so it stays correct whichever lamps go in, and
+#      the wire order derives from this model rather than from the
+#      measurement log. What is left is archaeology: knowing what
+#      Kawasaki actually used. It blocks nothing. Reopen only if the
+#      FACTORY model ever needs to be authoritative on gauge - i.e.
+#      for a reproduction rather than a rebuild.
 #
 #   2. THE STAR GROUND IS BIGGER THAN DRAWN. The stock harness earths
 #      most components through their own mounting hardware rather than
@@ -1369,8 +1376,10 @@ cables:
       ** DC+ GOES DIRECT TO THE BATTERY, not through the PDM. ** The SH775 is a SERIES regulator and
       series units are sensitive to resistance in the DC path, so the pair runs heavy and direct with
       MF_RR at the battery end.
-      12 AWG and plain red to match a direct battery run. ⚠️ THE GAUGE IS PROVISIONAL - blocker 1
-      stands, and the stator's rated wattage has still not been read off anything. [OPEN]
+      12 AWG and plain red to match a direct battery run. ⚠️ THE GAUGE IS PROVISIONAL, but NOT for
+      blocker 1's reason - that retired with #38, and this run is sized from load rather than
+      inherited from the measurement log anyway. What is actually missing is THE STATOR'S RATED
+      WATTAGE, which has still not been read off anything. [OPEN]
   W_RR_BATT:
     <<: *w12
     colors: [RD]
