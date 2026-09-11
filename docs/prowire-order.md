@@ -367,10 +367,51 @@ pull-to-seat joint you cannot redo without withdrawing the lead.
 - **MTA 280 crimper** for the `1708338-L` terminals already in hand. The die
   matters more on a sealed terminal because the seal must sit right behind the
   crimp.
+  ⚠️ MTA's own `9602455` hand crimp tool is listed for **UNSEALED** 280/480/630
+  terminals. These are sealed. **Do not order it on the series match alone.**
 - **090-series crimper** for the connector order (#37).
 - ⚠️ **Pull-test the first crimp.** 16 AWG is 1.0 mm², mid-range in
   `1708338-L`'s 1.0–2.0 mm² band, so it should be clean — the 10 `1708337-L` in
   the box are the fallback if not.
+
+### ⬜ OPEN — no terminal EXTRACTION tool is specified anywhere (raised 10 Sep 2026)
+
+This list had crimpers and no way to get a terminal back **out**. On a 42-way
+sealed block wired point-to-point by hand, a mis-landed wire is not a remote
+possibility, and the alternative to a depinning tool is cutting the wire and
+re-terminating — which costs a terminal, a seal, and length off a wire built in
+place.
+
+**Removal is two stages**, and the first is often the one people miss:
+
+1. **Release the secondary lock `0301372`** — six per module, so each covers ten
+   cavities. It is a TPA; nothing comes out while it is seated.
+2. **Depress the terminal's locking tang** and withdraw the wire.
+
+#### Candidates, none confirmed
+
+| Tool | Source | Note |
+|---|---|---|
+| `CID280ET` | ConnectorID | **Best lead** — stated for 1.5 / 2.3 / **2.8 mm** terminals, and it is the same distributor the module order came from |
+| "Estrattore per terminale MTA" | Copat | MTA-specific by name |
+| Metri-Pack 150/280 removal tool | Delphi/Aptiv `12094429`, CE Auto | 2.8 mm blade — **compatibility is INFERRED from the shared 280 footprint** |
+
+⚠️ **The Metri-Pack inference is exactly the kind this project keeps getting
+caught by.** MTA's F280 is MTA's own terminal; a shared 2.8 mm blade width sets
+the *cavity*, not the tang geometry a puller has to reach. See the `4550747`
+seal-versus-blade note above for the same distinction.
+
+#### How to settle it without buying anything
+
+**The parts are in hand.** Crimp one terminal, seat it, and try to get it out.
+That is the project's own standard — the part beats the catalogue — and it costs
+one terminal out of the spares. Do it on the same first crimp that pull-tests the
+die, before 41 more go in.
+
+⚠️ **The authoritative source is the MTA connection-system datasheet**, which is
+where this file's accessory part numbers came from. **It is not in `parts/`** —
+only the 13-page marketing overview is. If an official extractor PN exists, it is
+in that datasheet.
 
 ## These are ORDER quantities
 
