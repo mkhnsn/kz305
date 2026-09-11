@@ -809,13 +809,42 @@ loose, these ten are the fallback and save a reorder.
 
 ###### On arrival — receiving check
 
-- [ ] **`1708338-L` is loose pieces.** The line item carries the `-L` suffix and
-      reads x100, so this looks right; confirm it is not a reel in the box.
-- [ ] **Two each of `0300690` and `0300691`**, and they mate to each other.
-- [ ] **Count the secondary locks — eight**, six of which are required.
-- [ ] **Red seals present.** Per the shipping notice they are.
+**✅ Checked 10 Sep 2026, order received** `[bench]`.
+
+- [x] ~~**`1708338-L` is loose pieces.**~~ **Confirmed** — loose bagged, not a
+      reel. Applies to every new terminal in the order.
+- [x] ~~**Count the secondary locks — eight**, six of which are required.~~
+      **Eight received**, so two spare.
+- [x] ~~**Red seals present.**~~ **Confirmed.**
+- [ ] ⛔ **Two each of `0300690` and `0300691` — MIS-PICKED.** Both bags are
+      **labelled correctly** but **both contain the same gender foot**, so the
+      shipment is four of one and none of the other.
+      **Not chased and not blocking** — the legs may not be used at all, and the
+      mounting route is undecided (see *Enclosure and mounting*).
+      ⚠️ **This does NOT settle the gender dispute.** The whole point of ordering
+      both part numbers was that distributors list them with opposite genders;
+      one bag's contents contradict its label, and **which one is wrong is not
+      determinable from this shipment.** If the legs are ever used, order again
+      and check contents against labels on arrival — the disagreement is still
+      live, and a correct label is now known not to guarantee correct contents.
 
 ###### With the module in hand — ✅ settled 9–10 Sep 2026
+
+**Cover, retention and mounting — checked 10 Sep 2026** `[bench]`:
+
+- ✅ **The cover `0301371` closes over a populated block**, with both relay
+  sizes. Clearance is **close on the taller 6-way** but genuinely adequate; the
+  4-way has room to spare. The relay body is 23.7 mm inside a 60 mm lidded
+  envelope.
+- ✅ **Relay retention is terminal friction, and that is accepted.** Nothing in
+  the module or the cover clamps a relay down — the pins hold it.
+  **Decided: build it that way.** If vibration turns out to lift a relay, the fix
+  is **a keeper added to the lid**, which is a change to one part and can be made
+  after the harness is built. It does not gate anything now.
+- ⬜ **Wire exit depth below the mating face is still unmeasured** — no terminal
+  has been crimped yet. **This is the last input the enclosure needs**; the
+  107.6 x 72 x 60 mm envelope is the module alone and does not include the wire
+  bundle turning out of the bottom.
 
 Grid pitch and relay footprint alignment, the last piece of #10 that needed the
 part rather than arithmetic, are both read off the bench:
@@ -1146,8 +1175,13 @@ provisional here is the *terminal* count, for reason 2 above — the jumpers.
   fuses throughout. Not a drawback, but it should be deliberate — it sets what
   spares get carried.
 - **Enclosure and mounting.** Sets the footprint, so it comes before layout.
-  The module itself is 107.6 x 72 x 60 mm lidded; add wire exit depth below it.
-- **Relay retention against vibration**, for whichever route.
+  The module itself is 107.6 x 72 x 60 mm lidded; **wire exit depth below it is
+  still unmeasured** and needs a crimped terminal in a cavity to settle.
+  ⚠️ The MTA mounting legs are **not committed to** — the shipment was mis-picked
+  and the legs may not be used at all, so the mounting route is open.
+- ~~**Relay retention against vibration.**~~ ✅ **Settled 10 Sep 2026** — it is
+  terminal friction, and that is accepted. Fallback if it ever lifts: a keeper in
+  the lid, addable after the build.
 
 ## Sources
 

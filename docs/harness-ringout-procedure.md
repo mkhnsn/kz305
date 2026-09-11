@@ -247,9 +247,10 @@ and where each goes.
 **3 & 4. Br/W, Bl/W and the two Y/R wires** — all four are answered by item 0
 above. Do that first and these fall out of it.
 
-**5. Second harness tag.** One reads `26001-12348`. A second tag on another
-branch has never been logged, and it identifies the harness variant.
-Answer: ______________
+**5. ~~Second harness tag.~~ DROPPED 10 Sep 2026 by decision** (#7 closed
+won't-do). One reads `26001-12348`; the second will not be logged. The harness
+variant therefore stays identified by the diagram's grouping alone — see
+`docs/bench-checks-2026-08-15.md` for what that gives up. **Skip this step.**
 
 **6. Dimmer common.** Open since 13 Aug. This one is **on the switch, not the
 harness** — cluster unplugged, three pins R/BK · Bl · R/Y, find the pin that

@@ -113,9 +113,9 @@ for anything gauge-related.
   "all six" closure. `BK/Y` at the tail fan, so **Net B**, so its consumers are
   ground-side and feed the star-ground count.
 - **`B00.11`'s second consumer**, if the meter does not settle it in Session A.
-- **Both harness tags** (#7) — photograph before unwrapping; tags come off with
-  tape, and the part number decides whether a third dead way is likely or
-  surprising.
+- ~~**Both harness tags** (#7)~~ — **DROPPED 10 Sep 2026 by decision.** #7 closed
+  won't-do; the second tag will not be logged. See `docs/bench-checks-2026-08-15.md`
+  for what that gives up.
 
 ## Session D — Step 3, unwrap the loom
 

@@ -126,8 +126,16 @@ Bl as common, but flags this as the one marginal table.
 
 ## Opportunistic — only while the harness is off the bike
 
-- [ ] **Second harness tag.** One reads `26001-12348`. A second tag on another
-      branch has not been logged. Read both under good light: ______________
+- [x] ~~**Second harness tag.**~~ **DROPPED 10 Sep 2026, by decision** (#7
+      closed won't-do). One tag reads `26001-12348`; the second was never logged
+      and will not be.
+      ⚠️ **What that costs:** the tag part number was the one way to identify the
+      harness variant **independently of** the wiring diagram's A1/A2/B1/C1/D1
+      grouping. The transcription assumes which column applies, and that
+      assumption now stands on the diagram alone. It is not a live risk — the
+      rebuild is being built from metered readings off this bike rather than from
+      the diagram — but a future contradiction between bike and diagram cannot be
+      settled this way.
 - [ ] **Neutral switch residual 4 Ω** — split the path to locate it:
       switch terminal → case nearby = ______ Ω (the switch contact itself,
       runs in oil, a few ohms may just be the switch);
