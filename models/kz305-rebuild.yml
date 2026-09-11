@@ -700,8 +700,18 @@ connectors:
       NOTHING: it runs to a cavity the cluster does not populate, found 29 Aug 2026 by reading the far
       half. Do not reproduce it. Bl arrives on its own flying lead rather than through the 6P, and the
       horn BK is a separate spade - so the cluster's seven conductors are 5 in the 6P + Bl + BK.
-      ** GND IS A NEW WIRE. ** Stock, the horn button earths through the cluster body; powder coating
-      removes that path. See the GND bus notes.
+      ** WAY 8 IS A NEW CLUSTER-SIDE LEAD - decided 10 Sep 2026 (#53). ** Stock, the horn button earths
+      through the cluster body, then bar to frame; the powder coat removes the frame end. The cluster
+      itself has no pin 8, but the new 8-way 090 does, so the cluster side gets a short BK lead:
+      RING TERMINAL + STAR WASHER UNDER ONE OF THE CLUSTER'S OWN SCREWS, into way 8 of the
+      component-side housing. It never touches the bar or the frame, so the coating is irrelevant.
+      It only has to carry K_HORN's coil return, about 0.09A, so a few ohms in the path do not matter.
+      ACCEPTANCE TEST, before crimping: horn button PRESSED, meter from the BK horn spade to the chosen
+      screw. Continuity = build it this way. Open or erratic means the button grounds some other way
+      (e.g. to a plate that bears on the bar) - then fall back to an internal lead from the button's
+      ground contact into the pigtail.
+      Parts beyond the connector order: one small ring terminal, one star washer, a few inches of 16
+      AWG BK (see #55 for ring terminals generally).
 
   USB:
     type: USB-C PD charger
@@ -1162,8 +1172,9 @@ cables:
     <<: *w16
     colors: [BK]
     notes: |-
-      NEW WIRE - no counterpart in the old harness. The cluster earthed through its own body and the
-      frame is being powder coated. Worked example of blocker 2.
+      NEW WIRE - no counterpart in the old harness. Harness side of LH way 8, to the star bus. The
+      cluster side of way 8 is a short lead to a ring under a cluster screw - see LH (#53, 10 Sep 2026).
+      Worked example of blocker 2: a component that earthed through its own body now gets a wire.
   W_HORN_PWR:
     <<: *w16
     colors: [RD]

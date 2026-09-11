@@ -117,6 +117,9 @@ findings on the project's second-weakest evidence class.
   two checks against the new family — 090's current rating against the beam
   feeds, and whether 16 AWG (1.31 mm²) closes in a 090 terminal rated to about
   1.25 mm².
+- **LH way 8 ground (#53).** Horn button pressed, meter from the BK horn spade
+  to the cluster screw that will carry the ring terminal. Continuity means the
+  external lead works. Open or erratic means fall back to an internal lead.
 - **`SOL`'s way numbers** off the housing, not the diagram. `IGN` and `FUSE_4P`
   both needed renumbering once actually read.
 - **Bullet genders** for the relay's `Y/R` and `BK`, which are recorded but
