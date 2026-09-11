@@ -366,9 +366,10 @@ connectors:
       R1 coil has no polarity constraint. A RELAY FITTED BACKWARDS SIMPLY WORKS, so no keying, label
       or witness mark is needed. Cavity convention in docs/pdm-cavity-map.md.
       ⚠️ THIS MAKES -R1 LOAD-BEARING, NOT A PREFERENCE. A -D1 diode relay fitted 180 round is a dead
-      short across the coil. The knockoff relays on the bench have UNKNOWN suppression: read the coil
-      with a DMM BOTH WAYS ROUND before fitting - a resistor reads the same both ways, a diode does
-      not. Anything asymmetric is a D1 and does not go in.
+      short across the coil. The relays in hand ARE RESISTOR TYPE [bench 10 Sep], knockoffs included,
+      so the bench set is clear. STANDING RULE FOR RESTOCKS: a -D1 is invisible once the relay is in
+      the module, so read a new relay's coil with a DMM BOTH WAYS ROUND - a resistor reads the same
+      both ways, a diode does not. Anything asymmetric is a D1 and does not go in.
       ** PART: MTA 0301370, BUSES POINT-TO-POINTED AT ASSEMBLY. ** 60 sealed 2.8mm cavities taking 30
       MiniVal fuses or 10 micro relays or a mix, so one cavity type takes either and a position's role
       is decided by what is pushed in. The catalogue's only bussed module (0301697) is fuses-only, not

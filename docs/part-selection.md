@@ -1006,9 +1006,12 @@ harmless rather than destructive, which is the point.
 footprint accepts the relay 180° round with no electrical consequence — and that
 is *only* true for a resistor. A `-D1` fitted backwards is a dead short across
 the coil. So this is no longer a preference between two acceptable variants:
-**a diode relay in this module is a latent short.** Test the coil of any relay of
-unknown provenance with a DMM both ways round — a resistor reads the same in
-both directions, a diode does not.
+**a diode relay in this module is a latent short.**
+
+✅ The relays in hand, knockoffs included, are **resistor type** `[bench 10 Sep]`.
+The rule stands for every relay bought after them: test the coil of any relay of
+unknown provenance with a DMM both ways round — a resistor reads the same in both
+directions, a diode does not.
 
 The starter solenoid is a stock part with no integral option — fit a discrete
 diode across its coil, cathode to the Y/R feed.

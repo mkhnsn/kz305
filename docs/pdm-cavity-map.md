@@ -76,9 +76,7 @@ positions.
 ## What the part settled
 
 Everything this section once listed as open is now read off the module and the
-relays in hand. **The only thing still owed is a bench test, not a measurement:
-confirm the knockoff relays are resistor-suppressed and not diode-suppressed** —
-see *The two conditions this rests on*, below.
+relays in hand. **The relay block owes nothing further.**
 
 ### ✅ The 4-way relay's PINS are a 2 x 2 — predicted by the pitch, confirmed on the bench
 
@@ -176,10 +174,14 @@ preferences, and a build that quietly breaks either loses the property:
    fitted 180° round has its 1N4007 reversed across the coil — **a dead short**.
    This is the exact failure the R1 choice was made to avoid, and rotation
    freedom now makes it unavoidable rather than unlikely.
-   ⚠️ **The Amazon relays in hand are knockoffs and their suppression is not
-   known.** Test before fitting: put a DMM across the coil pins and read it
-   **both ways round**. A resistor reads the same in both directions; a diode
-   reads differently. Anything asymmetric is a `-D1` and must not go in.
+   ✅ **The relays in hand are resistor type** `[bench 10 Sep]`, knockoffs
+   included — so the set on the bench is clear and nothing is owed before
+   fitting them.
+   ⚠️ **This stays a standing rule for every relay bought after these.** It is
+   the one spec that cannot be relaxed on a restock, and it is not visible once
+   the relay is in the module. Check a new relay's coil with a DMM **both ways
+   round** — a resistor reads the same in both directions, a diode does not.
+   Anything asymmetric is a `-D1` and does not go in.
 2. **4-way SPNO only.** A changeover relay (87a) or a 6-way is a different
    analysis — its rotation is not free. If a position ever needs one, the keying
    question reopens **for that position**.
