@@ -324,17 +324,19 @@ connectors:
         manufacturer: MTA
         mpn: 1708339-L
         qty: 1
-      # 60 cavities less the 42 populated. Includes the 10 that sit unused inside
-      # a relay footprint - the module seals at the WIRE-ENTRY face, so a relay
-      # body on top does not close a hole in the bottom.
+      # 60 cavities less the 42 populated. A 4-way relay uses exactly its four
+      # cavities [bench 10 Sep 2026], so every plug goes in an unwired cavity -
+      # the module seals at the WIRE-ENTRY face, so nothing on top closes a hole
+      # in the bottom.
       - type: Cavity plug
         subtype: 2.8mm black - 60 cavities less 42 wired. REQUIRED or the module is not sealed
         manufacturer: MTA
         mpn: "4550750"
         qty: 18
-      # ⚠️ 16 AWG at 2.26mm clears green's 2.2mm lower bound by 0.06mm. Caliper
-      # the delivered spool - issue #61. If it misses, those circuits move to
-      # 14 AWG, which is ALSO green, so this quantity holds either way.
+      # 16 AWG TXL measured 2.20-2.21mm, on green's 2.2mm bound, and a green
+      # seal is very snug on it [bench 10 Sep 2026] - #61 closed. If a future
+      # spool ever misses, those circuits move to 14 AWG, which is ALSO green,
+      # so this quantity holds either way.
       # ⚠️ ZERO. Kept as a line so the decision is visible rather than absent:
       # 40 were bought before the harness went all-16, and they are now spare.
       - type: Wire seal - red
@@ -826,7 +828,7 @@ connectors:
     subtype: block to star bus - HEAVY
     pinlabels: [STUD]
     notes: |-
-      ** THIS STRAP CARRIES STARTER CURRENT, AND IT IS THE BIGGEST CASE OF BLOCKER 5. ** The starter
+      ** THIS STRAP CARRIES STARTER CURRENT, AND IT IS THE BIGGEST CASE OF BLOCKER 2. ** The starter
       motor grounds through its own case into the engine, so the engine-to-chassis path is the return
       for the entire cranking current - well over 100A - not a signal earth. Stock relied on the
       engine being bolted to a bare frame. ** THE FRAME IS BEING POWDER COATED, WHICH REMOVES EXACTLY
@@ -901,7 +903,7 @@ connectors:
       RETAINED - this splice is inside the pod PIGTAIL, not the pod, and the pigtail survives.
       Observed 29 Aug 2026 and the count closes it at exactly three: six ways cross the 6P, eight
       wires leave the pigtail, five ways are signal, so 5 + 3 = 8.
-      NOT a blocker 5 case - the pod already HAS a ground wire. It only needs re-terminating on the
+      NOT a blocker 2 case - the pod already HAS a ground wire. It only needs re-terminating on the
       new bus.
 
   COIL_L:
@@ -998,7 +1000,7 @@ cables:
   W_IGN_RET:
     <<: *w16
     colors: [GY]
-    notes: Ignition switch output - now drives the K_MAIN coil only (~0.15A), so this dropped from 16 to 18 AWG. The switch no longer carries the bike's load.
+    notes: Ignition switch output (IGN:3, ON) - drives the K_MAIN coil only, ~0.15A. 16 AWG like the rest of the harness since 4 Sep. Not on the PARK path - PARK is IGN:1 to IGN:2, so the tail lamp in PARK is carried by W_IGN_FEED under F1 (see #48).
 
   W_RH_IN:
     <<: *w16
@@ -1138,7 +1140,7 @@ cables:
     colors: [BK]
     notes: |-
       NEW WIRE - no counterpart in the old harness. The cluster earthed through its own body and the
-      frame is being powder coated. Worked example of blocker 5.
+      frame is being powder coated. Worked example of blocker 2.
   W_HORN_PWR:
     <<: *w16
     colors: [BU]
@@ -1804,5 +1806,5 @@ connections:
 #   harness simply does not contain them - and the count is unknown
 #   until ground Net B's earth points are traced through their child
 #   harnesses. This is the largest single unknown in the rebuild's
-#   wire count. See blocker 5 and the GND notes.
+#   wire count. See blocker 2 and the GND notes.
 # =====================================================================

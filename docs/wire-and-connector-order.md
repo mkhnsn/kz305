@@ -1,5 +1,14 @@
 # Wire and connector order
 
+> ⛔ **SUPERSEDED — do not order from this file.** Written 4 Sep 2026, before the
+> harness went all-16 AWG, so its wire table still carries 18 AWG SKUs.
+> Current order sheets:
+> - **Wire:** `docs/prowire-order.md` (all 16 AWG, plus 14 and 12 where noted)
+> - **Connectors:** `docs/connector-order.md` (sealed 090, Cycle Terminal / Corsa)
+> - **PDM:** the `PDM` additional components in `models/kz305-rebuild.yml`
+>
+> Kept for its supplier notes. Everything below this box is historical.
+
 Three suppliers, and only one of them is ready to order today.
 
 | Supplier | Scope | Status |

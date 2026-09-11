@@ -57,7 +57,7 @@ connectors:
       SCOPE CONSEQUENCE FOR THE REBUILD: every component earthing through its own mounting hardware
       needs a NEW ground wire back to the star bus - wire that does not exist in this harness and
       appears nowhere in these models. ⚠️ THE COUNT IS NOT YET KNOWN. Each has to be traced through
-      its own child harness. See blocker 5 in the rebuild. [OPEN]
+      its own child harness. See blocker 2 in the rebuild. [OPEN]
   GND_ENG:
     type: Engine case ground
     subtype: internal, no harness wire
@@ -70,7 +70,7 @@ connectors:
       narrower than the node is. Net B earths this way too, but through child-harness pigtails rather
       than at the component body - see GND_NETB.
       REBUILD: every one of these is a component that gets a NEW wire back to the star bus. See
-      blocker 5.
+      blocker 2.
   MF:
     <<: *main_fuse
     subtype: 20A glass — fuse box holder 1, printed MAIN

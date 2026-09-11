@@ -111,7 +111,7 @@ cables:
       The harness-side leg of the pod ground. IT IS NET B - 0.1 ohm from B00.1's BK/Y to B10.5
       [meter 29 Aug 2026]. Settled by meter rather than by colour, which matters: black base made
       Net B the obvious guess, and guesses off colour have been wrong repeatedly on this harness.
-      NOT a blocker 5 case. The pod already HAS a ground wire in the harness; blocker 5 counts
+      NOT a blocker 2 case. The pod already HAS a ground wire in the harness; blocker 2 counts
       components with none, earthing through their own mounting hardware. The pod's return simply
       needs re-terminating on the new bus.
 

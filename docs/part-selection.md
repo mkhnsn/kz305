@@ -701,10 +701,15 @@ the disagreement is harmless — do not order four of one.
 | Secondary lock | `0301372` | **6** | ⚠️ six per module, not one |
 | Mounting leg | `0300690` | 2 | gender disputed — see above |
 | Mounting leg | `0300691` | 2 | |
-| Terminal, 18–16 AWG | `1708338-L` | 40 | 16x 18 AWG + 24x 16 AWG |
-| Terminal, 14–12 AWG | `1708339-L` | 2 | ⚠️ was missing entirely until 3 Sep |
-| Wire seal, red | `4550748` | 16 | 18 AWG |
-| Wire seal, green | `4550747` | 26 | 16 AWG and 14 AWG |
+| Terminal, 18–16 AWG | `1708338-L` | **41** | all 16 AWG |
+| Terminal, 14–12 AWG | `1708339-L` | **1** | `W_MAIN_SW_FEED` only |
+| Wire seal, red | `4550748` | **0** | no 18 AWG left in the harness |
+| Wire seal, green | `4550747` | **42** | 16 AWG and 14 AWG |
+
+⚠️ **Updated 10 Sep 2026 to match the model.** This table was written 3 Sep with
+an 18/16/14 split. On **4 Sep the harness went all-16 AWG** (`models/kz305-rebuild.yml`,
+the `PDM` additional components), so red seals dropped to zero and every cavity
+wire takes green. The quantities in the model are authoritative.
 | Cavity plug | `4550750` | 18 | 60 less 42 populated |
 
 #### Where the quantities come from — derived, 3 Sep 2026
@@ -728,10 +733,12 @@ They did not agree before `SP_HOT` and `SP_SW` were drawn (#50): the nine
 fuse-input wires existed nowhere, standing in as four abstract "bus ways", and
 two cavities carried two wires each.
 
-Gauge split of the 42: **18 AWG x16, 16 AWG x24, 14 AWG x2.**
+Gauge split of the 42: **16 AWG x41, 14 AWG x1** (since 4 Sep; the 3 Sep split
+was 18 x16, 16 x24, 14 x2).
 
-Only **two** 14 AWG legs still enter the block — `K_MAIN`'s 30 and 87.
-`W_MAIN_OUT` now terminates outside it, on `SP_HOT`.
+Only **one** 14 AWG leg enters the block — `W_MAIN_SW_FEED` to `K_MAIN`'s 30.
+`W_SW_BUS` went to 16 AWG with everything else, and `W_MAIN_OUT` terminates
+outside the block, on `SP_HOT`.
 
 ##### ⚠️ These are DESIGN quantities, not order quantities
 
@@ -742,8 +749,8 @@ the order.
 
 ✅ **The hedge was not needed.** 16 AWG TXL measured **2.20–2.21 mm** on 10 Sep
 against a 2.26 nominal — on the bound rather than 0.06 above it — but **a green
-seal test-fitted on that wire is very snug**, so the gauge stays 16 AWG. The 30
-`1708339-L` remain the funded fallback. See *Wire seals*.
+seal test-fitted on that wire is very snug**, so the gauge stays 16 AWG. See
+*Wire seals* — and note the 14 AWG fallback there is **only partly funded**.
 
 | Part | Design | Suggested order |
 |---|---|---|
@@ -1007,30 +1014,33 @@ working limit, not a failure point, and the seal grips there as designed.
 ⚠️ **Basis, stated precisely:** both the caliper reading and the fit test were on
 a **previous batch of the same part number**, not on the spool the harness will
 be built from. Judged sufficient. If a future spool ever feels loose in a green
-seal, this is the paragraph to come back to — and the fallback below is the
-answer, already funded.
+seal, this is the paragraph to come back to, and the fallback below is the
+answer, though it is only partly funded.
 
-##### The 16 → 14 AWG fallback — not needed, kept because it is paid for
+##### The 16 → 14 AWG fallback — not needed, and only partly funded
 
-If a future spool ever misses the bound, the 24 sixteen-gauge circuits move to
-**14 AWG** at 2.59 mm — **0.39 mm inside green**, mid-band. This was anticipated
-at order time:
+If a future spool ever misses the bound, the sixteen-gauge cavity wires move to
+**14 AWG** at 2.59 mm — **0.39 mm inside green**, mid-band.
 
-| | Design | Ordered | Needed if all 24 move |
+⚠️ **Corrected 10 Sep 2026.** An earlier version of this section said the
+fallback was fully funded, counting 24 sixteen-gauge circuits. That was the
+3 Sep split. Since the harness went all-16 on 4 Sep there are **41**:
+
+| | Design | Ordered | Needed if all 41 move |
 |---|---|---|---|
-| `4550747` green seal | 26 | 60 | 26 — **unchanged**, green covers both |
-| `1708339-L` terminal (14–12) | 2 | **30** | 26 — **fits, 4 spare** |
+| `4550747` green seal | 42 | 60 | 42 — **unchanged**, green covers both |
+| `1708339-L` terminal (14–12) | 1 | **30** | 42 — **12 short** |
 
-**The terminals were deliberately over-ordered 15× against design for exactly
-this.** Green seals survive the change; the terminal does not, and that was the
-line hedged. What is *not* covered is the wire itself — a new Prowire order in
-the affected colours, and 14 AWG is stiffer in a block where every wire turns
-through 90° under the mating face.
+Green seals survive the change. The terminals cover about two-thirds of it, so a
+full move would need roughly a dozen more `1708339-L`, plus a new Prowire order
+in the affected colours. 14 AWG is also stiffer in a block where every wire turns
+through 90° under the mating face. Moot while the green seal stays snug on the
+delivered 16 AWG.
 
 ⚠️ 14 AWG has its own band-edge story: at 2.08 mm² it falls between
 `1708338-L`'s 1.0–2.0 and `1708339-L`'s 2.5–4.0, the same gap 18 AWG sits in.
-MTA's own AWG labelling calls `1708339-L` the 14–12 terminal and the two existing
-14 AWG legs already use it, so this is settled by precedent rather than by CSA.
+MTA's own AWG labelling calls `1708339-L` the 14–12 terminal and the existing
+14 AWG leg already uses it, so this is settled by precedent rather than by CSA.
 
 #### ⚠️ 6 AWG is not TXL and cannot be
 
@@ -1118,7 +1128,13 @@ unknown provenance with a DMM both ways round — a resistor reads the same in b
 directions, a diode does not.
 
 The starter solenoid is a stock part with no integral option — fit a discrete
-diode across its coil, cathode to the Y/R feed.
+diode across its coil, cathode to the coil's **positive** feed.
+
+⛔ **Do not fit it until blocker 3 closes.** Which of the solenoid's two leads is
+COIL+ is not known (`starter_relay` in `models/kz305-common.yml`). "Cathode to
+Y/R" assumes Y/R is the feed. A diode fitted backwards conducts straight across
+the coil supply every time the start button is pressed, so it is a short rather
+than a suppressor. Read the polarity with the meter in Session A first.
 
 ### USB-C PD charger — replaces the stock accessory circuit
 
@@ -1150,10 +1166,8 @@ doing by default.
   14.0–14.5 V running, and a permanent-magnet alternator with the battery
   disconnected can transient well above that. The SH775 being a **series**
   regulator helps — it open-circuits the stator rather than shunting it.
-- **Sealing follows the hybrid connector policy**: sealed if it lives on the bar
-  or anywhere exposed, stock-style bullets acceptable only if it sits inside the
-  headlight shell or under the seat. Water in the sleeve killed the original
-  harness.
+- **Sealed 090, like every other connection** (#37, 4 Sep 2026). Water in the
+  sleeve killed the original harness.
 - **A socket with a cap or a captive lead**, not an open receptacle. An
   unoccupied USB-C socket on a motorcycle collects water and grit.
 

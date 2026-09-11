@@ -27,10 +27,10 @@ convention — see `models/factory/00-notes.yml`.
 | Marker | n |
 |---|---|
 | OPEN | 112 |
-| MEASURED | 67 |
+| MEASURED | 68 |
 | CONFIRMED | 44 |
 | IDENTIFIED | 39 |
-| CLOSED | 25 |
+| CLOSED | 26 |
 | ESTABLISHED | 12 |
 | CORRECTED | 11 |
 | RESOLVED | 11 |
@@ -44,8 +44,8 @@ convention — see `models/factory/00-notes.yml`.
 | Evidence | n |
 |---|---|
 | `unstated` | 186 |
-| `meter` | 134 |
-| `bench` | 18 |
+| `meter` | 135 |
+| `bench` | 19 |
 | `photo` | 9 |
 | `arith` | 1 |
 | `scan` | 1 |
@@ -128,17 +128,17 @@ note that it is accepted unverified.
 | `models/kz305-rebuild.yml` | 72 | RESOLVED | `unstated` | #   are deliberately not resolved in this file. As of 10 Sep 2026 the |
 | `models/kz305-rebuild.yml` | 74 | CLOSED | `unstated` | #   solenoid; #44 #49 #50 #51 #54 are closed. |
 | `models/kz305-rebuild.yml` | 183 | IDENTIFIED | `unstated` | #      branch must be drawn with feed and ground identified, and the |
-| `models/kz305-rebuild.yml` | 361 | CONFIRMED | `unstated` | docs/pdm-cavity-map.md - written, and confirmed against the part 9-10 Sep 2026. |
-| `models/kz305-rebuild.yml` | 363 | CONFIRMED | `unstated` | ** IN HAND 9 Sep 2026. 107.6 x 72 x 60 mm with the lid on per the datasheet drawing **, and the cavity grid is confirmed |
-| `models/kz305-rebuild.yml` | 403 | CLOSED | `unstated` | only drives that coil. Every other relay's welded-closed failure is a flat battery; that one is |
-| `models/kz305-rebuild.yml` | 431 | CLOSED | `unstated` | block; #49-#51 are closed. |
-| `models/kz305-rebuild.yml` | 500 | CLOSED | `unstated` | USB circuit landed, F11 when #49 closed - and each change would have meant cutting and |
-| `models/kz305-rebuild.yml` | 587 | IDENTIFIED | `unstated` | ** PART IDENTIFIED 6 Sep 2026: SONG CHUAN 303 SERIES, ULTRA MICRO 280. ** 303-1AH-C-xx, SPNO, |
-| `models/kz305-rebuild.yml` | 632 | CONFIRMED | `unstated` | UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026, |
-| `models/kz305-rebuild.yml` | 720 | IDENTIFIED | `unstated` | is the feed/ground reference for the beam circuits - draw every lamp branch with both identified. |
-| `models/kz305-rebuild.yml` | 966 | ESTABLISHED | `unstated` | ** STOCK ALREADY MADE IT ACCESSIBLE, established 2 Sep 2026. ** This node is B03 on the old |
-| `models/kz305-rebuild.yml` | 1082 | CLOSED | `unstated` | Unlike the other blocker-2 cases this one cannot be solved by masking, because the window closed. |
-| `models/kz305-rebuild.yml` | 1359 | CLOSED | `unstated` | order closed before 14 AWG yellow could be added, so this pair comes from Corsa as MIL-spec |
+| `models/kz305-rebuild.yml` | 363 | CONFIRMED | `unstated` | docs/pdm-cavity-map.md - written, and confirmed against the part 9-10 Sep 2026. |
+| `models/kz305-rebuild.yml` | 365 | CONFIRMED | `unstated` | ** IN HAND 9 Sep 2026. 107.6 x 72 x 60 mm with the lid on per the datasheet drawing **, and the cavity grid is confirmed |
+| `models/kz305-rebuild.yml` | 405 | CLOSED | `unstated` | only drives that coil. Every other relay's welded-closed failure is a flat battery; that one is |
+| `models/kz305-rebuild.yml` | 433 | CLOSED | `unstated` | block; #49-#51 are closed. |
+| `models/kz305-rebuild.yml` | 502 | CLOSED | `unstated` | USB circuit landed, F11 when #49 closed - and each change would have meant cutting and |
+| `models/kz305-rebuild.yml` | 589 | IDENTIFIED | `unstated` | ** PART IDENTIFIED 6 Sep 2026: SONG CHUAN 303 SERIES, ULTRA MICRO 280. ** 303-1AH-C-xx, SPNO, |
+| `models/kz305-rebuild.yml` | 634 | CONFIRMED | `unstated` | UPGRADE - keeps horn current out of the left cluster. Topology CONFIRMED BY METER 28 Aug 2026, |
+| `models/kz305-rebuild.yml` | 722 | IDENTIFIED | `unstated` | is the feed/ground reference for the beam circuits - draw every lamp branch with both identified. |
+| `models/kz305-rebuild.yml` | 968 | ESTABLISHED | `unstated` | ** STOCK ALREADY MADE IT ACCESSIBLE, established 2 Sep 2026. ** This node is B03 on the old |
+| `models/kz305-rebuild.yml` | 1084 | CLOSED | `unstated` | Unlike the other blocker-2 cases this one cannot be solved by masking, because the window closed. |
+| `models/kz305-rebuild.yml` | 1361 | CLOSED | `unstated` | order closed before 14 AWG yellow could be added, so this pair comes from Corsa as MIL-spec |
 
 ## Withdrawn, doubted or open — 127
 
@@ -219,7 +219,7 @@ note that it is accepted unverified.
 | `models/factory/backbone.yml` | 39 | OPEN | connected to anything [photo + bench 29 Aug 2026]. Every BK/Y point measures OPEN to it. |
 | `models/factory/backbone.yml` | 50 | OPEN | 0.0-0.3 ohm from the tail to the R/R to the headlight junction - and it is OPEN TO THE CHASSIS |
 | `models/factory/backbone.yml` | 54 | OPEN | elsewhere. That is why every point on it reads open with the harness on the bench - its returns |
-| `models/factory/backbone.yml` | 60 | OPEN | its own child harness. See blocker 5 in the rebuild. [OPEN] |
+| `models/factory/backbone.yml` | 60 | OPEN | its own child harness. See blocker 2 in the rebuild. [OPEN] |
 | `models/factory/backbone.yml` | 163 | OPEN | the whole reason the procedure unwraps before ringing out rather than after. [OPEN] |
 | `models/factory/backbone.yml` | 213 | OPEN | mate at all, and W/BK is a colour that appears NOWHERE else in this project's map. [OPEN] |
 | `models/factory/backbone.yml` | 223 | OPEN | it. [OPEN] |
@@ -255,23 +255,23 @@ note that it is accepted unverified.
 | `models/kz305-rebuild.yml` | 73 | OPEN | #   open ones are #45 #47 #48 #52 #53 #55, plus #46 narrowed to the |
 | `models/kz305-rebuild.yml` | 105 | OPEN | #   starter-relay branch, open to the coil-feed Y/R. It is the starter |
 | `models/kz305-rebuild.yml` | 175 | OPEN | #      regulator open-circuits the stator instead of shorting it, so |
-| `models/kz305-rebuild.yml` | 405 | OPEN | NO PARASITIC DRAW FROM THE HOT FUSES - an un-energised relay is an open contact, so F4 and F5 |
-| `models/kz305-rebuild.yml` | 406 | OPEN | sit at battery voltage against an open circuit and pass nothing. |
-| `models/kz305-rebuild.yml` | 563 | OPEN | IN HAND - a Polaris ORV takeoff, $45 [bench 29 Aug 2026]. A SERIES regulator: it open-circuits |
-| `models/kz305-rebuild.yml` | 578 | OPEN | values. It is what sizes MF_RR. [OPEN] |
-| `models/kz305-rebuild.yml` | 612 | OPEN | (open = bike dead, key does nothing). |
-| `models/kz305-rebuild.yml` | 624 | OPEN | there is no spark. Fails safe (open = engine stops). |
-| `models/kz305-rebuild.yml` | 633 | OPEN | which is what unblocked it: the horn button return is its own black net, left bar to horn, OPEN |
-| `models/kz305-rebuild.yml` | 657 | OPEN | and R/Y are open in both settled positions but blip CLOSED while the switch moves, so both coils |
-| `models/kz305-rebuild.yml` | 924 | OPEN | are what stops the contacts arcing as they open, and without them the points burn in hours. |
-| `models/kz305-rebuild.yml` | 969 | OPEN | reproduce: it needs no tools to open and it is where an EI module would tap. |
-| `models/kz305-rebuild.yml` | 1095 | WITHDRAWN | than a real exception. The exemption is withdrawn. |
-| `models/kz305-rebuild.yml` | 1112 | WITHDRAWN | directly, which is WITHDRAWN - the assembly has exactly TWO small leads, Y/R and BK, BOTH ENDING |
-| `models/kz305-rebuild.yml` | 1117 | OPEN | blocker 3. [OPEN] |
-| `models/kz305-rebuild.yml` | 1133 | OPEN | earth. Its own net, open to the starter-trigger black [meter 28 Aug 2026]. |
-| `models/kz305-rebuild.yml` | 1147 | OPEN | still dead with the key out because its COIL is switched, and an open relay contact draws nothing. |
-| `models/kz305-rebuild.yml` | 1386 | OPEN | WATTAGE, which has still not been read off anything. [OPEN] |
+| `models/kz305-rebuild.yml` | 407 | OPEN | NO PARASITIC DRAW FROM THE HOT FUSES - an un-energised relay is an open contact, so F4 and F5 |
+| `models/kz305-rebuild.yml` | 408 | OPEN | sit at battery voltage against an open circuit and pass nothing. |
+| `models/kz305-rebuild.yml` | 565 | OPEN | IN HAND - a Polaris ORV takeoff, $45 [bench 29 Aug 2026]. A SERIES regulator: it open-circuits |
+| `models/kz305-rebuild.yml` | 580 | OPEN | values. It is what sizes MF_RR. [OPEN] |
+| `models/kz305-rebuild.yml` | 614 | OPEN | (open = bike dead, key does nothing). |
+| `models/kz305-rebuild.yml` | 626 | OPEN | there is no spark. Fails safe (open = engine stops). |
+| `models/kz305-rebuild.yml` | 635 | OPEN | which is what unblocked it: the horn button return is its own black net, left bar to horn, OPEN |
+| `models/kz305-rebuild.yml` | 659 | OPEN | and R/Y are open in both settled positions but blip CLOSED while the switch moves, so both coils |
+| `models/kz305-rebuild.yml` | 926 | OPEN | are what stops the contacts arcing as they open, and without them the points burn in hours. |
+| `models/kz305-rebuild.yml` | 971 | OPEN | reproduce: it needs no tools to open and it is where an EI module would tap. |
+| `models/kz305-rebuild.yml` | 1097 | WITHDRAWN | than a real exception. The exemption is withdrawn. |
+| `models/kz305-rebuild.yml` | 1114 | WITHDRAWN | directly, which is WITHDRAWN - the assembly has exactly TWO small leads, Y/R and BK, BOTH ENDING |
+| `models/kz305-rebuild.yml` | 1119 | OPEN | blocker 3. [OPEN] |
+| `models/kz305-rebuild.yml` | 1135 | OPEN | earth. Its own net, open to the starter-trigger black [meter 28 Aug 2026]. |
+| `models/kz305-rebuild.yml` | 1149 | OPEN | still dead with the key out because its COIL is switched, and an open relay contact draws nothing. |
+| `models/kz305-rebuild.yml` | 1388 | OPEN | WATTAGE, which has still not been read off anything. [OPEN] |
 
 ---
 
-349 marked claims across 22 files.
+351 marked claims across 22 files.
