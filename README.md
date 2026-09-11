@@ -152,12 +152,13 @@ terminal off and starting that wire again.
 harness — organised by session (what you need in hand), with the ordering
 constraints that make some sessions gate others.
 
-`docs/claims-register.md` is generated, and inventories every dated or
-status-marked claim in the models and measurement logs, classified by **how it
-was established**:
+`tools/claims_register.py` inventories every dated or status-marked claim in
+the models and measurement logs, classified by **how it was established**. Its
+output is **generated on demand and not committed** — run it before a build
+milestone, or whenever you want to know what still rests on weak evidence:
 
 ```sh
-.venv/bin/python3 tools/claims_register.py > docs/claims-register.md
+.venv/bin/python3 tools/claims_register.py > docs/claims-register.md   # gitignored
 ```
 
 The evidence classes are ranked by this project's own failure record, not by
@@ -168,8 +169,7 @@ and later withdrawn, with the class of evidence that produced the wrong version.
 Every note in the models carries one explicit evidence tag — `[meter 29 Aug
 2026]`, `[bench 2 Sep 2026]`, `[OPEN]` — and the register reads those directly.
 A claim in `models/` that comes back `unstated` is a note that skipped the
-convention. Regenerate after any model change; the register is a coverage map,
-not a verdict.
+convention. The register is a coverage map, not a verdict.
 
 ## What the notes are, and are not
 

@@ -12,3 +12,6 @@ out/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Generated on demand by tools/claims_register.py - not committed.
+docs/claims-register.md

@@ -6,38 +6,12 @@ individual findings are wrong — most are well evidenced — but that **nothing
 recorded which claim rested on which kind of evidence**, so nobody could tell
 what still needed proving.
 
-`docs/claims-register.md` is now generated from the repo and answers that
-mechanically. Regenerate it after any model change:
+`tools/claims_register.py` answers that mechanically. It is run on demand and
+its output is not committed (see the README):
 
 ```sh
-.venv/bin/python3 tools/claims_register.py > docs/claims-register.md
+.venv/bin/python3 tools/claims_register.py > docs/claims-register.md   # gitignored
 ```
-
-## What the register says today
-
-**349 marked claims** as of the 10 Sep 2026 regeneration, up from 328 on 2 Sep.
-The distribution:
-
-| Evidence | 2 Sep | 10 Sep | |
-|---|---|---|---|
-| `unstated` | 172 | **186** | most are `[OPEN]` markers |
-| `meter` | 130 | **134** | |
-| `bench` | 15 | **18** | the PDM and relay reads |
-| `photo` | 9 | 9 | unchanged — Session A is what converts these |
-| `arith` | 1 | 1 | |
-| `scan` | 1 | 1 | |
-
-**81 standing claims rest on scan, photograph or unstated evidence** while
-asserting something is settled, against 70 on 2 Sep. The rise has not been
-broken down, so it could be new notes that skipped the evidence tag or
-reclassification; the register's own list is where to look.
-
-⚠️ The 47 `unstated` lines in `measurements/` are the remaining gap: that
-directory was not part of the notes cleanup and does not carry evidence tags.
-
-The `unstated` majority is the actionable part. This project is good at
-recording *what* it concluded and inconsistent at recording *how* — and "how"
-is the only thing that says whether a claim needs re-testing.
 
 ## Evidence classes, ranked by this project's own failure record
 

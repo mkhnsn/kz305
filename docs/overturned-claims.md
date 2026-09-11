@@ -3,9 +3,10 @@
 Every claim this project asserted and later withdrew, with the class of
 evidence that produced the wrong version and the class that corrected it.
 
-This is the empirical basis for the evidence ranking used in
-`docs/verification-plan.md` and `docs/claims-register.md`. The ranking is
-**not** a prior about what ought to be reliable — it is this table.
+**A closed record from the transcription phase (Aug–early Sep 2026).** It is
+why the evidence ranking in `docs/verification-plan.md` looks the way it does.
+Add to it if a claim is ever withdrawn again; otherwise it does not need to be
+read or cited.
 
 The model notes no longer carry these histories. They state what is
 currently held true, with one evidence tag. The working-out lives in

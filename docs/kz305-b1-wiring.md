@@ -2,6 +2,20 @@
 
 Last updated: 2026-08-15 (added 15 Aug bench findings: points lead colors, neutral switch)
 
+> **Status, 10 Sep 2026: this is a transcription of what the diagram says, and it
+> is not the project's current state.** The models are. Three questions this file
+> still describes as open have been closed:
+>
+> | Asked below as open | Closed |
+> |---|---|
+> | Dimmer switch common | **28 Aug** `[meter]`: `Bl` is common, `R/BK` HI, `R/Y` LO |
+> | Which of the two 10A holders is which | **28 Aug**: the box prints MAIN / HEAD / TAIL |
+> | Where `Br/W` goes | **29 Aug**: it's the TAIL fuse's input, fed from `SP_RH_BR` |
+>
+> Where the diagram and the bike disagree (e.g. TAIL1 printed `R/BK`, actually
+> `R/Bl`), the diagram's reading is kept on purpose. That divergence is the
+> evidence.
+
 Source: *Kawasaki Z250/KZ305 Service Manual 1979–1982*, printed page 255
 (PDF page 261), in the 1981 KZ305-A supplement.
 
