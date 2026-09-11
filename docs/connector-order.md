@@ -120,26 +120,11 @@ Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals a
 The bussed halves take no terminals. Terminals are shared across the MT / HM / HW
 sealed 090 families, so one part number covers every housing above.
 
-#### The seal bore against TXL — ACCEPTED UNVERIFIED, 6 Sep 2026
+#### Terminals and seals on TXL — accepted per the manufacturer's spec, 10 Sep 2026
 
-HW090 seals are built around Japanese OEM wire, roughly **2.0–2.2 mm** insulation
-OD. **TXL 16 AWG is 2.26–2.40 mm.** Whether the seal closes on it is **not
-established, and the order proceeds anyway** — chasing a specification for a
-$30 line was not worth stalling everything else.
-
-Recorded as accepted rather than dropped, because if it does bite the reason
-needs to be findable:
-
-- **Most likely fine.** Elastomeric seals have real range, and these vendors sell
-  to people using aftermarket wire every day.
-- **The failure shows up at assembly**, as a seal that will not seat or a cavity
-  that will not close.
-- ⚠️ **Test-fit ONE seal before crimping 77.** That costs nothing and turns a
-  discovered-late problem into a discovered-early one.
-- **If it is too tight**: ask Cycle Terminal whether an alternative seal size
-  exists for HW090, the way Corsa's QLW listing offers selectable sizes. Failing
-  that, the sheltered connectors can run a marginal seal and the exposed ones
-  cannot.
+The HW090 terminals and seals are used on the 16 AWG TXL as ordered, within the
+vendor's stated range. Wire and seal sizing are not second-guessed beyond that
+(#37, closed).
 
 ## R/R connectors — IDENTIFIED, 6 Sep 2026
 

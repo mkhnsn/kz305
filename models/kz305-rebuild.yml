@@ -1065,8 +1065,8 @@ cables:
       ** LOAD RECOUNTED 10 Sep 2026 (#45): about 12.3A sustained, 18.7A peak ** on filament lamps with
       USB at 45W. The 4 Sep drop to 16 AWG was justified on 6.6A, which counted only the coil circuit.
       ** IT STAYS 16 AWG, AND CANNOT GO HEAVIER AS BUILT. ** It lands on SP_SW, an HW.JC-14P-1 090
-      junction, and 090 terminals top out around 1.25 sq mm - 16 AWG is already at the edge and 14 AWG
-      will not crimp. ACCEPTED 10 Sep 2026: it is a short run in 125C TXL, and the LED conversion takes
+      junction, and 14 AWG is heavier than the 090 family takes. 16 AWG is used there per the
+      manufacturer's spec (#37). ACCEPTED 10 Sep 2026: it is a short run in 125C TXL, and the LED conversion takes
       it to roughly 11A. If it ever needs to carry more, the fix is to split the switched load, not to
       thicken this wire.
   # --- the two feed-side buses, outside the module - see SP_HOT / SP_SW ---

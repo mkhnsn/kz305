@@ -112,11 +112,9 @@ findings on the project's second-weakest evidence class.
 
 ## Session E — parts in hand
 
-- ~~**Identify the retained connector series** (#37)~~ — **moot since the 4 Sep
-  rescope**: sealed 090 everywhere, stock housings cut off. What #37 still owes is
-  two checks against the new family — 090's current rating against the beam
-  feeds, and whether 16 AWG (1.31 mm²) closes in a 090 terminal rated to about
-  1.25 mm².
+- ~~**Identify the retained connector series** (#37)~~ — **closed.** Sealed 090
+  everywhere, stock housings cut off, terminals and seals used per the
+  manufacturer's spec.
 - **LH way 8 ground (#53).** Horn button pressed, meter from the BK horn spade
   to the cluster screw that will carry the ring terminal. Continuity means the
   external lead works. Open or erratic means fall back to an internal lead.
