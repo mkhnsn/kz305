@@ -1003,6 +1003,11 @@ connectors:
       reproduce: it needs no tools to open and it is where an EI module would tap.
 
 cables:
+  # ignore_in_bom: true marks a conductor that ALREADY EXISTS in a retained stock part - the pod
+  # pigtail, the condenser pigtail, the braided points leads. It is drawn because the electrical path
+  # is real, but it is not cut, labelled or ordered. The BOM and tools/label_schedule.py both skip
+  # it (#52, 10 Sep 2026). The under-block PDM jumpers are NOT flagged: they are real wire, cut and
+  # crimped into two cavities.
 
   W_BAT_SOL:  {<<: *w6,  colors: [RD]}
   W_SOL_SM:   {<<: *w6,  colors: [RD]}
@@ -1104,6 +1109,7 @@ cables:
   W_COIL_R: {<<: *w16, colors: [YE]}
   W_PTS_L:
     <<: *w16
+    ignore_in_bom: true
     colors: [YE]
     notes: Yellow serves LEFT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_CAP_GND:
@@ -1117,10 +1123,12 @@ cables:
       Unlike the other blocker-2 cases this one cannot be solved by masking, because the window closed.
   W_CAP_L:
     <<: *w16
+    ignore_in_bom: true
     colors: [YE]
     notes: STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52. Drawn because the circuit is real; not cut, not labelled, not ordered.
   W_CAP_R:
     <<: *w16
+    ignore_in_bom: true
     colors: [BU]
     notes: |-
       STOCK CONDENSER PIGTAIL, not harness wire - see CAP_L and issue #52.
@@ -1130,6 +1138,7 @@ cables:
       than a real exception. The exemption is withdrawn.
   W_PTS_R:
     <<: *w16
+    ignore_in_bom: true
     colors: [BK]
     notes: Black serves RIGHT - stamped plate, confirmed 15 Aug 2026, corroborated by the diagram. Factory braided jacket - do NOT strip it.
   W_RH_OUT:
@@ -1302,15 +1311,15 @@ cables:
   W_SIG_FR: {<<: *w16, colors: [GY]}
   W_SIG_RR: {<<: *w16, colors: [GY]}
   W_IND_L:  {<<: *w16, colors: [GN], notes: "Left splice to the instrument 6P way 1."}
-  W_IND_L2: {<<: *w16, colors: [GN], notes: "Pod-side leg to the left dash indicator."}
+  W_IND_L2: {<<: *w16, ignore_in_bom: true, colors: [GN], notes: "Pod-side leg to the left dash indicator."}
   W_IND_R:  {<<: *w16, colors: [GY], notes: "Right splice to the instrument 6P way 2."}
-  W_IND_R2: {<<: *w16, colors: [GY], notes: "Pod-side leg to the right dash indicator."}
+  W_IND_R2: {<<: *w16, ignore_in_bom: true, colors: [GY], notes: "Pod-side leg to the right dash indicator."}
   W_GND_SIG_FL: {<<: *w16, colors: [BK]}
   W_GND_SIG_FR: {<<: *w16, colors: [BK]}
   W_GND_SIG_RL: {<<: *w16, colors: [BK]}
   W_GND_SIG_RR: {<<: *w16, colors: [BK]}
-  W_GND_IND_L:  {<<: *w16, colors: [BK], notes: "Into the pod ground splice - see SP_POD_GND."}
-  W_GND_IND_R:  {<<: *w16, colors: [BK], notes: "Into the pod ground splice - completes its 1-to-3."}
+  W_GND_IND_L:  {<<: *w16, ignore_in_bom: true, colors: [BK], notes: "Into the pod ground splice - see SP_POD_GND."}
+  W_GND_IND_R:  {<<: *w16, ignore_in_bom: true, colors: [BK], notes: "Into the pod ground splice - completes its 1-to-3."}
 
   # --- tail lamp and the brake circuit --------------------------------
   W_TAIL_RUN:
@@ -1340,17 +1349,18 @@ cables:
     colors: [BU]
     notes: Splice to the HI filament. W_HEAD_HI now runs relay-to-splice rather than relay-to-lamp.
   W_IND_HB:  {<<: *w16, colors: [BU], notes: "Splice to the instrument 6P - the dash high-beam indicator."}
-  W_IND_HB2: {<<: *w16, colors: [BU], notes: "Pod-side leg, 6P to the indicator."}
-  W_GND_HB:  {<<: *w16, colors: [BK], notes: "Indicator return into the pod ground splice."}
+  W_IND_HB2: {<<: *w16, ignore_in_bom: true, colors: [BU], notes: "Pod-side leg, 6P to the indicator."}
+  W_GND_HB:  {<<: *w16, ignore_in_bom: true, colors: [BK], notes: "Indicator return into the pod ground splice."}
 
   # --- neutral circuit -------------------------------------------------
   W_IND_N_FEED:
     <<: *w16
     colors: [BN]
     notes: PDM F7 to the instrument 6P - switched power for the neutral lamp.
-  W_IND_N_FEED2: {<<: *w16, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
+  W_IND_N_FEED2: {<<: *w16, ignore_in_bom: true, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
   W_NSW2:
     <<: *w16
+    ignore_in_bom: true
     colors: [GY]
     notes: |-
       The lamp's RETURN, not a ground - it runs to the neutral switch, which closes to the engine
@@ -1367,7 +1377,7 @@ cables:
       ~1.1V for the old incandescent. Still worth cleaning, no longer worth chasing.
 
   # --- pod ground and the engine strap ---------------------------------
-  W_POD_GND2: {<<: *w16, colors: [BK], notes: "Pod-side leg - three indicator returns onto one conductor at the splice."}
+  W_POD_GND2: {<<: *w16, ignore_in_bom: true, colors: [BK], notes: "Pod-side leg - three indicator returns onto one conductor at the splice."}
   W_POD_GND:  {<<: *w16, colors: [BK], notes: "Harness-side leg, 6P to the star bus. Stock earthed this on Net B, which never reached the chassis ring."}
   W_ENG_GND:
     <<: *w6

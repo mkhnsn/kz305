@@ -22,12 +22,15 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-210 labels for 105 wires.
+186 labels for 93 wires.
+
+Not labelled: 13 conductors that already exist in retained
+stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
-| `ALT` | ALT-1/2 | `>RR-1/2` | YE/YE | 16 AWG |
-| `ALT` | RR-1/2 | `>ALT-1/2` | YE/YE | 16 AWG |
+| `ALT` | ALT-1/2 | `>RR-1/2` | YE/YE | 14 AWG |
+| `ALT` | RR-1/2 | `>ALT-1/2` | YE/YE | 14 AWG |
 | `BAT_GND` | BATT-2 | `>GND-1` | BK | 6 AWG |
 | `BAT_GND` | GND-1 | `>BATT-2` | BK | 6 AWG |
 | `BAT_SOL` | BATT-1 | `>SOL-1` | RD | 6 AWG |
@@ -44,12 +47,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `BRK_OUT_F` | SP_BRAKE-1 | `>FBRK-2` | GN | 16 AWG |
 | `BRK_OUT_R` | RBRK-2 | `>SP_BRAKE-1` | GN | 16 AWG |
 | `BRK_OUT_R` | SP_BRAKE-1 | `>RBRK-2` | GN | 16 AWG |
-| `CAP_GND` | CAP_L-2 | `>GND-22` | BK | 16 AWG |
-| `CAP_GND` | GND-22 | `>CAP_L-2` | BK | 16 AWG |
-| `CAP_L` | CAP_L-1 | `>PTS_L-1` | YE | 16 AWG |
-| `CAP_L` | PTS_L-1 | `>CAP_L-1` | YE | 16 AWG |
-| `CAP_R` | CAP_R-1 | `>PTS_R-1` | BU | 16 AWG |
-| `CAP_R` | PTS_R-1 | `>CAP_R-1` | BU | 16 AWG |
+| `CAP_GND` | CAP_L-2 | `>SP_GND-1` | BK | 16 AWG |
+| `CAP_GND` | SP_GND-1 | `>CAP_L-2` | BK | 16 AWG |
 | `COIL_L` | COIL_L-1 | `>SP_YR-1` | YE | 16 AWG |
 | `COIL_L` | SP_YR-1 | `>COIL_L-1` | YE | 16 AWG |
 | `COIL_PWR` | K_COIL-1 | `>PDM-4` | YE | 16 AWG |
@@ -58,36 +57,32 @@ again, one wire at a time, and it is not recoverable any other way.
 | `COIL_R` | SP_YR-1 | `>COIL_R-1` | YE | 16 AWG |
 | `DIM_COMMON` | LH-1 | `>SP_RLY-1` | GN | 16 AWG |
 | `DIM_COMMON` | SP_RLY-1 | `>LH-1` | GN | 16 AWG |
-| `ENG_GND` | GND-14 | `>GND_ENG-1` | BK | 6 AWG |
-| `ENG_GND` | GND_ENG-1 | `>GND-14` | BK | 6 AWG |
-| `FLASH_GND` | FLASHER-3 | `>GND-20` | BK | 16 AWG |
-| `FLASH_GND` | GND-20 | `>FLASHER-3` | BK | 16 AWG |
+| `ENG_GND` | GND-3 | `>GND_ENG-1` | BK | 6 AWG |
+| `ENG_GND` | GND_ENG-1 | `>GND-3` | BK | 6 AWG |
+| `FLASH_GND` | FLASHER-3 | `>SP_GND-1` | BK | 16 AWG |
+| `FLASH_GND` | SP_GND-1 | `>FLASHER-3` | BK | 16 AWG |
 | `FLASH_IN` | FLASHER-1 | `>PDM-13` | BN | 16 AWG |
 | `FLASH_IN` | PDM-13 | `>FLASHER-1` | BN | 16 AWG |
 | `FLASH_OUT` | FLASHER-2 | `>LH-4` | BU | 16 AWG |
 | `FLASH_OUT` | LH-4 | `>FLASHER-2` | BU | 16 AWG |
-| `GND_HB` | IND_HB-2 | `>SP_POD_GND-1` | BK | 16 AWG |
-| `GND_HB` | SP_POD_GND-1 | `>IND_HB-2` | BK | 16 AWG |
-| `GND_IND_L` | IND_L-2 | `>SP_POD_GND-1` | BK | 16 AWG |
-| `GND_IND_L` | SP_POD_GND-1 | `>IND_L-2` | BK | 16 AWG |
-| `GND_IND_R` | IND_R-2 | `>SP_POD_GND-1` | BK | 16 AWG |
-| `GND_IND_R` | SP_POD_GND-1 | `>IND_R-2` | BK | 16 AWG |
-| `GND_SIG_FL` | GND-16 | `>SIG_FL-2` | BK | 16 AWG |
-| `GND_SIG_FL` | SIG_FL-2 | `>GND-16` | BK | 16 AWG |
-| `GND_SIG_FR` | GND-17 | `>SIG_FR-2` | BK | 16 AWG |
-| `GND_SIG_FR` | SIG_FR-2 | `>GND-17` | BK | 16 AWG |
-| `GND_SIG_RL` | GND-18 | `>SIG_RL-2` | BK | 16 AWG |
-| `GND_SIG_RL` | SIG_RL-2 | `>GND-18` | BK | 16 AWG |
-| `GND_SIG_RR` | GND-19 | `>SIG_RR-2` | BK | 16 AWG |
-| `GND_SIG_RR` | SIG_RR-2 | `>GND-19` | BK | 16 AWG |
-| `GND_SPD` | GND-12 | `>LAMP_SPD-2` | BK | 16 AWG |
-| `GND_SPD` | LAMP_SPD-2 | `>GND-12` | BK | 16 AWG |
-| `GND_TAC` | GND-13 | `>LAMP_TAC-2` | BK | 16 AWG |
-| `GND_TAC` | LAMP_TAC-2 | `>GND-13` | BK | 16 AWG |
-| `GND_TAIL` | GND-15 | `>TAIL-3` | BK | 16 AWG |
-| `GND_TAIL` | TAIL-3 | `>GND-15` | BK | 16 AWG |
-| `HEAD_GND` | GND-10 | `>HEAD-3` | BK | 16 AWG |
-| `HEAD_GND` | HEAD-3 | `>GND-10` | BK | 16 AWG |
+| `GND_MAIN` | GND-4 | `>SP_GND-1` | BK | 12 AWG |
+| `GND_MAIN` | SP_GND-1 | `>GND-4` | BK | 12 AWG |
+| `GND_SIG_FL` | SIG_FL-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_SIG_FL` | SP_GND-1 | `>SIG_FL-2` | BK | 16 AWG |
+| `GND_SIG_FR` | SIG_FR-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_SIG_FR` | SP_GND-1 | `>SIG_FR-2` | BK | 16 AWG |
+| `GND_SIG_RL` | SIG_RL-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_SIG_RL` | SP_GND-1 | `>SIG_RL-2` | BK | 16 AWG |
+| `GND_SIG_RR` | SIG_RR-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_SIG_RR` | SP_GND-1 | `>SIG_RR-2` | BK | 16 AWG |
+| `GND_SPD` | LAMP_SPD-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_SPD` | SP_GND-1 | `>LAMP_SPD-2` | BK | 16 AWG |
+| `GND_TAC` | LAMP_TAC-2 | `>SP_GND-1` | BK | 16 AWG |
+| `GND_TAC` | SP_GND-1 | `>LAMP_TAC-2` | BK | 16 AWG |
+| `GND_TAIL` | SP_GND-1 | `>TAIL-3` | BK | 16 AWG |
+| `GND_TAIL` | TAIL-3 | `>SP_GND-1` | BK | 16 AWG |
+| `HEAD_GND` | HEAD-3 | `>SP_GND-1` | BK | 16 AWG |
+| `HEAD_GND` | SP_GND-1 | `>HEAD-3` | BK | 16 AWG |
 | `HEAD_HI` | K_HI-2 | `>SP_HI-1` | BU | 16 AWG |
 | `HEAD_HI` | SP_HI-1 | `>K_HI-2` | BU | 16 AWG |
 | `HEAD_HI2` | HEAD-1 | `>SP_HI-1` | BU | 16 AWG |
@@ -102,12 +97,12 @@ again, one wire at a time, and it is not recoverable any other way.
 | `HI_TRIG` | LH-2 | `>K_HI-3` | GY | 16 AWG |
 | `HORN_COIL` | K_HORN-3 | `>SP_RLY-1` | GY | 16 AWG |
 | `HORN_COIL` | SP_RLY-1 | `>K_HORN-3` | GY | 16 AWG |
-| `HORN_FEED` | HORN-1 | `>K_HORN-2` | YE | 16 AWG |
-| `HORN_FEED` | K_HORN-2 | `>HORN-1` | YE | 16 AWG |
-| `HORN_GND` | GND-9 | `>HORN-2` | BK | 16 AWG |
-| `HORN_GND` | HORN-2 | `>GND-9` | BK | 16 AWG |
-| `HORN_PWR` | K_HORN-1 | `>PDM-5` | BU | 16 AWG |
-| `HORN_PWR` | PDM-5 | `>K_HORN-1` | BU | 16 AWG |
+| `HORN_FEED` | HORN-1 | `>K_HORN-2` | BN | 16 AWG |
+| `HORN_FEED` | K_HORN-2 | `>HORN-1` | BN | 16 AWG |
+| `HORN_GND` | HORN-2 | `>SP_GND-1` | BK | 16 AWG |
+| `HORN_GND` | SP_GND-1 | `>HORN-2` | BK | 16 AWG |
+| `HORN_PWR` | K_HORN-1 | `>PDM-5` | RD | 16 AWG |
+| `HORN_PWR` | PDM-5 | `>K_HORN-1` | RD | 16 AWG |
 | `HORN_SW` | K_HORN-4 | `>LH-7` | YE | 16 AWG |
 | `HORN_SW` | LH-7 | `>K_HORN-4` | YE | 16 AWG |
 | `HOT_F1` | PDM-14 | `>SP_HOT-1` | RD | 16 AWG |
@@ -122,32 +117,24 @@ again, one wire at a time, and it is not recoverable any other way.
 | `IGN_RET` | K_MAIN-3 | `>IGN-3` | GY | 16 AWG |
 | `IND_HB` | INSTR_6P-5 | `>SP_HI-1` | BU | 16 AWG |
 | `IND_HB` | SP_HI-1 | `>INSTR_6P-5` | BU | 16 AWG |
-| `IND_HB2` | IND_HB-1 | `>INSTR_6P-5` | BU | 16 AWG |
-| `IND_HB2` | INSTR_6P-5 | `>IND_HB-1` | BU | 16 AWG |
 | `IND_L` | INSTR_6P-1 | `>SP_SIG_L-1` | GN | 16 AWG |
 | `IND_L` | SP_SIG_L-1 | `>INSTR_6P-1` | GN | 16 AWG |
-| `IND_L2` | IND_L-1 | `>INSTR_6P-1` | GN | 16 AWG |
-| `IND_L2` | INSTR_6P-1 | `>IND_L-1` | GN | 16 AWG |
 | `IND_N_FEED` | INSTR_6P-3 | `>SP_INSTR-1` | BN | 16 AWG |
 | `IND_N_FEED` | SP_INSTR-1 | `>INSTR_6P-3` | BN | 16 AWG |
-| `IND_N_FEED2` | IND_N-1 | `>INSTR_6P-3` | BN | 16 AWG |
-| `IND_N_FEED2` | INSTR_6P-3 | `>IND_N-1` | BN | 16 AWG |
 | `IND_R` | INSTR_6P-2 | `>SP_SIG_R-1` | GY | 16 AWG |
 | `IND_R` | SP_SIG_R-1 | `>INSTR_6P-2` | GY | 16 AWG |
-| `IND_R2` | IND_R-1 | `>INSTR_6P-2` | GY | 16 AWG |
-| `IND_R2` | INSTR_6P-2 | `>IND_R-1` | GY | 16 AWG |
 | `INSTR_FEED` | PDM-11 | `>SP_INSTR-1` | BN | 16 AWG |
 | `INSTR_FEED` | SP_INSTR-1 | `>PDM-11` | BN | 16 AWG |
-| `KHI_GND` | GND-6 | `>K_HI-4` | BK | 16 AWG |
-| `KHI_GND` | K_HI-4 | `>GND-6` | BK | 16 AWG |
-| `KLO_GND` | GND-7 | `>K_LO-4` | BK | 16 AWG |
-| `KLO_GND` | K_LO-4 | `>GND-7` | BK | 16 AWG |
-| `KMAIN_GND` | GND-4 | `>K_MAIN-4` | BK | 16 AWG |
-| `KMAIN_GND` | K_MAIN-4 | `>GND-4` | BK | 16 AWG |
-| `K_GND` | GND-5 | `>K_COIL-4` | BK | 16 AWG |
-| `K_GND` | K_COIL-4 | `>GND-5` | BK | 16 AWG |
-| `LH_GND` | GND-8 | `>LH-8` | BK | 16 AWG |
-| `LH_GND` | LH-8 | `>GND-8` | BK | 16 AWG |
+| `KHI_GND` | K_HI-4 | `>SP_GND-1` | BK | 16 AWG |
+| `KHI_GND` | SP_GND-1 | `>K_HI-4` | BK | 16 AWG |
+| `KLO_GND` | K_LO-4 | `>SP_GND-1` | BK | 16 AWG |
+| `KLO_GND` | SP_GND-1 | `>K_LO-4` | BK | 16 AWG |
+| `KMAIN_GND` | K_MAIN-4 | `>SP_GND-1` | BK | 16 AWG |
+| `KMAIN_GND` | SP_GND-1 | `>K_MAIN-4` | BK | 16 AWG |
+| `K_GND` | K_COIL-4 | `>SP_GND-1` | BK | 16 AWG |
+| `K_GND` | SP_GND-1 | `>K_COIL-4` | BK | 16 AWG |
+| `LH_GND` | LH-8 | `>SP_GND-1` | BK | 16 AWG |
+| `LH_GND` | SP_GND-1 | `>LH-8` | BK | 16 AWG |
 | `LO_PWR` | K_LO-1 | `>SP_HEAD-1` | BU | 16 AWG |
 | `LO_PWR` | SP_HEAD-1 | `>K_LO-1` | BU | 16 AWG |
 | `LO_TRIG` | K_LO-3 | `>LH-3` | GN | 16 AWG |
@@ -166,16 +153,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `MTR_TAC` | SP_MTR-1 | `>LAMP_TAC-1` | BN | 16 AWG |
 | `NSW` | INSTR_6P-4 | `>NSW-1` | GY | 16 AWG |
 | `NSW` | NSW-1 | `>INSTR_6P-4` | GY | 16 AWG |
-| `NSW2` | IND_N-2 | `>INSTR_6P-4` | GY | 16 AWG |
-| `NSW2` | INSTR_6P-4 | `>IND_N-2` | GY | 16 AWG |
-| `POD_GND` | GND-11 | `>INSTR_6P-6` | BK | 16 AWG |
-| `POD_GND` | INSTR_6P-6 | `>GND-11` | BK | 16 AWG |
-| `POD_GND2` | INSTR_6P-6 | `>SP_POD_GND-1` | BK | 16 AWG |
-| `POD_GND2` | SP_POD_GND-1 | `>INSTR_6P-6` | BK | 16 AWG |
-| `PTS_L` | COIL_L-2 | `>PTS_L-1` | YE | 16 AWG |
-| `PTS_L` | PTS_L-1 | `>COIL_L-2` | YE | 16 AWG |
-| `PTS_R` | COIL_R-2 | `>PTS_R-1` | BK | 16 AWG |
-| `PTS_R` | PTS_R-1 | `>COIL_R-2` | BK | 16 AWG |
+| `POD_GND` | INSTR_6P-6 | `>SP_GND-1` | BK | 16 AWG |
+| `POD_GND` | SP_GND-1 | `>INSTR_6P-6` | BK | 16 AWG |
 | `RH_IN` | PDM-3 | `>RH-1` | YE | 16 AWG |
 | `RH_IN` | RH-1 | `>PDM-3` | YE | 16 AWG |
 | `RH_OUT` | RH-3 | `>SOL-3` | YE | 16 AWG |
@@ -200,8 +179,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `SIG_RL` | SP_SIG_L-1 | `>SIG_RL-1` | GN | 16 AWG |
 | `SIG_RR` | SIG_RR-1 | `>SP_SIG_R-1` | GY | 16 AWG |
 | `SIG_RR` | SP_SIG_R-1 | `>SIG_RR-1` | GY | 16 AWG |
-| `SOL_GND` | GND-3 | `>SOL-4` | BK | 16 AWG |
-| `SOL_GND` | SOL-4 | `>GND-3` | BK | 16 AWG |
+| `SOL_GND` | SOL-4 | `>SP_GND-1` | BK | 16 AWG |
+| `SOL_GND` | SP_GND-1 | `>SOL-4` | BK | 16 AWG |
 | `SOL_SM` | SM-1 | `>SOL-2` | RD | 6 AWG |
 | `SOL_SM` | SOL-2 | `>SM-1` | RD | 6 AWG |
 | `SW_BUS` | K_MAIN-2 | `>SP_SW-1` | BN | 16 AWG |
@@ -230,8 +209,8 @@ again, one wire at a time, and it is not recoverable any other way.
 | `TAIL_RUN` | TAIL-1 | `>SP_TAIL-1` | BU | 16 AWG |
 | `USB_FEED` | PDM-23 | `>USB-1` | BN | 16 AWG |
 | `USB_FEED` | USB-1 | `>PDM-23` | BN | 16 AWG |
-| `USB_GND` | GND-21 | `>USB-2` | BK | 16 AWG |
-| `USB_GND` | USB-2 | `>GND-21` | BK | 16 AWG |
+| `USB_GND` | SP_GND-1 | `>USB-2` | BK | 16 AWG |
+| `USB_GND` | USB-2 | `>SP_GND-1` | BK | 16 AWG |
 | `YR_OUT` | K_COIL-2 | `>SP_YR-1` | YE | 16 AWG |
 | `YR_OUT` | SP_YR-1 | `>K_COIL-2` | YE | 16 AWG |
 | `YR_TRIG` | K_COIL-3 | `>RH-2` | GY | 16 AWG |

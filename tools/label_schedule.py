@@ -49,7 +49,11 @@ def pinref(connector, pins):
 
 def main():
     model = load(REBUILD, COMMON.read_text(encoding="utf-8"))
-    cables = model.get("cables", {})
+    # Stock conductors in retained parts are drawn but not cut, so they get
+    # no label - see the note above `cables:` in the model (#52).
+    everything = model.get("cables", {})
+    cables = {k: v for k, v in everything.items() if not v.get("ignore_in_bom")}
+    skipped = sorted(set(everything) - set(cables))
     rows = []
     for name, ln, lp, rn, rp in ends(model.get("connections", []), cables):
         c = cables[name]
@@ -76,6 +80,10 @@ def main():
     print("again, one wire at a time, and it is not recoverable any other way.\n")
     print("## Schedule\n")
     print(f"{len(rows)} labels for {len(cables)} wires.\n")
+    if skipped:
+        print(f"Not labelled: {len(skipped)} conductors that already exist in retained")
+        print("stock parts (flagged `ignore_in_bom` in the model): "
+              + ", ".join(f"`{short(n)}`" for n in skipped) + ".\n")
     print("| Label text | Goes on end | Reads (far end) | Colour | Gauge |")
     print("|---|---|---|---|---|")
     for text, near, far, colour, gauge in rows:

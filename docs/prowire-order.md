@@ -3,6 +3,16 @@
 Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 **order** quantities, not design quantities — see the note at the foot.
 
+| Section | Status (10 Sep 2026) |
+|---|---|
+| 1. TXL wire | ✅ ordered, Q25134 |
+| 2. Ring terminals | ✅ bought |
+| 3. Heavy cable | ⬜ **not ordered** — lug sizes wait on the stud sizes (#42) |
+| 4. Splice hardware | ✅ bought |
+| 5 / 5b. Heat shrink, sleeving | ✅ bought |
+| 6. MP630 inline fuse holders | ✅ bought |
+| 8. Tools | see the section |
+
 ## Outstanding after order Q25134 — `TXL-14-4`, ~8 ft
 
 `W_ALT` went back to 14 AWG on 6 Sep because the Furukawa QLW 250 at the
