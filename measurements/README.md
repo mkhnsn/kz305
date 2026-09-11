@@ -382,8 +382,9 @@ There is a **second fuse box** on this bike, carrying **two fuses**. It is a
 | Out 2 | **`W/BK`**, double-female, oxidised and unused |
 
 So `B09`'s mate is that box's `W/Bl` output, and the accessory feed was **in
-service**. Its inbound `R/W` mates a short jumper off the **starter relay
-assembly**'s own `R/W` female bullet.
+service**. Its inbound `R/W` mates a short jumper whose ring bolts to the
+**battery post**, at the battery end of the relay's battery cable — not to the
+relay `[bench 2 Sep, corrected 11 Sep 2026]`.
 
 **⚠️ `R/W` is red base, and it is not `W/R`.** The main power path — `B04.6` to
 `B06.4`, and the R/R's DC output — is `W/R`, white base. Both wires exist on
@@ -407,14 +408,9 @@ base, confirmed with the R/R in hand.
 
 ### What is still open
 
-- **Where the second box takes power, and whether it is switched.** Its `R/W`
-  goes to the starter relay assembly, which **is not yet mapped**. This matters
-  for the accessory identification: the diagram calls the accessory pickup a
-  *switched* feed, and a lead off the relay's battery side would be permanently
-  live.
-  **The capture sheet for that session is `starter-relay.md`**, and the reading
-  that settles it is one ring-out: the `R/W` jumper against each heavy stud,
-  relay de-energised.
+- ~~Where the second box takes power, and whether it is switched.~~ **Closed:**
+  its `R/W` ring is on the **battery post**. Permanently live, unfused for two
+  inches, and the diagram's *switched* call is wrong. See `starter-relay.md`.
 - **`W/BK`'s mate.** None recorded, and it looks like it never had one.
 
 

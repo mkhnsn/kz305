@@ -206,9 +206,10 @@ connectors:
       ⚠️ R/W IS RED BASE, AND IT IS NOT W/R. The main power path is W/R, WHITE base. Both wires exist
       on this bike - see the reversed-pairs warning in kz305-common.yml.
       ** ITS FEED IS PERMANENTLY LIVE. ** The R/W inbound bullet mates a jumper whose ring bolts to
-      the STARTER RELAY'S BATTERY STUD, under the boot - so this box is hot whenever the battery is,
-      and the run is unfused for those two inches [bench 2 Sep 2026]. The diagram's "switched" call
-      for the accessory leads is wrong.
+      THE BATTERY POST ITSELF, under the boot at the battery end of the relay's battery cable - NOT
+      to the relay [bench 2 Sep 2026, corrected 11 Sep]. So this box is hot whenever the battery is,
+      and the run is unfused for those two inches. The diagram's "switched" call for the accessory
+      leads is wrong.
       NOT DRAWN INTO THE CIRCUIT: only the W/Bl output has a known destination. W/BK has no recorded
       mate at all, and W/BK is a colour that appears NOWHERE else in this project's map. [OPEN]
   SP_NETA:

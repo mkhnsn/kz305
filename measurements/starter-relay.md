@@ -12,13 +12,12 @@ are logged here, not in `harness-lengths.csv`.
 Two open items in `README.md` both terminate at this assembly and cannot close
 without it:
 
-- **Is the accessory feed switched or permanently live?** The second fuse box
-  takes power on an `R/W` male bullet, and that `R/W` mates *a short jumper off
-  the starter relay assembly's own `R/W` female bullet*. Which relay stud that
-  jumper leaves from — battery side or switched side — is the whole answer. The
-  44-year-old diagram calls the accessory pickup *switched*; a lead off the
-  battery side would be permanently live, and that changes the fuse assignment
-  the rebuild has to make.
+- **Is the accessory feed switched or permanently live?** ✅ Closed 2 Sep,
+  corrected 11 Sep: the second fuse box's `R/W` mates a short jumper whose ring
+  sits **under the battery boot at the battery end of the battery cable** — on
+  the battery post, not on the relay at all. Permanently live. The 44-year-old
+  diagram calls the accessory pickup *switched*; it is not, and that changes
+  the fuse assignment the rebuild has to make.
 - **The `B06.4` melting mechanism.** `B06.4` is `W/R`, the 20 A MAIN circuit,
   and it melted at a bullet where a larger conductor meets a smaller one. The
   larger conductor runs to this assembly. This is a **design** finding, not a
@@ -39,7 +38,7 @@ relay itself.
 | `B06.2` — `BK`, female bullet | lengths, 2026-08-28 | **Black Net 2 = starter trigger.** 0.2 Ω to `B01.2`'s black (RH_4P, the start button) and **open** to Black Net 1. Start button → relay COIL+. |
 | `B06.4` — `W/R`, male bullet, **melted** | lengths + inventory | Its 3-way node ran off as `W/R` to the relay. The node was on the **fuse-box pigtail**, not in the loom, and is now unplugged — the 28 Aug mate record cannot be re-verified by looking. |
 | `B06.1` — `Y/R`, male bullet | lengths, 2026-08-28 | **`Y/R` Net 2**, open to both `B03` and `B01.2`. A second independent `Y/R` circuit the models do not carry. On the branch serving the relay; **circuit unidentified**. |
-| second fuse box inbound `R/W` | README, 2026-08-29 | Mates a short jumper off the relay assembly's own `R/W` female bullet. |
+| second fuse box inbound `R/W` | README, 2026-08-29 | Mates a short jumper. Its ring is at the **battery post**, not on the relay `[bench 11 Sep 2026]`. |
 | `W_SOL_GND` | `models/factory/starting.yml` | Modelled direct to chassis ground, confirmed 15 Aug. **No neutral-switch interlock in this circuit.** |
 | `W_START` | `models/factory/starting.yml` | Start button output to COIL+. `BK` but **not** a ground — a black net of its own. |
 
@@ -86,6 +85,13 @@ cut to fit on the bike, so a tape length is not needed.
 Under the battery boot, alongside the heavy cable's ring, sits **a second ring
 terminal on an `R/W` wire, running about 2 in to a female bullet.** It is
 unconnected now but is plainly made to bolt to **the battery stud itself**.
+
+⚠️ **The `R/W` ring is at the BATTERY end of the battery cable, not at the
+relay** `[bench 11 Sep 2026]`. The relay's battery stud carries the heavy cable
+and the `W/R` double-female; the battery post carries the heavy cable's other
+ring and the `R/W` ring. Same net, two physically different landings — so the
+`R/W` jumper is **not** a lead of the relay assembly and does not belong on its
+terminal map.
 
 That answers the question this whole capture sheet was opened for, and it
 answers it **without a meter** — a lug on a post is topology, where a meter
@@ -262,20 +268,11 @@ assembly`. State the cavity rule used in `notes`.
 | Per-way colour + gender | |
 | Depth | |
 
-### 2. ⚠️ Which stud the `R/W` jumper leaves from — battery side or switched
+### 2. ✅ Where the `R/W` jumper takes power — closed, no reading needed
 
-**The reading that unblocks the accessory identification.** With the relay
-de-energised, ring the `R/W` female bullet against each of the two heavy studs.
-The stud it is continuous with is its source.
-
-- Continuous with the **battery** stud → the accessory feed is **permanently
-  live**, and the diagram's "switched" call is wrong.
-- Continuous with the **starter motor** stud → it is only live while cranking,
-  which cannot be what fed an accessory circuit. That result means the jumper is
-  something else and the identification needs rethinking.
-
-Record the ohms, not just "continuous" — the procedure's >1 Ω rule makes every
-ring-out a fault survey.
+Its ring bolts to the **battery post**, at the battery end of the battery cable
+`[bench 2 Sep, corrected 11 Sep 2026]`. A lug on a post is topology; no ring-out
+against the relay studs is needed, and none would tell you more.
 
 ### 3. Heavy cables
 
@@ -292,9 +289,8 @@ no wire gauge on this project has been measured at all.
 
 ### 4. The `R/W` jumper
 
-Length, gauge, and **whether it is a discrete lead or a shared crimp** with
-anything else on that stud. A shared crimp is a splice and changes the topology
-the rebuild reproduces.
+Not a relay lead — it lives at the battery post. Gauge only, if ever; the
+rebuild does not reproduce it.
 
 ### 5. Coil ground
 
