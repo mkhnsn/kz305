@@ -11,7 +11,7 @@ The working-out, superseded options and dated history are in
 | PDM | **MTA `0301370`, in hand and checked** |
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
-| Fuses | Ratings assigned, F1–F11. **Ordered** (Cycle Terminal): Mini blade + ATC 20 A / 30 A |
+| Fuses | Ratings assigned, F1–F11, plus **7 spares populated in the block**. **Ordered** (Cycle Terminal): Mini blade + ATC 20 A / 30 A |
 | Flasher | **Custom LED ELFR-1, ordered** 11 Sep (#11) |
 | 6 AWG heavy cable | **Ordered** 11 Sep: welding cable + 1/4" lugs, fits the M6 studs (#42) |
 | USB-C PD charger | Criteria set, part not selected (#64) |
@@ -155,7 +155,7 @@ blade, not MTA's cavity bore.
 Cycle Terminal as `SCMR20`, which they list as the **resistor type**.
 **Genuine relays are on order from Cycle Terminal** and replace the Amazon
 knockoffs, which were used for test-fitting. The knockoffs are resistor type too
-`[bench 10 Sep]`. Six positions, five fitted, one spare.
+`[bench 10 Sep]`. Six positions, **six fitted**: five wired and `K_SPARE` sitting unwired in the sixth so the spare lives with the bike (decided 11 Sep). **Buy six.**
 
 **On arrival:** read each coil with a DMM both ways round. Resistor type reads
 the same in both directions; a diode doesn't. And read the pin marking: the
@@ -201,6 +201,10 @@ and a diode fitted backwards shorts the coil supply on every start press. See #4
 
 Assigned 4 Sep (#41). **Sized for incandescent on purpose**, so the LED headlight
 and USB charger can't move them. Per-fuse reasoning is on `PDM` in the model.
+
+**Plus 7 spares, populated in the block's spare positions** (decided 11 Sep):
+2 x 5 A, 2 x 7.5 A, 2 x 10 A, 1 x 15 A. Layout in `docs/pdm-cavity-map.md`.
+So the kit needs **18 Mini fuses**: 7 x 5 A, 4 x 7.5 A, 5 x 10 A, 2 x 15 A.
 
 - **Buy a quality kit** — Littelfuse, Bussmann or MTA. This harness exists because
   a joint on the main power path melted.

@@ -25,7 +25,7 @@ hand, 9–10 Sep 2026 `[bench]`. Part numbers and quantities are in
  r5   F5 IN    spare   │  K_COIL  ││  K_HORN  │   F6 IN    F9 IN    spare    spare
  r6   F5 OUT   spare   └──────────┘└──────────┘   F6 OUT   F9 OUT   spare    spare
                        ┌──────────┐┌──────────┐
-                       │   K_HI   ││  SPARE   │   (rows 3-4 and 5-6 of c3-c6)
+                       │   K_HI   ││ K_SPARE  │   (rows 3-4 and 5-6 of c3-c6)
                        └──────────┘└──────────┘
 
       ──── HOT ────   ──── 6 relays ────   ──────── SWITCHED ────────
@@ -46,9 +46,9 @@ F3 on permanent power.
 |---|---|
 | **Fuse positions** | **18** — c1–c2 gives 6, c7–c10 gives 12 |
 | Fuses used | 11 |
-| **Spare fuse positions** | **7** |
+| **Spare fuse positions** | **7 — all populated with spare fuses**, see below |
 | Relay positions | 6 |
-| Relays fitted | 5, one spare |
+| Relays fitted | **6** — 5 wired, 1 spare fitted unwired |
 | **Wired cavities** — 11 fuses x2 + 5 live relays x4 | **42** |
 | **Cavity plugs** — 60 less wired | **18** |
 
@@ -57,7 +57,30 @@ cavities, so substituting one costs two spare fuse positions and reopens the
 rotation question for that position.
 
 **Every unwired cavity gets a plug**, all 18. The module seals at the wire-entry
-face, so a relay on top doesn't close a hole underneath.
+face, so a relay on top doesn't close a hole underneath — and neither does a
+spare fuse. The plug count does not move when the spares go in.
+
+## Spares live in the block — decided 11 Sep 2026
+
+**Every spare position is populated**, so the spares travel with the bike
+instead of in a drawer. A spare position has no wires under it, so a fuse or
+relay sitting there does nothing until it is moved into a live position.
+
+**Spare fuses — 7, covering every rating used:**
+
+| Position | Rating | | Position | Rating |
+|---|---|---|---|---|
+| c2 r1–2 | 5 A | | c9 r5–6 | 10 A |
+| c2 r3–4 | 5 A | | c10 r1–2 | 10 A |
+| c2 r5–6 | 7.5 A | | c10 r3–4 | 7.5 A |
+| | | | c10 r5–6 | **15 A** |
+
+Two each of 5, 7.5 and 10 A, one 15 A (only F5 uses it). The HOT end's spares
+sit in c2 next to the HOT column; the SWITCHED end's in c9–c10.
+
+**Spare relay — 1**, `K_SPARE`, in the sixth position (c5–c6, rows 5–6). Same
+part as the other five, so it swaps into any of them. Buy **six** relays, not
+five.
 
 ## Relay pins — and why rotation doesn't matter
 
@@ -104,4 +127,6 @@ marking and confirm the diagonals when they arrive.
   being read off a diagram instead of the part.
 - **One wire per cavity.** The feed buses are star points outside the module
   (`SP_HOT`, `SP_SW`).
+- **Spares go in last**, after the wired positions are checked, so a spare is
+  never mistaken for a live fuse during the ring-out.
 - **Depinning:** pull the TPA (`0301372`), then release both tangs.
