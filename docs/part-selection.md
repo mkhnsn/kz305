@@ -12,10 +12,11 @@ The working-out, superseded options and dated history are in
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
 | Fuses | Ratings assigned, F1–F11. **Ordered** (Cycle Terminal): Mini blade + ATC 20 A / 30 A |
-| Flasher | Shortlisted, not yet in hand (#11) |
-| 6 AWG heavy cable | Type settled; lugs wait on stud sizes (#42) |
+| Flasher | **Custom LED ELFR-1, ordered** 11 Sep (#11) |
+| 6 AWG heavy cable | **Ordered** 11 Sep: welding cable + 1/4" lugs, fits the M6 studs (#42) |
 | USB-C PD charger | Criteria set, part not selected (#64) |
 | LED headlight | Not selected (#60) |
+| Labels, grommets, diodes | **Ordered** 11 Sep: Rhino-compatible 6/9/12/19 mm, grommet kit, 1N4004 x125 |
 
 ---
 
@@ -215,8 +216,14 @@ and USB charger can't move them. Per-fuse reasoning is on `PDM` in the model.
 around 8 AWG. Use **fine-strand welding cable**, red and black, with tinned
 copper lugs and adhesive heat-shrink boots.
 
-- [ ] **Lug sizes** come off the actual studs: the starter relay and the motor
-  terminal.
+**Ordered 11 Sep 2026:** Shirbly 6 AWG welding cable, 10 ft red + 10 ft
+black; SELTERM 6 AWG 1/4" tinned copper lugs, 25. Both relay studs and the
+motor terminal are **M6** `[bench 11 Sep]`, and a 1/4" (6.35 mm) hole fits M6.
+Battery-post and star-bus lug sizes not yet read; the 1/4" lugs likely cover
+them too.
+
+- [ ] Adhesive heat-shrink boots for the lugs - not yet ordered (the 19 mm
+  printed labels are not boots).
 
 ⚠️ `W_ENG_GND` carries the whole cranking return. It's not a signal earth.
 
@@ -251,7 +258,9 @@ Required because the bike is going **full LED**. It needs a **load-independent**
 solid-state unit. Load is only 2–4 W per side, so capacity isn't the deciding
 factor.
 
-**Buy whichever of the first two is in stock:**
+**Ordered 11 Sep 2026: Custom LED ELFR-1** (the plug-in version, not the QD), $25.99, arriving Tuesday. Stays open on #11 until bench-tested with the LED signals.
+
+The shortlist it was chosen from:
 
 | | |
 |---|---|
