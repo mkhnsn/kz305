@@ -121,8 +121,9 @@ the suffix it's a reel of thousands.
 - [ ] **Crimp tool** for `1708338-L` / `1708339-L` (sealed). Don't order MTA
   `9602455` (listed for unsealed). See `docs/prowire-order.md`.
 - [ ] **Pull-test the first crimp.**
-- [ ] **#45** (hot/switched split) moves F4 and F5 across the relay block if
-  adopted. Settle it before populating.
+- [x] ~~**#45** (hot/switched split)~~. **Settled 10 Sep: the split stays**, so
+  the cavity map stands. A welded horn or beam relay is fixed by pulling it and
+  fitting the spare. See `docs/pre-ride-check.md`.
 
 ---
 
@@ -151,7 +152,12 @@ blade, not MTA's cavity bore.
 
 `303-1AH-C-R1`, Ultra Micro 280, 20 A, SPNO, **4-way** (2 x 2 pins). Sold by
 Cycle Terminal as `SCMR20`. Six positions, five fitted, one spare. In hand, and
-confirmed resistor type `[bench 10 Sep]`.
+confirmed resistor type `[bench 10 Sep]`. **Carry a spare on the bike.** It's
+the fix for a stuck horn or beam, and for a failed stop check
+(`docs/pre-ride-check.md`).
+
+**K_MAIN is the loaded one:** about 12 A sustained and 19 A peak on filament
+lamps, against a 20 A relay. The others carry 0.1–7 A.
 
 ### Coil suppression
 

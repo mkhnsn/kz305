@@ -38,8 +38,7 @@ fit in **four columns** — c3–c4 and c5–c6.
 matters: a mis-landed feed wire would have to cross four columns of relays to put
 F3 on permanent power.
 
-⚠️ **#45 may move F4 and F5 to SWITCHED.** If it's adopted, they cross the relay
-block and this layout gets redrawn. Settle #45 before populating.
+**F1, F4 and F5 stay HOT.** Settled 10 Sep 2026 (#45), so this layout stands.
 
 ## Counts
 

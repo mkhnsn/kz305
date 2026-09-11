@@ -148,6 +148,10 @@ terminal off and starting that wire again.
 
 ## Verification
 
+`docs/pre-ride-check.md` is the check to run on the finished bike, every ride:
+the engine must stop on the key and on the kill switch, each on its own. It also
+covers what to do about a stuck horn or beam relay.
+
 `docs/verification-plan.md` is the plan for proving the model against the real
 harness — organised by session (what you need in hand), with the ordering
 constraints that make some sessions gate others.

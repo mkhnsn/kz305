@@ -243,14 +243,19 @@ connectors:
       to SP_HOT instead, which is a power stud.
       ⚠️ THIS FUSE PROTECTS THE WIRE, NOT THE LOADS - every circuit downstream has its own fuse. So
       the rating and the conductor move together, and BIGGER IS NOT BETTER.
-      ** 20A EXACTLY, AND NEITHER NEIGHBOURING SIZE WORKS - checked 6 Sep 2026. ** SP_HOT's worst case
-      on filament lamps is about 15.4A, all coincident:
-        K_MAIN switched side, F3 coils plus relay coils   6.4A
-        F4 horn                                           2.0A
-        F5 headlamp, BOTH beams during the dimmer blip    7.0A
-      A 15A fuse is BELOW that and nuisance-blows on every cold dip. A 30A fuse does not protect
-      W_MAIN_OUT, which is 14 AWG and good for about 20A. 20A leaves 30% margin and protects its
-      conductor, which is the only job it has.
+      ** 20A EXACTLY - LOAD RECOUNTED 10 Sep 2026 (#45). ** MF carries the whole bike. On filament
+      lamps with the USB charger at its 45W ceiling:
+        switched side via K_MAIN, sustained (F3 6.0, F10 4.4, F7/F6 1.55, coils 0.35)   ~12.3A
+        F1 K_MAIN coil ~0.1 + F5 headlamp, one beam 4.2                                   ~4.3A
+        SUSTAINED, riding at night on high beam and charging                             ~16.6A
+        + F8 brake 2.25, F9 signals 4.1 flashing, F4 horn 2.0, dimmer blip +2.8        intermittent
+      The earlier figure of 15.4A counted only the coil circuit on the switched side and left out
+      F6-F10. The worst REALISTIC case - high beam, brake held, indicating, charging at 45W -
+      averages about 21A, at this fuse's rating. An ATC blade carries its rating continuously, so it
+      holds, but there is no margin in that corner. Accepted 10 Sep 2026: the USB cap stays at 45W
+      and the LED conversion takes this down to roughly 12-13A.
+      A 25A or 30A fuse does not protect W_MAIN_OUT, which is 14 AWG. Going up means W_MAIN_OUT to
+      12 AWG first.
       ** 20A STANDS, AND #49 IS WHAT FREED IT (4 Sep 2026). ** While two 18 AWG branches left the
       switched bus unfused, this fuse was their only protection and its rating was hostage to them.
       They now leave through F11, so nothing downstream depends on this rating except the 14 AWG main
@@ -399,16 +404,31 @@ connectors:
                             out; only the contact side is hot.
           F5 HEADLAMP PWR - K_HI and K_LO commons, same arrangement.
         SW   - fed from SW IN, downstream of K_MAIN, dead with the key out:
-          F2 KILL FEED, F3 COIL PWR, F6 TAIL/PARK, F7 INSTR, F8 BRAKE, F9 SIGNAL.
+          F2 KILL FEED, F3 COIL PWR, F6 TAIL/PARK, F7 INSTR, F8 BRAKE, F9 SIGNAL, F10 USB,
+          F11 RELAY COILS.
       ** F3 IS NOT NEGOTIABLE. ** If it were hot and K_COIL's contact ever welded, the engine would
       keep running with the key out AND THE KILL SWITCH WOULD HAVE NO EFFECT, because the kill switch
-      only drives that coil. Every other relay's welded-closed failure is a flat battery; that one is
-      a bike you cannot stop.
+      only drives that coil. That one is a bike you cannot stop.
+      ** THE OTHER RELAYS' WELDED-CLOSED FAILURE, corrected 10 Sep 2026 (#45). ** It is not just "a flat
+      battery". A welded K_HORN leaves the horn sounding, and a welded K_HI or K_LO leaves that beam
+      lit - and because F4 and F5 are HOT, the key does not clear either. ACCEPTED, because a relay
+      welds AT THE MOMENT IT SWITCHES (button pressed, dimmer moved), so the rider is there when it
+      happens. THE REMEDY IS TO PULL THE STUCK RELAY AND FIT THE SPARE - not to pull F4 or F5, which
+      would take both beams. Carry a spare relay.
+      Considered and rejected on 10 Sep: (a) moving F4/F5 onto K_MAIN, which on filament lamps puts
+      ~16.5A sustained and ~28A peak through a 20A micro relay and 16 AWG W_SW_BUS; and (b) a second
+      ignition relay K_AUX for F4/F5, which adds a failure where the headlamp dies with the engine
+      still running, and needs a ground position, which means installing the spare fourth SP_GND
+      junction.
+      ⚠️ DOUBLE WELD: K_MAIN and K_COIL both welded leaves no electrical way to stop the engine short
+      of pulling F3. Mitigated by the pre-ride stop check in docs/pre-ride-check.md, which catches a
+      latent weld in either one before the second can happen. Stalling in gear is the last resort.
       NO PARASITIC DRAW FROM THE HOT FUSES - an un-energised relay is an open contact, so F4 and F5
       sit at battery voltage against an open circuit and pass nothing.
-      WHAT THE HYBRID BUYS: K_MAIN carries about 6.6A rather than the roughly 9A of a full stack, and
-      the headlamp and horn loads never cross its contacts at all. It is the one relay whose failure
-      kills the bike, so it is the one worth unloading.
+      WHAT THE HYBRID BUYS: the headlamp and horn loads (4-9A) never cross K_MAIN's contacts. K_MAIN
+      still carries the rest of the switched side - about 12.3A sustained and 18.7A peak on filament
+      lamps (recounted 10 Sep 2026; the earlier 6.6A counted only the coil circuit). It is the one
+      relay whose failure kills the bike, so keeping the headlamp off it is worth the split.
       ** FUSE RATINGS ASSIGNED 4 Sep 2026, SIZED FOR INCANDESCENT. ** The bike may run filament lamps
       for a while before the LED conversion, so every rating below covers the STOCK load, not the LED
       one. That is the conservative direction and it means the ratings do not change if the lamp
@@ -504,8 +524,9 @@ connectors:
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
       cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
-      ⚠️ CARRIES THE WHOLE SWITCHED LOAD, about 6.6A, through its first segment. Same taper and same
-      ordering rule as SP_HOT.
+      ⚠️ CARRIES THE WHOLE SWITCHED LOAD through its first segment - about 12.3A sustained and 18.7A
+      peak on filament lamps with USB at 45W (recounted 10 Sep 2026, #45). Inside the junction's 22A.
+      Same taper and same ordering rule as SP_HOT.
       Every branch is now fused, so MF is no longer the sole protection for anything leaving here -
       which is what freed MF's rating to be chosen on wire protection alone.
 
@@ -602,19 +623,20 @@ connectors:
       ⚠️ COIL IS 91 mA, NOT THE 150 mA THIS MODEL ASSUMED. Five relays draw 455 mA, not 750. That eases
       K_MAIN and, more to the point, the 3-5 ohm cluster contacts that justify relaying at all.
       ⚠️ LAMP LOAD IS RATED 16A STEADY, not the headline 20A - with 80A inrush allowed, which covers
-      cold filament easily. Nothing here approaches either: the heaviest is K_MAIN at about 6.4A.
+      cold filament easily. The heaviest is K_MAIN, at about 12.3A sustained and 18.7A peak on
+      filament lamps (recounted 10 Sep 2026). K_MAIN does not make onto a lamp's inrush - the lamp
+      relays do - except the tail and instrument lamps, which are small.
       ⚠️ DATASHEET NOTE 7: the 20A type wants MIN 3.0 sq mm wire. That applies at the full 20A rating.
-      Our heaviest relay circuit is 6.4A on 16 AWG, which is fine - but do not load one to 20A without
-      taking the wire to 12 AWG.
+      K_MAIN at ~12A sustained on 16 AWG is below that, but not by the margin the round-up rule wants.
+      Do not load any relay toward 20A without going to 12 AWG, which also needs the GREY seal.
       ALL FIVE RELAYS ARE ISO 280 MICRO and SEAT IN THE PDM rather than in separate sockets - the
-      module's cavities are the 2.8mm 280 footprint. 20A parts (35A versions available) against a
-      worst case of about 6.6A here, so every position sits well inside its rating.
+      module's cavities are the 2.8mm 280 footprint. 20A parts (35A versions available). K_MAIN is the
+      heavily loaded one; the others carry 0.1-7A.
       UPGRADE - keeps the whole switched load out of the ignition switch. That contact measured a
       healthy 0.1 ohm [meter 15 Aug 2026], so this is preventive rather than a repair. Fails safe
       (open = bike dead, key does nothing).
-      CARRIES ABOUT 6.6A UNDER THE HYBRID SPLIT rather than the roughly 9A of a full stack - the
-      headlamp and horn loads are fed hot and bypass these contacts entirely. This is the one relay
-      whose failure kills the bike, which is what made it worth unloading.
+      Under the hybrid split the headlamp and horn are fed hot and bypass these contacts. What remains
+      is still about 12.3A sustained / 18.7A peak on filament lamps - see the PDM notes.
 
   K_COIL:
     type: Relay
@@ -1021,14 +1043,15 @@ cables:
     <<: *w16
     colors: [BN]
     notes: |-
-      Relay output - the switched brown bus. Under the hybrid split it carries the coil circuit through
-      F3 plus the relay coils, about 6.6A, while the horn and headlamp loads are fed hot and never
-      cross it.
-      ** DROPPED FROM 14 TO 16 AWG, 4 Sep 2026. ** It was the only 14 AWG BN in the harness, so a whole
-      minimum quantity bought one wire, and 16 AWG BN is already on the list at eight conductors.
-      16 AWG carries 6.6A with room to spare on a run this short.
-      NOTE THIS IS A ROUND-DOWN, against the standing round-up rule, and it is justified by the SKU
-      rather than by the load. If the switched bus ever grows past about 10A, revisit it.
+      Relay output - the switched brown bus, K_MAIN's 87 to SP_SW. Horn and headlamp are fed hot and
+      never cross it, but everything else switched does.
+      ** LOAD RECOUNTED 10 Sep 2026 (#45): about 12.3A sustained, 18.7A peak ** on filament lamps with
+      USB at 45W. The 4 Sep drop to 16 AWG was justified on 6.6A, which counted only the coil circuit.
+      ** IT STAYS 16 AWG, AND CANNOT GO HEAVIER AS BUILT. ** It lands on SP_SW, an HW.JC-14P-1 090
+      junction, and 090 terminals top out around 1.25 sq mm - 16 AWG is already at the edge and 14 AWG
+      will not crimp. ACCEPTED 10 Sep 2026: it is a short run in 125C TXL, and the LED conversion takes
+      it to roughly 11A. If it ever needs to carry more, the fix is to split the switched load, not to
+      thicken this wire.
   # --- the two feed-side buses, outside the module - see SP_HOT / SP_SW ---
   W_HOT_F1:  {<<: *w16, colors: [RD], notes: "Hot bus to the F1 cavity. RD - always-hot per the scheme."}
   W_HOT_F4:  {<<: *w16, colors: [RD], notes: "Hot bus to the F4 cavity."}
