@@ -523,7 +523,8 @@ chosen at build time. It is the exact property this section was reaching for.
 **Envelope: 107.6 x 72 x 60 mm** with the lid on, from the manufacturer's
 dimensioned drawing (`parts/mta-0301370-dimensions.png`). The module in hand
 measured 108 x 71 x 60 on 9 Sep, which agrees. That is the box the enclosure and
-mounting have to swallow — before wire exit clearance below the mating face.
+mounting have to swallow. ⚠️ It is the **whole** module dimension — the terminal
+and its seal sit *inside* that 60 mm, not below it.
 
 #### Capacity against this design
 
@@ -846,10 +847,26 @@ loose, these ten are the fallback and save a reorder.
   **Decided: build it that way.** If vibration turns out to lift a relay, the fix
   is **a keeper added to the lid**, which is a change to one part and can be made
   after the harness is built. It does not gate anything now.
-- ⬜ **Wire exit depth below the mating face is still unmeasured** — no terminal
-  has been crimped yet. **This is the last input the enclosure needs**; the
-  107.6 x 72 x 60 mm envelope is the module alone and does not include the wire
-  bundle turning out of the bottom.
+- ✅ **"Wire exit depth" was a phantom requirement — withdrawn 10 Sep 2026.** An
+  earlier draft of this file claimed the enclosure had to allow an unmeasured
+  depth below the mating face before the wires could turn. **It does not.** The
+  wire comes out of the bottom cleanly and nothing in the module prevents it
+  bending 90° immediately `[bench]`. The terminal and seal seat *within* the
+  60 mm. **The envelope is complete as drawn.**
+
+  What the enclosure actually has to allow is not a module dimension at all:
+
+  - **Bundle cross-section.** 42 wires at 2.0–2.6 mm OD leaving one 107.6 x 72 mm
+    face. Turned 90°, they fan and stack, and the bundle's thickness — not any
+    per-wire depth — is what the enclosure has to clear. That number falls out of
+    the routing, which depends on where the module is mounted.
+  - **Strain relief at the seal.** A bend taken *at* the cavity mouth puts shear
+    on the crimp and can distort the seal lip, which is the one thing keeping
+    water out. This is a **clamp-the-bundle** requirement, not a clearance one —
+    support the loom so the connector is not the thing holding the bend.
+
+  ⚠️ Neither is measurable until the mounting location is chosen. **The enclosure
+  is blocked on that decision, not on a measurement.**
 
 Grid pitch and relay footprint alignment, the last piece of #10 that needed the
 part rather than arithmetic, are both read off the bench:
@@ -1227,10 +1244,13 @@ provisional here is the *terminal* count, for reason 2 above — the jumpers.
   fuses throughout. Not a drawback, but it should be deliberate — it sets what
   spares get carried.
 - **Enclosure and mounting.** Sets the footprint, so it comes before layout.
-  The module itself is 107.6 x 72 x 60 mm lidded; **wire exit depth below it is
-  still unmeasured** and needs a crimped terminal in a cavity to settle.
-  ⚠️ The MTA mounting legs are **not committed to** — the shipment was mis-picked
-  and the legs may not be used at all, so the mounting route is open.
+  The module is **107.6 x 72 x 60 mm lidded and that is the whole of it** — the
+  terminals and seals are inside it, and the wires can turn 90° straight out of
+  the bottom face with nothing in the way `[bench 10 Sep]`.
+  What is open is **where it mounts**, which then sets the bundle routing and the
+  clamping that keeps the bend off the seals. ⚠️ The MTA mounting legs are **not
+  committed to** — the shipment was mis-picked and the legs may not be used at
+  all.
 - ~~**Relay retention against vibration.**~~ ✅ **Settled 10 Sep 2026** — it is
   terminal friction, and that is accepted. Fallback if it ever lifts: a keeper in
   the lid, addable after the build.
