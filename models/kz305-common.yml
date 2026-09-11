@@ -252,6 +252,11 @@ templates:
       THE COIL LEADS MATE B06.1 AND B06.2 BY GENDER COMPLEMENT - B06.1 is a MALE Y/R and B06.2 a
       FEMALE BK, exactly opposite to the relay's pair, on the branch that serves this assembly. That
       identifies Y/R Net 2 as the coil feed. [arith 2 Sep 2026]
+      COIL METERED 3.2 ohm Y/R to BK, ~3.75 A at 12 V. BOTH LEADS OPEN to both studs and to the case,
+      and the case sits in a RUBBER vibration mount [meter 11 Sep 2026]. The coil floats; there is no
+      ground at this part and W_SOL_GND does not exist. Called at the bench: Y/R = COIL+, BK = COIL-.
+      The diode (#46) follows the ELECTRICAL polarity, which turns on where Y/R Net 2's far end is -
+      see measurements/starter-relay.md.
       ⚠️ WHERE THE COIL'S RETURN GOES IS NOT KNOWN, and which lead is which is not known. Ground-side
       switching would fit the metered Push = Y/R to BK, but Y/R Net 2 is OPEN to the bar's Y/R, so
       they are not one wire and the loop does not close on present evidence. Needs the meter. Do not

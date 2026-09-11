@@ -42,12 +42,15 @@
 #      Until it closes, the GND bus way count is a guess and the PDM
 #      circuit count is not final.
 #
-#   3. THE STARTER RELAY COIL. Which of the assembly's two leads is
-#      COIL-, and where the coil's return goes. "COIL- grounds
-#      directly" is withdrawn and nothing has replaced it - W_SOL_GND
-#      is drawn but MUST NOT BE BUILT. The SOL way numbers below are
-#      still the diagram's, not the part's, and both IGN and FUSE_4P
-#      had to be renumbered once read.
+#   3. THE STARTER RELAY COIL - RELAY SIDE CLOSED 11 Sep 2026, HARNESS
+#      SIDE OPEN. Metered: 3.2 ohm Y/R to BK, both leads open to both
+#      studs and to the case, rubber-mounted. The coil FLOATS - there is
+#      no ground at the relay, so W_SOL_GND does not exist and MUST NOT
+#      BE BUILT. Bench call: Y/R = COIL+, BK = COIL-. What is still open
+#      is the far end of Y/R Net 2 (B06.1), the coil's other side: live
+#      feed or earth. Until that is found the trigger cannot be drawn
+#      and the diode (#46) cannot be oriented. The SOL way numbers below
+#      are still the diagram's, not the part's.
 #
 #   4. RESOLVED 3 Sep 2026 - THE STOCK ACCESSORY CIRCUIT IS NOT
 #      REPRODUCED, and a USB-C PD charger replaces it.
@@ -145,11 +148,15 @@
 #     relay will not pull in through 8 ohm. Cleaning is what makes
 #     relaying work.
 #
-#     THE STARTER NEEDS NO NEW RELAY. SOL *is* the starter relay and the
-#     button has only ever driven its coil, never the motor. A K_START
-#     would drive the new coil through the SAME degraded contacts, and
-#     a relay coil (~0.15A) against a solenoid coil (~0.3A) is a 2x
-#     improvement where K_COIL buys 20x.
+#     THE STARTER NEEDS NO NEW RELAY - REOPENED 11 Sep 2026. SOL *is*
+#     the starter relay and the button has only ever driven its coil,
+#     never the motor. The argument below assumed a ~0.3A solenoid coil;
+#     IT IS 3.2 ohm, ~3.75A [meter 11 Sep 2026]. Through a 5 ohm button
+#     the coil sees ~1.5A and under 5V and will not pull in - which is
+#     probably the no-crank the bike arrived with. So #6 (clean the
+#     contacts) is mandatory for starting, and a K_START (~0.15A coil)
+#     is now a 25x improvement, not 2x. Whether to add one is a decision
+#     to make, not made here.
 #
 #   ** WHICH FUSES SIT BEHIND K_MAIN: HYBRID. ** F1/F4/F5 always-hot,
 #     F2/F3 and the rest switched. See the PDM notes for why, and issue

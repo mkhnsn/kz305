@@ -195,7 +195,46 @@ the whole main power path leaves the battery, passes one lug, and steps down to
 18-or-16 gauge at a bullet. That is the gauge step, and it is two connections
 from the battery with nothing but the 20 A MAIN downstream of it.
 
-### ⚠️ OPEN — coil polarity, which lead is which
+### ✅ Coil — METERED, 11 Sep 2026
+
+| Reading | Value |
+|---|---|
+| `Y/R` to `BK` | **3.2 Ω** |
+| `Y/R` to battery stud, motor stud, case | open |
+| `BK` to battery stud, motor stud, case | open |
+| Mounting | **rubber vibration holder** — the case is isolated from the frame anyway |
+
+**The coil is fully floating.** Neither end reaches a stud or the case, and the
+rubber mount means the case itself was never an earth. Both coil ends leave on
+wires, full stop. `W_SOL_GND` stays unbuilt.
+
+**Polarity, as called at the bench: `Y/R` is `COIL+`, `BK` is `COIL-`.**
+
+**Load: 3.2 Ω is about 3.75 A at 12 V.** The rebuild model had the solenoid coil
+at ~0.3 A; it is more than ten times that. Every amp of it goes through the
+start button's contacts — see the note on `K_START` in `kz305-rebuild.yml`.
+
+⚠️ **What the polarity call does and does not settle.** A bare 3.2 Ω coil has no
+polarity of its own; `+`/`-` only bites once the suppression diode (#46) goes
+across it. The diode has to follow the *electrical* polarity — the end that
+sits at battery potential while cranking — not the label. From the harness
+side, `BK` is Black Net 2, 0.2 Ω to the start button, and the button's metered
+action is *Push = bar `Y/R` to `BK`* with the bar `Y/R` being the kill-switch
+output. Read literally, that puts battery potential on `BK` when cranking, with
+`Y/R` Net 2 as the return. **That is the opposite of the label.** It resolves
+one way or the other the moment `Y/R` Net 2's far end is found: a live feed
+makes the label right and the bar reading wrong; an earth makes the label the
+part's convention and `BK` the electrical positive. Fit the diode after that,
+not before.
+
+### ⚠️ OPEN — where `Y/R` Net 2 goes
+
+The one thing left on the coil. `B06.1`'s `Y/R` is the coil's other end; its
+far end has been unidentified since 28 Aug — open to `B03` and to the bar's
+`Y/R` on that date. It is either the coil's live feed or its earth, and the
+rebuild cannot draw the starter trigger until it is one or the other.
+
+### Superseded — coil polarity by eye
 
 The two small wires are **`Y/R`** and **`BK`**. The models draw the coil as fed
 **`BK`** from the start button on `COIL+`, with `COIL-` grounding directly, and
@@ -237,10 +276,8 @@ Both are **eyeball estimates**, not tape.
 
 - **Gauge of anything.** Needs calipers. This is the circuit that melted and the
   gauge step is the finding, so it is deliberately left blank.
-- **Coil polarity** — see above.
-- **Terminal map and cavity rule** — the housing's own markings, if any.
-- **Coil ground** — where the `BK` terminates.
-- Ohms on every path.
+- **`Y/R` Net 2's far end** — the coil's other side, see above.
+- **Terminal map** — which physical position each of the four landings is in.
 
 ## Readings to take
 
@@ -292,12 +329,12 @@ no wire gauge on this project has been measured at all.
 Not a relay lead — it lives at the battery post. Gauge only, if ever; the
 rebuild does not reproduce it.
 
-### 5. Coil ground
+### 5. ✅ Coil ground — there is none at the relay
 
-`W_SOL_GND` is modelled direct-to-chassis. Verify the **physical ring terminal
-location** — which frame or engine point it lands on. That location is a Net B
-earth point, and **the count of Net B earth points is the count of new ground
-wires the star bus needs**. It is not yet known.
+Metered 11 Sep 2026: both coil ends are open to both studs and to the case, and
+the case sits in a rubber mount. No ring, no case path. `W_SOL_GND` does not
+exist and is not a Net B earth point. The return, if it is a return, is `Y/R`
+Net 2 — trace it in the harness (#8).
 
 ## Scope note
 
