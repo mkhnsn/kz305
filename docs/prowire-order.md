@@ -374,44 +374,49 @@ pull-to-seat joint you cannot redo without withdrawing the lead.
   `1708338-L`'s 1.0–2.0 mm² band, so it should be clean — the 10 `1708337-L` in
   the box are the fallback if not.
 
-### ⬜ OPEN — no terminal EXTRACTION tool is specified anywhere (raised 10 Sep 2026)
+### ✅ CLOSED — depinning, settled at the bench 10 Sep 2026 `[bench]`
 
-This list had crimpers and no way to get a terminal back **out**. On a 42-way
-sealed block wired point-to-point by hand, a mis-landed wire is not a remote
-possibility, and the alternative to a depinning tool is cutting the wire and
-re-terminating — which costs a terminal, a seal, and length off a wire built in
-place.
+**Tool: Aptiv `12094429` Metri-Pack 150/280 extraction tool — already owned, and
+it works.** Nothing needs to be bought.
 
-**Removal is two stages**, and the first is often the one people miss:
+This list previously had crimpers and no way to get a terminal back **out**. On a
+42-way sealed block wired point-to-point by hand, a mis-landed wire is not a
+remote possibility, and the alternative to a depinning tool is cutting the wire
+and re-terminating — which costs a terminal, a seal, and length off a wire built
+in place.
 
-1. **Release the secondary lock `0301372`** — six per module, so each covers ten
-   cavities. It is a TPA; nothing comes out while it is seated.
-2. **Depress the terminal's locking tang** and withdraw the wire.
+#### The procedure
 
-#### Candidates, none confirmed
+1. **Pull the TPA out first.** The secondary lock `0301372` — six per module, ten
+   cavities each. Nothing moves while it is seated.
+2. **Release the tangs.** ⚠️ **There are TWO, one on each side of the terminal**
+   `[bench]`. A single-blade tool takes them one at a time; both must be down
+   before the wire will withdraw.
 
-| Tool | Source | Note |
-|---|---|---|
-| `CID280ET` | ConnectorID | **Best lead** — stated for 1.5 / 2.3 / **2.8 mm** terminals, and it is the same distributor the module order came from |
-| "Estrattore per terminale MTA" | Copat | MTA-specific by name |
-| Metri-Pack 150/280 removal tool | Delphi/Aptiv `12094429`, CE Auto | 2.8 mm blade — **compatibility is INFERRED from the shared 280 footprint** |
+⚠️ **A tang bent during extraction is a terminal with reduced retention.** In a
+sealed block that is a wire that can back out under vibration with nothing
+visible from outside. Inspect both tangs on anything extracted, re-form or
+discard — the terminals were over-ordered 2.5× precisely so discarding is cheap.
 
-⚠️ **The Metri-Pack inference is exactly the kind this project keeps getting
-caught by.** MTA's F280 is MTA's own terminal; a shared 2.8 mm blade width sets
-the *cavity*, not the tang geometry a puller has to reach. See the `4550747`
-seal-versus-blade note above for the same distinction.
+#### Nice to have, not needed
 
-#### How to settle it without buying anything
+A **double-bladed extractor** would release both tangs in one pass rather than
+two. Not critical, and not worth an order on its own — but if a 280 tool is ever
+ordered for another reason, this is the feature to look for. ConnectorID's
+`CID280ET` is the obvious thing to ask about, being the same distributor as the
+module order.
 
-**The parts are in hand.** Crimp one terminal, seat it, and try to get it out.
-That is the project's own standard — the part beats the catalogue — and it costs
-one terminal out of the spares. Do it on the same first crimp that pull-tests the
-die, before 41 more go in.
+#### For the record — the Metri-Pack inference held
 
-⚠️ **The authoritative source is the MTA connection-system datasheet**, which is
-where this file's accessory part numbers came from. **It is not in `parts/`** —
-only the 13-page marketing overview is. If an official extractor PN exists, it is
-in that datasheet.
+This entry originally flagged the Metri-Pack route as **unconfirmed**, on the
+grounds that a shared 2.8 mm blade sets the *cavity* rather than the tang
+geometry a puller reaches. The bench says the Aptiv tool fits MTA's F280 fine.
+The caution was right to make and the answer came out the cheap way — the part in
+hand, not the catalogue.
+
+⚠️ Still true, and unrelated: **the MTA connection-system datasheet is not in
+`parts/`** — only the 13-page marketing overview. `docs/part-selection.md` cites
+that datasheet as the source for every accessory part number.
 
 ## These are ORDER quantities
 
