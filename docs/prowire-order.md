@@ -11,7 +11,7 @@ Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 | 4. Splice hardware | ✅ bought |
 | 5 / 5b. Heat shrink, sleeving | ✅ bought |
 | 6. MP630 inline fuse holders | ✅ bought |
-| 8. Tools | see the section |
+| 8. Tools | ✅ crimp tools owned for every terminal family |
 
 ## Outstanding after order Q25134 — `TXL-14-4`, ~8 ft
 

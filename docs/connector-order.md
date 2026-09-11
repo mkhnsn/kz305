@@ -21,7 +21,13 @@ That convention also falls out naturally at the junctions: their bussed half is
 **male**, so the wires land in a **female** housing — consistent with everything
 else.
 
-### Cycle Terminal — all HW090, ALL IN STOCK 6 Sep 2026
+### Cycle Terminal — PLACED
+
+✅ **Order placed.** It carries the HW090 housings and consumables below, the
+Furukawa QLW pair, **the fuses** (MiniVal kit + ATC 20 A and 30 A) and **the
+genuine Song Chuan relays** (`SCMR20`).
+
+#### HW090 lines, all in stock 6 Sep 2026
 
 | Item | Female | Male | For |
 |---|---|---|---|

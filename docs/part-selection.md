@@ -9,9 +9,9 @@ The working-out, superseded options and dated history are in
 |---|---|
 | Regulator/rectifier | **Shindengen SH775, in hand** |
 | PDM | **MTA `0301370`, in hand and checked** |
-| Relays | **Song Chuan 303 `-R1`, in hand** |
+| Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
-| Fuses | Ratings assigned, F1–F11. Mini blade |
+| Fuses | Ratings assigned, F1–F11. **Ordered** (Cycle Terminal): Mini blade + ATC 20 A / 30 A |
 | Flasher | Shortlisted, not yet in hand (#11) |
 | 6 AWG heavy cable | Type settled; lugs wait on stud sizes (#42) |
 | USB-C PD charger | Criteria set, part not selected (#64) |
@@ -118,8 +118,8 @@ the suffix it's a reel of thousands.
 ### Open
 - [ ] **Where it mounts.** This sets the enclosure, the routing of 42 wires out
   of one face, and the bundle clamping that keeps the bend off the seals.
-- [ ] **Crimp tool** for `1708338-L` / `1708339-L` (sealed). Don't order MTA
-  `9602455` (listed for unsealed). See `docs/prowire-order.md`.
+- [x] ~~**Crimp tools**~~. Owned for every terminal family: sealed MTA 280,
+  HW090, MP630.
 - [ ] **Pull-test the first crimp.**
 - [x] ~~**#45** (hot/switched split)~~. **Settled 10 Sep: the split stays**, so
   the cavity map stands. A welded horn or beam relay is fixed by pulling it and
@@ -151,8 +151,14 @@ blade, not MTA's cavity bore.
 ## Relays — Song Chuan 303 `-R1`
 
 `303-1AH-C-R1`, Ultra Micro 280, 20 A, SPNO, **4-way** (2 x 2 pins). Sold by
-Cycle Terminal as `SCMR20`. Six positions, five fitted, one spare. In hand, and
-confirmed resistor type `[bench 10 Sep]`. **Carry a spare on the bike.** It's
+Cycle Terminal as `SCMR20`, which they list as the **resistor type**.
+**Genuine relays are on order from Cycle Terminal** and replace the Amazon
+knockoffs, which were used for test-fitting. The knockoffs are resistor type too
+`[bench 10 Sep]`. Six positions, five fitted, one spare.
+
+**On arrival:** read each coil with a DMM both ways round. Resistor type reads
+the same in both directions; a diode doesn't. And read the pin marking: the
+knockoff showed the second coil pin as 86 or possibly 88. **Carry a spare on the bike.** It's
 the fix for a stuck horn or beam, and for a failed stop check
 (`docs/pre-ride-check.md`).
 

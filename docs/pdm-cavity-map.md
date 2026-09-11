@@ -94,7 +94,8 @@ For a relay on rows *r, r+1* and columns *c, c+1*:
 | (r+1, c) lower-left | **85** COIL− |
 
 The knockoff moulding reads the second coil pin as 86 or possibly 88. The
-geometry is what matters. Re-read the marking if a genuine Song Chuan is bought.
+geometry is what matters. Genuine Song Chuan relays are on order, so re-read the
+marking and confirm the diagonals when they arrive.
 
 ## Build rules
 
