@@ -385,7 +385,7 @@ connectors:
       MiniVal fuses or 10 micro relays or a mix, so one cavity type takes either and a position's role
       is decided by what is pushed in. The catalogue's only bussed module (0301697) is fuses-only, not
       waterproof, and carries a SINGLE bus where this design needs two - so the two junctions get
-      wired by hand. Full comparison and assembly rules in docs/part-selection.md.
+      wired by hand. Assembly rules in docs/part-selection.md; the module comparison is in archive/part-selection-2026-09-10.md.
       ** ONE WIRE PER CAVITY - DO NOT DAISY-CHAIN. ** A sealed cavity takes one cable seal on one
       wire, so the HOT and SWITCHED junctions are star points OUTSIDE the module. Keep HOT and
       SWITCHED positions at OPPOSITE ENDS of the block: interleaved, a mis-landed feed wire puts F3 on

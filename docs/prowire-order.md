@@ -374,49 +374,18 @@ pull-to-seat joint you cannot redo without withdrawing the lead.
   `1708338-L`'s 1.0–2.0 mm² band, so it should be clean — the 10 `1708337-L` in
   the box are the fallback if not.
 
-### ✅ CLOSED — depinning, settled at the bench 10 Sep 2026 `[bench]`
+### Depinning the MTA module `[bench 10 Sep 2026]`
 
-**Tool: Aptiv `12094429` Metri-Pack 150/280 extraction tool — already owned, and
-it works.** Nothing needs to be bought.
+**Tool: Aptiv `12094429`, already owned.** It fits MTA's F280.
 
-This list previously had crimpers and no way to get a terminal back **out**. On a
-42-way sealed block wired point-to-point by hand, a mis-landed wire is not a
-remote possibility, and the alternative to a depinning tool is cutting the wire
-and re-terminating — which costs a terminal, a seal, and length off a wire built
-in place.
+1. **Pull the TPA** (`0301372`) first. Nothing moves while it's seated.
+2. **Release both tangs**, one on each side of the terminal. A single blade takes
+   two passes.
 
-#### The procedure
-
-1. **Pull the TPA out first.** The secondary lock `0301372` — six per module, ten
-   cavities each. Nothing moves while it is seated.
-2. **Release the tangs.** ⚠️ **There are TWO, one on each side of the terminal**
-   `[bench]`. A single-blade tool takes them one at a time; both must be down
-   before the wire will withdraw.
-
-⚠️ **A tang bent during extraction is a terminal with reduced retention.** In a
-sealed block that is a wire that can back out under vibration with nothing
-visible from outside. Inspect both tangs on anything extracted, re-form or
-discard — the terminals were over-ordered 2.5× precisely so discarding is cheap.
-
-#### Nice to have, not needed
-
-A **double-bladed extractor** would release both tangs in one pass rather than
-two. Not critical, and not worth an order on its own — but if a 280 tool is ever
-ordered for another reason, this is the feature to look for. ConnectorID's
-`CID280ET` is the obvious thing to ask about, being the same distributor as the
-module order.
-
-#### For the record — the Metri-Pack inference held
-
-This entry originally flagged the Metri-Pack route as **unconfirmed**, on the
-grounds that a shared 2.8 mm blade sets the *cavity* rather than the tang
-geometry a puller reaches. The bench says the Aptiv tool fits MTA's F280 fine.
-The caution was right to make and the answer came out the cheap way — the part in
-hand, not the catalogue.
-
-⚠️ Still true, and unrelated: **the MTA connection-system datasheet is not in
-`parts/`** — only the 13-page marketing overview. `docs/part-selection.md` cites
-that datasheet as the source for every accessory part number.
+Inspect the tangs on anything you pull. A bent tang holds less well and can let
+the wire back out under vibration. Re-form it or use a new terminal. A
+double-bladed extractor would do both tangs at once; ConnectorID's `CID280ET`
+is worth asking about if you ever order one.
 
 ## These are ORDER quantities
 

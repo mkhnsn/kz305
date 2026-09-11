@@ -17,3 +17,14 @@ diff rather than an accident:
 
 Every confirmed measurement from this file was migrated to kz305-common.yml
 before archiving. Kept for provenance only. Do not build from it.
+
+---
+
+`part-selection-2026-09-10.md` — archived 10 Sep 2026.
+
+The full working-out behind part selection (flasher, regulator, PDM, seals,
+suppression, fuses), about 1300 lines, with every superseded decision left
+inline. It was replaced by a current-state `docs/part-selection.md` because a
+bench-side reader could not find the part number under the history. Nothing
+here is current. Where the two disagree, `docs/part-selection.md` and the model
+win.
