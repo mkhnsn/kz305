@@ -22,10 +22,10 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-186 labels for 93 wires.
+188 labels for 94 wires.
 
-Not labelled: 13 conductors that already exist in retained
-stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`.
+Not labelled: 15 conductors that already exist in retained
+stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`, `TDR_GND`, `TDR_SAE`.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -207,6 +207,8 @@ stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, 
 | `TAIL_OUT` | SP_TAIL-1 | `>IGN-2` | BU | 16 AWG |
 | `TAIL_RUN` | SP_TAIL-1 | `>TAIL-1` | BU | 16 AWG |
 | `TAIL_RUN` | TAIL-1 | `>SP_TAIL-1` | BU | 16 AWG |
+| `TDR_HOT` | BATT-1 | `>MF_TDR-1` | RD | 12 AWG |
+| `TDR_HOT` | MF_TDR-1 | `>BATT-1` | RD | 12 AWG |
 | `USB_FEED` | PDM-23 | `>USB-1` | BN | 16 AWG |
 | `USB_FEED` | USB-1 | `>PDM-23` | BN | 16 AWG |
 | `USB_GND` | SP_GND-1 | `>USB-2` | BK | 16 AWG |

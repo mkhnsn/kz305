@@ -15,6 +15,7 @@ The working-out, superseded options and dated history are in
 | Flasher | **Custom LED ELFR-1, ordered** 11 Sep (#11) |
 | 6 AWG heavy cable | **Ordered** 11 Sep: welding cable + 1/4" lugs, fits the M6 studs (#42) |
 | USB-C PD charger | Criteria set, part not selected (#64) |
+| Tender / 12V accessory point | **Decided 14 Sep:** SAE on the battery posts through a third MP630 holder, 10 A ATC. Pigtail and fuse not yet bought |
 | LED headlight | Not selected (#60) |
 | Labels, grommets, diodes | **Ordered** 11 Sep: Rhino-compatible 6/9/12/19 mm, grommet kit, 1N4004 x125 |
 
@@ -253,6 +254,40 @@ left plugged in overnight flattens a 10 Ah battery. Moving F10's input to
 
 F10 is already 7.5 A, sized for a 45 W unit's ~4.4 A plus capacitive inrush.
 Prefer a slow-blow characteristic if the chosen unit specifies one.
+
+The always-hot 12 V need is met elsewhere: the SAE tender point below. That is
+what keeps this one switched.
+
+---
+
+## Battery tender / 12 V accessory point — SAE (decided 14 Sep 2026)
+
+One SAE socket on the battery posts, built into the harness rather than
+bolted on as a generic tender pigtail. **Not through the PDM**: a tender has
+to reach the battery with the key off, the main fuse pulled or the harness
+off the bike, and a twelfth fuse would have reopened `SP_HOT`, which is a
+frozen five-way crimp. Model nodes `MF_TDR` and `SAE`.
+
+| | |
+|---|---|
+| Feed | `W_TDR_HOT`, 12 AWG RD, ring on the **positive post** to `MF_TDR` |
+| Fuse | `MF_TDR`, **MP630 1214 ATC set**, same holder as `MF` and `MF_RR`, within a hand's width of the post |
+| Rating | **10 A ATC**, sized to the SAE contacts, not the 12 AWG. Buy one plus a spare; the PDM spares are MiniVal and do not fit |
+| Socket | SAE 2-pin, capped, **unfused, 12 AWG pigtail**. Its own leads run fuse-to-socket and socket-to-negative-post; they are existing conductors, not labelled or ordered |
+| Rings | 1/4 inch, for the M6 posts. Re-terminate the pigtail's BK lead with ours if the supplied ring is not 1/4 inch |
+| Return | Battery **negative post**, not the star bus. Adds nothing to blocker 2 |
+
+Always hot, deliberately. It only feeds what is plugged into it: a tender,
+an SAE-to-USB adapter, heated gear, a jump lead. The USB charger stays
+switched on F10 for the opposite reason.
+
+Post stacks after this: POS carries the 6 AWG lug, `W_RR_BATT` and
+`W_TDR_HOT`; NEG the 6 AWG lug and `W_TDR_GND`. Lug against the post, rings
+on top, one nut.
+
+- [ ] SAE pigtail, unfused, 12 AWG, capped
+- [ ] MP630 1214 ATC set, one more
+- [ ] ATC 10 A, two
 
 ---
 

@@ -66,6 +66,15 @@
 #      The part is not selected and that is now a parts question
 #      rather than a design one - it sizes F10 and nothing else.
 #
+#   5. DECIDED 14 Sep 2026 - A TENDER / 12V ACCESSORY POINT, AND IT
+#      DOES NOT GO THROUGH THE PDM. An SAE socket on the battery posts,
+#      fused in its own MP630 holder, on the colour scheme and labelled
+#      like every other lead. It is on the posts because a tender has
+#      to reach the battery with the key off, the main fuse pulled or
+#      the harness unplugged, and because SP_HOT is a settled five-way
+#      crimp that a twelfth fuse would reopen. See MF_TDR and SAE.
+#      This is the always-hot 12V point; the USB charger stays SWITCHED.
+#
 #   LENGTHS ARE NOT A BLOCKER. The harness is built in place on the
 #   bike and trimmed to final length there. Step 1 measured 46 branches
 #   off the old harness before anything was cut, and that map sets
@@ -745,6 +754,56 @@ connectors:
       a 45W unit draws about 4.4A in.
       ⚠️ SIZE F10 FOR INRUSH, NOT JUST STEADY DRAW. A PD converter has capacitive input, and a fuse
       chosen on running current alone can nuisance-blow at switch-on.
+  MF_TDR:
+    type: Tender fuse
+    subtype: 10A ATC, Metri-Pack 630 sealed pull-to-seat holder - AT THE BATTERY END
+    mpn: MP630 1214 ATC Set
+    pinlabels: [IN, OUT]
+    additional_components:
+      - type: Fuse
+        subtype: ATC / ATO regular blade, 10A red - NOT MiniVal
+        qty: 1
+    notes: |-
+      NEW PART, 14 Sep 2026. Fuses the battery tender / 12V accessory lead, SAE. Third MP630 holder
+      on the bike, same set as MF and MF_RR, so it is the same seal, the same terminal and the same
+      pull-to-seat discipline - seal on, label on, crimp last.
+      ** SITS WITHIN A HAND'S WIDTH OF THE POSITIVE POST. ** The only unfused length is W_TDR_HOT from
+      the post ring to this holder, and that is the same rule MF_RR already follows on the charging
+      pair. This is what the stock R/W accessory feed lacked.
+      ** 10A ATC. ** The wire is 12 AWG and would take far more, so the fuse is sized to the SAE
+      contacts, which are the weakest thing in the circuit at 10-15A depending on the maker. A
+      tender draws 0.75-5A; 10A leaves about 120W for an accessory. Not on the bike's spare list -
+      the PDM spares are MiniVal - so buy the 10A ATC with a spare.
+      ⚠️ NOT THROUGH THE PDM - decided 14 Sep 2026. A twelfth fuse on the HOT side was costed and
+      dropped: it would make SP_HOT a six-way crimp after that node was frozen at five, cost a spare
+      position and two plugs, add a star-bus wire to blocker 2, and put the tender's charge current
+      through the harness. Worse, a tender fed through the PDM cannot charge the battery with MF
+      pulled or the harness off the bike, which is exactly when it is wanted.
+
+  SAE:
+    type: SAE socket
+    subtype: 2-pin, capped, 12 AWG pigtail - part not selected
+    pinlabels: ["+12V", GND]
+    notes: |-
+      NEW, 14 Sep 2026. The battery tender and 12V accessory point. An SAE face because that is what
+      every tender, SAE-to-USB adapter, heated-gear lead and jump lead already carries; the face is the
+      only generic thing about this circuit.
+      ** ALWAYS HOT, AND MEANT TO BE. ** This is the one always-live outlet on the bike. The USB
+      charger stays on F10, switched, because a socket someone can leave a phone in must die with the
+      key; an SAE socket only feeds what is deliberately plugged into it, and a tender needs it hot.
+      ** BUILT INTO THE HARNESS, NOT A BOLT-ON PIGTAIL. ** Fused in MF_TDR, the same sealed holder as
+      the main and charging fuses; RD and BK on the scheme; both post rings 1/4 inch for the M6 posts
+      [bench 11 Sep 2026]; printed labels; dressed into the loom with the charging pair and capped
+      where it can be reached without lifting the seat.
+      The socket comes as a pigtail with its own 12 AWG leads, which are W_TDR_SAE and W_TDR_GND -
+      existing conductors, not harness wire, so they are not ordered or labelled (the CAP_L rule,
+      issue #52). Cut short: the RD lead is pulled to seat in MF_TDR, the BK lead is re-terminated
+      with our 1/4 inch ring and heat shrink at the negative post. Buy the UNFUSED pigtail - the fuse
+      lives in MF_TDR, and a second holder in series is one more joint for nothing.
+      ⚠️ BATTERY POST STACKS. POS now carries the 6 AWG lug, W_RR_BATT's ring and W_TDR_HOT's ring;
+      NEG the 6 AWG lug and W_TDR_GND's ring. Heavy lug against the post, then the rings, one nut.
+      Pigtail length and where the cap sits are set on the bike [bench] - no cut lengths.
+
   HORN:
     type: Horn
     subtype: 12V 2A
@@ -1446,6 +1505,26 @@ cables:
     notes: Fuse to the battery positive. Kept as short as the mounting allows - see W_RR_OUT for why this path's resistance matters to a series regulator.
   W_RR_GND:  {<<: *w12, colors: [BK], notes: "Gauge raised from 14 to 12 to match W_RR_OUT - the return carries the same current as the feed."}
 
+  # --- battery tender / 12V accessory point - see MF_TDR and SAE -----
+  W_TDR_HOT:
+    <<: *w12
+    colors: [RD]
+    notes: |-
+      Battery positive post to the tender fuse. The only unfused length in the circuit, so it is kept
+      as short as the holder's position allows, like W_RR_BATT beside it. 12 AWG because that is the
+      bottom of the MP630 terminal's band, and 12 AWG RD is on hand for the charging pair - a 16 AWG
+      lead would need a different holder and a fourth terminal family for one wire.
+  W_TDR_SAE:
+    <<: *w12
+    ignore_in_bom: true
+    colors: [RD]
+    notes: THE SAE PIGTAIL'S OWN POSITIVE LEAD, not harness wire - fuse holder to the socket. Pulled to seat in MF_TDR. Not cut from stock, not labelled, not ordered.
+  W_TDR_GND:
+    <<: *w12
+    ignore_in_bom: true
+    colors: [BK]
+    notes: THE SAE PIGTAIL'S OWN RETURN, not harness wire - socket to the battery negative post, re-terminated with our 1/4 inch ring. Lands on the post, not the star bus - a tender's return belongs on the battery, and it adds nothing to blocker 2's count.
+
 connections:
 
   # --- heavy starter path -------------------------------------------
@@ -1825,6 +1904,17 @@ connections:
   - - RR: [5]
     - W_RR_GND: [1]
     - GND: [2]
+
+  # --- battery tender / 12V accessory point ---------------------------
+  - - BATT: [1]
+    - W_TDR_HOT: [1]
+    - MF_TDR: [1]
+  - - MF_TDR: [2]
+    - W_TDR_SAE: [1]
+    - SAE: [1]
+  - - SAE: [2]
+    - W_TDR_GND: [1]
+    - BATT: [2]
 
 # =====================================================================
 # NOT YET DRAWN

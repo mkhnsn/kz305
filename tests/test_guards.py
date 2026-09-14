@@ -380,7 +380,7 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
 
     # Components where one colour on many ways is correct by construction.
     #   GND / SP_*  - one net by definition
-    #   MF / MF_RR  - a fuse is symmetric; its two terminals are one circuit
+    #   MF / MF_RR / MF_TDR - a fuse is symmetric; its two terminals are one circuit
     #   BATT        - battery positive is one net
     #   SOL         - 6 AWG battery cable comes in red and black only, so
     #                 W_BAT_SOL and W_SOL_SM are both RD. They are lugs on
@@ -412,7 +412,7 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     # What is left - lamps, splices, free bullets - is where a swap has no
     # other check. That is what this guard is for.
     exempt = {
-        "GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "BATT", "SOL",
+        "GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "MF_TDR", "BATT", "SOL",
         "PDM", "LH", "RH", "IGN", "INSTR_6P", "COIL_L", "COIL_R",
         "K_MAIN", "K_COIL", "K_HORN", "K_HI", "K_LO",
     }
