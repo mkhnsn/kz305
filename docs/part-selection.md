@@ -8,7 +8,7 @@ The working-out, superseded options and dated history are in
 | Part | Status |
 |---|---|
 | Regulator/rectifier | **Shindengen SH775, in hand** |
-| Battery | **Antigravity ATZ-7 lithium.** Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
+| Battery | **Antigravity ATZ-7 RE-START lithium** (BMS cut-off, one-start reserve). Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
 | PDM | **MTA `0301370`, in hand and checked** |
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
@@ -255,7 +255,9 @@ fused, grounded to the star bus.**
   water and grit.
 
 **Switched, not always-hot.** The bike has no parasitic load today, and a phone
-left plugged in overnight flattens the lithium ATZ-7. Moving F10's input to
+left plugged in overnight runs the ATZ-7 to its RE-START cut-off. The pack
+saves itself and one start, but that is a backstop, not a reason to leave a
+socket hot. Moving F10's input to
 `SP_HOT` is a one-wire change if that's ever wanted.
 
 F10 is already 7.5 A, sized for a 45 W unit's ~4.4 A plus capacitive inrush.

@@ -744,8 +744,10 @@ connectors:
       ** SWITCHED, NOT ALWAYS-HOT, AND THAT IS THE WHOLE POINT OF REPLACING IT. ** Fed from F10 on
       the switched bus, so it dies with the key.
       ⚠️ THIS BIKE HAS NO PARASITIC LOAD AT ALL TODAY - points ignition, no ECU, no clock, no alarm.
-      A PD charger left hot would be the first, and a phone left plugged in overnight would flatten
-      the ATZ-7 - a small lithium pack, which unlike lead-acid does not forgive that. Making it hot is a one-wire change at the PDM if that is ever wanted; making it
+      A PD charger left hot would be the first, and a phone left plugged in overnight would run the
+      ATZ-7 down to its RE-START cut-off - the pack saves itself and one start, but the reason to
+      keep this switched does not change: a socket that dies with the key never needs saving. Making
+      it hot is a one-wire change at the PDM if that is ever wanted; making it
       hot BY DEFAULT would rebuild the exact fault this circuit exists to correct.
       ** IT GETS ITS OWN FUSE. ** F10, not shared. A USB socket is the circuit most likely to meet a
       failed cable or a passenger's unknown device, and that must not take the instruments with it.
@@ -803,7 +805,8 @@ connectors:
       ⚠️ BATTERY POST STACKS. POS now carries the 6 AWG lug, W_RR_BATT's ring and W_TDR_HOT's ring;
       NEG the 6 AWG lug and W_TDR_GND's ring. Heavy lug against the post, then the rings, one nut.
       Pigtail length and where the cap sits are set on the bike [bench] - no cut lengths.
-      ⚠️ THE BATTERY IS LITHIUM (Antigravity ATZ-7) - ONLY A LITHIUM-MODE CHARGER GOES ON THIS SOCKET.
+      ⚠️ THE BATTERY IS LITHIUM (Antigravity ATZ-7 RE-START) - ONLY A LITHIUM-MODE CHARGER GOES ON
+      THIS SOCKET.
       A lead-acid tender's desulfation or pulse mode, or a float held above about 13.6V, damages
       it. Antigravity's own charger or any unit with a stated LiFePO4 mode. That is the manufacturer's
       warning about the charging system applied to the one other charger this bike will ever see.

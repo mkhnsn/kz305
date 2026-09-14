@@ -236,10 +236,14 @@ templates:
 
   battery: &battery
     type: Battery
-    subtype: 12V - stock 10Ah lead-acid; rebuild fits an Antigravity ATZ-7 lithium
+    subtype: 12V - stock 10Ah lead-acid; rebuild fits an Antigravity ATZ-7 RE-START lithium
     notes: |-
-      ** THE REBUILD BATTERY IS LITHIUM - Antigravity ATZ-7, recorded 14 Sep 2026. ** Capacity and
-      cranking figures go here from the box, not from memory [spec].
+      ** THE REBUILD BATTERY IS LITHIUM - Antigravity ATZ-7 RE-START, recorded 14 Sep 2026. **
+      Capacity and cranking figures go here from the box, not from memory [spec].
+      ** RE-START: the pack has its own BMS cut-off. ** It disconnects itself before a drain takes it
+      too low and holds a reserve that the button on the case releases for one start. So a load
+      left on overnight strands nothing - but the cut-off is the LAST line, not a design input. The
+      USB stays switched on its own merits; this only changes what a mistake costs.
       ⚠️ ANTIGRAVITY'S OWN WARNING for pre-mid-80s bikes: a damaged or old regulator can over-charge
       a lithium battery to smoking and melting. MET: the rebuild's Shindengen SH775 is a modern
       series-type solid-state unit. The charging test target of 14.0-14.5V at 3-5k stands and is
