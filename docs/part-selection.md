@@ -8,6 +8,7 @@ The working-out, superseded options and dated history are in
 | Part | Status |
 |---|---|
 | Regulator/rectifier | **Shindengen SH775, in hand** |
+| Battery | **Antigravity ATZ-7 lithium.** Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
 | PDM | **MTA `0301370`, in hand and checked** |
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
@@ -31,6 +32,11 @@ The working-out, superseded options and dated history are in
   unterminated.
 - **Series, not shunt.** It open-circuits the stator rather than burning the
   surplus, which is what makes the LED conversion comfortable.
+- **Required by the battery, not just preferred.** Antigravity's note on the
+  ATZ-7: bikes from the mid-80s and earlier must run a modern solid-state
+  regulator, because an old or damaged one over-charges a lithium battery to
+  smoking and melting. The SH775 is that regulator. The stock unit never
+  goes back on this bike.
 - **DC+ runs heavy and direct to the battery**, fused at the battery end
   (`MF_RR`), not through the PDM. Series units are sensitive to resistance in
   that path. See `W_RR_OUT` in the model.
@@ -249,7 +255,7 @@ fused, grounded to the star bus.**
   water and grit.
 
 **Switched, not always-hot.** The bike has no parasitic load today, and a phone
-left plugged in overnight flattens a 10 Ah battery. Moving F10's input to
+left plugged in overnight flattens the lithium ATZ-7. Moving F10's input to
 `SP_HOT` is a one-wire change if that's ever wanted.
 
 F10 is already 7.5 A, sized for a 45 W unit's ~4.4 A plus capacitive inrush.
@@ -274,12 +280,16 @@ frozen five-way crimp. Model nodes `MF_TDR` and `SAE`.
 | Fuse | `MF_TDR`, **MP630 1214 ATC set**, same holder as `MF` and `MF_RR`, within a hand's width of the post |
 | Rating | **10 A ATC**, sized to the SAE contacts, not the 12 AWG. Buy one plus a spare; the PDM spares are MiniVal and do not fit |
 | Socket | SAE 2-pin, capped, **unfused, 12 AWG pigtail**. Its own leads run fuse-to-socket and socket-to-negative-post; they are existing conductors, not labelled or ordered |
-| Rings | 1/4 inch, for the M6 posts. Re-terminate the pigtail's BK lead with ours if the supplied ring is not 1/4 inch |
+| Rings | Sized to the ATZ-7's terminal bolts, **not yet measured** (relay and starter are M6; the battery's may be M5). Re-terminate the pigtail's BK lead with ours if the supplied ring does not match |
 | Return | Battery **negative post**, not the star bus. Adds nothing to blocker 2 |
 
 Always hot, deliberately. It only feeds what is plugged into it: a tender,
 an SAE-to-USB adapter, heated gear, a jump lead. The USB charger stays
 switched on F10 for the opposite reason.
+
+⚠️ **Lithium battery, lithium charger.** The ATZ-7 takes a charger with a
+stated LiFePO4 mode only: no desulfation or pulse repair, no lead-acid float.
+Antigravity's own charger is the safe default.
 
 Post stacks after this: POS carries the 6 AWG lug, `W_RR_BATT` and
 `W_TDR_HOT`; NEG the 6 AWG lug and `W_TDR_GND`. Lug against the post, rings

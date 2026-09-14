@@ -236,7 +236,18 @@ templates:
 
   battery: &battery
     type: Battery
-    subtype: 12V 10Ah
+    subtype: 12V - stock 10Ah lead-acid; rebuild fits an Antigravity ATZ-7 lithium
+    notes: |-
+      ** THE REBUILD BATTERY IS LITHIUM - Antigravity ATZ-7, recorded 14 Sep 2026. ** Capacity and
+      cranking figures go here from the box, not from memory [spec].
+      ⚠️ ANTIGRAVITY'S OWN WARNING for pre-mid-80s bikes: a damaged or old regulator can over-charge
+      a lithium battery to smoking and melting. MET: the rebuild's Shindengen SH775 is a modern
+      series-type solid-state unit. The charging test target of 14.0-14.5V at 3-5k stands and is
+      inside the lithium window. Do not run this battery on the stock regulator, ever.
+      ⚠️ A LITHIUM-SAFE TENDER ONLY. No desulfation or pulse-repair mode, no lead-acid float that
+      sits above 13.6V. See SAE.
+      ⚠️ POST THREADS NOT MEASURED. The relay and starter are M6 [bench 11 Sep 2026]; the battery's
+      terminal bolts are the part's own and may be M5 or M6. Check before ordering the last rings.
     pinlabels: [POS, NEG]
 
   starter_relay: &starter_relay
