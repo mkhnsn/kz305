@@ -8,7 +8,7 @@ The working-out, superseded options and dated history are in
 | Part | Status |
 |---|---|
 | Regulator/rectifier | **Shindengen SH775, in hand** |
-| Battery | **Antigravity ATZ-7 RE-START lithium** (BMS cut-off, one-start reserve). Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
+| Battery | **Antigravity ATZ-7 RE-START lithium** (BMS cut-off, one-start reserve), ~115 x 70 x 85 mm unconfirmed. Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
 | PDM | **MTA `0301370`, in hand and checked** |
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |

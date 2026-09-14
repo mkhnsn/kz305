@@ -240,6 +240,8 @@ templates:
     notes: |-
       ** THE REBUILD BATTERY IS LITHIUM - Antigravity ATZ-7 RE-START, recorded 14 Sep 2026. **
       Capacity and cranking figures go here from the box, not from memory [spec].
+      Case 4.53 x 2.75 x 3.35 in, 115 x 70 x 85 mm, L x D x H - from memory 14 Sep 2026, confirm
+      against the box or a tape before the battery tray and the PDM's neighbour space are settled.
       ** RE-START: the pack has its own BMS cut-off. ** It disconnects itself before a drain takes it
       too low and holds a reserve that the button on the case releases for one start. So a load
       left on overnight strands nothing - but the cut-off is the LAST line, not a design input. The
