@@ -14,11 +14,11 @@ The working-out, superseded options and dated history are in
 | Wire | TXL, Prowire. **All 16 AWG** in the PDM; 14 and 12 where noted |
 | Fuses | Ratings assigned, F1–F11, plus **7 spares populated in the block**. **Ordered** (Cycle Terminal): Mini blade + ATC 20 A / 30 A |
 | Flasher | **Custom LED ELFR-1, ordered** 11 Sep (#11) |
-| 6 AWG heavy cable | **Ordered** 11 Sep: welding cable + 1/4" lugs, fits the M6 studs (#42) |
+| 6 AWG heavy cable | **In hand** 15 Sep: welding cable + 1/4" lugs, fits the M6 studs (#42). Battery-post and star-bus ends still open |
 | USB-C PD charger | Criteria set, part not selected (#64) |
 | Tender / 12V accessory point | **Decided 14 Sep:** SAE on the battery posts through a third MP630 holder, 10 A ATC. Pigtail and fuse not yet bought |
 | LED headlight | Not selected (#60) |
-| Labels, grommets, diodes | **Ordered** 11 Sep: Rhino-compatible 6/9/12/19 mm, grommet kit, 1N4004 x125 |
+| Labels, grommets, diodes | **Labels in hand** 15 Sep, 6/9/12/19 mm with spare cartridges. Grommet kit and 1N4004 x125 ordered 11 Sep |
 
 ---
 
@@ -227,7 +227,7 @@ So the kit needs **18 Mini fuses**: 7 x 5 A, 4 x 7.5 A, 5 x 10 A, 2 x 15 A.
 around 8 AWG. Use **fine-strand welding cable**, red and black, with tinned
 copper lugs and adhesive heat-shrink boots.
 
-**Ordered 11 Sep 2026:** Shirbly 6 AWG welding cable, 10 ft red + 10 ft
+**In hand 15 Sep 2026:** Shirbly 6 AWG welding cable, 10 ft red + 10 ft
 black; SELTERM 6 AWG 1/4" tinned copper lugs, 25. Both relay studs and the
 motor terminal are **M6** `[bench 11 Sep]`, and a 1/4" (6.35 mm) hole fits M6.
 Battery-post and star-bus lug sizes not yet read; the 1/4" lugs likely cover

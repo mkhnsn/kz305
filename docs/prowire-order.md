@@ -3,11 +3,11 @@
 Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 **order** quantities, not design quantities — see the note at the foot.
 
-| Section | Status (10 Sep 2026) |
+| Section | Status (15 Sep 2026) |
 |---|---|
 | 1. TXL wire | ✅ ordered, Q25134 |
 | 2. Ring terminals | ✅ bought |
-| 3. Heavy cable | ⬜ **not ordered** — lug sizes wait on the stud sizes (#42) |
+| 3. Heavy cable | ✅ in hand 15 Sep — 6 AWG welding cable and 1/4" lugs, bought outside Prowire (#42) |
 | 4. Splice hardware | ✅ bought |
 | 5 / 5b. Heat shrink, sleeving | ✅ bought |
 | 6. MP630 inline fuse holders | ✅ bought |
