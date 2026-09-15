@@ -239,9 +239,11 @@ templates:
     subtype: 12V - stock 10Ah lead-acid; rebuild fits an Antigravity ATZ-7 RE-START lithium
     notes: |-
       ** THE REBUILD BATTERY IS LITHIUM - Antigravity ATZ-7 RE-START, recorded 14 Sep 2026. **
-      Capacity and cranking figures go here from the box, not from memory [spec].
-      Case 4.53 x 2.75 x 3.35 in, 115 x 70 x 85 mm, L x D x H - from memory 14 Sep 2026, confirm
-      against the box or a tape before the battery tray and the PDM's neighbour space are settled.
+      Maker's sheet [spec 15 Sep 2026]: 150 CA peak; 7 Ah lead-acid EQUIVALENT, 3.3 Ah ACTUAL, 42 Wh;
+      115 x 70 x 85 mm L x D x H; 0.6 kg.
+      ** SIZE LOADS ON 3.3 Ah, NOT 7. ** The 7 is a lead-acid comparison figure. A 45W USB charger at
+      full draw would take this pack to its cut-off in well under an hour; a tender at 1A refills it
+      in about four.
       ** RE-START: the pack has its own BMS cut-off. ** It disconnects itself before a drain takes it
       too low and holds a reserve that the button on the case releases for one start. So a load
       left on overnight strands nothing - but the cut-off is the LAST line, not a design input. The
@@ -252,8 +254,9 @@ templates:
       inside the lithium window. Do not run this battery on the stock regulator, ever.
       ⚠️ A LITHIUM-SAFE TENDER ONLY. No desulfation or pulse-repair mode, no lead-acid float that
       sits above 13.6V. See SAE.
-      ⚠️ POST THREADS NOT MEASURED. The relay and starter are M6 [bench 11 Sep 2026]; the battery's
-      terminal bolts are the part's own and may be M5 or M6. Check before ordering the last rings.
+      ⚠️ POST THREADS NOT MEASURED, and the maker's sheet does not give them. M5 or M6; the relay and
+      starter are M6 [bench 11 Sep 2026]. Put a thread gauge on the supplied bolts before ordering the
+      last rings.
     pinlabels: [POS, NEG]
 
   starter_relay: &starter_relay
