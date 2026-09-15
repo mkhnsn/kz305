@@ -22,10 +22,14 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-188 labels for 94 wires.
+186 labels for 93 wires.
 
 Not labelled: 15 conductors that already exist in retained
 stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`, `TDR_GND`, `TDR_SAE`.
+
+Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
+
+**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (160), `9mm.csv` (18), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is `NAME >FAR-END`.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -179,8 +183,6 @@ stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, 
 | `SIG_RL` | SP_SIG_L-1 | `>SIG_RL-1` | GN | 16 AWG |
 | `SIG_RR` | SIG_RR-1 | `>SP_SIG_R-1` | GY | 16 AWG |
 | `SIG_RR` | SP_SIG_R-1 | `>SIG_RR-1` | GY | 16 AWG |
-| `SOL_GND` | SOL-4 | `>SP_GND-1` | BK | 16 AWG |
-| `SOL_GND` | SP_GND-1 | `>SOL-4` | BK | 16 AWG |
 | `SOL_SM` | SM-1 | `>SOL-2` | RD | 6 AWG |
 | `SOL_SM` | SOL-2 | `>SM-1` | RD | 6 AWG |
 | `SW_BUS` | K_MAIN-2 | `>SP_SW-1` | BG | 16 AWG |
