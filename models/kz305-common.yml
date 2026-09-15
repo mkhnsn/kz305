@@ -77,7 +77,14 @@
 #      BK  ground ONLY - never a signal, never a feed
 #      RD  always-hot / battery / unfused main
 #      WH  fused main power, pre-relay
-#      BN  switched power - the bus and its fused feeds
+#      BG  switched power - the bus and its fused feeds. TAN wire;
+#          the renderer's nearest code is BG, beige. Was brown until
+#          15 Sep 2026, when Prowire's brown backorder ran long and the
+#          line was swapped to tan to keep the delivery. 21 conductors.
+#          ⚠️ TAN AND YELLOW under a torch: the two solid colours most
+#          alike in this scheme now, and YE is ignition and starter
+#          trigger. They meet only at the PDM and the retained IGN
+#          switch, both of which identify their ways. Read the label.
 #      YE  ignition, coil, starter trigger
 #      GY  control and trigger signals - relay coil drives, switch
 #          returns, and the RIGHT turn circuit

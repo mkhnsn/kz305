@@ -79,7 +79,7 @@ $15.20 — twice the wire for 1.35x the money. ⚠️ **If a line needs more tha
 
 | Gauge | Colour | Item | Cond. | Need | **Buy** | $ |
 |---|---|---|---|---|---|---|
-| 16 | BN | `TXL-16-1` | 21 | ~63 ft | **100** | ~19 |
+| 16 | **TN** | tan, swapped in for `TXL-16-1` brown 15 Sep | 21 | ~63 ft | **100** | ~19 |
 | 16 | BK | `TXL-16-0` | 19 | ~57 ft | **100** | 22.90 |
 | 16 | YE | `TXL-16-4` | 10 | ~30 ft | **50** | ~14 |
 | 16 | BU | `TXL-16-LB` | 10 | ~30 ft | **50** | 13.15 |
@@ -97,7 +97,7 @@ $15.20 — twice the wire for 1.35x the money. ⚠️ **If a line needs more tha
 
 | Line | Ft | $ |
 |---|---|---|
-| `TXL-16-1` brown | 100 | 17.60 |
+| tan, in place of `TXL-16-1` brown | 100 | 17.60 |
 | `TXL-16-0` black | 100 | 22.90 |
 | `TXL-16-4` yellow | 50 | 14.00 |
 | `TXL-16-LB` light blue | 50 | 13.15 |
@@ -121,11 +121,13 @@ Blue is 10 conductors and black is 19: the two biggest groups in the harness,
 and the two you least want to confuse. The point of solid colours plus printed
 labels is that the colour is readable *before* you read the label.
 
-### `TXL-16-1` brown is backordered to 7 Sep
+### Brown became tan — 15 Sep 2026
 
-48,000 ft inbound, so it is a three-day wait rather than a supply problem.
-⚠️ **Check whether it holds the whole order or ships split** — a second delivery
-charge costs more than the three days are worth.
+`TXL-16-1` brown was backordered to 7 Sep and then slipped well past it.
+Prowire emailed; the line was **swapped to tan** so the whole order shipped
+together, out for delivery 15 Sep. **The switched bus is tan on this bike.**
+The model codes it `BG`, the renderer's nearest colour, and the label schedule
+prints `BG`. Nothing else in the order changed.
 
 ### The one line that cannot be fixed
 

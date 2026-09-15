@@ -1131,7 +1131,7 @@ cables:
     notes: Main stud to the relay common. Short run inside the PDM; protected by the 20A main. Individual circuits are fused downstream of the relay.
   W_SW_BUS:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: |-
       Relay output - the switched brown bus, K_MAIN's 87 to SP_SW. Horn and headlamp are fed hot and
       never cross it, but everything else switched does.
@@ -1146,15 +1146,15 @@ cables:
   W_HOT_F1:  {<<: *w16, colors: [RD], notes: "Hot bus to the F1 cavity. RD - always-hot per the scheme."}
   W_HOT_F4:  {<<: *w16, colors: [RD], notes: "Hot bus to the F4 cavity."}
   W_HOT_F5:  {<<: *w16, colors: [RD], notes: "Hot bus to the F5 cavity."}
-  W_SW_F2:   {<<: *w16, colors: [BN], notes: "Switched bus to the F2 cavity. BN - switched power."}
-  W_SW_F3:   {<<: *w16, colors: [BN], notes: "Switched bus to the F3 cavity."}
-  W_SW_F6:   {<<: *w16, colors: [BN], notes: "Switched bus to the F6 cavity."}
-  W_SW_F7:   {<<: *w16, colors: [BN], notes: "Switched bus to the F7 cavity."}
-  W_SW_F8:   {<<: *w16, colors: [BN], notes: "Switched bus to the F8 cavity."}
-  W_SW_F9:   {<<: *w16, colors: [BN], notes: "Switched bus to the F9 cavity."}
-  W_SW_F10:  {<<: *w16, colors: [BN], notes: "Switched bus to the F10 cavity - the USB charger."}
-  W_SW_F11:  {<<: *w16, colors: [BN], notes: "Switched bus to the F11 cavity - relay coil supply."}
-  W_RLY_PWR: {<<: *w16, colors: [BN], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
+  W_SW_F2:   {<<: *w16, colors: [BG], notes: "Switched bus to the F2 cavity. BG, tan - switched power."}
+  W_SW_F3:   {<<: *w16, colors: [BG], notes: "Switched bus to the F3 cavity."}
+  W_SW_F6:   {<<: *w16, colors: [BG], notes: "Switched bus to the F6 cavity."}
+  W_SW_F7:   {<<: *w16, colors: [BG], notes: "Switched bus to the F7 cavity."}
+  W_SW_F8:   {<<: *w16, colors: [BG], notes: "Switched bus to the F8 cavity."}
+  W_SW_F9:   {<<: *w16, colors: [BG], notes: "Switched bus to the F9 cavity."}
+  W_SW_F10:  {<<: *w16, colors: [BG], notes: "Switched bus to the F10 cavity - the USB charger."}
+  W_SW_F11:  {<<: *w16, colors: [BG], notes: "Switched bus to the F11 cavity - relay coil supply."}
+  W_RLY_PWR: {<<: *w16, colors: [BG], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
   W_GND_MAIN:
     <<: *w12
     colors: [BK]
@@ -1239,7 +1239,7 @@ cables:
     <<: *w16
     colors: [GY]
     notes: |-
-      Switched power to the K_HORN coil, ~0.15A. GY not BN - it is a relay coil drive, and the
+      Switched power to the K_HORN coil, ~0.15A. GY not BG - it is a relay coil drive, and the
       8-colour scheme groups those under grey.
       ⚠️ IT IS FED FROM THE SWITCHED BUS (PDM SW OUT), so the horn is dead with the key out even
       though F4 on the load side is always-hot. The colour describes the ROLE, not the source.
@@ -1268,8 +1268,8 @@ cables:
       RD for always-hot, the same as W_IGN_FEED off F1 (#57, 10 Sep 2026).
   W_HORN_FEED:
     <<: *w16
-    colors: [BN]
-    notes: Relay output to the horn - K_HORN's 87. BN for switched power, the relay's output role (#57, 10 Sep 2026).
+    colors: [BG]
+    notes: Relay output to the horn - K_HORN's 87. BG, tan, for switched power, the relay's output role (#57, 10 Sep 2026).
   W_HORN_GND:
     <<: *w16
     colors: [BK]
@@ -1321,7 +1321,7 @@ cables:
   # --- tail / park net, and the meter lamps on it ---------------------
   W_TAIL_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F6 to the ignition switch's TAIL1 way. Fused switched power in; the switch decides whether it or the battery feeds the tail net.
   W_TAIL_OUT:
     <<: *w16
@@ -1332,21 +1332,21 @@ cables:
       LED meter lamps it carries today.
   W_INSTR_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F7 out to the instrument splice - one wire per cavity. Splits at SP_INSTR into the meter feed and the neutral lamp feed.
   W_MTR_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F7 to the meter lamp splice. Switched instrument power, sharing the fuse with the neutral lamp.
-  W_MTR_SPD: {<<: *w16, colors: [BN], notes: "Speedometer light. SWITCHED, not park-fed - see SP_MTR."}
-  W_MTR_TAC: {<<: *w16, colors: [BN], notes: "Tachometer light, same net."}
+  W_MTR_SPD: {<<: *w16, colors: [BG], notes: "Speedometer light. SWITCHED, not park-fed - see SP_MTR."}
+  W_MTR_TAC: {<<: *w16, colors: [BG], notes: "Tachometer light, same net."}
   W_GND_SPD: {<<: *w16, colors: [BK]}
   W_GND_TAC: {<<: *w16, colors: [BK]}
 
   # --- USB-C PD charger, replacing the stock accessory circuit ----------
   W_USB_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: |-
       PDM F10 to the charger. SWITCHED - it dies with the key, deliberately. See USB.
       16 AWG covers a 45W unit at about 4.4A in with margin; confirm against the chosen part.
@@ -1358,7 +1358,7 @@ cables:
   # --- turn signals -----------------------------------------------------
   W_FLASH_IN:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F9 to the flasher. Switched, so the signals die with the key.
   W_FLASH_OUT:
     <<: *w16
@@ -1403,10 +1403,10 @@ cables:
     notes: Tail net to the tail filament. Lights in ON and in PARK - see SP_TAIL.
   W_BRK_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F8 to the brake splice. Its own fuse, unlike stock - see SP_BRK_FEED.
-  W_BRK_FEED_F: {<<: *w16, colors: [BN], notes: "Splice to the front switch, at the lever perch."}
-  W_BRK_FEED_R: {<<: *w16, colors: [BN], notes: "Splice to the rear switch, frame mounted."}
+  W_BRK_FEED_F: {<<: *w16, colors: [BG], notes: "Splice to the front switch, at the lever perch."}
+  W_BRK_FEED_R: {<<: *w16, colors: [BG], notes: "Splice to the rear switch, frame mounted."}
   W_BRK_OUT_F:  {<<: *w16, colors: [GN], notes: "Front switch out to the brake lamp splice."}
   W_BRK_OUT_R:  {<<: *w16, colors: [GN], notes: "Rear switch out to the brake lamp splice."}
   W_BRAKE:
@@ -1430,9 +1430,9 @@ cables:
   # --- neutral circuit -------------------------------------------------
   W_IND_N_FEED:
     <<: *w16
-    colors: [BN]
+    colors: [BG]
     notes: PDM F7 to the instrument 6P - switched power for the neutral lamp.
-  W_IND_N_FEED2: {<<: *w16, ignore_in_bom: true, colors: [BN], notes: "Pod-side leg, 6P to the lamp."}
+  W_IND_N_FEED2: {<<: *w16, ignore_in_bom: true, colors: [BG], notes: "Pod-side leg, 6P to the lamp."}
   W_NSW2:
     <<: *w16
     ignore_in_bom: true
