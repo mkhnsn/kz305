@@ -25,7 +25,7 @@ hand, 9–10 Sep 2026 `[bench]`. Part numbers and quantities are in
  r5   F5 IN    spare   │  K_COIL  ││  K_HORN  │   F6 IN    F9 IN    spare    spare
  r6   F5 OUT   spare   └──────────┘└──────────┘   F6 OUT   F9 OUT   spare    spare
                        ┌──────────┐┌──────────┐
-                       │   K_HI   ││ K_SPARE  │   (rows 3-4 and 5-6 of c3-c6)
+                       │   K_HI   ││ K_SPARE  │   rows 3-4 of c3-c6, between the two pairs above
                        └──────────┘└──────────┘
 
       ──── HOT ────   ──── 6 relays ────   ──────── SWITCHED ────────
@@ -60,6 +60,17 @@ rotation question for that position.
 face, so a relay on top doesn't close a hole underneath — and neither does a
 spare fuse. The plug count does not move when the spares go in.
 
+## Where it mounts — decided 15 Sep 2026
+
+**Beside the battery, under the seat, mid-frame.** On the old harness that is
+the `B06` fan-out at **835 mm from the headlight datum**, where the fuse box
+4-pin, the starter-relay leads and the main feed all left the trunk. The
+rebuild's PDM, its three splices (`SP_HOT`, `SP_SW`, `SP_RLY`), the ground
+collector `SP_GND` and the two battery-end fuse holders all sit there.
+
+That number is what `docs/cut-list.md` is built on. Enclosure and fixing are
+still open (#55).
+
 ## Spares live in the block — decided 11 Sep 2026
 
 **Every spare position is populated**, so the spares travel with the bike
@@ -78,7 +89,7 @@ relay sitting there does nothing until it is moved into a live position.
 Two each of 5, 7.5 and 10 A, one 15 A (only F5 uses it). The HOT end's spares
 sit in c2 next to the HOT column; the SWITCHED end's in c9–c10.
 
-**Spare relay — 1**, `K_SPARE`, in the sixth position (c5–c6, rows 5–6). Same
+**Spare relay — 1**, `K_SPARE`, in the sixth position (c5–c6, rows 3–4, beside `K_HI`). Same
 part as the other five, so it swaps into any of them. Buy **six** relays, not
 five.
 
@@ -127,6 +138,8 @@ marking and confirm the diagonals when they arrive.
   being read off a diagram instead of the part.
 - **One wire per cavity.** The feed buses are star points outside the module
   (`SP_HOT`, `SP_SW`).
+- **Cut to `docs/cut-list.md`**, one wire at a time: cut, label, seal, crimp,
+  then the next. The far end stays long for the bike.
 - **Spares go in last**, after the wired positions are checked, so a spare is
   never mistaken for a live fuse during the ring-out.
 - **Depinning:** pull the TPA (`0301372`), then release both tangs.

@@ -611,3 +611,20 @@ def test_ground_leads_land_on_the_net_their_colour_declares():
         "ground leads on a node whose net they are measured OPEN to:\n  "
         + "\n  ".join(sorted(set(problems)))
     )
+
+
+def test_cut_list_places_every_buildable_wire():
+    """tools/cut_list.py must know where both ends of every wire sit.
+
+    The cut list is what the bench cuts to, and a wire with an unplaced end
+    would either be skipped silently or guessed. The tool exits non-zero and
+    names the node instead, and this makes that a build failure so a new
+    connector cannot be drawn without being placed.
+    """
+    import subprocess
+    r = subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "cut_list.py")],
+        capture_output=True, text=True,
+    )
+    assert r.returncode == 0, r.stderr
+    assert "| c1 r1 (F1 IN) |" in r.stdout

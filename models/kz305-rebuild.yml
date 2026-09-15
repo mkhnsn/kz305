@@ -78,7 +78,11 @@
 #   LENGTHS ARE NOT A BLOCKER. The harness is built in place on the
 #   bike and trimmed to final length there. Step 1 measured 46 branches
 #   off the old harness before anything was cut, and that map sets
-#   component spacing - it is a reference, not a cut list.
+#   component spacing. Since 15 Sep 2026 it also drives a CUT LIST -
+#   docs/cut-list.md, from tools/cut_list.py - because the PDM end is
+#   crimped at the bench and a wire has to be cut before its first
+#   crimp. Route plus 300 mm; the far end is still trimmed on the bike.
+#   The PDM sits at 835 mm from the datum, the old B06 fan-out.
 #
 #   DESIGN DECISIONS AWAITING A CALL were filed as issues #44-#55 and
 #   are deliberately not resolved in this file. As of 10 Sep 2026 the
