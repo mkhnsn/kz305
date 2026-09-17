@@ -59,7 +59,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 ## Everything else — cut when the near end is terminated
 
-49 wires. Same rule: cut to this, crimp the near end, trim the far end on the bike.
+51 wires. Same rule: cut to this, crimp the near end, trim the far end on the bike.
 
 | Wire | Colour | Gauge | From | To | Route | **Cut** | Basis |
 |---|---|---|---|---|---|---|---|
@@ -67,7 +67,8 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_COIL_L` | YE | 16 AWG | COIL_L | SP_YR | 440 | **950** | est |
 | `W_COIL_R` | YE | 16 AWG | COIL_R | SP_YR | 440 | **950** | est |
 | `W_BRK_FEED_F` | BG | 16 AWG | FBRK | SP_BRK_FEED | 750 | **1250** | est |
-| `W_GND_MAIN` | BK/BK | 16 AWG | GND | SP_GND | 200 | **2 x 700** | est |
+| `W_GND_MAIN_A` | BK | 16 AWG | GND | SP_GND | 200 | **700** | est |
+| `W_GND_MAIN_B` | BK | 16 AWG | GND | SP_GND | 200 | **700** | est |
 | `W_RR_GND` | BK | 12 AWG | GND | RR | 400 | **900** | est |
 | `W_HEAD_HI2` | BU | 16 AWG | HEAD | SP_HI | 100 | **600** | tape |
 | `W_IND_HB` | BU | 16 AWG | INSTR_6P | SP_HI | 100 | **600** | tape |
@@ -83,7 +84,8 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_TDR_HOT` | RD | 12 AWG | MF_TDR | BATT | 300 | **800** | est |
 | `W_NSW` | GY | 16 AWG | NSW | INSTR_6P | 1400 | **1900** | tape |
 | `W_BRK_FEED_R` | BG | 16 AWG | RBRK | SP_BRK_FEED | 300 | **800** | est |
-| `W_ALT` | YE/YE | 14 AWG | RR | ALT | 625 | **2 x 1150** | est |
+| `W_ALT_A` | YE | 14 AWG | RR | ALT | 625 | **1150** | est |
+| `W_ALT_B` | YE | 14 AWG | RR | ALT | 625 | **1150** | est |
 | `W_SIG_FL` | GN | 16 AWG | SIG_FL | SP_SIG_L | 300 | **800** | est |
 | `W_SIG_FR` | GY | 16 AWG | SIG_FR | SP_SIG_R | 300 | **800** | est |
 | `W_SIG_RL` | GN | 16 AWG | SIG_RL | SP_SIG_L | 1710 | **2250** | est |

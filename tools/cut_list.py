@@ -264,14 +264,9 @@ def main():
     w(f"{len(pdm)} wires, in cavity order, column by column.\n")
     w("| Cavity | Wire | Colour | Gauge | Far end | Route | **Cut** | Basis |")
     w("|---|---|---|---|---|---|---|---|")
-    def cut_text(r):
-        # a two-conductor cable is two wires off the spool, each cut to length
-        n = len(r["colours"])
-        return f"{n} x {r['cut']}" if n > 1 else str(r["cut"])
-
     for r in pdm:
         w(f"| {r['cavity']} | `{r['name']}` | {r['colour']} | {r['gauge']} | "
-          f"{r['far']} | {r['route']} | **{cut_text(r)}** | {r['basis']} |")
+          f"{r['far']} | {r['route']} | **{r['cut']}** | {r['basis']} |")
     w("")
 
     w("## Everything else — cut when the near end is terminated\n")
@@ -281,7 +276,7 @@ def main():
     w("|---|---|---|---|---|---|---|---|")
     for r in rest:
         w(f"| `{r['name']}` | {r['colour']} | {r['gauge']} | {r['near']} | {r['far']} | "
-          f"{r['route']} | **{cut_text(r)}** | {r['basis']} |")
+          f"{r['route']} | **{r['cut']}** | {r['basis']} |")
     w("")
 
     w("## Heavy cable — not cut at the bench\n")

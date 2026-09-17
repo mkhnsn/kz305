@@ -492,7 +492,7 @@ connectors:
       These are sealed, they use the same 090 terminals as the rest of the connector order, and a
       circuit can be removed by pulling a terminal rather than cutting a crimp.
       LOAD IS ABOUT 5-8A across nineteen 16 AWG returns, against a 22A rating.
-      ⚠️ THE TWO LEADS OUT LEAVE FROM DIFFERENT BLOCKS - see W_GND_MAIN. Put them on the first and
+      ⚠️ THE TWO LEADS OUT LEAVE FROM DIFFERENT BLOCKS - see W_GND_MAIN_A. Put them on the first and
       last block of the chain so no single jumper carries the whole return.
       ⚠️ THE CHARGING RETURN IS NOT HERE. W_RR_GND goes direct to the bolted point - see GND.
   SP_HOT:
@@ -1163,15 +1163,17 @@ cables:
   W_SW_F10:  {<<: *w16, colors: [BG], notes: "Switched bus to the F10 cavity - the USB charger."}
   W_SW_F11:  {<<: *w16, colors: [BG], notes: "Switched bus to the F11 cavity - relay coil supply."}
   W_RLY_PWR: {<<: *w16, colors: [BG], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
-  W_GND_MAIN:
+  W_GND_MAIN_A:
     <<: *w16
-    colors: [BK, BK]
+    colors: [BK]
     notes: |-
-      The signal ground bus up to the bolted star point. TWO 16 AWG LEADS, FROM TWO DIFFERENT
-      JUNCTION BLOCKS - decided 17 Sep 2026. SP_GND is built from sealed 090 junctions and the 090
-      family takes nothing heavier than 16 AWG, so the 12 AWG lead this used to be could not land.
+      The signal ground bus up to the bolted star point. ONE OF TWO 16 AWG LEADS, W_GND_MAIN_A AND
+      W_GND_MAIN_B, FROM TWO DIFFERENT JUNCTION BLOCKS - decided 17 Sep 2026. SP_GND is built from
+      sealed 090 junctions and the 090 family takes nothing heavier than 16 AWG, so the 12 AWG lead
+      this used to be could not land.
       All nineteen returns come home this way, about 5-8A. Either lead alone carries that, so there
       is a second route home, and each 090 pin sees half of it. Both leads land under the star bolt.
+  W_GND_MAIN_B: {<<: *w16, colors: [BK], notes: "The second signal ground lead, from the far junction block. See W_GND_MAIN_A."}
   W_KMAIN_GND:
     <<: *w16
     colors: [BK]
@@ -1476,10 +1478,12 @@ cables:
       earth. 6 AWG to match the rest of the heavy loop. See GND_ENG for why the powder coating makes
       this a new part rather than a reproduction.
 
-  W_ALT:
+  W_ALT_A:
     <<: *w14
-    colors: [YE, YE]
+    colors: [YE]
     notes: |-
+      ONE OF TWO SINGLE WIRES, W_ALT_A AND W_ALT_B - the stator's two legs. They are AC and
+      interchangeable: either lands on either of the regulator's AC inputs.
       ** 14 AWG - SETTLED 6 Sep 2026 BY THE CONNECTOR, not by the conductor. ** The SH775's AC side is
       a Furukawa QLW 250 (grey, QLW-A-3F-GR) and 14 AWG is the SMALLEST socket the housing accepts;
       its stated range is 2.00-8.00 sq mm. 16 AWG is 1.23 sq mm and will neither crimp nor seal.
@@ -1508,6 +1512,7 @@ cables:
       surprise later.
       ⚠️ YELLOW COLLIDES WITH THE SCHEME'S IGNITION ROLE but is kept to match stock. These two are
       isolated in their own connector at the regulator and touch nothing else.
+  W_ALT_B: {<<: *w14, colors: [YE], notes: "The stator's second leg. See W_ALT_A - same wire, same rules, interchangeable with it."}
   W_RR_OUT:
     <<: *w12
     colors: [RD]
@@ -1557,9 +1562,12 @@ connections:
   - - BATT: [2]
     - W_BAT_GND: [1]
     - GND: [1]
-  - - SP_GND: [1,1]
-    - W_GND_MAIN: [1,2]
-    - GND: [4,4]
+  - - SP_GND: [1]
+    - W_GND_MAIN_A: [1]
+    - GND: [4]
+  - - SP_GND: [1]
+    - W_GND_MAIN_B: [1]
+    - GND: [4]
 
   # --- main feed through the 20A fuse --------------------------------
   - - SOL: [1]
@@ -1912,9 +1920,12 @@ connections:
     - GND: [3]
 
   # --- charging ------------------------------------------------------
-  - - ALT: [1,2]
-    - W_ALT: [1,2]
-    - RR: [1,2]
+  - - ALT: [1]
+    - W_ALT_A: [1]
+    - RR: [1]
+  - - ALT: [2]
+    - W_ALT_B: [1]
+    - RR: [2]
   - - RR: [4]
     - W_RR_OUT: [1]
     - MF_RR: [1]

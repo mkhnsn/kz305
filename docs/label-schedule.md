@@ -21,19 +21,21 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-186 labels for 93 wires.
+190 labels for 95 wires.
 
 Not labelled: 15 conductors that already exist in retained
 stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`, `TDR_GND`, `TDR_SAE`.
 
 Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 
-**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (162), `9mm.csv` (16), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is the wire name.
+**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (164), `9mm.csv` (18), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is the wire name.
 
 | Label text | This end | Far end | Colour | Gauge |
 |---|---|---|---|---|
-| `ALT` | ALT-1/2 | RR-1/2 | YE/YE | 14 AWG |
-| `ALT` | RR-1/2 | ALT-1/2 | YE/YE | 14 AWG |
+| `ALT_A` | ALT-1 | RR-1 | YE | 14 AWG |
+| `ALT_A` | RR-1 | ALT-1 | YE | 14 AWG |
+| `ALT_B` | ALT-2 | RR-2 | YE | 14 AWG |
+| `ALT_B` | RR-2 | ALT-2 | YE | 14 AWG |
 | `BAT_GND` | BATT-2 | GND-1 | BK | 6 AWG |
 | `BAT_GND` | GND-1 | BATT-2 | BK | 6 AWG |
 | `BAT_SOL` | BATT-1 | SOL-1 | RD | 6 AWG |
@@ -68,8 +70,10 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `FLASH_IN` | PDM-13 | FLASHER-1 | BG | 16 AWG |
 | `FLASH_OUT` | FLASHER-2 | LH-4 | BU | 16 AWG |
 | `FLASH_OUT` | LH-4 | FLASHER-2 | BU | 16 AWG |
-| `GND_MAIN` | GND-4/4 | SP_GND-1/1 | BK/BK | 16 AWG |
-| `GND_MAIN` | SP_GND-1/1 | GND-4/4 | BK/BK | 16 AWG |
+| `GND_MAIN_A` | GND-4 | SP_GND-1 | BK | 16 AWG |
+| `GND_MAIN_A` | SP_GND-1 | GND-4 | BK | 16 AWG |
+| `GND_MAIN_B` | GND-4 | SP_GND-1 | BK | 16 AWG |
+| `GND_MAIN_B` | SP_GND-1 | GND-4 | BK | 16 AWG |
 | `GND_SIG_FL` | SIG_FL-2 | SP_GND-1 | BK | 16 AWG |
 | `GND_SIG_FL` | SP_GND-1 | SIG_FL-2 | BK | 16 AWG |
 | `GND_SIG_FR` | SIG_FR-2 | SP_GND-1 | BK | 16 AWG |

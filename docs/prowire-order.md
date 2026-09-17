@@ -15,7 +15,7 @@ Generated from `models/kz305-rebuild.yml`, 4 Sep 2026. Quantities are
 
 ## Outstanding after order Q25134 — `TXL-14-4`, ~8 ft
 
-`W_ALT` went back to 14 AWG on 6 Sep because the Furukawa QLW 250 at the
+`W_ALT_A` / `W_ALT_B` went back to 14 AWG on 6 Sep because the Furukawa QLW 250 at the
 regulator will not take anything smaller. That re-added a SKU the 4 Sep
 consolidation had removed, and the order had already closed.
 
@@ -50,8 +50,8 @@ of it against ~6 ft needed.
 
 ### Everything else still covers
 
-`12 AWG BK` carries `W_RR_GND` only, against 10 ft ordered. `W_GND_MAIN` is two
-16 AWG leads, because `SP_GND`'s 090 junctions take nothing heavier. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
+`12 AWG BK` carries `W_RR_GND` only, against 10 ft ordered. `W_GND_MAIN_A` and `W_GND_MAIN_B`
+are 16 AWG, because `SP_GND`'s 090 junctions take nothing heavier. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
 
 ## 1. TXL wire — 11 SKUs, all 16 AWG above 14
 

@@ -382,6 +382,9 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     #   GND / SP_*  - one net by definition
     #   MF / MF_RR / MF_TDR - a fuse is symmetric; its two terminals are one circuit
     #   BATT        - battery positive is one net
+    #   ALT / RR    - W_ALT_A and W_ALT_B are the stator's two legs, both YE.
+    #                 They are AC and interchangeable: either leg lands on
+    #                 either AC input, so a swap is not an error.
     #   SOL         - 6 AWG battery cable comes in red and black only, so
     #                 W_BAT_SOL and W_SOL_SM are both RD. They are lugs on
     #                 separate studs and cannot physically be interchanged.
@@ -412,7 +415,7 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     # What is left - lamps, splices, free bullets - is where a swap has no
     # other check. That is what this guard is for.
     exempt = {
-        "GND", "SP_YR", "SP_HEAD", "MF", "MF_RR", "MF_TDR", "BATT", "SOL",
+        "GND", "ALT", "RR", "SP_YR", "SP_HEAD", "MF", "MF_RR", "MF_TDR", "BATT", "SOL",
         "PDM", "LH", "RH", "IGN", "INSTR_6P", "COIL_L", "COIL_R",
         "K_MAIN", "K_COIL", "K_HORN", "K_HI", "K_LO",
     }
@@ -447,14 +450,9 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
             continue
         for colour, uses in sorted(colours.items()):
             # One colour arriving on two different pins FROM TWO DIFFERENT
-            # CABLES is the ambiguity that matters. Two other cases are fine:
-            #   - the same colour twice on ONE pin is a single net, such as a
-            #     feed in and a tap out of a distribution stud;
-            #   - ONE multi-conductor cable spanning several pins, where the
-            #     wires are told apart by position within the cable rather
-            #     than by colour. W_ALT is the case in hand - a single-phase
-            #     alternator's two yellow phases, which are AC and therefore
-            #     interchangeable anyway.
+            # CABLES is the ambiguity that matters. The same colour twice on
+            # ONE pin is fine: it is a single net, such as a feed in and a
+            # tap out of a distribution stud.
             pins = {pin for pin, _ in uses}
             designators = {cable for _, cable in uses}
             if len(pins) > 1 and len(designators) > 1:

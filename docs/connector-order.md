@@ -86,7 +86,7 @@ a ruined female one comes out of the eleven already in the box.
 
 ⚠️ **Eight cavity plugs are needed.** `SP_SW`'s 14-way runs 11 of
 14. The four `SP_GND` junctions use **27 of 32** positions — nineteen returns, three
-jumper pairs and the two `W_GND_MAIN` leads — so `SP_GND` takes five more plugs.
+jumper pairs and the `W_GND_MAIN_A` and `W_GND_MAIN_B` leads — so `SP_GND` takes five more plugs.
 Eight in all, against twenty bought.
 
 ### Cycle Terminal — also the Furukawa R/R pair
@@ -106,7 +106,7 @@ Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals a
 |---|---|
 | `HW.JC-8P` bussed junction | 4 |
 | `HW.JC-14P-1` bussed junction | 1 |
-| M22759/16-14 yellow, `W_ALT` | 8 ft |
+| M22759/16-14 yellow, `W_ALT_A` / `W_ALT_B` | 8 ft |
 
 ⚠️ **The relays were not in it.** They move to the Cycle Terminal cart below.
 
@@ -146,18 +146,18 @@ Cycle Terminal also sells them as a pair — `QLW-3F Set`, $16.95, with 6 termin
 
 ### ⚠️ The AC side will not take 16 AWG
 
-Both vendors give the range as **2.00–8.00 mm² (12–14 AWG)**. `W_ALT` is 16 AWG =
+Both vendors give the range as **2.00–8.00 mm² (12–14 AWG)**. `W_ALT_A` / `W_ALT_B` is 16 AWG =
 **1.23 mm²**, below the minimum. The terminal will not crimp on it and the seal
 will not close on its insulation.
 
 | Wire | Gauge | mm² | |
 |---|---|---|---|
-| `W_ALT` | 16 AWG | 1.23 | ⚠️ **below minimum** |
+| `W_ALT_A` / `W_ALT_B` | 16 AWG | 1.23 | ⚠️ **below minimum** |
 | `W_RR_OUT` | 12 AWG | 3.31 | OK |
 | `W_RR_GND` | 12 AWG | 3.31 | OK |
 
 **Check Corsa's socket and seal dropdowns first** — the listing offers selectable
-sizes, so a 16 AWG socket may exist for this housing. If not, run `W_ALT` at
+sizes, so a 16 AWG socket may exist for this housing. If not, run `W_ALT_A` / `W_ALT_B` at
 14 AWG; see its note in the model for why that costs less than the 4 Sep
 gauge-matching decision implies.
 
