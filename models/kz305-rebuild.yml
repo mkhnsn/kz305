@@ -81,8 +81,12 @@
 #   component spacing. Since 15 Sep 2026 it also drives a CUT LIST -
 #   docs/cut-list.md, from tools/cut_list.py - because the PDM end is
 #   crimped at the bench and a wire has to be cut before its first
-#   crimp. Route plus 300 mm; the far end is still trimmed on the bike.
+#   crimp. Route plus 500 mm, loose because the build starts on the
+#   bench; the far end is still trimmed on the bike.
 #   The PDM sits at 835 mm from the datum, the old B06 fan-out.
+#   THE PDM, THE ATZ-7 AND THE REGULATOR ALL SIT IN THE OLD BATTERY BOX
+#   - decided 17 Sep 2026. The ATZ-7 is far smaller than the lead-acid
+#   it replaces, and that freed volume is what the other two use.
 #
 #   DESIGN DECISIONS AWAITING A CALL were filed as issues #44-#55 and
 #   are deliberately not resolved in this file. As of 10 Sep 2026 the
@@ -617,8 +621,9 @@ connectors:
       CONNECTORS NOT YET ORDERED - two mating pigtails, 3-pin AC + 2-pin DC, Shindengen FH009-FH020
       family, $16-22; Eastern Beaver preferred for correct crimps and DC gauge.
       DC+ RUNS HEAVY AND DIRECT TO THE BATTERY with MF_RR at the battery end - see W_RR_OUT.
-      Leave room and a mount; the SH775 is larger than a Podtronics, so mount it where the airflow
-      actually is.
+      IT MOUNTS IN THE OLD BATTERY BOX, with the PDM and the ATZ-7 - decided 17 Sep 2026. That keeps
+      the DC pair short, which is what W_RR_OUT asks for, and costs airflow: the box is sheltered.
+      ⚠️ CHECK BODY TEMPERATURE ON THE FIRST RUN, beside a lithium battery. [OPEN]
       ⚠️ THE STATOR'S RATED WATTAGE HAS NOT BEEN READ OFF ANYTHING - only the 0.4 ohm and 75V AC test
       values. It is what sizes MF_RR. [OPEN]
       Target 14.0-14.5V at 3-5k AND check body temperature. Never disconnect with the ignition on, and

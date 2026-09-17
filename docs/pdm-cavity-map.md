@@ -60,9 +60,11 @@ rotation question for that position.
 face, so a relay on top doesn't close a hole underneath — and neither does a
 spare fuse. The plug count does not move when the spares go in.
 
-## Where it mounts — decided 15 Sep 2026
+## Where it mounts — decided 17 Sep 2026
 
-**Beside the battery, under the seat, mid-frame.** On the old harness that is
+**In the old battery box, with the ATZ-7 and the regulator.** The ATZ-7 is far
+smaller than the lead-acid battery the box was made for, and the PDM and the
+SH775 take the freed volume. On the old harness that is
 the `B06` fan-out at **835 mm from the headlight datum**, where the fuse box
 4-pin, the starter-relay leads and the main feed all left the trunk. The
 rebuild's PDM, its three splices (`SP_HOT`, `SP_SW`, `SP_RLY`), the ground
