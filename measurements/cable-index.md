@@ -13,7 +13,7 @@ why the measurement log keys on physical branch IDs instead.
 | `W_ACC_GND_R` | SP_NETA | ACC_R | YEBK | 16 AWG |
 | `W_ACC_PWR` | ACC_F_PWR | ACC_R_PWR | WHBU | 18 AWG |
 | `W_ACC_RING` | GND_CHASSIS | SP_NETA | YEBK | 16 AWG |
-| `W_ALT` | ALT | RR | YE, YE | 14 AWG |
+| `W_ALT` | ALT | RR | YE, YE | 16 AWG |
 | `W_BAT_GND` | BATT | GND_CHASSIS | BKYE | 6 AWG |
 | `W_BAT_SOL` | BATT | SOL | RD | 6 AWG |
 | `W_BL_UP` | FUSE_HEAD | FUSE_4P | BU | 18 AWG |
@@ -28,7 +28,7 @@ why the measurement log keys on physical branch IDs instead.
 | `W_BR_BUS` | RH_4P | SP_BR | BN | 16 AWG |
 | `W_BR_MAIN` | IGN | SP_BR | BN | 16 AWG |
 | `W_CAP_L` | PTS_L | CAP_L | YE | 18 AWG |
-| `W_CAP_R` | PTS_R | CAP_R | BK | 18 AWG |
+| `W_CAP_R` | PTS_R | CAP_R | BU | 18 AWG |
 | `W_COIL_L_FEED` | SP_YR | COIL_L | YERD | 16 AWG |
 | `W_COIL_R_FEED` | SP_YR | COIL_R | YERD | 16 AWG |
 | `W_DIM_FEED` | FUSE_4P | LH | BU | 16 AWG |
