@@ -506,29 +506,27 @@ connectors:
       review - see issue #50.
       FIVE CONDUCTORS: W_MAIN_OUT in from the 20A fuse, then W_MAIN_SW_FEED to K_MAIN's 30 and the
       F1, F4 and F5 inputs.
-      ** BUILT AS ONE CRIMPED PARALLEL SPLICE - Molex 19205-0004, 8 GA. ** Five conductors in a
-      4.20mm bore, which needs 3.83mm. One crimp, no cascade.
-      ** AND IT STAYS A CRIMP RATHER THAN A JUNCTION CONNECTOR - issue #44, 6 Sep 2026. ** SP_SW moved
-      to a sealed junction for serviceability; this node deliberately did not. It is the
-      HIGHEST-CURRENT node in the harness at about 16A, and unlike SP_SW its membership is settled -
-      F1, F4, F5 and K_MAIN's 30, none of them likely to change.
+      ** BUILT AS ONE CRIMPED PARALLEL SPLICE - Molex Versakrimp 19205-0004, 8 GA. ** All five
+      conductors enter from the same end and take one crimp, under adhesive heat-shrink. One crimp,
+      no cascade, no link wires.
+      ⚠️ TEST-CRIMP ON SCRAP FIRST. The 4.20mm bore was sized on 5 Sep 2026 for five 16 AWG, which
+      need 3.83mm. Two of the five have since gone to 14 AWG - W_MAIN_OUT and W_MAIN_SW_FEED - and
+      two 14 plus three 16 pack to about 4.1mm before any insertion allowance. It is 8.1 mm2 of
+      copper in an 8 GA barrel, so the crimp itself is in range; what is unproven is getting the
+      ends in. [OPEN]
+      IF THEY WILL NOT GO IN: two 8 GA crimps joined by one 14 AWG link, with W_MAIN_OUT and
+      W_MAIN_SW_FEED together on the first crimp so the heavy current never crosses the link.
+      ** AND IT STAYS A CRIMP RATHER THAN A JUNCTION CONNECTOR - issue #44, 6 Sep 2026. ** SP_SW and
+      SP_GND moved to sealed 090 junctions for serviceability; this node deliberately did not. It is
+      the HIGHEST-CURRENT node in the harness at about 16A, its membership is settled - F1, F4, F5
+      and K_MAIN's 30 - and the 090 family does not take its 14 AWG conductors.
       A crimp has ZERO mated interfaces; a junction has two per wire. On the main feed of a vibrating
       motorcycle that difference is the whole reason this rebuild bans bullets on the main path.
-      Serviceability is worth paying interfaces for where the design is still moving. It is not worth
-      paying them where it is settled.
-      Modelled as ONE node the way the factory model's SP_BR is - a trunk with taps - so the build
-      form is a note rather than a topology, and this decision does not change the drawing.
-      ⚠️ THE TRUNK CARRIES CUMULATIVE CURRENT, NOT BRANCH CURRENT. The segment nearest the fuse
-      carries everything downstream of it - up to 20A - and can taper as branches leave. Size each
-      segment for what passes through it, not for the branch it feeds.
-      ⚠️ ORDER THE CASCADE SO THE HEAVIEST BRANCH LEAVES FIRST. In a cascade the last branch's current
-      passes through every splice before it, so putting the big load at the far end puts the most
-      joints in series with the most current. K_MAIN's 30 is the heavy one here.
-      WHY A CASCADE RATHER THAN A STUD: sealed crimp splices under adhesive heat-shrink, distributed
-      along the loom, against four ring terminals stacked on one post. Stock practice on this bike -
-      SP_RH_BR is a 1-to-3 and SP_BRAKE a 2-into-1 shared crimp. It also avoids a bolted joint that
-      can loosen. The old harness did NOT fail at a splice; it failed at a separable bullet with a
-      gauge step in it.
+      The old harness did NOT fail at a splice; it failed at a separable bullet with a gauge step
+      in it.
+      THE RULE FOR EVERY OTHER NODE: up to five wires is one parallel splice - 12-10 GA for two or
+      three, 8 GA for four or five, see docs/prowire-order.md. Past five it is a sealed 090 junction,
+      which is where SP_SW (9) and SP_GND (19) went.
   SP_SW:
     style: simple
     type: Splice

@@ -81,6 +81,7 @@ POSITIONS = {
     "IGN":      (0,    100, "tape", "B00.3"),
     "INSTR_6P": (0,    100, "tape", "B00.1"),
     "HEAD":     (0,    100, "tape", "B00.9"),
+    "FBRK":     (0,    100, "tape", "B00.5 / B00.6 - the switch's own pigtail comes down to the shell"),
     "SP_HI":    (0,    0,   "tape", "in the shell"),
     "SP_TAIL":  (0,    0,   "tape", "in the shell"),
     "SP_INSTR": (0,    0,   "tape", "in the shell"),
@@ -93,7 +94,6 @@ POSITIONS = {
     "SIG_FR":   (0,    300, "est",  "front signal stalk"),
     # --- bars ---------------------------------------------------------
     "RH":       (400,  160, "tape", "B01.2"),
-    "FBRK":     (400,  200, "est",  "front lever perch, beside RH"),
     "HORN":     (400,  260, "tape", "B01.3"),
     "NSW":      (400,  900, "tape", "B01.4"),
     "LH":       (430,  200, "tape", "B02.3"),
@@ -208,6 +208,9 @@ def main():
                 cut = round_up(route + MARGIN_MM)
             cav = cavity_of(a, pa[0]) or cavity_of(b, pb[0])
             near, far = (a, b) if cavity_of(a, pa[0]) else (b, a)
+            # a jumper with both ends in the block: name the second cavity too
+            if cavity_of(a, pa[0]) and cavity_of(b, pb[0]):
+                far = cavity_of(b, pb[0])
             rows.append(dict(name=name, gauge=gauge, colour=colour, near=near,
                              far=far, cavity=cav, route=route, cut=cut,
                              basis=basis(a, b), heavy=heavy))

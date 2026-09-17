@@ -19,7 +19,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | c1 r1 (F1 IN) | `W_HOT_F1` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
 | c1 r2 (F1 OUT) | `W_IGN_FEED` | RD | 16 AWG | IGN | 935 | **1450** | tape |
 | c1 r3 (F4 IN) | `W_HOT_F4` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
-| c1 r4 (F4 OUT) | `W_HORN_PWR` | RD | 16 AWG | K_HORN | 0 | **300** | tape |
+| c1 r4 (F4 OUT) | `W_HORN_PWR` | RD | 16 AWG | c5 r5 (K_HORN 30) | 0 | **300** | tape |
 | c1 r5 (F5 IN) | `W_HOT_F5` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
 | c1 r6 (F5 OUT) | `W_HEAD_SUPPLY` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
 | c3 r1 (K_MAIN 30) | `W_MAIN_SW_FEED` | WH | 14 AWG | SP_HOT | 0 | **300** | est |
@@ -43,7 +43,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | c7 r1 (F2 IN) | `W_SW_F2` | BG | 16 AWG | SP_SW | 0 | **300** | est |
 | c7 r2 (F2 OUT) | `W_RH_IN` | YE | 16 AWG | RH | 595 | **1100** | tape |
 | c7 r3 (F3 IN) | `W_SW_F3` | BG | 16 AWG | SP_SW | 0 | **300** | est |
-| c7 r4 (F3 OUT) | `W_COIL_PWR` | YE | 16 AWG | K_COIL | 0 | **300** | tape |
+| c7 r4 (F3 OUT) | `W_COIL_PWR` | YE | 16 AWG | c3 r5 (K_COIL 30) | 0 | **300** | tape |
 | c7 r5 (F6 IN) | `W_SW_F6` | BG | 16 AWG | SP_SW | 0 | **300** | est |
 | c7 r6 (F6 OUT) | `W_TAIL_FEED` | BG | 16 AWG | IGN | 935 | **1450** | tape |
 | c8 r1 (F7 IN) | `W_SW_F7` | BG | 16 AWG | SP_SW | 0 | **300** | est |
@@ -66,7 +66,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_RR_BATT` | RD | 12 AWG | BATT | MF_RR | 300 | **800** | est |
 | `W_COIL_L` | YE | 16 AWG | COIL_L | SP_YR | 440 | **950** | est |
 | `W_COIL_R` | YE | 16 AWG | COIL_R | SP_YR | 440 | **950** | est |
-| `W_BRK_FEED_F` | BG | 16 AWG | FBRK | SP_BRK_FEED | 450 | **950** | est |
+| `W_BRK_FEED_F` | BG | 16 AWG | FBRK | SP_BRK_FEED | 750 | **1250** | est |
 | `W_GND_MAIN` | BK | 12 AWG | GND | SP_GND | 200 | **700** | est |
 | `W_RR_GND` | BK | 12 AWG | GND | RR | 400 | **900** | est |
 | `W_HEAD_HI2` | BU | 16 AWG | HEAD | SP_HI | 100 | **600** | tape |
@@ -89,7 +89,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_SIG_RL` | GN | 16 AWG | SIG_RL | SP_SIG_L | 1710 | **2250** | est |
 | `W_SIG_RR` | GY | 16 AWG | SIG_RR | SP_SIG_R | 1710 | **2250** | est |
 | `W_RH_OUT` | YE | 16 AWG | SOL | RH | 695 | **1200** | tape |
-| `W_BRK_OUT_F` | GN | 16 AWG | SP_BRAKE | FBRK | 450 | **950** | est |
+| `W_BRK_OUT_F` | GN | 16 AWG | SP_BRAKE | FBRK | 750 | **1250** | est |
 | `W_BRK_OUT_R` | GN | 16 AWG | SP_BRAKE | RBRK | 300 | **800** | est |
 | `W_CAP_GND` | BK | 16 AWG | SP_GND | CAP_L | 485 | **1000** | est |
 | `W_FLASH_GND` | BK | 16 AWG | SP_GND | FLASHER | 145 | **650** | est |
@@ -132,10 +132,10 @@ Bought long, cut on the bike with both lugs' landings in front of you. Route sho
 | 12 AWG | RD | 3.2 m | 12 ft (3.7 m) | 0.5 m ⚠️ |
 | 14 AWG | WH | 0.9 m | 10 ft (3.0 m) | 2.1 m |
 | 14 AWG | YE/YE | 1.1 m | 8 ft (2.4 m) | 1.3 m |
-| 16 AWG | BG | 13.3 m | 100 ft (30.5 m) | 17.2 m |
+| 16 AWG | BG | 13.6 m | 100 ft (30.5 m) | 16.9 m |
 | 16 AWG | BK | 19.5 m | 100 ft (30.5 m) | 11.0 m |
 | 16 AWG | BU | 7.5 m | 50 ft (15.2 m) | 7.8 m |
-| 16 AWG | GN | 11.8 m | 50 ft (15.2 m) | 3.4 m |
+| 16 AWG | GN | 12.1 m | 50 ft (15.2 m) | 3.1 m |
 | 16 AWG | GY | 10.7 m | 50 ft (15.2 m) | 4.5 m |
 | 16 AWG | RD | 2.6 m | 15 ft (4.6 m) | 1.9 m |
 | 16 AWG | YE | 6.7 m | 50 ft (15.2 m) | 8.5 m |
