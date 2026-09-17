@@ -84,9 +84,9 @@
 #   crimp. Route plus 500 mm, loose because the build starts on the
 #   bench; the far end is still trimmed on the bike.
 #   The PDM sits at 835 mm from the datum, the old B06 fan-out.
-#   THE PDM, THE ATZ-7 AND THE REGULATOR ALL SIT IN THE OLD BATTERY BOX
-#   - decided 17 Sep 2026. The ATZ-7 is far smaller than the lead-acid
-#   it replaces, and that freed volume is what the other two use.
+#   THE PDM, THE ATZ-7 AND THE REGULATOR ALL SIT WHERE THE OLD BATTERY
+#   BOX WAS, in a custom-fabricated box - decided 17 Sep 2026. The box
+#   is fabricated outside this repo; its geometry is not modelled here.
 #
 #   DESIGN DECISIONS AWAITING A CALL were filed as issues #44-#55 and
 #   are deliberately not resolved in this file. As of 10 Sep 2026 the
@@ -229,7 +229,7 @@ connectors:
         1 BATT NEG      6 AWG, direct
         2 RR RETURN     12 AWG, direct - see below
         3 ENGINE STRAP  6 AWG, direct. Carries the WHOLE CRANKING RETURN, well over 100A
-        4 SIGNAL BUS    one lead up from SP_GND, which collects the nineteen signal returns
+        4 SIGNAL BUS    two 16 AWG leads up from SP_GND, which collects the nineteen signal returns
       ** THE HEAVY RETURNS NEVER TOUCH A CONNECTOR. ** No 090 or 250 junction is rated for a tenth of
       cranking current. These are bolted, and the bolt IS the star point.
       ⚠️ W_RR_GND IS TREATED AS HEAVY, and that was not obvious. It is 12 AWG carrying the charging
@@ -485,16 +485,16 @@ connectors:
     type: Splice
     subtype: signal ground bus - 19 returns, sealed junctions
     notes: |-
-      ** SEALED JUNCTION CONNECTORS, NOT A BUS BAR - issue #44, 6 Sep 2026. ** Three HW.JC-8P sealed
-      junctions (8 ways, all pins bussed, 22A) jumpered together: 24 positions for nineteen returns,
-      two internal jumpers and one lead out to the bolted star point.
+      ** SEALED JUNCTION CONNECTORS, NOT A BUS BAR - issue #44, 6 Sep 2026. ** Four HW.JC-8P sealed
+      junctions (8 ways, all pins bussed, 22A) jumpered together: 32 positions for nineteen returns,
+      three internal jumpers and two leads out to the bolted star point. 27 used, 5 plugged.
       WHY NOT A BAR: a bar is unsealed, and water in the sleeve is what killed the original harness.
       These are sealed, they use the same 090 terminals as the rest of the connector order, and a
       circuit can be removed by pulling a terminal rather than cutting a crimp.
       LOAD IS ABOUT 5-8A across nineteen 16 AWG returns, against a 22A rating.
+      ⚠️ THE TWO LEADS OUT LEAVE FROM DIFFERENT BLOCKS - see W_GND_MAIN. Put them on the first and
+      last block of the chain so no single jumper carries the whole return.
       ⚠️ THE CHARGING RETURN IS NOT HERE. W_RR_GND goes direct to the bolted point - see GND.
-      ⚠️ 24 POSITIONS FOR 19 GROUNDS PLUS 2 JUMPER PAIRS AND A LEAD IS EXACTLY FULL. Buy a fourth
-      junction if any spare capacity is wanted; blocker 2's ground count is not final.
   SP_HOT:
     style: simple
     type: Splice
@@ -619,8 +619,9 @@ connectors:
       CONNECTORS NOT YET ORDERED - two mating pigtails, 3-pin AC + 2-pin DC, Shindengen FH009-FH020
       family, $16-22; Eastern Beaver preferred for correct crimps and DC gauge.
       DC+ RUNS HEAVY AND DIRECT TO THE BATTERY with MF_RR at the battery end - see W_RR_OUT.
-      IT MOUNTS IN THE OLD BATTERY BOX, with the PDM and the ATZ-7 - decided 17 Sep 2026. That keeps
-      the DC pair short, which is what W_RR_OUT asks for, and costs airflow: the box is sheltered.
+      IT MOUNTS WHERE THE OLD BATTERY BOX WAS, in a custom box with the PDM and the ATZ-7 - decided
+      17 Sep 2026. That keeps the DC pair short, which is what W_RR_OUT asks for, and costs airflow:
+      the box is sheltered.
       ⚠️ CHECK BODY TEMPERATURE ON THE FIRST RUN, beside a lithium battery. [OPEN]
       ⚠️ THE STATOR'S RATED WATTAGE HAS NOT BEEN READ OFF ANYTHING - only the 0.4 ohm and 75V AC test
       values. It is what sizes MF_RR. [OPEN]
@@ -1163,9 +1164,14 @@ cables:
   W_SW_F11:  {<<: *w16, colors: [BG], notes: "Switched bus to the F11 cavity - relay coil supply."}
   W_RLY_PWR: {<<: *w16, colors: [BG], notes: "PDM F11 out to the relay coil splice. Was two unfused taps off SP_SW - see SP_RLY and issue #49."}
   W_GND_MAIN:
-    <<: *w12
-    colors: [BK]
-    notes: The signal ground bus up to the bolted star point. Carries all nineteen returns, about 5-8A, so it is 12 AWG rather than 16 - it is the only conductor on that path and there is no second route home.
+    <<: *w16
+    colors: [BK, BK]
+    notes: |-
+      The signal ground bus up to the bolted star point. TWO 16 AWG LEADS, FROM TWO DIFFERENT
+      JUNCTION BLOCKS - decided 17 Sep 2026. SP_GND is built from sealed 090 junctions and the 090
+      family takes nothing heavier than 16 AWG, so the 12 AWG lead this used to be could not land.
+      All nineteen returns come home this way, about 5-8A. Either lead alone carries that, so there
+      is a second route home, and each 090 pin sees half of it. Both leads land under the star bolt.
   W_KMAIN_GND:
     <<: *w16
     colors: [BK]
@@ -1551,9 +1557,9 @@ connections:
   - - BATT: [2]
     - W_BAT_GND: [1]
     - GND: [1]
-  - - SP_GND: [1]
-    - W_GND_MAIN: [1]
-    - GND: [4]
+  - - SP_GND: [1,1]
+    - W_GND_MAIN: [1,2]
+    - GND: [4,4]
 
   # --- main feed through the 20A fuse --------------------------------
   - - SOL: [1]

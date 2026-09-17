@@ -29,7 +29,7 @@ stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, 
 
 Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 
-**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (160), `9mm.csv` (18), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is `NAME >FAR-END`.
+**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (162), `9mm.csv` (16), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is `NAME >FAR-END`.
 
 | Label text | Goes on end | Reads (far end) | Colour | Gauge |
 |---|---|---|---|---|
@@ -69,8 +69,8 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `FLASH_IN` | PDM-13 | `>FLASHER-1` | BG | 16 AWG |
 | `FLASH_OUT` | FLASHER-2 | `>LH-4` | BU | 16 AWG |
 | `FLASH_OUT` | LH-4 | `>FLASHER-2` | BU | 16 AWG |
-| `GND_MAIN` | GND-4 | `>SP_GND-1` | BK | 12 AWG |
-| `GND_MAIN` | SP_GND-1 | `>GND-4` | BK | 12 AWG |
+| `GND_MAIN` | GND-4/4 | `>SP_GND-1/1` | BK/BK | 16 AWG |
+| `GND_MAIN` | SP_GND-1/1 | `>GND-4/4` | BK/BK | 16 AWG |
 | `GND_SIG_FL` | SIG_FL-2 | `>SP_GND-1` | BK | 16 AWG |
 | `GND_SIG_FL` | SP_GND-1 | `>SIG_FL-2` | BK | 16 AWG |
 | `GND_SIG_FR` | SIG_FR-2 | `>SP_GND-1` | BK | 16 AWG |

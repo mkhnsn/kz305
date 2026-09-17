@@ -7,7 +7,7 @@ The working-out, superseded options and dated history are in
 
 | Part | Status |
 |---|---|
-| Regulator/rectifier | **Shindengen SH775, in hand**. Mounts in the old battery box with the PDM and battery |
+| Regulator/rectifier | **Shindengen SH775, in hand**. Mounts where the old battery box was, in a custom box with the PDM and battery |
 | Battery | **Antigravity ATZ-7 RE-START lithium**: 150 CA, 3.3 Ah actual (7 Pb-eq), 42 Wh, 115 x 70 x 85 mm, 0.6 kg. BMS cut-off, one-start reserve. Needs the solid-state regulator (have it) and a lithium-mode tender. Post thread not yet measured |
 | PDM | **MTA `0301370`, in hand and checked** |
 | Relays | **Song Chuan SCMR20 (`-R1`), ordered** from Cycle Terminal. Amazon knockoffs in hand for test-fitting |

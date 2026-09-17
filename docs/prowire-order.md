@@ -50,8 +50,8 @@ of it against ~6 ft needed.
 
 ### Everything else still covers
 
-`12 AWG BK` now carries `W_GND_MAIN` as well as `W_RR_GND` — two conductors
-against 10 ft ordered. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
+`12 AWG BK` carries `W_RR_GND` only, against 10 ft ordered. `W_GND_MAIN` is two
+16 AWG leads, because `SP_GND`'s 090 junctions take nothing heavier. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
 
 ## 1. TXL wire — 11 SKUs, all 16 AWG above 14
 

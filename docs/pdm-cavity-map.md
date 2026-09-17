@@ -62,16 +62,15 @@ spare fuse. The plug count does not move when the spares go in.
 
 ## Where it mounts — decided 17 Sep 2026
 
-**In the old battery box, with the ATZ-7 and the regulator.** The ATZ-7 is far
-smaller than the lead-acid battery the box was made for, and the PDM and the
-SH775 take the freed volume. On the old harness that is
+**Where the old battery box was, in a custom-fabricated box with the ATZ-7 and
+the regulator.** The box is fabricated outside this repo. On the old harness that is
 the `B06` fan-out at **835 mm from the headlight datum**, where the fuse box
 4-pin, the starter-relay leads and the main feed all left the trunk. The
 rebuild's PDM, its three splices (`SP_HOT`, `SP_SW`, `SP_RLY`), the ground
 collector `SP_GND` and the two battery-end fuse holders all sit there.
 
-That number is what `docs/cut-list.md` is built on. Enclosure and fixing are
-still open (#55).
+That number is what `docs/cut-list.md` is built on. The enclosure is the custom box,
+outside this repo's scope.
 
 ## Spares live in the block — decided 11 Sep 2026
 
