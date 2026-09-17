@@ -23,6 +23,10 @@ both the breakout and the branch were measured on the old harness; `est`
 means a node the old harness did not have, or one whose lead length was not
 taped, placed by where the part sits on the bike. Correct an `est` row here
 when the part is mounted and re-run.
+
+The list is also written to ~/Dropbox/Share/KZ305 Labels/cut-list.md, beside
+the label CSVs, so the bench copy cannot go stale. A machine with no such
+folder skips that and says so.
 """
 
 import math
@@ -36,6 +40,8 @@ from build import load  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 COMMON = ROOT / "models" / "kz305-common.yml"
 REBUILD = ROOT / "models" / "kz305-rebuild.yml"
+
+DROPBOX_DIR = Path.home() / "Dropbox" / "Share" / "KZ305 Labels"
 
 PDM_TRUNK_MM = 835  # B06 breakout - decided 15 Sep 2026
 
@@ -310,7 +316,15 @@ def main():
             flag = " ⚠️" if spool_m - m < 1 else ""
             w(f"| {g} | {c} | {m:.1f} m | {ft} ft ({spool_m:.1f} m) | {spool_m - m:.1f} m{flag} |")
     w("")
-    print("\n".join(out))
+    text = "\n".join(out)
+    print(text)
+
+    # stdout is the list, so the copy reports on stderr
+    if DROPBOX_DIR.is_dir():
+        (DROPBOX_DIR / "cut-list.md").write_text(text + "\n", encoding="utf-8")
+        print(f"copied the cut list to {DROPBOX_DIR}", file=sys.stderr)
+    else:
+        print(f"no {DROPBOX_DIR} - cut list not copied", file=sys.stderr)
 
 
 if __name__ == "__main__":

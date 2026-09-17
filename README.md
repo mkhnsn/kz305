@@ -136,8 +136,8 @@ is generated, never hand-written:
 .venv/bin/python3 tools/label_schedule.py > docs/label-schedule.md
 ```
 
-Two labels per wire, and **each names the far end** — that is the question you
-have when you are holding one end of a wire in a loom. The `W_` prefix is
+Two labels per wire, **both the same: the wire name and nothing else**. Where
+each end goes is in the schedule, not on the sleeve. The `W_` prefix is
 dropped: every wire has it, so it carries no information, and heat shrink on
 18 AWG has very little room.
 
