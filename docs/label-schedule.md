@@ -30,6 +30,8 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 
 **Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (164), `9mm.csv` (18), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is the wire name.
 
+✅ **6 mm and 9 mm printed and cut to size, 17 Sep 2026.** The 19 mm labels for the 6 AWG cables are not printed yet - that cable is cut on the bike.
+
 | Label text | This end | Far end | Colour | Gauge |
 |---|---|---|---|---|
 | `ALT_A` | ALT-1 | RR-1 | YE | 14 AWG |

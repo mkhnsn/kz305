@@ -12,6 +12,8 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 ## PDM and relay cavities — cut before the bench crimp
 
+✅ **Done 17 Sep 2026.** All 40 cut, labelled, sealed, crimped and seated in the block. Far ends are long, for the bike. The twenty relay terminals were first seated mirror-image and re-seated the same day - the cavities below are the corrected ones.
+
 40 wires, in cavity order, column by column.
 
 | Cavity | Wire | Colour | Gauge | Far end | Route | **Cut** | Basis |
@@ -19,31 +21,31 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | c1 r1 (F1 IN) | `W_HOT_F1` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
 | c1 r2 (F1 OUT) | `W_IGN_FEED` | RD | 16 AWG | IGN | 935 | **1450** | tape |
 | c1 r3 (F4 IN) | `W_HOT_F4` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
-| c1 r4 (F4 OUT) | `W_HORN_PWR` | RD | 16 AWG | c5 r5 (K_HORN 30) | 0 | **300** | tape |
+| c1 r4 (F4 OUT) | `W_HORN_PWR` | RD | 16 AWG | c6 r5 (K_HORN 30) | 0 | **300** | tape |
 | c1 r5 (F5 IN) | `W_HOT_F5` | RD | 16 AWG | SP_HOT | 0 | **300** | est |
 | c1 r6 (F5 OUT) | `W_HEAD_SUPPLY` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
-| c3 r1 (K_MAIN 30) | `W_MAIN_SW_FEED` | WH | 14 AWG | SP_HOT | 0 | **300** | est |
-| c3 r2 (K_MAIN 85) | `W_KMAIN_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
-| c3 r3 (K_HI 30) | `W_HI_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
-| c3 r4 (K_HI 85) | `W_KHI_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
-| c3 r6 (K_COIL 85) | `W_K_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
-| c4 r1 (K_MAIN 86) | `W_IGN_RET` | GY | 16 AWG | IGN | 935 | **1450** | tape |
-| c4 r2 (K_MAIN 87) | `W_SW_BUS` | BG | 16 AWG | SP_SW | 0 | **300** | est |
-| c4 r3 (K_HI 86) | `W_HI_TRIG` | GY | 16 AWG | LH | 605 | **1150** | tape |
-| c4 r4 (K_HI 87) | `W_HEAD_HI` | BU | 16 AWG | SP_HI | 835 | **1350** | tape |
-| c4 r5 (K_COIL 86) | `W_YR_TRIG` | GY | 16 AWG | RH | 595 | **1100** | tape |
-| c4 r6 (K_COIL 87) | `W_YR_OUT` | YE | 16 AWG | SP_YR | 515 | **1050** | tape |
-| c5 r1 (K_LO 30) | `W_LO_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
-| c5 r2 (K_LO 85) | `W_KLO_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
-| c5 r6 (K_HORN 85) | `W_HORN_SW` | YE | 16 AWG | LH | 605 | **1150** | tape |
-| c6 r1 (K_LO 86) | `W_LO_TRIG` | GN | 16 AWG | LH | 605 | **1150** | tape |
-| c6 r2 (K_LO 87) | `W_HEAD_LO` | GN | 16 AWG | HEAD | 935 | **1450** | tape |
-| c6 r5 (K_HORN 86) | `W_HORN_COIL` | GY | 16 AWG | SP_RLY | 0 | **300** | est |
-| c6 r6 (K_HORN 87) | `W_HORN_FEED` | BG | 16 AWG | HORN | 695 | **1200** | tape |
+| c3 r1 (K_MAIN 86) | `W_IGN_RET` | GY | 16 AWG | IGN | 935 | **1450** | tape |
+| c3 r2 (K_MAIN 87) | `W_SW_BUS` | BG | 16 AWG | SP_SW | 0 | **300** | est |
+| c3 r3 (K_HI 86) | `W_HI_TRIG` | GY | 16 AWG | LH | 605 | **1150** | tape |
+| c3 r4 (K_HI 87) | `W_HEAD_HI` | BU | 16 AWG | SP_HI | 835 | **1350** | tape |
+| c3 r5 (K_COIL 86) | `W_YR_TRIG` | GY | 16 AWG | RH | 595 | **1100** | tape |
+| c3 r6 (K_COIL 87) | `W_YR_OUT` | YE | 16 AWG | SP_YR | 515 | **1050** | tape |
+| c4 r1 (K_MAIN 30) | `W_MAIN_SW_FEED` | WH | 14 AWG | SP_HOT | 0 | **300** | est |
+| c4 r2 (K_MAIN 85) | `W_KMAIN_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c4 r3 (K_HI 30) | `W_HI_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
+| c4 r4 (K_HI 85) | `W_KHI_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c4 r6 (K_COIL 85) | `W_K_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c5 r1 (K_LO 86) | `W_LO_TRIG` | GN | 16 AWG | LH | 605 | **1150** | tape |
+| c5 r2 (K_LO 87) | `W_HEAD_LO` | GN | 16 AWG | HEAD | 935 | **1450** | tape |
+| c5 r5 (K_HORN 86) | `W_HORN_COIL` | GY | 16 AWG | SP_RLY | 0 | **300** | est |
+| c5 r6 (K_HORN 87) | `W_HORN_FEED` | BG | 16 AWG | HORN | 695 | **1200** | tape |
+| c6 r1 (K_LO 30) | `W_LO_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
+| c6 r2 (K_LO 85) | `W_KLO_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c6 r6 (K_HORN 85) | `W_HORN_SW` | YE | 16 AWG | LH | 605 | **1150** | tape |
 | c7 r1 (F2 IN) | `W_SW_F2` | BG | 16 AWG | SP_SW | 0 | **300** | est |
 | c7 r2 (F2 OUT) | `W_RH_IN` | YE | 16 AWG | RH | 595 | **1100** | tape |
 | c7 r3 (F3 IN) | `W_SW_F3` | BG | 16 AWG | SP_SW | 0 | **300** | est |
-| c7 r4 (F3 OUT) | `W_COIL_PWR` | YE | 16 AWG | c3 r5 (K_COIL 30) | 0 | **300** | tape |
+| c7 r4 (F3 OUT) | `W_COIL_PWR` | YE | 16 AWG | c4 r5 (K_COIL 30) | 0 | **300** | tape |
 | c7 r5 (F6 IN) | `W_SW_F6` | BG | 16 AWG | SP_SW | 0 | **300** | est |
 | c7 r6 (F6 OUT) | `W_TAIL_FEED` | BG | 16 AWG | IGN | 935 | **1450** | tape |
 | c8 r1 (F7 IN) | `W_SW_F7` | BG | 16 AWG | SP_SW | 0 | **300** | est |

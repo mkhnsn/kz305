@@ -41,6 +41,9 @@ ROOT = Path(__file__).resolve().parent.parent
 COMMON = ROOT / "models" / "kz305-common.yml"
 REBUILD = ROOT / "models" / "kz305-rebuild.yml"
 
+# Bench progress, so the list says what is built. Blank until it is.
+PDM_DONE = "17 Sep 2026"
+
 DROPBOX_DIR = Path.home() / "Dropbox" / "Share" / "KZ305 Labels"
 
 PDM_TRUNK_MM = 835  # B06 breakout - decided 15 Sep 2026
@@ -133,11 +136,14 @@ PDM_CAVITY = {
     24: "c9 r1 (F10 IN)", 23: "c9 r2 (F10 OUT)",
     26: "c9 r3 (F11 IN)", 25: "c9 r4 (F11 OUT)",
 }
-# relay: (row, col) of its upper-left cavity; pins [30, 87, 86, 85] sit at
-# (r,c) (r+1,c+1) (r,c+1) (r+1,c) - the diagonal rule in the cavity map.
+# relay: (row, col) of its lowest-numbered cavity; pins [30, 87, 86, 85] sit
+# at (r,c+1) (r+1,c) (r,c) (r+1,c+1) - the diagonal rule in the cavity map.
+# Columns are numbered from the WIRE side of the block, so seen from the
+# fuse side c10 is on the left and 30 is the upper-LEFT pin. Corrected
+# 17 Sep 2026 after the relays were first pinned mirror-image.
 RELAY_ORIGIN = {"K_MAIN": (1, 3), "K_LO": (1, 5), "K_HI": (3, 3),
                 "K_COIL": (5, 3), "K_HORN": (5, 5)}
-RELAY_PIN_OFFSET = {1: (0, 0), 2: (1, 1), 3: (0, 1), 4: (1, 0)}
+RELAY_PIN_OFFSET = {1: (0, 1), 2: (1, 0), 3: (0, 0), 4: (1, 1)}
 RELAY_PIN_NAME = {1: "30", 2: "87", 3: "86", 4: "85"}
 
 
@@ -261,6 +267,11 @@ def main():
       "next.** A cut wire with no label is the one that gets mixed up.\n")
 
     w("## PDM and relay cavities — cut before the bench crimp\n")
+    if PDM_DONE:
+        w(f"✅ **Done {PDM_DONE}.** All {len(pdm)} cut, labelled, sealed, crimped and seated "
+          "in the block. Far ends are long, for the bike. The twenty relay terminals were "
+          "first seated mirror-image and re-seated the same day - the cavities below are "
+          "the corrected ones.\n")
     w(f"{len(pdm)} wires, in cavity order, column by column.\n")
     w("| Cavity | Wire | Colour | Gauge | Far end | Route | **Cut** | Basis |")
     w("|---|---|---|---|---|---|---|---|")

@@ -134,6 +134,8 @@ def main():
           + ", ".join(f"`{s}mm.csv` ({n})" for s, n in counts.items())
           + ". DYMO ID: heat-shrink label, Import Data, map `label` to the text field, "
             "print all. Printed text is the wire name.\n")
+    print("✅ **6 mm and 9 mm printed and cut to size, 17 Sep 2026.** The 19 mm labels for "
+          "the 6 AWG cables are not printed yet - that cable is cut on the bike.\n")
     print("| Label text | This end | Far end | Colour | Gauge |")
     print("|---|---|---|---|---|")
     for text, near, far, colour, gauge in rows:

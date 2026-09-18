@@ -11,24 +11,35 @@ hand, 9–10 Sep 2026 `[bench]`. Part numbers and quantities are in
 | Fuse | 2 cavities **within a column**, rows (1,2) (3,4) or (5,6), three per column |
 | Relay | its own footprint and no more: **4-way = 2 x 2**, 6-way = 3 x 2. Bodies don't overhang |
 
-**Numbering:** mating face, keyway up, left to right, top row first. So
-`cavity = (row − 1) × 10 + column`.
+**Numbering:** the part's own, printed on the **wire side**: c1–c10 left to
+right *as seen from the wire side*, top row first. So
+`cavity = (row − 1) × 10 + column`. **There is no keyway**; the printed numbers
+orient the block. Seen from the **fuse side** — the side that faces you on the
+bike — **c10 is on the left and c1 on the right.** Every drawing in this repo is
+the fuse-side view. Corrected 17 Sep 2026 `[bench]`: the block was first read
+as "mating face, keyway up, c1 left", which mirrored the relays.
 
 ## Layout
 
-```
-        c1       c2      c3   c4     c5   c6       c7       c8       c9      c10
- r1   F1 IN    spare   ┌──────────┐┌──────────┐   F2 IN    F7 IN   F10 IN    spare
- r2   F1 OUT   spare   │  K_MAIN  ││   K_LO   │   F2 OUT   F7 OUT  F10 OUT   spare
- r3   F4 IN    spare   └──────────┘└──────────┘   F3 IN    F8 IN   F11 IN    spare
- r4   F4 OUT   spare   ┌──────────┐┌──────────┐   F3 OUT   F8 OUT  F11 OUT   spare
- r5   F5 IN    spare   │  K_COIL  ││  K_HORN  │   F6 IN    F9 IN    spare    spare
- r6   F5 OUT   spare   └──────────┘└──────────┘   F6 OUT   F9 OUT   spare    spare
-                       ┌──────────┐┌──────────┐
-                       │   K_HI   ││ K_SPARE  │   rows 3-4 of c3-c6, between the two pairs above
-                       └──────────┘└──────────┘
+![PDM fuse side](pdm-map.svg)
 
-      ──── HOT ────   ──── 6 relays ────   ──────── SWITCHED ────────
+`docs/pdm-map.svg`, drawn by `tools/pdm_map.py` from the model - every cavity, its wire and colour, the fuses, the relays and the spares.
+
+Fuse side, c10 on the left:
+
+```
+        c10      c9      c8      c7      c6   c5     c4   c3      c2       c1
+ r1    spare   F10 IN   F7 IN   F2 IN   ┌──────────┐┌──────────┐  spare    F1 IN
+ r2    spare   F10 OUT  F7 OUT  F2 OUT  │   K_LO   ││  K_MAIN  │  spare    F1 OUT
+ r3    spare   F11 IN   F8 IN   F3 IN   └──────────┘└──────────┘  spare    F4 IN
+ r4    spare   F11 OUT  F8 OUT  F3 OUT  ┌──────────┐┌──────────┐  spare    F4 OUT
+ r5    spare    spare   F9 IN   F6 IN   │  K_HORN  ││  K_COIL  │  spare    F5 IN
+ r6    spare    spare   F9 OUT  F6 OUT  └──────────┘└──────────┘  spare    F5 OUT
+                                        ┌──────────┐┌──────────┐
+                                        │ K_SPARE  ││   K_HI   │  rows 3-4 of c3-c6
+                                        └──────────┘└──────────┘
+
+      ──────── SWITCHED ────────   ──── 6 relays ────   ──── HOT ────
 ```
 
 Each relay is **2 rows x 2 columns**. Three stack per column-pair, so six relays
@@ -119,14 +130,22 @@ both ways round before fitting. See `docs/part-selection.md`, *Coil suppression*
 ### Cavity convention
 
 The relay can rotate but the wires can't, so each 2 x 2 has its diagonals fixed.
-For a relay on rows *r, r+1* and columns *c, c+1*:
+For a relay on rows *r, r+1* and columns *c, c+1*, seen from the fuse side
+(so column *c+1* is the LEFT-hand one):
 
-| Cavity | Role |
-|---|---|
-| (r, c) upper-left | **30** contact |
-| (r+1, c+1) lower-right | **87** contact |
-| (r, c+1) upper-right | **86** COIL+ |
-| (r+1, c) lower-left | **85** COIL− |
+| Cavity | Fuse-side position | Role |
+|---|---|---|
+| (r, c+1) | upper-left | **30** contact |
+| (r+1, c) | lower-right | **87** contact |
+| (r, c) | upper-right | **86** COIL+ |
+| (r+1, c+1) | lower-left | **85** COIL− |
+
+⚠️ **Corrected 17 Sep 2026.** The first pinning put 30 at (r, c), from a
+"c1 left" reading of the block that was actually the wire-side view. That
+mirrored every relay — contacts on the coil diagonal — and a mirror is not a
+rotation, so no way of fitting the relay could fix it. All twenty relay
+terminals were depinned and swapped column-for-column the same day. Fuse
+pairs sit within one column, so no fuse wire moved.
 
 The knockoff moulding reads the second coil pin as 86 or possibly 88. The
 geometry is what matters. Genuine Song Chuan relays are on order, so re-read the

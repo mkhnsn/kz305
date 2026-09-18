@@ -136,6 +136,12 @@ is generated, never hand-written:
 .venv/bin/python3 tools/label_schedule.py > docs/label-schedule.md
 ```
 
+The PDM's mating face, with every cavity's wire, the fuses and the relays:
+
+```sh
+.venv/bin/python3 tools/pdm_map.py > docs/pdm-map.svg
+```
+
 Two labels per wire, **both the same: the wire name and nothing else**. Where
 each end goes is in the schedule, not on the sleeve. The `W_` prefix is
 dropped: every wire has it, so it carries no information, and heat shrink on
