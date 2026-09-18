@@ -143,9 +143,10 @@ For a relay on rows *r, r+1* and columns *c, c+1*, seen from the fuse side
 ⚠️ **Corrected 17 Sep 2026.** The first pinning put 30 at (r, c), from a
 "c1 left" reading of the block that was actually the wire-side view. That
 mirrored every relay — contacts on the coil diagonal — and a mirror is not a
-rotation, so no way of fitting the relay could fix it. All twenty relay
-terminals were depinned and swapped column-for-column the same day. Fuse
-pairs sit within one column, so no fuse wire moved.
+rotation, so no way of fitting the relay could fix it. The fix is to swap each
+relay's terminals column-for-column. `K_LO` and `K_HORN` (c5–c6) are done;
+**`K_MAIN`, `K_HI` and `K_COIL` (c3–c4) are still mirrored — #66.** Fuse pairs
+sit within one column, so no fuse wire moved.
 
 The knockoff moulding reads the second coil pin as 86 or possibly 88. The
 geometry is what matters. Genuine Song Chuan relays are on order, so re-read the

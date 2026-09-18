@@ -12,7 +12,7 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 ## PDM and relay cavities — cut before the bench crimp
 
-✅ **Done 17 Sep 2026.** All 40 cut, labelled, sealed, crimped and seated in the block. Far ends are long, for the bike. The twenty relay terminals were first seated mirror-image and re-seated the same day - the cavities below are the corrected ones.
+✅ **Done 17 Sep 2026.** All 40 cut, labelled, sealed, crimped and seated in the block. Far ends are long, for the bike. The relay terminals were first seated mirror-image; c5–c6 (K_LO, K_HORN) are re-seated, **c3–c4 (K_MAIN, K_HI, K_COIL) are still to swap — #66**. The cavities below are the corrected ones.
 
 40 wires, in cavity order, column by column.
 

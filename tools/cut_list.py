@@ -269,9 +269,9 @@ def main():
     w("## PDM and relay cavities — cut before the bench crimp\n")
     if PDM_DONE:
         w(f"✅ **Done {PDM_DONE}.** All {len(pdm)} cut, labelled, sealed, crimped and seated "
-          "in the block. Far ends are long, for the bike. The twenty relay terminals were "
-          "first seated mirror-image and re-seated the same day - the cavities below are "
-          "the corrected ones.\n")
+          "in the block. Far ends are long, for the bike. The relay terminals were first "
+          "seated mirror-image; c5–c6 (K_LO, K_HORN) are re-seated, **c3–c4 (K_MAIN, K_HI, "
+          "K_COIL) are still to swap — #66**. The cavities below are the corrected ones.\n")
     w(f"{len(pdm)} wires, in cavity order, column by column.\n")
     w("| Cavity | Wire | Colour | Gauge | Far end | Route | **Cut** | Basis |")
     w("|---|---|---|---|---|---|---|---|")
