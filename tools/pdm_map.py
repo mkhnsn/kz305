@@ -12,8 +12,14 @@ Drawn as you look at the FUSE SIDE, the side you see with the block on the
 bike. The part's column numbers run 1-10 from the WIRE side, so from the fuse
 side c10 is on the left and c1 on the right. r1 at the top,
 cavity = (row-1)*10 + column. There is no keyway; the printed numbers orient it.
+
+Also writes pdm-map.svg and pdm-map.png to ~/Dropbox/Share/KZ305 Labels, for
+the bench and the phone. The PNG needs rsvg-convert (brew install librsvg);
+without it only the SVG is copied, and the tool says so.
 """
 
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -21,6 +27,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import cut_list as cl  # noqa: E402
+
+DROPBOX_DIR = cl.DROPBOX_DIR
 
 FUSE_A = {1: 5, 2: 5, 3: 10, 4: 10, 5: 15, 6: 5, 7: 5, 8: 7.5, 9: 10, 10: 7.5, 11: 5}
 # spare fuses: (col, top row) -> rating
@@ -196,7 +204,20 @@ def main():
       'the top row and 85 / 87 on the bottom, seen from this side - the diagonal rule. '
       'A -R1 relay works either way round.</text>')
     a('</svg>')
-    print("\n".join(o))
+    svg = "\n".join(o)
+    print(svg)
+
+    # stdout is the SVG, so the copies report on stderr
+    if not DROPBOX_DIR.is_dir():
+        print(f"no {DROPBOX_DIR} - map not copied", file=sys.stderr)
+        return
+    (DROPBOX_DIR / "pdm-map.svg").write_text(svg + "\n", encoding="utf-8")
+    if shutil.which("rsvg-convert"):
+        subprocess.run(["rsvg-convert", "-w", "1800", "-o", str(DROPBOX_DIR / "pdm-map.png")],
+                       input=svg.encode("utf-8"), check=True)
+        print(f"copied pdm-map.svg and pdm-map.png to {DROPBOX_DIR}", file=sys.stderr)
+    else:
+        print(f"copied pdm-map.svg to {DROPBOX_DIR} - no rsvg-convert, so no PNG", file=sys.stderr)
 
 
 if __name__ == "__main__":
