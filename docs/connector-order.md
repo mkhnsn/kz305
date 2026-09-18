@@ -82,12 +82,12 @@ a ruined female one comes out of the eleven already in the box.
 | HW090 terminals — **MALE** | **15** | zero spare included |
 | HW090 terminals — female | **10** | 11 already spare; belt and braces |
 | HW090 wire seals | **15** | not gendered, 11 already spare |
-| HW090 cavity plugs | **20** | **8** needed — see below — and blocker 2 may change the ground count |
+| HW090 cavity plugs | **20** | **9** needed — see below — and blocker 2 may change the ground count |
 
-⚠️ **Eight cavity plugs are needed.** `SP_SW`'s 14-way runs 11 of
-14. The four `SP_GND` junctions use **27 of 32** positions — nineteen returns, three
-jumper pairs and the `W_GND_MAIN_A` and `W_GND_MAIN_B` leads — so `SP_GND` takes five more plugs.
-Eight in all, against twenty bought.
+⚠️ **Nine cavity plugs are needed.** `SP_SW`'s 14-way runs 11 of
+14. The four `SP_GND` junctions use **26 of 32** positions — eighteen returns, three
+jumper pairs and the `W_GND_MAIN_A` and `W_GND_MAIN_B` leads — so `SP_GND` takes six more plugs.
+Nine in all, against twenty bought.
 
 ### Cycle Terminal — also the Furukawa R/R pair
 

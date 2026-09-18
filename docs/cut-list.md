@@ -117,6 +117,29 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_BRAKE` | GN | 16 AWG | TAIL | SP_BRAKE | 960 | **1500** | est |
 | `W_TAIL_RUN` | BU | 16 AWG | TAIL | SP_TAIL | 1610 | **2150** | est |
 
+## Splices — what each node is, and when to crimp it
+
+A parallel splice is ONE crimp with every member present, so a node waits for its longest member to be cut. Slide the 3/8" W5DL shrink on first; it cannot go on after. A sealed junction takes each wire on its own 090 female and seal, crimped with the 090 tool, inserted any time.
+
+`PDM` = members that are 300 mm jumpers from the block; `other` = members from elsewhere. **Now** = every member is a PDM jumper. **Wait** = the node needs a wire from the second table first.
+
+| Node | Where | Members | PDM | Other | Form | When |
+|---|---|---|---|---|---|---|
+| `SP_SW` | beside the PDM | 9 | `W_SW_BUS`, `W_SW_F2`, `W_SW_F3`, `W_SW_F6`, `W_SW_F7`, `W_SW_F8`, `W_SW_F9`, `W_SW_F10`, `W_SW_F11` | — | HW.JC-14P-1 sealed junction, 11 of 14 - SW_BUS and SW_F3 on bus A | Now, one wire at a time |
+| `SP_GND` | beside the PDM | 20 | `W_KMAIN_GND`, `W_K_GND`, `W_KHI_GND`, `W_KLO_GND` | 16 wires from the second table | 4 x HW.JC-8P sealed junctions, 26 of 32 - GND_MAIN_A on the first block, GND_MAIN_B on the last | Now, one wire at a time |
+| `SP_HOT` | beside the PDM | 5 | `W_MAIN_SW_FEED`, `W_HOT_F1`, `W_HOT_F4`, `W_HOT_F5` | `W_MAIN_OUT` | 8 GA parallel splice (5) | Wait for `W_MAIN_OUT` — ⚠️ TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for |
+| `SP_HEAD` | beside the PDM - F5 out to both beam relays | 3 | `W_HEAD_SUPPLY`, `W_HI_PWR`, `W_LO_PWR` | — | 12-10 GA parallel splice (3) | **Now** |
+| `SP_RLY` | beside the PDM | 3 | `W_RLY_PWR`, `W_HORN_COIL` | `W_DIM_COMMON` | 12-10 GA parallel splice (3) | Wait for `W_DIM_COMMON` |
+| `SP_BRK_FEED` | B04 breakout | 3 | — | `W_BRK_FEED`, `W_BRK_FEED_F`, `W_BRK_FEED_R` | 12-10 GA parallel splice (3) | When the loom is dressed |
+| `SP_HI` | in the shell | 3 | — | `W_HEAD_HI`, `W_HEAD_HI2`, `W_IND_HB` | 12-10 GA parallel splice (3) | When the loom is dressed |
+| `SP_INSTR` | in the shell | 3 | — | `W_INSTR_FEED`, `W_MTR_FEED`, `W_IND_N_FEED` | 12-10 GA parallel splice (3) | When the loom is dressed |
+| `SP_YR` | B03 | 3 | — | `W_YR_OUT`, `W_COIL_L`, `W_COIL_R` | double-female bullet, the stock B03 form - toolless, the EI tap (#65) | When the loom is dressed |
+| `SP_BRAKE` | B04 breakout, B04.2 blue merge | 3 | — | `W_BRK_OUT_F`, `W_BRK_OUT_R`, `W_BRAKE` | 12-10 GA parallel splice (3) | When the loom is dressed |
+| `SP_MTR` | in the shell | 3 | — | `W_MTR_FEED`, `W_MTR_SPD`, `W_MTR_TAC` | 12-10 GA parallel splice (3) | When the loom is dressed |
+| `SP_SIG_L` | in the shell | 4 | — | `W_SIG_L`, `W_SIG_FL`, `W_SIG_RL`, `W_IND_L` | 8 GA parallel splice (4) | When the loom is dressed |
+| `SP_SIG_R` | in the shell | 4 | — | `W_SIG_R`, `W_SIG_FR`, `W_SIG_RR`, `W_IND_R` | 8 GA parallel splice (4) | When the loom is dressed |
+| `SP_TAIL` | in the shell | 2 | — | `W_TAIL_OUT`, `W_TAIL_RUN` | 12-10 GA parallel splice (2) | When the loom is dressed |
+
 ## Heavy cable — not cut at the bench
 
 Bought long, cut on the bike with both lugs' landings in front of you. Route shown for ordering only.

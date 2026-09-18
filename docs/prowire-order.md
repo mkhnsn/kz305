@@ -158,7 +158,7 @@ Twenty-two rings will not stack on one post — the same objection that sent
 
 It needs a **ground bus bar** with several studs. And the choice is tied to
 **#44**, still open: the engine strap carries **the whole cranking return, well
-over 100 A**, and putting it on the same bar as nineteen signal grounds is
+over 100 A**, and putting it on the same bar as eighteen signal grounds is
 exactly what that issue says not to do.
 
 **Do not buy ground hardware until #44 is decided.** Everything else here is

@@ -229,12 +229,12 @@ connectors:
         1 BATT NEG      6 AWG, direct
         2 RR RETURN     12 AWG, direct - see below
         3 ENGINE STRAP  6 AWG, direct. Carries the WHOLE CRANKING RETURN, well over 100A
-        4 SIGNAL BUS    two 16 AWG leads up from SP_GND, which collects the nineteen signal returns
+        4 SIGNAL BUS    two 16 AWG leads up from SP_GND, which collects the eighteen signal returns
       ** THE HEAVY RETURNS NEVER TOUCH A CONNECTOR. ** No 090 or 250 junction is rated for a tenth of
       cranking current. These are bolted, and the bolt IS the star point.
       ⚠️ W_RR_GND IS TREATED AS HEAVY, and that was not obvious. It is 12 AWG carrying the charging
       return - up to the 30A of MF_RR - so putting it on a 22A signal junction would push that current
-      through a bus shared with nineteen lamp and relay returns. Found while splitting the node.
+      through a bus shared with eighteen lamp and relay returns. Found while splitting the node.
       ⚠️ THE FRAME IS ALREADY POWDER COATED, so this is a bare-metal plate or a scraped landing, NOT
       "the frame". Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor -
       treat it as pass/fail, not a measurement.
@@ -483,15 +483,15 @@ connectors:
   SP_GND:
     style: simple
     type: Splice
-    subtype: signal ground bus - 19 returns, sealed junctions
+    subtype: signal ground bus - 18 returns, sealed junctions
     notes: |-
       ** SEALED JUNCTION CONNECTORS, NOT A BUS BAR - issue #44, 6 Sep 2026. ** Four HW.JC-8P sealed
-      junctions (8 ways, all pins bussed, 22A) jumpered together: 32 positions for nineteen returns,
-      three internal jumpers and two leads out to the bolted star point. 27 used, 5 plugged.
+      junctions (8 ways, all pins bussed, 22A) jumpered together: 32 positions for eighteen returns,
+      three internal jumper pairs and two leads out to the bolted star point. 26 used, 6 plugged.
       WHY NOT A BAR: a bar is unsealed, and water in the sleeve is what killed the original harness.
       These are sealed, they use the same 090 terminals as the rest of the connector order, and a
       circuit can be removed by pulling a terminal rather than cutting a crimp.
-      LOAD IS ABOUT 5-8A across nineteen 16 AWG returns, against a 22A rating.
+      LOAD IS ABOUT 5-8A across eighteen 16 AWG returns, against a 22A rating.
       ⚠️ THE TWO LEADS OUT LEAVE FROM DIFFERENT BLOCKS - see W_GND_MAIN_A. Put them on the first and
       last block of the chain so no single jumper carries the whole return.
       ⚠️ THE CHARGING RETURN IS NOT HERE. W_RR_GND goes direct to the bolted point - see GND.
@@ -1171,7 +1171,7 @@ cables:
       W_GND_MAIN_B, FROM TWO DIFFERENT JUNCTION BLOCKS - decided 17 Sep 2026. SP_GND is built from
       sealed 090 junctions and the 090 family takes nothing heavier than 16 AWG, so the 12 AWG lead
       this used to be could not land.
-      All nineteen returns come home this way, about 5-8A. Either lead alone carries that, so there
+      All eighteen returns come home this way, about 5-8A. Either lead alone carries that, so there
       is a second route home, and each 090 pin sees half of it. Both leads land under the star bolt.
   W_GND_MAIN_B: {<<: *w16, colors: [BK], notes: "The second signal ground lead, from the far junction block. See W_GND_MAIN_A."}
   W_KMAIN_GND:

@@ -60,6 +60,18 @@ MARGIN_MM = 500
 MIN_CUT_MM = 300
 ROUND_MM = 50
 
+# Splice nodes that are not a parallel crimp. Everything else is a Molex
+# Versakrimp parallel splice sized by member count: 12-10 GA for two or
+# three, 8 GA for four or five - docs/prowire-order.md section 4.
+SPLICE_FORM = {
+    "SP_SW":  "HW.JC-14P-1 sealed junction, 11 of 14 - SW_BUS and SW_F3 on bus A",
+    "SP_GND": "4 x HW.JC-8P sealed junctions, 26 of 32 - GND_MAIN_A on the first block, GND_MAIN_B on the last",
+    "SP_YR":  "double-female bullet, the stock B03 form - toolless, the EI tap (#65)",
+}
+SPLICE_NOTE = {
+    "SP_HOT": "TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for",
+}
+
 # node: (trunk_mm from the headlight datum, branch_mm off the trunk, basis, source)
 P = PDM_TRUNK_MM
 POSITIONS = {
@@ -288,6 +300,48 @@ def main():
     for r in rest:
         w(f"| `{r['name']}` | {r['colour']} | {r['gauge']} | {r['near']} | {r['far']} | "
           f"{r['route']} | **{r['cut']}** | {r['basis']} |")
+    w("")
+
+    # splice nodes: members, form, and whether the PDM jumpers can be crimped yet
+    members = {}
+    for r in rows:
+        for end in (r["near"], r["far"]):
+            if isinstance(end, str) and end.startswith("SP_"):
+                members.setdefault(end, []).append(r)
+    w("## Splices — what each node is, and when to crimp it\n")
+    w("A parallel splice is ONE crimp with every member present, so a node waits "
+      "for its longest member to be cut. Slide the 3/8\" W5DL shrink on first; it "
+      "cannot go on after. A sealed junction takes each wire on its own 090 female "
+      "and seal, crimped with the 090 tool, inserted any time.\n")
+    w("`PDM` = members that are 300 mm jumpers from the block; `other` = members "
+      "from elsewhere. **Now** = every member is a PDM jumper. **Wait** = the node "
+      "needs a wire from the second table first.\n")
+    w("| Node | Where | Members | PDM | Other | Form | When |")
+    w("|---|---|---|---|---|---|---|")
+    for node in sorted(members, key=lambda n: (-sum(1 for r in members[n] if r["cavity"]), n)):
+        ms = members[node]
+        jump = [r for r in ms if r["cavity"] and r["route"] == 0]
+        other = [r for r in ms if r not in jump]
+        n = len(ms)
+        form = SPLICE_FORM.get(node) or (f"12-10 GA parallel splice ({n})" if n <= 3
+                                         else f"8 GA parallel splice ({n})")
+        if node in SPLICE_FORM and "junction" in SPLICE_FORM[node]:
+            when = "Now, one wire at a time"
+        elif not other:
+            when = "**Now**"
+        elif jump:
+            when = "Wait for " + ", ".join(f"`{r['name']}`" for r in other)
+        else:
+            when = "When the loom is dressed"
+        note = SPLICE_NOTE.get(node)
+        if note:
+            when += f" — ⚠️ {note}"
+        where = POSITIONS[node][3]
+        w(f"| `{node}` | {where} | {n} | "
+          + (", ".join(f"`{r['name']}`" for r in jump) or "—") + " | "
+          + ((f"{len(other)} wires from the second table" if len(other) > 6
+              else ", ".join(f"`{r['name']}`" for r in other)) or "—")
+          + f" | {form} | {when} |")
     w("")
 
     w("## Heavy cable — not cut at the bench\n")
