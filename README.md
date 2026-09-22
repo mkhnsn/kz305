@@ -152,6 +152,66 @@ Both slide on from the wire end and a crimped terminal will not pass either.
 Order: label, seal, strip, crimp, shrink. Getting it wrong means cutting the
 terminal off and starting that wire again.
 
+## Branch map
+
+The WireViz drawings are **schematics**: they say what connects to what and
+deliberately say nothing about physical routing. `docs/branch-map.md` is the
+other view, and it is the one a build needs — **which wires travel together**,
+so a branch can be cut, sleeved and taped as a unit.
+
+```sh
+.venv/bin/python3 tools/branch_map.py       > docs/branch-map.md
+.venv/bin/python3 tools/branch_map.py --svg > docs/branch-map.svg
+```
+
+Node positions come from `tools/cut_list.py`'s `POSITIONS`, so the branch map
+cannot drift from the cut list. Every wire is placed on the trunk by its two
+ends and occupies everything between them; the bundle at any point is every
+wire whose span covers it. A wire with both ends at one breakout — the PDM
+jumpers, the headlight-shell splices — never enters the trunk and is counted in
+that breakout's drop.
+
+⚠️ **Conductor counts are exact; diameters are not.** The count comes from the
+model. Bundle OD is estimated from the recorded insulation ODs with a stated
+packing factor, and only the 1/4″ sleeve's expanded diameter is a figure this
+repo actually has. Measure a real bundle before trusting a sleeve at its limit.
+
+Two things it establishes that the old harness's geometry did not:
+
+- **The trunk is thickest at its back end**, 34 conductors between the
+  alternator and the PDM, where everything from the front and the bars has
+  gathered and nothing has left yet. Not at the front, which is where a harness
+  built around the stock fuse box was fattest.
+- **The front does not need 3/4″.** `docs/prowire-order.md` put the whole front
+  on it; the bundle does not reach 3/4″ until the right bar joins at 400 mm.
+  Datum to right bar is 20 conductors, which is 1/2″ work.
+
+## Landing map
+
+`docs/label-schedule.md` gives both ends of every wire, but as `RR-1` and
+`PDM-5`. At the bench that is not enough — you are holding a wire and a
+crimper. `docs/landing-map.md` resolves those to the **physical part and the
+hole in it**:
+
+```sh
+.venv/bin/python3 tools/landing_map.py > docs/landing-map.md
+```
+
+`RR-1` becomes AC1 on the Shindengen SH775, in the box where the battery used
+to be, 835 mm from the datum. `PDM-5` becomes cavity `c1 r4 (F4 OUT)` on the
+MTA 0301370. Three views of the same data: the parts and where each sits, every
+wire with both ends, and — the assembly view — what lands on each part, cavity
+by cavity.
+
+Part identity and pin labels come from the model, positions and cavity names
+from `tools/cut_list.py`, and the ends from `tools/label_schedule.py`, so the
+landing map cannot disagree with the cut list, the label schedule or the BOM.
+
+⚠️ **Splice form is not repeated there.** What each `SP_` node physically is —
+a parallel crimp, a sealed junction, the stock bullet at B03 — and when it can
+be crimped is the splices section of `docs/cut-list.md`, which stays the
+authority.
+
 ## Verification
 
 `docs/pre-ride-check.md` is the check to run on the finished bike, every ride:
