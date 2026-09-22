@@ -16,6 +16,10 @@ connectors:
       DIMMER: Bl common, 0.1 ohm to R/BK in HI and to R/Y in LO, R/BK to R/Y open in both [meter
       28 Aug 2026, cluster unplugged]. ⚠️ THE WIPER IS MAKE-BEFORE-BREAK - both beam outputs blip
       together while the switch moves. Turn switch - R is O to Gy, L is G to O.
+      ⚠️ EIGHT WAYS IN THE REBUILD AGAINST THIS 6P's SIX. It is not a mismatch: the rebuild
+      collapses all three of this cluster's stock terminations into ONE 8-way housing - the seven
+      leads below plus a new earth lead. See LH in models/kz305-rebuild.yml, which carries the
+      full 5 / 6 / 7 / 8 reconciliation.
       THE CLUSTER CARRIES SEVEN LEADS: five through the 6P, the blue on its own flying bullet
       (B02.2), and B02.1's plain BK spade. The 6P is 3 rows of 2 and carries, top row first, R/BK
       and Br, then Gy and R/Y, then Or and Gn - BROWN IS IN IT AND BLUE IS NOT [bench 29 Aug 2026].

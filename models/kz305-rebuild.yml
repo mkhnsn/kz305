@@ -735,6 +735,17 @@ connectors:
     <<: *lh_cluster
     pinlabels: [Bl COMMON, R/BK HI, R/Y LO, O TURN FEED, G LEFT, Gy RIGHT, BK HORN, GND]
     notes: |-
+      ** THIS CONNECTOR IS 8-WAY. ** Four different numbers circulate for it and all four are
+      true of different things, which is exactly why it keeps causing confusion. Read this before
+      trusting any of them:
+        8 - THE CONNECTOR WE BUILD. One sealed 090 carrying the whole cluster. The build number,
+            and the one docs/connector-order.md buys a pair of.
+        7 - the cluster's own conductors. Stock split them across THREE terminations, not one.
+        6 - the stock 6P housing. One of those three, never the whole cluster.
+        5 - live ways in that stock 6P: the sixth is a brown the harness feeds and the cluster
+            does not populate. This is the number in docs/wire-and-connector-order.md, which is
+            marked SUPERSEDED at its head - do not order from it.
+      7 cluster conductors + 1 new earth lead (way 8, below) = 8.
       RETAINED STOCK PART - THE CLUSTER IS KEPT, BUT NOT ITS CONNECTOR. #37 (closed 4 Sep 2026)
       cuts the stock housing off the retained pigtail and puts a new sealed 090 on each end, which
       is why docs/connector-order.md buys BOTH halves of an 8-way. This harness therefore mates a
