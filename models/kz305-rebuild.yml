@@ -229,7 +229,7 @@ connectors:
         1 BATT NEG      6 AWG, direct
         2 RR RETURN     12 AWG, direct - see below
         3 ENGINE STRAP  6 AWG, direct. Carries the WHOLE CRANKING RETURN, well over 100A
-        4 SIGNAL BUS    two 16 AWG leads up from SP_GND, which collects the eighteen signal returns
+        4 SIGNAL BUS    the lead up from SP_GND, which collects the eighteen signal returns - form TBD
       ** THE HEAVY RETURNS NEVER TOUCH A CONNECTOR. ** No 090 or 250 junction is rated for a tenth of
       cranking current. These are bolted, and the bolt IS the star point.
       ⚠️ W_RR_GND IS TREATED AS HEAVY, and that was not obvious. It is 12 AWG carrying the charging
@@ -444,8 +444,7 @@ connectors:
       Considered and rejected on 10 Sep: (a) moving F4/F5 onto K_MAIN, which on filament lamps puts
       ~16.5A sustained and ~28A peak through a 20A micro relay and 16 AWG W_SW_BUS; and (b) a second
       ignition relay K_AUX for F4/F5, which adds a failure where the headlamp dies with the engine
-      still running, and needs a ground position, which means installing the spare fourth SP_GND
-      junction.
+      still running, and needs one more ground return on SP_GND.
       ⚠️ DOUBLE WELD: K_MAIN and K_COIL both welded leaves no electrical way to stop the engine short
       of pulling F3. Mitigated by the pre-ride stop check in docs/pre-ride-check.md, which catches a
       latent weld in either one before the second can happen. Stalling in gear is the last resort.
@@ -483,17 +482,20 @@ connectors:
   SP_GND:
     style: simple
     type: Splice
-    subtype: signal ground bus - 18 returns, sealed junctions
+    subtype: signal ground bus - 18 returns, parallel splices - PDM GROUP FIRST, THE REST TBD
     notes: |-
-      ** SEALED JUNCTION CONNECTORS, NOT A BUS BAR - issue #44, 6 Sep 2026. ** Four HW.JC-8P sealed
-      junctions (8 ways, all pins bussed, 22A) jumpered together: 32 positions for eighteen returns,
-      three internal jumper pairs and two leads out to the bolted star point. 26 used, 6 plugged.
+      ** PARALLEL SPLICES UNDER ADHESIVE SHRINK - decided 19 Sep 2026. ** The sealed 090 junctions
+      this node was drawn with are too bulky to dress on the bike. ONE NODE ELECTRICALLY, SEVERAL
+      CRIMPS PHYSICALLY: the returns are crimped in groups by where they arrive.
+      THE PDM GROUP IS THE FIRST CRIMP: the four relay coil grounds - W_KMAIN_GND, W_K_GND,
+      W_KHI_GND, W_KLO_GND - plus one lead out, five conductors in an 8 GA barrel. About 0.6A.
+      It is a LEAF: no other return passes through it.
+      ** THE REST IS TBD ** until more of the harness is in place: how the other returns are
+      grouped, whether the front returns land on a second frame point at the headstock instead of
+      running back here, and the gauge and landing of the lead out - see W_GND_MAIN_A. DO NOT CUT
+      those returns yet; docs/cut-list.md holds them.
       WHY NOT A BAR: a bar is unsealed, and water in the sleeve is what killed the original harness.
-      These are sealed, they use the same 090 terminals as the rest of the connector order, and a
-      circuit can be removed by pulling a terminal rather than cutting a crimp.
-      LOAD IS ABOUT 5-8A across eighteen 16 AWG returns, against a 22A rating.
-      ⚠️ THE TWO LEADS OUT LEAVE FROM DIFFERENT BLOCKS - see W_GND_MAIN_A. Put them on the first and
-      last block of the chain so no single jumper carries the whole return.
+      LOAD IS ABOUT 5-8A across eighteen 16 AWG returns.
       ⚠️ THE CHARGING RETURN IS NOT HERE. W_RR_GND goes direct to the bolted point - see GND.
   SP_HOT:
     style: simple
@@ -516,17 +518,16 @@ connectors:
       ends in. [OPEN]
       IF THEY WILL NOT GO IN: two 8 GA crimps joined by one 14 AWG link, with W_MAIN_OUT and
       W_MAIN_SW_FEED together on the first crimp so the heavy current never crosses the link.
-      ** AND IT STAYS A CRIMP RATHER THAN A JUNCTION CONNECTOR - issue #44, 6 Sep 2026. ** SP_SW and
-      SP_GND moved to sealed 090 junctions for serviceability; this node deliberately did not. It is
-      the HIGHEST-CURRENT node in the harness at about 16A, its membership is settled - F1, F4, F5
-      and K_MAIN's 30 - and the 090 family does not take its 14 AWG conductors.
+      ** A CRIMP, NOT A JUNCTION CONNECTOR - issue #44, 6 Sep 2026. ** It is the HIGHEST-CURRENT
+      node in the harness at about 16A, its membership is settled - F1, F4, F5 and K_MAIN's 30 -
+      and the 090 family does not take its 14 AWG conductors.
       A crimp has ZERO mated interfaces; a junction has two per wire. On the main feed of a vibrating
       motorcycle that difference is the whole reason this rebuild bans bullets on the main path.
       The old harness did NOT fail at a splice; it failed at a separable bullet with a gauge step
       in it.
-      THE RULE FOR EVERY OTHER NODE: up to five wires is one parallel splice - 12-10 GA for two or
-      three, 8 GA for four or five, see docs/prowire-order.md. Past five it is a sealed 090 junction,
-      which is where SP_SW (9) and SP_GND (19) went.
+      THE RULE FOR EVERY OTHER NODE: a parallel splice - 12-10 GA for two or three wires, 8 GA for
+      four or five, see docs/prowire-order.md. SP_SW's nine went in one larger barrel. SP_GND is
+      too many for one crimp and is built as several - see SP_GND.
   SP_SW:
     style: simple
     type: Splice
@@ -538,18 +539,18 @@ connectors:
       node sits downstream of K_MAIN and UPSTREAM of every individual fuse, so anything tapped
       straight off it is protected by nothing smaller than MF. Two loads used to hang here directly.
       They now leave through F11. Do not add a ninth branch that is not a fuse input.
-      ** BUILT AS A SEALED JUNCTION CONNECTOR - HW.JC-14P-1, issue #44, 6 Sep 2026. ** Fourteen ways
-      as TWO 7-way buses, 22A, jumpered together to take all nine conductors with three spare.
-      ⚠️ PUT THE HEAVY BRANCHES ON BUS A - the side K_MAIN's 87 feeds directly, F3 coil power
-      especially. The jumper to bus B then carries only F7, F8 and F9, which is a couple of amps.
-      WHY A CONNECTOR HERE AND A CRIMP AT SP_HOT: this node changed TWICE in one week - F10 when the
-      USB circuit landed, F11 when #49 closed - and each change would have meant cutting and
-      re-crimping. The circuit list is still moving. SP_HOT's is not.
+      ** BUILT 19 Sep 2026 AS ONE PARALLEL SPLICE. ** All nine conductors in one barrel, crimped,
+      then flooded with solder by torch. The sealed 090 junction it was drawn with is too bulky
+      to dress on the bike. One crimp, no cascade, no link wires - see docs/prowire-order.md.
+      ⚠️ SOLDER WICKS UP THE STRANDS and leaves a stiff section. The adhesive shrink has to run
+      past where the stiffness ends, and the bundle is tied so it cannot flex there.
+      ⚠️ MEMBERSHIP IS NOW FIXED IN COPPER. A tenth switched circuit does not join this crimp - it
+      shares an existing fuse or the node is cut and rebuilt.
       ⚠️ K_MAIN's 87 IS INSIDE THE MODULE AND THIS NODE IS OUTSIDE IT. So the switched bus leaves the
       block on one wire and comes back on six, which is nine cavity crossings for one net. That is the
       cost of a module with no busbar, and it is worth seeing rather than discovering at assembly.
       ⚠️ CARRIES THE WHOLE SWITCHED LOAD through its first segment - about 12.3A sustained and 18.7A
-      peak on filament lamps with USB at 45W (recounted 10 Sep 2026, #45). Inside the junction's 22A.
+      peak on filament lamps with USB at 45W (recounted 10 Sep 2026, #45).
       Same taper and same ordering rule as SP_HOT.
       Every branch is now fused, so MF is no longer the sole protection for anything leaving here -
       which is what freed MF's rating to be chosen on wire protection alone.
@@ -1145,9 +1146,8 @@ cables:
       never cross it, but everything else switched does.
       ** LOAD RECOUNTED 10 Sep 2026 (#45): about 12.3A sustained, 18.7A peak ** on filament lamps with
       USB at 45W. The 4 Sep drop to 16 AWG was justified on 6.6A, which counted only the coil circuit.
-      ** IT STAYS 16 AWG, AND CANNOT GO HEAVIER AS BUILT. ** It lands on SP_SW, an HW.JC-14P-1 090
-      junction, and 14 AWG is heavier than the 090 family takes. 16 AWG is used there per the
-      manufacturer's spec (#37). ACCEPTED 10 Sep 2026: it is a short run in 125C TXL, and the LED conversion takes
+      ** IT STAYS 16 AWG, AND IS BUILT. ** It is crimped and soldered into SP_SW with the eight
+      branches. ACCEPTED 10 Sep 2026: it is a short run in 125C TXL, and the LED conversion takes
       it to roughly 11A. If it ever needs to carry more, the fix is to split the switched load, not to
       thicken this wire.
   # --- the two feed-side buses, outside the module - see SP_HOT / SP_SW ---
@@ -1167,13 +1167,13 @@ cables:
     <<: *w16
     colors: [BK]
     notes: |-
-      The signal ground bus up to the bolted star point. ONE OF TWO 16 AWG LEADS, W_GND_MAIN_A AND
-      W_GND_MAIN_B, FROM TWO DIFFERENT JUNCTION BLOCKS - decided 17 Sep 2026. SP_GND is built from
-      sealed 090 junctions and the 090 family takes nothing heavier than 16 AWG, so the 12 AWG lead
-      this used to be could not land.
-      All eighteen returns come home this way, about 5-8A. Either lead alone carries that, so there
-      is a second route home, and each 090 pin sees half of it. Both leads land under the star bolt.
-  W_GND_MAIN_B: {<<: *w16, colors: [BK], notes: "The second signal ground lead, from the far junction block. See W_GND_MAIN_A."}
+      The signal ground bus up to the bolted star point. All eighteen returns come home this way,
+      about 5-8A.
+      ** GAUGE AND COUNT ARE TBD - 19 Sep 2026. ** Drawn as two 16 AWG leads, which is what the 090
+      junctions forced. SP_GND is now parallel splices, which take a heavier conductor, so this can
+      go back to a single 12 AWG trunk once the ground grouping is settled - see SP_GND.
+      DO NOT CUT until then; docs/cut-list.md holds it.
+  W_GND_MAIN_B: {<<: *w16, colors: [BK], notes: "The second signal ground lead. TBD with W_GND_MAIN_A - it may not survive."}
   W_KMAIN_GND:
     <<: *w16
     colors: [BK]

@@ -60,14 +60,22 @@ MARGIN_MM = 500
 MIN_CUT_MM = 300
 ROUND_MM = 50
 
-# Splice nodes that are not a parallel crimp. Everything else is a Molex
+# Splice nodes that are not sized by the rule. Everything else is a Molex
 # Versakrimp parallel splice sized by member count: 12-10 GA for two or
 # three, 8 GA for four or five - docs/prowire-order.md section 4.
 SPLICE_FORM = {
-    "SP_SW":  "HW.JC-14P-1 sealed junction, 11 of 14 - SW_BUS and SW_F3 on bus A",
-    "SP_GND": "4 x HW.JC-8P sealed junctions, 26 of 32 - GND_MAIN_A on the first block, GND_MAIN_B on the last",
+    "SP_SW":  "one parallel splice, all 9 in one barrel, crimped then solder-flooded",
+    "SP_GND": "parallel splices, one per group - PDM group: 8 GA, the four coil grounds + the lead out. Other groups TBD",
     "SP_YR":  "double-female bullet, the stock B03 form - toolless, the EI tap (#65)",
 }
+# Nodes whose "when" is a bench fact or a decision, not derivable from membership.
+SPLICE_WHEN = {
+    "SP_SW":  "✅ Built 19 Sep 2026",
+    "SP_GND": "PDM group **now**. The rest TBD - do not cut",
+}
+# Returns into these nodes are held: the landing is not decided, so the table
+# prints the longest case as a ceiling instead of a length to cut.
+HOLD_NODES = {"SP_GND"}
 SPLICE_NOTE = {
     "SP_HOT": "TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for",
 }
@@ -236,7 +244,9 @@ def main():
             # a jumper with both ends in the block: name the second cavity too
             if cavity_of(a, pa[0]) and cavity_of(b, pb[0]):
                 far = cavity_of(b, pb[0])
-            rows.append(dict(name=name, gauge=gauge, colour=colour, near=near,
+            # a PDM jumper into a held node is still a bench jumper and is not held
+            hold = cut is not None and route != 0 and bool(HOLD_NODES & {a, b})
+            rows.append(dict(name=name, gauge=gauge, colour=colour, near=near, hold=hold,
                              far=far, cavity=cav, route=route, cut=cut, colours=colours,
                              basis=basis(a, b), heavy=heavy))
     if missing:
@@ -295,11 +305,15 @@ def main():
     w("## Everything else — cut when the near end is terminated\n")
     w(f"{len(rest)} wires. Same rule: cut to this, crimp the near end, trim the far "
       "end on the bike.\n")
+    w("⚠️ **`TBD (≤N)` — do not cut.** Every return into `SP_GND` from outside the "
+      "PDM is held until the ground grouping and landing are decided. N is the "
+      "longest case, a run all the way back to the PDM.\n")
     w("| Wire | Colour | Gauge | From | To | Route | **Cut** | Basis |")
     w("|---|---|---|---|---|---|---|---|")
     for r in rest:
+        cut = f"TBD (≤{r['cut']})" if r["hold"] else r["cut"]
         w(f"| `{r['name']}` | {r['colour']} | {r['gauge']} | {r['near']} | {r['far']} | "
-          f"{r['route']} | **{r['cut']}** | {r['basis']} |")
+          f"{r['route']} | **{cut}** | {r['basis']} |")
     w("")
 
     # splice nodes: members, form, and whether the PDM jumpers can be crimped yet
@@ -311,8 +325,7 @@ def main():
     w("## Splices — what each node is, and when to crimp it\n")
     w("A parallel splice is ONE crimp with every member present, so a node waits "
       "for its longest member to be cut. Slide the 3/8\" W5DL shrink on first; it "
-      "cannot go on after. A sealed junction takes each wire on its own 090 female "
-      "and seal, crimped with the 090 tool, inserted any time.\n")
+      "cannot go on after.\n")
     w("`PDM` = members that are 300 mm jumpers from the block; `other` = members "
       "from elsewhere. **Now** = every member is a PDM jumper. **Wait** = the node "
       "needs a wire from the second table first.\n")
@@ -325,8 +338,8 @@ def main():
         n = len(ms)
         form = SPLICE_FORM.get(node) or (f"12-10 GA parallel splice ({n})" if n <= 3
                                          else f"8 GA parallel splice ({n})")
-        if node in SPLICE_FORM and "junction" in SPLICE_FORM[node]:
-            when = "Now, one wire at a time"
+        if node in SPLICE_WHEN:
+            when = SPLICE_WHEN[node]
         elif not other:
             when = "**Now**"
         elif jump:

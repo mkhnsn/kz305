@@ -51,7 +51,8 @@ of it against ~6 ft needed.
 ### Everything else still covers
 
 `12 AWG BK` carries `W_RR_GND` only, against 10 ft ordered. `W_GND_MAIN_A` and `W_GND_MAIN_B`
-are 16 AWG, because `SP_GND`'s 090 junctions take nothing heavier. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
+are drawn as 16 AWG and are **TBD**: `SP_GND` is parallel splices now, so the signal ground
+trunk can go back to 12 AWG from the same spool once the ground grouping is settled. `16 AWG YE` drops from 10 conductors to 8 against 50 ft.
 
 ## 1. TXL wire — 11 SKUs, all 16 AWG above 14
 
@@ -231,6 +232,7 @@ ends into.
 | `SP_SIG_L` `SP_SIG_R` | 4 | **8 GA** |
 | `SP_HOT` | 5 | **8 GA** |
 | `SP_SW` | 9 | **6 GA** — see below |
+| `SP_GND` PDM group | 5 | **8 GA** — four coil grounds + the lead out. Other groups TBD |
 | `SP_POD_GND` | 4 | — inside the retained pod pigtail |
 
 ### `SP_SW` is one crimp on a 6 GA

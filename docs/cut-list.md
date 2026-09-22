@@ -63,14 +63,16 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 51 wires. Same rule: cut to this, crimp the near end, trim the far end on the bike.
 
+⚠️ **`TBD (≤N)` — do not cut.** Every return into `SP_GND` from outside the PDM is held until the ground grouping and landing are decided. N is the longest case, a run all the way back to the PDM.
+
 | Wire | Colour | Gauge | From | To | Route | **Cut** | Basis |
 |---|---|---|---|---|---|---|---|
 | `W_RR_BATT` | RD | 12 AWG | BATT | MF_RR | 300 | **800** | est |
 | `W_COIL_L` | YE | 16 AWG | COIL_L | SP_YR | 440 | **950** | est |
 | `W_COIL_R` | YE | 16 AWG | COIL_R | SP_YR | 440 | **950** | est |
 | `W_BRK_FEED_F` | BG | 16 AWG | FBRK | SP_BRK_FEED | 750 | **1250** | est |
-| `W_GND_MAIN_A` | BK | 16 AWG | GND | SP_GND | 200 | **700** | est |
-| `W_GND_MAIN_B` | BK | 16 AWG | GND | SP_GND | 200 | **700** | est |
+| `W_GND_MAIN_A` | BK | 16 AWG | GND | SP_GND | 200 | **TBD (≤700)** | est |
+| `W_GND_MAIN_B` | BK | 16 AWG | GND | SP_GND | 200 | **TBD (≤700)** | est |
 | `W_RR_GND` | BK | 12 AWG | GND | RR | 400 | **900** | est |
 | `W_HEAD_HI2` | BU | 16 AWG | HEAD | SP_HI | 100 | **600** | tape |
 | `W_IND_HB` | BU | 16 AWG | INSTR_6P | SP_HI | 100 | **600** | tape |
@@ -95,20 +97,20 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_RH_OUT` | YE | 16 AWG | SOL | RH | 695 | **1200** | tape |
 | `W_BRK_OUT_F` | GN | 16 AWG | SP_BRAKE | FBRK | 750 | **1250** | est |
 | `W_BRK_OUT_R` | GN | 16 AWG | SP_BRAKE | RBRK | 300 | **800** | est |
-| `W_CAP_GND` | BK | 16 AWG | SP_GND | CAP_L | 485 | **1000** | est |
-| `W_FLASH_GND` | BK | 16 AWG | SP_GND | FLASHER | 145 | **650** | est |
-| `W_GND_SIG_FL` | BK | 16 AWG | SP_GND | SIG_FL | 1135 | **1650** | est |
-| `W_GND_SIG_FR` | BK | 16 AWG | SP_GND | SIG_FR | 1135 | **1650** | est |
-| `W_GND_SIG_RL` | BK | 16 AWG | SP_GND | SIG_RL | 875 | **1400** | est |
-| `W_GND_SIG_RR` | BK | 16 AWG | SP_GND | SIG_RR | 875 | **1400** | est |
-| `W_GND_SPD` | BK | 16 AWG | SP_GND | LAMP_SPD | 1085 | **1600** | est |
-| `W_GND_TAC` | BK | 16 AWG | SP_GND | LAMP_TAC | 1085 | **1600** | est |
-| `W_GND_TAIL` | BK | 16 AWG | SP_GND | TAIL | 775 | **1300** | est |
-| `W_HEAD_GND` | BK | 16 AWG | SP_GND | HEAD | 935 | **1450** | est |
-| `W_HORN_GND` | BK | 16 AWG | SP_GND | HORN | 695 | **1200** | est |
-| `W_LH_GND` | BK | 16 AWG | SP_GND | LH | 605 | **1150** | est |
-| `W_POD_GND` | BK | 16 AWG | SP_GND | INSTR_6P | 935 | **1450** | est |
-| `W_USB_GND` | BK | 16 AWG | SP_GND | USB | 1235 | **1750** | est |
+| `W_CAP_GND` | BK | 16 AWG | SP_GND | CAP_L | 485 | **TBD (≤1000)** | est |
+| `W_FLASH_GND` | BK | 16 AWG | SP_GND | FLASHER | 145 | **TBD (≤650)** | est |
+| `W_GND_SIG_FL` | BK | 16 AWG | SP_GND | SIG_FL | 1135 | **TBD (≤1650)** | est |
+| `W_GND_SIG_FR` | BK | 16 AWG | SP_GND | SIG_FR | 1135 | **TBD (≤1650)** | est |
+| `W_GND_SIG_RL` | BK | 16 AWG | SP_GND | SIG_RL | 875 | **TBD (≤1400)** | est |
+| `W_GND_SIG_RR` | BK | 16 AWG | SP_GND | SIG_RR | 875 | **TBD (≤1400)** | est |
+| `W_GND_SPD` | BK | 16 AWG | SP_GND | LAMP_SPD | 1085 | **TBD (≤1600)** | est |
+| `W_GND_TAC` | BK | 16 AWG | SP_GND | LAMP_TAC | 1085 | **TBD (≤1600)** | est |
+| `W_GND_TAIL` | BK | 16 AWG | SP_GND | TAIL | 775 | **TBD (≤1300)** | est |
+| `W_HEAD_GND` | BK | 16 AWG | SP_GND | HEAD | 935 | **TBD (≤1450)** | est |
+| `W_HORN_GND` | BK | 16 AWG | SP_GND | HORN | 695 | **TBD (≤1200)** | est |
+| `W_LH_GND` | BK | 16 AWG | SP_GND | LH | 605 | **TBD (≤1150)** | est |
+| `W_POD_GND` | BK | 16 AWG | SP_GND | INSTR_6P | 935 | **TBD (≤1450)** | est |
+| `W_USB_GND` | BK | 16 AWG | SP_GND | USB | 1235 | **TBD (≤1750)** | est |
 | `W_MAIN_OUT` | WH | 14 AWG | SP_HOT | MF | 150 | **650** | est |
 | `W_MTR_FEED` | BG | 16 AWG | SP_MTR | SP_INSTR | 0 | **300** | tape |
 | `W_SIG_L` | GN | 16 AWG | SP_SIG_L | LH | 630 | **1150** | tape |
@@ -119,14 +121,14 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 ## Splices — what each node is, and when to crimp it
 
-A parallel splice is ONE crimp with every member present, so a node waits for its longest member to be cut. Slide the 3/8" W5DL shrink on first; it cannot go on after. A sealed junction takes each wire on its own 090 female and seal, crimped with the 090 tool, inserted any time.
+A parallel splice is ONE crimp with every member present, so a node waits for its longest member to be cut. Slide the 3/8" W5DL shrink on first; it cannot go on after.
 
 `PDM` = members that are 300 mm jumpers from the block; `other` = members from elsewhere. **Now** = every member is a PDM jumper. **Wait** = the node needs a wire from the second table first.
 
 | Node | Where | Members | PDM | Other | Form | When |
 |---|---|---|---|---|---|---|
-| `SP_SW` | beside the PDM | 9 | `W_SW_BUS`, `W_SW_F2`, `W_SW_F3`, `W_SW_F6`, `W_SW_F7`, `W_SW_F8`, `W_SW_F9`, `W_SW_F10`, `W_SW_F11` | — | HW.JC-14P-1 sealed junction, 11 of 14 - SW_BUS and SW_F3 on bus A | Now, one wire at a time |
-| `SP_GND` | beside the PDM | 20 | `W_KMAIN_GND`, `W_K_GND`, `W_KHI_GND`, `W_KLO_GND` | 16 wires from the second table | 4 x HW.JC-8P sealed junctions, 26 of 32 - GND_MAIN_A on the first block, GND_MAIN_B on the last | Now, one wire at a time |
+| `SP_SW` | beside the PDM | 9 | `W_SW_BUS`, `W_SW_F2`, `W_SW_F3`, `W_SW_F6`, `W_SW_F7`, `W_SW_F8`, `W_SW_F9`, `W_SW_F10`, `W_SW_F11` | — | one parallel splice, all 9 in one barrel, crimped then solder-flooded | ✅ Built 19 Sep 2026 |
+| `SP_GND` | beside the PDM | 20 | `W_KMAIN_GND`, `W_K_GND`, `W_KHI_GND`, `W_KLO_GND` | 16 wires from the second table | parallel splices, one per group - PDM group: 8 GA, the four coil grounds + the lead out. Other groups TBD | PDM group **now**. The rest TBD - do not cut |
 | `SP_HOT` | beside the PDM | 5 | `W_MAIN_SW_FEED`, `W_HOT_F1`, `W_HOT_F4`, `W_HOT_F5` | `W_MAIN_OUT` | 8 GA parallel splice (5) | Wait for `W_MAIN_OUT` — ⚠️ TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for |
 | `SP_HEAD` | beside the PDM - F5 out to both beam relays | 3 | `W_HEAD_SUPPLY`, `W_HI_PWR`, `W_LO_PWR` | — | 12-10 GA parallel splice (3) | **Now** |
 | `SP_RLY` | beside the PDM | 3 | `W_RLY_PWR`, `W_HORN_COIL` | `W_DIM_COMMON` | 12-10 GA parallel splice (3) | Wait for `W_DIM_COMMON` |

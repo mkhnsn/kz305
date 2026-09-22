@@ -17,10 +17,6 @@ hard to find — deliberate, not a side effect.
 harness then has no exposed live pins, which matters most at `IGN` and `LH` where
 the harness side is fed from the PDM.
 
-That convention also falls out naturally at the junctions: their bussed half is
-**male**, so the wires land in a **female** housing — consistent with everything
-else.
-
 ### Cycle Terminal — PLACED
 
 ✅ **Order placed.** It carries the HW090 housings and consumables below, the
@@ -34,22 +30,19 @@ genuine Song Chuan relays** (`SCMR20`).
 | 3-way | 1 | 1 | `RH` right cluster |
 | 4-way | 1 | 1 | `IGN` ignition switch |
 | 6-way | 1 | 1 | `INSTR_6P` pod |
-| 8-way | **5** | 1 | `LH` **+ 4 junction mating halves** |
-| 14-way | **1** | — | `SP_SW` junction mating half |
+| 8-way | **5** | 1 | `LH` — one pair. **Four females are surplus** |
+| 14-way | **1** | — | **surplus** |
 
-⚠️ **Five 8-way females, one 8-way male.** Four of the females are the mating
-halves for the `HW.JC-8P` junctions and have no male partner to buy — the
-junction *is* their partner. This is the line most likely to be mis-ordered.
-
-✅ **The 14-way female is in stock**, which was the risk item: the
-`HW.JC-14P-1` was already bought from Corsa and would have been stranded without
-it. No extra `HW.JC-8P` is needed, and `SP_SW` stays a single junction rather
-than two 8-ways jumpered.
+⚠️ **The junction mating halves are not used.** Four 8-way females and the 14-way
+female were ordered to mate the `HW.JC` sealed junctions. `SP_SW` and `SP_GND` are
+parallel splices instead (19 Sep 2026) — the junctions are too bulky to dress on
+the bike. The housings go on the shelf; **their terminals and seals are the spares
+pool**, below.
 
 #### Terminals and seals come WITH the housings — 6 Sep 2026
 
 Cycle Terminal includes exactly one way's worth per housing, so the kits above
-supply **88 terminals and 88 seals against the 77 needed**:
+supply **88 terminals and 88 seals against the 42 needed**:
 
     3-way pair       3 x 2 =   6
     4-way pair       4 x 2 =   8
@@ -65,29 +58,24 @@ it was written before this was known.
 
 #### ⚠️ Spares must be weighted MALE
 
-The junction mating halves are all female — 35 of the 56 female terminals — so the
-kits carry female spares and **no male spare at all**:
+The surplus junction halves are all female, so the kits carry a deep pile of female
+spares and **no male spare at all**:
 
 | | Female | Male |
 |---|---|---|
-| Needed | 56 | 21 |
+| Needed | 21 | 21 |
 | Supplied by the kits | 67 | 21 |
-| **Spare** | **11** | **0** |
+| **Spare** | **46** | **0** |
 
 Every male terminal that ships gets used. A ruined male crimp means a re-order;
-a ruined female one comes out of the eleven already in the box.
+a ruined female one comes out of the forty-six already in the box.
 
 | Consumable | Qty | Why |
 |---|---|---|
 | HW090 terminals — **MALE** | **15** | zero spare included |
-| HW090 terminals — female | **10** | 11 already spare; belt and braces |
-| HW090 wire seals | **15** | not gendered, 11 already spare |
-| HW090 cavity plugs | **20** | **9** needed — see below — and blocker 2 may change the ground count |
-
-⚠️ **Nine cavity plugs are needed.** `SP_SW`'s 14-way runs 11 of
-14. The four `SP_GND` junctions use **26 of 32** positions — eighteen returns, three
-jumper pairs and the `W_GND_MAIN_A` and `W_GND_MAIN_B` leads — so `SP_GND` takes six more plugs.
-Nine in all, against twenty bought.
+| HW090 terminals — female | **10** | 46 already spare; not needed |
+| HW090 wire seals | **15** | not gendered, 46 already spare |
+| HW090 cavity plugs | **20** | **none needed** — the nine were all for the junctions, and every housing still in use is full |
 
 ### Cycle Terminal — also the Furukawa R/R pair
 
@@ -104,8 +92,8 @@ Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals a
 
 | Item | Qty |
 |---|---|
-| `HW.JC-8P` bussed junction | 4 |
-| `HW.JC-14P-1` bussed junction | 1 |
+| `HW.JC-8P` bussed junction | 4 — **not used**, see above |
+| `HW.JC-14P-1` bussed junction | 1 — **not used** |
 | M22759/16-14 yellow, `W_ALT_A` / `W_ALT_B` | 8 ft |
 
 ⚠️ **The relays were not in it.** They move to the Cycle Terminal cart below.
@@ -115,10 +103,9 @@ Cycle Terminal's `QLW-3F Set` bundles both at $16.95 with 6 terminals, 5 seals a
 | | |
 |---|---|
 | `IGN` 4 + `INSTR_6P` 6 + `RH` 3 + `LH` 8, both halves | 42 |
-| Junction mating halves — `SP_GND` 24, `SP_SW` 11 | 35 |
-| **Total** | **77 — buy 100** |
+| **Total** | **42** |
 
-The bussed halves take no terminals. Terminals are shared across the MT / HM / HW
+Terminals are shared across the MT / HM / HW
 sealed 090 families, so one part number covers every housing above.
 
 #### Terminals and seals on TXL — accepted per the manufacturer's spec, 10 Sep 2026
