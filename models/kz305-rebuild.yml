@@ -580,6 +580,21 @@ connectors:
   IGN:
     <<: *ign_switch
 
+  # THREE WAYS HERE AGAINST THE FACTORY 4P's FOUR - deliberate, and worth stating because the
+  # two drawings look like they disagree. Stock, four leads leave the switch body and the cluster
+  # branch turns them into four conductors at the 4P plus one bullet: Br, Br/W, Y/R, BK, and Bl/W.
+  # The rebuild needs three of them. Br/W is gone because both brake switches are now fed from the
+  # PDM (F8 -> SP_BRK_FEED), and Bl/W is gone because the headlight is fed from F5, not tapped off
+  # the bar. The count is three rather than four because the cluster's two Y/R leads still merge at
+  # the stock 2-to-1 splice on the cluster side.
+  #
+  # ⚠️ OPEN - WHERE THE CLUSTER PIGTAIL IS CUT, AND WHAT HAPPENS TO THE TWO SPARE LEGS.
+  # The 3-way assumes the pigtail is cut at the old 4P, keeping the stock Y/R splice. Cut it back
+  # at the switch body instead and there are four conductors, not three, and the ordered 3-way is
+  # one way short. Worse, the stock brown splice (SP_RH_BR in the factory model) sits on the
+  # cluster side and feeds Br/W and Bl/W off the same node as the kill-switch brown. Retain the
+  # branch as it is and both legs are still there, now live off PDM F2 and landing nowhere. They
+  # have to be cut back to the splice or capped - nothing in this model says which.
   RH:
     <<: *rh_cluster
     pinlabels: [STOP IN (Br), LINK (Y/R), START OUT (BK)]
@@ -720,9 +735,14 @@ connectors:
     <<: *lh_cluster
     pinlabels: [Bl COMMON, R/BK HI, R/Y LO, O TURN FEED, G LEFT, Gy RIGHT, BK HORN, GND]
     notes: |-
-      RETAINED STOCK PART - the rebuild keeps the switchgear, so the new harness has to mate this
-      pigtail. Only the horn and dimmer ways are drawn so far; the turn ways are listed to hold their
-      places and are NOT YET CONNECTED.
+      RETAINED STOCK PART - THE CLUSTER IS KEPT, BUT NOT ITS CONNECTOR. #37 (closed 4 Sep 2026)
+      cuts the stock housing off the retained pigtail and puts a new sealed 090 on each end, which
+      is why docs/connector-order.md buys BOTH halves of an 8-way. This harness therefore mates a
+      connector we fit, not the factory one. An earlier version of this note said the new harness
+      "has to mate this pigtail"; that was written before #37 was rescoped.
+      ALL EIGHT WAYS CARRY A CIRCUIT, since the 1-2 Sep drawing pass. An earlier version also said
+      the turn ways were placeholders and NOT YET CONNECTED - superseded by that pass, and the
+      NOT YET DRAWN footer of this file has recorded the correction since.
       ** FIVE WAYS IN THE 6P, NOT SIX - design input 3b. ** The stock 6P carries a brown that feeds
       NOTHING: it runs to a cavity the cluster does not populate, found 29 Aug 2026 by reading the far
       half. Do not reproduce it. Bl arrives on its own flying lead rather than through the 6P, and the
@@ -739,6 +759,11 @@ connectors:
       ground contact into the pigtail.
       Parts beyond the connector order: one small ring terminal, one star washer, a few inches of 16
       AWG BK (see #55 for ring terminals generally).
+      ⚠️ THE WAY NUMBERS HERE ARE THE REBUILD'S, NOT THE FACTORY MODEL'S. The housing is a new part,
+      so its numbering is ours to set, and it does not match models/factory/lighting.yml's LH: ways
+      1 and 2 are swapped there (R/BK first, then Bl) and so are 4 and 5 (G before O). Cross-refer by
+      the LABEL - Bl COMMON, G LEFT - never by way number. The stock 6P's own cavity order is a third
+      thing again, recorded in the factory note.
 
   USB:
     type: USB-C PD charger
@@ -917,11 +942,20 @@ connectors:
     subtype: 6P connector, instrument pod
     pinlabels: [L TURN, R TURN, NEUTRAL FEED, NEUTRAL SW, HIGH BEAM, POD GND]
     notes: |-
-      RETAINED STOCK PART - the pod pigtail survives, so the new harness has to mate it.
-      ** CAVITY NUMBERS ARE THE STOCK ONES, READ AT THE BENCH 29 Aug 2026 ** - 3 rows of 2, mating
-      face, keyway up, top row first; harness side FEMALE. Do not renumber them to suit the rebuild:
-      the far half is the original pigtail and its cavities are fixed by the part.
-      Ways 1 and 2 are the turn indicators and are NOT YET CONNECTED - they land with the signals.
+      RETAINED STOCK PART - THE POD IS KEPT, BUT NOT ITS CONNECTOR. #37 (closed 4 Sep 2026) cuts
+      the stock housing off the retained pigtail and puts a new sealed 090 on each end, which is why
+      docs/connector-order.md buys BOTH halves of a 6-way.
+      ** THE NUMBERING BELOW IS THE STOCK CAVITY ORDER, READ AT THE BENCH 29 Aug 2026 ** - 3 rows of
+      2, mating face, keyway up, top row first; harness side FEMALE. It is KEPT BY CHOICE rather than
+      forced: once the stock housing is off, the cavities belong to the new part and the order is ours
+      to set. Keeping it means the 29 Aug bench reading still describes where the pod's own leads
+      land, which is worth more than any reason to renumber.
+      ⚠️ THE EARLIER REASON GIVEN HERE WAS WRONG AFTER #37 - it said the far half is the original
+      pigtail and its cavities are fixed by the part. They are not; the far half is a new housing too.
+      The numbering stands on the choice above, not on that.
+      ALL SIX WAYS CARRY A CIRCUIT, since the 1-2 Sep drawing pass. An earlier version said ways 1
+      and 2 were NOT YET CONNECTED - superseded, and this file's NOT YET DRAWN footer has recorded
+      the correction since.
 
   IND_N:
     <<: *indicator

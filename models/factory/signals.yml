@@ -173,9 +173,10 @@ connections:
 # NEEDS CALIPERS:
 #   - GAUGE, HARNESS-WIDE. Not one wire has had its gauge taken with a
 #     tool. Every value in these models is inherited or eyeballed.
-#   - THE RETAINED CONNECTOR SERIES. The right-bar 4P and both 6Ps are
-#     reproduced by the rebuild and none is identified by part number
-#     or measured.
+#   - ~~THE RETAINED CONNECTOR SERIES~~. CLOSED by #37, 4 Sep 2026. The
+#     right-bar 4P and both 6Ps are NOT reproduced: the rebuild cuts
+#     the stock housings off the retained pigtails and fits sealed 090
+#     at both ends, so none of them has to be identified or measured.
 #
 # CANNOT BE VERIFIED - the evidence left the bike at teardown:
 #   - W/BK, the second fuse box's other output. No recorded mate, and
