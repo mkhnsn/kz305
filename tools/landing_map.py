@@ -32,11 +32,48 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+import branch_map as bm  # noqa: E402
 import cut_list as cl  # noqa: E402
 import label_schedule as ls  # noqa: E402
 from build import load  # noqa: E402
 
 DROPBOX_DIR = cl.DROPBOX_DIR
+
+# HOW YOU FIND WAY 1 ON THE PHYSICAL PART. Only where this repo actually
+# records it. Everything absent from here has a way numbering that is a list
+# order in the model and nothing else - see "Way 1 is not anchored" below.
+# A guessed orientation is worse than a blank one: it reads like a fact and
+# wires the harness backwards.
+ORIENTED = {
+    "IGN": "Mating face, keyway up, left to right, top row first — the ways ARE physical cavities.",
+    "INSTR_6P": "Mating face, keyway up, top row first, 3 rows of 2; harness side female. "
+                "Stock cavity order, read at the bench 29 Aug 2026.",
+    "PDM": "The part's own printed numbers, c1–c10 left to right FROM THE WIRE SIDE, top row "
+           "first; cavity = (row−1)×10 + column. No keyway. See docs/pdm-cavity-map.md — and note "
+           "that from the fuse side, the side facing you on the bike, c10 is on the LEFT.",
+}
+RELAY_ORIENT = ("Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the "
+                "block follow docs/pdm-cavity-map.md.")
+
+# The order convention is harness side FEMALE, component side MALE
+# (docs/connector-order.md). These are where a RETAINED part fixes the gender
+# instead, so the convention does not hold and the harness side is forced.
+GENDER_FORCED = {
+    "SOL": "Forced by the relay: its Y/R lead is a FEMALE bullet and its BK a MALE one, so the "
+           "harness side is Y/R male and BK female — the one place a harness-side pin is male. "
+           "See #65.",
+    "ALT": "Bullets on the stator's own stub; gender NOT RECORDED (#65).",
+    "CAP_L": "The condenser bracket's pigtail ends in MALE bullets, so the harness side is female.",
+    "CAP_R": "The condenser bracket's pigtail ends in MALE bullets, so the harness side is female.",
+}
+
+# One node in the model, more than one housing in the hand.
+SPLIT_HOUSING = {
+    "RR": "TWO HOUSINGS, one node here. Ways 1–3 (AC1/AC2/AC3) are the GREY Furukawa "
+          "QLW-A-3F-GR; ways 4–5 (DC+/GND) are the BLACK QLW-A-B3F-B. Colour is the keying — it "
+          "is what stops AC being plugged into DC. Each runs 2 of 3 ways and takes a cavity plug. "
+          "⚠️ Which cavity of the black housing is DC+ and which is GND is NOT RECORDED.",
+}
 
 # A subtype is often "<the part> - <a paragraph about it>". The part is the
 # bit before the first dash; the paragraph belongs in the parts table, not in
@@ -114,6 +151,72 @@ def terminals_for(conn):
             sub = head(comp.get("subtype"), 70)
             out.append(" — ".join(x for x in (ident, sub) if x))
     return out
+
+
+def zone(node):
+    """Roughly where on the bike, from the trunk breakout the part hangs off.
+    Names come from branch_map.PLACE so the two drawings agree."""
+    if node not in cl.POSITIONS:
+        return ""
+    trunk, branch, _, _ = cl.POSITIONS[node]
+    place = bm.PLACE.get(trunk)
+    if not place:
+        return f"{trunk} mm along the trunk"
+    return f"{place}, {branch} mm out" if branch else place
+
+
+def ways_of(node, conn, landings):
+    """Declared ways, and the conductors landing on them. They differ where one
+    landing legitimately takes two leads - GND's SIGNAL BUS stud is the case -
+    so both are shown rather than one being quietly wrong."""
+    declared = len((conn or {}).get("pinlabels") or []) or None
+    return declared, len(landings.get(node) or [])
+
+
+def needs_anchor(node, conn, declared):
+    """A single conductor has no pinout to get wrong. Everything else does,
+    and the risk rises with the way count."""
+    if str((conn or {}).get("type") or "").lower() == "splice":
+        return False
+    if (declared or 0) <= 1:
+        return False
+    return orientation(node, conn) is None
+
+
+def orientation(node, conn):
+    if node in ORIENTED:
+        return ORIENTED[node]
+    if str((conn or {}).get("type") or "").lower() == "relay":
+        return RELAY_ORIENT
+    return None
+
+
+# The sealed-090 order convention governs exactly the four housings that order
+# buys both halves of. It says nothing about a Furukawa pair sold as a mating
+# set, or an MTA block, or a bullet whose gender a retained part already fixed -
+# so it is not quoted at them.
+HW090_ORDER = {"RH", "LH", "INSTR_6P", "IGN"}
+GENDER_BY_PART = {
+    "RR": "Fixed by the part - the Furukawa QLW housings mate as sold, grey to grey and black to "
+          "black. The 090 order convention does not reach this one.",
+    "PDM": "Fixed by the part - MTA sealed 2.8mm terminals into the block's own cavities.",
+    "MF": "Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.",
+    "MF_RR": "Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.",
+    "MF_TDR": "Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.",
+}
+
+
+def gender(node, conn):
+    if node in GENDER_FORCED:
+        return GENDER_FORCED[node]
+    if node in GENDER_BY_PART:
+        return GENDER_BY_PART[node]
+    if str((conn or {}).get("type") or "").lower() == "relay":
+        return "Fixed by the part - the relay's blades into its cavities in the block."
+    if node in HW090_ORDER:
+        return ("Harness side FEMALE, component side MALE - docs/connector-order.md, so a "
+                "disconnected harness has no exposed live pin.")
+    return None
 
 
 def collect(doc):
@@ -210,19 +313,83 @@ def main():
     w("")
 
     # ---- by component ----------------------------------------------------
-    w("## By component — what lands on each part\n")
-    w("The assembly view: stand at one part and this is everything that arrives there.\n")
+    w("## By component — the pinout of each part, and where it sits\n")
+    w("Stand at one part: what it is, roughly where on the bike, which way is which, and "
+      "everything that arrives there.\n")
+
+    need = []
+    for node in sorted(landings):
+        conn = conns.get(node) or {}
+        declared, _ = ways_of(node, conn, landings)
+        if needs_anchor(node, conn, declared):
+            need.append((declared or 0, node))
+    need.sort(reverse=True)
+
+    w("⚠️ **WAY 1 IS ANCHORED ON FOUR OF THESE AND NOWHERE ELSE.** `IGN` and `INSTR_6P` by a "
+      "keyway, `PDM` by its printed numbers, the relays by the pin numbers moulded into them. On "
+      "every other multi-way connector the numbering below is **this model's list order and "
+      "nothing else** — no keyway, latch or printed number has been recorded for it. For the "
+      "housings we fit ourselves that numbering is ours to define, but it still has to be "
+      "defined against a feature you can see, and that has not been done.\n")
+    w("**Pick a feature, write it down, then crimp.** Nothing here is guessed, which is why the "
+      "line says nothing rather than something plausible. A single-conductor node has no pinout "
+      "to get wrong and is not counted below.\n")
+    w("Needing an anchor, worst first — the more ways, the more ways to be wrong:\n")
+    w("| Ways | Node | Part |")
+    w("|---|---|---|")
+    for ways, node in need:
+        w(f"| **{ways}** | `{node}` | {part_short(node, conns.get(node) or {})} |")
+    w("")
+
+    w("### Every connector\n")
+    w("**Ways** is what the model declares; **wires** is what lands. They differ where one "
+      "landing takes two leads — `GND`'s SIGNAL BUS stud is the case, not an error.\n")
+    w("| Node | Part | Ways | Wires | Roughly where | Way 1 |")
+    w("|---|---|---|---|---|---|")
+    for node in sorted(landings):
+        conn = conns.get(node) or {}
+        if str(conn.get("type") or "").lower() == "splice":
+            continue
+        declared, wired = ways_of(node, conn, landings)
+        if node == "PDM":
+            ways_txt = "60 cavities"
+            wired_txt = f"{wired} here + 20 under the relays"
+        else:
+            ways_txt = str(declared) if declared else "—"
+            wired_txt = str(wired)
+        if orientation(node, conn):
+            flag = "✅ anchored"
+        elif (declared or 0) <= 1:
+            flag = "— single conductor"
+        else:
+            flag = "⚠️ not anchored"
+        w(f"| `{node}` | {part_short(node, conn)} | {ways_txt} | {wired_txt} "
+          f"| {zone(node) or '—'} | {flag} |")
+    w("")
+    w("Splices are left out of that table — they have no pinout, and the cut list's splices "
+      "section is the authority on what each one physically is.\n")
     for node in sorted(landings):
         conn = conns.get(node) or {}
         trunk, branch, bas, src = place(node)
         w(f"### `{node}` — {part_full(node, conn)}\n")
-        bits = []
         if conn.get("subtype"):
-            bits.append(str(conn["subtype"]))
+            w(str(conn["subtype"]) + "\n")
         if src:
-            bits.append(f"Sits at **{trunk} mm** from the datum, {branch} mm out ({bas}) — {src}.")
-        for b in bits:
-            w(b + "\n")
+            z = zone(node)
+            where = f"**{z}.** " if z else ""
+            w(f"{where}Harness geometry: {trunk} mm from the datum, {branch} mm out ({bas}) — "
+              f"{src}.\n")
+        if node in SPLIT_HOUSING:
+            w("⚠️ " + SPLIT_HOUSING[node] + "\n")
+        g = gender(node, conn)
+        if g:
+            w(f"**Gender:** {g}\n")
+        how = orientation(node, conn)
+        if how:
+            w(f"**Way 1:** {how}\n")
+        elif str(conn.get("type") or "").lower() != "splice":
+            w("⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not "
+              "a physical feature of the part. Fix it to something visible before crimping.\n")
         w("| In | Wire | Colour | Gauge | Comes from |")
         w("|---|---|---|---|---|")
         items = sorted(landings[node], key=lambda r: (terminal(node, r[1], conn), r[0]))
