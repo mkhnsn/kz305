@@ -186,6 +186,32 @@ Two things it establishes that the old harness's geometry did not:
   on it; the bundle does not reach 3/4″ until the right bar joins at 400 mm.
   Datum to right bar is 20 conductors, which is 1/2″ work.
 
+## Landing map
+
+`docs/label-schedule.md` gives both ends of every wire, but as `RR-1` and
+`PDM-5`. At the bench that is not enough — you are holding a wire and a
+crimper. `docs/landing-map.md` resolves those to the **physical part and the
+hole in it**:
+
+```sh
+.venv/bin/python3 tools/landing_map.py > docs/landing-map.md
+```
+
+`RR-1` becomes AC1 on the Shindengen SH775, in the box where the battery used
+to be, 835 mm from the datum. `PDM-5` becomes cavity `c1 r4 (F4 OUT)` on the
+MTA 0301370. Three views of the same data: the parts and where each sits, every
+wire with both ends, and — the assembly view — what lands on each part, cavity
+by cavity.
+
+Part identity and pin labels come from the model, positions and cavity names
+from `tools/cut_list.py`, and the ends from `tools/label_schedule.py`, so the
+landing map cannot disagree with the cut list, the label schedule or the BOM.
+
+⚠️ **Splice form is not repeated there.** What each `SP_` node physically is —
+a parallel crimp, a sealed junction, the stock bullet at B03 — and when it can
+be crimped is the splices section of `docs/cut-list.md`, which stays the
+authority.
+
 ## Verification
 
 `docs/pre-ride-check.md` is the check to run on the finished bike, every ride:
