@@ -636,7 +636,7 @@ Sits at **650 mm** from the datum, 0 mm out (est) — B04 breakout.
 
 ### `SP_GND` — Splice — signal ground bus
 
-signal ground bus - 18 returns, sealed junctions
+signal ground bus - 18 returns, parallel splices - PDM GROUP FIRST, THE REST TBD
 
 Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
 
