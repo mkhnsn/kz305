@@ -41,9 +41,16 @@ connectors:
       29 Aug 2026]. The splices are corroborated from outside the sleeve as well as by unsleeving.
       PHYSICAL: 4-way rectangular, the SMALLER of the two four-way series in this harness. B06.5 at
       the fuse box is the same series in the opposite gender. NOT the same part as the R/R's 4P.
-      PART SELECTION: this one IS reproduced - the rebuild retains the right-bar switchgear, so the
-      new harness has to mate its pigtail in the male half of this series. ⚠️ THE SERIES IS NOT
-      IDENTIFIED AND NO DIMENSION HAS BEEN MEASURED ON IT. [OPEN]
+      PART SELECTION: ⚠️ NOT REPRODUCED, AND THE SERIES NEVER HAS TO BE IDENTIFIED - #37, closed
+      4 Sep 2026. This entry used to say the rebuild had to mate this pigtail in the male half of
+      the same series, and carried an [OPEN] demanding the series and its dimensions. Both are
+      RETIRED: the rebuild cuts the stock housing off the retained cluster pigtail and fits a new
+      sealed 090 at each end, which is why docs/connector-order.md buys both halves of a 3-way.
+      The physical description above stays as the factory record. See docs/verification-plan.md.
+      ⚠️ THREE WAYS IN THE REBUILD AGAINST FOUR HERE. Br/W is dropped - the brake switches are fed
+      from the PDM now - and Bl/W with it. That leaves the question of what happens to those two
+      legs of SP_RH_BR, which are on the cluster side and survive the housing coming off; see the
+      comment above RH in models/kz305-rebuild.yml.
   RH_BLW:
     type: Bullet connector
     subtype: Bl/W, right bar

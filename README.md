@@ -200,8 +200,17 @@ hole in it**:
 `RR-1` becomes AC1 on the Shindengen SH775, in the box where the battery used
 to be, 835 mm from the datum. `PDM-5` becomes cavity `c1 r4 (F4 OUT)` on the
 MTA 0301370. Three views of the same data: the parts and where each sits, every
-wire with both ends, and — the assembly view — what lands on each part, cavity
-by cavity.
+wire with both ends, and — the assembly view — **the pinout of each connector**:
+what it is, roughly where on the bike, its gender, how way 1 is found, and
+everything that arrives there.
+
+⚠️ **Way 1 is anchored on four connectors and nowhere else.** `IGN` and
+`INSTR_6P` by a keyway, `PDM` by its printed numbers, the relays by the pin
+numbers moulded into them. On every other multi-way connector the numbering is
+the model's list order and nothing else — no keyway, latch or printed number has
+been recorded. For housings we fit ourselves that numbering is ours to define,
+but it has to be fixed to a feature you can see first. The sheet ranks what
+needs it, worst first, and says nothing rather than something plausible.
 
 Part identity and pin labels come from the model, positions and cavity names
 from `tools/cut_list.py`, and the ends from `tools/label_schedule.py`, so the

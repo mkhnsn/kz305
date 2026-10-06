@@ -178,15 +178,100 @@ Only where the model names a terminal. Everything else takes the sealed 090 term
 | `YR_OUT` | YE | 16 AWG | `K_COIL` Relay | c3 r6 (K_COIL 87) | `SP_YR` Splice | way 1 |
 | `YR_TRIG` | GY | 16 AWG | `K_COIL` Relay | c3 r5 (K_COIL 86) | `RH` Right bar cluster | 2 — LINK (Y/R) |
 
-## By component — what lands on each part
+## By component — the pinout of each part, and where it sits
 
-The assembly view: stand at one part and this is everything that arrives there.
+Stand at one part: what it is, roughly where on the bike, which way is which, and everything that arrives there.
+
+⚠️ **WAY 1 IS ANCHORED ON FOUR OF THESE AND NOWHERE ELSE.** `IGN` and `INSTR_6P` by a keyway, `PDM` by its printed numbers, the relays by the pin numbers moulded into them. On every other multi-way connector the numbering below is **this model's list order and nothing else** — no keyway, latch or printed number has been recorded for it. For the housings we fit ourselves that numbering is ours to define, but it still has to be defined against a feature you can see, and that has not been done.
+
+**Pick a feature, write it down, then crimp.** Nothing here is guessed, which is why the line says nothing rather than something plausible. A single-conductor node has no pinout to get wrong and is not counted below.
+
+Needing an anchor, worst first — the more ways, the more ways to be wrong:
+
+| Ways | Node | Part |
+|---|---|---|
+| **8** | `LH` | Left bar cluster |
+| **5** | `RR` | Shindengen SH775 |
+| **4** | `SOL` | Starter relay |
+| **4** | `GND` | Star ground point |
+| **3** | `TAIL` | Tail / brake light |
+| **3** | `RH` | Right bar cluster |
+| **3** | `HEAD` | Headlight |
+| **3** | `FLASHER` | Turn signal flasher |
+| **2** | `USB` | USB-C PD charger |
+| **2** | `SIG_RR` | Turn signal |
+| **2** | `SIG_RL` | Turn signal |
+| **2** | `SIG_FR` | Turn signal |
+| **2** | `SIG_FL` | Turn signal |
+| **2** | `RBRK` | Brake light switch |
+| **2** | `MF_TDR` | MP630 1214 ATC Set |
+| **2** | `MF_RR` | MP630 1214 ATC Set |
+| **2** | `MF` | MP630 1214 ATC Set |
+| **2** | `LAMP_TAC` | Indicator lamp |
+| **2** | `LAMP_SPD` | Indicator lamp |
+| **2** | `HORN` | Horn |
+| **2** | `FBRK` | Brake light switch |
+| **2** | `COIL_R` | Ignition coil |
+| **2** | `COIL_L` | Ignition coil |
+| **2** | `CAP_L` | Capacitor |
+| **2** | `BATT` | Battery |
+| **2** | `ALT` | Alternator |
+
+### Every connector
+
+**Ways** is what the model declares; **wires** is what lands. They differ where one landing takes two leads — `GND`'s SIGNAL BUS stud is the case, not an error.
+
+| Node | Part | Ways | Wires | Roughly where | Way 1 |
+|---|---|---|---|---|---|
+| `ALT` | Alternator | 2 | 2 | alternator, 320 mm out | ⚠️ not anchored |
+| `BATT` | Battery | 2 | 4 | PDM, battery, regulator, 150 mm out | ⚠️ not anchored |
+| `CAP_L` | Capacitor | 2 | 1 | brakes and condenser, 300 mm out | ⚠️ not anchored |
+| `COIL_L` | Ignition coil | 2 | 1 | coil splice, under the tank, 300 mm out | ⚠️ not anchored |
+| `COIL_R` | Ignition coil | 2 | 1 | coil splice, under the tank, 300 mm out | ⚠️ not anchored |
+| `FBRK` | Brake light switch | 2 | 2 | the headlight junction (datum), 100 mm out | ⚠️ not anchored |
+| `FLASHER` | Turn signal flasher | 3 | 3 | flasher, 100 mm out | ⚠️ not anchored |
+| `GND` | Star ground point | 4 | 5 | PDM, battery, regulator, 200 mm out | ⚠️ not anchored |
+| `GND_ENG` | Engine ground point | 1 | 1 | PDM, battery, regulator, 400 mm out | — single conductor |
+| `HEAD` | Headlight | 3 | 3 | the headlight junction (datum), 100 mm out | ⚠️ not anchored |
+| `HORN` | Horn | 2 | 2 | right bar, 260 mm out | ⚠️ not anchored |
+| `IGN` | Ignition switch | 4 | 4 | the headlight junction (datum), 100 mm out | ✅ anchored |
+| `INSTR_6P` | Junction | 6 | 6 | the headlight junction (datum), 100 mm out | ✅ anchored |
+| `K_COIL` | Relay | 4 | 4 | PDM, battery, regulator | ✅ anchored |
+| `K_HI` | Relay | 4 | 4 | PDM, battery, regulator | ✅ anchored |
+| `K_HORN` | Relay | 4 | 4 | PDM, battery, regulator | ✅ anchored |
+| `K_LO` | Relay | 4 | 4 | PDM, battery, regulator | ✅ anchored |
+| `K_MAIN` | Relay | 4 | 4 | PDM, battery, regulator | ✅ anchored |
+| `LAMP_SPD` | Indicator lamp | 2 | 2 | the headlight junction (datum), 250 mm out | ⚠️ not anchored |
+| `LAMP_TAC` | Indicator lamp | 2 | 2 | the headlight junction (datum), 250 mm out | ⚠️ not anchored |
+| `LH` | Left bar cluster | 8 | 8 | left bar, 200 mm out | ⚠️ not anchored |
+| `MF` | MP630 1214 ATC Set | 2 | 2 | PDM, battery, regulator, 150 mm out | ⚠️ not anchored |
+| `MF_RR` | MP630 1214 ATC Set | 2 | 2 | PDM, battery, regulator, 150 mm out | ⚠️ not anchored |
+| `MF_TDR` | MP630 1214 ATC Set | 2 | 1 | PDM, battery, regulator, 150 mm out | ⚠️ not anchored |
+| `NSW` | Neutral switch | 1 | 1 | right bar, 900 mm out | — single conductor |
+| `PDM` | MTA 0301370 | 60 cavities | 22 here + 20 under the relays | PDM, battery, regulator | ✅ anchored |
+| `RBRK` | Brake light switch | 2 | 2 | brakes and condenser, 300 mm out | ⚠️ not anchored |
+| `RH` | Right bar cluster | 3 | 3 | right bar, 160 mm out | ⚠️ not anchored |
+| `RR` | Shindengen SH775 | 5 | 4 | PDM, battery, regulator, 200 mm out | ⚠️ not anchored |
+| `SIG_FL` | Turn signal | 2 | 2 | the headlight junction (datum), 300 mm out | ⚠️ not anchored |
+| `SIG_FR` | Turn signal | 2 | 2 | the headlight junction (datum), 300 mm out | ⚠️ not anchored |
+| `SIG_RL` | Turn signal | 2 | 2 | the tail fan, where the trunk ends, 350 mm out | ⚠️ not anchored |
+| `SIG_RR` | Turn signal | 2 | 2 | the tail fan, where the trunk ends, 350 mm out | ⚠️ not anchored |
+| `SM` | Starter motor | 1 | 1 | PDM, battery, regulator, 400 mm out | — single conductor |
+| `SOL` | Starter relay | 4 | 4 | PDM, battery, regulator, 100 mm out | ⚠️ not anchored |
+| `TAIL` | Tail / brake light | 3 | 3 | the tail fan, where the trunk ends, 250 mm out | ⚠️ not anchored |
+| `USB` | USB-C PD charger | 2 | 2 | right bar, 800 mm out | ⚠️ not anchored |
+
+Splices are left out of that table — they have no pinout, and the cut list's splices section is the authority on what each one physically is.
 
 ### `ALT` — Alternator — single-phase, 2 bullet
 
 single-phase, 2 bullet
 
-Sits at **730 mm** from the datum, 320 mm out (tape) — B05 + B05.1.
+**alternator, 320 mm out.** Harness geometry: 730 mm from the datum, 320 mm out (tape) — B05 + B05.1.
+
+**Gender:** Bullets on the stator's own stub; gender NOT RECORDED (#65).
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -197,7 +282,9 @@ Sits at **730 mm** from the datum, 320 mm out (tape) — B05 + B05.1.
 
 12V - stock 10Ah lead-acid; rebuild fits an Antigravity ATZ-7 RE-START lithium
 
-Sits at **835 mm** from the datum, 150 mm out (tape) — SOL.1 battery cable.
+**PDM, battery, regulator, 150 mm out.** Harness geometry: 835 mm from the datum, 150 mm out (tape) — SOL.1 battery cable.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -210,7 +297,11 @@ Sits at **835 mm** from the datum, 150 mm out (tape) — SOL.1 battery cable.
 
 LEFT - STOCK PART
 
-Sits at **650 mm** from the datum, 300 mm out (est) — condenser at the points cover.
+**brakes and condenser, 300 mm out.** Harness geometry: 650 mm from the datum, 300 mm out (est) — condenser at the points cover.
+
+**Gender:** The condenser bracket's pigtail ends in MALE bullets, so the harness side is female.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -220,7 +311,9 @@ Sits at **650 mm** from the datum, 300 mm out (est) — condenser at the points 
 
 LEFT
 
-Sits at **460 mm** from the datum, 300 mm out (est) — coil, from B03.
+**coil splice, under the tank, 300 mm out.** Harness geometry: 460 mm from the datum, 300 mm out (est) — coil, from B03.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -230,7 +323,9 @@ Sits at **460 mm** from the datum, 300 mm out (est) — coil, from B03.
 
 RIGHT
 
-Sits at **460 mm** from the datum, 300 mm out (est) — coil, from B03.
+**coil splice, under the tank, 300 mm out.** Harness geometry: 460 mm from the datum, 300 mm out (est) — coil, from B03.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -240,7 +335,9 @@ Sits at **460 mm** from the datum, 300 mm out (est) — coil, from B03.
 
 front, at the lever perch
 
-Sits at **0 mm** from the datum, 100 mm out (tape) — B00.5 / B00.6 - the switch's own pigtail comes down to the shell.
+**the headlight junction (datum), 100 mm out.** Harness geometry: 0 mm from the datum, 100 mm out (tape) — B00.5 / B00.6 - the switch's own pigtail comes down to the shell.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -251,7 +348,9 @@ Sits at **0 mm** from the datum, 100 mm out (tape) — B00.5 / B00.6 - the switc
 
 load-independent solid-state, 3-pin
 
-Sits at **880 mm** from the datum, 100 mm out (tape) — B07.
+**flasher, 100 mm out.** Harness geometry: 880 mm from the datum, 100 mm out (tape) — B07.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -263,7 +362,9 @@ Sits at **880 mm** from the datum, 100 mm out (tape) — B07.
 
 bolted, to a bare-metal plate
 
-Sits at **835 mm** from the datum, 200 mm out (est) — star bus plate - NOT PLACED, see blocker 2.
+**PDM, battery, regulator, 200 mm out.** Harness geometry: 835 mm from the datum, 200 mm out (est) — star bus plate - NOT PLACED, see blocker 2.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -277,7 +378,9 @@ Sits at **835 mm** from the datum, 200 mm out (est) — star bus plate - NOT PLA
 
 block to star bus - HEAVY
 
-Sits at **835 mm** from the datum, 400 mm out (est) — engine case bolt.
+**PDM, battery, regulator, 400 mm out.** Harness geometry: 835 mm from the datum, 400 mm out (est) — engine case bolt.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -287,7 +390,9 @@ Sits at **835 mm** from the datum, 400 mm out (est) — engine case bolt.
 
 LED - part not selected
 
-Sits at **0 mm** from the datum, 100 mm out (tape) — B00.9.
+**the headlight junction (datum), 100 mm out.** Harness geometry: 0 mm from the datum, 100 mm out (tape) — B00.9.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -299,7 +404,9 @@ Sits at **0 mm** from the datum, 100 mm out (tape) — B00.9.
 
 12V 2A
 
-Sits at **400 mm** from the datum, 260 mm out (tape) — B01.3.
+**right bar, 260 mm out.** Harness geometry: 400 mm from the datum, 260 mm out (tape) — B01.3.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -310,7 +417,11 @@ Sits at **400 mm** from the datum, 260 mm out (tape) — B01.3.
 
 4-pin
 
-Sits at **0 mm** from the datum, 100 mm out (tape) — B00.3.
+**the headlight junction (datum), 100 mm out.** Harness geometry: 0 mm from the datum, 100 mm out (tape) — B00.3.
+
+**Gender:** Harness side FEMALE, component side MALE - docs/connector-order.md, so a disconnected harness has no exposed live pin.
+
+**Way 1:** Mating face, keyway up, left to right, top row first — the ways ARE physical cavities.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -323,7 +434,11 @@ Sits at **0 mm** from the datum, 100 mm out (tape) — B00.3.
 
 6P connector, instrument pod
 
-Sits at **0 mm** from the datum, 100 mm out (tape) — B00.1.
+**the headlight junction (datum), 100 mm out.** Harness geometry: 0 mm from the datum, 100 mm out (tape) — B00.1.
+
+**Gender:** Harness side FEMALE, component side MALE - docs/connector-order.md, so a disconnected harness has no exposed live pin.
+
+**Way 1:** Mating face, keyway up, top row first, 3 rows of 2; harness side female. Stock cavity order, read at the bench 29 Aug 2026.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -338,7 +453,11 @@ Sits at **0 mm** from the datum, 100 mm out (tape) — B00.1.
 
 Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — in the PDM.
+
+**Gender:** Fixed by the part - the relay's blades into its cavities in the block.
+
+**Way 1:** Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the block follow docs/pdm-cavity-map.md.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -351,7 +470,11 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
 
 Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — in the PDM.
+
+**Gender:** Fixed by the part - the relay's blades into its cavities in the block.
+
+**Way 1:** Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the block follow docs/pdm-cavity-map.md.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -364,7 +487,11 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
 
 Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — in the PDM.
+
+**Gender:** Fixed by the part - the relay's blades into its cavities in the block.
+
+**Way 1:** Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the block follow docs/pdm-cavity-map.md.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -377,7 +504,11 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
 
 Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — in the PDM.
+
+**Gender:** Fixed by the part - the relay's blades into its cavities in the block.
+
+**Way 1:** Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the block follow docs/pdm-cavity-map.md.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -390,7 +521,11 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
 
 Song Chuan 303-1AH-C-R1, Ultra Micro 280, 20A - seats in the PDM
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — in the PDM.
+
+**Gender:** Fixed by the part - the relay's blades into its cavities in the block.
+
+**Way 1:** Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its cavities in the block follow docs/pdm-cavity-map.md.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -403,7 +538,9 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — in the PDM.
 
 speedometer light - LED
 
-Sits at **0 mm** from the datum, 250 mm out (est) — meter lamp, pod.
+**the headlight junction (datum), 250 mm out.** Harness geometry: 0 mm from the datum, 250 mm out (est) — meter lamp, pod.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -414,7 +551,9 @@ Sits at **0 mm** from the datum, 250 mm out (est) — meter lamp, pod.
 
 tachometer light - LED
 
-Sits at **0 mm** from the datum, 250 mm out (est) — meter lamp, pod.
+**the headlight junction (datum), 250 mm out.** Harness geometry: 0 mm from the datum, 250 mm out (est) — meter lamp, pod.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -425,7 +564,11 @@ Sits at **0 mm** from the datum, 250 mm out (est) — meter lamp, pod.
 
 dimmer + turn signal + horn
 
-Sits at **430 mm** from the datum, 200 mm out (tape) — B02.3.
+**left bar, 200 mm out.** Harness geometry: 430 mm from the datum, 200 mm out (tape) — B02.3.
+
+**Gender:** Harness side FEMALE, component side MALE - docs/connector-order.md, so a disconnected harness has no exposed live pin.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -442,7 +585,11 @@ Sits at **430 mm** from the datum, 200 mm out (tape) — B02.3.
 
 20A ATC, Metri-Pack 630 sealed pull-to-seat holder
 
-Sits at **835 mm** from the datum, 150 mm out (tape) — B06.3 / SOL.2 - between relay and PDM.
+**PDM, battery, regulator, 150 mm out.** Harness geometry: 835 mm from the datum, 150 mm out (tape) — B06.3 / SOL.2 - between relay and PDM.
+
+**Gender:** Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -453,7 +600,11 @@ Sits at **835 mm** from the datum, 150 mm out (tape) — B06.3 / SOL.2 - between
 
 30A ATC, Metri-Pack 630 sealed pull-to-seat holder - AT THE BATTERY END
 
-Sits at **835 mm** from the datum, 150 mm out (est) — at the battery end of the charging pair.
+**PDM, battery, regulator, 150 mm out.** Harness geometry: 835 mm from the datum, 150 mm out (est) — at the battery end of the charging pair.
+
+**Gender:** Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -464,7 +615,11 @@ Sits at **835 mm** from the datum, 150 mm out (est) — at the battery end of th
 
 10A ATC, Metri-Pack 630 sealed pull-to-seat holder - AT THE BATTERY END
 
-Sits at **835 mm** from the datum, 150 mm out (est) — at the battery positive post.
+**PDM, battery, regulator, 150 mm out.** Harness geometry: 835 mm from the datum, 150 mm out (est) — at the battery positive post.
+
+**Gender:** Fixed by the part - Metri-Pack 630 pull-to-seat, terminals into the holder.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -474,7 +629,9 @@ Sits at **835 mm** from the datum, 150 mm out (est) — at the battery positive 
 
 single conductor, case-grounding
 
-Sits at **400 mm** from the datum, 900 mm out (tape) — B01.4.
+**right bar, 900 mm out.** Harness geometry: 400 mm from the datum, 900 mm out (tape) — B01.4.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -484,7 +641,11 @@ Sits at **400 mm** from the datum, 900 mm out (tape) — B01.4.
 
 Sealed modular, 60 cavities on the 280 footprint
 
-Sits at **835 mm** from the datum, 0 mm out (tape) — B06 fan-out.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (tape) — B06 fan-out.
+
+**Gender:** Fixed by the part - MTA sealed 2.8mm terminals into the block's own cavities.
+
+**Way 1:** The part's own printed numbers, c1–c10 left to right FROM THE WIRE SIDE, top row first; cavity = (row−1)×10 + column. No keyway. See docs/pdm-cavity-map.md — and note that from the fuse side, the side facing you on the bike, c10 is on the LEFT.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -515,7 +676,9 @@ Sits at **835 mm** from the datum, 0 mm out (tape) — B06 fan-out.
 
 rear, frame mounted
 
-Sits at **650 mm** from the datum, 300 mm out (est) — rear brake switch, frame mounted.
+**brakes and condenser, 300 mm out.** Harness geometry: 650 mm from the datum, 300 mm out (est) — rear brake switch, frame mounted.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -526,7 +689,11 @@ Sits at **650 mm** from the datum, 300 mm out (est) — rear brake switch, frame
 
 stop switch + starter button
 
-Sits at **400 mm** from the datum, 160 mm out (tape) — B01.2.
+**right bar, 160 mm out.** Harness geometry: 400 mm from the datum, 160 mm out (tape) — B01.2.
+
+**Gender:** Harness side FEMALE, component side MALE - docs/connector-order.md, so a disconnected harness has no exposed live pin.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -538,7 +705,13 @@ Sits at **400 mm** from the datum, 160 mm out (tape) — B01.2.
 
 3-phase 35A SERIES type - see docs/part-selection.md
 
-Sits at **835 mm** from the datum, 200 mm out (est) — custom box where the old battery box was, with the PDM and battery - decided 17 Sep 2026.
+**PDM, battery, regulator, 200 mm out.** Harness geometry: 835 mm from the datum, 200 mm out (est) — custom box where the old battery box was, with the PDM and battery - decided 17 Sep 2026.
+
+⚠️ TWO HOUSINGS, one node here. Ways 1–3 (AC1/AC2/AC3) are the GREY Furukawa QLW-A-3F-GR; ways 4–5 (DC+/GND) are the BLACK QLW-A-B3F-B. Colour is the keying — it is what stops AC being plugged into DC. Each runs 2 of 3 ways and takes a cavity plug. ⚠️ Which cavity of the black housing is DC+ and which is GND is NOT RECORDED.
+
+**Gender:** Fixed by the part - the Furukawa QLW housings mate as sold, grey to grey and black to black. The 090 order convention does not reach this one.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -551,7 +724,9 @@ Sits at **835 mm** from the datum, 200 mm out (est) — custom box where the old
 
 front left - LED
 
-Sits at **0 mm** from the datum, 300 mm out (est) — front signal stalk.
+**the headlight junction (datum), 300 mm out.** Harness geometry: 0 mm from the datum, 300 mm out (est) — front signal stalk.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -562,7 +737,9 @@ Sits at **0 mm** from the datum, 300 mm out (est) — front signal stalk.
 
 front right - LED
 
-Sits at **0 mm** from the datum, 300 mm out (est) — front signal stalk.
+**the headlight junction (datum), 300 mm out.** Harness geometry: 0 mm from the datum, 300 mm out (est) — front signal stalk.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -573,7 +750,9 @@ Sits at **0 mm** from the datum, 300 mm out (est) — front signal stalk.
 
 rear left - LED
 
-Sits at **1360 mm** from the datum, 350 mm out (est) — B10 fan + rear signal stalk.
+**the tail fan, where the trunk ends, 350 mm out.** Harness geometry: 1360 mm from the datum, 350 mm out (est) — B10 fan + rear signal stalk.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -584,7 +763,9 @@ Sits at **1360 mm** from the datum, 350 mm out (est) — B10 fan + rear signal s
 
 rear right - LED
 
-Sits at **1360 mm** from the datum, 350 mm out (est) — B10 fan + rear signal stalk.
+**the tail fan, where the trunk ends, 350 mm out.** Harness geometry: 1360 mm from the datum, 350 mm out (est) — B10 fan + rear signal stalk.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -593,7 +774,9 @@ Sits at **1360 mm** from the datum, 350 mm out (est) — B10 fan + rear signal s
 
 ### `SM` — Starter motor
 
-Sits at **835 mm** from the datum, 400 mm out (est) — starter motor terminal.
+**PDM, battery, regulator, 400 mm out.** Harness geometry: 835 mm from the datum, 400 mm out (est) — starter motor terminal.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -601,7 +784,11 @@ Sits at **835 mm** from the datum, 400 mm out (est) — starter motor terminal.
 
 ### `SOL` — Starter relay
 
-Sits at **835 mm** from the datum, 100 mm out (tape) — B06.1 / B06.2 relay leads.
+**PDM, battery, regulator, 100 mm out.** Harness geometry: 835 mm from the datum, 100 mm out (tape) — B06.1 / B06.2 relay leads.
+
+**Gender:** Forced by the relay: its Y/R lead is a FEMALE bullet and its BK a MALE one, so the harness side is Y/R male and BK female — the one place a harness-side pin is male. See #65.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -614,7 +801,7 @@ Sits at **835 mm** from the datum, 100 mm out (tape) — B06.1 / B06.2 relay lea
 
 brake lamp feed - two switches, one lamp
 
-Sits at **650 mm** from the datum, 0 mm out (est) — B04 breakout, B04.2 blue merge.
+**brakes and condenser.** Harness geometry: 650 mm from the datum, 0 mm out (est) — B04 breakout, B04.2 blue merge.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -626,7 +813,7 @@ Sits at **650 mm** from the datum, 0 mm out (est) — B04 breakout, B04.2 blue m
 
 brake switch feed - 1 to 2
 
-Sits at **650 mm** from the datum, 0 mm out (est) — B04 breakout.
+**brakes and condenser.** Harness geometry: 650 mm from the datum, 0 mm out (est) — B04 breakout.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -638,7 +825,7 @@ Sits at **650 mm** from the datum, 0 mm out (est) — B04 breakout.
 
 signal ground bus - 18 returns, parallel splices - PDM GROUP FIRST, THE REST TBD
 
-Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (est) — beside the PDM.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -667,7 +854,7 @@ Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
 
 headlamp supply - feeds both beam relay commons
 
-Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM - F5 out to both beam relays.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (est) — beside the PDM - F5 out to both beam relays.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -679,7 +866,7 @@ Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM - F5 out to
 
 high-beam net - lamp plus indicator
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -691,7 +878,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 always-hot bus - 1 in, 4 out
 
-Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (est) — beside the PDM.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -705,7 +892,7 @@ Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
 
 instrument feed - 1 to 2
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -717,7 +904,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 meter lamp feed - 1 to 2
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -729,7 +916,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 relay coil supply - F11 out, 1 to 2
 
-Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (est) — beside the PDM.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -741,7 +928,7 @@ Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
 
 left turn net - 1 to 3
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -754,7 +941,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 right turn net - 1 to 3
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -767,7 +954,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 switched bus - 1 in, 8 out - FUSE INPUTS ONLY
 
-Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
+**PDM, battery, regulator.** Harness geometry: 835 mm from the datum, 0 mm out (est) — beside the PDM.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -785,7 +972,7 @@ Sits at **835 mm** from the datum, 0 mm out (est) — beside the PDM.
 
 tail / park net
 
-Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
+**the headlight junction (datum).** Harness geometry: 0 mm from the datum, 0 mm out (tape) — in the shell.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -796,7 +983,7 @@ Sits at **0 mm** from the datum, 0 mm out (tape) — in the shell.
 
 Y/R coil feed - EI TAP POINT
 
-Sits at **460 mm** from the datum, 140 mm out (tape) — B03.
+**coil splice, under the tank, 140 mm out.** Harness geometry: 460 mm from the datum, 140 mm out (tape) — B03.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -808,7 +995,9 @@ Sits at **460 mm** from the datum, 140 mm out (tape) — B03.
 
 tail / brake - LED
 
-Sits at **1360 mm** from the datum, 250 mm out (est) — B10 fan + tail lamp lead.
+**the tail fan, where the trunk ends, 250 mm out.** Harness geometry: 1360 mm from the datum, 250 mm out (est) — B10 fan + tail lamp lead.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
@@ -820,7 +1009,9 @@ Sits at **1360 mm** from the datum, 250 mm out (est) — B10 fan + tail lamp lea
 
 12V in - part not selected
 
-Sits at **400 mm** from the datum, 800 mm out (est) — NOT PLACED (#64) - cut for the handlebar, the longest case; trim if it lands under the seat.
+**right bar, 800 mm out.** Harness geometry: 400 mm from the datum, 800 mm out (est) — NOT PLACED (#64) - cut for the handlebar, the longest case; trim if it lands under the seat.
+
+⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
 | In | Wire | Colour | Gauge | Comes from |
 |---|---|---|---|---|
