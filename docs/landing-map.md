@@ -48,7 +48,7 @@ Every node a wire lands on. `Where` is mm from the headlight datum, then mm out 
 | `SIG_RL` | Turn signal — rear left<br>*B10 fan + rear signal stalk* | 1360 mm, 350 out | est | 2 |
 | `SIG_RR` | Turn signal — rear right<br>*B10 fan + rear signal stalk* | 1360 mm, 350 out | est | 2 |
 | `SM` | Starter motor<br>*starter motor terminal* | 835 mm, 400 out | est | 1 |
-| `SOL` | Starter relay<br>*B06.1 / B06.2 relay leads* | 835 mm, 100 out | tape | 4 |
+| `SOL` | Starter relay — generic aftermarket replacement<br>*B06.1 / B06.2 relay leads* | 835 mm, 100 out | tape | 4 |
 | `SP_BRAKE` | Splice — brake lamp feed — form and crimp order in the cut list<br>*B04 breakout, B04.2 blue merge* | 650 mm, 0 out | est | 3 |
 | `SP_BRK_FEED` | Splice — brake switch feed — form and crimp order in the cut list<br>*B04 breakout* | 650 mm, 0 out | est | 3 |
 | `SP_GND` | Splice — signal ground bus — form and crimp order in the cut list<br>*beside the PDM* | 835 mm, 0 out | est | 20 |
@@ -148,7 +148,7 @@ Only where the model names a terminal. Everything else takes the sealed 090 term
 | `NSW` | GY | 16 AWG | `INSTR_6P` Junction | 4 — NEUTRAL SW | `NSW` Neutral switch | 1 — SIGNAL |
 | `POD_GND` | BK | 16 AWG | `INSTR_6P` Junction | 6 — POD GND | `SP_GND` Splice | way 1 |
 | `RH_IN` | YE | 16 AWG | `PDM` MTA 0301370 | c7 r2 (F2 OUT) | `RH` Right bar cluster | 1 — STOP IN (Br) |
-| `RH_OUT` | YE | 16 AWG | `RH` Right bar cluster | 3 — START OUT (BK) | `SOL` Starter relay | 3 — COIL+ |
+| `RH_OUT` | YE | 16 AWG | `RH` Right bar cluster | 3 — START OUT (BK) | `SOL` Starter relay | 3 — COIL+ (YE spade) |
 | `RLY_PWR` | BG | 16 AWG | `PDM` MTA 0301370 | c9 r4 (F11 OUT) | `SP_RLY` Splice | way 1 |
 | `RR_BATT` | RD | 12 AWG | `BATT` Battery | 1 — POS | `MF_RR` MP630 1214 ATC Set | 2 — OUT |
 | `RR_GND` | BK | 12 AWG | `GND` Star ground point | 2 — RR RETURN | `RR` Shindengen SH775 | 5 — GND |
@@ -782,11 +782,13 @@ rear right - LED
 |---|---|---|---|---|
 | 1 — POS | `SOL_SM` | RD | 6 AWG | `SOL` Starter relay |
 
-### `SOL` — Starter relay
+### `SOL` — Starter relay — generic aftermarket replacement
+
+generic aftermarket replacement - 2x M6 post, 2x 6.3 mm male spade
 
 **PDM, battery, regulator, 100 mm out.** Harness geometry: 835 mm from the datum, 100 mm out (tape) — B06.1 / B06.2 relay leads.
 
-**Gender:** Forced by the relay: its Y/R lead is a FEMALE bullet and its BK a MALE one, so the harness side is Y/R male and BK female — the one place a harness-side pin is male. See #65.
+**Gender:** Forced by the replacement solenoid: its two coil terminals are 6.3 mm MALE spades, so the harness side is two FEMALE 6.3 mm receptacles. NOT bullets. The stock part's bullets, and the male harness pin they forced, retired with it [bench 23 Oct 2026].
 
 ⚠️ **Way 1 is not anchored** — the numbering below is this model's list order, not a physical feature of the part. Fix it to something visible before crimping.
 
@@ -795,7 +797,7 @@ rear right - LED
 | 1 — BAT STUD | `BAT_SOL` | RD | 6 AWG | `BATT` Battery |
 | 1 — BAT STUD | `MAIN_IN` | RD | 12 AWG | `MF` MP630 1214 ATC Set |
 | 2 — MOTOR STUD | `SOL_SM` | RD | 6 AWG | `SM` Starter motor |
-| 3 — COIL+ | `RH_OUT` | YE | 16 AWG | `RH` Right bar cluster |
+| 3 — COIL+ (YE spade) | `RH_OUT` | YE | 16 AWG | `RH` Right bar cluster |
 
 ### `SP_BRAKE` — Splice — brake lamp feed
 

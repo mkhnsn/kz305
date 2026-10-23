@@ -41,16 +41,37 @@
 #      third choice. See issue #54.
 #      Until it closes, the GND bus way count is a guess and the PDM
 #      circuit count is not final.
+#      ✅ THE LANDING ITSELF IS DECIDED 23 Oct 2026, and the choice is
+#      WIRE rather than abrasion: EVERY ground comes back to one frame
+#      point. Its form is TWO M6 SCREW LANDINGS SIDE BY SIDE with STAR
+#      WASHERS, and MOST returns are combined upstream in a PARALLEL
+#      SPLICE terminating in a SINGLE RING. That settles the "form TBD"
+#      against the GND node's SIGNAL BUS landing.
+#      ⚠️ THE COUNT IS STILL OPEN, and there is now a reconciliation
+#      with it: this node is drawn with FOUR landings (#44, 6 Sep)
+#      against TWO screws in metal, so which rings stack on which screw
+#      has to be stated before anything is torqued. The heavy returns
+#      may not share a signal junction - see the GND note.
 #
-#   3. THE STARTER RELAY COIL - RELAY SIDE CLOSED 11 Sep 2026, HARNESS
-#      SIDE OPEN. Metered: 3.2 ohm Y/R to BK, both leads open to both
-#      studs and to the case, rubber-mounted. The coil FLOATS - there is
-#      no ground at the relay, so W_SOL_GND does not exist and MUST NOT
-#      BE BUILT. Bench call: Y/R = COIL+, BK = COIL-. What is still open
-#      is the far end of Y/R Net 2 (B06.1), the coil's other side: live
-#      feed or earth. Until that is found the trigger cannot be drawn
-#      and the diode (#46) cannot be oriented. The SOL way numbers below
-#      are still the diagram's, not the part's.
+#   3. RESOLVED 23 Oct 2026 - THE SOLENOID HAS BEEN REPLACED, AND THAT
+#      IS WHAT CLOSES THIS. A generic aftermarket unit is fitted and
+#      wired: TWO M6 POSTS and TWO 6.3 mm MALE SPADE coil terminals,
+#      coil NOT polarized and with NO internal suppression.
+#      The YELLOW spade is the trigger (COIL+) and the BLACK spade goes
+#      to FRAME GROUND (COIL-), so the coil's return is settled BY
+#      CONSTRUCTION rather than by tracing a wire. W_SOL_GND IS REAL
+#      AND BUILDABLE - the FLOATS claim belonged to the stock part.
+#      THE DIODE (#46) IS NOW ORIENTABLE - cathode to the yellow spade.
+#      SOL'S HARNESS-SIDE GENDER INVERTS. Two male spades on the part
+#      means two FEMALE 6.3 mm receptacles on the harness, not bullets,
+#      and SOL stops being the one place a harness pin is male.
+#      WHAT CARRIES OVER AS OPEN, blocking nothing here:
+#        - the new coil's RESISTANCE is not metered. 3.2 ohm / ~3.75 A
+#          belongs to the part that came off, and the K_START argument
+#          below rests on that number.
+#        - Y/R Net 2 (B06.1) is UNIDENTIFIED AGAIN. The gender-complement
+#          inference that named it the coil feed read the stock part's
+#          bullets, and is withdrawn with the part. [OPEN]
 #
 #   4. RESOLVED 3 Sep 2026 - THE STOCK ACCESSORY CIRCUIT IS NOT
 #      REPRODUCED, and a USB-C PD charger replaces it.
@@ -90,8 +111,9 @@
 #
 #   DESIGN DECISIONS AWAITING A CALL were filed as issues #44-#55 and
 #   are deliberately not resolved in this file. As of 10 Sep 2026 the
-#   open ones are #45 #47 #48 #52 #53 #55, plus #46 narrowed to the
-#   solenoid; #44 #49 #50 #51 #54 are closed.
+#   open ones are #45 #47 #48 #52 #53 #55; #44 #49 #50 #51 #54 are
+#   closed. #46 is ANSWERED as of 23 Oct 2026 - cathode to the yellow
+#   spade - and closes when the diode is physically fitted.
 # ---------------------------------------------------------------------
 #
 # ---------------------------------------------------------------------
@@ -229,7 +251,9 @@ connectors:
         1 BATT NEG      6 AWG, direct
         2 RR RETURN     12 AWG, direct - see below
         3 ENGINE STRAP  6 AWG, direct. Carries the WHOLE CRANKING RETURN, well over 100A
-        4 SIGNAL BUS    the lead up from SP_GND, which collects the eighteen signal returns - form TBD
+        4 SIGNAL BUS    the lead up from SP_GND, which collects the eighteen signal returns.
+                        ** FORM SETTLED 23 Oct 2026 ** - a PARALLEL SPLICE terminating in a SINGLE
+                        RING, which is how the frame point is actually built.
       ** THE HEAVY RETURNS NEVER TOUCH A CONNECTOR. ** No 090 or 250 junction is rated for a tenth of
       cranking current. These are bolted, and the bolt IS the star point.
       ⚠️ W_RR_GND IS TREATED AS HEAVY, and that was not obvious. It is 12 AWG carrying the charging
@@ -238,6 +262,17 @@ connectors:
       ⚠️ THE FRAME IS ALREADY POWDER COATED, so this is a bare-metal plate or a scraped landing, NOT
       "the frame". Acceptance is 0.0-0.1 ohm REL-zeroed on a Fluke 87V, which is the meter's floor -
       treat it as pass/fail, not a measurement.
+      ** THE POINT IS BUILT, 23 Oct 2026 - TWO M6 SCREW LANDINGS SIDE BY SIDE, STAR WASHERS, and
+      every ground in the harness comes back to it. ** Most returns are combined upstream in the
+      parallel splice above and arrive as one ring.
+      ⚠️ FOUR LANDINGS AGAINST TWO SCREWS. The duty split below is still right and still forced by
+      current, but it is a split of RINGS, not of screws, and the hardware has two. WHICH RINGS
+      STACK ON WHICH SCREW IS NOT RECORDED, and it is not free to choose - BATT NEG and ENGINE
+      STRAP are 6 AWG and ENGINE STRAP carries the whole cranking return. Say it before anything is
+      torqued, and keep the signal ring off whichever screw takes the cranking return. [OPEN]
+      ✅ WIRE, NOT ABRASION - decided in the metal. Blocker 2 left that as a choice of two; every
+      mounting-earthed component gets a lead back to this point rather than a scraped landing of its
+      own. The COUNT of those components is still blocker 2.
 
   MF:
     <<: *main_fuse
@@ -601,6 +636,27 @@ connectors:
 
   SOL:
     <<: *starter_relay
+    subtype: generic aftermarket replacement - 2x M6 post, 2x 6.3 mm male spade
+    pinlabels: [BAT STUD, MOTOR STUD, COIL+ (YE spade), COIL- (BK spade)]
+    notes: |-
+      ** THE STOCK SOLENOID HAS BEEN REPLACED ** [bench 23 Oct 2026]. This entry OVERRIDES the
+      starter_relay template in kz305-common.yml, which is kept as the STOCK part's record for the
+      factory model. Nothing on this part is a bullet.
+      THE PART - two M6 posts and two 6.3 mm MALE spades out of the top. No MPN recorded.
+      COIL IS NOT POLARIZED and has NO INTERNAL SUPPRESSION, read both ways at the bench. It still
+      needs the discrete 1N4004 of #46, CATHODE TO THE YELLOW SPADE.
+      AS WIRED - way 1 (post) carries the 6 AWG from the battery AND the always-hot tap that feeds
+      the main fuses, which is W_MAIN_IN below. Way 2 (post) is 6 AWG to the starter motor. Way 3 is
+      the YELLOW trigger spade, way 4 the BLACK spade to frame ground.
+      ** THE COIL EARTHS AT THE RELAY. ** W_SOL_GND is real, which is the reverse of the stock part.
+      ** THE MELTED GAUGE STEP IS GONE BY CONSTRUCTION. ** The stock failure was a conductor-size
+      step at a BULLET two connections from the battery, off this same stud. The main-fuse feed is
+      now a second M6 RING on way 1.
+      ⚠️ COIL RESISTANCE NOT TAKEN on this part. 3.2 ohm and ~3.75 A are the part that came off,
+      and the K_START argument in the header rests on that figure. Meter it. [OPEN]
+      ⚠️ WAY NUMBERS ARE THE DRAWING'S. They match how the part is wired, but no moulded mark has
+      been read off the housing. [OPEN]
+      HARNESS SIDE IS TWO FEMALE 6.3 mm RECEPTACLES. Not bullets - see docs/part-selection.md.
   SM:
     <<: *starter_motor
   ALT:
@@ -1287,13 +1343,13 @@ cables:
     <<: *w16
     colors: [BK]
     notes: |-
-      ⛔ ** DO NOT BUILD THIS CONNECTION. ** It was drawn on the claim that the relay's COIL- grounds
-      directly, which is WITHDRAWN - the assembly has exactly TWO small leads, Y/R and BK, BOTH ENDING
-      IN BULLETS INTO THE HARNESS, with no ring, eyelet or anything that lands on engine or frame
-      [bench 2 Sep 2026]. See the starter_relay note in kz305-common.yml.
-      LEFT DRAWN rather than deleted because there is no positive account of what replaces it, and
-      deleting it would assert the coil has no return, which is also false. The meter settles it -
-      blocker 3. [OPEN]
+      ✅ BUILDABLE AS OF 23 Oct 2026. The solenoid has been replaced and the new part's BLACK spade
+      goes to FRAME GROUND, so the coil return is a real wire and a real Net B earth point.
+      This wire carried a DO NOT BUILD from 2 Sep to 23 Oct, on the stock assembly's two bullet
+      leads reaching no earth at all. That claim retires with the part it described.
+      IT LANDS ON SP_GND, the signal bus, not on a bolted heavy landing. ⚠️ CONFIRM THAT ONCE THE
+      NEW COIL IS METERED - at the stock coil's 3.75 A this is the largest single current on an
+      eighteen-way parallel splice, and a materially stiffer coil reopens the question.
   # --- horn, relayed -------------------------------------------------
   W_HORN_COIL:
     <<: *w16

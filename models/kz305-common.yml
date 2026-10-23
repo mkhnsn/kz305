@@ -287,7 +287,13 @@ templates:
       ⚠️ WHERE THE COIL'S RETURN GOES IS NOT KNOWN, and which lead is which is not known. Ground-side
       switching would fit the metered Push = Y/R to BK, but Y/R Net 2 is OPEN to the bar's Y/R, so
       they are not one wire and the loop does not close on present evidence. Needs the meter. Do not
-      redraw the circuit until it does. [OPEN]
+      redraw the circuit until it does.
+      ⛔ ** THIS WHOLE TEMPLATE IS THE STOCK PART'S RECORD. ** The solenoid was REPLACED with a
+      generic aftermarket unit on or before 23 Oct 2026 - two M6 posts and two 6.3 mm MALE spades,
+      no bullets, coil NOT polarized, and its BK spade earthed to the frame. The rebuild's SOL
+      OVERRIDES this entry; the factory model keeps it because the factory model describes the bike
+      as Kawasaki built it. The FLOATS claim and the gender-complement inference above are true of
+      the stock part only - both are retired for the rebuild. See measurements/starter-relay.md.
 
   starter_motor: &starter_motor
     type: Starter motor
