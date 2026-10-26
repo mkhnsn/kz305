@@ -7,7 +7,7 @@ stock is a visible diff rather than an accident:
 | Model | What it is |
 |---|---|
 | `models/factory/*.yml` | The **as-built** factory harness, split by subsystem. Reference only — nothing gets built from it. Carries no wire lengths by design, so it renders without a BOM. |
-| `models/kz305-rebuild.yml` | The **replacement** harness actually being built. DRAFT — see its header for open blockers. |
+| `models/kz305-rebuild.yml` | The **replacement** harness, as built and fitted in October 2026. Its design history is under `archive/`. |
 
 `models/kz305-common.yml` holds the shared part library (connector and cable
 definitions as YAML anchors) so the two models can never disagree about what a

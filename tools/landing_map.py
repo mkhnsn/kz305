@@ -59,9 +59,8 @@ RELAY_ORIENT = ("Pin numbers are moulded into the relay (30 / 85 / 86 / 87). Its
 # (docs/connector-order.md). These are where a RETAINED part fixes the gender
 # instead, so the convention does not hold and the harness side is forced.
 GENDER_FORCED = {
-    "SOL": "Forced by the relay: its Y/R lead is a FEMALE bullet and its BK a MALE one, so the "
-           "harness side is Y/R male and BK female — the one place a harness-side pin is male. "
-           "See #65.",
+    "SOL": "Forced by the relay: the Cyleto solenoid carries a 2-pin coil plug, so the harness "
+           "side mates that plug.",
     "ALT": "Bullets on the stator's own stub; gender NOT RECORDED (#65).",
     "CAP_L": "The condenser bracket's pigtail ends in MALE bullets, so the harness side is female.",
     "CAP_R": "The condenser bracket's pigtail ends in MALE bullets, so the harness side is female.",

@@ -10,18 +10,19 @@ Positions are `tools/cut_list.py`'s `POSITIONS`, so this cannot drift from the c
 
 ## The trunk
 
-**Peak: 34 conductors between 730 and 835 mm** — immediately before the PDM breakout, where everything from the front and the bars has gathered and nothing has left yet. The trunk is thickest at its back end, not its front.
+**Peak: 33 conductors between 730 and 835 mm** — immediately before the PDM breakout, where everything from the front and the bars has gathered and nothing has left yet. The trunk is thickest at its back end, not its front.
 
 | From | To | Conductors | Area mm² | Est. OD | Sleeve |
 |---|---|---|---|---|---|
-| 0 | 400 | **20** | 77 | 11.4 mm | 1/2" |
-| 400 | 430 | **26** | 100 | 13.0 mm | 1/2" |
-| 430 | 460 | **30** | 115 | 14.0 mm | 3/4" |
-| 460 | 650 | **31** | 119 | 14.2 mm | 3/4" |
-| 650 | 730 | **32** | 123 | 14.4 mm | 3/4" |
-| 730 | 835 | **34** | 134 | 15.1 mm | 3/4" |
-| 835 | 880 | **10** | 38 | 8.1 mm | 1/4" |
-| 880 | 1360 | **7** | 27 | 6.8 mm | 1/4" |
+| 0 | 370 | **16** | 61 | 10.2 mm | 1/2" |
+| 370 | 400 | 27 | ? | ? | ? |
+| 400 | 430 | 29 | ? | ? | ? |
+| 430 | 460 | 31 | ? | ? | ? |
+| 460 | 650 | 32 | ? | ? | ? |
+| 650 | 730 | 31 | ? | ? | ? |
+| 730 | 835 | 33 | ? | ? | ? |
+| 835 | 880 | **8** | 31 | 7.2 mm | 1/4" |
+| 880 | 1360 | **5** | 19 | 5.7 mm | 1/4" |
 
 ### Against the order
 
@@ -30,8 +31,8 @@ Trunk only — the branch drops are almost all 1/4" and are counted in `docs/pro
 | Sleeve | Trunk run | Ordered | |
 |---|---|---|---|
 | 1/4" | 525 mm (1.7 ft) | 35 ft | ✅ |
-| 1/2" | 430 mm (1.4 ft) | 10 ft | ✅ |
-| 3/4" | 405 mm (1.3 ft) | 10 ft | ✅ |
+| 1/2" | 370 mm (1.2 ft) | 10 ft | ✅ |
+| 3/4" | 0 mm (0.0 ft) | 10 ft | ✅ |
 
 ⚠️ **This splits the front differently from that document**, which put the whole front on 3/4". The bundle does not reach 3/4" until the right bar joins it at 400 mm: datum to right bar is 20 conductors, which is 1/2" work. Sleeving it 3/4" would leave the headlight run loose in its sleeve.
 
@@ -41,12 +42,13 @@ Wires are listed at **both** ends, so a wire from the headlight shell to the PDM
 
 ### 0 mm — the headlight junction (datum)
 
-31 conductors across 14 nodes.
+33 conductors across 15 nodes.
 
 | Node | Off trunk | Basis | Conductors | Wires |
 |---|---|---|---|---|
 | `FBRK` | 100 mm | tape | 2 | `BRK_FEED_F`, `BRK_OUT_F` |
 | `HEAD` | 100 mm | tape | 3 | `HEAD_GND`, `HEAD_HI2`, `HEAD_LO` |
+| `HS_GND` | 50 mm | est | 8 | `GND_SIG_FL`, `GND_SIG_FR`, `GND_SPD`, `GND_TAC`, `HEAD_GND`, `HS_GND`, `LH_GND`, `POD_GND` |
 | `IGN` | 100 mm | tape | 4 | `IGN_FEED`, `IGN_RET`, `TAIL_FEED`, `TAIL_OUT` |
 | `INSTR_6P` | 100 mm | tape | 6 | `IND_HB`, `IND_L`, `IND_N_FEED`, `IND_R`, `NSW`, `POD_GND` |
 | `LAMP_SPD` | 250 mm | est | 2 | `GND_SPD`, `MTR_SPD` |
@@ -59,6 +61,14 @@ Wires are listed at **both** ends, so a wire from the headlight shell to the PDM
 | `SP_SIG_L` | 0 mm | tape | 4 | `IND_L`, `SIG_FL`, `SIG_L`, `SIG_RL` |
 | `SP_SIG_R` | 0 mm | tape | 4 | `IND_R`, `SIG_FR`, `SIG_R`, `SIG_RR` |
 | `SP_TAIL` | 0 mm | tape | 2 | `TAIL_OUT`, `TAIL_RUN` |
+
+### 370 mm — GND
+
+13 conductors across 1 node.
+
+| Node | Off trunk | Basis | Conductors | Wires |
+|---|---|---|---|---|
+| `GND` | 100 mm | est | 13 | `CAP_GND`, `ENG_GND`, `FLASH_GND`, `GND_TAIL`, `HORN_GND`, `HS_GND`, `KHI_GND`, `KLO_GND`, `KMAIN_GND`, `K_GND`, `RR_GND`, `SOL_GND`, `USB_GND` |
 
 ### 400 mm — right bar
 
@@ -106,17 +116,16 @@ Wires are listed at **both** ends, so a wire from the headlight shell to the PDM
 
 | Node | Off trunk | Basis | Conductors | Wires |
 |---|---|---|---|---|
-| `ALT` | 320 mm | tape | 2 | `ALT_A`, `ALT_B` |
+| `ALT_SVC` | 200 mm | est | 2 | `ALT_A`, `ALT_B` |
 
 ### 835 mm — PDM, battery, regulator
 
-70 conductors across 20 nodes.
+55 conductors across 18 nodes.
 
 | Node | Off trunk | Basis | Conductors | Wires |
 |---|---|---|---|---|
-| `BATT` | 150 mm | tape | 4 | `BAT_GND`, `BAT_SOL`, `RR_BATT`, `TDR_HOT` |
-| `GND` | 200 mm | est | 5 | `BAT_GND`, `ENG_GND`, `GND_MAIN_A`, `GND_MAIN_B`, `RR_GND` |
-| `GND_ENG` | 400 mm | est | 1 | `ENG_GND` |
+| `BATT` | 150 mm | tape | 2 | `BAT_GND`, `BAT_SOL` |
+| `GND_ENG` | 400 mm | est | 2 | `BAT_GND`, `ENG_GND` |
 | `K_COIL` | 0 mm | tape | 4 | `COIL_PWR`, `K_GND`, `YR_OUT`, `YR_TRIG` |
 | `K_HI` | 0 mm | tape | 4 | `HEAD_HI`, `HI_PWR`, `HI_TRIG`, `KHI_GND` |
 | `K_HORN` | 0 mm | tape | 4 | `HORN_COIL`, `HORN_FEED`, `HORN_PWR`, `HORN_SW` |
@@ -128,8 +137,7 @@ Wires are listed at **both** ends, so a wire from the headlight shell to the PDM
 | `PDM` | 0 mm | tape | 22 | `BRK_FEED`, `COIL_PWR`, `FLASH_IN`, `HEAD_SUPPLY`, `HORN_PWR`, `HOT_F1`, `HOT_F4`, `HOT_F5`, `IGN_FEED`, `INSTR_FEED`, `RH_IN`, `RLY_PWR`, `SW_F10`, `SW_F11`, `SW_F2`, `SW_F3`, `SW_F6`, `SW_F7`, `SW_F8`, `SW_F9`, `TAIL_FEED`, `USB_FEED` |
 | `RR` | 200 mm | est | 4 | `ALT_A`, `ALT_B`, `RR_GND`, `RR_OUT` |
 | `SM` | 400 mm | est | 1 | `SOL_SM` |
-| `SOL` | 100 mm | tape | 4 | `BAT_SOL`, `MAIN_IN`, `RH_OUT`, `SOL_SM` |
-| `SP_GND` | 0 mm | est | 20 | `CAP_GND`, `FLASH_GND`, `GND_MAIN_A`, `GND_MAIN_B`, `GND_SIG_FL`, `GND_SIG_FR`, `GND_SIG_RL`, `GND_SIG_RR`, `GND_SPD`, `GND_TAC`, `GND_TAIL`, `HEAD_GND`, `HORN_GND`, `KHI_GND`, `KLO_GND`, `KMAIN_GND`, `K_GND`, `LH_GND`, `POD_GND`, `USB_GND` |
+| `SOL` | 100 mm | tape | 7 | `BAT_SOL`, `MAIN_IN`, `RH_OUT`, `RR_BATT`, `SOL_GND`, `SOL_SM`, `TDR_HOT` |
 | `SP_HEAD` | 0 mm | est | 3 | `HEAD_SUPPLY`, `HI_PWR`, `LO_PWR` |
 | `SP_HOT` | 0 mm | est | 5 | `HOT_F1`, `HOT_F4`, `HOT_F5`, `MAIN_OUT`, `MAIN_SW_FEED` |
 | `SP_RLY` | 0 mm | est | 3 | `DIM_COMMON`, `HORN_COIL`, `RLY_PWR` |
@@ -145,11 +153,9 @@ Wires are listed at **both** ends, so a wire from the headlight shell to the PDM
 
 ### 1360 mm — the tail fan, where the trunk ends
 
-7 conductors across 3 nodes.
+5 conductors across 1 node.
 
 | Node | Off trunk | Basis | Conductors | Wires |
 |---|---|---|---|---|
-| `SIG_RL` | 350 mm | est | 2 | `GND_SIG_RL`, `SIG_RL` |
-| `SIG_RR` | 350 mm | est | 2 | `GND_SIG_RR`, `SIG_RR` |
-| `TAIL` | 250 mm | est | 3 | `BRAKE`, `GND_TAIL`, `TAIL_RUN` |
+| `TAIL_6P` | 100 mm | est | 5 | `BRAKE`, `GND_TAIL`, `SIG_RL`, `SIG_RR`, `TAIL_RUN` |
 

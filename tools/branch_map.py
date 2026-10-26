@@ -107,7 +107,7 @@ def bundle_od(members):
 
 def wire_spans(doc):
     """name -> (trunk_lo, trunk_hi, [nodes], gauge, colour) for every wire that
-    gets built. Retained pigtails and the withdrawn W_SOL_GND are left out -
+    gets built. Retained pigtails and the tail-end harness are left out -
     they are not wire this harness cuts."""
     cables = doc["cables"]
     cable_ends = cl.ends(doc)

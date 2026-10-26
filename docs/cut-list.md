@@ -31,16 +31,16 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | c3 r5 (K_COIL 86) | `W_YR_TRIG` | GY | 16 AWG | RH | 595 | **1100** | tape |
 | c3 r6 (K_COIL 87) | `W_YR_OUT` | YE | 16 AWG | SP_YR | 515 | **1050** | tape |
 | c4 r1 (K_MAIN 30) | `W_MAIN_SW_FEED` | WH | 14 AWG | SP_HOT | 0 | **300** | est |
-| c4 r2 (K_MAIN 85) | `W_KMAIN_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c4 r2 (K_MAIN 85) | `W_KMAIN_GND` | BK | 16 AWG | GND | 565 | **1100** | est |
 | c4 r3 (K_HI 30) | `W_HI_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
-| c4 r4 (K_HI 85) | `W_KHI_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
-| c4 r6 (K_COIL 85) | `W_K_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c4 r4 (K_HI 85) | `W_KHI_GND` | BK | 16 AWG | GND | 565 | **1100** | est |
+| c4 r6 (K_COIL 85) | `W_K_GND` | BK | 16 AWG | GND | 565 | **1100** | est |
 | c5 r1 (K_LO 86) | `W_LO_TRIG` | GN | 16 AWG | LH | 605 | **1150** | tape |
 | c5 r2 (K_LO 87) | `W_HEAD_LO` | GN | 16 AWG | HEAD | 935 | **1450** | tape |
 | c5 r5 (K_HORN 86) | `W_HORN_COIL` | GY | 16 AWG | SP_RLY | 0 | **300** | est |
 | c5 r6 (K_HORN 87) | `W_HORN_FEED` | BG | 16 AWG | HORN | 695 | **1200** | tape |
 | c6 r1 (K_LO 30) | `W_LO_PWR` | BU | 16 AWG | SP_HEAD | 0 | **300** | est |
-| c6 r2 (K_LO 85) | `W_KLO_GND` | BK | 16 AWG | SP_GND | 0 | **300** | est |
+| c6 r2 (K_LO 85) | `W_KLO_GND` | BK | 16 AWG | GND | 565 | **1100** | est |
 | c6 r6 (K_HORN 85) | `W_HORN_SW` | YE | 16 AWG | LH | 605 | **1150** | tape |
 | c7 r1 (F2 IN) | `W_SW_F2` | BG | 16 AWG | SP_SW | 0 | **300** | est |
 | c7 r2 (F2 OUT) | `W_RH_IN` | YE | 16 AWG | RH | 595 | **1100** | tape |
@@ -61,20 +61,29 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 
 ## Everything else — cut when the near end is terminated
 
-51 wires. Same rule: cut to this, crimp the near end, trim the far end on the bike.
-
-⚠️ **`TBD (≤N)` — do not cut.** Every return into `SP_GND` from outside the PDM is held until the ground grouping and landing are decided. N is the longest case, a run all the way back to the PDM.
+50 wires. Same rule: cut to this, crimp the near end, trim the far end on the bike.
 
 | Wire | Colour | Gauge | From | To | Route | **Cut** | Basis |
 |---|---|---|---|---|---|---|---|
-| `W_RR_BATT` | RD | 12 AWG | BATT | MF_RR | 300 | **800** | est |
 | `W_COIL_L` | YE | 16 AWG | COIL_L | SP_YR | 440 | **950** | est |
 | `W_COIL_R` | YE | 16 AWG | COIL_R | SP_YR | 440 | **950** | est |
 | `W_BRK_FEED_F` | BG | 16 AWG | FBRK | SP_BRK_FEED | 750 | **1250** | est |
-| `W_GND_MAIN_A` | BK | 16 AWG | GND | SP_GND | 200 | **TBD (≤700)** | est |
-| `W_GND_MAIN_B` | BK | 16 AWG | GND | SP_GND | 200 | **TBD (≤700)** | est |
-| `W_RR_GND` | BK | 12 AWG | GND | RR | 400 | **900** | est |
+| `W_CAP_GND` | BK | 16 AWG | GND | CAP_L | 680 | **1200** | est |
+| `W_ENG_GND` | BK | 12 AWG | GND | GND_ENG | 965 | **1500** | est |
+| `W_FLASH_GND` | BK | 16 AWG | GND | FLASHER | 710 | **1250** | est |
+| `W_HORN_GND` | BK | 16 AWG | GND | HORN | 390 | **900** | est |
+| `W_HS_GND` | BK | 16 AWG | GND | HS_GND | 520 | **1050** | est |
+| `W_RR_GND` | BK | 12 AWG | GND | RR | 765 | **1300** | est |
+| `W_SOL_GND` | BK | 16 AWG | GND | SOL | 665 | **1200** | est |
+| `W_USB_GND` | BK | 16 AWG | GND | USB | 930 | **1450** | est |
 | `W_HEAD_HI2` | BU | 16 AWG | HEAD | SP_HI | 100 | **600** | tape |
+| `W_GND_SIG_FL` | BK | 16 AWG | HS_GND | SIG_FL | 350 | **850** | est |
+| `W_GND_SIG_FR` | BK | 16 AWG | HS_GND | SIG_FR | 350 | **850** | est |
+| `W_GND_SPD` | BK | 16 AWG | HS_GND | LAMP_SPD | 300 | **800** | est |
+| `W_GND_TAC` | BK | 16 AWG | HS_GND | LAMP_TAC | 300 | **800** | est |
+| `W_HEAD_GND` | BK | 16 AWG | HS_GND | HEAD | 150 | **650** | est |
+| `W_LH_GND` | BK | 16 AWG | HS_GND | LH | 680 | **1200** | est |
+| `W_POD_GND` | BK | 16 AWG | HS_GND | INSTR_6P | 150 | **650** | est |
 | `W_IND_HB` | BU | 16 AWG | INSTR_6P | SP_HI | 100 | **600** | tape |
 | `W_IND_L` | GN | 16 AWG | INSTR_6P | SP_SIG_L | 100 | **600** | tape |
 | `W_IND_N_FEED` | BG | 16 AWG | INSTR_6P | SP_INSTR | 100 | **600** | tape |
@@ -85,39 +94,27 @@ Every length is **route + margin, rounded up to 50 mm**, and the route is the 28
 | `W_FLASH_OUT` | BU | 16 AWG | LH | FLASHER | 750 | **1250** | tape |
 | `W_MAIN_IN` | RD | 12 AWG | MF | SOL | 250 | **750** | tape |
 | `W_RR_OUT` | RD | 12 AWG | MF_RR | RR | 350 | **850** | est |
-| `W_TDR_HOT` | RD | 12 AWG | MF_TDR | BATT | 300 | **800** | est |
+| `W_TDR_HOT` | RD | 12 AWG | MF_TDR | SOL | 250 | **750** | est |
 | `W_NSW` | GY | 16 AWG | NSW | INSTR_6P | 1400 | **1900** | tape |
 | `W_BRK_FEED_R` | BG | 16 AWG | RBRK | SP_BRK_FEED | 300 | **800** | est |
-| `W_ALT_A` | YE | 14 AWG | RR | ALT | 625 | **1150** | est |
-| `W_ALT_B` | YE | 14 AWG | RR | ALT | 625 | **1150** | est |
+| `W_ALT_A` | YE | 12 AWG | RR | ALT_SVC | 505 | **1050** | est |
+| `W_ALT_B` | YE | 12 AWG | RR | ALT_SVC | 505 | **1050** | est |
 | `W_SIG_FL` | GN | 16 AWG | SIG_FL | SP_SIG_L | 300 | **800** | est |
 | `W_SIG_FR` | GY | 16 AWG | SIG_FR | SP_SIG_R | 300 | **800** | est |
-| `W_SIG_RL` | GN | 16 AWG | SIG_RL | SP_SIG_L | 1710 | **2250** | est |
-| `W_SIG_RR` | GY | 16 AWG | SIG_RR | SP_SIG_R | 1710 | **2250** | est |
 | `W_RH_OUT` | YE | 16 AWG | SOL | RH | 695 | **1200** | tape |
+| `W_RR_BATT` | RD | 12 AWG | SOL | MF_RR | 250 | **750** | est |
 | `W_BRK_OUT_F` | GN | 16 AWG | SP_BRAKE | FBRK | 750 | **1250** | est |
 | `W_BRK_OUT_R` | GN | 16 AWG | SP_BRAKE | RBRK | 300 | **800** | est |
-| `W_CAP_GND` | BK | 16 AWG | SP_GND | CAP_L | 485 | **TBD (≤1000)** | est |
-| `W_FLASH_GND` | BK | 16 AWG | SP_GND | FLASHER | 145 | **TBD (≤650)** | est |
-| `W_GND_SIG_FL` | BK | 16 AWG | SP_GND | SIG_FL | 1135 | **TBD (≤1650)** | est |
-| `W_GND_SIG_FR` | BK | 16 AWG | SP_GND | SIG_FR | 1135 | **TBD (≤1650)** | est |
-| `W_GND_SIG_RL` | BK | 16 AWG | SP_GND | SIG_RL | 875 | **TBD (≤1400)** | est |
-| `W_GND_SIG_RR` | BK | 16 AWG | SP_GND | SIG_RR | 875 | **TBD (≤1400)** | est |
-| `W_GND_SPD` | BK | 16 AWG | SP_GND | LAMP_SPD | 1085 | **TBD (≤1600)** | est |
-| `W_GND_TAC` | BK | 16 AWG | SP_GND | LAMP_TAC | 1085 | **TBD (≤1600)** | est |
-| `W_GND_TAIL` | BK | 16 AWG | SP_GND | TAIL | 775 | **TBD (≤1300)** | est |
-| `W_HEAD_GND` | BK | 16 AWG | SP_GND | HEAD | 935 | **TBD (≤1450)** | est |
-| `W_HORN_GND` | BK | 16 AWG | SP_GND | HORN | 695 | **TBD (≤1200)** | est |
-| `W_LH_GND` | BK | 16 AWG | SP_GND | LH | 605 | **TBD (≤1150)** | est |
-| `W_POD_GND` | BK | 16 AWG | SP_GND | INSTR_6P | 935 | **TBD (≤1450)** | est |
-| `W_USB_GND` | BK | 16 AWG | SP_GND | USB | 1235 | **TBD (≤1750)** | est |
 | `W_MAIN_OUT` | WH | 14 AWG | SP_HOT | MF | 150 | **650** | est |
 | `W_MTR_FEED` | BG | 16 AWG | SP_MTR | SP_INSTR | 0 | **300** | tape |
 | `W_SIG_L` | GN | 16 AWG | SP_SIG_L | LH | 630 | **1150** | tape |
 | `W_SIG_R` | GY | 16 AWG | SP_SIG_R | LH | 630 | **1150** | tape |
 | `W_TAIL_OUT` | BU | 16 AWG | SP_TAIL | IGN | 100 | **600** | tape |
-| `W_BRAKE` | GN | 16 AWG | TAIL | SP_BRAKE | 960 | **1500** | est |
-| `W_TAIL_RUN` | BU | 16 AWG | TAIL | SP_TAIL | 1610 | **2150** | est |
+| `W_BRAKE` | GN | 16 AWG | TAIL_6P | SP_BRAKE | 810 | **1350** | est |
+| `W_GND_TAIL` | BK | 16 AWG | TAIL_6P | GND | 1190 | **1700** | est |
+| `W_SIG_RL` | GN | 16 AWG | TAIL_6P | SP_SIG_L | 1460 | **2000** | est |
+| `W_SIG_RR` | GY | 16 AWG | TAIL_6P | SP_SIG_R | 1460 | **2000** | est |
+| `W_TAIL_RUN` | BU | 16 AWG | TAIL_6P | SP_TAIL | 1460 | **2000** | est |
 
 ## Splices — what each node is, and when to crimp it
 
@@ -128,7 +125,6 @@ A parallel splice is ONE crimp with every member present, so a node waits for it
 | Node | Where | Members | PDM | Other | Form | When |
 |---|---|---|---|---|---|---|
 | `SP_SW` | beside the PDM | 9 | `W_SW_BUS`, `W_SW_F2`, `W_SW_F3`, `W_SW_F6`, `W_SW_F7`, `W_SW_F8`, `W_SW_F9`, `W_SW_F10`, `W_SW_F11` | — | one parallel splice, all 9 in one barrel, crimped then solder-flooded | ✅ Built 19 Sep 2026 |
-| `SP_GND` | beside the PDM | 20 | `W_KMAIN_GND`, `W_K_GND`, `W_KHI_GND`, `W_KLO_GND` | 16 wires from the second table | parallel splices, one per group - PDM group: 8 GA, the four coil grounds + the lead out. Other groups TBD | PDM group **now**. The rest TBD - do not cut |
 | `SP_HOT` | beside the PDM | 5 | `W_MAIN_SW_FEED`, `W_HOT_F1`, `W_HOT_F4`, `W_HOT_F5` | `W_MAIN_OUT` | 8 GA parallel splice (5) | Wait for `W_MAIN_OUT` — ⚠️ TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for |
 | `SP_HEAD` | beside the PDM - F5 out to both beam relays | 3 | `W_HEAD_SUPPLY`, `W_HI_PWR`, `W_LO_PWR` | — | 12-10 GA parallel splice (3) | **Now** |
 | `SP_RLY` | beside the PDM | 3 | `W_RLY_PWR`, `W_HORN_COIL` | `W_DIM_COMMON` | 12-10 GA parallel splice (3) | Wait for `W_DIM_COMMON` |
@@ -150,22 +146,21 @@ Bought long, cut on the bike with both lugs' landings in front of you. Route sho
 |---|---|---|---|---|---|
 | `W_BAT_SOL` | RD | SOL | BATT | 250 | tape |
 | `W_SOL_SM` | RD | SM | SOL | 500 | est |
-| `W_BAT_GND` | BK | GND | BATT | 350 | est |
-| `W_ENG_GND` | BK | GND | GND_ENG | 600 | est |
+| `W_BAT_GND` | BK | GND_ENG | BATT | 550 | est |
 
 ## Stock check — cut totals against the spools
 
 | Gauge | Colour | Cut total | Spool | Left |
 |---|---|---|---|---|
-| 12 AWG | BK | 0.9 m | 10 ft (3.0 m) | 2.1 m |
-| 12 AWG | RD | 3.2 m | 12 ft (3.7 m) | 0.5 m ⚠️ |
+| 12 AWG | BK | 2.8 m | 10 ft (3.0 m) | 0.2 m ⚠️ |
+| 12 AWG | RD | 3.1 m | 12 ft (3.7 m) | 0.6 m ⚠️ |
+| 12 AWG | YE | 2.1 m | ? | ? |
 | 14 AWG | WH | 0.9 m | 10 ft (3.0 m) | 2.1 m |
-| 14 AWG | YE | 2.3 m | 8 ft (2.4 m) | 0.1 m ⚠️ |
 | 16 AWG | BG | 14.6 m | 100 ft (30.5 m) | 15.9 m |
-| 16 AWG | BK | 21.9 m | 100 ft (30.5 m) | 8.6 m |
-| 16 AWG | BU | 7.5 m | 50 ft (15.2 m) | 7.8 m |
-| 16 AWG | GN | 12.1 m | 50 ft (15.2 m) | 3.1 m |
-| 16 AWG | GY | 10.7 m | 50 ft (15.2 m) | 4.5 m |
+| 16 AWG | BK | 18.9 m | 100 ft (30.5 m) | 11.5 m |
+| 16 AWG | BU | 7.3 m | 50 ft (15.2 m) | 7.9 m |
+| 16 AWG | GN | 11.7 m | 50 ft (15.2 m) | 3.5 m |
+| 16 AWG | GY | 10.4 m | 50 ft (15.2 m) | 4.8 m |
 | 16 AWG | RD | 2.6 m | 15 ft (4.6 m) | 1.9 m |
 | 16 AWG | YE | 6.7 m | 50 ft (15.2 m) | 8.5 m |
 

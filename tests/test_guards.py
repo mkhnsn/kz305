@@ -382,9 +382,10 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     #   GND / SP_*  - one net by definition
     #   MF / MF_RR / MF_TDR - a fuse is symmetric; its two terminals are one circuit
     #   BATT        - battery positive is one net
-    #   ALT / RR    - W_ALT_A and W_ALT_B are the stator's two legs, both YE.
-    #                 They are AC and interchangeable: either leg lands on
-    #                 either AC input, so a swap is not an error.
+    #   ALT / ALT_SVC / RR - W_ALT_A and W_ALT_B are the stator's two legs,
+    #                 both YE. They are AC and interchangeable: either leg
+    #                 lands on either AC input, so a swap is not an error.
+    #                 ALT_SVC is the Deutsch disconnect on that same pair.
     #   SOL         - 6 AWG battery cable comes in red and black only, so
     #                 W_BAT_SOL and W_SOL_SM are both RD. They are lugs on
     #                 separate studs and cannot physically be interchanged.
@@ -415,7 +416,7 @@ def test_rebuild_has_no_colour_collisions_on_a_connector():
     # What is left - lamps, splices, free bullets - is where a swap has no
     # other check. That is what this guard is for.
     exempt = {
-        "GND", "ALT", "RR", "SP_YR", "SP_HEAD", "MF", "MF_RR", "MF_TDR", "BATT", "SOL",
+        "GND", "ALT", "ALT_SVC", "RR", "SP_YR", "SP_HEAD", "MF", "MF_RR", "MF_TDR", "BATT", "SOL",
         "PDM", "LH", "RH", "IGN", "INSTR_6P", "COIL_L", "COIL_R",
         "K_MAIN", "K_COIL", "K_HORN", "K_HI", "K_LO",
     }

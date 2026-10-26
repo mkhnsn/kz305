@@ -21,29 +21,27 @@ again, one wire at a time, and it is not recoverable any other way.
 
 ## Schedule
 
-190 labels for 95 wires.
+186 labels for 93 wires.
 
-Not labelled: 15 conductors that already exist in retained
-stock parts (flagged `ignore_in_bom` in the model): `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`, `TDR_GND`, `TDR_SAE`.
+Not labelled: 25 conductors that already exist in retained
+stock parts (flagged `ignore_in_bom` in the model): `BRAKE2`, `CAP_L`, `CAP_R`, `GND_HB`, `GND_IND_L`, `GND_IND_R`, `GND_SIG_RL`, `GND_SIG_RR`, `GND_TAIL2`, `IND_HB2`, `IND_L2`, `IND_N_FEED2`, `IND_R2`, `NSW2`, `POD_GND2`, `PTS_L`, `PTS_R`, `SIG_RL2`, `SIG_RR2`, `STATOR_A`, `STATOR_B`, `TAIL_GND2`, `TAIL_RUN2`, `TDR_GND`, `TDR_SAE`.
 
-Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
-
-**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (164), `9mm.csv` (18), `19mm.csv` (8). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is the wire name.
+**Print files for the Rhino 6000+**, one per cartridge, in `docs/labels/`: `6mm.csv` (160), `9mm.csv` (20), `19mm.csv` (6). DYMO ID: heat-shrink label, Import Data, map `label` to the text field, print all. Printed text is the wire name.
 
 ✅ **6 mm and 9 mm printed and cut to size, 17 Sep 2026.** The 19 mm labels for the 6 AWG cables are not printed yet - that cable is cut on the bike.
 
 | Label text | This end | Far end | Colour | Gauge |
 |---|---|---|---|---|
-| `ALT_A` | ALT-1 | RR-1 | YE | 14 AWG |
-| `ALT_A` | RR-1 | ALT-1 | YE | 14 AWG |
-| `ALT_B` | ALT-2 | RR-2 | YE | 14 AWG |
-| `ALT_B` | RR-2 | ALT-2 | YE | 14 AWG |
-| `BAT_GND` | BATT-2 | GND-1 | BK | 6 AWG |
-| `BAT_GND` | GND-1 | BATT-2 | BK | 6 AWG |
+| `ALT_A` | ALT_SVC-1 | RR-1 | YE | 12 AWG |
+| `ALT_A` | RR-1 | ALT_SVC-1 | YE | 12 AWG |
+| `ALT_B` | ALT_SVC-2 | RR-2 | YE | 12 AWG |
+| `ALT_B` | RR-2 | ALT_SVC-2 | YE | 12 AWG |
+| `BAT_GND` | BATT-2 | GND_ENG-1 | BK | 6 AWG |
+| `BAT_GND` | GND_ENG-1 | BATT-2 | BK | 6 AWG |
 | `BAT_SOL` | BATT-1 | SOL-1 | RD | 6 AWG |
 | `BAT_SOL` | SOL-1 | BATT-1 | RD | 6 AWG |
-| `BRAKE` | SP_BRAKE-1 | TAIL-2 | GN | 16 AWG |
-| `BRAKE` | TAIL-2 | SP_BRAKE-1 | GN | 16 AWG |
+| `BRAKE` | SP_BRAKE-1 | TAIL_6P-3 | GN | 16 AWG |
+| `BRAKE` | TAIL_6P-3 | SP_BRAKE-1 | GN | 16 AWG |
 | `BRK_FEED` | PDM-12 | SP_BRK_FEED-1 | BG | 16 AWG |
 | `BRK_FEED` | SP_BRK_FEED-1 | PDM-12 | BG | 16 AWG |
 | `BRK_FEED_F` | FBRK-1 | SP_BRK_FEED-1 | BG | 16 AWG |
@@ -54,8 +52,8 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `BRK_OUT_F` | SP_BRAKE-1 | FBRK-2 | GN | 16 AWG |
 | `BRK_OUT_R` | RBRK-2 | SP_BRAKE-1 | GN | 16 AWG |
 | `BRK_OUT_R` | SP_BRAKE-1 | RBRK-2 | GN | 16 AWG |
-| `CAP_GND` | CAP_L-2 | SP_GND-1 | BK | 16 AWG |
-| `CAP_GND` | SP_GND-1 | CAP_L-2 | BK | 16 AWG |
+| `CAP_GND` | CAP_L-2 | GND-1 | BK | 16 AWG |
+| `CAP_GND` | GND-1 | CAP_L-2 | BK | 16 AWG |
 | `COIL_L` | COIL_L-1 | SP_YR-1 | YE | 16 AWG |
 | `COIL_L` | SP_YR-1 | COIL_L-1 | YE | 16 AWG |
 | `COIL_PWR` | K_COIL-1 | PDM-4 | YE | 16 AWG |
@@ -64,34 +62,26 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `COIL_R` | SP_YR-1 | COIL_R-1 | YE | 16 AWG |
 | `DIM_COMMON` | LH-1 | SP_RLY-1 | GN | 16 AWG |
 | `DIM_COMMON` | SP_RLY-1 | LH-1 | GN | 16 AWG |
-| `ENG_GND` | GND-3 | GND_ENG-1 | BK | 6 AWG |
-| `ENG_GND` | GND_ENG-1 | GND-3 | BK | 6 AWG |
-| `FLASH_GND` | FLASHER-3 | SP_GND-1 | BK | 16 AWG |
-| `FLASH_GND` | SP_GND-1 | FLASHER-3 | BK | 16 AWG |
+| `ENG_GND` | GND-1 | GND_ENG-1 | BK | 12 AWG |
+| `ENG_GND` | GND_ENG-1 | GND-1 | BK | 12 AWG |
+| `FLASH_GND` | FLASHER-3 | GND-1 | BK | 16 AWG |
+| `FLASH_GND` | GND-1 | FLASHER-3 | BK | 16 AWG |
 | `FLASH_IN` | FLASHER-1 | PDM-13 | BG | 16 AWG |
 | `FLASH_IN` | PDM-13 | FLASHER-1 | BG | 16 AWG |
 | `FLASH_OUT` | FLASHER-2 | LH-4 | BU | 16 AWG |
 | `FLASH_OUT` | LH-4 | FLASHER-2 | BU | 16 AWG |
-| `GND_MAIN_A` | GND-4 | SP_GND-1 | BK | 16 AWG |
-| `GND_MAIN_A` | SP_GND-1 | GND-4 | BK | 16 AWG |
-| `GND_MAIN_B` | GND-4 | SP_GND-1 | BK | 16 AWG |
-| `GND_MAIN_B` | SP_GND-1 | GND-4 | BK | 16 AWG |
-| `GND_SIG_FL` | SIG_FL-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_SIG_FL` | SP_GND-1 | SIG_FL-2 | BK | 16 AWG |
-| `GND_SIG_FR` | SIG_FR-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_SIG_FR` | SP_GND-1 | SIG_FR-2 | BK | 16 AWG |
-| `GND_SIG_RL` | SIG_RL-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_SIG_RL` | SP_GND-1 | SIG_RL-2 | BK | 16 AWG |
-| `GND_SIG_RR` | SIG_RR-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_SIG_RR` | SP_GND-1 | SIG_RR-2 | BK | 16 AWG |
-| `GND_SPD` | LAMP_SPD-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_SPD` | SP_GND-1 | LAMP_SPD-2 | BK | 16 AWG |
-| `GND_TAC` | LAMP_TAC-2 | SP_GND-1 | BK | 16 AWG |
-| `GND_TAC` | SP_GND-1 | LAMP_TAC-2 | BK | 16 AWG |
-| `GND_TAIL` | SP_GND-1 | TAIL-3 | BK | 16 AWG |
-| `GND_TAIL` | TAIL-3 | SP_GND-1 | BK | 16 AWG |
-| `HEAD_GND` | HEAD-3 | SP_GND-1 | BK | 16 AWG |
-| `HEAD_GND` | SP_GND-1 | HEAD-3 | BK | 16 AWG |
+| `GND_SIG_FL` | HS_GND-1 | SIG_FL-2 | BK | 16 AWG |
+| `GND_SIG_FL` | SIG_FL-2 | HS_GND-1 | BK | 16 AWG |
+| `GND_SIG_FR` | HS_GND-1 | SIG_FR-2 | BK | 16 AWG |
+| `GND_SIG_FR` | SIG_FR-2 | HS_GND-1 | BK | 16 AWG |
+| `GND_SPD` | HS_GND-1 | LAMP_SPD-2 | BK | 16 AWG |
+| `GND_SPD` | LAMP_SPD-2 | HS_GND-1 | BK | 16 AWG |
+| `GND_TAC` | HS_GND-1 | LAMP_TAC-2 | BK | 16 AWG |
+| `GND_TAC` | LAMP_TAC-2 | HS_GND-1 | BK | 16 AWG |
+| `GND_TAIL` | GND-1 | TAIL_6P-5 | BK | 16 AWG |
+| `GND_TAIL` | TAIL_6P-5 | GND-1 | BK | 16 AWG |
+| `HEAD_GND` | HEAD-3 | HS_GND-1 | BK | 16 AWG |
+| `HEAD_GND` | HS_GND-1 | HEAD-3 | BK | 16 AWG |
 | `HEAD_HI` | K_HI-2 | SP_HI-1 | BU | 16 AWG |
 | `HEAD_HI` | SP_HI-1 | K_HI-2 | BU | 16 AWG |
 | `HEAD_HI2` | HEAD-1 | SP_HI-1 | BU | 16 AWG |
@@ -108,8 +98,8 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `HORN_COIL` | SP_RLY-1 | K_HORN-3 | GY | 16 AWG |
 | `HORN_FEED` | HORN-1 | K_HORN-2 | BG | 16 AWG |
 | `HORN_FEED` | K_HORN-2 | HORN-1 | BG | 16 AWG |
-| `HORN_GND` | HORN-2 | SP_GND-1 | BK | 16 AWG |
-| `HORN_GND` | SP_GND-1 | HORN-2 | BK | 16 AWG |
+| `HORN_GND` | GND-1 | HORN-2 | BK | 16 AWG |
+| `HORN_GND` | HORN-2 | GND-1 | BK | 16 AWG |
 | `HORN_PWR` | K_HORN-1 | PDM-5 | RD | 16 AWG |
 | `HORN_PWR` | PDM-5 | K_HORN-1 | RD | 16 AWG |
 | `HORN_SW` | K_HORN-4 | LH-7 | YE | 16 AWG |
@@ -120,6 +110,8 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `HOT_F4` | SP_HOT-1 | PDM-15 | RD | 16 AWG |
 | `HOT_F5` | PDM-16 | SP_HOT-1 | RD | 16 AWG |
 | `HOT_F5` | SP_HOT-1 | PDM-16 | RD | 16 AWG |
+| `HS_GND` | GND-1 | HS_GND-1 | BK | 16 AWG |
+| `HS_GND` | HS_GND-1 | GND-1 | BK | 16 AWG |
 | `IGN_FEED` | IGN-1 | PDM-2 | RD | 16 AWG |
 | `IGN_FEED` | PDM-2 | IGN-1 | RD | 16 AWG |
 | `IGN_RET` | IGN-3 | K_MAIN-3 | GY | 16 AWG |
@@ -134,16 +126,16 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `IND_R` | SP_SIG_R-1 | INSTR_6P-2 | GY | 16 AWG |
 | `INSTR_FEED` | PDM-11 | SP_INSTR-1 | BG | 16 AWG |
 | `INSTR_FEED` | SP_INSTR-1 | PDM-11 | BG | 16 AWG |
-| `KHI_GND` | K_HI-4 | SP_GND-1 | BK | 16 AWG |
-| `KHI_GND` | SP_GND-1 | K_HI-4 | BK | 16 AWG |
-| `KLO_GND` | K_LO-4 | SP_GND-1 | BK | 16 AWG |
-| `KLO_GND` | SP_GND-1 | K_LO-4 | BK | 16 AWG |
-| `KMAIN_GND` | K_MAIN-4 | SP_GND-1 | BK | 16 AWG |
-| `KMAIN_GND` | SP_GND-1 | K_MAIN-4 | BK | 16 AWG |
-| `K_GND` | K_COIL-4 | SP_GND-1 | BK | 16 AWG |
-| `K_GND` | SP_GND-1 | K_COIL-4 | BK | 16 AWG |
-| `LH_GND` | LH-8 | SP_GND-1 | BK | 16 AWG |
-| `LH_GND` | SP_GND-1 | LH-8 | BK | 16 AWG |
+| `KHI_GND` | GND-1 | K_HI-4 | BK | 16 AWG |
+| `KHI_GND` | K_HI-4 | GND-1 | BK | 16 AWG |
+| `KLO_GND` | GND-1 | K_LO-4 | BK | 16 AWG |
+| `KLO_GND` | K_LO-4 | GND-1 | BK | 16 AWG |
+| `KMAIN_GND` | GND-1 | K_MAIN-4 | BK | 16 AWG |
+| `KMAIN_GND` | K_MAIN-4 | GND-1 | BK | 16 AWG |
+| `K_GND` | GND-1 | K_COIL-4 | BK | 16 AWG |
+| `K_GND` | K_COIL-4 | GND-1 | BK | 16 AWG |
+| `LH_GND` | HS_GND-1 | LH-8 | BK | 16 AWG |
+| `LH_GND` | LH-8 | HS_GND-1 | BK | 16 AWG |
 | `LO_PWR` | K_LO-1 | SP_HEAD-1 | BU | 16 AWG |
 | `LO_PWR` | SP_HEAD-1 | K_LO-1 | BU | 16 AWG |
 | `LO_TRIG` | K_LO-3 | LH-3 | GN | 16 AWG |
@@ -162,18 +154,18 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `MTR_TAC` | SP_MTR-1 | LAMP_TAC-1 | BG | 16 AWG |
 | `NSW` | INSTR_6P-4 | NSW-1 | GY | 16 AWG |
 | `NSW` | NSW-1 | INSTR_6P-4 | GY | 16 AWG |
-| `POD_GND` | INSTR_6P-6 | SP_GND-1 | BK | 16 AWG |
-| `POD_GND` | SP_GND-1 | INSTR_6P-6 | BK | 16 AWG |
-| `RH_IN` | PDM-3 | RH-1 | YE | 16 AWG |
-| `RH_IN` | RH-1 | PDM-3 | YE | 16 AWG |
-| `RH_OUT` | RH-3 | SOL-3 | YE | 16 AWG |
-| `RH_OUT` | SOL-3 | RH-3 | YE | 16 AWG |
+| `POD_GND` | HS_GND-1 | INSTR_6P-6 | BK | 16 AWG |
+| `POD_GND` | INSTR_6P-6 | HS_GND-1 | BK | 16 AWG |
+| `RH_IN` | PDM-3 | RH-2 | YE | 16 AWG |
+| `RH_IN` | RH-2 | PDM-3 | YE | 16 AWG |
+| `RH_OUT` | RH-1 | SOL-3 | YE | 16 AWG |
+| `RH_OUT` | SOL-3 | RH-1 | YE | 16 AWG |
 | `RLY_PWR` | PDM-25 | SP_RLY-1 | BG | 16 AWG |
 | `RLY_PWR` | SP_RLY-1 | PDM-25 | BG | 16 AWG |
-| `RR_BATT` | BATT-1 | MF_RR-2 | RD | 12 AWG |
-| `RR_BATT` | MF_RR-2 | BATT-1 | RD | 12 AWG |
-| `RR_GND` | GND-2 | RR-5 | BK | 12 AWG |
-| `RR_GND` | RR-5 | GND-2 | BK | 12 AWG |
+| `RR_BATT` | MF_RR-2 | SOL-1 | RD | 12 AWG |
+| `RR_BATT` | SOL-1 | MF_RR-2 | RD | 12 AWG |
+| `RR_GND` | GND-1 | RR-5 | BK | 12 AWG |
+| `RR_GND` | RR-5 | GND-1 | BK | 12 AWG |
 | `RR_OUT` | MF_RR-1 | RR-4 | RD | 12 AWG |
 | `RR_OUT` | RR-4 | MF_RR-1 | RD | 12 AWG |
 | `SIG_FL` | SIG_FL-1 | SP_SIG_L-1 | GN | 16 AWG |
@@ -184,10 +176,12 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `SIG_L` | SP_SIG_L-1 | LH-5 | GN | 16 AWG |
 | `SIG_R` | LH-6 | SP_SIG_R-1 | GY | 16 AWG |
 | `SIG_R` | SP_SIG_R-1 | LH-6 | GY | 16 AWG |
-| `SIG_RL` | SIG_RL-1 | SP_SIG_L-1 | GN | 16 AWG |
-| `SIG_RL` | SP_SIG_L-1 | SIG_RL-1 | GN | 16 AWG |
-| `SIG_RR` | SIG_RR-1 | SP_SIG_R-1 | GY | 16 AWG |
-| `SIG_RR` | SP_SIG_R-1 | SIG_RR-1 | GY | 16 AWG |
+| `SIG_RL` | SP_SIG_L-1 | TAIL_6P-1 | GN | 16 AWG |
+| `SIG_RL` | TAIL_6P-1 | SP_SIG_L-1 | GN | 16 AWG |
+| `SIG_RR` | SP_SIG_R-1 | TAIL_6P-2 | GY | 16 AWG |
+| `SIG_RR` | TAIL_6P-2 | SP_SIG_R-1 | GY | 16 AWG |
+| `SOL_GND` | GND-1 | SOL-4 | BK | 16 AWG |
+| `SOL_GND` | SOL-4 | GND-1 | BK | 16 AWG |
 | `SOL_SM` | SM-1 | SOL-2 | RD | 6 AWG |
 | `SOL_SM` | SOL-2 | SM-1 | RD | 6 AWG |
 | `SW_BUS` | K_MAIN-2 | SP_SW-1 | BG | 16 AWG |
@@ -212,15 +206,15 @@ Not labelled because NOT BUILT (marked DO NOT BUILD in the model): `SOL_GND`.
 | `TAIL_FEED` | PDM-7 | IGN-4 | BG | 16 AWG |
 | `TAIL_OUT` | IGN-2 | SP_TAIL-1 | BU | 16 AWG |
 | `TAIL_OUT` | SP_TAIL-1 | IGN-2 | BU | 16 AWG |
-| `TAIL_RUN` | SP_TAIL-1 | TAIL-1 | BU | 16 AWG |
-| `TAIL_RUN` | TAIL-1 | SP_TAIL-1 | BU | 16 AWG |
-| `TDR_HOT` | BATT-1 | MF_TDR-1 | RD | 12 AWG |
-| `TDR_HOT` | MF_TDR-1 | BATT-1 | RD | 12 AWG |
+| `TAIL_RUN` | SP_TAIL-1 | TAIL_6P-4 | BU | 16 AWG |
+| `TAIL_RUN` | TAIL_6P-4 | SP_TAIL-1 | BU | 16 AWG |
+| `TDR_HOT` | MF_TDR-1 | SOL-1 | RD | 12 AWG |
+| `TDR_HOT` | SOL-1 | MF_TDR-1 | RD | 12 AWG |
 | `USB_FEED` | PDM-23 | USB-1 | BG | 16 AWG |
 | `USB_FEED` | USB-1 | PDM-23 | BG | 16 AWG |
-| `USB_GND` | SP_GND-1 | USB-2 | BK | 16 AWG |
-| `USB_GND` | USB-2 | SP_GND-1 | BK | 16 AWG |
+| `USB_GND` | GND-1 | USB-2 | BK | 16 AWG |
+| `USB_GND` | USB-2 | GND-1 | BK | 16 AWG |
 | `YR_OUT` | K_COIL-2 | SP_YR-1 | YE | 16 AWG |
 | `YR_OUT` | SP_YR-1 | K_COIL-2 | YE | 16 AWG |
-| `YR_TRIG` | K_COIL-3 | RH-2 | GY | 16 AWG |
-| `YR_TRIG` | RH-2 | K_COIL-3 | GY | 16 AWG |
+| `YR_TRIG` | K_COIL-3 | RH-3 | GY | 16 AWG |
+| `YR_TRIG` | RH-3 | K_COIL-3 | GY | 16 AWG |

@@ -65,17 +65,15 @@ ROUND_MM = 50
 # three, 8 GA for four or five - docs/prowire-order.md section 4.
 SPLICE_FORM = {
     "SP_SW":  "one parallel splice, all 9 in one barrel, crimped then solder-flooded",
-    "SP_GND": "parallel splices, one per group - PDM group: 8 GA, the four coil grounds + the lead out. Other groups TBD",
     "SP_YR":  "double-female bullet, the stock B03 form - toolless, the EI tap (#65)",
 }
 # Nodes whose "when" is a bench fact or a decision, not derivable from membership.
 SPLICE_WHEN = {
     "SP_SW":  "✅ Built 19 Sep 2026",
-    "SP_GND": "PDM group **now**. The rest TBD - do not cut",
 }
 # Returns into these nodes are held: the landing is not decided, so the table
 # prints the longest case as a ceiling instead of a length to cut.
-HOLD_NODES = {"SP_GND"}
+HOLD_NODES = set()
 SPLICE_NOTE = {
     "SP_HOT": "TEST-CRIMP ON SCRAP FIRST - two 14 AWG and three 16 AWG is tighter than the barrel was sized for",
 }
@@ -89,7 +87,6 @@ POSITIONS = {
     "SP_SW":    (P,    0,   "est",  "beside the PDM"),
     "SP_RLY":   (P,    0,   "est",  "beside the PDM"),
     "SP_HEAD":  (P,    0,   "est",  "beside the PDM - F5 out to both beam relays"),
-    "SP_GND":   (P,    0,   "est",  "beside the PDM"),
     "K_MAIN":   (P,    0,   "tape", "in the PDM"),
     "K_COIL":   (P,    0,   "tape", "in the PDM"),
     "K_HORN":   (P,    0,   "tape", "in the PDM"),
@@ -99,10 +96,10 @@ POSITIONS = {
     "SOL":      (P,    100, "tape", "B06.1 / B06.2 relay leads"),
     "BATT":     (P,    150, "tape", "SOL.1 battery cable"),
     "RR":       (P,    200, "est",  "custom box where the old battery box was, with the PDM and battery - decided 17 Sep 2026"),
-    "MF_RR":    (P,    150, "est",  "at the battery end of the charging pair"),
-    "MF_TDR":   (P,    150, "est",  "at the battery positive post"),
+    "MF_RR":    (P,    150, "est",  "off the solenoid battery stud"),
+    "MF_TDR":   (P,    150, "est",  "off the solenoid battery stud"),
     "SAE":      (P,    300, "est",  "capped under the side cover"),
-    "GND":      (P,    200, "est",  "star bus plate - NOT PLACED, see blocker 2"),
+    "FRAME":    (P,    400, "est",  "frame bond off the engine ground point"),
     "USB":      (400,  800, "est",  "NOT PLACED (#64) - cut for the handlebar, the longest case; trim if it lands under the seat"),
     "SM":       (P,    400, "est",  "starter motor terminal"),
     "GND_ENG":  (P,    400, "est",  "engine case bolt"),
@@ -111,6 +108,7 @@ POSITIONS = {
     "INSTR_6P": (0,    100, "tape", "B00.1"),
     "HEAD":     (0,    100, "tape", "B00.9"),
     "FBRK":     (0,    100, "tape", "B00.5 / B00.6 - the switch's own pigtail comes down to the shell"),
+    "HS_GND":   (0,    50,  "est",  "headstock ground bullet"),
     "SP_HI":    (0,    0,   "tape", "in the shell"),
     "SP_TAIL":  (0,    0,   "tape", "in the shell"),
     "SP_INSTR": (0,    0,   "tape", "in the shell"),
@@ -126,6 +124,7 @@ POSITIONS = {
     "HORN":     (400,  260, "tape", "B01.3"),
     "NSW":      (400,  900, "tape", "B01.4"),
     "LH":       (430,  200, "tape", "B02.3"),
+    "GND":      (370,  100, "est",  "star point under the tank - 60 mm datum-side of the LH branch, three ring terminals"),
     # --- under the tank -----------------------------------------------
     "SP_YR":    (460,  140, "tape", "B03"),
     "COIL_L":   (460,  300, "est",  "coil, from B03"),
@@ -135,8 +134,11 @@ POSITIONS = {
     "SP_BRAKE": (650,  0,   "est",  "B04 breakout, B04.2 blue merge"),
     "RBRK":     (650,  300, "est",  "rear brake switch, frame mounted"),
     "ALT":      (730,  320, "tape", "B05 + B05.1"),
+    "ALT_SVC":  (730,  200, "est",  "Deutsch 2-way on the stator jumper, clear of the chaincase"),
     # --- rear ---------------------------------------------------------
     "FLASHER":  (880,  100, "tape", "B07"),
+    "TAIL_6P":  (1360, 100, "est",  "tail 6-way - the main harness ends here"),
+    "SP_TAIL_GND": (1360, 150, "est", "tail-end harness ground splice"),
     "TAIL":     (1360, 250, "est",  "B10 fan + tail lamp lead"),
     "SIG_RL":   (1360, 350, "est",  "B10 fan + rear signal stalk"),
     "SIG_RR":   (1360, 350, "est",  "B10 fan + rear signal stalk"),
@@ -305,9 +307,6 @@ def main():
     w("## Everything else — cut when the near end is terminated\n")
     w(f"{len(rest)} wires. Same rule: cut to this, crimp the near end, trim the far "
       "end on the bike.\n")
-    w("⚠️ **`TBD (≤N)` — do not cut.** Every return into `SP_GND` from outside the "
-      "PDM is held until the ground grouping and landing are decided. N is the "
-      "longest case, a run all the way back to the PDM.\n")
     w("| Wire | Colour | Gauge | From | To | Route | **Cut** | Basis |")
     w("|---|---|---|---|---|---|---|---|")
     for r in rest:

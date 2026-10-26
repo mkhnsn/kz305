@@ -28,3 +28,13 @@ inline. It was replaced by a current-state `docs/part-selection.md` because a
 bench-side reader could not find the part number under the history. Nothing
 here is current. Where the two disagree, `docs/part-selection.md` and the model
 win.
+
+---
+
+`models-2026-10-26/` — archived 26 Oct 2026.
+
+The rebuild model as a design, before it was rewritten as the as-built
+record once the harness was on the bike. Blockers, holds, issue
+cross-references and the reasoning behind rejected alternatives all live
+here; the live model keeps only what a reader needs at the bench. See its
+own README.

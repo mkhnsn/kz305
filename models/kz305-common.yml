@@ -195,14 +195,11 @@ templates:
   #
   # ⚠️ 6 AWG IS NOT TXL AND CANNOT BE. TXL runs roughly 24 to 8 AWG; 6 is
   # outside the range. The three heavy cables - W_BAT_SOL, W_SOL_SM and
-  # W_BAT_GND - are battery/starter cable, a different product with a
-  # different insulation and a much larger OD. NOT SPECIFIED YET, and it
-  # does not inherit the seal or terminal decisions above: none of it
-  # enters the PDM, and all three terminate in lugs rather than 280s.
-  # Lug holes are M6 at the relay studs and the starter motor terminal
-  # [bench 11 Sep 2026]; the battery-post and star-bus ends are still open.
+  # W_BAT_GND - are welding cable with crimped ring lugs, straight and
+  # right-angle as the landing needs. None of it enters the PDM. Lug holes
+  # are M6 at the relay studs and the starter motor terminal.
   # Bought long and cut to fit on the bike - no cut lengths.
-  w6:  &w6  {gauge: 6 AWG,  type: Battery cable - SPEC TBD}
+  w6:  &w6  {gauge: 6 AWG,  type: "Welding cable - ring lugs, straight and right-angle"}
   w12: &w12 {gauge: 12 AWG, type: TXL, supplier: Prowire}
   w14: &w14 {gauge: 14 AWG, type: TXL, supplier: Prowire}
   w16: &w16 {gauge: 16 AWG, type: TXL, supplier: Prowire}
