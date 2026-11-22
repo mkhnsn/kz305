@@ -18,7 +18,8 @@ The working-out, superseded options and dated history are in
 | USB-C PD charger | Criteria set, part not selected (#64) |
 | Tender / 12V accessory point | **Decided 14 Sep:** SAE on the battery posts through a third MP630 holder, 10 A ATC. Pigtail and fuse not yet bought |
 | LED headlight | Not selected (#60) |
-| Labels, grommets, diodes | **Labels in hand** 15 Sep, 6/9/12/19 mm with spare cartridges. Grommet kit and 1N4004 x125 ordered 11 Sep |
+| Labels, grommets, diodes | **Labels in hand** 15 Sep, 6/9/12/19 mm with spare cartridges. Grommet kit and 1N4004 x125 ordered 11 Sep. The one diode that gets fitted is `SOL`'s — cathode to the yellow spade |
+| Starter solenoid | **Replaced and wired** 23 Oct: generic aftermarket, 2 × M6 post + 2 × 6.3 mm male spade, unpolarized coil. **No MPN recorded, coil resistance not metered.** Needs 2 × female 6.3 mm receptacles |
 
 ---
 
@@ -190,10 +191,22 @@ does not. Anything that reads differently is a `-D1` and doesn't go in.
 86 is COIL+ and 85 COIL− on every relay in the design. Build it that way even
 though the part doesn't care.
 
-**Starter solenoid (`SOL`):** a stock part with no integral option. It needs a
-discrete diode, **cathode to the coil's positive feed**.
-⛔ **Don't fit it until blocker 3 closes.** Which lead is COIL+ isn't known yet,
-and a diode fitted backwards shorts the coil supply on every start press. See #46.
+**Starter solenoid (`SOL`): ✅ answered 23 Oct 2026.** The stock relay has been
+replaced with a generic aftermarket unit — two M6 posts, two **6.3 mm male
+spades** — and the coil is **not polarized, with no internal suppression**, read
+both ways at the bench. So it still needs the discrete 1N4004:
+
+> **Cathode to the YELLOW spade (COIL+). Anode to the BLACK spade (COIL−).**
+
+The orientation is settled by how the part is wired, not by tracing: the black
+spade goes to frame ground, so the yellow one is the feed. Blocker 3 is closed
+and the ⛔ is lifted. A diode fitted backwards still shorts the coil supply on
+every start press, so fit it to that line and no other. See #46.
+
+**Terminals for it:** 2 × **female 6.3 mm** receptacles, fully insulated, 16 AWG.
+This *replaces* bullets for `SOL` — the stock part's `Y/R` female and `BK` male
+bullets are gone with the part, and `SOL` is no longer the one place the harness
+carries a male pin.
 
 ---
 

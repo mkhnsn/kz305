@@ -20,6 +20,23 @@ pulling F3. This check finds the first weld while it's still harmless.
 **If either one fails:** don't ride. Pull the relay for the method that
 failed (`K_COIL` for the kill switch, `K_MAIN` for the key) and fit the spare.
 
+⛔ **If the spare doesn't fix it, the relay was never the problem — its
+trigger isn't on the switch you tried.** A welded contact and a mis-landed
+trigger both read as "that method doesn't stop the engine", and only the first
+is fixed by a relay. Check the trigger's landing before swapping more parts.
+
+## ⛔ The starter cranks with the switch at STOP
+
+**Open as of 22 Nov 2026 — don't ride it, and don't crank it in gear.** The
+start button is fed from the brown rather than from the kill-switch output, so
+STOP cuts the coils but not the starter.
+
+The run/stop switch was the **only** crank interlock on this bike: the neutral
+switch is indicator only, and there is no clutch switch. Until it's fixed,
+nothing stops the starter turning the engine over in gear.
+
+See `measurements/rh-cluster.md`.
+
 **Last resort, if both have failed while riding:** clutch in, brake to a stop,
 then let the clutch out in gear to stall it.
 

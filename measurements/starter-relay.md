@@ -28,6 +28,71 @@ without it:
 they are different circuits. The main power path (`B04.6` ↔ `B06.4`, and the
 R/R's DC output) is `W/R`. The second fuse box's feed is `R/W`.
 
+## ⚠️ THE SOLENOID HAS BEEN REPLACED — 23 Oct 2026
+
+**The stock starter relay is off the bike.** A generic replacement is fitted and
+wired. **Every reading below dated 2 Sep or 11 Sep 2026 describes the STOCK
+assembly**, which is no longer the part in the circuit. Those readings stay as
+the as-built reference the design findings rest on; they are not the part the
+rebuild lands on.
+
+### The new part
+
+| | |
+|---|---|
+| Identity | generic aftermarket, bought from Amazon. **No MPN recorded** |
+| Heavy landings | **two M6 posts** |
+| Coil terminals | **two 6.3 mm MALE spades**, out of the top |
+| Coil polarity | **NOT polarized — no internal suppression.** Read both ways `[bench 23 Oct 2026]` |
+| Coil resistance | **NOT TAKEN** — see *Still open* below |
+
+So the part is two posts and two spades, and nothing on it is a bullet.
+
+### As installed
+
+| Landing | What is on it |
+|---|---|
+| Post A | 6 AWG from the battery, **plus** the always-hot tap that feeds the main fuses |
+| Post B | 6 AWG to the starter motor |
+| Spade — yellow | the start trigger. **COIL+** |
+| Spade — black | **COIL−**, to frame ground |
+
+**The coil's return is settled by construction, not by tracing.** The black
+spade goes to earth, so the yellow spade is the live feed. That is what blocker
+3 was waiting on.
+
+### ✅ The diode can now be oriented — #46
+
+**Cathode to the yellow spade (COIL+), anode to the black spade (COIL−).** A
+discrete 1N4004; the part has no internal suppression, so the diode is still
+required. Stock is on hand (×125, ordered 11 Sep).
+
+### What this part being fitted overturns
+
+| Claim, and where | Status |
+|---|---|
+| "The coil FLOATS — `W_SOL_GND` does not exist and MUST NOT BE BUILT" | **FALSE on this part.** The coil earths at the relay. `W_SOL_GND` is real and buildable |
+| `Y/R` Net 2 identified as the coil feed **by gender complement** | **WITHDRAWN.** The inference ran off the stock part's bullet genders; this part has spades |
+| `SOL` is the one place a harness-side pin is male | **INVERTED.** Two male spades on the part means two **female** 6.3 mm receptacles on the harness |
+| The melted `W/R` double-female off the battery stud | **GONE.** The main-fuse feed is now a second M6 ring on Post A |
+| Coil 3.2 Ω / ~3.75 A | **STOCK PART ONLY.** Untested on this one |
+
+**The gauge step that melted is fixed by this installation.** The stock failure
+was a conductor-size step at a *bullet*, two connections from the battery. It is
+now a ring on a stud.
+
+**`Y/R` Net 2 is still an unidentified circuit** — a wire whose far end nothing
+has found. It is no longer on the critical path for the trigger or the diode.
+
+### Still open on the new part
+
+- **Coil resistance.** Not taken. It is not academic: the reopened `K_START`
+  argument in `kz305-rebuild.yml` turns on 3.2 Ω / ~3.75 A through the start
+  button, and that figure belongs to the part that came off. Re-read it.
+- **Which post is which**, recorded against the housing rather than assumed.
+  The model has Post A as `BAT STUD` (way 1) and Post B as `MOTOR STUD` (way 2),
+  which matches how it is wired, but no moulded mark has been read.
+
 ## What is already known, from the harness side
 
 Every one of these was read from the *other* end. Nothing below was read at the
@@ -117,7 +182,12 @@ Consequences, and they are design ones rather than curiosities:
   in service while both accessory **earths** sat open. A permanently-live feed
   that nothing was earthed to is a circuit half-built, not a circuit in use.
 
-### ✅ The two coil leads mate `B06.1` and `B06.2` — by gender complement
+### ⛔ WITHDRAWN 23 Oct 2026 — the two coil leads mate `B06.1` and `B06.2` by gender complement
+
+**The part this argument is about is off the bike.** The replacement has 6.3 mm
+spades, not bullets, so there is no gender complement to read and this no longer
+identifies anything. It was the *only* evidence naming `Y/R` Net 2 as the coil
+feed, so that circuit goes back to unidentified. Kept below as the stock record.
 
 Terminations read 2 Sep 2026:
 
@@ -195,7 +265,10 @@ the whole main power path leaves the battery, passes one lug, and steps down to
 18-or-16 gauge at a bullet. That is the gauge step, and it is two connections
 from the battery with nothing but the 20 A MAIN downstream of it.
 
-### ✅ Coil — METERED, 11 Sep 2026
+### ✅ Coil — METERED, 11 Sep 2026 — ⚠️ STOCK PART
+
+**This is the part that came off.** The fitted solenoid's coil has not been
+read for resistance. See the 23 Oct section at the head of this file.
 
 | Reading | Value |
 |---|---|
@@ -329,7 +402,11 @@ no wire gauge on this project has been measured at all.
 Not a relay lead — it lives at the battery post. Gauge only, if ever; the
 rebuild does not reproduce it.
 
-### 5. ✅ Coil ground — there is none at the relay
+### 5. ⛔ SUPERSEDED — coil ground: there is none at the relay
+
+**True of the stock part, false of the fitted one.** The replacement's black
+spade goes to frame ground, so `W_SOL_GND` exists and IS a Net B earth point.
+Stock record follows.
 
 Metered 11 Sep 2026: both coil ends are open to both studs and to the case, and
 the case sits in a rubber mount. No ring, no case path. `W_SOL_GND` does not
@@ -338,9 +415,12 @@ Net 2 — trace it in the harness (#8).
 
 ## Scope note
 
-Unlike the fuse box, the relay assembly is **not** being replaced by the rebuild
-as a decided matter. Whether it survives is open. Map it as an as-built
-reference either way — the topology is what the design findings rest on.
+**Closed 23 Oct 2026: the assembly WAS replaced.** This was filed as open —
+*"whether it survives is open"* — and the answer is a generic aftermarket unit,
+already fitted and wired. Everything mapped here stays as the as-built reference
+the design findings rest on; the topology is what those findings rest on, and
+the melted-bullet mechanism is a finding about the stock design regardless of
+what is bolted there now.
 
 ---
 
