@@ -20,6 +20,14 @@ pulling F3. This check finds the first weld while it's still harmless.
 **If either one fails:** don't ride. Pull the relay for the method that
 failed (`K_COIL` for the kill switch, `K_MAIN` for the key) and fit the spare.
 
+⛔ **If the spare doesn't fix it, the relay was never the problem — its
+trigger isn't on the switch you tried.** A welded contact and a mis-landed
+trigger both read as "that method doesn't stop the engine", and only the first
+is fixed by a relay. This bike has had the second: measured 22 Nov 2026, the
+**start button** closed `RH` way 1 to way 2 with the kill switch OFF, feeding
+`K_COIL` off F2 and leaving the kill switch connected to nothing. Check `RH`
+way 2 against `measurements/rh-cluster.md` before swapping more parts.
+
 **Last resort, if both have failed while riding:** clutch in, brake to a stop,
 then let the clutch out in gear to stall it.
 

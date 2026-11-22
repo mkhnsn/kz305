@@ -331,6 +331,13 @@ templates:
       procedure's damaged-conductor threshold. The benchmark is in hand - the ignition switch
       measured 0.1 ohm. Re-measure after cleaning and record the value; a contact that will not come
       under 1 ohm needs replacing, not more cleaning.
+      ⛔ ** THE SWITCH TABLE ABOVE DOES NOT DESCRIBE THE BIKE AS WIRED ** [meter 22 Nov 2026]. On
+      the built harness the BUTTON closes the stop-switch input to the Y/R way with the kill switch
+      OFF, and the kill switch closes nothing to it. RUN = Br-Y_R is the 15 Aug reading on the part
+      and is kept; whether it has since failed, or the cluster is landed wrong on the new 3-way, or
+      a node inside its pigtail bypasses the kill switch, is not established. The consequence is
+      that the KILL SWITCH CANNOT STOP THE ENGINE - see blocker 0 in kz305-rebuild.yml and
+      measurements/rh-cluster.md. Do not rely on this table for the rebuild until it is re-read.
 
   lh_cluster: &lh_cluster
     type: Left bar cluster

@@ -1,11 +1,21 @@
 # =====================================================================
-# KZ305-B1 — REPLACEMENT HARNESS  (DRAFT - NOT BUILDABLE YET)
+# KZ305-B1 — REPLACEMENT HARNESS  (BUILT AND ON THE BIKE - IN COMMISSIONING)
 #
 #   wireviz -f hps -p kz305-common.yml kz305-rebuild.yml
 #
-# This is the harness being built to replace the factory one. It must
-# reproduce EVERY circuit in the factory model - any circuit missing
-# from that transcription is a circuit that will not exist on the bike.
+# This is the harness that replaced the factory one. It must reproduce
+# EVERY circuit in the factory model - any circuit missing from that
+# transcription is a circuit that will not exist on the bike.
+#
+# ** THIS FILE SAID "DRAFT - NOT BUILDABLE YET" UNTIL 22 Nov 2026. ** It
+# was built and fitted while it still said so, and the engine has been
+# cranked and fired on it. The blockers below were written to stop wire
+# being cut; several are now commissioning items against copper that
+# already exists, which is a different thing, and each says which it is.
+# THE MODEL IS NO LONGER AHEAD OF THE BIKE - IT CAN NOW BE BEHIND IT.
+# A reading off the bike outranks this file (working rule 1), and a
+# measurement against the BUILT harness goes in measurements/ with the
+# build date on it.
 #
 # See models/factory/00-notes.yml for the evidence-tag convention.
 # Open items on the as-built record are at the foot of
@@ -13,7 +23,30 @@
 # docs/verification-plan.md.
 #
 # ---------------------------------------------------------------------
-# BLOCKERS - do not cut wire against this file yet
+# BLOCKERS - the wire is cut; these are commissioning items now
+#
+#   0. ⛔ LIVE DEFECT ON THE BIKE, 22 Nov 2026 - THE KILL SWITCH CANNOT
+#      STOP THE ENGINE. Measured at the cluster: with the kill switch
+#      OFF, pressing the START BUTTON closes RH way 1 to RH way 2.
+#      Way 1 is F2 OUT, live whenever the key is on and UPSTREAM of the
+#      kill switch. Way 2 is K_COIL's coil. So the button energises
+#      K_COIL from F2, the coils come alive, and they die when it is
+#      released - which is the reported "fires on both, dies the instant
+#      you let go of the starter". It also explains no coil voltage with
+#      the key on and the kill switch at RUN - nothing else drives that
+#      relay - and the relay heard clicking with the kill switch OFF.
+#      WAY 2 IS ON THE BUTTON'S CONTACT AND THE KILL SWITCH REACHES
+#      NOTHING. Cutting coil power at this relay's trigger is the whole
+#      safety function of K_COIL (see W_COIL_PWR), and the kill-switch
+#      half of the pre-ride stop check cannot pass. A SPARE RELAY DOES
+#      NOT FIX THIS.
+#      NOT YET DETERMINED, and the fixes differ - a landing error at the
+#      new 3-way (where docs/landing-map.md records way 1 as NOT
+#      anchored), a node inside the cluster pigtail upstream of the kill
+#      switch (the SP_RH_BR [OPEN] further down), or kill-switch
+#      contacts gone fully open (already measured degraded at 3 ohm,
+#      15 Aug). The deciding reading and the truth table to finish are
+#      in measurements/rh-cluster.md. DO NOT RIDE IT. [OPEN]
 #
 #   1. RETIRED 4 Sep 2026 - GAUGE IS MOOT FOR THE REBUILD (#38 closed).
 #      This existed so new wire would not be sized against unverified
@@ -630,9 +663,30 @@ connectors:
   # cluster side and feeds Br/W and Bl/W off the same node as the kill-switch brown. Retain the
   # branch as it is and both legs are still there, now live off PDM F2 and landing nowhere. They
   # have to be cut back to the splice or capped - nothing in this model says which.
+  #
+  # ⛔ AND THIS IS NO LONGER HYPOTHETICAL. On 22 Nov 2026 the built harness measured the START
+  # BUTTON closing way 1 to way 2 with the kill switch OFF - a path from the F2 brown to K_COIL's
+  # coil that bypasses the kill switch entirely. A node upstream of the kill switch INSIDE this
+  # pigtail, which is what SP_RH_BR is, is one of the three ways to get that reading. Counting the
+  # conductors in the pigtail and finding whether that splice is still in there is now a fault
+  # trace, not housekeeping. See blocker 0 and measurements/rh-cluster.md.
   RH:
     <<: *rh_cluster
     pinlabels: [STOP IN (Br), LINK (Y/R), START OUT (BK)]
+    notes: |-
+      ⛔ ** THE WAY-2 ASSIGNMENT BELOW IS WRONG ON THE BUILT HARNESS ** [meter 22 Nov 2026].
+      Way 2 is drawn as the KILL-SWITCH OUTPUT, on the stock table RUN = Br-Y_R and Push = Y_R-BK.
+      On the bike the BUTTON closes way 1 to way 2 with the kill switch OFF, and the kill switch
+      closes nothing to way 2 at all. Way 1 is F2 OUT, live with the key on and upstream of the kill
+      switch, so the button feeds K_COIL directly and the coils live only while it is held.
+      ** THE KILL SWITCH THEREFORE CANNOT STOP THE ENGINE. ** See blocker 0 at the head of this file
+      and measurements/rh-cluster.md for the deciding reading.
+      THE DRAWING IS LEFT AS DESIGNED rather than redrawn to match the fault. What is on the bike is
+      a defect to correct, not a topology to record - and which of three causes it is has not been
+      established, so there is nothing yet to redraw it TO. [OPEN]
+      ⚠️ WAY 1 IS NOT ANCHORED on this connector - the numbering is this model's list order, with
+      no keyway, latch or printed number recorded (docs/landing-map.md). Fix it to something visible
+      while the connector is apart; an offset here is exactly the error that numbering invites.
 
   SOL:
     <<: *starter_relay
@@ -1235,6 +1289,10 @@ cables:
       Kill switch output. Drives K_COIL and, internally to the cluster, the starter button. Carries about
       0.3A instead of the stock ~6A. Still the node that makes the kill switch stop the engine - cutting
       it drops the coils.
+      ⛔ ** ON THE BIKE THIS IS NOT THE KILL-SWITCH OUTPUT ** [meter 22 Nov 2026]. At RH way 2 it is
+      fed by the START BUTTON off F2, not by the kill switch, so it drops the coils when the button is
+      released and the kill switch does nothing to it. That is blocker 0 - the one thing on this wire
+      that has to be true is the one thing that is not. See measurements/rh-cluster.md.
   W_MAIN_SW_FEED:
     <<: *w14
     colors: [WH]
