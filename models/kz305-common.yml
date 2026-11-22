@@ -331,13 +331,15 @@ templates:
       procedure's damaged-conductor threshold. The benchmark is in hand - the ignition switch
       measured 0.1 ohm. Re-measure after cleaning and record the value; a contact that will not come
       under 1 ohm needs replacing, not more cleaning.
-      ⛔ ** THE SWITCH TABLE ABOVE DOES NOT DESCRIBE THE BIKE AS WIRED ** [meter 22 Nov 2026]. On
-      the built harness the BUTTON closes the stop-switch input to the Y/R way with the kill switch
-      OFF, and the kill switch closes nothing to it. RUN = Br-Y_R is the 15 Aug reading on the part
-      and is kept; whether it has since failed, or the cluster is landed wrong on the new 3-way, or
-      a node inside its pigtail bypasses the kill switch, is not established. The consequence is
-      that the KILL SWITCH CANNOT STOP THE ENGINE - see blocker 0 in kz305-rebuild.yml and
-      measurements/rh-cluster.md. Do not rely on this table for the rebuild until it is re-read.
+      ⛔ ** "INTERLOCK HOLDS" NO LONGER DOES, ON THE BUILT HARNESS ** [22 Nov 2026]. The starter
+      cranks with the run/stop switch in EITHER position: the button is fed from the brown rather
+      than from the kill-switch output, so STOP cuts the coils but not the starter. RUN = Br-Y_R
+      still holds - the kill switch does stop the engine - and the rest of the 15 Aug table is kept
+      as the reading on the part. What is not established is whether the cluster is landed wrong on
+      the new 3-way, a node inside its pigtail bypasses the kill switch, or the rewiring fed the
+      button that way. ** THIS CLUSTER WAS THE ONLY CRANK INTERLOCK ON THE BIKE ** - the neutral
+      switch is indicator only and there is no clutch switch. See blocker 0 in kz305-rebuild.yml and
+      measurements/rh-cluster.md.
 
   lh_cluster: &lh_cluster
     type: Left bar cluster

@@ -1,78 +1,77 @@
 # Right-hand bar cluster — stop switch and starter button
 
-Bench and in-situ readings on `RH`, the retained right-hand cluster. Opened as
-its own capture sheet on **22 Nov 2026**, when a live fault on the built harness
-turned out to be in this part rather than in the PDM.
+Readings on `RH`, the retained right-hand cluster, as rewired on the **built**
+harness. Opened 22 Nov 2026; corrected the same day — see *What this is not*.
 
-⚠️ **THIS FILE RECORDS A SAFETY DEFECT THAT IS NOT YET FIXED.** As wired on
-22 Nov 2026 the **kill switch cannot stop the engine.** See below.
+⚠️ **THE STARTER HAS NO INTERLOCK.** It cranks with the run/stop switch in
+either position. That is the defect; it is not fixed.
 
-## What the models assume about this cluster
+## The defect
 
-The rebuild draws `RH` as three ways:
+**The starter cranks in either position of the run/stop switch** `[bike,
+22 Nov 2026]`, and at the cluster, **pressing the start button closes way 1 to
+way 2 with the kill switch OFF** `[meter, 22 Nov 2026]`.
 
-| Way | Label | Wire | Far end |
-|---|---|---|---|
-| 1 | `STOP IN (Br)` | `RH_IN`, YE 16 AWG | **PDM `c7 r2` (F2 OUT)** — live whenever the key is on |
-| 2 | `LINK (Y/R)` | `YR_TRIG`, GY 16 AWG | **`K_COIL` pin 86 (`c3 r5`)** — the ignition relay's coil |
-| 3 | `START OUT (BK)` | `RH_OUT`, YE 16 AWG | **`SOL` way 3** — the solenoid's yellow spade |
+Way 1 is `RH_IN` from **PDM `c7 r2` (F2 OUT)** — live whenever the key is on,
+and **upstream of the kill switch**. So the button is taking its feed from the
+brown rather than from the kill-switch output, and the kill switch gates
+nothing on the starter side.
 
-The assumption behind that is the stock switch table, `RUN = Br-Y_R, Push =
-Y_R-BK` `[meter 15 Aug 2026]`: the kill switch closes **1 to 2**, and the button
-then closes **2 to 3**. Way 2 is therefore supposed to be the *kill-switch
-output*, and everything that stops the engine depends on it being so.
+### The ignition side is fine
 
-## ⛔ MEASURED 22 Nov 2026 — the BUTTON closes 1 to 2, not the kill switch
+**The kill switch does stop the engine** `[bike, 22 Nov 2026]`. Whatever way 2
+carries in this build, it reaches the **solenoid trigger** and not `K_COIL`'s
+coil — if it drove `K_COIL`, pressing the button with the kill switch OFF would
+energise the coils and the kill switch could not stop anything.
 
-**With the kill switch OFF, pressing the start button closes way 1 to way 2.**
+So the model's way assignment does not describe the build. The rebuild draws:
 
-That is the whole fault, and it is sufficient on its own:
+| Way | Model's label | Model's far end |
+|---|---|---|
+| 1 | `STOP IN (Br)` | PDM `c7 r2` (F2 OUT) |
+| 2 | `LINK (Y/R)` | `K_COIL` pin 86 (`c3 r5`) |
+| 3 | `START OUT (BK)` | `SOL` way 3, the yellow spade |
 
-- Way 1 is permanently live off F2 with the key on, **upstream of the kill
-  switch**.
-- Way 2 is `K_COIL`'s coil.
+On the bike, way 2 behaves as the **start output**. Ways 2 and 3 are evidently
+not carrying what the drawing says, and `docs/landing-map.md` already records
+`RH` way 1 as **not anchored** to any physical feature — the numbering is the
+model's list order, with no keyway, latch or printed number read off the part.
 
-So pressing the button energises `K_COIL` from F2, F3 power reaches `SP_YR`,
-and both coils come alive. Release the button and the relay drops out and the
-coils die.
+## Why it matters — the kill switch was the only interlock
 
-### It accounts for every symptom reported
+The stock cluster's 15 Aug reading is `RUN = Br-Y_R, Push = Y_R-BK,
+**interlock holds**`: the kill switch fed the start button, so STOP cut the
+starter as well as the coils. That interlock is gone.
 
-| Symptom | Cause |
-|---|---|
-| Engine fires on both cylinders while cranking, dies the instant the button is released | `K_COIL` is energised only while the button is held |
-| No voltage at the coil feed with the key on, kill switch RUN, not cranking | the kill switch does **not** close 1 to 2, so nothing else energises `K_COIL` |
-| Kill switch OFF, button pressed - a relay clicks but no crank | that click is `K_COIL`, fed from way 1; way 3 is not fed, so the solenoid does nothing |
-| Kill switch RUN, button pressed - cranks | way 3 is fed, so the solenoid pulls in as designed |
+Nothing else replaces it on this bike:
 
-### ⛔ What it means for the kill switch
+- **The neutral switch is not a crank interlock** — "Indicator only, NOT a
+  crank interlock" `[meter 15 Aug 2026]`, and the factory starting circuit has
+  no neutral interlock either.
+- There is no clutch switch.
 
-**Way 2 is on the button's contact, and the kill switch reaches nothing.**
-Cutting coil power at `K_COIL`'s trigger is the entire safety function of that
-relay - see the `W_COIL_PWR` note in `kz305-rebuild.yml` - and it is not
-connected to the kill switch. `docs/pre-ride-check.md` asks for the engine to
-stop both ways on every ride; as wired, the kill-switch half of that check
-cannot pass, and a spare relay will not fix it.
+**So the bike will crank in gear with the run/stop switch at STOP.** That is
+the hazard, and it is the whole of it — the ignition kill still works, so this
+is a cranking hazard rather than a runaway one.
 
-## ⚠️ OPEN — landing error or cluster internals?
+## The fix
 
-**Not yet determined, and the two have different fixes.** A single row of the
-truth table is confirmed; it does not distinguish:
+The start button has to be fed from the **kill-switch output**, not from the
+brown. At the cluster that means the button's input comes off the downstream
+side of the kill switch, so the wire to `SOL`'s yellow spade is live only with
+the switch at RUN.
 
-- **A landing error at the new 3-way.** The cluster's conductors are crimped
-  into the wrong ways. `docs/landing-map.md` lists `RH` among the connectors
-  where way 1 is **not anchored** to any physical feature - the numbering is
-  the model's list order - so an offset here is exactly the mistake that
-  numbering invites. Fix is re-landing.
-- **The cluster's own internals, or its pigtail.** The `[OPEN]` on `RH` in
-  `kz305-rebuild.yml` records that the stock brown splice `SP_RH_BR` sits on
-  the **cluster side** and feeds Br/W and Bl/W off the same node as the
-  kill-switch brown, live off F2 and landing nowhere. A node upstream of the
-  kill switch, inside this pigtail, is the other way to get this reading.
-- **Dead kill-switch contacts.** Already known to be degraded: **kill 3 ohm,
-  button 5 ohm, 8 ohm in series** `[meter 15 Aug 2026]`, with cleaning a
-  planned build step the whole relay scheme depends on. A contact that has gone
-  fully open reads the same as one that was never landed.
+Which of these it is has not been established, and they have different fixes:
+
+- **A landing error at the new 3-way** — the conductors are crimped into the
+  wrong ways. Fix is re-landing. Way 1 being unanchored is exactly the error
+  that numbering invites.
+- **A node inside the cluster pigtail upstream of the kill switch** — which is
+  what the `SP_RH_BR` `[OPEN]` on `RH` describes: the stock brown splice sits
+  on the cluster side and feeds legs off the same node as the kill-switch
+  brown, live off F2. Fix is cutting back or capping.
+- **The rewiring itself** — the button was deliberately or accidentally fed
+  from the brown during the rebuild.
 
 ### The table to finish
 
@@ -86,19 +85,39 @@ Cluster UNPLUGGED from the harness, probing its own three pins:
 | Kill ON, button pressed | | | |
 
 **The reading that decides it:** which conductor closes to the brown with the
-**kill switch ON and the button released**. That one is the kill-switch output
-and belongs on way 2, feeding `K_COIL`; the one that closes only on the button
-belongs on way 3, feeding the solenoid.
+**kill switch ON and the button released**. That is the kill-switch output, and
+the button's feed belongs on it.
 
-If **nothing** closes to brown on kill-ON alone, the kill switch's own contacts
-are open and re-landing fixes nothing - clean them to the under-1-ohm
-acceptance in the `rh_cluster` note and re-read.
+Also worth recording while it is apart: **how many conductors are in the
+pigtail**, three or four, and whether `SP_RH_BR` is still inside it. The
+`[OPEN]` on `RH` turns on that.
 
-### Also not recorded
+## ⚠️ One reading still unexplained
 
-- **How many conductors are actually in the pigtail**, three or four, and
-  whether `SP_RH_BR` is still inside it. The `[OPEN]` above turns on this.
-- **Contact resistance after cleaning.** The 15 Aug figures are pre-cleaning.
+Earlier the same day: **no voltage at the coil feed with the key on and the
+kill switch at RUN, not cranking** — which is why the engine fired only while
+the starter was held. That cannot be true at the same time as *the kill switch
+stops the engine*, since both describe the kill switch driving `K_COIL`.
+
+Either something changed between the two readings, or one of them was taken in
+a different switch state than recorded. **Not resolved, and not guessed at.**
+It is the one thing that would say whether there is a second fault on the
+ignition side or only the one on the starter side.
+
+## Also not recorded
+
+**Contact resistance after cleaning.** The cluster measured **kill 3 ohm,
+button 5 ohm, 8 ohm in series** on 15 Aug 2026, pre-cleaning, with cleaning a
+planned build step the whole relay scheme depends on. Acceptance is under
+1 ohm per contact, REL-zeroed.
+
+## What this is not
+
+**Corrected 22 Nov 2026.** This file first recorded the defect as *the kill
+switch cannot stop the engine*, reasoning from the 1-to-2 reading plus the
+model's way-2 assignment. The kill switch does stop the engine; the way-2
+assignment is what is wrong. The defect is on the starter side only, and the
+severity is a missing crank interlock rather than a missing ignition kill.
 
 ## Scope note
 
